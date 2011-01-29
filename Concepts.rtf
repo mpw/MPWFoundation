@@ -1,0 +1,186 @@
+{\rtf1\mac\ansicpg10000\cocoartf871
+{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\f0\b\fs24 \cf0 \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\fs48 \cf0 MPWFoundation Overview\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\qc
+
+\b0\fs28 \cf0 Marcel Weiher\
+Metaobject GmbH
+\fs48 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 This is an overview over the concepts and services provided in the framework MPWFoundation.  
+\b \
+\
+Streams
+\b0 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\i \cf0 Note
+\i0 :  the name 
+\i Stream
+\i0  for this abstraction has caused confusion because it is not a straightforward implementation of the streams concept found, for example, in UNIX.  The name 
+\i EncodingFilters
+\i0  seems to cause less confusion, and may be used in the future even though it is actually a little too specific.\
+\
+The basic operating principle of streams is that they process objects 'written' onto them and pass the results of this processing to their target (stream).  Each stream class performs a specific action on the objects written to it, double-dispatch is used to let this processing be adapted to each class.\
+\
+\
+\
+The default stream action is to pass the objects unchanged to the target.  MPWFlattenStream unpacks collections, recursively.  MPWByteStream is the superclass for streams with byte-oriented instead of object-oriented targets, MPWProperyListStream creates property-lists.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Higher order messaging
+\b0 \
+\
+Higher order messaging in MPWFoundation allows messages to have other messages as arguments.  It uses no special syntax (or compiler support) but builds on existing syntax and the Objective-C runtime infrastructure.\
+\
+Higher order messaging generally takes the following form:\
+\
+	[[someObject higherOrderMessage] argumentMessage]\
+\
+It is implemented by 
+\i higherOrderMessage
+\i0  setting up a 
+\i trampoline
+\i0  object that 'captures' the 
+\i argumentMessage
+\i0  in an NSInvocation and immediately forwards that to 
+\i someObject
+\i0  using a specified private message.\
+\
+Currently, higer order messaging is used primarily for iteration support (see next section).  There is also some support for dealing with exceptions at the messaging level and some experimental support for building and executing message expressions at runtime.  Application areas that also could benefit but are not supported yet are asynchronous messaging, broadcast messaging and access control.\
+\
+Existing base-level solutions typically hide the message send, for example in\
+\
+	[NSThread detachNewThreadSelector:@selector(doSomething) toTarget:self withObject:nil];\
+\
+compared to\
+\
+	[[self inNewThread] doSomething];\
+\
+\
+
+\b Iteration\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+MPWFoundation provides iteration support loosely modelled on Smalltalk, but based on higher order messages instead of blocks (see MPWEnumFilter).\
+\
+The basic mechanism is probably most easily explained by an example:\
+\
+	classArray=[[someArray collect] class];\
+\
+Assuming that 
+\i someArray
+\i0  is an NSArray of objects, 
+\i classArray
+\i0  will be filled with the the classes of the objects in someArray.  Phrased in operational terms, the array assigned to 
+\i classArray
+\i0  will have been filled with the results of sending the message 
+\i class 
+\i0 to each element of the array 
+\i someArray
+\i0 .\
+\
+The following higher-order iteration messages are defined:\
+\
+	- 
+\i do
+\i0  just sends the message and ignores the result\
+	- 
+\i collect
+\i0  returns the return values of the messages sent (must be ids)\
+	- 
+\i select
+\i0  and 
+\i reject
+\i0  return the receivers depending on wether the message returned YES or NO\
+\
+The argument-message can be an almost arbitrary message-send, so iteration can be applied in a wide variety of situations.  \
+\
+	// append extension to each string in stringArray\
+	[[stringArray collect] stringByAppendingString:@".extension];\
+\
+Arguments of the message can be iterated over simultaneously by providing an enumerator for that argument. \
+\
+	//  concatenate the elements of two stringArrays\
+	[[prefixArray collect] stringByAppendingString:[postfixArray objectEnumerator]];\
+\
+Conversely, the argument can also be non-iterating.  The message 
+\i each
+\i0  is a convenience method for providing an enumerator.\
+\
+	// prepend prefix to each string in stringArray\
+	[[@"prefix" collect] stringByAppendingString:[stringArray each]];\
+\
+The current compiler generates code for the BOOL return it thinks is happening that mangles the id-return that is actually happening.  A patch has been submitted to the gcc Objective-C maintainer, for now workarounds include prepending two (2) underscores that will be removed by the iteration code.\
+\
+	//  get only the NSString subclasses from array\
+	[[someArray select] __isKindOfClass:[NSString class]]\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Threading and Futures
+\b0 \
+\
+\
+\
+
+\b Object caches\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+Object caches provide an extremely fast allocation mechanism for temporary objects.  They avoid actual allocations by maintaining a circular buffer of objects of a particular class, and messaging by caching the IMPs of the allocation methods of that class.  In order to be used in an object-cache a class must support re-initialization of instance that have been allocated and used previously.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Primitive wrappers/collections\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+Simple object representations for both points and rectangles are provided.\
+\
+There are also classes for arrays of floating point numbers and unsigned short integers, corresponding to acutal needs encountered so far (extension to other types is straightforward).  The iteration methods available for object arrays/enumerators are duplicated for the primitive types.  \
+\
+The MPWSubData class provides OO-references to parts of another piece of data.  \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Archving extensions\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+Protocol and convenience macros are provided for archiving instance variables with their names, primarily to support future coders that are capable of encoding names of variables.  The protocol is also implemented for existing coders (simply discarding the name) in order to allow new code to always use name-based encoding even if it needs to be used with older coders.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Accessors\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+Macros for accessor methods eliminate redundant and error-prone coding of accessor methods.  They try to capture best-practice for accessors.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Miscalleneous
+\b0 \
+\
+There are various other extensions not described here.\
+}

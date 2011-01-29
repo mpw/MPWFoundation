@@ -1,0 +1,32 @@
+{
+    FILESTABLE = {
+        BUNDLES = (); 
+        CLASSES = (MPWASCII85Stream.m, MPWFilterStream.m, MPWLZWStream.m); 
+        C_FILES = (); 
+        FRAMEWORKS = (); 
+        FRAMEWORKSEARCH = (); 
+        HEADERSEARCH = (); 
+        H_FILES = (MPWASCII85Stream.h, MPWFilterStream.h, MPWLZWStream.h); 
+        M_FILES = (); 
+        OTHER_LINKED = (); 
+        OTHER_SOURCES = (Makefile.preamble, Makefile, Makefile.postamble); 
+        PROJECT_HEADERS = (MPWLZWStream.h, MPWFilterStream.h, MPWASCII85Stream.h); 
+        PUBLIC_HEADERS = (MPWASCII85Stream.h, MPWLZWStream.h, MPWFilterStream.h); 
+        SUBPROJECTS = (); 
+        TOOLS = (); 
+    }; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {}; 
+    NEXTSTEP_BUILDTOOL = /bin/gnumake; 
+    NEXTSTEP_COMPILEROPTIONS = "-O4 -funroll-loops"; 
+    NEXTSTEP_INSTALLDIR = /Local/Library/Frameworks; 
+    NEXTSTEP_JAVA_COMPILER = /usr/bin/javac; 
+    NEXTSTEP_OBJCPLUS_COMPILER = /usr/bin/cc; 
+    PDO_UNIX_JAVA_COMPILER = "$(NEXTDEV_BIN)/javac"; 
+    PDO_UNIX_OBJCPLUS_COMPILER = "$(NEXTDEV_BIN)/gcc"; 
+    PROJECTNAME = Comm; 
+    PROJECTTYPE = Subproject; 
+    PROJECTVERSION = 2.8; 
+    WINDOWS_JAVA_COMPILER = "$(JDKBINDIR)/javac.exe"; 
+    WINDOWS_OBJCPLUS_COMPILER = "$(DEVDIR)/gcc"; 
+}

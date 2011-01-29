@@ -1,0 +1,106 @@
+{\rtf1\ansi\ansicpg1252\cocoartf924
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f0\fs24 \cf0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 Some Timings\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+Basic measures of allocation performance (with Trampolines) on a beige 233 MHz G3 running MacOS-X-Server CR1.\
+\
+alloc+init+autorelease:			~5.513 microseconds\
+\
+cache-alloc+retain+autorelease:	~1.782  microseconds\
+(ditto thread-safe disabled):		~1.787 microseconds\
+(ditto thread-safe enabled):		~2.227 microseconds\
+\
+cache-alloc w/o retain (unsafe)	~0.917 microseconds\
+(ditto thread-safe disabled):		~0.928 microseconds\
+(ditto thread-safe enabled):		~1.142 microseconds\
+\
+cache-alloc w/o retain (unsafe)		~0.457 microseconds\
+  + no autorelease-pools\
+\
+plain msg-send (for comparison):	~0.216 microseconds\
+IMP-call of same message:		~0.105 microseconds\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b \cf0 Enumerator timings/observations\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0 \cf0 \
+Doing all processing in a loop is a lot faster than doing it per/object via -nextObject.   Doing it in nextObject is only needed if "pipes" of enum-filters are wanted/needed, select/collect/reject/do could very well be run in a tight loop.\
+\
+[[array do] class]:				~0.579 microseconds / element (nextObject)\
+							~0.342 microseconds / element (tight loop)\
+normal enumerator loop			~0.490 microseconds / element\
+\
+Paramters:\
+	action:  	select / reject / collect / do\
+	message:	usually acquired via trampoline\
+	source:	a source enumerator (or array or single object )\
+\
+Issue:  can I build a method that can run in a tight loop but also be used in a filter-pipe type of environment?\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 Bug in Enumerators\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+Getting the method-signature of a method fails if that method lives in a category and hasn't been called yet.  It seems that loading categories only happens when actually making a call.  \
+\
+How to fix:  try to call the routines that gets an IMP for a selector.\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 Notes on Object Caches\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+Treadmill garbage collector by Henry C. Baker:  ACM SIGPLAN notices 27(3), March 1992.  Implements "spaces" using linked ists of objects.  Integration with reference counting:  sending retain adds that object to the "root" list.  Traversal can be via meta-information.  \
+\
+My object allocation pools are an approximation of generation scavenging ideas:   temporary objects should not generate allocation overhad.  \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 Problems moving to WinNT\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+Makefiles, import of libc.h, strings.h, strncasecmp(), NSImpForObjectAndSelector(), NSSimpleCString method additions\
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 + FScript:  \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+better error messages in refactored code\
+make array ops work with enum-filters instead\
+  - have doPattern:aPattern and collectPattern:\
+  - my initialization routines (which check for nextObject etc.) are just specialized + hacked pattern creators!\
+  - execution engine uses this mechanism instead of hardcoding\
+\
+extract/simplify execution engine\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b\fs36 \cf0 SmallStringTable ideas\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\b0\fs24 \cf0 \
+Sharing keys:  the key-space is just a bag of bytes (well-defined on a byte-level), so could potentially share these and even have them stored pre-defined (in archives, in code/'text').  Two things would be needed, though, to make it work when dicts don't have exactly the same keys:  (1) allow keys to be skipped/unfilled and (2) allow an extension-dict for keys that weren't in the shared key-space.\
+\
+Faster lookup for larger tables:  (1) index by size ( maxslength-sized jump table ) (2) keep a 'linked list' of elements with the same size   (2) for each string, store an index to compare to (maybe for each string length?), currently always just character 0\
+\
+}

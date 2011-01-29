@@ -1,0 +1,158 @@
+{\rtf1\ansi\ansicpg1252\cocoartf895\cocoasubrtf200
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\ql\qnatural
+
+\f0\fs24 \cf0 - bugfix:	enum-filters didn't work with WebScript (and mssh)\
+	fix:	filter implements -isKindOfClass: and forwards it to its source\
+- bugfix:	enum-filters didn't work with empty arrays\
+	fix:	arrays check for emptyness and use an 'ignore' trampoline in that case\
+9912.31\
+- heisenbug:  FIFO test  dualThreadStream  had a spurious failure\
+200001.01\
+- removed call to init from cache-hit branch of object-cache\
+        - that way, most objects should be reusable (needed NSMutableData for multi-buffer scanner, working)\
+        - it was only being called in the fast, non-auto-release case (which would be a bug anyhow)\
+        - the fix probably breaks code that relies on this being called (possibly XML kit)\
+- added a cache for NSMutableDatas used as buffers for MPWScanner in streaming mode\
+2000.01.15\
+- bugfix:  -printf: method didn't work on Solaris because my varargs hack just doesn't work there\
+       	- fix:  use real varargs now, works on both Solaris and X-Server\
+       	- todo:  introduce test\
+2000.08.01\
+- addition:	methods + macros for arrays of Objective-C types added to named-encoding\
+2000.08.04\
+- bugfix:  \
+	- enum-filters did not release their source after they were done exhausting it\
+	- this was a problem because enum-filters are cached (not dealloced)\
+	- fix:  all methods that exhaust the source now release + nil-out the source\
+2000.10.08\
+- added -(unsigned)position to MPWScanner\
+2000.10.09\
+- added -D`uname` to automate cthread #ifdefs ( not 'Darwin' is taken as meaning MacOS-X-Server -> cthreads)\
+2000.11.20\
+- bug:  NSPageData always reports its retainCount as '1' even when it is much greater.\
+	- this causes the short-circuit logic in MPWSubData archiving to misfire\
+	- workaround:  check for NSPageData and disable short circuit if that's the target\
+2001.01.26\
+- bug:  exception when using 'safely'\
+	- cause:  the original method was a 'void' method and safely is trying to set the return value\
+	- fix:  don't set the return value if the method signature indicates a void return\
+2001.07.12\
+- problems on MacOS-X-Server:\
+	- MPWObject ...\
+2001.8.1\
+- added  -selectWhereValueForKey:  to HOM-messages\
+	- this uses key-value coding to select based on an attribute of an object\
+	- attribute can be anything accessible by a key-value path\
+- moved  -memberOf:aSet  to MPWFoundation (from MPWPSObjects)\
+	- asks an object if it is member of a set, very useful in filtering\
+2001.8.2\
+- bugfix:  NSDictionary additions -floatValueForKey: and -boolValueForKey:  all return -intValue, fixed\
+	(Thanks to Todd Blanchard <tblanchard@mac.com> for pointing this out)\
+2001.8.13\
+- added option to LZW stream not to output the EOD marker at end\
+	(needed to compatibly test my decoder, it seems real-life data streams often don't have it)\
+2001.8.26\
+- refactor:  moved HOM trigger messages out of MPWEnumFilter into NSObjectFiltering and NSArrayFiltering\
+- bug:  select with iterating argument (instead of / in addition to target ) doesn't work\
+	- cause:  typo in MPWFakedMethodSignature, char *sig[] instead of char sig[],\
+		caused type to be reported as "" instead of "@", therefore no iteration\
+	- fix: fixed the typo\
+2001.8.31\
+- moved NSBundle conveniences here from MPWPSInterpreter in MPWPSObject\
+	(was needed in MPWTextAppKit testing code)\
+- added test\
+2001.9.4\
+- integrated Linux diffs\
+	- removed -attribute:viaSelector:  (subsumed by selectWhereValueForKey: )\
+       	- issue:  using [obj methodForSelector:]  in fast method lookup (should cache that as well...)\
+        - added auto-run of tests during build\
+2001.9.16\
+- Linux:  bugfix MPWTrampoline now a NSProxy subclass again (just wasn't in header) \
+    - making it a subclass of NSObject had caused bugs where HOM was used with\
+      key-value coding because valueForKey: is defined in (a category of) NSObject,\
+      so it wasn't HOM-ified but instead sent directly to the trampoline, which\
+      then tried to look up the key directly in itself/its HOM-target...\
+- Linux:  reactivated selectWhereKey:  -> available in EOControl, which is used\
+    by WorkflowEngine and therefore available there, have to find a different\
+    solution for the general MPWFoundation w/o EOControl case\
+- Linux:  bugfix for enum-filter not passing enough arguments\
+    - using objc_msg_lookup directly instead of [obj performSelector:...]\
+2001.11.14\
+- changed various DEBUG into VERBOSEDEBUG for interoperability with environment wherer DEBUG is on by default     \
+2002.7.5\
+- fixed a test that was using a malformed property list (10.2 is a bit pickier...)\
+2003.5.27\
+- bug:  StreamTarget's atomic methods don't work on mounted filesystems\
+	- seen in PdfCompres\
+	- cause:  unlink() / link() don't work as expected\
+	- fix: use NSFileManager instead, which works\
+2003.10.10\
+- bug:  'random' failure in FIFO, so this is apparently still not completely thread-safe (ouch!)\
+	- not reproducible...\
+2004.2.7\
+- -[MPWByteStream printFormat:] updated to use [NSString initWithFormat:] instead of vsprintf()\
+	- in order to allow '%@' to work\
+    	- also fixes potential buffer overrung\
+2005.7.19\
+- bug:  MPWByteStream target that doesn't respond to appendBytes:length:\
+	cause hard crash\
+	- fix: check in setTarget: and raise exception if it's not OK\
+2005.11.15\
+- bug:  a lot of the select tests started failing, returning null ( but not all)\
+	-> turns out the select + isEqual: tests are failing\
+	cause: it seems that NSProxy has gained an isEqual: method\
+	fix: override isEqual:  in MPWTrampoline by 'manually' forwarding the message to the target\
+2006.1.13\
+- MPWPoint additions\
+	- convenience creation from numbers (support '@' in Smalltalk)\
+	- point x point arithmetic ( no point x number yet )\
+2006.7.26\
+- console complaints about unlocking a lock that isn't locked\
+	- future does this, uses unlocking with condition as a signal\
+	- use a tryLock before doing the unlockWithCondition:\
+- On Intel/Leopard, collect/select/... HOM is failing, crashes when creating the NSInvocation (in Foundation code)\
+	- however, future HOM is working fine (it seems), as is ignore, soft pointer proxies, ...\
+	- could it be a problem with NSEnumerators? \
+		-> doesn't look like it\
+	- instead, it seems that the method signature is shot ( po _signature raises )\
+		- only with my collection HOMs\
+	-> YES, that's it, disabling the code that returns fakes removes those crashes\
+		(but obviously causes crashes with BOOL returning messages)\
+		-> switching to forward:: would help...\
+	- cause:  -[MPWFakedReturnMethodSignature	 initWithSignature:] had incorrect instance size\
+		- used sizeof *self , which doesn't seem to work any more in Leopard\
+	- fixed: in Leopard, use class_getInstanceSize()\
+2006.8.4\
+- bug:  (found in MPWXmlKit) 	MPWSubData isEqual: is incorrect\
+	- will return YES if other is a different kind of NSString and receiver is a prefix of other\
+	- fixed:  always check if the lengths are equal\
+	(issue: length doesn't properly take into account UTF-8 strings, and possibly can't ?)\
+\
+2006.8.5\
+- bug:  MPWMessageCatcher did not tell its NSInvocations to retain their args\
+	(caused crash in MPWXmlKit tests with NSXMLParser)\
+	- fix: forwardInvocation tells the NSInvocation to retain its args\
+2006.8.7\
+- finally fixed the FIFO\
+	- had nothing to do with the threading part, the grow routine was\
+	  buggy (tried to copy too many items, could thus overwrite good\
+	  data with blanks)\
+2007.3.20\
+- moved MPWPSFloat and MPWPSInteger to MPWFoundation (as MPWFloat and MPWInteger)\
+	- introduced a 'flags' fields in the 32 bit MPWObject refcount word (refcount now 24 bits)\
+	- MPWPSObject now does not introduce any state, so PS-interpreter can use MPWFloat/MPWInteger		(it also puts most MPWPSObject methods into a category of MPWObject)\
+		introduce an "arithmetic context" that can provide some object-caches and possibly other settings\
+	- (purpose: cheaper/chaceable object number reps for XML generation and Arches)\
+2007.3.27\
+- first simple implementation of MPWFastInvocation\
+	- including some test for the expected speedup\
+	- NSInvocation-compatible (for the basics that are needed)\
+2007.3.28\
+- added MPWRusage from various test programs \
+2007.3.29\
+- added MPWSmallStringTable for quickly mapping small c-strings to objects\
+	- unit test shows around 4x NSDictionary and 5x MPWUniqueString speed\
+}

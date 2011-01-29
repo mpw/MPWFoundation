@@ -1,0 +1,2 @@
+#!/bin/sh
+find . -name '*.m' | xargs grep -h '@implementation' | grep -v '(' | sed 's/@implementation /__objc_class_name_/' >classdef

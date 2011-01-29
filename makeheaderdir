@@ -1,0 +1,4 @@
+#!/bin/sh
+mkdir -p .headers/MPWFoundation
+cd .headers/MPWFoundation
+apply 'ln -s %1' `find ../.. -type f -name '*.h' `

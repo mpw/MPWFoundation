@@ -1,0 +1,242 @@
+? GNUmakefile
+? shared_obj
+? linux-compile-diffs
+Index: MPWMsgExpression.h
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWMsgExpression.h,v
+retrieving revision 1.4
+diff -r1.4 MPWMsgExpression.h
+10c10
+<     SEL		selector;
+---
+> //    SEL		selector;
+33c33
+< @end
+\ No newline at end of file
+---
+> @end
+Index: MPWMsgExpression.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWMsgExpression.m,v
+retrieving revision 1.4
+diff -r1.4 MPWMsgExpression.m
+6c6
+< #import <objc/objc-runtime.h>
+---
+> //#import <objc/objc-runtime.h>
+25a26,27
+> #if 0
+> 
+122a125,126
+> #endif
+> 
+308c312
+< @end
+\ No newline at end of file
+---
+> @end
+Index: MPWObject.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWObject.m,v
+retrieving revision 1.23
+diff -r1.23 MPWObject.m
+11a12,13
+> #undef CTHREADS
+> 
+Index: MPWRuntimeAdditions.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWRuntimeAdditions.m,v
+retrieving revision 1.7
+diff -r1.7 MPWRuntimeAdditions.m
+4c4
+< #import <objc/objc-class.h>
+---
+> //#import <objc/objc-class.h>
+12a13
+> #if 0
+16a18
+> #endif 
+19a22,23
+> #if 0
+> 
+55a60,61
+> 
+> #endif 
+Index: MPWTrampoline.h
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWTrampoline.h,v
+retrieving revision 1.1
+diff -r1.1 MPWTrampoline.h
+6c6
+< @interface MPWTrampoline : NSProxy
+---
+> @interface MPWTrampoline : NSObject
+Index: MPWTrampoline.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/MPWTrampoline.m,v
+retrieving revision 1.15
+diff -r1.15 MPWTrampoline.m
+18a19
+> 
+63d63
+<     [NSException raise:@"not understood" format:@"MPWTrampoline +forwardInvocation:%@",invocationToForward];
+70a71
+> 
+141a143
+> #if 0
+152c154
+<     NS_DURING
+---
+> //    NS_DURING
+154c156
+<     NS_HANDLER
+---
+> //    NS_HANDLER
+156c158
+<     NS_ENDHANDLER
+---
+> //    NS_ENDHANDLER
+158a161
+> #endif
+169a173
+> 
+171a176
+> 
+182a188
+> 
+214a221
+> 
+222c229
+<     return (id)(int)[self isKindOfClass:aClass];
+---
+>     return (id)[self isKindOfClass:aClass];
+224a232
+> 
+225a234
+> 
+Index: NSDataPrivateMemoryMapping.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/NSDataPrivateMemoryMapping.m,v
+retrieving revision 1.7
+diff -r1.7 NSDataPrivateMemoryMapping.m
+3c3
+< #if 1
+---
+> #if 0
+Index: NSInvocationAdditions.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/NSInvocationAdditions.m,v
+retrieving revision 1.5
+diff -r1.5 NSInvocationAdditions.m
+19a20
+> #if 0
+33a35,36
+> 
+> #endif
+Index: NSInvocationAdditions_lookup.h
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/NSInvocationAdditions_lookup.h,v
+retrieving revision 1.5
+diff -r1.5 NSInvocationAdditions_lookup.h
+2a3
+> #if 0
+45c46
+< 
+---
+> #endif
+Index: NSObjectAdditions.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/NSObjectAdditions.m,v
+retrieving revision 1.6
+diff -r1.6 NSObjectAdditions.m
+5,6c5,6
+< #import <objc/objc-class.h>
+< #import "MPWUniqueString.h"
+---
+> //#import <objc/objc-class.h>
+> //#import <Foundation/MPWUniqueString.h>
+38a39
+> #if 0
+65a67,68
+> 
+> #endif
+Index: Collections.subproj/MPWEnumFilter.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/Collections.subproj/MPWEnumFilter.m,v
+retrieving revision 1.39
+diff -r1.39 MPWEnumFilter.m
+3c3
+< #import <objc/objc-runtime.h>
+---
+> //#import <objc/objc-runtime.h>
+5c5
+< #import <MPWFoundation/NSInvocationAdditions_lookup.h>
+---
+> //#import <MPWFoundation/NSInvocationAdditions_lookup.h>
+129a130
+> #if 0
+258a260,261
+> #endif
+> 
+475a479
+> #if 0
+510a515
+> #endif
+Index: Collections.subproj/NSEnumeratorFiltering.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/Collections.subproj/NSEnumeratorFiltering.m,v
+retrieving revision 1.2
+diff -r1.2 NSEnumeratorFiltering.m
+5c5
+< #import <MPWFoundation/NSInvocationAdditions_lookup.h>
+---
+> //#import <MPWFoundation/NSInvocationAdditions_lookup.h>
+8a9
+> #if 0
+17a19
+> #endif
+Index: Streams.subproj/MPWByteStream.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/Streams.subproj/MPWByteStream.m,v
+retrieving revision 1.18
+diff -r1.18 MPWByteStream.m
+225a226,227
+> 
+> #if 0
+233a236,237
+> 
+> #endif
+Index: Streams.subproj/MPWStream.m
+===================================================================
+RCS file: /Users/marcel/programming/MasterRepository/MPWFoundation/Streams.subproj/MPWStream.m,v
+retrieving revision 1.17
+diff -r1.17 MPWStream.m
+5c5
+< #import <objc/objc-runtime.h>
+---
+> //#import <objc/objc-runtime.h>
+92a93
+> #if 0
+100a102
+> #endif
+117,124d118
+< /*
+<     NSLog(@"write %@ onto %@ with %@",
+<               anObject,self,NSStringFromSelector(streamWriterMessage));
+< */
+< // visObj=anObject;
+< //    visSel=streamWriterMessage;
+< //    visStream=self;
+< //    [anObject retain];
+126c120
+< //        [anObject performSelector:streamWriterMessage withObject:self];
+---
+> #if 0
+128,129c122
+< //    } else {
+< //        [self close];
+---
+> #endif
+131,132d123
+< //    [anObject release];
+< //    return [anObject writeOnMPWStream:self];

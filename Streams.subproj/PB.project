@@ -1,0 +1,58 @@
+{
+    DYNAMIC_CODE_GEN = YES; 
+    FILESTABLE = {
+        BUNDLES = (); 
+        CLASSES = (
+            MPWStream.m, 
+            MPWByteStream.m, 
+            MPWHierarchicalStream.m, 
+            MPWPropertyListStream.m, 
+            MPWFlattenStream.m
+        ); 
+        C_FILES = (); 
+        FRAMEWORKSEARCH = (); 
+        HEADERSEARCH = (); 
+        H_FILES = (
+            MPWStream.h, 
+            MPWByteStream.h, 
+            MPWHierarchicalStream.h, 
+            MPWPropertyListStream.h, 
+            MPWFlattenStream.h
+        ); 
+        M_FILES = (); 
+        OTHER_LINKED = (); 
+        OTHER_SOURCES = (Makefile.preamble, Makefile, Makefile.postamble); 
+        PROJECT_HEADERS = (
+            MPWStream.h, 
+            MPWByteStream.h, 
+            MPWPropertyListStream.h, 
+            MPWHierarchicalStream.h, 
+            MPWFlattenStream.h
+        ); 
+        PUBLIC_HEADERS = (
+            MPWStream.h, 
+            MPWByteStream.h, 
+            MPWPropertyListStream.h, 
+            MPWHierarchicalStream.h, 
+            MPWFlattenStream.h
+        ); 
+        SUBPROJECTS = (); 
+        TOOLS = (); 
+    }; 
+    LANGUAGE = English; 
+    LOCALIZABLE_FILES = {}; 
+    MAKEFILEDIR = "$(MAKEFILEPATH)/pb_makefiles"; 
+    NEXTSTEP_BUILDTOOL = /bin/gnumake; 
+    NEXTSTEP_INSTALLDIR = /Local/Library/Frameworks; 
+    NEXTSTEP_JAVA_COMPILER = /usr/bin/javac; 
+    NEXTSTEP_OBJCPLUS_COMPILER = /usr/bin/cc; 
+    PDO_UNIX_BUILDTOOL = $NEXT_ROOT/NextDeveloper/bin/make; 
+    PDO_UNIX_JAVA_COMPILER = "$(NEXTDEV_BIN)/javac"; 
+    PDO_UNIX_OBJCPLUS_COMPILER = "$(NEXTDEV_BIN)/gcc"; 
+    PROJECTNAME = Streams; 
+    PROJECTTYPE = Component; 
+    PROJECTVERSION = 2.8; 
+    WINDOWS_BUILDTOOL = $NEXT_ROOT/NextDeveloper/Executables/make; 
+    WINDOWS_JAVA_COMPILER = "$(JDKBINDIR)/javac.exe"; 
+    WINDOWS_OBJCPLUS_COMPILER = "$(DEVDIR)/gcc"; 
+}
