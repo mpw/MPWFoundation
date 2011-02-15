@@ -31,10 +31,18 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <MPWFoundation/MPWByteStream.h>
+#import "MPWByteStream.h"
 
 @interface MPWPropertyListStream : MPWByteStream
 {
 }
+
+@end
+
+
+
+@interface MPWPropertyListStream(testing)
+
++_encode:anObject;
 
 @end

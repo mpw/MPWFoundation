@@ -214,7 +214,7 @@ SEL visSel;
             first=NO;
         } else {
             if (spacer) {
-				NSLog(@"write spacer '%@' length: %d",spacer,[spacer length]);
+//				NSLog(@"write spacer '%@' length: %d",spacer,[spacer length]);
                 [self writeObject:spacer];
             }
         }

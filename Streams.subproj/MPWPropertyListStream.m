@@ -36,6 +36,28 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @implementation MPWPropertyListStream
 
 
+-(void)beginArray
+{
+    [self appendBytes:"( " length:2];
+}
+
+-(void)endArray
+{
+    [self appendBytes:") " length:2];
+}
+
+-(void)beginDict
+{
+    [self appendBytes:"{ " length:2];
+}
+
+-(void)endDict
+{
+    [self appendBytes:"} " length:2];
+}
+
+
+
 -(void)writeString:(NSString*)anObject
 {
 	[self outputString:[anObject quotedStringRepresentation]];
@@ -64,11 +86,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)writeArray:(NSArray*)anArray
 {
 //	NSLog(@" =========== plist stream write array: %@",anArray);
-	[self appendBytes:"(\n" length:2];
-   indent+=2;
+	[self beginArray];
     [self writeArrayContent:anArray];
-    indent-=2;
- 	[self appendBytes:" )\n" length:3];
+	[self endArray];
 }
 
 -(void)writeEnumerator:e
@@ -106,4 +126,68 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+
+#import "DebugMacros.h"
+
+@implementation MPWPropertyListStream(testing)
+
+
++_testStream {
+	return [self streamWithTarget:[NSMutableString string]];
+}
+
++_encode:anObject
+{
+	MPWPropertyListStream *writer=[self _testStream];
+	//	NSLog(@"stream: %@",writer);
+	[writer writeObject:anObject];
+	[writer close];
+	return [writer target];
+}
+
+
++(void)testWriteString
+{
+	IDEXPECT( [self _encode:@"hello world"], @"\"hello world\"", @"string encode");
+}
+
++(void)testWriteArray
+{
+	IDEXPECT( ([self _encode:[NSArray arrayWithObjects:@"hello",@"world",nil]]), 
+			 @"( \"hello\",\"world\") ", @"array encode");
+}
+
++(void)testWriteDict
+{
+	NSString *expectedEncoding= @"{\n    key = \"value\";\n    key1 = \"value1\";\n}";
+	NSString *actualEncoding=[self _encode:[NSDictionary dictionaryWithObjectsAndKeys:@"value",@"key",
+											@"value1",@"key1",nil ]];
+	//	INTEXPECT( [actualEncoding length], [expectedEncoding length], @"lengths");
+	
+	IDEXPECT( actualEncoding, expectedEncoding, @"dict encode");
+}
+
++(void)testWriteIntegers
+{
+	IDEXPECT( [self _encode:[NSNumber numberWithInt:42]], @"42", @"42");
+	IDEXPECT( [self _encode:[NSNumber numberWithInt:1]], @"1", @"1");
+	IDEXPECT( [self _encode:[NSNumber numberWithInt:0]], @"0", @"0");
+	IDEXPECT( [self _encode:[NSNumber numberWithInt:-1]], @"-1", @"1");
+}
+
+
++testSelectors
+{
+	return [NSArray arrayWithObjects:
+			@"testWriteString",
+			@"testWriteArray",
+//			@"testWriteLiterals",
+			@"testWriteIntegers",
+			@"testWriteDict",
+//			@"testEscapeStrings",
+//			@"testUnicodeEscapes",
+			nil];
+}
+
+@end
 
