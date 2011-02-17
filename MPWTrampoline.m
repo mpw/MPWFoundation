@@ -80,7 +80,24 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
+#if 1
 CACHING_ALLOC( quickTrampoline, 5, YES )
+#else
+static pthread_key_t key=0;
+static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
++quickTrampoline  {
+	if ( !key ) {
+		pthread_key_create(&key, __objc_cache_destructor);
+	}
+	MPWObjectCache *cache=pthread_getspecific( key  );
+	if ( !cache ) {
+		cache = [[MPWObjectCache alloc] initWithCapacity:5 class:self];
+		[cache setUnsafeFastAlloc:YES];
+		pthread_setspecific( key, cache );
+	}
+	return GETOBJECT(cache);
+}
+#endif
 
 
 +methodSignatureForSelector:(SEL)selector

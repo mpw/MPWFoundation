@@ -37,7 +37,25 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWIgnoreTrampoline
 
-CACHING_ALLOC( quickTrampoline, 5, YES )
+//CACHING_ALLOC( quickTrampoline, 5, YES )
+
+//#define CACHING_ALLOC( selector, size, unsafe  )
+static pthread_key_t key=NULL;
+static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
++quickTrampoline  {
+	if ( !key ) {
+		pthread_key_create(&key, __objc_cache_destructor);
+	}
+	MPWObjectCache *cache=pthread_getspecific( key  );
+	if ( !cache ) {
+		cache = [[MPWObjectCache alloc] initWithCapacity:5 class:self];
+		[cache setUnsafeFastAlloc:YES];
+		pthread_setspecific( key, cache );
+	}
+	return GETOBJECT(cache);
+}
+
+
 
 -methodSignatureForSelector:(SEL)aSelector
 {

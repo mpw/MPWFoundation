@@ -1,6 +1,6 @@
 //
 //  PhoneGeometry.h
-//  LDMac
+//  MPWFoundation
 //
 //  Created by Marcel Weiher on 11/11/10.
 //  Copyright 2010-2011 Marcel Weiher. All rights reserved.

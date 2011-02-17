@@ -33,6 +33,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <MPWFoundation/MPWFoundation.h>
 #import "AccessorMacros.h"
+#import <pthread.h>
 
 @class MPWObject;
 
@@ -71,17 +72,24 @@ scalarAccessor_h( SEL, reInitSelector, setReInitSelector )
 
 //#define	GETOBJECT( cache )		([(cache) getObject])
 
-#define CACHING_ALLOC( selector, size, unsafe ) \
-static MPWObjectCache* cache=nil;\
+
+
+#define CACHING_ALLOC( selector,size, unsafe  ) \
+static pthread_key_t key=0;\
+static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }\
 +selector\
 {\
-    if ( cache == nil ) {\
-       cache = [[MPWObjectCache alloc] initWithCapacity:size class:self];\
-       [cache setUnsafeFastAlloc:unsafe];\
-       [cache makeThreadSafeOnDemand];\
-    }\
-    return GETOBJECT( cache );\
-}\
-idAccessor( cache, setCache )\
+	if ( !key ) {\
+		pthread_key_create(&key, __objc_cache_destructor);\
+	}\
+	MPWObjectCache *cache=pthread_getspecific( key  );\
+	if ( !cache ) {\
+		cache = [[MPWObjectCache alloc] initWithCapacity:size class:self];\
+		[cache setUnsafeFastAlloc:unsafe];\
+		pthread_setspecific( key, cache );\
+	}\
+	return GETOBJECT(cache);\
+}
+
 
 @end
