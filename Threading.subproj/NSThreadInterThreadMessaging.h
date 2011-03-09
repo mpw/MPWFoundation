@@ -37,15 +37,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 @interface NSThread(InterThreadMessaging)
-+ (id)allocateProxyForObject:(id)anObject;
-+(BOOL)isInCurrentThread:anObject;
--proxyDict;
--proxyForObject:anObject;
-+currentThreadProxyForObject:anObject;
-+ (void)removeProxyForObject:(id)anObject;
-+ (BOOL)createServerForObjectInCurrentThread:(id)anObject;
-+ (void)createServerForObjectInNewThread:(id)anObject;
-
 @end
 
 @interface NSObject(asyncMessaging)

@@ -84,6 +84,7 @@ static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }\
 	}\
 	MPWObjectCache *cache=pthread_getspecific( key  );\
 	if ( !cache ) {\
+/*        NSLog(@"will create a local cache for %@ for thread %p",NSStringFromClass(self),[NSThread currentThread]); */\
 		cache = [[MPWObjectCache alloc] initWithCapacity:size class:self];\
 		[cache setUnsafeFastAlloc:unsafe];\
 		pthread_setspecific( key, cache );\

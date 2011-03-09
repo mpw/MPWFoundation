@@ -42,10 +42,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
     int	retainCount;
 	id	xxxTarget;
 	SEL xxxSelector;
+	id  xxxAdditionalArg;
 }
 
 idAccessor_h( xxxTarget, setXxxTarget )
 scalarAccessor_h( SEL, xxxSelector, setXxxSelector )
+idAccessor_h( xxxAdditionalArg, setXxxAdditionalArg )
 
 +trampolineWithTarget:target selector:(SEL)selector;
 +trampoline;

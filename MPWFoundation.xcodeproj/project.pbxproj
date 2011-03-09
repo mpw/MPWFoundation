@@ -96,7 +96,6 @@
 		1F008FA510BDAC18001F05D5 /* Concepts.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AE01398925005ADD88 /* Concepts.rtf */; };
 		1F008FA610BDAC18001F05D5 /* Log.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AF01398925005ADD88 /* Log.rtf */; };
 		1F008FA710BDAC18001F05D5 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B001398925005ADD88 /* Notes.rtf */; };
-		1F008FA810BDAC18001F05D5 /* Readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B101398925005ADD88 /* Readme.rtf */; };
 		1F008FA910BDAC18001F05D5 /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
 		1F008FAB10BDAC18001F05D5 /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1F008FAC10BDAC18001F05D5 /* MPWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1934006686DDC35ADD82 /* MPWObject.m */; settings = {ATTRIBUTES = (); }; };
@@ -326,6 +325,7 @@
 		1FB93A961292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; };
 		1FB93A971292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; };
 		1FBBEFD80E11EF6400977797 /* MPWFoundation_prefix_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */; };
+		1FC7C901132501FC00FD39D1 /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FC97CDD0BB0A8B900F8CB51 /* MPWNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC97CDB0BB0A8B900F8CB51 /* MPWNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC97CDE0BB0A8B900F8CB51 /* MPWNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC97CDC0BB0A8B900F8CB51 /* MPWNumber.m */; };
 		1FC97CF00BB0A9B200F8CB51 /* MPWInteger.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC97CEE0BB0A9B200F8CB51 /* MPWInteger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -407,7 +407,6 @@
 		1FCDE16B1253A9640002D17A /* Concepts.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AE01398925005ADD88 /* Concepts.rtf */; };
 		1FCDE16C1253A9640002D17A /* Log.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AF01398925005ADD88 /* Log.rtf */; };
 		1FCDE16D1253A9640002D17A /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B001398925005ADD88 /* Notes.rtf */; };
-		1FCDE16E1253A9640002D17A /* Readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B101398925005ADD88 /* Readme.rtf */; };
 		1FCDE16F1253A9640002D17A /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
 		1FCDE1711253A9640002D17A /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FCDE1721253A9640002D17A /* MPWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1934006686DDC35ADD82 /* MPWObject.m */; settings = {ATTRIBUTES = (); }; };
@@ -527,7 +526,6 @@
 		1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AE01398925005ADD88 /* Concepts.rtf */; };
 		1FF8FDF209B49D0100652476 /* Log.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61AF01398925005ADD88 /* Log.rtf */; };
 		1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B001398925005ADD88 /* Notes.rtf */; };
-		1FF8FDF409B49D0100652476 /* Readme.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 66DC61B101398925005ADD88 /* Readme.rtf */; };
 		1FF8FDF509B49D0100652476 /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
 		1FF8FDF709B49D0100652476 /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FF8FDF809B49D0100652476 /* MPWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1934006686DDC35ADD82 /* MPWObject.m */; settings = {ATTRIBUTES = (); }; };
@@ -764,7 +762,6 @@
 		66DC61AE01398925005ADD88 /* Concepts.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Concepts.rtf; sourceTree = "<group>"; };
 		66DC61AF01398925005ADD88 /* Log.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Log.rtf; sourceTree = "<group>"; };
 		66DC61B001398925005ADD88 /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
-		66DC61B101398925005ADD88 /* Readme.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Readme.rtf; sourceTree = "<group>"; };
 		F51B7249013FD70701ABB64E /* NSBundleConveniences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSBundleConveniences.m; sourceTree = "<group>"; };
 		F51B724A013FD70701ABB64E /* NSBundleConveniences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSBundleConveniences.h; sourceTree = "<group>"; };
 		F51B7251013FDD9801ABB64E /* ResourceTest */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ResourceTest; sourceTree = "<group>"; };
@@ -936,7 +933,6 @@
 				66DC61AE01398925005ADD88 /* Concepts.rtf */,
 				66DC61AF01398925005ADD88 /* Log.rtf */,
 				66DC61B001398925005ADD88 /* Notes.rtf */,
-				66DC61B101398925005ADD88 /* Readme.rtf */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1650,7 +1646,6 @@
 				1F008FA510BDAC18001F05D5 /* Concepts.rtf in Resources */,
 				1F008FA610BDAC18001F05D5 /* Log.rtf in Resources */,
 				1F008FA710BDAC18001F05D5 /* Notes.rtf in Resources */,
-				1F008FA810BDAC18001F05D5 /* Readme.rtf in Resources */,
 				1F008FA910BDAC18001F05D5 /* ResourceTest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1662,7 +1657,6 @@
 				1FCDE16B1253A9640002D17A /* Concepts.rtf in Resources */,
 				1FCDE16C1253A9640002D17A /* Log.rtf in Resources */,
 				1FCDE16D1253A9640002D17A /* Notes.rtf in Resources */,
-				1FCDE16E1253A9640002D17A /* Readme.rtf in Resources */,
 				1FCDE16F1253A9640002D17A /* ResourceTest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1674,7 +1668,6 @@
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
-				1FF8FDF409B49D0100652476 /* Readme.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1854,6 +1847,7 @@
 				1F64207B12CB1A3700240B02 /* MPWActiveDownload.m in Sources */,
 				1F75BBA312D2589800E7ABB4 /* MPWPListBuilder.m in Sources */,
 				1F78214D12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */,
+				1FC7C901132501FC00FD39D1 /* NSThreadInterThreadMessaging.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
