@@ -132,6 +132,20 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	return count;
 }
 
+-description
+{
+	if ( [self count] ) {
+		NSMutableString *description=[NSMutableString stringWithFormat:@"( %d",[self integerAtIndex:0]];
+		for (int i=1;i<[self count];i++) {
+			[description appendFormat:@", %d",[self integerAtIndex:i]];
+		}
+		[description appendString:@")"];
+		return description;
+	} else {
+		return @"( )";
+	}
+}
+
 @end
 
 

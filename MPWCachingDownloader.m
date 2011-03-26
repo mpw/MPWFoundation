@@ -161,7 +161,11 @@ idAccessor( observer, setObserver )
 		return nil;
 	} else {
 //		NSLog(@"need to request: %@ --  path: %@",[request urlstring],[self pathForWebURL:[request urlstring]]);
-		return [self activeDownloadFromRequest:request];
+		@try {
+			return [self activeDownloadFromRequest:request];
+		} @catch (id e) {
+		}
+		return nil;
 	}
 }
 
