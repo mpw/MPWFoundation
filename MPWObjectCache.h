@@ -31,7 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <MPWFoundation/MPWFoundation.h>
+#import "MPWObject.h"
 #import "AccessorMacros.h"
 #import <pthread.h>
 

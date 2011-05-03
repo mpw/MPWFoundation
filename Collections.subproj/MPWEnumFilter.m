@@ -37,13 +37,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation.h"
 #endif
 #import "MPWEnumFilter.h"
-#import <MPWFoundation/AccessorMacros.h>
-#import <MPWFoundation/MPWObjectCache.h>
-#import <MPWFoundation/NSInvocationAdditions_lookup.h>
+#import "AccessorMacros.h"
+#import "MPWObjectCache.h"
+#import "NSInvocationAdditions_lookup.h"
 //#import "MPWFakedReturnMethodSignature.h"
 #import "NSObjectFiltering.h"
 #import "DebugMacros.h"
-#import <MPWFoundation/NSInvocationAdditions_lookup.h>
 
 @implementation MPWEnumFilters
 

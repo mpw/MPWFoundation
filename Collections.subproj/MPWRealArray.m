@@ -38,7 +38,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //---	my includes
 
 #import "MPWRealArray.h"
-#import "MPWByteStream.h"
+//#import "MPWByteStream.h"
 #import "CodingAdditions.h"
 
 //---	NS includes

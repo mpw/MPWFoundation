@@ -362,7 +362,7 @@ static int offsetOfCStringWithLengthInTableOfLength( char  *table, NSUInteger ta
 }
 
 #define LOOKUP_COUNT 1000000
-#if FULL_MPWFOUNDATION && !WINDOWS
+#if FULL_MPWFOUNDATION && !WINDOWS && !LINUX
 
 +(void)testLookupFasterThanNSDictionary
 {
