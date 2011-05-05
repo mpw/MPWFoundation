@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>MPWFoundation (Framework).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>MPWFoundation (Linux Cocotron).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>MPWFoundation (Windows Cocotron).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MPWFoundationTouch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>MPWFoundationTouchFat.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>1F008F5A10BDAC18001F05D5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F4FC66810F7F6AC00376799</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1FA5B7D51172CD28001628B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1FCDE1201253A9640002D17A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1FF8FDB309B49D0100652476</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
