@@ -15,10 +15,10 @@
 
 @implementation MPWActiveDownload
 
-objectAccessor( MPWResourceLoadRequest*, request, setRequest )
-objectAccessor( MPWByteStream*, output, setOutput )
-objectAccessor( MPWCachingDownloader*, downloader, setDownloader )
-objectAccessor( NSURLConnection*, urlConnection, setUrlConnection )
+objectAccessor( MPWResourceLoadRequest, request, setRequest )
+objectAccessor( MPWByteStream, output, setOutput )
+objectAccessor( MPWCachingDownloader, downloader, setDownloader )
+objectAccessor( NSURLConnection, urlConnection, setUrlConnection )
 boolAccessor( done, setDone )
 boolAccessor( log, setLog )
 intAccessor( downloadedSoFar, setDownloadedSoFar )

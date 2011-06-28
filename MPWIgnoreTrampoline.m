@@ -40,7 +40,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //CACHING_ALLOC( quickTrampoline, 5, YES )
 
 //#define CACHING_ALLOC( selector, size, unsafe  )
-static pthread_key_t key=NULL;
+static pthread_key_t key=0;
 static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
 +quickTrampoline  {
 	if ( !key ) {

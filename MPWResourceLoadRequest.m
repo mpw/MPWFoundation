@@ -12,7 +12,7 @@
 
 @implementation MPWResourceLoadRequest
 
-objectAccessor( NSString*, urlstring, setUrlstring )
+objectAccessor( NSString, urlstring, setUrlstring )
 scalarAccessor( SEL, selector, setSelector )
 idAccessor( target, setTarget )
 scalarAccessor( SEL, failureSelector, setFailureSelector )

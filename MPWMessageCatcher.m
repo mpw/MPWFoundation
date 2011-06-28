@@ -65,7 +65,7 @@ extern id objc_msgSend(id, SEL, ...);
 -(BOOL)respondsToSelector:(SEL)aSelector
 {
     return [testClass instancesRespondToSelector:aSelector] ||
-			[isa instancesRespondToSelector:aSelector];
+			[object_getClass(self) instancesRespondToSelector:aSelector];
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:(SEL)aSelector
@@ -73,7 +73,7 @@ extern id objc_msgSend(id, SEL, ...);
 	NSMethodSignature* sig;
 	sig = [testClass instanceMethodSignatureForSelector:aSelector];
 	if (!sig) {
-		sig = [isa instanceMethodSignatureForSelector:aSelector];
+		sig = [object_getClass(self) instanceMethodSignatureForSelector:aSelector];
 	}
     return  sig;
 }

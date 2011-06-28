@@ -49,7 +49,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
-objectAccessor_h( MPWKVCSoftPointer*, xxxsoftPointer, xxxsetSoftPointer )
+objectAccessor_h( MPWKVCSoftPointer, xxxsoftPointer, xxxsetSoftPointer )
 +proxyWithSoftPointer:softPointer;
 -initWithSoftPointer:softPointer;
 

@@ -472,6 +472,7 @@
 		1FCE1E1C1371BB250035A429 /* MPWBlockInvocable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE1E141371BB250035A429 /* MPWBlockInvocable.m */; };
 		1FE006030AFC4E7800F4542F /* MPWEnumSelectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE006040AFC4E7800F4542F /* MPWEnumSelectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */; };
+		1FE09082137821B6003B18B9 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
 		1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1947006686DDC35ADD82 /* AccessorMacros.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1948006686DDC35ADD82 /* DebugMacros.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1949006686DDC35ADD82 /* MPWObject.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
@@ -1866,6 +1867,7 @@
 				1F78214D12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */,
 				1FC7C901132501FC00FD39D1 /* NSThreadInterThreadMessaging.m in Sources */,
 				1FCE1E181371BB250035A429 /* MPWBlockInvocable.m in Sources */,
+				1FE09082137821B6003B18B9 /* NSNil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2530,11 +2532,7 @@
 		1FF8FE2B09B49D0200652476 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					x86_64,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				COPY_PHASE_STRIP = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

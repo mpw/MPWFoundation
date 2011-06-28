@@ -13,7 +13,7 @@
 
 idAccessor( key , setKey )
 idAccessor( plist , setPlist )
-//objectAccessor( NSMutableArray*, containerStack, setContainerStack )
+//objectAccessor( NSMutableArray, containerStack, setContainerStack )
 
 -init
 {

@@ -54,7 +54,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
     IMP		releaseImp;
     SEL		reInitSelector;
     IMP		reInitImp;
-	NSZone*	myZone;
 }
 
 +cacheWithCapacity:(int)newCap class:(Class)newClass;

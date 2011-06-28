@@ -71,7 +71,7 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 {
 //  [xxxTarget performSelector:xxxSelector withObject:invocationToForward];
 //	class_addMethod(isa ,[invocationToForward selector],forwardAMessage,"@@#@");
-	[isa addMethod:(IMP)[self instanceMethodForSelector:@selector(forwardAMessage:) ] forSelector:xxxSelector types: "@@#@"];
+	[object_getClass(self) addMethod:(IMP)[self instanceMethodForSelector:@selector(forwardAMessage:) ] forSelector:xxxSelector types: "@@#@"];
 	[self setXxxTarget:nil];
 }
 

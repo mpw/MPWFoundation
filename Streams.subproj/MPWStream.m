@@ -55,7 +55,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     NSAutoreleasePool* pool=[[NSAutoreleasePool alloc] init];
     [self process:anObject];
-    [pool release];
+    [pool drain];
 }
 
 +defaultTarget
@@ -224,7 +224,7 @@ SEL visSel;
             [pool release], pool=[[NSAutoreleasePool alloc] init];
         }
     }
-    [pool release];
+    [pool drain];
 }
 
 -(void)writeEnumerator_fast:(NSEnumerator*)e spacer:spacer

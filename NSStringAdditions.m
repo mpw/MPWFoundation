@@ -248,11 +248,11 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
     id pool,res1,res2,res3;
     id pool1,pool2,pool3;
     pool=[NSMutableSet setWithObjects:@"test",nil];
-    pool1=[pool copy];
+    pool1=[[pool copy] autorelease];
     res1 = [@"test" uniquedByNumberingInUpdatingPool:pool];
-    pool2=[pool copy];
+    pool2=[[pool copy] autorelease];
     res2 = [@"test" uniquedByNumberingInUpdatingPool:pool];
-    pool3=[pool copy];
+    pool3=[[pool copy] autorelease];
     res3 = [@"test" uniquedByNumberingInUpdatingPool:pool];
     NSAssert2( [res1 isEqual:@"test-1"], @"expected 'test-1' got %@ when uniqing 'test' against %@",res1,pool1);
     NSAssert2( [res2 isEqual:@"test-2"], @"expected 'test-2' got %@ when uniqing 'test' against %@",res1,pool2);

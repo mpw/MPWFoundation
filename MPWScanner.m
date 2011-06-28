@@ -382,7 +382,7 @@ idAccessor( dataSource, setDataSource )
 			}
             [self computeHeadRoom];
         } while ( end-pos < roomNeeded  );
-        [pool release];
+        [pool drain];
     } else {
 //        NSLog(@"requested %d, have %d",roomNeeded,end-pos);
     }

@@ -47,8 +47,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWNamedData
 
-objectAccessor( NSData*, data, setData )
-objectAccessor( NSString*, name, setName )
+objectAccessor( NSData, data, setData )
+objectAccessor( NSString, name, setName )
 
 -initWithData:(NSData*)aData name:(NSString*)filename
 {

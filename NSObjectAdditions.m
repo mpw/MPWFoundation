@@ -89,7 +89,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	unsigned int i,count=0;
 	Ivar* ivars=class_copyIvarList( self, &count );
 	for ( i=0;i<count;i++) {
-		[names addObject:[NSString stringWithCString:ivar_getName( ivars[i]) ]];
+		[names addObject:[NSString stringWithUTF8String:ivar_getName( ivars[i]) ]];
 	}
 	free(ivars);
 }
@@ -101,7 +101,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	Ivar* ivars=class_copyIvarList( self, &count );
 	for ( i=0;i<count;i++) {
 		if ( ivar_getOffset(ivars[i]) == ivarOffset ) {
-			name= [NSString stringWithCString:ivar_getName( ivars[i]) ];
+			name= [NSString stringWithUTF8String:ivar_getName( ivars[i]) ];
 			break;
 		}
 	}
@@ -258,7 +258,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testIvarAtOffset
 {
-	id tester=[self new];
+	id tester=[[self new] autorelease];
 	
 	IDEXPECT( [tester ivarNameForVarPointer:[tester addressOfA] orIndex:1],  @"a", @"first ivar" );
 	IDEXPECT( [tester ivarNameForVarPointer:[tester addressOfB] orIndex:2],  @"b", @"second ivar" );

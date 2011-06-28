@@ -13,7 +13,7 @@
 
 @implementation MPWCachingDownloader
 
-objectAccessor( NSString*, cacheBaseDir, setCacheBaseDir )
+objectAccessor( NSString, cacheBaseDir, setCacheBaseDir )
 idAccessor( observer, setObserver )
 
 -(void)refreshItemFromBackground:anItem

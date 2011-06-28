@@ -66,8 +66,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWFuture
 
-objectAccessor( NSInvocation*, invocation, setInvocation )
-objectAccessor( NSConditionLock*, lock, setLock )
+objectAccessor( NSInvocation, invocation, setInvocation )
+objectAccessor( NSConditionLock, lock, setLock )
 idAccessor( target, setTarget )
 idAccessor( _result, setResult )
 

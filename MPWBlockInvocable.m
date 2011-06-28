@@ -9,9 +9,21 @@
 #import "MPWBlockInvocable.h"
 
 
+
 @implementation MPWBlockInvocable
 
+#if 0
 
+static void *copy(void *dst, void *src) {  return 
+
+/** Optional block dispose helper. May be NULL. */
+static void *dispose(void *) 
+#endif
+
+
+static struct Block_descriptor sdescriptor= {
+		0, 64, NULL, NULL
+};
 
 -(id)invokeWithArgs:(va_list)args
 {
@@ -37,6 +49,8 @@ static id blockFun( id self, ... ) {
 	self=[super init];
 	if ( self ) {
 		invoke=(IMP)[self invokeMapper];
+		descriptor=&sdescriptor;
+		flags=(1 << 28);
 	}
 	return self;
 }
