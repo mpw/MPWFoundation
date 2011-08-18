@@ -382,8 +382,8 @@ static int offsetOfCStringWithLengthInTableOfLength( char  *table, NSUInteger ta
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"dict time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"dict vs. string table lookup time ratio: %g",ratio);
-	NSAssert2( ratio > 3.2 ,@"ratio of small string table to NSDictionary %g < %g",
-				ratio,3.2);   
+	NSAssert2( ratio > 2.5 ,@"ratio of small string table to NSDictionary %g < %g",
+				ratio,2.5);   
 }
 
 +(void)testLookupFasterThanMPWUniqueString

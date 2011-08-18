@@ -61,6 +61,7 @@ extern void releaseMPWObject( MPWObject *obj );
 extern void releaseMPWObjects( MPWObject **objs, unsigned count );
 
 #if __OBJC_GC__
+#include <objc/objc-auto.h>
 #define	IS_OBJC_GC_ON  objc_collecting_enabled()
 #define	ALLOC_POINTERS( size )  NSAllocateCollectable( (size), NSScannedOption)
 #else

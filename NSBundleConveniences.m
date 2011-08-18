@@ -42,14 +42,18 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation NSBundle(Conveniences)
 
+-(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType 
+{
+	NSString *path = [self pathForResource:aName ofType:aType];
+	NSData *data;
+    data =  [NSData dataWithContentsOfMappedFile:path];
+    return data;
+}
+
 +(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType forClass:(Class)class
 {
 	NSBundle *classBundle = [self bundleForClass:class];
-	NSString *path = [classBundle pathForResource:aName ofType:aType];
-	NSData *data;
-    data =  [NSData dataWithContentsOfFile:path];
-    return data;
-
+    return [classBundle resourceWithName:aName type:aType];
 }
 
 +defaultFrameworkSearchPaths

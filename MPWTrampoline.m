@@ -109,7 +109,7 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
     }
 }
 
--(unsigned)retainCount
+-(NSUInteger)retainCount
 {
     return retainCount+1;
 }

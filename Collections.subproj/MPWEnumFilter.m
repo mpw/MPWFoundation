@@ -32,7 +32,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #ifdef Darwin
-#import <objc/objc-runtime.h>
+#import <objc/runtime.h>
 #import <Foundation/NSInvocation.h>
 #import "MPWFoundation.h"
 #endif
@@ -210,8 +210,10 @@ static id returnNil() {  return nil; }
 #if FAST_MSG_LOOKUPS
         CACHED_LOOKUP_WITH_CACHE(tempTarget,targetSelector,targetFilterImp,targetClass );
         arguments[0] = targetFilterImp( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
-#else
+#elsif !LINUX
         arguments[0] =((IMP)objc_msg_lookup( tempTarget, targetSelector))( tempTarget ,targetSelector ,arguments[2] ,arguments[3] ,arguments[4], arguments[5]);
+#else
+        arguments[0]=[tempTarget performSelector:targetSelector withObject:arguments[2] withObject:arguments[3]];
 #endif
         result = processResult( self, NULL );
     } while ( result == nil );

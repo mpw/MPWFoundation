@@ -68,7 +68,7 @@ static void lineLimited_putc( MPWASCII85Stream* self, unsigned char byte )
 }
 
 
--(void)appendBytes:(const void*)data length:(unsigned int)count
+-(void)appendBytes:(const void*)data length:(unsigned long)count
 {
     short theChar;
     unsigned const char *bytes=data;
