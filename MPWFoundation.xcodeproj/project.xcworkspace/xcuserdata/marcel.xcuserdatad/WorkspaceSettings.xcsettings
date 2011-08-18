@@ -4,5 +4,9 @@
 <dict>
 	<key>IDEWorkspaceUserSettings_BuildLocationStyle</key>
 	<integer>2</integer>
+	<key>IDEWorkspaceUserSettings_HasAskedToTakeAutomaticSnapshotBeforeSignificantChanges</key>
+	<true/>
+	<key>IDEWorkspaceUserSettings_SnapshotAutomaticallyBeforeSignificantChanges</key>
+	<false/>
 </dict>
 </plist>
