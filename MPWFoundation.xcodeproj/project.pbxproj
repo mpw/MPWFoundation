@@ -2241,6 +2241,7 @@
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Development;
 		};
@@ -2262,6 +2263,7 @@
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				VALID_ARCHS = "i386 armv6 armv7";
 				ZERO_LINK = NO;
 			};
@@ -2284,6 +2286,7 @@
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = "Release Tiger";
 		};
