@@ -1551,6 +1551,23 @@
 		};
 /* End PBXHeadersBuildPhase section */
 
+/* Begin PBXLegacyTarget section */
+		1F3AC607143EB3D9009B8504 /* show-build-dir */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(BUILD_DIR)";
+			buildConfigurationList = 1F3AC60B143EB3D9009B8504 /* Build configuration list for PBXLegacyTarget "show-build-dir" */;
+			buildPhases = (
+			);
+			buildToolPath = echo;
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "show-build-dir";
+			passBuildSettingsInEnvironment = 1;
+			productName = "show-build-dir";
+		};
+/* End PBXLegacyTarget section */
+
 /* Begin PBXNativeTarget section */
 		1F008F5A10BDAC18001F05D5 /* MPWFoundation (Windows Cocotron) */ = {
 			isa = PBXNativeTarget;
@@ -1659,6 +1676,7 @@
 				1F4FC66810F7F6AC00376799 /* MPWFoundationTouch */,
 				1FA5B7D51172CD28001628B6 /* MPWFoundationTouchFat */,
 				1FCDE1201253A9640002D17A /* MPWFoundation (Linux Cocotron) */,
+				1F3AC607143EB3D9009B8504 /* show-build-dir */,
 			);
 		};
 /* End PBXProject section */
@@ -2221,6 +2239,77 @@
 			};
 			name = "Release Tiger";
 		};
+		1F3AC608143EB3D9009B8504 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				DEBUGGING_SYMBOLS = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		1F3AC609143EB3D9009B8504 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		1F3AC60A143EB3D9009B8504 /* Release Tiger */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = "Release Tiger";
+		};
 		1F4FC66A10F7F6AD00376799 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2574,6 +2663,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;
+		};
+		1F3AC60B143EB3D9009B8504 /* Build configuration list for PBXLegacyTarget "show-build-dir" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F3AC608143EB3D9009B8504 /* Development */,
+				1F3AC609143EB3D9009B8504 /* Release */,
+				1F3AC60A143EB3D9009B8504 /* Release Tiger */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;

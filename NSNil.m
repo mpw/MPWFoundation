@@ -79,6 +79,11 @@ id nsnil=nil;
     return self;
 }
 
+-(void)forwardInvocation:(NSInvocation *)anInvocation
+{
+    return ;   // just swallow
+}
+
 @end
 
 @implementation NSObject(Testnil)

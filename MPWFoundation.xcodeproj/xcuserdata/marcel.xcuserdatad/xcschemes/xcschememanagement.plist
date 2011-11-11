@@ -7,32 +7,42 @@
 		<key>MPWFoundation (Framework).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>15</integer>
 		</dict>
 		<key>MPWFoundation (Linux Cocotron).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>26</integer>
 		</dict>
 		<key>MPWFoundation (Windows Cocotron).xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>24</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>19</integer>
 		</dict>
 		<key>MPWFoundationTouchFat.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>40</integer>
+			<integer>43</integer>
+		</dict>
+		<key>show-build-dir.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>53</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>1F008F5A10BDAC18001F05D5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F3AC607143EB3D9009B8504</key>
 		<dict>
 			<key>primary</key>
 			<true/>
