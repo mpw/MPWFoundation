@@ -46,6 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(unsigned short*)ushorts;
 -(unsigned)ushortAtIndex:(unsigned)index;
 -(unsigned)lastUshort;
+-(unsigned)count;
 -(void)appendUshorts:(const unsigned short*)newData count:(unsigned)newCount;
 -(void)pushUshort:(unsigned short)newShort;
 -(void)popUshort;

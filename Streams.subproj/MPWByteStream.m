@@ -41,6 +41,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+@interface MPWNullTarget : NSObject
+
+@end
+
 
 @interface MPWStdioTarget : NSObject
 {
@@ -143,6 +147,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 +file:(FILE*)file
 {
     return [self streamWithTarget:[MPWStdioTarget fileTarget:file]];
+}
+
++null
+{
+    return [self streamWithTarget:[[[MPWNullTarget alloc] init] autorelease]];
 }
 
 +(NSString*)defaultFileMode
@@ -634,6 +643,15 @@ intAccessor( fd, setFd )
 
 @end
 
+
+@implementation MPWNullTarget
+
+
+-(void)appendBytes:(const void *)bytes length:(unsigned)len
+{
+}
+
+@end
 
 
 @implementation MPWByteStream(testing)

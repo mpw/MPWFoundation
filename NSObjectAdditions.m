@@ -69,15 +69,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 @end
-@implementation NSObject(addressKey)
-
--addressKey
-{
-	long long address = (long long)(NSUInteger)self;
-    return [NSString stringWithFormat:@"%llu",address];
-}
-
-@end
 
 @implementation NSObject(ivarAccess)
 
@@ -239,6 +230,16 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "DebugMacros.h"
 
 @interface NSObjectIvarAcccessTesting : NSObject { id a; int b; float c; NSString *d;id f; }
+@end
+
+@implementation NSObject(addressKey)
+
+-addressKey
+{
+	long long address = (long long)(NSUInteger)self;
+    return [NSString stringWithFormat:@"%llu",address];
+}
+
 @end
 
 @implementation NSObjectIvarAcccessTesting : NSObject

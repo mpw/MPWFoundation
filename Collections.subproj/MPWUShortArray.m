@@ -70,7 +70,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [self ushortAtIndex:count-1];
 }
 
--(unsigned)count
+-(NSUInteger)count
 {
 	return count;
 }
