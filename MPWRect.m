@@ -48,6 +48,11 @@ scalarAccessor( NSRect, rect, setRect )
     return self;
 }
 
++rectWithRect:(NSRect)aRect
+{
+    return [[[self alloc] initWithRect:aRect] autorelease];
+}
+
 -(void)setOrigin:aPoint
 {
 	rect.origin=[aPoint point];
@@ -56,6 +61,26 @@ scalarAccessor( NSRect, rect, setRect )
 -(void)setMpwSize:aPoint
 {
 	rect.size=[aPoint asSize];
+}
+
+-(double)x
+{
+    return rect.origin.x;
+}
+
+-(double)y
+{
+    return rect.origin.y;
+}
+
+-(double)width
+{
+    return rect.size.width;
+}
+
+-(double)height
+{
+    return rect.size.height;
 }
 
 -origin
@@ -69,6 +94,12 @@ scalarAccessor( NSRect, rect, setRect )
         rect.size.width,rect.size.height
     }];
 }
+
+-size
+{
+    return [self mpwSize];
+}
+
 
 +rectWithNSRect:(NSRect)aRect
 {
@@ -97,6 +128,39 @@ scalarAccessor( NSRect, rect, setRect )
     return self;
 }
 
+-(double)midX
+{
+    return (rect.origin.x + rect.size.width)/2.0;
+}
+
+-(double)midY
+{
+    return (rect.origin.y + rect.size.height)/2.0;
+}
+
+-(NSPoint)center
+{
+    return NSMakePoint( [self midX], [self midY] );
+}
+
+-(MPWRect*)inset:(double)xInset :(double)yInset
+{
+    return [[self  class] rectWithRect:NSInsetRect( rect, xInset, yInset )];
+}
+
+-(MPWRect*)inset:anObject
+{
+    float x=0,y=0;
+    if ( [anObject respondsToSelector:@selector(x)] && [anObject respondsToSelector:@selector(y)] ) {
+        x=[(MPWPoint*)anObject x];
+        y=[(MPWPoint*)anObject y];
+    } else {
+        x=[anObject doubleValue];
+        y=x;
+    }
+    return [self inset:x :y];
+}
+
 @end
 
 @implementation NSString(rectCreation)
@@ -113,3 +177,73 @@ scalarAccessor( NSRect, rect, setRect )
 
 @end
 
+#import "DebugMacros.h"
+
+@implementation MPWRect(testing)
+
++(MPWRect*)_testA { return [self rectWithRect:NSMakeRect( 10,15,30,105)]; }
++(MPWRect*)_testB { return [self rectWithRect:NSMakeRect( 100,20,130,30)]; }
+
++(void)testMid
+{
+    MPWRect *a=[self _testA];
+    FLOATEXPECT([a midX], 20.0, @"a midX");
+    FLOATEXPECT([a midY], 60.0, @"a midY");
+    MPWRect *b=[self _testB];
+    FLOATEXPECT([b midX], 115, @"b midX");
+    FLOATEXPECT([b midY], 25, @"b midY");
+    
+}
+
++(void)testXYWidthHeight
+{
+    MPWRect *a=[self _testA];
+    FLOATEXPECT([a x], 10.0, @"a x");
+    FLOATEXPECT([a y], 15.0, @"a y");
+    FLOATEXPECT([a width], 30.0, @"a width");
+    FLOATEXPECT([a height], 105.0, @"a height");
+    MPWRect *b=[self _testB];
+    FLOATEXPECT([b x], 100.0, @"b x");
+    FLOATEXPECT([b y], 20.0, @"b y");
+    FLOATEXPECT([b width], 130.0, @"b width");
+    FLOATEXPECT([b height], 30.0, @"b height");
+    
+}
+
++(void)testCenter
+{
+    MPWRect *a=[self _testA];
+    NSPoint center=[a center];
+    
+    FLOATEXPECT(center.x , 20.0, @"a center.x");
+    FLOATEXPECT(center.y , 60.0, @"a center.y");
+    MPWRect *b=[self _testB];
+    center=[b center];
+    FLOATEXPECT(center.x , 115.0, @"b center.x");
+    FLOATEXPECT(center.y , 25.0, @"b center.y");
+    
+}
+
++(void)testInset
+{
+    MPWRect *a=[self _testA];
+    MPWRect *insetA=[a inset:5 :4];
+    FLOATEXPECT([insetA x], 15.0, @"a x");
+    FLOATEXPECT([insetA y], 19.0, @"a y");
+    FLOATEXPECT([insetA width], 20.0, @"a width");
+    FLOATEXPECT([insetA height], 97.0, @"a height");
+    
+}
+
+
++testSelectors
+{
+    return [NSArray arrayWithObjects:
+            @"testMid",
+            @"testXYWidthHeight",
+            @"testCenter",
+            @"testInset",
+            nil];
+}
+
+@end

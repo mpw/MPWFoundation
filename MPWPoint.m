@@ -137,7 +137,9 @@ CACHING_ALLOC( _mpwPoint, 20, NO )
 #define pointArithmetic( methodName, operation )\
 -methodName:aPoint\
 {\
-	NSPoint otherPoint=[aPoint point];\
+	NSPoint otherPoint=NSMakePoint(0,0);\
+    if ( [aPoint respondsToSelector:@selector(point)] ) { otherPoint=[aPoint point]; } \
+    else { otherPoint.x = [(NSNumber*)aPoint doubleValue]; otherPoint.y = otherPoint.x;  }  \
 	return [isa pointWithX:otherPoint.x operation point.x y:otherPoint.y operation point.y];\
 }
 
@@ -189,12 +191,22 @@ pointArithmetic( reverseSubPoint, - )
 
 @end
 
-@implementation NSNumber(pointCreation)
+@implementation NSNumber(pointCreationAndArithmetic)
 
 -pointWith:otherNumber
 {
 	return [[[MPWPoint alloc] initWithPoint:NSMakePoint([self floatValue],[otherNumber floatValue])] autorelease];
 }
+
+#define reversePointNumberArithmetic( op )\
+-op:somethingElse {  return [[MPWPoint pointWithX:[self doubleValue] y:[self doubleValue]] op:somethingElse]; }\
+
+reversePointNumberArithmetic( mulPoint )
+reversePointNumberArithmetic( reverseDivPoint)
+reversePointNumberArithmetic( addPoint )
+reversePointNumberArithmetic( reverseSubPoint )
+
+
 
 @end
 
@@ -220,10 +232,31 @@ pointArithmetic( reverseSubPoint, - )
 	FLOATEXPECT([divResult y], 10.0, @"divide y");
 }
 
++(void)testPointNumberArithmetic
+{
+	id point1 = [self pointWithX:20 y:30];
+    id number = [NSNumber numberWithInt:2];
+	id mulResult,addResult,subResult,divResult;
+ 
+	mulResult = [point1 mul:number];
+	divResult = [point1 div:number];
+	addResult = [point1 add:number];
+	subResult = [point1 sub:number];
+	FLOATEXPECT([mulResult x], 40.0, @"multiply x");
+	FLOATEXPECT([mulResult y], 60.0, @"multiply y");
+	FLOATEXPECT([addResult x], 22.0, @"add x");
+	FLOATEXPECT([addResult y], 32.0, @"add y");
+	FLOATEXPECT([subResult x], 18.0, @"sub x");
+	FLOATEXPECT([subResult y], 28.0, @"add y");
+	FLOATEXPECT([divResult x], 10.0, @"divide x");
+	FLOATEXPECT([divResult y], 15.0, @"divide y");
+}
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
-		@"testPointArithmetic",
+            @"testPointArithmetic",
+            @"testPointNumberArithmetic",
 		nil];
 }
 

@@ -50,6 +50,17 @@ defineArithOp( div, / )
     }
 }
 
+-(double)sin
+{
+    return sin([self doubleValue] * M_PI);
+}
+
+
+-(double)cos
+{
+    return cos([self doubleValue] * M_PI);
+}
+
 -coerceToDecimalNumber
 {
     const char *objcType=[self objCType];
