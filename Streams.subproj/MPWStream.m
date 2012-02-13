@@ -317,7 +317,14 @@ SEL visSel;
 
 @end
 
+@implementation NSEnumerator(streaming)
 
+-(void)writeOnStream:(id<Streaming>)aStream
+{
+    [aStream writeEnumerator:self];
+}
+
+@end
 @implementation NSObject(BaseStreaming)
 
 -(void)writeOnMPWStream:(MPWStream*)aStream
