@@ -130,12 +130,12 @@ scalarAccessor( NSRect, rect, setRect )
 
 -(double)midX
 {
-    return (rect.origin.x + rect.size.width)/2.0;
+    return (rect.origin.x * 2 + rect.size.width)/2.0;
 }
 
 -(double)midY
 {
-    return (rect.origin.y + rect.size.height)/2.0;
+    return (rect.origin.y * 2 + rect.size.height)/2.0;
 }
 
 -(NSPoint)center
@@ -187,11 +187,11 @@ scalarAccessor( NSRect, rect, setRect )
 +(void)testMid
 {
     MPWRect *a=[self _testA];
-    FLOATEXPECT([a midX], 20.0, @"a midX");
-    FLOATEXPECT([a midY], 60.0, @"a midY");
+    FLOATEXPECT([a midX], 25.0, @"a midX");
+    FLOATEXPECT([a midY], 67.5, @"a midY");
     MPWRect *b=[self _testB];
-    FLOATEXPECT([b midX], 115, @"b midX");
-    FLOATEXPECT([b midY], 25, @"b midY");
+    FLOATEXPECT([b midX], 165.0, @"b midX");
+    FLOATEXPECT([b midY], 35.0, @"b midY");
     
 }
 
@@ -215,12 +215,12 @@ scalarAccessor( NSRect, rect, setRect )
     MPWRect *a=[self _testA];
     NSPoint center=[a center];
     
-    FLOATEXPECT(center.x , 20.0, @"a center.x");
-    FLOATEXPECT(center.y , 60.0, @"a center.y");
+    FLOATEXPECT(center.x , 25.0, @"a center.x");
+    FLOATEXPECT(center.y , 67.5, @"a center.y");
     MPWRect *b=[self _testB];
     center=[b center];
-    FLOATEXPECT(center.x , 115.0, @"b center.x");
-    FLOATEXPECT(center.y , 25.0, @"b center.y");
+    FLOATEXPECT(center.x , 165.0, @"b center.x");
+    FLOATEXPECT(center.y , 35.0, @"b center.y");
     
 }
 
