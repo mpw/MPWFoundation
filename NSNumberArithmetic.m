@@ -52,13 +52,13 @@ defineArithOp( div, / )
 
 -(double)sin
 {
-    return sin([self doubleValue] * M_PI);
+    return sin([self doubleValue] * M_PI/180.0);
 }
 
 
 -(double)cos
 {
-    return cos([self doubleValue] * M_PI);
+    return cos([self doubleValue] * M_PI/180.0);
 }
 
 -coerceToDecimalNumber
