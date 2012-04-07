@@ -3,7 +3,7 @@
 //  LDMac
 //
 //  Created by Marcel Weiher on 9/15/10.
-//  Copyright 2010-2011 Marcel Weiher. All rights reserved.
+//  Copyright 2010-2012 Marcel Weiher. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

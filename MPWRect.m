@@ -1,4 +1,4 @@
-/* MPWRect.m Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* MPWRect.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -210,10 +210,12 @@ scalarAccessor( NSRect, rect, setRect )
     
 }
 
+
 +(void)testCenter
 {
     MPWRect *a=[self _testA];
     NSPoint center=[a center];
+
     
     FLOATEXPECT(center.x , 25.0, @"a center.x");
     FLOATEXPECT(center.y , 67.5, @"a center.y");

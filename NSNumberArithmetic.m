@@ -61,6 +61,11 @@ defineArithOp( div, / )
     return cos([self doubleValue] * M_PI/180.0);
 }
 
+-(double)pow:(double)otherNumber
+{
+return pow( [self doubleValue], otherNumber );
+}
+
 -coerceToDecimalNumber
 {
     const char *objcType=[self objCType];
@@ -103,6 +108,7 @@ defineArithOp( div, / )
 -div:aNumber   {
     return [self decimalNumberByDividingBy:[aNumber coerceToDecimalNumber]];
 }
+
 
 @end
 

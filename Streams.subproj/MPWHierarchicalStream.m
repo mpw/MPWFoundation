@@ -1,4 +1,4 @@
-/* MPWHierarchicalStream.m Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* MPWHierarchicalStream.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without

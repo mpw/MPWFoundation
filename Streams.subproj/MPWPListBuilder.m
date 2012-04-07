@@ -3,7 +3,7 @@
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 1/3/11.
-//  Copyright 2011 metaobject ltd. All rights reserved.
+//  Copyright 2012 metaobject ltd. All rights reserved.
 //
 
 #import "MPWPListBuilder.h"

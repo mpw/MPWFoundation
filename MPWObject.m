@@ -1,4 +1,4 @@
-/* MPWObject.m Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* MPWObject.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -192,7 +192,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
                         selector:@selector(initializeThreaded)
                             name:NSWillBecomeMultiThreadedNotification
                           object:nil];
-		_collecting=IS_OBJC_GC_ON;
+//		_collecting=IS_OBJC_GC_ON;
         inited=YES;
     }
 }
@@ -229,7 +229,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 
 -(NSString*)copyrightString
 {
-    return @"Copyright 1998-2011 by Marcel Weiher, All Rights Reserved.";
+    return @"Copyright 1998-2012 by Marcel Weiher, All Rights Reserved.";
 }
 
 @end

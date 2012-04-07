@@ -1,6 +1,6 @@
 /*
     MPWTrampoline.m created by marcel on Tue 29-Jun-1999 
-    Copyright (c) 1999-2011 by Marcel Weiher. All rights reserved.
+    Copyright (c) 1999-2012 by Marcel Weiher. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
@@ -102,7 +102,7 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 	[[self xxxTarget] setKey:aKey];
 }
 
--(void)release
+-(oneway void)release
 {
     if ( --retainCount < 0 ) {
         [self dealloc];
@@ -192,7 +192,7 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 
 +(BOOL)respondsToSelector:(SEL)aSelector
 {
-	NSLog(@"trampoline class respondsToSelector:%@",NSStringFromSelector(aSelector));
+//	NSLog(@"trampoline class respondsToSelector:%@",NSStringFromSelector(aSelector));
 	return [super respondsToSelector:aSelector];
 }
 
@@ -246,7 +246,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 -(id)isEqual:otherObject
 {
-	NSMethodSignature* sig=[MPWFakedReturnMethodSignature fakeSignatureWithSignature:[NSObject methodSignatureForSelector:_cmd]];
+	NSMethodSignature* sig=[NSObject methodSignatureForSelector:_cmd];
 	NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
 	id retval;
 	[invocation setTarget:self];

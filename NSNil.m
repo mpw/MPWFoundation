@@ -1,4 +1,4 @@
-/* NSNil.m Copyright (c) 1998-2011 by Marcel Weiher, 
+/* NSNil.m Copyright (c) 1998-2012 by Marcel Weiher, 
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 	¥ Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -57,6 +57,16 @@ id nsnil=nil;
 -(BOOL)isNil
 {
     return YES;
+}
+
+-ifNil:anArg
+{
+    return [anArg value];
+}
+
+-ifNotNil:anArg
+{
+    return self;
 }
 
 -retain
@@ -128,6 +138,20 @@ id nsnil=nil;
     return [NSArray arrayWithObjects:
         @"uniqueNil",@"nilIsNil",@"nsnilIsNil",@"objIsNil",nil
  ];
+}
+
+@end
+
+@implementation NSObject(ifNotNil)
+
+-ifNotNil:anArg
+{
+    return [anArg value];
+}
+
+-ifNil:anArg
+{
+    return nil;
 }
 
 @end

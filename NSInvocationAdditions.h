@@ -1,4 +1,4 @@
-/* NSInvocationAdditions.h Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* NSInvocationAdditions.h Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without

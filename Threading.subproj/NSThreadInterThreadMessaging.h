@@ -1,4 +1,4 @@
-/* NSThreadInterThreadMessaging.h Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* NSThreadInterThreadMessaging.h Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -42,7 +42,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @interface NSObject(asyncMessaging)
 
 -async;
--onMainThread;
+-asyncOnMainThread;
+-syncOnMainThread;
 -afterDelay:(NSTimeInterval)delay;
 
 

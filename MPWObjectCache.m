@@ -1,4 +1,4 @@
-/* MPWObjectCache.m Copyright (c) 1998-2011 by Marcel Weiher, All Rights Reserved.
+/* MPWObjectCache.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -52,15 +52,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 "*/
 
 static int _collecting=NO;
-
-#ifdef IS_OBJC_GC_ON
-
-+(void)initialize
-{
-	_collecting=IS_OBJC_GC_ON;
-}
-
-#endif
 
 -initWithCapacity:(int)newCap class:(Class)newClass allocSel:(SEL)aSel initSel:(SEL)iSel
 {

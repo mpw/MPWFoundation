@@ -2672,6 +2672,7 @@
 				1F3AC60A143EB3D9009B8504 /* Release Tiger */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
 		};
 		1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
