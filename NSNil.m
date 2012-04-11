@@ -10,6 +10,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 
 #import "NSNil.h"
+#import <objc/runtime.h>
 
 @implementation NSNil
 /*"
@@ -32,6 +33,20 @@ id nsnil=nil;
     return nsnil;
 }
 
+#if !TARGET_OS_IPHONE
+extern id _objc_setNilReceiver(id newNilReceiver);
+
++(void)setNilHandler
+{
+    _objc_setNilReceiver([self nsNil]);
+}
+
++(void)unsetNilHandler
+{
+    _objc_setNilReceiver(nil);
+}
+#endif
+
 +alloc
 {
     return [self nsNil];
@@ -52,6 +67,15 @@ id nsnil=nil;
 	"*/
 {
     return NO;
+}
+
+-(BOOL)respondsToSelector:(SEL)selector
+{
+    return
+    selector == @selector(isNil) ||
+    selector == @selector(isNotNil) ||
+    selector == @selector(ifNil:) ||
+    selector == @selector(ifNotNil:);
 }
 
 -(BOOL)isNil
@@ -89,9 +113,13 @@ id nsnil=nil;
     return self;
 }
 
--(void)forwardInvocation:(NSInvocation *)anInvocation
+
+static id idresult( id receiver, SEL selector, ... )  { return nil; }
+
++(BOOL)resolveInstanceMethod:(SEL)selector
 {
-    return ;   // just swallow
+    class_addMethod(self, selector, (IMP)idresult , "@@:@");
+    return YES;
 }
 
 @end
@@ -109,6 +137,8 @@ id nsnil=nil;
 }
 
 @end
+
+#import "DebugMacros.h"
 
 @implementation NSNil(testing)
 
@@ -132,11 +162,71 @@ id nsnil=nil;
     NSAssert( [@"" isNotNil], @"NXConstantString isNil");
 }
 
++value
+{
+    return @"value";
+}
+
++(void)testNilIfNil
+{
+    IDEXPECT( [[self nsNil] ifNil:self] ,@"value", @"");
+}
+
+
++(void)testNilIfNotNil
+{
+    IDEXPECT( [[self nsNil] ifNotNil:self], [self nsNil], @"");
+}
+
+
++(void)testNotNilIfNil
+{
+    IDEXPECT( [@"" ifNil:self], [self nsNil], @"");
+}
+
+
++(void)testNotNilIfNotNil
+{
+    IDEXPECT( [@"" ifNotNil:self], @"value", @"");
+
+}
+
++(void)testNilEatsMessages
+{
+    id mynil=[self nsNil];
+    id result = @"result";
+    EXPECTFALSE([mynil respondsToSelector:@selector(bozo)],@"should not respond to to bozo");
+    @try {
+        result = [mynil bozo];
+    }
+    @catch (NSException *exception) {
+        EXPECTNIL(exception, @"should not have gotten exception");
+    }
+    EXPECTNIL(result, @"result should have been nil");
+}
+
++(void)testnilReceiver
+{
+    [self setNilHandler];
+    @try {
+        IDEXPECT([nil ifNil:self],@"value",@"actual nil receiver");
+    }
+    @finally {
+        [self unsetNilHandler];
+    }
+}
 
 +testSelectors
 {
     return [NSArray arrayWithObjects:
-        @"uniqueNil",@"nilIsNil",@"nsnilIsNil",@"objIsNil",nil
+        @"uniqueNil",@"nilIsNil",@"nsnilIsNil",@"objIsNil",
+            @"testNilIfNil",@"testNilIfNotNil",
+            @"testNotNilIfNil",@"testNotNilIfNotNil",
+            @"testNilEatsMessages",
+#if !TARGET_OS_IPHONE            
+            @"testnilReceiver",
+#endif            
+            nil
  ];
 }
 
@@ -151,7 +241,7 @@ id nsnil=nil;
 
 -ifNil:anArg
 {
-    return nil;
+    return [NSNil nsNil];
 }
 
 @end
