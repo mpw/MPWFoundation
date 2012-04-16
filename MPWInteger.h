@@ -16,6 +16,7 @@
 
 +integer:(int)newInt;
 -initWithInteger:(int)newInt;
++numberWithInt:(int)anInt;
 
 
 @end
