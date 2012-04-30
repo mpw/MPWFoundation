@@ -7,6 +7,7 @@
 //
 
 #import "MPWObject.h"
+#import "MPWBlockInvocable.h"
 #import <Foundation/Foundation.h>
 
 @interface MPWFastInvocation : MPWObject {

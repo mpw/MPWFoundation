@@ -70,6 +70,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -initWithCapacity:(NSUInteger)capacity;
 -initWithCount:(NSUInteger)newCount;
 -initWithReals:(float*)realNums count:(NSUInteger)newCount;
+-(id)initWithStart:(float)start end:(float)end step:(float)step;
 
 -(NSUInteger)count;
 -(void)clear;

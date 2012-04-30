@@ -49,6 +49,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSArray.h>
 #import <Foundation/NSData.h>
 #import <Foundation/NSCoder.h>
+#import <Accelerate/Accelerate.h>
 
 //---	generic includes
 
@@ -152,6 +153,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return self;
 }
 
+-(float)vec_reduce_sum
+{
+    float theSum=0;
+    vDSP_sve ( floatStart, 1, &theSum, count );
+    return theSum;
+}
+
 -(void)_grow
 {
     capacity=capacity*2+2;
@@ -161,6 +169,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
         data=calloc( (capacity+6), sizeof(float) );
     }
     floatStart = (float*)(data+4);
+}
+
+-(id)initWithStart:(float)start end:(float)end step:(float)step
+{
+    int numElements=floor((end-start)/step)+1;
+    float element=start;
+    self=[self initWithCount:numElements];
+    for (int i=0;i<numElements;i++,element+=step) {
+        floatStart[i]=element;
+    }
+    return self;
 }
 
 +arrayWithCapacity:(NSUInteger)newCapacity
@@ -262,11 +281,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)appendArray:anArray
 {
     int i;
-    if ( [anArray respondsToSelector:@selector(reals)] )
+    if ( [anArray respondsToSelector:@selector(reals)] ) {
         [self addReals:[anArray reals] count:[anArray count]];
-    else
-        for (i=0;i<count;i++)
-            [self addReal:[[anArray objectAtIndex:i] floatValue]];
+    } else {
+        for (NSNumber *n in anArray ) {
+            [self addReal:[n floatValue]];
+        }
+    }
     return;
 }
 
@@ -551,7 +572,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #define REDUCE_LOOP_OPERATOR( opname, op, condition )	REDUCE_LOOP_OPERATION( operator_##opname , c=a op b; ,condition )
 #define LOOP_FUNCTION( fn, condition )					UNARY_LOOP_OPERATION( fn, b=fn((double)a); ,condition )
 
-#if 0
+#if 1
 
 BINARY_LOOP_OPERATOR( asterisk, *, YES )
 BINARY_LOOP_OPERATOR( hyphen, - , YES)
@@ -576,9 +597,6 @@ LOOP_FUNCTION( tan, YES )
 LOOP_FUNCTION( tanh, YES )
 LOOP_FUNCTION( log, a>=0 )
 LOOP_FUNCTION( log10, a>=0 )
-#ifdef PPC
-LOOP_FUNCTION( log1p, a>=-1 )
-#endif
 LOOP_FUNCTION( sqrt, a>=0 )
 LOOP_FUNCTION( exp, YES )
 UNARY_LOOP_OPERATION( negated, b=-a, YES )
@@ -588,6 +606,11 @@ REDUCE_LOOP_OPERATOR( plus, + , YES)
 REDUCE_LOOP_OPERATOR( slash, / , b != 0)
 REDUCE_LOOP_OPERATION( min, c=(a<b ? a:b) , YES)
 REDUCE_LOOP_OPERATION( max, c=(a>b ? a:b) , YES)
+
+#ifdef PPC
+LOOP_FUNCTION( log1p, a>=-1 )
+#endif
+
 
 #endif
 
@@ -615,3 +638,50 @@ REDUCE_LOOP_OPERATION( max, c=(a>b ? a:b) , YES)
 
 @end
 		
+#import "DebugMacros.h"
+
+@implementation MPWRealArray(testing)
+
++(MPWRealArray*)_testArray
+{
+    return [self arrayWithReals:(float[]){ 2.0, 3.0 , 5.0 } count:3];
+}
+
++(void)testReducePlus
+{
+    FLOATEXPECT([[[self _testArray] reduce_operator_plus] floatValue], 10.0, @"");
+}
+
++(void)testVecReducePlus
+{
+    FLOATEXPECT([[self _testArray] vec_reduce_sum], 10.0, @"");
+}
+
++(void)testReduceMultiply
+{
+    FLOATEXPECT([[[self _testArray] reduce_operator_asterisk] floatValue], 30.0, @"");
+}
+
++(void)testGenerate
+{
+    id exactlyTen=[[[self alloc] initWithStart:1 end:10 step:1.0] autorelease];
+    id tenWithOvershoot=[[[self alloc] initWithStart:1 end:10.1 step:1.0] autorelease];
+    id tenWithBaseOffsetAndOvershoot=[[[self alloc] initWithStart:1.1 end:10.1 step:1.0] autorelease];
+    INTEXPECT([exactlyTen count], 10, @"exactly 1-10 step 1.0");
+    FLOATEXPECT([exactlyTen realAtIndex:5], 6.0, @"1-10, realAtIndex:5");
+    INTEXPECT([tenWithOvershoot count], 10, @" 1-10.1 step 1.0");
+    INTEXPECT([tenWithBaseOffsetAndOvershoot count], 10, @" 1.1-10.1 step 1.0");
+    INTEXPECT((int)(10*[tenWithBaseOffsetAndOvershoot realAtIndex:5]), 61, @"1.1-10.1, 10 * realAtIndex:5");
+}
+
++testSelectors
+{
+    return [NSArray arrayWithObjects:
+            @"testReducePlus",
+            @"testVecReducePlus",
+            @"testReduceMultiply",
+            @"testGenerate",
+            nil];
+}
+
+@end

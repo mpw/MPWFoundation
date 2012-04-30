@@ -102,6 +102,17 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	return cached( target, selector, args[0], args[1],args[2],args[3] );
 }
 
+-(id)invokeWithArgs:(va_list)varArgs
+{
+    for (int i=0;i<3;i++) {
+        args[i]=va_arg(varArgs, id);
+    }
+    va_end(varArgs);
+    return [self resultOfInvoking];
+}
+
+
+
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count
 {
 	int i;

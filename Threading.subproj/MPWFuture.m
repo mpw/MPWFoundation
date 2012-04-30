@@ -132,8 +132,14 @@ idAccessor( _result, setResult )
 -(void)startRunning
 {
 	running=YES;
-//	[[self asyncJob] invokeInvocationOnceInNewThread];
+//    [[self async] performJob];
+#if NS_BLOCKS_AVAILABLE
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self performJob];});
+#else
 	[[MPWWorkQueue defaultQueue] addJob:self];
+    
+#endif
+//	[[self asyncJob] invokeInvocationOnceInNewThread];
 //	[NSThread detachNewThreadSelector:@selector(invokeInvocationOnceInNewThread) toTarget:self withObject:nil];
 }
 

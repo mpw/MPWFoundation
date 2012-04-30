@@ -40,10 +40,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +nsNil;
 extern id nsnil;
-
++setNilHandler;
 @end
 
 @interface NSObject(nilTesting)
 -(BOOL)isNotNil;
+-(BOOL)isNil;
+-(id)ifNil:aBlock;
+-(id)ifNotNil:aBlock;
 @end
 

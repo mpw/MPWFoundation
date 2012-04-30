@@ -18,6 +18,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 "*/
 
 id nsnil=nil;
+static BOOL installed=NO;
 
 -_internalInitNil
 {
@@ -38,11 +39,13 @@ extern id _objc_setNilReceiver(id newNilReceiver);
 
 +(void)setNilHandler
 {
+    installed=YES;
     _objc_setNilReceiver([self nsNil]);
 }
 
 +(void)unsetNilHandler
 {
+    installed=NO;
     _objc_setNilReceiver(nil);
 }
 #endif
@@ -83,6 +86,7 @@ extern id _objc_setNilReceiver(id newNilReceiver);
     return YES;
 }
 
+
 -ifNil:anArg
 {
     return [anArg value];
@@ -90,7 +94,7 @@ extern id _objc_setNilReceiver(id newNilReceiver);
 
 -ifNotNil:anArg
 {
-    return self;
+    return installed ? nil : [NSNil nsNil];
 }
 
 -retain
@@ -175,7 +179,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 +(void)testNilIfNotNil
 {
-    IDEXPECT( [[self nsNil] ifNotNil:self], [self nsNil], @"");
+    IDEXPECT( [[self nsNil] ifNotNil:self], [self nsNil], @"nsNil ifNil ->");
 }
 
 
@@ -209,7 +213,8 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 {
     [self setNilHandler];
     @try {
-        IDEXPECT([nil ifNil:self],@"value",@"actual nil receiver");
+        IDEXPECT([nil ifNil:self],@"value",@"actual nil receiver ifNil -> gets a value");
+        EXPECTNIL([nil ifNotNil:self], @"nil receiver ifNotNil");
     }
     @finally {
         [self unsetNilHandler];
