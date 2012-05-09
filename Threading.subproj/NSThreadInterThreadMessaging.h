@@ -36,12 +36,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-@interface NSThread(InterThreadMessaging)
-@end
-
 @interface NSObject(asyncMessaging)
 
 -async;
+-asyncPrio;
+-asyncBackground;
 -asyncOnMainThread;
 -syncOnMainThread;
 -afterDelay:(NSTimeInterval)delay;

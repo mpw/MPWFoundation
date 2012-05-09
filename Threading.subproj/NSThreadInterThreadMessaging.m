@@ -37,6 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #if NS_BLOCKS_AVAILABLE
 #include <dispatch/dispatch.h>
 #endif
+#import "MPWStackSaverInvocation.h"
 
 NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyAlreadyActiveException";
 
@@ -68,14 +69,17 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 
 @implementation NSObject(threadingHOMs)
 
+
 #define HOM( msg  ) \
 -msg { return [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:)]; } \
--(void)msg:(NSInvocation*)invocation
+-(void)msg:(NSInvocation*)invocation { \
+   invocation=(NSInvocation*)[MPWStackSaverInvocation withInvocation:invocation]; 
+
+
 
 typedef void (^voidBlock)(void );
 
 HOM( async )
-{
 #if NS_BLOCKS_AVAILABLE
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [invocation invokeWithTarget:self];});
 #else    
@@ -85,25 +89,19 @@ HOM( async )
 
 #if NS_BLOCKS_AVAILABLE
 HOM( asyncPrio )
-{
-    NSLog(@"async hi");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ [invocation invokeWithTarget:self];});
 }
 
 HOM( asyncBackground )
-{
-    NSLog(@"async lo");
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{ [invocation invokeWithTarget:self];});
 }
 #endif
 
 HOM(asyncOnMainThread)
-{
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:NO];
 }
 
 HOM(syncOnMainThread)
-{
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:YES];
 }
 

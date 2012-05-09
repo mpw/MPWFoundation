@@ -65,7 +65,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWIdentityDictionary.h>
 #import <MPWFoundation/MPWObjectReference.h>
 
-
+#import <MPWFoundation/NSThreadInterThreadMessaging.h>
 #import <MPWFoundation/bytecoding.h>
 #import <MPWFoundation/NSRectAdditions.h>
 #import <MPWFoundation/NSBundleConveniences.h>
