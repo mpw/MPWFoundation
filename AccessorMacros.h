@@ -120,6 +120,15 @@ setAccessor( id, var, setVar )
 	return [self _##var]; \
 } \
 
+#define dictAccessor( objectType, var, setVar, someDict ) \
+    -(objectType*)var { return [someDict objectForKey:@""#var]; } \
+    -(void)setVar:(objectType*)newValue { [someDict setObject:newValue forKey:@""#var]; } \
+
+#define scalarDictAccessor( scalarType, var, setVar, someDict ) \
+     -(scalarType)var { scalarType temp=0;  [[someDict objectForKey:@""#var] getValue:&temp]; return temp; }\
+     -(void)setVar:(scalarType)newValue {  NSValue *temp=[NSValue valueWithBytes:&newValue objCType:@encode(scalarType)]; [someDict setObject:temp forKey:@""#var]; } \
+
+
 
 //--- compatibility:
 
