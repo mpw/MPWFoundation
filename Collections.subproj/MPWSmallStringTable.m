@@ -170,38 +170,24 @@ IMP __stringTableLookupFun=NULL;
 	}
 }
 
-static int offsetOfCStringWithLengthInTableOfLength( char  *table, NSUInteger tableLength, char *cstr, NSUInteger len)
+static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, NSUInteger tableLength, char *cstr, NSUInteger len)
 {
 	int i;
 	const char *curptr=table;
 	for (i=0; i<tableLength;i++ ) {
 		int entryLen=*curptr;
 		if ( len==entryLen ) {
-			int offset=0;
-//			int offset=table[i].offset;
-//			char *tablestring=table[i].string;
+			int offset=entryLen-1;
 			const char *tablestring=curptr+1;
 
 			if ( (cstr[offset])==(tablestring[offset]) ) {
-				if (!strncmp( cstr, tablestring , len ) ) {
-					return i;
-				}
-			}
-#if 0
-				int j;
-				for (j=0;j<len;j+=2) {
+				for (int j=0;j<len;j++) {
 					if ( cstr[j] != tablestring[j] ) {
-						goto notequal;
-					}
-					if ( cstr[j+1] != tablestring[j+1] ) {
-						goto notequal;
-					}
+                        continue;
+                    }
 				}
-				return table[i].vialue;
+				return i;
 			}
-			notequal:
-				continue;
-#endif				
 		}
 		curptr+=entryLen+1;
 	}
@@ -213,6 +199,7 @@ static int offsetOfCStringWithLengthInTableOfLength( char  *table, NSUInteger ta
 	int offset = offsetOfCStringWithLengthInTableOfLength( table , tableLength, cstr, len );
 	return offset;
 }
+
 -(int)offsetForCString:(char*)cstr
 {
 	return [self offsetForCString:cstr length:strlen(cstr)];
@@ -382,7 +369,7 @@ static int offsetOfCStringWithLengthInTableOfLength( char  *table, NSUInteger ta
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"dict time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"dict vs. string table lookup time ratio: %g",ratio);
-#define RATIO 2.4
+#define RATIO 4.2
 	NSAssert2( ratio > RATIO ,@"ratio of small string table to NSDictionary %g < %g",
 				ratio, RATIO );   
 }
