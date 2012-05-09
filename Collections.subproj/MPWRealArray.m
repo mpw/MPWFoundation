@@ -153,13 +153,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return self;
 }
 
--(float)vec_reduce_sum
-{
-    float theSum=0;
-    vDSP_sve ( floatStart, 1, &theSum, count );
-    return theSum;
-}
-
 -(void)_grow
 {
     capacity=capacity*2+2;
@@ -280,7 +273,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)appendArray:anArray
 {
-    int i;
     if ( [anArray respondsToSelector:@selector(reals)] ) {
         [self addReals:[anArray reals] count:[anArray count]];
     } else {
@@ -613,6 +605,20 @@ LOOP_FUNCTION( log1p, a>=-1 )
 
 
 #endif
+
+
+-(float)vec_reduce_sum
+{
+#if !TARGET_OS_IPHONE
+    float theSum=0;
+    vDSP_sve ( floatStart, 1, &theSum, count );
+    return theSum;
+#else
+    return [[self reduce_operator_plus] floatValue];
+#endif
+}
+
+
 
 -(void)appendContents:aByteStream
 {
