@@ -73,7 +73,7 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 #define HOM( msg  ) \
 -msg { return [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:)]; } \
 -(void)msg:(NSInvocation*)invocation { \
-   invocation=(NSInvocation*)[MPWStackSaverInvocation withInvocation:invocation]; 
+//   invocation=(NSInvocation*)[MPWStackSaverInvocation withInvocation:invocation]; 
 
 
 

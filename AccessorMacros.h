@@ -65,8 +65,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
     ASSIGN_ID(var,newVar)\
 } \
 
-#define readAccessor( type, var )\
--(type)var						{	return var;			}
+#define readAccessorName( type, var , name )\
+-(type)name						{	return var;			}
+
+#define readAccessor( type, var )   readAccessorName( type, var, var )
 
 #define relayReadAccessor( var, delegate ) \
 -var\
@@ -110,14 +112,15 @@ setAccessor( id, var, setVar )
 #define boolAccessor(var,setVar )  scalarAccessor( BOOL, var, setVar )
 #define boolAccessor_h(var,setVar )  scalarAccessor_h( BOOL, var, setVar )
 
-#define lazyAccessor( type, var ,setVar, computeVar )   \
-	readAccessorName( type,var, _##var ) \
-	setAccessor( type, var, setVar ) \
--(type)var { \
-	if ( ![self _##var] )  { \
-		[self setVar:[self computeVar]]; \
+#define lazyAccessor( ltype, lvar ,setLVar, computeVar )   \
+	readAccessorName( ltype, lvar, _##lvar ) \
+	setAccessor( ltype, lvar, setLVar ) \
+\
+-(ltype)lvar { \
+	if ( ![self _##lvar] )  { \
+		[self setLVar:[self computeVar]]; \
 	}  \
-	return [self _##var]; \
+	return [self _##lvar]; \
 } \
 
 #define dictAccessor( objectType, var, setVar, someDict ) \

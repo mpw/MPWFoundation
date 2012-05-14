@@ -20,8 +20,13 @@
 scalarAccessor( id, target, _setTarget )
 idAccessor( result, setResult )
 boolAccessor( useCaching, _setUseCaching )
-
+lazyAccessor( id , methodSignature, setMethodSignature, getSignature)
 // extern id objc_msgSend( id receiver, SEL _cmd, ... );
+
+-getSignature
+{
+    return [target methodSignatureForSelector:selector ];
+}
 
 -init
 {
@@ -111,6 +116,11 @@ extern id objc_msgSend( id target, SEL selector, ... );
     return [self resultOfInvoking];
 }
 
+-(void)invokeWithTarget:aTarget
+{
+    [self setTarget:aTarget];
+    [self resultOfInvoking];
+}
 
 
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count
@@ -129,6 +139,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 
 -(void)dealloc
 {
+    [methodSignature release];
 	[result release];
 //	[target release];
 	[super dealloc];

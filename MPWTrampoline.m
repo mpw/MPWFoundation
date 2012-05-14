@@ -34,6 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWTrampoline.h"
 #import "MPWObjectCache.h"
+#import <MPWFoundation/MPWFastInvocation.h>
 //#import "NSInvocationAdditions_lookup.h"
 #import "MPWRuntimeAdditions.h"
 #import "DebugMacros.h"
@@ -119,6 +120,28 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
     [xxxTarget performSelector:xxxSelector withObject:invocationToForward withObject:xxxAdditionalArg];
 	[self setXxxTarget:nil];
 }
+
+
+
+static void __forwardStart( MPWTrampoline* target, SEL selector )
+{
+    MPWFastInvocation *invocationToForward=[[MPWFastInvocation alloc] init];
+    [invocationToForward setSelector:@selector(start)];
+    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:nil];
+    [invocationToForward release];
+}
+
++(BOOL)resolveInstanceMethod:(SEL)selector
+{
+    if ( selector == @selector(start) ) {
+        NSLog(@"add start forwarder");
+        class_addMethod(self, selector, __forwardStart , "@@:");
+        return YES;
+    }
+    return NO;
+}
+
+
 
 #if LIB_FOUNDATION_LIBRARY
 

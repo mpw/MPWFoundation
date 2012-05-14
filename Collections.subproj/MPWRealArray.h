@@ -71,6 +71,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -initWithCount:(NSUInteger)newCount;
 -initWithReals:(float*)realNums count:(NSUInteger)newCount;
 -(id)initWithStart:(float)start end:(float)end step:(float)step;
+#if !TARGET_OS_IPHONE
+-(id)initWithVecStart:(float)start end:(float)end step:(float)step;
+#endif
 
 -(NSUInteger)count;
 -(void)clear;

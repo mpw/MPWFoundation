@@ -18,6 +18,7 @@
 	id	result;
 	IMP cached;
 	BOOL useCaching;
+    NSMethodSignature *methodSignature;
 	@public
 	IMP  invokeFun;
 }

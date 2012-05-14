@@ -58,4 +58,22 @@ extern id objc_msgSend(id, SEL, ...);
 
 @end
 
+#import "DebugMacros.h"
 
+@implementation MPWValueAccessor(testing)
+
++(void)testBasicUnboundAccess
+{
+    
+    EXPECTTRUE(NO, @"sentinel");
+}
+
+
++testSelectors
+{
+    return [NSArray arrayWithObjects:
+ //           @"testBasicUnboundAccess",
+            nil];
+}
+
+@end

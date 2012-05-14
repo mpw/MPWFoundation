@@ -175,6 +175,18 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return self;
 }
 
+#if !TARGET_OS_IPHONE
+
+-(id)initWithVecStart:(float)start end:(float)end step:(float)step
+{
+    int numElements=floor((end-start)/step)+1;
+    self=[self initWithCount:numElements];
+    vDSP_vgen(&start, &end,floatStart,1, numElements );
+    
+    return self;
+}
+#endif
+
 +arrayWithCapacity:(NSUInteger)newCapacity
 {
     return [[[self alloc] initWithCapacity:newCapacity] autorelease];
