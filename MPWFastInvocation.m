@@ -13,9 +13,12 @@
 #if FULL_MPWFOUNDATION && !WINDOWS && !LINUX
 #import "MPWRusage.h"
 #endif
+#import "MPWObjectCache.h"
+
 
 @implementation MPWFastInvocation
 
+CACHING_ALLOC( quickInvocation, 5, YES )
 
 scalarAccessor( id, target, _setTarget )
 idAccessor( result, setResult )
@@ -28,10 +31,18 @@ lazyAccessor( id , methodSignature, setMethodSignature, getSignature)
     return [target methodSignatureForSelector:selector ];
 }
 
+
+-copyWithZone:aZone
+{
+    return [self retain];
+}
+
 -init
 {
 	self = [super init];
-	invokeFun=[self methodForSelector:@selector(resultOfInvoking)];
+    if ( self && !invokeFun) {
+        invokeFun=[self methodForSelector:@selector(resultOfInvoking)];
+    }
 	return self;
 }
 
@@ -102,6 +113,13 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	*(id*)returnValueBuf = result;
 }
 
+-(void)setReturnValue:(void*)retval
+{
+	[self setResult:*(id*)retval];
+}
+
+
+
 -resultOfInvoking
 {
 	return cached( target, selector, args[0], args[1],args[2],args[3] );
@@ -122,6 +140,13 @@ extern id objc_msgSend( id target, SEL selector, ... );
     [self resultOfInvoking];
 }
 
+-returnValueAfterInvokingWithTarget:aTarget
+{
+//    NSLog(@"returnValueAfterInvokingWithTarget: [%@ %@]",aTarget,NSStringFromSelector(selector));
+    id retval = cached( aTarget, selector, args[0], args[1],args[2],args[3] );
+//    NSLog(@"retval: %p",retval);
+    return retval;
+}
 
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count
 {
@@ -135,6 +160,16 @@ extern id objc_msgSend( id target, SEL selector, ... );
 -(void)invoke
 {
 	[self setResult:[self resultOfInvoking]];
+}
+
+-(void)retainArguments
+{
+    
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p:[%@  %@]>",[self class],self,target,NSStringFromSelector(selector)];
 }
 
 -(void)dealloc
@@ -163,7 +198,6 @@ extern id objc_msgSend( id target, SEL selector, ... );
 
 @end
 
-#ifndef RELEASE
 
 
 @implementation MPWFastInvocation(testing)
@@ -271,7 +305,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	MPWRusage* slowStart=[MPWRusage current];
 
 	for (i=0;i<SEND_COUNT;i++) {
-		[@"Hello" class];
+		[@"Hello" length];
 	}
 	MPWRusage* slowTime=[MPWRusage timeRelativeTo:slowStart];
 	[fast setUseCaching:YES];
@@ -283,8 +317,8 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",[fastTime userMicroseconds],[slowTime userMicroseconds],ratio);
-	NSAssert2( ratio > 1.4 ,@"ratio of cached fast invocation to normal message send %g < %g",
-				ratio,1.4);   
+	NSAssert2( ratio > 0.6 ,@"ratio of cached fast invocation to normal message send %g < %g",
+				ratio,0.6);
 }
 
 #endif
@@ -318,4 +352,4 @@ extern id objc_msgSend( id target, SEL selector, ... );
 }
 
 @end
-#endif 
+
