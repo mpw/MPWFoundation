@@ -35,6 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWTrampoline.h"
 #import "MPWObjectCache.h"
 #import <MPWFoundation/MPWFastInvocation.h>
+#import <MPWFoundation/NSInvocationAdditions_lookup.h>
 //#import "NSInvocationAdditions_lookup.h"
 #import "MPWRuntimeAdditions.h"
 #import "DebugMacros.h"
@@ -117,25 +118,28 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 
 -(void)forwardInvocation:(NSInvocation*)invocationToForward
 {
+    [invocationToForward setTarget:xxxTarget];
     [xxxTarget performSelector:xxxSelector withObject:invocationToForward withObject:xxxAdditionalArg];
 	[self setXxxTarget:nil];
 }
 
 
 
-static void __forwardStart( MPWTrampoline* target, SEL selector )
+static void __forwardStart0( MPWTrampoline* target, SEL selector )
 {
-    MPWFastInvocation *invocationToForward=[[MPWFastInvocation alloc] init];
-    [invocationToForward setSelector:@selector(start)];
-    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:nil];
-    [invocationToForward release];
+    MPWFastInvocation *invocationToForward=[MPWFastInvocation quickInvocation];
+    [invocationToForward setSelector:selector];
+    [invocationToForward setTarget:target->xxxTarget];
+    objc_msgSend(target->xxxTarget,target->xxxSelector, invocationToForward, target->xxxAdditionalArg);
+//    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:target->xxxAdditionalArg];
 }
 
-+(BOOL)resolveInstanceMethod:(SEL)selector
+
++(BOOL)resolveInstanceMethod:selector
 {
-    if ( selector == @selector(start) ) {
-        NSLog(@"add start forwarder");
-        class_addMethod(self, selector, __forwardStart , "@@:");
+
+    if ( !strchr(sel_getName(selector), ':')) {
+        class_addMethod(self, selector, __forwardStart0, "@@:");
         return YES;
     }
     return NO;
