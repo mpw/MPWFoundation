@@ -34,6 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "NSThreadInterThreadMessaging.h"
 #import "NSConditionLockSem.h"
 #import "MPWTrampoline.h"
+#import <MPWFoundation/NSInvocationAdditions_lookup.h>
 #if NS_BLOCKS_AVAILABLE
 #include <dispatch/dispatch.h>
 #endif
@@ -69,6 +70,13 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 
 @implementation NSObject(threadingHOMs)
 
+#define HOM1( msg, type, conversion ) \
+-msg:(type)arg  { id tramp = [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:withArg:)]; [tramp setXxxAdditionalArg:conversion]; return tramp; } \
+-(void)msg:(NSInvocation*)invocation withArg:arg { \
+
+#define HOM1DOUBLE( msg )    HOM1( msg, double, [NSNumber numberWithDouble:arg] )
+
+
 
 #define HOM( msg  ) \
 -msg { return [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:)]; } \
@@ -79,23 +87,6 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 
 typedef void (^voidBlock)(void );
 
-HOM( async )
-#if NS_BLOCKS_AVAILABLE
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [invocation invokeWithTarget:self];});
-#else    
-    [invocation performSelectorInBackground:@selector(invokeWithTarget:) withObject:self];
-#endif
-}
-
-#if NS_BLOCKS_AVAILABLE
-HOM( asyncPrio )
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{ [invocation invokeWithTarget:self];});
-}
-
-HOM( asyncBackground )
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{ [invocation invokeWithTarget:self];});
-}
-#endif
 
 HOM(asyncOnMainThread)
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:NO];
@@ -105,18 +96,36 @@ HOM(syncOnMainThread)
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:YES];
 }
 
--afterDelay:(NSTimeInterval)delay
-{
-	MPWTrampoline *trampoline=[MPWTrampoline trampolineWithTarget:self selector:@selector(invoke:afterDelay:)];
-	[trampoline setXxxAdditionalArg:[NSNumber numberWithDouble:delay]];
-	 return trampoline;
-}
 
--(void)invoke:(NSInvocation*)anInvocation afterDelay:(NSNumber*)aDelay
-{
-	[anInvocation performSelector:@selector(invokeWithTarget:) withObject:self afterDelay:[aDelay doubleValue]];
+HOM1DOUBLE( afterDelay )
+	[invocation performSelector:@selector(invokeWithTarget:) withObject:self afterDelay:[arg doubleValue]];
 }
 
 
+HOM1( asyncOn , dispatch_queue_t , (id)arg )
+    SEL sel = [invocation selector];
+    if ( sel && !strchr(sel_getName(sel), ':') ) {
+        dispatch_async((dispatch_queue_t)arg, ^{ objc_msgSend(self,sel); });
+    } else {
+        dispatch_async((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
+    }
+}
+
+-async {
+    return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+}
+
+-asyncPrio {
+    return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0)];
+}
+
+-asyncBackground {
+    return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)];
+}
+
+HOM1( asyncOnOperationQueue , id , arg )
+    NSInvocationOperation *op=[[[NSInvocationOperation alloc] initWithInvocation:invocation] autorelease];
+     [arg addOperation:op];
+}
 
 @end

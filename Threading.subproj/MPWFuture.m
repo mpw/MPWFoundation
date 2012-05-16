@@ -123,9 +123,13 @@ idAccessor( _result, setResult )
 -(void)performJob
 {
 	id pool=[NSAutoreleasePool new];
-	[self setResult:[invocation returnValueAfterInvokingWithTarget:target]];
+//    NSLog(@"performJob(%p)",self);
+    id tempResult = [invocation returnValueAfterInvokingWithTarget:target];
+	[self setResult:tempResult];
+//    NSLog(@"performJob(%p), result: %p/%@",self,tempResult,tempResult);
 	[lock tryLock];
 	[lock unlockWithCondition:LOCK_DONE];
+//    NSLog(@"performJob(%p) did unblock reader",self);
 	[pool release];
 }
 
@@ -151,10 +155,11 @@ idAccessor( _result, setResult )
 	[newInvocation setReturnValue:&self];
 }
 
--(void)futureEval:(NSInvocation*)newInvocation
+-futureEval:(NSInvocation*)newInvocation
 {
 	[self lazyEval:newInvocation];
 	[self startRunning];
+    return self;
 }
 
 -(void)waitForResult
@@ -168,9 +173,13 @@ idAccessor( _result, setResult )
 
 -result
 {
+//    NSLog(@"result(%p)",self);
 	if ( ![self _result] ) {
+//        NSLog(@"will wait for result(%p)",self);
 		[self waitForResult];
+//        NSLog(@"did wait for result(%p)",self);
 	}
+//    NSLog(@"result(%p): %@",self,[self _result]);
 	return [self _result];
 }
 
