@@ -341,7 +341,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	return [NSArray arrayWithObjects:
 				@"testBasicSendNSInvocation",
 				@"testBasicSend",
-#if FULL_MPWFOUNDATION
+#if 1 // FULL_MPWFOUNDATION
 				@"testFasterThanNSInvocationWithoutCaching",
 				@"testFasterThanNSInvocationWitCaching",
 				@"testCachingFasterThanNonCaching",

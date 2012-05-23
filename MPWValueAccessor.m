@@ -10,6 +10,8 @@
 #import "AccessorMacros.h"
 #import <Foundation/Foundation.h>
 #import <MPWFoundation/MPWByteStream.h>
+#import <objc/runtime.h>
+
 
 @implementation MPWValueAccessor
 
@@ -22,30 +24,50 @@ extern id objc_msgSend(id, SEL, ...);
     return [[[self alloc] initWithName:name] autorelease];
 }
 
--initWithName:(NSString*)name
+-(void)setName:(NSString*)name forComponent:(AccessPathComponent*)component
+{
+    component->getSelector= NSSelectorFromString(name);
+    component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[name capitalizedString]] stringByAppendingString:@":"]);
+    component->getIMP=objc_msgSend;
+    component->putIMP=objc_msgSend;
+    component->targetOffset=-1;
+    component->additionalArg=[name retain];
+}
+
+-(void)bindComponent:(AccessPathComponent*)component toTarget:aTarget
+{
+    component->targetClass=object_getClass( aTarget);
+    component->getIMP=[aTarget methodForSelector:component->getSelector];
+    component->putIMP=[aTarget methodForSelector:component->putSelector];
+    if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
+        [NSException raise:@"bind failed" format:@"bind failed"];
+    }
+}
+
+-(void)setComponentsForPath:(NSArray*)pathComponents
+{
+    int componentCount=[pathComponents count];
+    NSAssert1(componentCount<6, @"only support up to 6 path components got %d", componentCount);
+    count=componentCount;
+    for (int i=0;i<count;i++) {
+        [self setName:[pathComponents objectAtIndex:i] forComponent:components+i];
+    }
+}
+
+-initWithPath:(NSString*)path
 {
     self=[super init];
     if ( self ) {
-        final.getSelector= NSSelectorFromString(name);
-        final.putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[name capitalizedString]] stringByAppendingString:@":"]);
-        final.getIMP=objc_msgSend;
-        final.putIMP=objc_msgSend;
-        final.targetOffset=-1;
-        
+        [self setComponentsForPath:[path componentsSeparatedByString:@"/"]];
     }
     return self;
 }
 
--(void)bindToTarget:aTarget
+-initWithName:(NSString*)name
 {
-    [self _setTarget:aTarget];
-//    final.targetClass=objc_getClass( aTarget);
-    final.getIMP=[aTarget methodForSelector:final.getSelector];
-    final.putIMP=[aTarget methodForSelector:final.putSelector];
-    if ( (final.getIMP == NULL) || (final.putIMP == NULL) ) {
-        [NSException raise:@"bind failed" format:@"bind failed"];
-    }
+    return [self initWithPath:name];
 }
+
 
 static inline id getValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
     for (int i=0;i<count;i++) {
@@ -60,23 +82,33 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     c[final].putIMP( currentTarget, c[final].putSelector, value, c[final].additionalArg );
 }
 
+-(void)bindToTarget:aTarget
+{
+    [self _setTarget:aTarget];
+    id currentTarget=aTarget;
+    for ( int i=0;i<count;i++) {
+        [self bindComponent:components+i toTarget:currentTarget];
+        currentTarget=getValueForComponents(currentTarget, components+i, 1);
+    }
+}
+
 -valueForTarget:aTarget
 {
-    return getValueForComponents( aTarget, &final, 1);
+    return getValueForComponents( aTarget, components, count);
 }
 
 -(void)setValue:newValue forTarget:aTarget
 {
-     setValueForComponents( aTarget, &final, 1,newValue);
+     setValueForComponents( aTarget, components, count,newValue);
 
 }
 
 
--value {  return getValueForComponents( target, &final, 1); }
+-value {  return getValueForComponents( target, components, count); }
 
 -(void)setValue:newValue
 {
-    setValueForComponents( target, &final, 1,newValue);
+    setValueForComponents( target, components, count,newValue);
 }
 
 
@@ -84,12 +116,19 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 #import "DebugMacros.h"
 #import "MPWByteStream.h"
+#import "MPWRusage.h"
 
 @implementation MPWValueAccessor(testing)
 
 +_testTarget
 {
     return [MPWStream streamWithTarget:[MPWByteStream Stderr]];
+}
+
+
++_testCompoundTarget
+{
+    return [MPWStream streamWithTarget:[MPWStream streamWithTarget:[MPWByteStream Stderr]]];
 }
 
 +(void)testBasicUnboundAccess
@@ -118,6 +157,53 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     IDEXPECT([t target], [MPWByteStream Stdout], @"newly set target after bind");
 }
 
++(void)testPathAccess
+{
+    MPWStream *t=[self _testCompoundTarget];
+    MPWValueAccessor *accessor=[[[self alloc] initWithPath:@"target/target"] autorelease];
+    [accessor bindToTarget:t];
+    IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
+    [accessor setValue:[MPWByteStream Stdout]];
+    IDEXPECT([[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
+}
+
+#define ACCESS_COUNT  1000000
+
++(void)testPerformanceOfPathAccess
+{
+    NSString *keyPath=@"target/target";
+    MPWStream *t=[self _testCompoundTarget];
+    MPWValueAccessor *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
+    MPWRusage* accessorStart=[MPWRusage current];
+    for (int i=0;i<ACCESS_COUNT;i++) {
+        [accessor valueForTarget:t];
+    }
+    MPWRusage* accessorTime=[MPWRusage timeRelativeTo:accessorStart];
+    MPWRusage* boundAccessorStart=[MPWRusage current];
+    for (int i=0;i<ACCESS_COUNT;i++) {
+        [accessor valueForTarget:t];
+    }
+    [accessor bindToTarget:t];
+    MPWRusage* boundAccessorTime=[MPWRusage timeRelativeTo:boundAccessorStart];
+    MPWRusage* kvcStart=[MPWRusage current];
+    for (int i=0;i<ACCESS_COUNT;i++) {
+        [t valueForKeyPath:@"target.target"];
+    }
+    MPWRusage* kvcTime=[MPWRusage timeRelativeTo:kvcStart];
+    double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
+#define EXPECTEDUNBOUNDRATIO 25.0
+    NSAssert2( unboundRatio > EXPECTEDUNBOUNDRATIO ,@"ratio of value accessor to kvc path %g < %g",
+              unboundRatio,EXPECTEDUNBOUNDRATIO);
+    
+    double boundRatio = (double)[kvcTime userMicroseconds] / (double)[boundAccessorTime userMicroseconds];
+#define EXPECTEDBOUNDRATIO 50.0
+    NSAssert2( boundRatio > EXPECTEDBOUNDRATIO ,@"ratio of bound value accessor to kvc path %g < %g",
+              boundRatio,EXPECTEDBOUNDRATIO);
+    
+
+    
+}
+
 
 +testSelectors
 {
@@ -125,6 +211,8 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
             @"testBasicUnboundAccess",
             @"testBasicUnboundSetAccess",
             @"testBoundGetSetAccess",
+            @"testPathAccess",
+            @"testPerformanceOfPathAccess",
             nil];
 }
 
