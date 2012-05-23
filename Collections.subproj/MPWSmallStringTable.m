@@ -181,12 +181,17 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 			const char *tablestring=curptr+1;
 
 			if ( (cstr[offset])==(tablestring[offset]) ) {
-				for (int j=0;j<len;j++) {
+                int j;
+                BOOL matches=YES;
+				for ( j=0;j<len-1;j++) {
 					if ( cstr[j] != tablestring[j] ) {
-                        continue;
+                        matches=NO;
+                        break;
                     }
 				}
-				return i;
+                if ( matches ){
+                    return i;
+                }
 			}
 		}
 		curptr+=entryLen+1;
@@ -283,12 +288,12 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 
 +_testKeys
 {
-	return [NSArray arrayWithObjects:@"Help", @"Marcel", @"me", nil];
+	return [NSArray arrayWithObjects:@"Help", @"Marcel", @"me", @"Manuel",  nil];
 }
 
 +_testValues
 {
-	return [NSArray arrayWithObjects:@"Value for Help", @"Value 2", @"myself and I", nil];
+	return [NSArray arrayWithObjects:@"Value for Help", @"Value 2", @"myself and I", @"Imposter", nil];
 }
 
 +_testCreateTestTable
@@ -369,7 +374,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"dict time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"dict vs. string table lookup time ratio: %g",ratio);
-#define RATIO 4.2
+#define RATIO 2.5
 	NSAssert2( ratio > RATIO ,@"ratio of small string table to NSDictionary %g < %g",
 				ratio, RATIO );   
 }
@@ -436,6 +441,13 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	IDEXPECT([table objectForKey:@"AudioList"], @"new", @"after replacing");
 }
 
++(void)testActuallyCheckingFullString
+{
+    MPWSmallStringTable *table=[self _testCreateTestTable];
+    IDEXPECT([table objectForKey:@"Manuel"], @"Imposter", @"has same 1st and last char");
+}
+
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
@@ -452,6 +464,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 			@"testOffsetLookup",
 			@"testReplaceObject",
 			@"testLongerKeys",
+			@"testActuallyCheckingFullString",
 			nil];
 }
 
