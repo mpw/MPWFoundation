@@ -51,7 +51,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWTrampoline
 
-idAccessor( xxxAdditionalArg, setXxxAdditionalArg )
+scalarAccessor( id, xxxAdditionalArg, setXxxAdditionalArg )
 
 +(void)initialize
 {

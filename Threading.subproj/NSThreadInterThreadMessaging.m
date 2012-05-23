@@ -70,15 +70,15 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 
 @implementation NSObject(threadingHOMs)
 
-#define HOM1( msg, type, conversion ) \
+#define HOM_METHOD1( msg, type, conversion ) \
 -msg:(type)arg  { id tramp = [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:withArg:)]; [tramp setXxxAdditionalArg:conversion]; return tramp; } \
 -(void)msg:(NSInvocation*)invocation withArg:arg { \
 
-#define HOM1DOUBLE( msg )    HOM1( msg, double, [NSNumber numberWithDouble:arg] )
+#define HOM_METHOD_DOUBLE( msg )    HOM_METHOD1( msg, double, [NSNumber numberWithDouble:arg] )
 
 
 
-#define HOM( msg  ) \
+#define HOM_METHOD( msg  ) \
 -msg { return [MPWTrampoline trampolineWithTarget:self selector:@selector(msg:)]; } \
 -(void)msg:(NSInvocation*)invocation { \
 //   invocation=(NSInvocation*)[MPWStackSaverInvocation withInvocation:invocation]; 
@@ -88,21 +88,21 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 typedef void (^voidBlock)(void );
 
 
-HOM(asyncOnMainThread)
+HOM_METHOD(asyncOnMainThread)
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:NO];
 }
 
-HOM(syncOnMainThread)
+HOM_METHOD(syncOnMainThread)
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:YES];
 }
 
 
-HOM1DOUBLE( afterDelay )
+HOM_METHOD_DOUBLE( afterDelay )
 	[invocation performSelector:@selector(invokeWithTarget:) withObject:self afterDelay:[arg doubleValue]];
 }
 
 
-HOM1( asyncOn , dispatch_queue_t , (id)arg )
+HOM_METHOD1( asyncOn , dispatch_queue_t , (id)arg )
     SEL sel = [invocation selector];
     if ( sel && !strchr(sel_getName(sel), ':') ) {
         dispatch_async((dispatch_queue_t)arg, ^{ objc_msgSend(self,sel); });
@@ -110,6 +110,17 @@ HOM1( asyncOn , dispatch_queue_t , (id)arg )
         dispatch_async((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
     }
 }
+
+
+HOM_METHOD1( syncOn  , dispatch_queue_t , (id)arg )
+    SEL sel = [invocation selector];
+    if ( sel && !strchr(sel_getName(sel), ':') ) {
+        dispatch_sync((dispatch_queue_t)arg, ^{ objc_msgSend(self,sel); });
+    } else {
+        dispatch_sync((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
+    }
+}
+
 
 -async {
     return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
@@ -123,7 +134,7 @@ HOM1( asyncOn , dispatch_queue_t , (id)arg )
     return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)];
 }
 
-HOM1( asyncOnOperationQueue , id , arg )
+HOM_METHOD1( asyncOnOperationQueue , id , arg )
     NSInvocationOperation *op=[[[NSInvocationOperation alloc] initWithInvocation:invocation] autorelease];
      [arg addOperation:op];
 }
