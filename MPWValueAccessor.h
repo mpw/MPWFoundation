@@ -8,11 +8,21 @@
 
 #import "MPWObject.h"
 
+typedef struct {
+    Class   targetClass;
+    int     targetOffset;
+    SEL     getSelector,putSelector;
+    IMP     getIMP,putIMP;
+    id      additionalArg;
+} AccessPathComponent;
+
 @interface MPWValueAccessor : MPWObject
 {
-    SEL getSelector,putSelector;
     id target;
-    IMP putIMP,getIMP;
+    AccessPathComponent *intermediate;
+    int intermediateCount;
+    AccessPathComponent final;
+
 }
 
 -initWithName:(NSString*)name;
