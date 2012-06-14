@@ -27,6 +27,9 @@ typedef CGSize NSSize;
 static inline NSString *NSStringFromRect( CGRect r ) { return [NSString stringWithFormat:@"(%g,%g - %g,%g)",r.origin.x,r.origin.y,r.size.width,r.size.height]; }
 static inline NSString *NSStringFromPoint( CGPoint p ) { return [NSString stringWithFormat:@"(%g,%g)",p.x,p.y]; }
 static inline NSString *NSStringFromSize( CGSize s ) { return [NSString stringWithFormat:@"(%g,%g)",s.width,s.height]; }
+static inline float NSMidX( NSRect r ) { return r.origin.x + r.size.width/2; }
+static inline float NSMidY( NSRect r ) { return r.origin.y + r.size.height/2; }
+
 
 
 
