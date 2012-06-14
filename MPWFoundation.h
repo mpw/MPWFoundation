@@ -56,7 +56,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWRealArray.h>
 #import <MPWFoundation/MPWUniqueString.h>
 #import <MPWFoundation/MPWUShortArray.h>
+#if !__has_feature(objc_arc)
 #import <MPWFoundation/MPWObjectCache.h>
+#endif
 #import <MPWFoundation/MPWSubData.h>
 #import <MPWFoundation/MPWScanner.h>
 #import <MPWFoundation/MPWPoint.h>
