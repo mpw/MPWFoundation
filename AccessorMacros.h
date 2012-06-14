@@ -113,10 +113,10 @@ setAccessor( id, var, setVar )
 #define boolAccessor_h(var,setVar )  scalarAccessor_h( BOOL, var, setVar )
 
 #define lazyAccessor( ltype, lvar ,setLVar, computeVar )   \
-	readAccessorName( ltype, lvar, _##lvar ) \
-	setAccessor( ltype, lvar, setLVar ) \
+	readAccessorName( ltype*, lvar, _##lvar ) \
+	setAccessor( ltype*, lvar, setLVar ) \
 \
--(ltype)lvar { \
+-(ltype*)lvar { \
 	if ( ![self _##lvar] )  { \
 		[self setLVar:[self computeVar]]; \
 	}  \
