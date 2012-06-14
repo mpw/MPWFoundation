@@ -24,6 +24,10 @@
             }\
 }\
 
+-mod:other
+{
+    return [NSNumber numberWithInt:[self intValue] % [other intValue]];
+}
 
 defineArithOp( add, + )
 defineArithOp( mul, * )
@@ -64,6 +68,11 @@ defineArithOp( div, / )
 -(double)pow:(double)otherNumber
 {
 return pow( [self doubleValue], otherNumber );
+}
+
+-(double)sqrt
+{
+    return sqrt([self doubleValue]);
 }
 
 -coerceToDecimalNumber
@@ -111,6 +120,7 @@ return pow( [self doubleValue], otherNumber );
 
 
 @end
+
 
 #if 0
 
