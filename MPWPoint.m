@@ -167,6 +167,12 @@ pointArithmetic( reverseSubPoint, - )
 	return [somethingElse reverseDivPoint:self];
 }
 
+-(float)distance:otherPoint
+{
+    double dx=[otherPoint x] - [self x];
+    double dy=[otherPoint y] - [self y];
+    return sqrt( dx*dx + dy*dy);
+}
 
 
 @end
@@ -252,11 +258,20 @@ reversePointNumberArithmetic( reverseSubPoint )
 	FLOATEXPECT([divResult y], 15.0, @"divide y");
 }
 
++(void)testDistance
+{
+	id point1 = [self pointWithX:20 y:30];
+	id point2 = [self pointWithX:4 y:3];
+    INTEXPECT((int)([point1 distance:point2]*10000), 313847, @"distance point1 <-> point2 * 1000");
+    FLOATEXPECT([point1 distance:point1], 0.0, @"point1 point2")
+}
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
             @"testPointArithmetic",
             @"testPointNumberArithmetic",
+            @"testDistance",
 		nil];
 }
 
