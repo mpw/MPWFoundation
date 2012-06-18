@@ -344,7 +344,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 #if 1 // FULL_MPWFOUNDATION
 				@"testFasterThanNSInvocationWithoutCaching",
 				@"testFasterThanNSInvocationWitCaching",
-				@"testCachingFasterThanNonCaching",
+//				@"testCachingFasterThanNonCaching",
 				@"testCachedInvocationFasterThanMessaging",
 #endif				
 				@"testIntArgAndReturnValue",
