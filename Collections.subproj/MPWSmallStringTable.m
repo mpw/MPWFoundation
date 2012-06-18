@@ -68,11 +68,13 @@ IMP __stringTableLookupFun=NULL;
                 maxLen=thisLength;
             }
 		}
+        int stringsOfLen[ maxLen + 2];
+        bzero(stringsOfLen, sizeof stringsOfLen);
         chainStarts=calloc( maxLen+2, sizeof(int));
 		tableLength=count;
 		table=malloc( totalStringLen +1 );
         tableIndex=calloc( count + 1, sizeof(StringTableIndex));
-        for (int i=0;i<maxLen;i++) {
+        for (int i=0;i<=maxLen;i++) {
             chainStarts[i]=-1;
         }
 		tableValues=ALLOC_POINTERS( (count+1)* sizeof(id) );
@@ -80,6 +82,26 @@ IMP __stringTableLookupFun=NULL;
 //		memcpy( tableValues, values, count * sizeof(id));
 		curptr=table;
 //		NSLog(@"table=%p curptr=%p",table,curptr);
+        
+		for (i=0;i<tableLength;i++) {\
+			int len=lengths[i];
+            tableIndex[i].length=len;
+            tableIndex[i].index=i;
+            tableIndex[i].next=chainStarts[len];
+            chainStarts[len]=i;
+        }
+        for (i=0;i<=maxLen;i++) {
+            int curIndex=chainStarts[i];
+            int number=0;
+            while (curIndex>=0) {
+                curIndex=tableIndex[curIndex].next;
+                number++;
+            }
+            if ( number) {
+                NSLog(@"strings of length %d: %d",i,number);
+            }
+        }
+        
         
 		for (i=0;i<tableLength;i++) {
 			int encoding=NSUTF8StringEncoding;
@@ -89,14 +111,10 @@ IMP __stringTableLookupFun=NULL;
 			NSString* key=keys[i];
 			int len=lengths[i];
 			id value=values[i];
-            tableIndex[i].length=len;
-            tableIndex[i].index=i;
-            tableIndex[i].next=chainStarts[len];
-            tableIndex[i].offset=curptr-table;
-            chainStarts[len]=i;
             
 			*curptr++=len;
-//            *curptr++=1;            //  number of entries of this length
+            *curptr++=1;            //  number of entries of this length
+            tableIndex[i].offset=curptr-table;
 			tableValues[i]=[value retain];
 			[key getCString:curptr maxLength:len+1 encoding:encoding];
 			curptr+=len;
@@ -134,7 +152,7 @@ IMP __stringTableLookupFun=NULL;
     
     [keys getObjects:keyArray];
     [values getObjects:valueArray];
-    
+    NSLog(@"keys: %@",keys);
 //	NSLog(@"will initWithObjects:forKeys:count");
 	return [self initWithObjects:valueArray forSortedKeys:keyArray count:[keys count]];
 }
@@ -183,9 +201,9 @@ IMP __stringTableLookupFun=NULL;
 		int i;
 		char *curptr=table;
 		for (i=0;i<anIndex;i++) {
-			curptr+=*curptr + 1;
+			curptr+=*curptr + 2;
 		}
-		return [[[NSString alloc] initWithBytes:curptr+1 length:*curptr encoding:NSUTF8StringEncoding] autorelease];
+		return [[[NSString alloc] initWithBytes:curptr+2 length:*curptr encoding:NSUTF8StringEncoding] autorelease];
 	} else {
 		return nil;
 	}
@@ -193,12 +211,12 @@ IMP __stringTableLookupFun=NULL;
 
 static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, StringTableIndex *tableIndex, int *chainStarts, NSUInteger tableLength, char *cstr, NSUInteger len)
 {
-    if ( YES || tableLength < 6) {
+    if (  tableLength < 2) {
         int i;
         const char *curptr=table;
         for (i=0; i<tableLength;i++ ) {
             int entryLen=*curptr++;
-            int numEntries=1;
+            int numEntries=*curptr++;
             if ( len==entryLen ) {
                 int offset=entryLen-1;
                 const char *tablestring=curptr;
@@ -227,7 +245,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
         while ( currentIndex >= 0 ) {
             StringTableIndex *cur=tableIndex+currentIndex;
             int firstCheckOffset=len-1;
-            const char *tablePtr=table + cur->offset + 1;
+            const char *tablePtr=table + cur->offset;
             if ( cstr[firstCheckOffset] == tablePtr[firstCheckOffset]) {
                 BOOL matches=YES;
                 for (int i=0;i<len;i++) {
