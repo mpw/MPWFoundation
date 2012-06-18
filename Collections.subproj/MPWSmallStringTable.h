@@ -10,7 +10,13 @@
 #import "MPWObject.h"
 #import "AccessorMacros.h"
 
-
+typedef struct {
+    int index;
+    int length;
+    int offset;
+    int next;
+    
+} StringTableIndex;
 
 @interface MPWSmallStringTable : NSDictionary {
 	int __retainCount;
@@ -22,8 +28,12 @@
 #else
 	__strong  id *tableValues;
 #endif
+    StringTableIndex *tableIndex;
+    int *chainStarts;
+    int maxLen;
 	id	defaultValue;
 	BOOL caseInsensitive;
+    
 	@public
 	IMP __stringTableLookupFun;
 }

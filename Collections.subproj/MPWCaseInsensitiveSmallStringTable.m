@@ -11,14 +11,14 @@
 
 @implementation MPWCaseInsensitiveSmallStringTable
 
--initWithObjects:(id*)values forKeys:(id*)keys count:(NSUInteger)count
+-initWithObjects:(id*)values forSortedKeys:(id*)keys count:(NSUInteger)count
 {
 	int i;
 	id lowercaseKeys[ count ];
 	for (i=0;i<count;i++) {
 		lowercaseKeys[i]=[keys[i] lowercaseString];
 	}
-	return [super initWithObjects:values forKeys:lowercaseKeys count:count];
+	return [super initWithObjects:values forSortedKeys:lowercaseKeys count:count];
 }
 
 
