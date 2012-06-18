@@ -34,6 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //#define LOCKING
 
 #import "MPWObject.h"
+#import "MPWObject_fastrc.h"
 #import <Foundation/Foundation.h>
 
 #undef Darwin

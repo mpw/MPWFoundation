@@ -42,19 +42,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 @end
-
-static inline id _retainMPWObject( MPWObject *obj ) {
-    if ( obj ) {
-        (obj->_retainCount)++; 
-    }
-    return obj;
-}
-
-static inline void _releaseMPWObject( MPWObject *obj ) {
-    if (obj && (--(obj->_retainCount) < 0)  ) {
-        [obj dealloc];
-    }
-}
 extern id retainMPWObject( MPWObject *obj );
 extern void retainMPWObjects( MPWObject **objs, unsigned count );
 extern void releaseMPWObject( MPWObject *obj );
