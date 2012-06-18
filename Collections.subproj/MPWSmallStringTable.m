@@ -90,6 +90,9 @@ IMP __stringTableLookupFun=NULL;
             tableIndex[i].next=chainStarts[len];
             chainStarts[len]=i;
         }
+        
+        //--- gather lengths
+        
         for (i=0;i<=maxLen;i++) {
             int curIndex=chainStarts[i];
             int number=0;
@@ -102,6 +105,27 @@ IMP __stringTableLookupFun=NULL;
                 NSLog(@"strings of length %d: %d",i,number);
             }
         }
+    
+        //---- write the table in ascending order of lengths
+
+#if 0
+        for (i=0;i<=maxLen;i++) {
+            if ( stringsOfLen[i]>0) {
+                *curptr++ = i;
+                *curptr++ = stringsOfLen[i];
+                int curIndex=chainStarts[i];
+                int number=0;
+                while (curIndex>=0) {
+                    curIndex=tableIndex[curIndex].next;
+                    number++;
+                }
+            }
+        }
+#endif
+      
+
+        
+        
         int encoding=NSUTF8StringEncoding;
 #if WINDOWS
         encoding=NSISOLatin1StringEncoding;
@@ -213,17 +237,17 @@ IMP __stringTableLookupFun=NULL;
 
 static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, StringTableIndex *tableIndex, int *chainStarts, NSUInteger tableLength, char *cstr, NSUInteger len)
 {
-    if (  tableLength < 10)  {
+    if (  tableLength < 1)  {
         int i;
         const char *curptr=table;
         for (i=0; i<tableLength;i++ ) {
             int entryLen=*curptr++;
             int numEntries=*curptr++;
-            int index=*curptr++;
             if ( len==entryLen ) {
                 int offset=entryLen-1;
-                const char *tablestring=curptr;
                 for (int  j=0;j<numEntries;j++) {
+                    int index=*curptr++;
+                    const char *tablestring=curptr;
                     if ( (cstr[offset])==(tablestring[offset]) ) {
                         int j;
                         BOOL matches=YES;
@@ -240,7 +264,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
                     curptr+=entryLen;
                 }
             } else {
-                curptr+=entryLen*numEntries;
+                curptr+=(entryLen+1)*numEntries;
             }
         }
     } else {
