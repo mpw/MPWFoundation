@@ -30,6 +30,7 @@ typedef struct {
 #endif
     StringTableIndex *tableIndex;
     int *chainStarts;
+    int *tableOffsetsPerLength;
     int maxLen;
 	id	defaultValue;
 	BOOL caseInsensitive;

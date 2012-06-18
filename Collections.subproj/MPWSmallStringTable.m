@@ -71,6 +71,7 @@ IMP __stringTableLookupFun=NULL;
         int stringsOfLen[ maxLen + 2];
         bzero(stringsOfLen, sizeof stringsOfLen);
         chainStarts=calloc( maxLen+2, sizeof(int));
+        tableOffsetsPerLength=calloc( maxLen+2, sizeof(int));
 		tableLength=count;
 		table=malloc( totalStringLen +1 );
         tableIndex=calloc( count + 1, sizeof(StringTableIndex));
@@ -102,34 +103,47 @@ IMP __stringTableLookupFun=NULL;
             }
             stringsOfLen[i]=number;
             if ( number) {
-                NSLog(@"strings of length %d: %d",i,number);
+//                NSLog(@"strings of length %d: %d",i,number);
             }
         }
     
         //---- write the table in ascending order of lengths
-
-#if 0
-        for (i=0;i<=maxLen;i++) {
-            if ( stringsOfLen[i]>0) {
-                *curptr++ = i;
-                *curptr++ = stringsOfLen[i];
-                int curIndex=chainStarts[i];
-                int number=0;
-                while (curIndex>=0) {
-                    curIndex=tableIndex[curIndex].next;
-                    number++;
-                }
-            }
-        }
-#endif
-      
-
-        
         
         int encoding=NSUTF8StringEncoding;
 #if WINDOWS
         encoding=NSISOLatin1StringEncoding;
 #endif
+
+#if 1
+        for (i=0;i<=maxLen;i++) {
+            if ( stringsOfLen[i]>0) {
+//              NSLog(@"%d strings of length %d",stringsOfLen[i], i);
+                tableOffsetsPerLength[i]=curptr-table;
+                *curptr++ = i;
+                *curptr++ = stringsOfLen[i];
+                int curIndex=chainStarts[i];
+                while (curIndex>=0) {
+                    
+                    int theIndex = tableIndex[curIndex].index;
+                    int len=lengths[theIndex];
+                    NSString* key=keys[theIndex];
+//                  NSLog(@"add string: %@",key);
+                    *curptr++=theIndex;   // store the key's index
+                    [key getCString:curptr maxLength:len+1 encoding:encoding];
+                    tableIndex[curIndex].offset=curptr-table;
+                    tableValues[theIndex]=[values[theIndex] retain];
+                    curptr+=len;
+
+                    curIndex=tableIndex[curIndex].next;
+                }
+            } else {
+                tableOffsetsPerLength[i]=-1;
+
+            }
+        }
+      
+
+#else
         
         
 		for (i=0;i<tableLength;i++) {
@@ -160,6 +174,7 @@ IMP __stringTableLookupFun=NULL;
 			[allkeys addObject:key];
 #endif			
 		}
+#endif
 		if ( !__stringTableLookupFun ) {
 			__stringTableLookupFun=[self methodForSelector:@selector(objectForCString:length:)];
 		}
@@ -178,7 +193,7 @@ IMP __stringTableLookupFun=NULL;
     
     [keys getObjects:keyArray];
     [values getObjects:valueArray];
-    NSLog(@"keys: %@",keys);
+//    NSLog(@"keys: %@",keys);
 //	NSLog(@"will initWithObjects:forKeys:count");
 	return [self initWithObjects:valueArray forSortedKeys:keyArray count:[keys count]];
 }
@@ -224,30 +239,32 @@ IMP __stringTableLookupFun=NULL;
 -keyAtIndex:(NSUInteger)anIndex
 {
 	if ( anIndex < tableLength ) {
-		int i;
-		char *curptr=table;
-		for (i=0;i<anIndex;i++) {
-			curptr+=*curptr + 3;
-		}
-		return [[[NSString alloc] initWithBytes:curptr+3 length:*curptr encoding:NSUTF8StringEncoding] autorelease];
-	} else {
-		return nil;
+        int i;
+        for (int i; i<tableLength;i++) {
+            if ( tableIndex[i].index == anIndex) {
+                return [[[NSString alloc] initWithBytes:table + tableIndex[i].offset length:tableIndex[i].length encoding:NSUTF8StringEncoding] autorelease];
+            }
+        }
 	}
+    return nil;
 }
 
-static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, StringTableIndex *tableIndex, int *chainStarts, NSUInteger tableLength, char *cstr, NSUInteger len)
+static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, int *tableOffsets, char *cstr, NSUInteger len)
 {
-    if (  tableLength < 1)  {
+#if 1
+    if (  tableOffsets[len] >= 0 )  {
         int i;
-        const char *curptr=table;
-        for (i=0; i<tableLength;i++ ) {
+        const char *curptr=table+tableOffsets[len];
+        for (i=0; i<1;i++ ) {
             int entryLen=*curptr++;
             int numEntries=*curptr++;
+//            NSLog(@"len: %d entryLen: %d",len,entryLen);
             if ( len==entryLen ) {
                 int offset=entryLen-1;
                 for (int  j=0;j<numEntries;j++) {
                     int index=*curptr++;
                     const char *tablestring=curptr;
+//                    NSLog(@"'%.*s' = '%.*s' ?",len,cstr,entryLen,tablestring);
                     if ( (cstr[offset])==(tablestring[offset]) ) {
                         int j;
                         BOOL matches=YES;
@@ -258,6 +275,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
                             }
                         }
                         if ( matches ){
+//                            NSLog(@"return index: %d",index);
                             return index;
                         }
                     }
@@ -267,7 +285,9 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
                 curptr+=(entryLen+1)*numEntries;
             }
         }
-    } else {
+    }
+#else
+    else {
         int currentIndex=chainStarts[len];
         while ( currentIndex >= 0 ) {
             StringTableIndex *cur=tableIndex+currentIndex;
@@ -288,13 +308,14 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
             currentIndex=cur->next;
         }
     }
+#endif
     return -1;
 }
 
 -(int)offsetForCString:(char*)cstr length:(int)len
 {
     if ( len <= maxLen) {
-        int offset = offsetOfCStringWithLengthInTableOfLength( table , tableIndex, chainStarts, tableLength, cstr, len );
+        int offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len );
         return offset;
     } else {
         return -1;
@@ -322,7 +343,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 {
     int offset=-1;
     if ( len <= maxLen ) {
-        offset = offsetOfCStringWithLengthInTableOfLength( table , tableIndex, chainStarts, tableLength, cstr, len );
+        offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len );
     }
 	if ( offset >= 0 ) {
 		return tableValues[offset];
@@ -409,7 +430,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	NSArray *values=[self _testValues];
 	IDEXPECT( [table objectForCString:"Help"] , [values objectAtIndex:0], @"first lookup" );
 	IDEXPECT( [table objectForCString:"Marcel"] , [values objectAtIndex:1], @"second lookup" );
-	IDEXPECT( [table objectForCString:"me"] , [values objectAtIndex:2], @"thrid lookup" );
+	IDEXPECT( [table objectForCString:"me"] , [values objectAtIndex:2], @"third lookup" );
 }
 
 +(void)testSimpleNSStringLookup
@@ -418,7 +439,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	NSArray *values=[self _testValues];
 	IDEXPECT( [table objectForKey:@"Help"] , [values objectAtIndex:0], @"first lookup" );
 	IDEXPECT( [table objectForKey:@"Marcel"] , [values objectAtIndex:1], @"second lookup" );
-	IDEXPECT( [table objectForKey:@"me"] , [values objectAtIndex:2], @"thrid lookup" );
+	IDEXPECT( [table objectForKey:@"me"] , [values objectAtIndex:2], @"third lookup" );
 }
 
 +(void)testSimpleCStringLengthLookup
@@ -427,7 +448,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	NSArray *values=[self _testValues];
 	IDEXPECT( [table objectForCString:"Help" length:4] , [values objectAtIndex:0], @"first lookup" );
 	IDEXPECT( [table objectForCString:"Marcel" length:6] , [values objectAtIndex:1], @"second lookup" );
-	IDEXPECT( [table objectForCString:"me"  length:2] , [values objectAtIndex:2], @"thrid lookup" );
+	IDEXPECT( [table objectForCString:"me"  length:2] , [values objectAtIndex:2], @"third lookup" );
 }
 
 +(void)testLookupOfNonExistingKey
@@ -461,19 +482,21 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	NSDictionary *dict=[NSDictionary dictionaryWithObjects:[self _testValues] forKeys:[self _testKeys]];
 	MPWRusage* slowStart=[MPWRusage current];
 	int i;
+#define CKEY  "me"
+    NSString *nskey=[NSString stringWithUTF8String:CKEY];
 	for (i=0;i<LOOKUP_COUNT;i++) {
-		[dict objectForKey:@"Marcel"];
+		[dict objectForKey:nskey];
 	}
 	MPWRusage* slowTime=[MPWRusage timeRelativeTo:slowStart];
 	MPWRusage* fastStart=[MPWRusage current];
 	for (i=0;i<LOOKUP_COUNT;i++) {
-		OBJECTFORCONSTANTSTRING(table,"Marcel");
+		OBJECTFORCONSTANTSTRING(table,CKEY);
 	}
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"dict time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"dict vs. string table lookup time ratio: %g",ratio);
-#define RATIO 1.2
+#define RATIO 3.5
 	NSAssert2( ratio > RATIO ,@"ratio of small string table to NSDictionary %g < %g",
 				ratio, RATIO );   
 }
@@ -495,8 +518,9 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"MPWUniqueString time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"MPWUniqueString vs. string table lookup time ratio: %g",ratio);
-	NSAssert2( ratio > 2.3 ,@"ratio of small string table to MPWUniqueString (NSMapTable) %g < %g",
-				ratio,2.3);   
+#define RATIO 2.5 
+	NSAssert2( ratio > RATIO ,@"ratio of small string table to MPWUniqueString (NSMapTable) %g < %g",
+				ratio,RATIO);
 }
 #endif
 
@@ -556,7 +580,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 			@"testLookupViaMacro",
 #if FULL_MPWFOUNDATION			
 			@"testLookupFasterThanNSDictionary",
-			@"testLookupFasterThanMPWUniqueString",
+//			@"testLookupFasterThanMPWUniqueString",
 #endif			
 			@"testFailedLookupGetsDefaultValue",
 			@"testKeyAtIndex",
