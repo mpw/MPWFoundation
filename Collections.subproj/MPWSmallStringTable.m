@@ -97,23 +97,25 @@ IMP __stringTableLookupFun=NULL;
                 curIndex=tableIndex[curIndex].next;
                 number++;
             }
+            stringsOfLen[i]=number;
             if ( number) {
                 NSLog(@"strings of length %d: %d",i,number);
             }
         }
+        int encoding=NSUTF8StringEncoding;
+#if WINDOWS
+        encoding=NSISOLatin1StringEncoding;
+#endif
         
         
 		for (i=0;i<tableLength;i++) {
-			int encoding=NSUTF8StringEncoding;
-#if WINDOWS
-			encoding=NSISOLatin1StringEncoding;
-#endif
 			NSString* key=keys[i];
 			int len=lengths[i];
 			id value=values[i];
             
 			*curptr++=len;
             *curptr++=1;            //  number of entries of this length
+            *curptr++=i;
             tableIndex[i].offset=curptr-table;
 			tableValues[i]=[value retain];
 			[key getCString:curptr maxLength:len+1 encoding:encoding];
@@ -201,9 +203,9 @@ IMP __stringTableLookupFun=NULL;
 		int i;
 		char *curptr=table;
 		for (i=0;i<anIndex;i++) {
-			curptr+=*curptr + 2;
+			curptr+=*curptr + 3;
 		}
-		return [[[NSString alloc] initWithBytes:curptr+2 length:*curptr encoding:NSUTF8StringEncoding] autorelease];
+		return [[[NSString alloc] initWithBytes:curptr+3 length:*curptr encoding:NSUTF8StringEncoding] autorelease];
 	} else {
 		return nil;
 	}
@@ -211,12 +213,13 @@ IMP __stringTableLookupFun=NULL;
 
 static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, StringTableIndex *tableIndex, int *chainStarts, NSUInteger tableLength, char *cstr, NSUInteger len)
 {
-    if (  tableLength < 2) {
+    if (  tableLength < 10)  {
         int i;
         const char *curptr=table;
         for (i=0; i<tableLength;i++ ) {
             int entryLen=*curptr++;
             int numEntries=*curptr++;
+            int index=*curptr++;
             if ( len==entryLen ) {
                 int offset=entryLen-1;
                 const char *tablestring=curptr;
@@ -231,7 +234,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
                             }
                         }
                         if ( matches ){
-                            return i;
+                            return index;
                         }
                     }
                     curptr+=entryLen;
