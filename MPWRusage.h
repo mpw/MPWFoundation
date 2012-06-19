@@ -16,12 +16,16 @@
 @interface MPWRusage : MPWObject
 {
         struct rusage usage;
+        long long absolute;
 }
 
 +current;
 +timeRelativeTo:(MPWRusage*)start;
 -(long)systemMicroseconds;
 -(long)userMicroseconds;
+-(int)absoluteMicroseconds;
+
+-(long long)absolute;
 
 
 @end

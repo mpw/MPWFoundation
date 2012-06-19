@@ -9,14 +9,17 @@
 #import "MPWRusage.h"
 #import <Foundation/Foundation.h>
 #import "MPWTrampoline.h"
+#import <mach/mach_time.h>
 
 @implementation MPWRusage
 
+scalarAccessor(long long, absolute , setAbsolute)
 
 -initWithCurrent
 {
         if (nil != (self=[super init])) {
                 getrusage( RUSAGE_SELF, &usage );
+                absolute=mach_absolute_time();
         }
         return self;
 }
@@ -55,6 +58,19 @@
         return [self microsecondsForTimeVal:usage.ru_utime];
 }
 
+-(double)absoluteNS
+{
+    struct mach_timebase_info base;
+    mach_timebase_info( &base );
+    return (double)absolute * (double)base.numer / (double)base.denom;
+}
+
+-(int)absoluteMicroseconds
+{
+    return [self absoluteNS] / 1000;
+}
+
+
 
 -subtractStartTime:(MPWRusage*)start
 {
@@ -63,7 +79,7 @@
         start_usage=*[start usage];
         usage.ru_utime = [self timevalFrom:start_usage.ru_utime to: usage.ru_utime];
         usage.ru_stime = [self timevalFrom:start_usage.ru_stime to: usage.ru_stime];
-
+        absolute -= [start absolute];
 #define USAGE_SUBTRACT( member )  usage.member -= start_usage.member
 
          USAGE_SUBTRACT(  ru_maxrss);          /* integral max resident set size */
