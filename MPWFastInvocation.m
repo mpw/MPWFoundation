@@ -150,11 +150,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count
 {
-	int i;
-	for (i=0;i<count;i++ ) {
-		args[i]=newArgs[i];
-	}
-	return INVOKE( self );
+    return cached( target, selector, newArgs[0], newArgs[1],newArgs[2],newArgs[3] );
 }
 
 -(void)invoke
