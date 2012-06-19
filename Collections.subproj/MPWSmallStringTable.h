@@ -22,7 +22,7 @@ typedef struct {
 	int __retainCount;
 	int	flags;
 	int	tableLength;
-	char *table;
+	unsigned char *table;
 #if WINDOWS || LINUX
 	id *tableValues;
 #else
