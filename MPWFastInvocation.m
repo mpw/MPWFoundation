@@ -165,14 +165,15 @@ extern id objc_msgSend( id target, SEL selector, ... );
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p:[%@  %@]>",[self class],self,target,NSStringFromSelector(selector)];
+    //--- target may be deallocated so don't %@ it...
+    return [NSString stringWithFormat:@"<%@:%p:[%p  %@]>",[self class],self,target,NSStringFromSelector(selector)];
 }
 
 -(void)dealloc
 {
+//    NSLog(@"dealloc MPWFastInvocation %p",self);
     [methodSignature release];
 	[result release];
-//	[target release];
 	[super dealloc];
 }
 
@@ -312,7 +313,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	}
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
-	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",[fastTime userMicroseconds],[slowTime userMicroseconds],ratio);
+	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",(int)[fastTime userMicroseconds],(int)[slowTime userMicroseconds],ratio);
 	NSAssert2( ratio > 0.6 ,@"ratio of cached fast invocation to normal message send %g < %g",
 				ratio,0.6);
 }

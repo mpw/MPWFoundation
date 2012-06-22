@@ -48,8 +48,13 @@ IMP __stringTableLookupFun=NULL;
 
 -initWithObjects:(id*)values forKeys:(id*)keys count:(NSUInteger)count
 {
-//	NSLog(@" initWithObjects:forKeys:count: %d --- ",count);
+//	NSLog(@"%p initWithObjects:forKeys:count: %d --- ",self,count);
 //	NSLog(@"will super init");
+    int encoding=NSUTF8StringEncoding;
+#if WINDOWS
+    encoding=NSISOLatin1StringEncoding;
+#endif
+    
 #ifndef WINDOWS
 	self=[super init];
 #endif
@@ -57,13 +62,16 @@ IMP __stringTableLookupFun=NULL;
 		int i;
 		int lengths[ count +1 ];
         maxLen=0;
+        NSAssert2(count<255, @"%@ - total number of strings %d > 255", [self class], count);
+
 		int totalStringLen=0;
 		unsigned char *curptr;
 //		NSLog(@"super init");
 		for (i=0;i<count;i++) {
-            int thisLength=[keys[i] length];
+            int thisLength=[keys[i] lengthOfBytesUsingEncoding:encoding];
 			lengths[i]=thisLength;
-			totalStringLen+=thisLength+2;
+			totalStringLen+=thisLength+3;
+            NSAssert3(thisLength<255, @"%@ - length of string '%@' %d > 255", [self class], keys[i], thisLength);
             if (thisLength>maxLen ) {
                 maxLen=thisLength;
             }
@@ -112,11 +120,6 @@ IMP __stringTableLookupFun=NULL;
     
         //---- write the table in ascending order of lengths
         
-        int encoding=NSUTF8StringEncoding;
-#if WINDOWS
-        encoding=NSISOLatin1StringEncoding;
-#endif
-
 #if 1
         for (i=0;i<=maxLen;i++) {
             if ( stringsOfLen[i]>0) {
@@ -138,6 +141,9 @@ IMP __stringTableLookupFun=NULL;
                     *curptr++=theIndex;   // store the key's index
                     [key getCString:(char*)curptr maxLength:len+1 encoding:encoding];
                     tableIndex[curIndex].offset=curptr-table;
+                    
+                    
+//                    NSLog(@"retain value[%d]: %p/%@ (of %d)",theIndex,values[theIndex],values[theIndex],tableLength);
                     tableValues[theIndex]=[values[theIndex] retain];
                     curptr+=len;
 
@@ -188,7 +194,7 @@ IMP __stringTableLookupFun=NULL;
 		}
 		[self setDefaultValue:nil];
 	}
-//    NSLog(@"returning initialized MPWSmallStringTable: %p",self);
+//   NSLog(@"returning initialized MPWSmallStringTable: %p",self);
 //    NSLog(@"returning initialized MPWSmallStringTable: %@",[self class]);
 //    NSLog(@"returning initialized MPWSmallStringTable: %@",self);
     
@@ -202,7 +208,7 @@ IMP __stringTableLookupFun=NULL;
     int keyCount = [keys count];
 	id keyArray[ keyCount +1 ];
 	id valueArray[ [values count] + 1];
-    
+    NSAssert2([keys count]==[values count], @"different numbers of keys and values", [keys count], [values count]);
     [keys getObjects:keyArray];
     [values getObjects:valueArray];
 //    NSLog(@"keys: %@",keys);
@@ -413,13 +419,20 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 {
     return [[self allKeys] objectEnumerator];
 }
+int _small_string_table_releaseIndex=0;
 
 -(void)dealloc
 {
+//    NSLog(@"dealloc %p",self);
 	if ( tableValues ) {
 		int i;
 		for (i=0;i<tableLength;i++) {
+            fprintf(stderr,"release value %d of %d\n",i,tableLength);
+            _small_string_table_releaseIndex=i;
+//            NSLog(@"release ptr %p",tableValues[i]);
+//            NSLog(@"release value %@",tableValues[i]);
 			[tableValues[i] release];
+//            NSLog(@"did release %d",i);
 		}
 		free(tableValues);
         tableValues=NULL;
@@ -621,6 +634,35 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
     IDEXPECT([table objectForKey:@"Manuel"], @"Imposter", @"has same 1st and last char");
 }
 
++(void)testMaxStringLengthEnforced
+{
+    NSString *s=@"10";
+    while ( [s length] < 256 ) {
+        s=[s stringByAppendingString:s];
+    }
+    NSArray *keys=[NSArray arrayWithObject:s];
+    @try {
+        [[[[self class] alloc] initWithKeys:keys values:keys] autorelease];
+        EXPECTFALSE(YES, @"should have raised");
+    }
+    @catch (NSException *exception) {
+    }
+}
+
++(void)testMaxTableSizeEnforced
+{
+    NSMutableArray *keys=[NSMutableArray array];
+    NSString *s=@"10";
+    while ( [keys count] < 256 ) {
+        [keys addObject:s];
+    }
+    @try {
+        [[[[self class] alloc] initWithKeys:keys values:keys] autorelease];
+        EXPECTFALSE(YES, @"should have raised");
+    }
+    @catch (NSException *exception) {
+    }
+}
 
 +testSelectors
 {
@@ -639,6 +681,8 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 			@"testReplaceObject",
 			@"testLongerKeys",
 			@"testActuallyCheckingFullString",
+            @"testMaxStringLengthEnforced",
+            @"testMaxTableSizeEnforced",
 			nil];
 }
 
