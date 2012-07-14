@@ -236,6 +236,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 @end
 
 #ifndef RELEASE
+#import "DebugMacros.h"
 
 @implementation MPWObject(testing)
 
@@ -243,7 +244,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 {
     id mpwobj=[[MPWObject alloc] init];
     id nsobj=[[NSObject alloc] init];
-    NSAssert2( [mpwobj retainCount] == [nsobj retainCount] ,@"retaincount not equal after alloc %d ,%d",[mpwobj retainCount],[nsobj retainCount]);
+    INTEXPECT( [mpwobj retainCount], [nsobj retainCount] ,@"retaincount not equal after alloc");
     [nsobj release];
     [mpwobj release];
 }
@@ -251,18 +252,13 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 +(void)retainCountSameAsNSObject
 {
     id mpo=[[[MPWObject alloc] init] autorelease],nso=[[[NSObject alloc] init] autorelease];
-    NSAssert2( [nso retainCount] ==
-               [mpo retainCount], @"retainCount of NSObject (%d) not equal to MPWObject (%d)",[nso retainCount],[mpo retainCount]);
+    INTEXPECT( [nso retainCount] , [mpo retainCount], @"retainCount of NSObject MPWObject");
 }
 
 +testSelectors
 {
-	if ( !IS_OBJC_GC_ON ) {
-		return [NSArray arrayWithObjects:
+    return [NSArray arrayWithObjects:
 			@"retaintCountAfterAlloc",@"retainCountSameAsNSObject", nil];
-	} else {
-		return [NSArray array];
-	}
 }
 
 @end

@@ -139,7 +139,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 {
 
     if ( !strchr(sel_getName(selector), ':')) {
-        class_addMethod(self, selector, __forwardStart0, "@@:");
+        class_addMethod(self, selector, (IMP)__forwardStart0, "@@:");
         return YES;
     }
     return NO;

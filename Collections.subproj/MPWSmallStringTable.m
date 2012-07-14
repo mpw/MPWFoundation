@@ -270,7 +270,7 @@ IMP __stringTableLookupFun=NULL;
     return nil;
 }
 
-static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, int *tableOffsets, char *cstr, NSUInteger len)
+static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char  *table, int *tableOffsets, char *cstr, NSUInteger len, int *chainStarts, StringTableIndex *tableIndex)
 {
 #if 1
     if (  tableOffsets[len] >= 0 )  {
@@ -308,7 +308,8 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
         }
     }
 #else
-    else {
+//    else
+    {
         int currentIndex=chainStarts[len];
         while ( currentIndex >= 0 ) {
             StringTableIndex *cur=tableIndex+currentIndex;
@@ -333,17 +334,17 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
     return -1;
 }
 
--(int)offsetForCString:(char*)cstr length:(int)len
+-(int)offsetForCString:(const char*)cstr length:(int)len
 {
     if ( len <= maxLen && tableLength>0) {
-        int offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len );
+        int offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len , chainStarts, tableIndex);
         return offset;
     } else {
         return -1;
     }
 }
 
--(int)offsetForCString:(char*)cstr
+-(int)offsetForCString:(const char*)cstr
 {
 	return [self offsetForCString:cstr length:strlen(cstr)];
 }
@@ -364,7 +365,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const char  *table, 
 {
     int offset=-1;
     if ( len <= maxLen && tableLength ) {
-        offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len );
+        offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len, chainStarts, tableIndex );
     }
 	if ( offset >= 0 ) {
 		return tableValues[offset];
@@ -427,7 +428,7 @@ int _small_string_table_releaseIndex=0;
 	if ( tableValues ) {
 		int i;
 		for (i=0;i<tableLength;i++) {
-            fprintf(stderr,"release value %d of %d\n",i,tableLength);
+//            fprintf(stderr,"release value %d of %d\n",i,tableLength);
             _small_string_table_releaseIndex=i;
 //            NSLog(@"release ptr %p",tableValues[i]);
 //            NSLog(@"release value %@",tableValues[i]);

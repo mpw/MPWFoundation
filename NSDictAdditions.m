@@ -101,6 +101,28 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	[self setObject:anObject forKey:[NSNumber numberWithInt:intKey]];
 }
 
+-(id)at:anObject
+{
+    return [self objectForKey:anObject];
+}
 
+@end
+
+@implementation NSArray(at)
+
+-(id)at:anObject
+{
+    return [self objectAtIndex:[anObject intValue]];
+}
+
+@end
+
+
+@implementation NSObject(at)
+
+-(id)at:anObject
+{
+    return [self valueForKey:anObject];
+}
 
 @end

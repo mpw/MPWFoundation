@@ -25,6 +25,7 @@
 
 #define	INVOKE( inv )	((inv)->invokeFun( (inv), @selector(resultOfInvoking))) 
 
+-target;
 -(void)invoke;
 -resultOfInvoking;
 -(void)setArgument:(void*)buffer atIndex:(NSInteger)argIndex;

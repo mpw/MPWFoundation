@@ -58,7 +58,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -description1
 {
-	return [NSString stringWithFormat:@"<%@:%p: -[%@:%x %@]>",[self class],self,[[self target] class],[self target],NSStringFromSelector([self selector])];
+	return [NSString stringWithFormat:@"<%@:%p: -[%@:%p %@]>",[self class],self,[[self target] class],[self target],NSStringFromSelector([self selector])];
 }
 
 
