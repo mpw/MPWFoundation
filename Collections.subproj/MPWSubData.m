@@ -198,7 +198,7 @@ boolAccessor( mustUnique, setMustUnique )
     if ( self == other ) {
         return YES;
     }
-	if ( *(Class*)other == isa ) {
+	if ( other && *(Class*)other == isa ) {
 		int otherLen=[other length];
 		const void *otherBytes=[other bytes];
 		return otherLen==myLength &&
