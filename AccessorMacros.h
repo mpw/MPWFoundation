@@ -81,17 +81,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }\
 
 #define objectAccessor( objectType, var, setVar ) \
-readAccessor( objectType*, var )\
-setAccessor( objectType*, var,setVar )
+    readAccessor( objectType*, var )\
+    setAccessor( objectType*, var,setVar )
 
 #define idAccessor( var, setVar )\
-readAccessor( id, var )\
-setAccessor( id, var,setVar )
+    readAccessor( id, var )\
+    setAccessor( id, var,setVar )
 
 
 #define relayAccessor( var, setVar, delegate )\
-relayReadAccessor( var , delegate )\
-setAccessor( id, var, setVar )
+    relayReadAccessor( var , delegate )\
+    setAccessor( id, var, setVar )
 
 #define	idAccessor_h( var,setVar ) -(void)setVar:newVar; \
 -var;

@@ -53,11 +53,13 @@ extern id objc_msgSend(id, SEL, ...);
         [self setName:[pathComponents objectAtIndex:i] forComponent:components+i];
     }
 }
+idAccessor(name, setName)
 
 -initWithPath:(NSString*)path
 {
     self=[super init];
     if ( self ) {
+        [self setName:path];
         [self setComponentsForPath:[path componentsSeparatedByString:@"/"]];
     }
     return self;

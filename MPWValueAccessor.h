@@ -21,8 +21,10 @@ typedef struct {
     id target;
     AccessPathComponent components[6];
     int count;
+    id name;
 }
 
++valueForName:(NSString*)name;
 -initWithName:(NSString*)name;
 -valueForTarget:aTarget;
 -(void)setValue:newValue forTarget:aTarget;
