@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import "MPWTrampoline.h"
 #import "DebugMacros.h"
-
+#import "NSInvocationAdditions.h"
 
 @implementation NSInvocation(copying)
 

@@ -40,22 +40,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWDirectForwardingTrampoline.h"
 #import "MPWObjectCache.h"
 #import "MPWRuntimeAdditions.h"
-#import <objc/objc.h>
+#import <objc/message.h>
 
 #if !LINUX
 
 @implementation MPWDirectForwardingTrampoline
 
-+(void)initialize
-{
-	static int initialized=NO;
-	if (!initialized) {
-		initialized=YES;
-//		NSLog(@"alias instance method!");
-		SEL sel=@selector(addMethod:forSelector:types:);
-		[NSObject aliasInstanceMethod:sel to:sel in:self];
-	}
-}
 
 CACHING_ALLOC( quickTrampoline, 5, YES )
 
@@ -69,14 +59,6 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 }
 #endif
 
--(void)forwardInvocation:(NSInvocation*)invocationToForward
-{
-//  [xxxTarget performSelector:xxxSelector withObject:invocationToForward];
-//	class_addMethod(isa ,[invocationToForward selector],forwardAMessage,"@@#@");
-	[object_getClass(self) addMethod:(IMP)[self instanceMethodForSelector:@selector(forwardAMessage:) ] forSelector:xxxSelector types: "@@#@"];
-	[self setXxxTarget:nil];
-}
-
 
 
 + (BOOL)resolveInstanceMethod1:(SEL)sel
@@ -84,7 +66,7 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 	Class cls = self;
 	NSLog(@"installing forwarder");
 	[cls addMethod:(IMP)[self instanceMethodForSelector:@selector(forwardAMessage:) ] forSelector:sel types: "@@#@"];
-	[NSObject aliasInstanceMethod:sel to:@selector(forwardAMessage:)  in:self];
+//	[NSObject aliasInstanceMethod:sel to:@selector(forwardAMessage:)  in:self];
 
 //	class_addMethod(cls ,sel,(IMP)[self instanceMethodForSelector:@selector(forwardAMessage:)],"@@#@");
     return NO;

@@ -55,7 +55,6 @@ idAccessor_h( xxxAdditionalArg, setXxxAdditionalArg )
 -sendTarget;
 -(void)xxxSetTargetKey:aKey;
 +(IMP)instanceMethodForSelector:(SEL)sel;
-
 @end
 
 @interface NSObject(safely)

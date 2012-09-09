@@ -82,6 +82,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 /*"
    Method aliasing allows use of appropriate selector names without a run-time penalty.
 "*/
+
+#if 0
+// FIXME:  redo with objc2 functions, allows direct access to method types
+
+
 +(void)aliasInstanceMethod:(SEL)old to:(SEL)new in:(Class)newClass
 {
 	[newClass addMethod:[self instanceMethodForSelector:old] forSelector:new types:(char*)[[self instanceMethodSignatureForSelector:old] types]];
@@ -96,6 +101,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     [self aliasInstanceMethod:old to:new in:self];
 }
+#endif
 
 @end
 

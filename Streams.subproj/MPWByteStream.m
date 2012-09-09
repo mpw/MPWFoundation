@@ -97,7 +97,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 		if ( indentLen > spacelen ) {
 			indentLen=spacelen;
 		}
-		[super appendBytes:spaces length:indentLen];
+		[self appendBytes:spaces length:indentLen];
 	}
 }
 
@@ -653,6 +653,7 @@ intAccessor( fd, setFd )
 
 @end
 
+#import "NSStringAdditions.h"
 
 @implementation MPWByteStream(testing)
 

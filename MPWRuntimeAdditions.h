@@ -44,9 +44,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface NSObject(methodAliasing)
 +(void)addMethod:(IMP)method forSelector:(SEL)selector types:(const char*)types;
-+(void)aliasInstanceMethod:(SEL)old to:(SEL)newSel in:(Class)newClass;
-+(void)aliasMethod:(SEL)old to:(SEL)newSel in:(Class)newClass;
-+(void)aliasInstanceMethod:(SEL)old to:(SEL)newSel;
+//+(void)aliasInstanceMethod:(SEL)old to:(SEL)newSel in:(Class)newClass;
+//+(void)aliasMethod:(SEL)old to:(SEL)newSel in:(Class)newClass;
+//+(void)aliasInstanceMethod:(SEL)old to:(SEL)newSel;
 @end
 
 @interface NSObject(defaultedVoidMethod)

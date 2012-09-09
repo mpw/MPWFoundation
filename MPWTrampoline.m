@@ -39,7 +39,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //#import "NSInvocationAdditions_lookup.h"
 #import "MPWRuntimeAdditions.h"
 #import "DebugMacros.h"
-#import "MPWFakedReturnMethodSignature.h"
 #import "MPWEnumFilter.h"
 
 @interface MPWTrampoline(isEqual)
@@ -271,6 +270,10 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
     return (IMP)mfs( self, _cmd, sel );
 }
 
+@end
+
+@implementation MPWTrampoline(isEqual)
+
 -(id)isEqual:otherObject
 {
 	NSMethodSignature* sig=[NSObject methodSignatureForSelector:_cmd];
@@ -283,7 +286,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 	[invocation getReturnValue:&retval];
 	return retval;
 }
-
 
 
 @end

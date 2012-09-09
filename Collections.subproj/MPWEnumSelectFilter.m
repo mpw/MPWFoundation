@@ -32,7 +32,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #import "MPWEnumSelectFilter.h"
-#import "MPWFakedReturnMethodSignature.h"
 #import "MPWObjectCache.h"
 
 @implementation MPWEnumSelectFilter
@@ -46,57 +45,6 @@ CACHING_ALLOC( quickFilter, 30, NO )
 }
 
 
-- (NSMethodSignature *)methodSignatureForHOMSelector1:(SEL)aSelector
-{
-    //--- Return an arbitray message if there is no arguments[1]
-    //--- (there were no objects to filter).  Otherwise, we would
-    //--- get a runtime error (message not understood) instead of
-    //--- an empty return list
-    id sig;
-#if VERBOSEDEBUG
-    if ( localDebug ) {
-        NSLog(@"getting sig for %@",NSStringFromSelector(aSelector));
-    }
-#endif
-//	NSLog(@"arguments[1]=%x",arguments[1]);
-//	NSLog(@"arguments[1]=%@",arguments[1]);
-    if ( arguments[1] ) {
-        sig = [arguments[1] methodSignatureForSelector:aSelector];
-//		NSLog(@"sig=%x",sig);
-        if ( sig == nil ) {
-            //--- retry, forcing methods in categories to be
-            //--- loaded ( they aren't by methodSignatureForSelector: )
-            [arguments[1] methodForSelector:aSelector];
-            sig = [arguments[1] methodSignatureForSelector:aSelector];
-            if ( sig == nil ) {
-                sig = [arguments[1] methodSignatureForSelector:[self mapSelector:aSelector]];
-            }
-        }
-        if ( sig ) {
-			id fakeSig;
-//			NSLog(@"return faked method signature");
-			fakeSig = [MPWFakedReturnMethodSignature fakeSignatureWithSignature:sig];
-			if (fakeSig ) {
-				sig=fakeSig;
-			} else {
-				[NSException raise:@"illegalstate" format:@"Couldn't create fake method signature for %@",NSStringFromSelector(aSelector)];
-			}
-        } else {
-            NSLog(@"couldn't find sig for selector %@ original object %@",NSStringFromSelector(aSelector),arguments[1]);
-        }
-    } else {
-        sig = [NSObject methodSignatureForSelector:@selector(class)];
-    }
-/*
-#if VERBOSEDEBUG
-    if ( localDebug ) {
-        NSLog(@"sig for %@ = %@/%@ %d",NSStringFromSelector(aSelector),sig,[sig class],[sig methodReturnType]);
-    }
-#endif
-*/
-//	NSLog(@"returning sig=%x",sig);
-    return sig;
-}
 
 +testSelectors
 {

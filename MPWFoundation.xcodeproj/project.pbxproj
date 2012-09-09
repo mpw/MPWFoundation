@@ -56,7 +56,6 @@
 		1F008F7C10BDAC18001F05D5 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1F008F7D10BDAC18001F05D5 /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; };
 		1F008F7E10BDAC18001F05D5 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
-		1F008F7F10BDAC18001F05D5 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1F008F8010BDAC18001F05D5 /* MPWStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1998006686DDC35ADD82 /* MPWStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1F008F8110BDAC18001F05D5 /* MPWByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1999006686DDC35ADD82 /* MPWByteStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1F008F8210BDAC18001F05D5 /* MPWHierarchicalStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF199A006686DDC35ADD82 /* MPWHierarchicalStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
@@ -121,7 +120,6 @@
 		1F008FC110BDAC18001F05D5 /* MPWEnumFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */; settings = {ATTRIBUTES = (); }; };
 		1F008FC210BDAC18001F05D5 /* MPWSubData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1978006686DDC35ADD82 /* MPWSubData.m */; settings = {ATTRIBUTES = (); }; };
 		1F008FC310BDAC18001F05D5 /* MPWUniqueString.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197E006686DDC35ADD82 /* MPWUniqueString.m */; settings = {ATTRIBUTES = (); }; };
-		1F008FC410BDAC18001F05D5 /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; settings = {ATTRIBUTES = (); }; };
 		1F008FC510BDAC18001F05D5 /* MPWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1992006686DDC35ADD82 /* MPWStream.m */; settings = {ATTRIBUTES = (); }; };
 		1F008FC610BDAC18001F05D5 /* MPWByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1993006686DDC35ADD82 /* MPWByteStream.m */; settings = {ATTRIBUTES = (); }; };
 		1F008FC710BDAC18001F05D5 /* MPWHierarchicalStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */; settings = {ATTRIBUTES = (); }; };
@@ -200,7 +198,6 @@
 		1F4FC68310F7F6D000376799 /* MPWRealArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1975006686DDC35ADD82 /* MPWRealArray.m */; };
 		1F4FC68410F7F6D000376799 /* MPWEnumFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */; };
 		1F4FC68510F7F6D000376799 /* MPWSubData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1978006686DDC35ADD82 /* MPWSubData.m */; };
-		1F4FC68710F7F6D000376799 /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; };
 		1F4FC68810F7F6D000376799 /* MPWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1992006686DDC35ADD82 /* MPWStream.m */; };
 		1F4FC68910F7F6D000376799 /* MPWByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1993006686DDC35ADD82 /* MPWByteStream.m */; };
 		1F4FC68A10F7F6D000376799 /* MPWHierarchicalStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */; };
@@ -256,7 +253,6 @@
 		1F4FCDB7110450EE00376799 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; };
 		1F4FCDB8110450EE00376799 /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; };
 		1F4FCDB9110450EE00376799 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; };
-		1F4FCDBA110450EE00376799 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; };
 		1F4FCDBB110450EE00376799 /* MPWStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1998006686DDC35ADD82 /* MPWStream.h */; };
 		1F4FCDBC110450EE00376799 /* MPWByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1999006686DDC35ADD82 /* MPWByteStream.h */; };
 		1F4FCDBD110450EE00376799 /* MPWHierarchicalStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF199A006686DDC35ADD82 /* MPWHierarchicalStream.h */; };
@@ -398,7 +394,6 @@
 		1FCDE1421253A9640002D17A /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FCDE1431253A9640002D17A /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; };
 		1FCDE1441253A9640002D17A /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
-		1FCDE1451253A9640002D17A /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1FCDE1461253A9640002D17A /* MPWStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1998006686DDC35ADD82 /* MPWStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FCDE1471253A9640002D17A /* MPWByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1999006686DDC35ADD82 /* MPWByteStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FCDE1481253A9640002D17A /* MPWHierarchicalStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF199A006686DDC35ADD82 /* MPWHierarchicalStream.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
@@ -462,7 +457,6 @@
 		1FCDE1861253A9640002D17A /* MPWEnumFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */; settings = {ATTRIBUTES = (); }; };
 		1FCDE1871253A9640002D17A /* MPWSubData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1978006686DDC35ADD82 /* MPWSubData.m */; settings = {ATTRIBUTES = (); }; };
 		1FCDE1881253A9640002D17A /* MPWUniqueString.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197E006686DDC35ADD82 /* MPWUniqueString.m */; settings = {ATTRIBUTES = (); }; };
-		1FCDE1891253A9640002D17A /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; settings = {ATTRIBUTES = (); }; };
 		1FCDE18A1253A9640002D17A /* MPWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1992006686DDC35ADD82 /* MPWStream.m */; settings = {ATTRIBUTES = (); }; };
 		1FCDE18B1253A9640002D17A /* MPWByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1993006686DDC35ADD82 /* MPWByteStream.m */; settings = {ATTRIBUTES = (); }; };
 		1FCDE18C1253A9640002D17A /* MPWHierarchicalStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */; settings = {ATTRIBUTES = (); }; };
@@ -592,7 +586,6 @@
 		1FF8FE0D09B49D0100652476 /* MPWEnumFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */; settings = {ATTRIBUTES = (); }; };
 		1FF8FE0E09B49D0100652476 /* MPWSubData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1978006686DDC35ADD82 /* MPWSubData.m */; settings = {ATTRIBUTES = (); }; };
 		1FF8FE0F09B49D0100652476 /* MPWUniqueString.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197E006686DDC35ADD82 /* MPWUniqueString.m */; settings = {ATTRIBUTES = (); }; };
-		1FF8FE1009B49D0100652476 /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; settings = {ATTRIBUTES = (); }; };
 		1FF8FE1109B49D0100652476 /* MPWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1992006686DDC35ADD82 /* MPWStream.m */; settings = {ATTRIBUTES = (); }; };
 		1FF8FE1209B49D0100652476 /* MPWByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1993006686DDC35ADD82 /* MPWByteStream.m */; settings = {ATTRIBUTES = (); }; };
 		1FF8FE1309B49D0100652476 /* MPWHierarchicalStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */; settings = {ATTRIBUTES = (); }; };
@@ -1301,7 +1294,6 @@
 				1F008F7C10BDAC18001F05D5 /* MPWEnumeratorBase.h in Headers */,
 				1F008F7D10BDAC18001F05D5 /* NSEnumeratorFiltering.h in Headers */,
 				1F008F7E10BDAC18001F05D5 /* MPWUniqueString.h in Headers */,
-				1F008F7F10BDAC18001F05D5 /* MPWFakedReturnMethodSignature.h in Headers */,
 				1F008F8010BDAC18001F05D5 /* MPWStream.h in Headers */,
 				1F008F8110BDAC18001F05D5 /* MPWByteStream.h in Headers */,
 				1F008F8210BDAC18001F05D5 /* MPWHierarchicalStream.h in Headers */,
@@ -1392,7 +1384,6 @@
 				1F4FCDB7110450EE00376799 /* MPWEnumeratorBase.h in Headers */,
 				1F4FCDB8110450EE00376799 /* NSEnumeratorFiltering.h in Headers */,
 				1F4FCDB9110450EE00376799 /* MPWUniqueString.h in Headers */,
-				1F4FCDBA110450EE00376799 /* MPWFakedReturnMethodSignature.h in Headers */,
 				1F4FCDBB110450EE00376799 /* MPWStream.h in Headers */,
 				1F4FCDBC110450EE00376799 /* MPWByteStream.h in Headers */,
 				1F4FCDBD110450EE00376799 /* MPWHierarchicalStream.h in Headers */,
@@ -1479,7 +1470,6 @@
 				1FCDE1421253A9640002D17A /* MPWEnumeratorBase.h in Headers */,
 				1FCDE1431253A9640002D17A /* NSEnumeratorFiltering.h in Headers */,
 				1FCDE1441253A9640002D17A /* MPWUniqueString.h in Headers */,
-				1FCDE1451253A9640002D17A /* MPWFakedReturnMethodSignature.h in Headers */,
 				1FCDE1461253A9640002D17A /* MPWStream.h in Headers */,
 				1FCDE1471253A9640002D17A /* MPWByteStream.h in Headers */,
 				1FCDE1481253A9640002D17A /* MPWHierarchicalStream.h in Headers */,
@@ -1868,7 +1858,6 @@
 				1F008FC110BDAC18001F05D5 /* MPWEnumFilter.m in Sources */,
 				1F008FC210BDAC18001F05D5 /* MPWSubData.m in Sources */,
 				1F008FC310BDAC18001F05D5 /* MPWUniqueString.m in Sources */,
-				1F008FC410BDAC18001F05D5 /* MPWFakedReturnMethodSignature.m in Sources */,
 				1F008FC510BDAC18001F05D5 /* MPWStream.m in Sources */,
 				1F008FC610BDAC18001F05D5 /* MPWByteStream.m in Sources */,
 				1F008FC710BDAC18001F05D5 /* MPWHierarchicalStream.m in Sources */,
@@ -1924,7 +1913,6 @@
 				1F4FC68310F7F6D000376799 /* MPWRealArray.m in Sources */,
 				1F4FC68410F7F6D000376799 /* MPWEnumFilter.m in Sources */,
 				1F4FC68510F7F6D000376799 /* MPWSubData.m in Sources */,
-				1F4FC68710F7F6D000376799 /* MPWFakedReturnMethodSignature.m in Sources */,
 				1F4FC68810F7F6D000376799 /* MPWStream.m in Sources */,
 				1F4FC68910F7F6D000376799 /* MPWByteStream.m in Sources */,
 				1F4FC68A10F7F6D000376799 /* MPWHierarchicalStream.m in Sources */,
@@ -1996,7 +1984,6 @@
 				1FCDE1861253A9640002D17A /* MPWEnumFilter.m in Sources */,
 				1FCDE1871253A9640002D17A /* MPWSubData.m in Sources */,
 				1FCDE1881253A9640002D17A /* MPWUniqueString.m in Sources */,
-				1FCDE1891253A9640002D17A /* MPWFakedReturnMethodSignature.m in Sources */,
 				1FCDE18A1253A9640002D17A /* MPWStream.m in Sources */,
 				1FCDE18B1253A9640002D17A /* MPWByteStream.m in Sources */,
 				1FCDE18C1253A9640002D17A /* MPWHierarchicalStream.m in Sources */,
@@ -2065,7 +2052,6 @@
 				1FF8FE0D09B49D0100652476 /* MPWEnumFilter.m in Sources */,
 				1FF8FE0E09B49D0100652476 /* MPWSubData.m in Sources */,
 				1FF8FE0F09B49D0100652476 /* MPWUniqueString.m in Sources */,
-				1FF8FE1009B49D0100652476 /* MPWFakedReturnMethodSignature.m in Sources */,
 				1FF8FE1109B49D0100652476 /* MPWStream.m in Sources */,
 				1FF8FE1209B49D0100652476 /* MPWByteStream.m in Sources */,
 				1FF8FE1309B49D0100652476 /* MPWHierarchicalStream.m in Sources */,

@@ -62,7 +62,7 @@ IMP __stringTableLookupFun=NULL;
 		int i;
 		int lengths[ count +1 ];
         maxLen=0;
-        NSAssert2(count<255, @"%@ - total number of strings %d > 255", [self class], count);
+        NSAssert2(count<255, @"%@ - total number of strings %ld > 255", [self class], (long)count);
 
 		int totalStringLen=0;
 		unsigned char *curptr;
@@ -448,6 +448,8 @@ int _small_string_table_releaseIndex=0;
 
 @end
 
+#import "MPWUniqueString.h"
+
 
 @implementation MPWSmallStringTable(testing)
 
@@ -581,7 +583,7 @@ int _small_string_table_releaseIndex=0;
 	}
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
-	NSLog(@"MPWUniqueString time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
+	NSLog(@"MPWUniqueString time: %ld (%g ns/iter) stringtable time: %ld (%g ns/iter)",(long)[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,(long)[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"MPWUniqueString vs. string table lookup time ratio: %g",ratio);
 #define RATIO 2.5 
 	NSAssert2( ratio > RATIO ,@"ratio of small string table to MPWUniqueString (NSMapTable) %g < %g",

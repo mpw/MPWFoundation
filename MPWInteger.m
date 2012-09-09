@@ -22,7 +22,7 @@
 	return [self integer:anInt];		//	NSNumber compatibility
 }
 
--initWithInteger:(int)newValue
+-initWithInteger:(NSInteger)newValue
 {
     self = [super init];
     intValue=newValue;

@@ -107,7 +107,7 @@ extern id _objc_setNilReceiver(id newNilReceiver);
 	return @"nil";
 }
 
--(void)release
+-(oneway void)release
 {
     ;
 }

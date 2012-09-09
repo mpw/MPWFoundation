@@ -319,7 +319,7 @@ SEL visSel;
 
 @implementation NSEnumerator(streaming)
 
--(void)writeOnStream:(id<Streaming>)aStream
+-(void)writeOnStream:(MPWStream*)aStream
 {
     [aStream writeEnumerator:self];
 }

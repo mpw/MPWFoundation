@@ -40,7 +40,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import "MPWObjectCache.h"
 #import "NSInvocationAdditions_lookup.h"
-//#import "MPWFakedReturnMethodSignature.h"
 #import "NSObjectFiltering.h"
 #import "DebugMacros.h"
 
