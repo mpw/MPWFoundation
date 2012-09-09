@@ -112,12 +112,12 @@ boolAccessor( mustUnique, setMustUnique )
     releaseMPWObject((MPWObject*)self);
 }
 
--(int)intValue
+-(long)longValue
 {
-	int offset=0;
-	int value=0;
+	long offset=0;
+	long value=0;
 	int sign=1;
-	const char *bytes=myBytes;
+	 char *bytes=myBytes;
 	while ( offset < myLength && isspace( bytes[offset] ) ) {
 		offset++;
 	}
@@ -133,6 +133,12 @@ boolAccessor( mustUnique, setMustUnique )
 	return value * sign;
 
 }
+
+-(int)intValue
+{
+    return [self longValue];
+}
+
 
 -initWithData:(NSData*)data bytes:(const char*)bytes length:(unsigned)len
 {
@@ -428,11 +434,19 @@ boolAccessor( mustUnique, setMustUnique )
 	INTEXPECT( [[self _subDataWithString:"4"] intValue] , 4, @"positive subdata");
 }
 
+
++(void)testSubDataLongValue
+{
+	INTEXPECT( [[self _subDataWithString:"-5000000000"] longValue] , -5000000000, @"negative subdata");
+	INTEXPECT( [[self _subDataWithString:"5000000000"] longValue] , 5000000000, @"positive subdata");
+}
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
 			@"testSubDataProtectsAgainstNilOriginalData",
 			@"testSubDataIntValue",
+			@"testSubDataLongValue",
 		nil];
 }
 

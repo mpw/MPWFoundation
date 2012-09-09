@@ -55,7 +55,7 @@ NSAssert1( (got)!=NULL, ([NSString stringWithFormat:@"%@ was nil but expected no
 #define EXPECTNIL( got , msg ) \
 NSAssert1( (got) == nil , ([NSString stringWithFormat:@"%@ was %p instead of nil",msg,got]),@"");
 #define INTEXPECT( got, expect, msg  ) \
-NSAssert1(((int)expect)==((int)got) , ([NSString stringWithFormat:@"got %d instead of expected %d for %@",(int)got,(int)expect,msg]),@"");
+NSAssert1(((long)expect)==((long)got) , ([NSString stringWithFormat:@"got %ld instead of expected %ld for %@",(long)got,(long)expect,msg]),@"");
 #define RECTEXPECT( rect, ex,ey,ew,eh , msg) \
 { \
 int _ax=ROUNDTOINTFORTEST(rect.origin.x);\

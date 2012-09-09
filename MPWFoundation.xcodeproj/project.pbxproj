@@ -176,8 +176,8 @@
 		1F198E1215DB909B00640A43 /* MPWMessageFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E0C15DB909B00640A43 /* MPWMessageFilterStream.m */; };
 		1F198E1315DB909B00640A43 /* MPWMessageFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E0C15DB909B00640A43 /* MPWMessageFilterStream.m */; };
 		1F198E1415DB909B00640A43 /* MPWMessageFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E0C15DB909B00640A43 /* MPWMessageFilterStream.m */; };
-		1F198E1715DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; };
-		1F198E1815DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; };
+		1F198E1715DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F198E1815DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F198E1915DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; };
 		1F198E1A15DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; };
 		1F198E1B15DB922C00640A43 /* MPWBlockFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E1615DB922B00640A43 /* MPWBlockFilterStream.m */; };
