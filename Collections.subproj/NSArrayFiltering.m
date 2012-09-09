@@ -121,11 +121,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -collectFastForSelector:(SEL)selector varargs:(va_list)varargs
 {
-	NSString *msg = @"[NSArray doInvocation, argument count %d exceeds maximum (4)";
+//	NSString *msg = @"[NSArray doInvocation, argument count %d exceeds maximum (4)";
 #if	FAST_MSG_LOOKUPS
     IMP actionMethod=objc_msgSend;
 #endif
-    Class class=nil;
+//    Class class=nil;
     int j,count=[self count];
 	id args[4];
 	int i;
@@ -134,7 +134,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	}
     id objs[ OBJECTS_PER_ITERATION ];
 	NSMutableArray *result=[NSMutableArray arrayWithCapacity:[self count]+20];
-	IMP addObject = [result methodForSelector:@selector(addObject:)];
+//	IMP addObject = [result methodForSelector:@selector(addObject:)];
 	//    NSAssert1( maxArgs < 4 , msg ,maxArgs);
     for (j=0;j<count;j+=OBJECTS_PER_ITERATION) {
         int max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);

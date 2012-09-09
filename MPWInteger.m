@@ -10,6 +10,8 @@
 #import <MPWFoundation/MPWFoundation.h>
 
 @implementation MPWInteger
+
+
 +integer:(int)newValue
 {
     return [[[self alloc] initWithInteger:newValue] autorelease];
@@ -80,7 +82,7 @@ defineArithOp( div, divInt, / )
 }
 
 
--(unsigned)hash
+-(NSUInteger)hash
 {
     return intValue;
 }

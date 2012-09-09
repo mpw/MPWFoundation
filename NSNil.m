@@ -128,6 +128,12 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 @end
 
+@interface NSNil(bozo)
+
+-bozo;
+
+@end
+
 @implementation NSObject(Testnil)
 
 -(BOOL)isNotNil
@@ -209,17 +215,20 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
     EXPECTNIL(result, @"result should have been nil");
 }
 
+#if !TARGET_OS_IPHONE            
+
 +(void)testnilReceiver
 {
     [self setNilHandler];
     @try {
-        IDEXPECT([nil ifNil:self],@"value",@"actual nil receiver ifNil -> gets a value");
-        EXPECTNIL([nil ifNotNil:self], @"nil receiver ifNotNil");
+        IDEXPECT([(id)nil ifNil:self],@"value",@"actual nil receiver ifNil -> gets a value");
+        EXPECTNIL([(id)nil ifNotNil:self], @"nil receiver ifNotNil");
     }
     @finally {
         [self unsetNilHandler];
     }
 }
+#endif
 
 +testSelectors
 {

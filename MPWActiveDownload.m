@@ -60,7 +60,7 @@ intAccessor( downloadSize, setDownloadeSize )
 	if(log) NSLog(@"connection: %@ didReceiveResponse: %@", connection, response);
 	if ( [response respondsToSelector:@selector(statusCode)] ) {
 		if ( log ) {
-					NSLog(@"statuscode: %d for %@",[(NSHTTPURLResponse*) response statusCode],[[self request] urlstring]);
+					NSLog(@"statuscode: %ld for %@",(long)[(NSHTTPURLResponse*) response statusCode],[[self request] urlstring]);
 		}
 		if ( [(NSHTTPURLResponse*)response statusCode] == 404 ) {
 			[connection cancel];
@@ -74,7 +74,7 @@ intAccessor( downloadSize, setDownloadeSize )
 }
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)d {
-	if(log) NSLog(@"connection: %@ didReceiveData: %u", connection, [d length]);
+	if(log) NSLog(@"connection: %@ didReceiveData: %lu", connection, (unsigned long)[d length]);
 	if ( [request target] && [request progressSelector] ) {
 		[[request target] performSelector:[request progressSelector]];
 	}

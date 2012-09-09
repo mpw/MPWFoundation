@@ -7,6 +7,7 @@
 //
 
 #import "MPWMessageFilterStream.h"
+#import <objc/objc.h>
 
 @implementation MPWMessageFilterStream
 

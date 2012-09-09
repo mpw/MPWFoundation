@@ -40,5 +40,6 @@
 -(void)downloadOnlyRequests:(NSArray*)requestArray;
 -(void)setCookies:(NSDictionary*)newCookies;
 -(void)setBaseURL:(NSURL*)newBaseURL;
+-(void)finishedLoading:request withData:data;
 
 @end

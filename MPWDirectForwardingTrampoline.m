@@ -40,6 +40,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWDirectForwardingTrampoline.h"
 #import "MPWObjectCache.h"
 #import "MPWRuntimeAdditions.h"
+#import <objc/objc.h>
 
 #if !LINUX
 
@@ -58,6 +59,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 CACHING_ALLOC( quickTrampoline, 5, YES )
 
+#if 0
 static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ... )
 {
 //	NSLog(@"forwarding directly via va_list");
@@ -65,7 +67,7 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 	va_start( va, _cmd );
 	return objc_msgSend( target->xxxTarget, target->xxxSelector ,_cmd ,va );
 }
-
+#endif
 
 -(void)forwardInvocation:(NSInvocation*)invocationToForward
 {

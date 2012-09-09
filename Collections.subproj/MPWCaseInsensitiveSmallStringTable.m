@@ -22,7 +22,7 @@
 }
 
 
--objectForCString:(char*)cstr length:(int)len
+-objectForCString:(const char*)cstr length:(int)len
 {
 	int i;
 	char lowercasestring[ len+1 ];

@@ -291,7 +291,8 @@ intAccessor( _maxConcurrent, setMaxConcurrent )
 {
 	NSString *cacheDir=@"/tmp/CachingDownloaderTest";
 	[[NSFileManager defaultManager] removeItemAtPath:cacheDir error:nil];
-	[[NSFileManager defaultManager] createDirectoryAtPath:cacheDir attributes:nil];
+	[[NSFileManager defaultManager] createDirectoryAtPath:cacheDir
+                              withIntermediateDirectories:YES attributes:nil error:nil   ];
 	MPWCachingDownloader *dl=[[[self alloc] initWithBaseDirectory:cacheDir] autorelease];
 	NSURL *url=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:@""];
 	NSString *urlstring = [url stringValue];

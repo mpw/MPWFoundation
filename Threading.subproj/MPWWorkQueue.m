@@ -177,7 +177,7 @@ static id sentinel=nil;
 	if ( aJob == sentinel ) {
 		[jobs put:sentinel];	//	other workers...
 	}
-	NSLog(@"thread %x completionCount %d",[NSThread currentThread],completionCount);
+	NSLog(@"thread %p completionCount %d",[NSThread currentThread],completionCount);
 }
 
 #endif

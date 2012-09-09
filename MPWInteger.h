@@ -15,7 +15,7 @@
 }
 
 +integer:(int)newInt;
--initWithInteger:(int)newInt;
+-initWithInteger:(NSInteger)newInt;
 +numberWithInt:(int)anInt;
 
 

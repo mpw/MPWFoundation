@@ -24,14 +24,14 @@ extern id objc_msgSend(id, SEL, ...);
     return [[[self alloc] initWithName:name] autorelease];
 }
 
--(void)setName:(NSString*)name forComponent:(AccessPathComponent*)component
+-(void)setName:(NSString*)newName forComponent:(AccessPathComponent*)component
 {
-    component->getSelector= NSSelectorFromString(name);
-    component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[name capitalizedString]] stringByAppendingString:@":"]);
+    component->getSelector= NSSelectorFromString(newName);
+    component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"]);
     component->getIMP=objc_msgSend;
     component->putIMP=objc_msgSend;
     component->targetOffset=-1;
-    component->additionalArg=[name retain];
+    component->additionalArg=[newName retain];
 }
 
 -(void)bindComponent:(AccessPathComponent*)component toTarget:aTarget
@@ -65,9 +65,9 @@ idAccessor(name, setName)
     return self;
 }
 
--initWithName:(NSString*)name
+-initWithName:(NSString*)newName
 {
-    return [self initWithPath:name];
+    return [self initWithPath:newName];
 }
 
 

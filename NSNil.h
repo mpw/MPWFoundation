@@ -40,7 +40,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +nsNil;
 extern id nsnil;
-+setNilHandler;
+
+#if !TARGET_OS_IPHONE
++(void)setNilHandler;
++(void)unsetNilHandler;
+#endif
+
 @end
 
 @interface NSObject(nilTesting)

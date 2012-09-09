@@ -294,8 +294,9 @@ static inline id getObjectNoBlock( FIFO* self )
 {
 	id anObject;
 	[condition_lock lock];
-	while ( anObject = getObjectNoBlock( self ) )
+	while ( nil != (anObject = getObjectNoBlock( self )) ) {
 		[anObject release];
+    }
 	[condition_lock unlock];
 	return self;
 }

@@ -46,10 +46,11 @@ typedef struct {
 -(NSUInteger)count;
 -objectForKey:(NSString*)key;
 -objectAtIndex:(NSUInteger)anIndex;
--objectForCString:(char*)cstr length:(int)len;
--objectForCString:(char*)cstr;
--(int)offsetForCString:(char*)cstr length:(int)len;
--(int)offsetForCString:(char*)cstr;
+-objectForCString:(const char*)cstr length:(int)len;
+-objectForCString:(const char*)cstr;
+-(int)offsetForCString:(const char*)cstr length:(int)len;
+-(int)offsetForCString:(const char*)cstr;
+-keyAtIndex:(NSUInteger)anIndex;
 
 idAccessor_h( defaultValue, setDefaultValue )
 

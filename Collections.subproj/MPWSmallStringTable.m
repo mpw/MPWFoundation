@@ -270,7 +270,7 @@ IMP __stringTableLookupFun=NULL;
     return nil;
 }
 
-static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char  *table, int *tableOffsets, char *cstr, NSUInteger len, int *chainStarts, StringTableIndex *tableIndex)
+static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char  *table, int *tableOffsets, const char *cstr, NSUInteger len, int *chainStarts, StringTableIndex *tableIndex)
 {
 #if 1
     if (  tableOffsets[len] >= 0 )  {
@@ -361,7 +361,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 }
 
 
--objectForCString:(char*)cstr length:(int)len
+-objectForCString:(const char*)cstr length:(int)len
 {
     int offset=-1;
     if ( len <= maxLen && tableLength ) {
@@ -373,7 +373,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 		return defaultValue;
 	}
 }
--objectForCString:(char*)cstr
+-objectForCString:(const char*)cstr
 {
 	return [self objectForCString:cstr length:strlen(cstr)];
 }
