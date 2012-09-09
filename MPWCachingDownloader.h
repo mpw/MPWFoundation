@@ -38,8 +38,8 @@
 -(void)setObserver:newObserver;
 -(void)downloadRequests:(NSArray*)requests;
 -(void)downloadOnlyRequests:(NSArray*)requestArray;
--(void)setCookies:(NSDictionary*)newCookies;
--(void)setBaseURL:(NSURL*)newBaseURL;
+//-(void)setCookies:(NSDictionary*)newCookies;
+//-(void)setBaseURL:(NSURL*)newBaseURL;
 -(void)finishedLoading:request withData:data;
 
 @end

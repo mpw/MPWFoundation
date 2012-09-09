@@ -42,7 +42,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(const char*)_types;
 -(void)_setTypes:(const char*)newTypes;
 #endif
--(const char*)fullMethodTypes;
 
 @end
 

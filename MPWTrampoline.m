@@ -135,7 +135,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 }
 
 
-+(BOOL)resolveInstanceMethod:selector
++(BOOL)resolveInstanceMethod:(SEL)selector
 {
 
     if ( !strchr(sel_getName(selector), ':')) {

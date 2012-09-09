@@ -51,6 +51,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSCoder.h>
 #import <Accelerate/Accelerate.h>
 
+#import "MPWByteStream.h"
+
 //---	generic includes
 
 #import <stdlib.h>

@@ -25,6 +25,7 @@
 
 #define	INVOKE( inv )	((inv)->invokeFun( (inv), @selector(resultOfInvoking))) 
 
++quickInvocation;
 -target;
 -(void)invoke;
 -resultOfInvoking;
@@ -34,6 +35,8 @@
 -(void)setSelector:(SEL)newSelector;
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count;
 -(void)setUseCaching:(BOOL)doCaching;
+-returnValueAfterInvokingWithTarget:aTarget;
+
 @end
 
 @interface NSInvocation(convenience)

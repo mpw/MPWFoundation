@@ -40,7 +40,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWObject.h"
 
-@interface MPWObjectReference : MPWObject {
+@interface MPWObjectReference : MPWObject <NSCopying>{
 	id  targetObject;
 }
 

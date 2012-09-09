@@ -33,6 +33,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWPropertyListStream.h"
 
+
+@interface NSString(_accessToInternalQuotedRep)
+-quotedStringRepresentation;
+@end
+
+
 @implementation MPWPropertyListStream
 
 
@@ -103,11 +109,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 @end
-
-@interface NSString(_accessToInternalQuotedRep)
--quotedStringRepresentation;
-@end
-
 @implementation NSString(PropertyListStreaming)
 
 -(void)writeOnPropertyListStream:(MPWByteStream*)aStream

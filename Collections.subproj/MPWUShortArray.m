@@ -116,7 +116,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	id str=[NSMutableString string];
 	int i;
-	[str appendFormat:@"<%@ %x: count: %d elements: %d",[self class],self,count];
+	[str appendFormat:@"<%@ %p: count: %d elements:",[self class],self,count];
 	for (i=0;i<count;i++) {
 		[str appendFormat:@" %d",[self ushortAtIndex:i]];
 	}

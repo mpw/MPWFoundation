@@ -143,7 +143,7 @@ typedef struct {
 	return data;
 }
 
--(unichar)characterAtIndex:(unsigned)index
+-(unichar)characterAtIndex:(NSUInteger)index
 {
     return data[index];
 }
@@ -189,7 +189,7 @@ typedef struct {
 	return self;
 }
 
--(void)release
+-(oneway void)release
 {
 }
 

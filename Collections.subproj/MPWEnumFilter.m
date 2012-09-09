@@ -427,7 +427,7 @@ static id returnNil() {  return nil; }
 
 -description
 {
-    return [NSString stringWithFormat:@"<MPWEnumFilter %x source=%x (%@)",self,source,source==self?@"self":source];
+    return [NSString stringWithFormat:@"<MPWEnumFilter %p source=%p (%@)",self,source,source==self?@"self":source];
 }
 
 -descriptionWithLocale:aLocal

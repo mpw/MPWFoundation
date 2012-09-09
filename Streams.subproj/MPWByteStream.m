@@ -558,7 +558,7 @@ idAccessor( finalFileName, setFinalFileName )
 
 -(void)appendBytes:(const void*)bytes length:(unsigned int)len
 {
-    NSAssert2( outfile != NULL,@"outfile is NULL, %@=%x",[self class],self );
+    NSAssert2( outfile != NULL,@"outfile is NULL, %@=%p",[self class],self );
     if ( NO && len < 5 ) {
         while (len--) {
             putc( *(unsigned char*)bytes++, outfile );

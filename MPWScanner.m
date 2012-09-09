@@ -440,8 +440,8 @@ static inline void copybuf( char *target,const char *source, int len ) {
     }
     copybuf( prevbuf, start+contextStart,offs-contextStart );
     copybuf( followbuf, pos, contextLen );
-    return [NSString stringWithFormat:@"%@ with pos=%d probe=%d len=%d, context='%s''%s'",
-        [self class],offs,probe-start,len,prevbuf,followbuf];
+    return [NSString stringWithFormat:@"%@ with pos=%d probe=%ld len=%d, context='%s''%s'",
+        [self class],offs,(long)(probe-start),len,prevbuf,followbuf];
 }
 
 @end

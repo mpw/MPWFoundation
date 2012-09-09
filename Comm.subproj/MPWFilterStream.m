@@ -72,7 +72,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     }
 }
 
--(void)appendBytes:(const void*)data length:(unsigned int)count
+-(void)appendBytes:(const void*)data length:(NSUInteger)count
 {
     [self forwardBytes:data length:count];
 }

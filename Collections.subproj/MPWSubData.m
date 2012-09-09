@@ -117,7 +117,7 @@ boolAccessor( mustUnique, setMustUnique )
 	long offset=0;
 	long value=0;
 	int sign=1;
-	 char *bytes=myBytes;
+	const char *bytes=myBytes;
 	while ( offset < myLength && isspace( bytes[offset] ) ) {
 		offset++;
 	}
@@ -193,8 +193,8 @@ boolAccessor( mustUnique, setMustUnique )
     if ( index < myLength ) {
         return ((unsigned char*)myBytes)[index];
     } else {
-        [NSException raise:@"OutOfRangeSubscript" format:@"subscript %d greater than length %d of %@/%x",
-            index,myLength,[self class],self];
+        [NSException raise:@"OutOfRangeSubscript" format:@"subscript %ld greater than length %d of %@/%p",
+            (long)index,myLength,[self class],self];
         return 0;
     }
 }
@@ -246,7 +246,7 @@ boolAccessor( mustUnique, setMustUnique )
             buf[i]=((unsigned char*)myBytes)[i+range.location];
         }
     } else {
-        [NSException raise:@"OutOfRange" format:@"range (%d,%d) out of range (%d)",range.location,range.length,myLength];
+        [NSException raise:@"OutOfRange" format:@"range (%ld,%ld) out of range (%ld)",(long)range.location,(long)range.length,(long)myLength];
     }
 }
 
