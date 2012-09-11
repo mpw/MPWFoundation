@@ -7,8 +7,9 @@
 //
 
 #import "MPWObject.h"
-#import "MPWBlockInvocable.h"
 #import <Foundation/Foundation.h>
+
+@class MPWBlockInvocable;
 
 @interface MPWFastInvocation : MPWObject {
 	SEL selector;
