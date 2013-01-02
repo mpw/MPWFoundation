@@ -8,18 +8,31 @@
 
 #import "MPWBlockInvocable.h"
 
+enum {
+    BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
+    BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
+    BLOCK_IS_GLOBAL =         (1 << 28),
+    BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
+    BLOCK_HAS_SIGNATURE =     (1 << 30),
+};
 
+
+
+const char *blocksig( void *block_arg )
+{
+    struct Block_struct *block=(struct Block_struct*)block_arg;
+    struct Block_descriptor *descriptor=block->descriptor;
+    if ( descriptor) {
+        if ( block->flags & BLOCK_HAS_COPY_DISPOSE) {
+            return (descriptor->signature);
+        } else {
+            return (const char*)descriptor->copy_helper;
+        }
+    }
+    return NULL;
+}
 
 @implementation MPWBlockInvocable
-
-#if 0
-
-static void *copy(void *dst, void *src) {  return 
-
-/** Optional block dispose helper. May be NULL. */
-static void *dispose(void *) 
-#endif
-
 
 static struct Block_descriptor sdescriptor= {
 		0, 64, NULL, NULL
@@ -30,6 +43,16 @@ static struct Block_descriptor sdescriptor= {
 	return self;
 }
 
+-(const char*)ctypes
+{
+    return blocksig(self);
+}
+
+-(NSString*)types
+{
+    const char *ctypes=[self ctypes];
+    return ctypes ? [NSString stringWithCString:ctypes encoding:NSASCIIStringEncoding] : nil;
+}
 
 static id blockFun( id self, ... ) {
 	va_list args;
@@ -83,11 +106,20 @@ typedef int (^intBlock)(int arg );
 	id blockObj = [[[self alloc] init] autorelease];
 	INTEXPECT( ((intBlock)blockObj)( 3 ), 9, @"block(3) ");
 }
+    
++(void)testNSBlockTypes
+{
+    intBlock myBlock=^(int arg){ return 3; };
+    const char *csig = blocksig( myBlock);
+    NSString *sig=[NSString stringWithCString:csig encoding:NSASCIIStringEncoding];
+    IDEXPECT(sig, @"i12@?0i8", @"signature of int->int block");
+}
 
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
-					@"testBlockInvoke",
+            @"testBlockInvoke",
+            @"testNSBlockTypes",
 			nil];
 }
 

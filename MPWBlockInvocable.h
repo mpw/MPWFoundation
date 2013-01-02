@@ -10,16 +10,21 @@
 
 
 struct Block_descriptor {
-    unsigned long int reserved;
-    
-    /** Total size of the described block, including imported variables. */
-    unsigned long int size;
-    
-    /** Optional block copy helper. May be NULL. */
-    void (*copy)(void *dst, void *src);
-    
-    /** Optional block dispose helper. May be NULL. */
-    void (*dispose)(void *);
+	unsigned long int reserved;	// NULL
+    unsigned long int size;         // sizeof(struct Block_literal_1)
+	// optional helper functions
+    void (*copy_helper)(void *dst, void *src);     // IFF (1<<25)
+    void (*dispose_helper)(void *src);             // IFF (1<<25)
+    // required ABI.2010.3.16
+    const char *signature;                         // IFF (1<<30)
+};
+
+struct Block_struct
+{
+    void *isa;
+    int  flags,reserved;
+    IMP  invoke;
+	struct Block_descriptor *descriptor;
 };
 
 
@@ -28,5 +33,7 @@ struct Block_descriptor {
     IMP invoke;
 	struct Block_descriptor *descriptor;
 }
+
+
 
 @end

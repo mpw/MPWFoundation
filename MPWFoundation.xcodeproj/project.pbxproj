@@ -927,6 +927,8 @@
 		07DF1946006686DDC35ADD82 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
+				07DF1947006686DDC35ADD82 /* AccessorMacros.h */,
+				07DF1948006686DDC35ADD82 /* DebugMacros.h */,
 				1F64207212CB1A3700240B02 /* MPWActiveDownload.h */,
 				1F64206612CB19E200240B02 /* MPWResourceLoadRequest.h */,
 				1F64205C12CB19D700240B02 /* MPWCachingDownloader.h */,
@@ -943,8 +945,6 @@
 				1F1E2215072C5C00007DCDB1 /* MPWMessageCatcher.h */,
 				1FC9240C05C5980E008047EB /* MPWObjectReference.h */,
 				F51B724A013FD70701ABB64E /* NSBundleConveniences.h */,
-				07DF1947006686DDC35ADD82 /* AccessorMacros.h */,
-				07DF1948006686DDC35ADD82 /* DebugMacros.h */,
 				07DF1949006686DDC35ADD82 /* MPWObject.h */,
 				1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */,
 				07DF194A006686DDC35ADD82 /* NSNil.h */,

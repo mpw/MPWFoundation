@@ -110,6 +110,11 @@ CACHING_ALLOC( _mpwPoint, 20, NO )
 {
     return NSStringFromPoint( [self point] );
 }
+#else
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: x=%g y=%g",[self class],self,point.x,point.y];
+}
 #endif
 -asPoint
 {
@@ -174,6 +179,20 @@ pointArithmetic( reverseSubPoint, - )
     return sqrt( dx*dx + dy*dy);
 }
 
+-(void)getReals:(float*)reals length:(int)len
+{
+    if (len>0) {
+        reals[0]=point.x;
+        if ( len>1) {
+            reals[1]=point.y;
+        }
+    }
+}
+
+-(int)count
+{
+    return 2;
+}
 
 @end
 
@@ -266,12 +285,34 @@ reversePointNumberArithmetic( reverseSubPoint )
     FLOATEXPECT([point1 distance:point1], 0.0, @"point1 point2")
 }
 
++(void)testGetReals
+{
+	id point1 = [self pointWithX:20 y:30];
+	id point2 = [self pointWithX:4 y:3];
+    float reals[2];
+    [point1  getReals:reals length:2];
+    FLOATEXPECT(reals[0], 20.0, @"got x into real[0]");
+    FLOATEXPECT(reals[1], 30.0, @"got y into real[1]");
+    [point2  getReals:reals length:2];
+    FLOATEXPECT(reals[0], 4.0, @"got x into real[0]");
+    FLOATEXPECT(reals[1], 3.0, @"got y into real[1]");
+
+}
++(void)testCount
+{
+	id point1 = [self pointWithX:20 y:30];
+    INTEXPECT([point1 count], 2, @"always 2");
+}
+
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
             @"testPointArithmetic",
             @"testPointNumberArithmetic",
             @"testDistance",
+            @"testGetReals",
+            @"testCount",
 		nil];
 }
 

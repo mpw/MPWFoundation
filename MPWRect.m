@@ -116,6 +116,13 @@ scalarAccessor( NSRect, rect, setRect )
 {
     return NSStringFromRect( [self rect] );
 }
+#else
+-description
+{
+    return [NSString stringWithFormat:@"%@:%p: origin=%@ extent: %@",[self class],self,[self origin],[self mpwSize
+                                                                                                      ]];
+}
+
 #endif
 -(void)encodeWithCoder:(NSCoder*)aCoder
 {

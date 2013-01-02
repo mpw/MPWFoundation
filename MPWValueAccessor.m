@@ -169,14 +169,14 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     IDEXPECT([[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
 }
 
-#define ACCESS_COUNT  1000000
+#define ACCESS_COUNT  100000
 
 +(void)testPerformanceOfPathAccess
 {
     NSString *keyPath=@"target/target";
     MPWStream *t=[self _testCompoundTarget];
-    MPWValueAccessor *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
     MPWRusage* accessorStart=[MPWRusage current];
+    MPWValueAccessor *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
     for (int i=0;i<ACCESS_COUNT;i++) {
         [accessor valueForTarget:t];
     }
@@ -185,20 +185,23 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     for (int i=0;i<ACCESS_COUNT;i++) {
         [accessor valueForTarget:t];
     }
-    [accessor bindToTarget:t];
     MPWRusage* boundAccessorTime=[MPWRusage timeRelativeTo:boundAccessorStart];
+    accessor=[[[self alloc] initWithPath:keyPath] autorelease];
+    [accessor bindToTarget:t];
     MPWRusage* kvcStart=[MPWRusage current];
     for (int i=0;i<ACCESS_COUNT;i++) {
         [t valueForKeyPath:@"target.target"];
     }
     MPWRusage* kvcTime=[MPWRusage timeRelativeTo:kvcStart];
     double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
-#define EXPECTEDUNBOUNDRATIO 12.0
+#define EXPECTEDUNBOUNDRATIO 20
     NSAssert2( unboundRatio > EXPECTEDUNBOUNDRATIO ,@"ratio of value accessor to kvc path %g < %g",
               unboundRatio,EXPECTEDUNBOUNDRATIO);
     
+//    NSLog(@"unboundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",unboundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[accessorTime userMicroseconds]);
     double boundRatio = (double)[kvcTime userMicroseconds] / (double)[boundAccessorTime userMicroseconds];
-#define EXPECTEDBOUNDRATIO 12.0
+//    NSLog(@"boundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",boundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[boundAccessorTime userMicroseconds]);
+#define EXPECTEDBOUNDRATIO 20
     NSAssert2( boundRatio > EXPECTEDBOUNDRATIO ,@"ratio of bound value accessor to kvc path %g < %g",
               boundRatio,EXPECTEDBOUNDRATIO);
     
