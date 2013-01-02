@@ -69,10 +69,10 @@ NSStringFromRect(NSMakeRect(_ax, _ay, _aw, _ah)),\
 NSStringFromRect(NSMakeRect(ex, ey, ew, eh)),msg]),@""); \
 }
 #define FLOATEXPECT( got, expect, msg  ) \
-NSAssert1((expect)==(got) , ([NSString stringWithFormat:@"%g instead of expected %g for %@",got,expect,msg]),@"");
+NSAssert1((expect)==(got) , ([NSString stringWithFormat:@"%g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
 
 #define FLOATEXPECTTOLERANCE( got, expect, tol, msg  ) \
-NSAssert1(fabs((expect)-(got)) < (tol) ,  ([NSString stringWithFormat:@"got %g instead of expected %g for %@",got,expect,msg]),@"");
+NSAssert1(fabs((expect)-(got)) < (tol) ,  ([NSString stringWithFormat:@"got %g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
 
 #define _IDEXPECT(  got,  expected,  msg,  self,  _cmd ) { \
 id _expected=expected;\
