@@ -32,8 +32,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #import "MPWFlattenStream.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation MPWFlattenStream
+
++(void)initialize
+{
+#if 0
+    Class NSObjectClass = [NSObject class];
+    SEL superMessage;
+    IMP skewIMP = imp_implementationWithBlock(^(id _s, id stream) { objc_msgSend( _s, superMessage,stream); });
+#endif
+}
 
 -(SEL)streamWriterMessage
 {

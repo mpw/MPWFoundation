@@ -196,14 +196,14 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
 #define EXPECTEDUNBOUNDRATIO 20
     NSAssert2( unboundRatio > EXPECTEDUNBOUNDRATIO ,@"ratio of value accessor to kvc path %g < %g",
-              unboundRatio,EXPECTEDUNBOUNDRATIO);
+              unboundRatio,(double)EXPECTEDUNBOUNDRATIO);
     
 //    NSLog(@"unboundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",unboundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[accessorTime userMicroseconds]);
     double boundRatio = (double)[kvcTime userMicroseconds] / (double)[boundAccessorTime userMicroseconds];
 //    NSLog(@"boundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",boundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[boundAccessorTime userMicroseconds]);
 #define EXPECTEDBOUNDRATIO 20
     NSAssert2( boundRatio > EXPECTEDBOUNDRATIO ,@"ratio of bound value accessor to kvc path %g < %g",
-              boundRatio,EXPECTEDBOUNDRATIO);
+              boundRatio,(double)EXPECTEDBOUNDRATIO);
     
 
     

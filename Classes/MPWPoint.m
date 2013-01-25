@@ -56,6 +56,7 @@ scalarAccessor( NSPoint, point, setPoint )
     return self;
 }
 
+
 -(float)x
 {
     return point.x;
@@ -189,7 +190,7 @@ pointArithmetic( reverseSubPoint, - )
     }
 }
 
--(int)count
+-(NSUInteger)count
 {
     return 2;
 }

@@ -788,7 +788,7 @@
 		1FA1D4570BBAAD520097A924 /* MPWRusage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWRusage.m; sourceTree = "<group>"; };
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
-		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dllmain.m; sourceTree = "<group>"; };
+		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dllmain.m; path = windows/dllmain.m; sourceTree = "<group>"; };
 		1FB93A941292012200D9D630 /* PhoneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneGeometry.h; sourceTree = "<group>"; };
 		1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWFoundation_prefix_header.h; sourceTree = "<group>"; };
 		1FC9240705C597EF008047EB /* MPWObjectReference.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObjectReference.m; sourceTree = "<group>"; };
@@ -861,13 +861,15 @@
 		07DF1932006686DDC35ADD82 /* MPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				1F1A30DC154DAE0C00BAC8D7 /* Accelerate.framework */,
 				07DF1933006686DDC35ADD82 /* Classes */,
 				07DF1946006686DDC35ADD82 /* Headers */,
+				07DF1966006686DDC35ADD82 /* Comm */,
+				07DF1973006686DDC35ADD82 /* Collections */,
+				07DF1990006686DDC35ADD82 /* Streams */,
+				07DF19A1006686DDC35ADD82 /* Threading */,
 				07DF195D006686DDC35ADD82 /* Other Sources */,
 				F51B7250013FDD5F01ABB64E /* Resources */,
 				07DF195F006686DDC35ADD82 /* Supporting Files */,
-				07DF1965006686DDC35ADD82 /* Subprojects */,
 				07DF19B2006686DDC35ADD82 /* External Frameworks and Libraries */,
 				07DF19B6006686DDC35ADD82 /* Products */,
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
@@ -921,7 +923,7 @@
 				1F11C44915567F6300E597D9 /* MPWValueAccessor.h */,
 				1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */,
 			);
-			name = Classes;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		07DF1946006686DDC35ADD82 /* Headers */ = {
@@ -972,6 +974,7 @@
 				1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */,
 			);
 			name = Headers;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		07DF195D006686DDC35ADD82 /* Other Sources */ = {
@@ -998,17 +1001,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		07DF1965006686DDC35ADD82 /* Subprojects */ = {
-			isa = PBXGroup;
-			children = (
-				07DF1966006686DDC35ADD82 /* Comm */,
-				07DF1973006686DDC35ADD82 /* Collections */,
-				07DF1990006686DDC35ADD82 /* Streams */,
-				07DF19A1006686DDC35ADD82 /* Threading */,
-			);
-			name = Subprojects;
-			sourceTree = "<group>";
-		};
 		07DF1966006686DDC35ADD82 /* Comm */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,8 +1015,11 @@
 		07DF1967006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				07DF196C006686DDC35ADD82 /* MPWASCII85Stream.h */,
 				07DF1968006686DDC35ADD82 /* MPWASCII85Stream.m */,
+				07DF196D006686DDC35ADD82 /* MPWFilterStream.h */,
 				07DF1969006686DDC35ADD82 /* MPWFilterStream.m */,
+				07DF196E006686DDC35ADD82 /* MPWLZWStream.h */,
 				07DF196A006686DDC35ADD82 /* MPWLZWStream.m */,
 			);
 			name = Classes;
@@ -1033,9 +1028,6 @@
 		07DF196B006686DDC35ADD82 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				07DF196C006686DDC35ADD82 /* MPWASCII85Stream.h */,
-				07DF196D006686DDC35ADD82 /* MPWFilterStream.h */,
-				07DF196E006686DDC35ADD82 /* MPWLZWStream.h */,
 			);
 			name = Headers;
 			sourceTree = "<group>";
@@ -1228,6 +1220,7 @@
 		07DF19B2006686DDC35ADD82 /* External Frameworks and Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				1F1A30DC154DAE0C00BAC8D7 /* Accelerate.framework */,
 				07DF19B3006686DDC35ADD82 /* System.framework */,
 				07DF19B4006686DDC35ADD82 /* Foundation.framework */,
 			);
