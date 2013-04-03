@@ -37,7 +37,13 @@ extern id objc_msgSend(id, SEL, ...);
 -(void)bindComponent:(AccessPathComponent*)component toTarget:aTarget
 {
     component->targetClass=object_getClass( aTarget);
+    if ( ![aTarget respondsToSelector:component->getSelector] ) {
+        component->getSelector = @selector(objectForKey:);
+    }
     component->getIMP=[aTarget methodForSelector:component->getSelector];
+    if ( ![aTarget respondsToSelector:component->putSelector] ) {
+        component->putSelector = @selector(setObject:forKey:);
+    }
     component->putIMP=[aTarget methodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
@@ -61,6 +67,7 @@ idAccessor(name, setName)
     if ( self ) {
         [self setName:path];
         [self setComponentsForPath:[path componentsSeparatedByString:@"/"]];
+        value=[self methodForSelector:@selector(value)];
     }
     return self;
 }
@@ -73,7 +80,11 @@ idAccessor(name, setName)
 
 static inline id getValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
     for (int i=0;i<count;i++) {
-        currentTarget=c[i].getIMP( currentTarget, c[i].getSelector, c[i].additionalArg );
+//        if ( c[i].targetOffset>= 0 ) {
+//            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
+//        } else {
+            currentTarget=c[i].getIMP( currentTarget, c[i].getSelector, c[i].additionalArg );
+//        }
     }
     return currentTarget;
 }
@@ -82,6 +93,11 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
     c[final].putIMP( currentTarget, c[final].putSelector, value, c[final].additionalArg );
+}
+
+-(void)_setOffset:(int)offset
+{
+    components[0].targetOffset=offset;
 }
 
 -(void)bindToTarget:aTarget
@@ -138,6 +154,15 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     MPWStream *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"target"];
     IDEXPECT([accessor valueForTarget:t], [MPWByteStream Stderr], @"target");
+}
+
+
++(void)testBoundDictAccess
+{
+    NSDictionary *dict=@{ @"hello": @"world" };
+    MPWValueAccessor *accessor=[self valueForName:@"hello"];
+    [accessor bindToTarget:dict];
+    IDEXPECT([accessor value], @"world", @"hello -> world");
 }
 
 +(void)testBasicUnboundSetAccess
@@ -218,6 +243,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
             @"testBoundGetSetAccess",
             @"testPathAccess",
             @"testPerformanceOfPathAccess",
+            @"testBoundDictAccess",
             nil];
 }
 

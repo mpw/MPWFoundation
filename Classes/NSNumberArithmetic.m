@@ -75,6 +75,13 @@ return pow( [self doubleValue], otherNumber );
     return sqrt([self doubleValue]);
 }
 
+-(NSString *)stringWithFormat:(NSString*)formatString
+{
+    NSNumberFormatter *f=[[[NSNumberFormatter alloc] init] autorelease];
+    [f setPositiveFormat:formatString];
+    return [f stringFromNumber:self];
+}
+
 -coerceToDecimalNumber
 {
     const char *objcType=[self objCType];

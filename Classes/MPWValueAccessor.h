@@ -22,12 +22,15 @@ typedef struct {
     AccessPathComponent components[6];
     int count;
     id name;
+    @public
+    IMP value;
 }
 
 +valueForName:(NSString*)name;
 -initWithName:(NSString*)name;
 -valueForTarget:aTarget;
 -(void)setValue:newValue forTarget:aTarget;
+#define GETVALUE(accessor) (accessor->value( accessor, @selector(value)))
 
 
 @end

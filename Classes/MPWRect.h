@@ -51,6 +51,12 @@ scalarAccessor_h( NSRect, rect, setRect )
 -origin;
 -mpwSize;
 
+-(double)x;
+-(double)y;
+-(double)width;
+-(double)height;
+
+
 
 @end
 @interface NSString(rectCreation)

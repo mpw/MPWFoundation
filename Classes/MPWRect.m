@@ -100,6 +100,21 @@ scalarAccessor( NSRect, rect, setRect )
     return [self mpwSize];
 }
 
+-(NSUInteger)count
+{
+    return 4;
+}
+
+-(void)getReals:(float*)reals length:(int)len
+{
+    if (len>=4) {
+        reals[0]=rect.origin.x;
+        reals[1]=rect.origin.y;
+        reals[2]=rect.size.width;
+        reals[3]=rect.size.height;
+    }
+}
+
 
 +rectWithNSRect:(NSRect)aRect
 {
