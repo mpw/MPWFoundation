@@ -55,11 +55,24 @@ static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
 	return GETOBJECT(cache);
 }
 
+static id  __ignore( MPWIgnoreTrampoline* target, SEL selector )
+{
+    return [target xxxTarget];
+}
+
+
++(BOOL)resolveInstanceMethod:(SEL)selector
+{
+    class_addMethod(self, selector, (IMP)__ignore, "@@:");
+    return YES;
+}
+
 
 
 -methodSignatureForSelector:(SEL)aSelector
 {
-    return [NSObject methodSignatureForSelector:@selector(class)];
+    id sig = [NSObject methodSignatureForSelector:@selector(class)];
+    return sig;
 }
 
 -(void)xxxSetTargetKey:aKey
@@ -72,8 +85,14 @@ static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
     return YES;
 }
 
+-(BOOL)respondsToSelector:(SEL)aSelector
+{
+    return YES;
+}
+
 -(void)forwardInvocation:(NSInvocation*)invocationToForward
 {
+    NSLog(@"empty ignore trampoline forwardInvocation: %@",invocationToForward);
     [invocationToForward setReturnValue:&xxxTarget];
 }
 

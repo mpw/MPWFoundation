@@ -236,7 +236,37 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -methodSignatureForHOMSelector:(SEL)selector
 {
-	return [[self objectAtIndex:0] methodSignatureForHOMSelector:selector];
+    if ( [self count] > 0){
+        return [[self objectAtIndex:0] methodSignatureForHOMSelector:selector];
+    } else {
+        return [self methodSignatureForSelector:@selector(asArray)];
+    }
 }
 
 @end
+
+@interface NSArrayFilteringTesting : NSObject
+
+@end
+
+#import "DebugMacros.h"
+
+@implementation NSArrayFilteringTesting
+
++(void)testEmptyArrayCanCollectNoArgMessage
+{
+    NSArray *empty=[NSArray array];
+    id trampoline=[empty collect];
+    id result = [trampoline stringValue];
+    INTEXPECT( [result count],0, @"length of result of collect-ing a zero-length source array with a zero arg message");
+}
+
++testSelectors
+{
+    return @[
+             @"testEmptyArrayCanCollectNoArgMessage",
+             ];
+}
+
+@end
+
