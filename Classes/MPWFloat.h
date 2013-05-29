@@ -16,6 +16,8 @@
 }
 
 +float:(float)newValue;
++double:(double)newValue;
+
 -(double)doubleValue;
 
 

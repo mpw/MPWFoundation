@@ -36,7 +36,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWUShortArray
 
--initWithCapacity:(unsigned)newCap
+-initWithCapacity:(NSUInteger)newCap
 {
     self = [super init];
     data = calloc( newCap+10 , sizeof(unsigned short));

@@ -38,7 +38,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
     NSData *data;
     id	dataSource;
     const char *start,*end,*pos,*probe;
-    NSMutableDictionary		*handlers,*defaultHandler;
+    NSMutableDictionary		*handlers;
+    id defaultHandler;
     IMP	  charSwitch[260];
     id textCache;
     IMP getObject,initData,makeText;

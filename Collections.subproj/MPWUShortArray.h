@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     unsigned short	*ushortStart;
 }
 
--initWithCapacity:(unsigned)newCap;
+-initWithCapacity:(NSUInteger)newCap;
 -initWithUshorts:(const unsigned short*)newData count:(unsigned)count;
 -(unsigned short*)ushorts;
 -(unsigned)ushortAtIndex:(unsigned)index;

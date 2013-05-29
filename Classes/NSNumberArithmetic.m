@@ -12,6 +12,15 @@
 
 @implementation NSNumber(Arithmetic)
 
+-bitOr:other
+{
+     return [NSNumber numberWithLong:[self longValue] | [other longValue]];
+}
+
+-pipe:other 
+{
+     return [self bitOr:other];
+}
 
 #define defineArithOp( opName, op ) \
 -opName:other {\
@@ -150,3 +159,4 @@ id _dummyGetNumtest( int value ) {
 	return [NSNumber numberWithInt:value];
 }
 #endif 
+

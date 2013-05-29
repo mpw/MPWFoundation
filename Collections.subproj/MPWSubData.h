@@ -51,6 +51,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(const char*)cString;
 -(NSUInteger)length;
 boolAccessor_h( mustUnique, setMustUnique )
+-originalData;
 
 @end
 

@@ -52,8 +52,8 @@ scalarAccessor_h( NSPoint, point, setPoint )
 +pointWithNSSize:(NSSize)aSize;
 +pointWithNSString:(NSString*)string;
 +pointWithX:(float)x y:(float)y;
--(float)x;
--(float)y;
+-(double)x;
+-(double)y;
 +zero;
 -(MPWRect*)extent:otherPoint;
 

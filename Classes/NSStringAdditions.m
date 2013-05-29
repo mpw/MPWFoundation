@@ -81,6 +81,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return result;
 }
 
++(id)stringWithCharacter:(int)theChar
+{
+    unichar ch=theChar;
+    return [self stringWithCharacters:&ch length:1];
+}
+
 -(int)numericCompare:other
 {
 	return [self compare:other options:64];

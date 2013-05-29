@@ -57,12 +57,12 @@ scalarAccessor( NSPoint, point, setPoint )
 }
 
 
--(float)x
+-(double)x
 {
     return point.x;
 }
 
--(float)y
+-(double)y
 {
     return point.y;
 }
@@ -173,7 +173,7 @@ pointArithmetic( reverseSubPoint, - )
 	return [somethingElse reverseDivPoint:self];
 }
 
--(float)distance:otherPoint
+-(float)distance:(MPWPoint*)otherPoint
 {
     double dx=[otherPoint x] - [self x];
     double dy=[otherPoint y] - [self y];

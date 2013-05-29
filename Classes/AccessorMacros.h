@@ -117,9 +117,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	setAccessor( ltype*, lvar, setLVar ) \
 \
 -(ltype*)lvar { \
-	if ( ![self _##lvar] )  { \
-		[self setLVar:[self computeVar]]; \
-	}  \
+    @synchronized( self ) { \
+        if ( ![self _##lvar] )  { \
+        [self setLVar:[self computeVar]]; \
+        }  \
+    } \
 	return [self _##lvar]; \
 } \
 

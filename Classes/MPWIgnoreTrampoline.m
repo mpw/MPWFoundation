@@ -34,6 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWIgnoreTrampoline.h"
 #import "MPWObjectCache.h"
+#import <objc/runtime.h>
 
 @implementation MPWIgnoreTrampoline
 

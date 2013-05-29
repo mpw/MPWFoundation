@@ -11,6 +11,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 #import "NSNil.h"
 #import <objc/runtime.h>
+#include <dlfcn.h>
 
 @implementation NSNil
 /*"
@@ -34,21 +35,41 @@ static BOOL installed=NO;
     return nsnil;
 }
 
-#if !TARGET_OS_IPHONE
-extern id _objc_setNilReceiver(id newNilReceiver);
+typedef id (*id2id)(id);
+static id2id nil_handler=nil;
+
+static id dummy(id arg) { return arg; }
+
++(id2id)nilHandlerSetter
+{
+//    extern id _objc_setNilReceiver(id );
+    if (!nil_handler) {
+        char buffer[2045];
+        strcpy(buffer, "_");
+        strcat(buffer, "objc_");
+        strcat(buffer, "set");
+        strcat(buffer, "Nil");
+        strcat(buffer, "Receiver");
+        
+        nil_handler=dlsym(RTLD_DEFAULT, buffer);
+        if (!nil_handler) {
+            nil_handler=dummy;
+        }
+    }
+    return nil_handler;
+}
 
 +(void)setNilHandler
 {
     installed=YES;
-    _objc_setNilReceiver([self nsNil]);
+    [self nilHandlerSetter]([self nsNil]);
 }
 
 +(void)unsetNilHandler
 {
     installed=NO;
-    _objc_setNilReceiver(nil);
+    [self nilHandlerSetter](nil);
 }
-#endif
 
 +alloc
 {
