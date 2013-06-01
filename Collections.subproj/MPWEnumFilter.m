@@ -34,7 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #ifdef Darwin
 #import <objc/runtime.h>
 #import <Foundation/NSInvocation.h>
-#import "MPWFoundation.h"
+#import <MPWFoundation/MPWFoundation.h>
 #endif
 #import "MPWEnumFilter.h"
 #import "AccessorMacros.h"

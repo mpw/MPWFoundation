@@ -31,7 +31,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWObject.h>
+#import <MPWFoundation/AccessorMacros.h>
 
 @interface MPWScanner : MPWObject
 {
@@ -61,6 +62,7 @@ idAccessor_h( dataSource, setDataSource )
 -makeString:(unsigned int)length;
 -(void)skipTo:(NSString*)aString;
 -(void)skipEOL;
+-nextLine;
 -nextObject;
 
 

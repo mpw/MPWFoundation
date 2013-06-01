@@ -31,9 +31,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "MPWFoundation.h"
+#import "MPWScanner.h"
 #import "AccessorMacros.h"
-
+#import "MPWSubData.h"
+#import "MPWObjectCache.h"
+#import "NSObjectFiltering.h"
+#import "NSStringAdditions.h"
+#import "MPWStream.h"
 
 @implementation MPWScanner
 /*"
@@ -447,6 +451,8 @@ static inline void copybuf( char *target,const char *source, int len ) {
 @end
 
 #if ! TARGET_OS_IPHONE
+
+#import "DebugMacros.h"
 
 @implementation MPWScanner(TestSupport)
 

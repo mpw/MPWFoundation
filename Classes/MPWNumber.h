@@ -20,5 +20,5 @@
 -(int)intValue;
 -(float)floatValue;
 -(NSString*)stringValue;
--negated;
+-negate;
 @end

@@ -7,9 +7,10 @@
 //
 
 #import "MPWCachingDownloader.h"
-#import <MPWFoundation/MPWFoundation.h>
+#import "NSStringAdditions.h"
 #import "MPWResourceLoadRequest.h"
 #import "MPWActiveDownload.h"
+#import "NSObjectFiltering.h"
 
 @implementation MPWCachingDownloader
 
@@ -265,6 +266,9 @@ intAccessor( _maxConcurrent, setMaxConcurrent )
 }
 
 @end
+
+#import "DebugMacros.h"
+
 
 @implementation MPWCachingDownloader(testing)
 

@@ -46,7 +46,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 +loadFramework:(NSString*)frameworkName;
 +(void)addFrameworkSearchPath:newPath;
 +frameworkPathForFrameworkName:(NSString*)frameworkName;
-+loadFramework:(NSString*)frameworkName;
 
 @end
 
