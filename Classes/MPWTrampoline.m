@@ -40,6 +40,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWRuntimeAdditions.h"
 #import "DebugMacros.h"
 #import "MPWEnumFilter.h"
+#include <objc/runtime.h>
+#include <objc/message.h>
 
 @interface MPWTrampoline(isEqual)
 
@@ -290,6 +292,18 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 @end
 
+
+@implementation NSString(dummy_return)
+
+-dummy_return:arg
+{
+    static id a=@"bozo";
+    [arg setReturnValue:&a];
+    return a;
+}
+
+@end
+
 @implementation MPWTrampoline(testing)
 
 +testSelectors
@@ -333,17 +347,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 @end
 
-
-@implementation NSString(dummy_return)
-
--dummy_return:arg
-{
-    static id a=@"bozo";
-    [arg setReturnValue:&a];
-    return a;
-}
-
-@end
 
 
 @implementation NSObject(safely)

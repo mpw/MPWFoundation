@@ -35,6 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //#import "MPWEnumFilter.h"
 #import <MPWFoundation/NSObjectFiltering.h>
 #import "NSObjectAdditions.h"
+#include <objc/runtime.h>
 
 @implementation NSCoder(NamedCoding)
 
@@ -105,19 +106,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(NSArray*)encodingKeys
 {
-	return [isa defaultEncodingKeys];
+	return [object_getClass(self) defaultEncodingKeys];
 }
 
 -(void)encodeWithCoder:(NSCoder*)aCoder
 {
-	if ( [isa doReflectiveCoding] ) {
+	if ( [object_getClass(self) doReflectiveCoding] ) {
 		[self encodeKeys:[self encodingKeys] withCoder:aCoder];
 	}
 }
 
 -initWithCoder:(NSCoder*)aCoder
 {
-	if ( [isa doReflectiveCoding] ) {
+	if ( [object_getClass(self) doReflectiveCoding] ) {
 		self = [self initWithCoder:aCoder keys:[self encodingKeys]];
 	}
 	return self;

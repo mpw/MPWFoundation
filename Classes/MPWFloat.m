@@ -8,7 +8,7 @@
 
 #import "MPWFloat.h"
 #import <MPWFoundation/MPWFoundation.h>
-
+#include <objc/runtime.h>
 
 @implementation MPWFloat
 
@@ -97,7 +97,8 @@ defineArithOp( div, divInt, / )
 
 -(BOOL)isEqual:otherValue
 {
-    return otherValue == self || (*(Class*)otherValue == isa && floatValue==((MPWFloat*)otherValue)->floatValue)
+    return otherValue == self ||
+        (object_getClass(otherValue) == object_getClass(self) && floatValue==((MPWFloat*)otherValue)->floatValue )
     || [otherValue isEqualToFloat:floatValue];
 }
 

@@ -64,6 +64,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 +Stderr;
 +file:(FILE*)file;
 +fileName:(NSString*)fileName;
++null;
+
 -(void)writeIndent;
 -(void)writeString:(NSString*)aString;
 -(unsigned)targetLength;

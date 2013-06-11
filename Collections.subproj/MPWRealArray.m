@@ -382,7 +382,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 -interpolate:otherVector weight:(float)weight
 {
-    return [self interpolate:otherVector into:[isa arrayWithCount:count] weight:weight];
+    return [self interpolate:otherVector into:[[self class] arrayWithCount:count] weight:weight];
 }
 
 -interpolate:otherVector steps:(int)numSteps

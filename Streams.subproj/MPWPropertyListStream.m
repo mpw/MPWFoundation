@@ -39,6 +39,15 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 
+@implementation NSObject(PropertyListStreaming)
+
+-(void)writeOnPropertyListStream:(MPWByteStream*)aStream
+{
+    [self writeOnByteStream:aStream];
+}
+
+@end
+
 @implementation MPWPropertyListStream
 
 
@@ -114,15 +123,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)writeOnPropertyListStream:(MPWByteStream*)aStream
 {
     [aStream writeString:self ];
-}
-
-@end
-
-@implementation NSObject(PropertyListStreaming)
-
--(void)writeOnPropertyListStream:(MPWByteStream*)aStream
-{
-    [self writeOnByteStream:aStream];
 }
 
 @end

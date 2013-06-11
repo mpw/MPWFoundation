@@ -98,7 +98,7 @@ typedef int (^intBlock)(int arg );
 
 -(id)invokeWithArgs:(va_list)args
 {
-	return (id)(va_arg( args, int ) * 3);
+	return (id)(va_arg( args, long ) * 3);
 }
 
 +(void)testBlockInvoke

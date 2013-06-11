@@ -30,6 +30,11 @@ typedef struct {
 -initWithName:(NSString*)name;
 -valueForTarget:aTarget;
 -(void)setValue:newValue forTarget:aTarget;
+-(NSString*)name;
+-value;
+-target;
+-(void)bindToTarget:aTarget;
+
 #define GETVALUE(accessor) (accessor->value( accessor, @selector(value)))
 
 

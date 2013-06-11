@@ -46,7 +46,7 @@ IMP __stringTableLookupFun=NULL;
 #endif	
 }
 
--initWithObjects:(id*)values forKeys:(id*)keys count:(NSUInteger)count
+-initWithObjects:(const id [])values forKeys:(const id <NSCopying> [])keys count:(NSUInteger)count
 {
 //	NSLog(@"%p initWithObjects:forKeys:count: %d --- ",self,count);
 //	NSLog(@"will super init");
@@ -68,10 +68,10 @@ IMP __stringTableLookupFun=NULL;
 		unsigned char *curptr;
 //		NSLog(@"super init");
 		for (i=0;i<count;i++) {
-            int thisLength=[keys[i] lengthOfBytesUsingEncoding:encoding];
+            NSUInteger thisLength=[(NSString*)keys[i] lengthOfBytesUsingEncoding:encoding];
 			lengths[i]=thisLength;
 			totalStringLen+=thisLength+3;
-            NSAssert3(thisLength<255, @"%@ - length of string '%@' %d > 255", [self class], keys[i], thisLength);
+            NSAssert3(thisLength<255, @"%@ - length of string '%@' %ld > 255", [self class], keys[i], (long)thisLength);
             if (thisLength>maxLen ) {
                 maxLen=thisLength;
             }
@@ -132,7 +132,7 @@ IMP __stringTableLookupFun=NULL;
                     
                     int theIndex = tableIndex[curIndex].index;
                     int len=lengths[theIndex];
-                    NSString* key=keys[theIndex];
+                    NSString* key=(NSString*)keys[theIndex];
 //                  NSLog(@"add string: %@",key);
 //                    NSLog(@"theIndex: %d",theIndex);
                     if ( theIndex > tableLength){

@@ -36,7 +36,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWObject.h"
 //#import <MPWFoundation/bytecoding.h>
 #import "DebugMacros.h"
-
+#include <objc/runtime.h>
 
 @interface NSObject(validate)
 
@@ -46,7 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface NSString(fastCString)
 
--(char*)_fastCStringContents:(BOOL)something;
+-(const char*)_fastCStringContents:(BOOL)something;
 
 @end
 
@@ -204,7 +204,7 @@ boolAccessor( mustUnique, setMustUnique )
     if ( self == other ) {
         return YES;
     }
-	if ( other && *(Class*)other == isa ) {
+	if ( other &&  object_getClass( other) == object_getClass( self) ) {
 		int otherLen=[other length];
 		const void *otherBytes=[other bytes];
 		return otherLen==myLength &&
@@ -295,7 +295,7 @@ boolAccessor( mustUnique, setMustUnique )
     return myLength;
 }
 
--(unsigned int)cStringLength
+-(NSUInteger)cStringLength
 {
     return myLength;
 }
@@ -400,7 +400,7 @@ boolAccessor( mustUnique, setMustUnique )
 
 -classForCoder
 {
-    return isa;
+    return object_getClass( self);
 }
 
 @end

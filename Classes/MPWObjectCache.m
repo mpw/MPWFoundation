@@ -37,6 +37,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/Foundation.h>
 #import <stdlib.h>
 
+@interface NSObject(removeFromCache)
+
+-(void)removeFromCache:(MPWObjectCache*)aCache;
+
+@end
+
 @implementation MPWObjectCache
 /*"
    Provides a local, circular buffer for re-cycling objects.  Needs objects that can be

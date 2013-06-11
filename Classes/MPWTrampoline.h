@@ -61,6 +61,7 @@ idAccessor_h( xxxAdditionalArg, setXxxAdditionalArg )
 
 -safely;
 -(NSMethodSignature*)methodSignatureForHOMSelector:(SEL)aSelector;
+-exceptionPerformingInvocation:(NSInvocation*)invocation;
 
 @end
 

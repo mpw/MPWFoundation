@@ -212,7 +212,7 @@ static id returnNil() {  return nil; }
 #elsif !LINUX
         arguments[0] =((IMP)objc_msg_lookup( tempTarget, targetSelector))( tempTarget ,targetSelector ,arguments[2] ,arguments[3] ,arguments[4], arguments[5]);
 #else
-#warning slow path!        
+//#warning slow path!
         targetFilterImp = [tempTarget methodForSelector:targetSelector];
         arguments[0] = targetFilterImp( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
 #endif

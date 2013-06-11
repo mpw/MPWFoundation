@@ -35,6 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWObjectCache.h"
 #import "MPWRect.h"
 #import "DebugMacros.h"
+#include <objc/runtime.h>
 
 @implementation MPWPoint
 /*"
@@ -146,7 +147,7 @@ CACHING_ALLOC( _mpwPoint, 20, NO )
 	NSPoint otherPoint=NSMakePoint(0,0);\
     if ( [aPoint respondsToSelector:@selector(point)] ) { otherPoint=[aPoint point]; } \
     else { otherPoint.x = [(NSNumber*)aPoint doubleValue]; otherPoint.y = otherPoint.x;  }  \
-	return [isa pointWithX:otherPoint.x operation point.x y:otherPoint.y operation point.y];\
+	return [object_getClass(self) pointWithX:otherPoint.x operation point.x y:otherPoint.y operation point.y];\
 }
 
 pointArithmetic( mulPoint, * )

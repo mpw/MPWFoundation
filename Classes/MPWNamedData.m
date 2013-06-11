@@ -37,6 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //
 
 #import <MPWFoundation/MPWFoundation.h>
+#import <objc/runtime.h>
 
 @interface NSCoder(namedDataCoding)
 
@@ -128,7 +129,7 @@ objectAccessor( NSString, name, setName )
 
 -classForCoder
 {
-    return isa;
+    return object_getClass(self);
 }
 
 @end

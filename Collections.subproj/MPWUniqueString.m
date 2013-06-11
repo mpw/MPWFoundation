@@ -41,6 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWUniqueString.h"
 #import <MPWFoundation/bytecoding.h>
 #import "MPWSubData.h"
+#import <objc/runtime.h>
 
 static NSString* empty1( NSMapTable *t, const void *p) { return @"";}
 static void empty2( NSMapTable *t, void *p) {}
@@ -54,7 +55,7 @@ typedef struct {
 
 @interface NSString(fastCString)
 
--_fastCStringContents:(BOOL)something;
+-(const char*)_fastCStringContents:(BOOL)something;
 
 @end
 
@@ -110,7 +111,7 @@ typedef struct {
 	if ( other == self ) {
 		return YES;
 	} else {
-		if ( isa == *(Class*)other ) {
+		if ( object_getClass( self )  == object_getClass( other ) ) {
 			return NO;
 		} else {
 			int otherLen=[other length];

@@ -183,7 +183,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(NSString*)ivarNameForVarPointer:(const void*)address orIndex:(int)index
 {
-    return [isa ivarNameAtOffset:address-(const void*)self orIndex:index];
+    return [object_getClass(self) ivarNameAtOffset:address-(const void*)self orIndex:index];
 }
 
 @end

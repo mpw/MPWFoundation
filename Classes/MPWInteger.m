@@ -8,6 +8,7 @@
 
 #import "MPWInteger.h"
 #import <MPWFoundation/MPWFoundation.h>
+#import <objc/runtime.h>
 
 @implementation MPWInteger
 
@@ -72,7 +73,7 @@ defineArithOp( div, divInt, / )
 
 -(BOOL)isEqual:otherValue
 {
-    return otherValue == self || (*(Class*)otherValue == isa && intValue==((MPWInteger*)otherValue)->intValue)
+    return otherValue == self || ( object_getClass(self)==object_getClass(otherValue) && intValue==((MPWInteger*)otherValue)->intValue)
     || [otherValue isEqualToInteger:intValue];
 }
 

@@ -44,6 +44,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #if !LINUX
 
+@interface NSObject(forwardAMessage)
+
+-forwardAMessage:anArg;
+
+@end
+
 @implementation MPWDirectForwardingTrampoline
 
 

@@ -46,7 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 // extern IMP class_lookupMethod( Class aClass , SEL msg );		for 10.4 or earlier
 #if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 ) || TARGET_OS_IPHONE
 
-extern id objc_msgSend(id receiver, SEL _cmd, ...);
+//extern id objc_msgSend(id receiver, SEL _cmd, ...);
 static inline IMP objc_class_msg_lookup( Class aClass, SEL msg )
 {
 //	return objc_msgSend;

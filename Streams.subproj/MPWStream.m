@@ -93,7 +93,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -init
 {
-    return [self initWithTarget:[isa defaultTarget]];
+    return [self initWithTarget:[[self class] defaultTarget]];
 }
 
 -(void)dealloc
