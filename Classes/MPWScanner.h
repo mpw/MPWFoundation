@@ -33,6 +33,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <MPWFoundation/MPWObject.h>
 #import <MPWFoundation/AccessorMacros.h>
+#import <Foundation/Foundation.h>
 
 @interface MPWScanner : MPWObject
 {
