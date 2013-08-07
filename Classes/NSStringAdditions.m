@@ -162,6 +162,16 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 @end
 
+@implementation NSData(asPropertyList)
+
+-propertyList
+{
+    return [NSPropertyListSerialization propertyListWithData:self options:0
+                                                      format:NULL error:nil];
+}
+
+@end
+
 @interface NSStringAdditionsTesting : NSObject
 @end
 @implementation NSStringAdditionsTesting
