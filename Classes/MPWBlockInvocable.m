@@ -73,11 +73,30 @@ static id blockFun( id self, ... ) {
 	if ( self ) {
 		invoke=(IMP)[self invokeMapper];
 		descriptor=&sdescriptor;
-		flags=(1 << 28);
+        flags=1;
+//		flags|=(1 << 28);   // is global
+        flags|=(1 << 24);  // we are a heap block
 	}
 	return self;
 }
 
+-(id)retain
+{
+    flags++;
+    return self;
+}
+
+-(oneway void)release
+{
+    if ( (--flags &0xffff) <= 0 ) {
+        [self dealloc];
+    }
+}
+
+-(NSUInteger)retainCount
+{
+    return flags&0xffff;
+}
 
 @end
 
@@ -115,11 +134,22 @@ typedef int (^intBlock)(int arg );
     IDEXPECT(sig, @"i12@?0i8", @"signature of int->int block");
 }
 
+
++(void)testBlockCopy
+{
+	id blockObj = [[[self alloc] init] autorelease];
+    intBlock firstBlock=(intBlock)blockObj;
+    intBlock copiedBlock=Block_copy(firstBlock);
+	INTEXPECT( ((intBlock)copiedBlock)( 3 ), 9, @"block(3) ");
+    Block_release(copiedBlock);
+}
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
             @"testBlockInvoke",
             @"testNSBlockTypes",
+            @"testBlockCopy",
 			nil];
 }
 
