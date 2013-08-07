@@ -29,7 +29,7 @@
             if ( type1 && type2 && *type1=='i' && *type2=='i' ) {\
                 return [NSNumber numberWithInt:[self intValue] op [other intValue]];\
             } else {\
-                return [NSNumber numberWithFloat:[self floatValue] op [other floatValue]];\
+                return [NSNumber numberWithDouble:[self doubleValue] op [other doubleValue]];\
             }\
 }\
 
@@ -59,7 +59,7 @@ defineArithOp( div, / )
     if ( type1 && *type1 == 'i' ){
         return [NSNumber numberWithInt:-[self intValue]];
     } else {
-        return [NSNumber numberWithFloat:-[self floatValue]];
+        return [NSNumber numberWithDouble:-[self doubleValue]];
     }
 }
 
