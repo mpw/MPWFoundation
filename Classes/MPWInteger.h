@@ -18,5 +18,8 @@
 -initWithInteger:(NSInteger)newInt;
 +numberWithInt:(int)anInt;
 
+-(void)setIntValue:(int)newInt;
+-(void)setFloatValue:(float)newFloat;
+
 
 @end
