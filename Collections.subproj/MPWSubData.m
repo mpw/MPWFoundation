@@ -250,6 +250,15 @@ boolAccessor( mustUnique, setMustUnique )
     }
 }
 
+#if NS_BLOCKS_AVAILABLE
+- (void) enumerateByteRangesUsingBlock:(void (^)(const void *bytes, NSRange byteRange, BOOL *stop))block
+{
+    BOOL stop=0;
+    block( myBytes, NSMakeRange(0, myLength),&stop);
+}
+#endif
+
+
 -(void)removeFromCache:aCache
 {
 //	[self intern];

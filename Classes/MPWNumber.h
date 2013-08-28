@@ -22,3 +22,4 @@
 -(NSString*)stringValue;
 -negate;
 @end
+

@@ -72,6 +72,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/NSRectAdditions.h>
 #import <MPWFoundation/NSBundleConveniences.h>
 #import <MPWFoundation/MPWIntArray.h>
+#import <MPWFoundation/NSNumberArithmetic.h>
 
 #import <MPWFoundation/MPWNamedData.h>
 
