@@ -74,7 +74,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)outdent;
 -(void)setIndentAmount:(int)indent;
 
-#define  TARGET_APPEND( data, count)   targetAppend( target, @selector(appendBytes:length:), data , count )
+#define  TARGET_APPEND( data, count)   { targetAppend( target, @selector(appendBytes:length:), data , count ); totalBytes+=count; }
 
 @end
 

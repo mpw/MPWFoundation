@@ -97,7 +97,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 		if ( indentLen > spacelen ) {
 			indentLen=spacelen;
 		}
-		[self appendBytes:spaces length:indentLen];
+        TARGET_APPEND(spaces, indentLen);
+//		[self appendBytes:spaces length:indentLen];
 	}
 }
 
@@ -233,8 +234,6 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)appendBytes:(const void*)data length:(NSUInteger)count
 {
     TARGET_APPEND( data , count );
-//  [target appendBytes:data length:count];
-    totalBytes+=count;
 }
 
 -(void)appendHexBytes:(const void*)data length:(NSUInteger)count
@@ -246,7 +245,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeCString:(const char*)cString
 {
-	FORWARDCHARS( cString );
+    TARGET_APPEND(cString, strlen(cString));
 }
 
 -(void)outputString1:(NSString*)aString
@@ -273,7 +272,7 @@ intAccessor( indentAmount , setIndentAmount )
 		[aString getCString:stringbytes maxLength:stringlen+10 encoding:NSUTF8StringEncoding];
 		stringbytes[stringlen]=0;
 	}
-	[self appendBytes:stringbytes length:stringlen];
+    TARGET_APPEND(stringbytes, stringlen);
 	if ( mallocedbytes ) {
 		free(mallocedbytes);
 	}
@@ -287,7 +286,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeData:(NSData*)data
 {
-    [self appendBytes:[data bytes] length:[data length]];
+    TARGET_APPEND([data bytes], [data length]);
 }
 
 -(void)printf:(NSString*)format,...
@@ -542,6 +541,7 @@ idAccessor( finalFileName, setFinalFileName )
 		[NSException raise:@"openfailure" format:@"%@ failed to open %@, error: %s",
 			[self class],tempName,strerror(errno)];
 	}
+//  setbuffer( f, NULL, 128 * 1024 );
     target = [self fileTarget:f];
     if ( atomic ) {
         [target setFinalFileName:filename];
@@ -558,14 +558,8 @@ idAccessor( finalFileName, setFinalFileName )
 
 -(void)appendBytes:(const void*)bytes length:(unsigned int)len
 {
-    NSAssert2( outfile != NULL,@"outfile is NULL, %@=%p",[self class],self );
-    if ( NO && len < 5 ) {
-        while (len--) {
-            putc( *(unsigned char*)bytes++, outfile );
-        }
-    } else {
-        fwrite( bytes, len,1,outfile );
-    }
+//    NSAssert2( outfile != NULL,@"outfile is NULL, %@=%p",[self class],self );
+    fwrite( bytes, len,1,outfile );
 }
 
 -(NSUInteger)length
