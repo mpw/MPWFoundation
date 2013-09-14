@@ -47,6 +47,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #define toBool(x)	[x boolValue]
 //#define toString(x)	[x stringValue]
 
+#if !__has_feature(objc_arc)
 #define ASSIGN_ID(var,value)\
     {\
         id tempValue=(value);\
@@ -57,7 +58,18 @@ THE POSSIBILITY OF SUCH DAMAGE.
 			[var release]; \
 		var = tempValue; \
 	} \
-    }\
+    }
+#else
+#define ASSIGN_ID(var,value)    var=value
+#endif
+
+#ifndef AUTORELEASE
+#if !__has_feature(objc_arc)
+#define AUTORELEASE(x)  ([(x) autorelease])
+#else
+#define AUTORELEASE(x)  (x)
+#endif
+#endif
 
 
 #define	setAccessor( type, var,setVar ) \
@@ -133,6 +145,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
      -(scalarType)var { scalarType temp=0;  [[someDict objectForKey:@""#var] getValue:&temp]; return temp; }\
      -(void)setVar:(scalarType)newValue {  NSValue *temp=[NSValue valueWithBytes:&newValue objCType:@encode(scalarType)]; [someDict setObject:temp forKey:@""#var]; } \
 
+#ifndef CONVENIENCE
+#define CONVENIENCE( sel, initsel ) \
++(instancetype)sel { \
+  return AUTORELEASE([[self alloc] initsel]); \
+} 
+
+#define SHORTCONVENIENCE( name, initsel )  CONVENIENCE( name##initsel , init##initself )
+#endif
 
 
 //--- compatibility:
@@ -143,20 +163,26 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 //---- RETAIN/RELEASE Macros for GNUStep compatibility
 
+
 #ifndef RETAIN
+#if !__has_feature(objc_arc)
 #define RETAIN(x)  ([(x) retain])
+#else
+#define RETAIN(x)   (x)
+#endif
 #endif
 
 #ifndef RELEASE
+#if !__has_feature(objc_arc)
 #define RELEASE(x)  ([(x) release])
+#else
+#define RELEASE(x)   (x)
+#endif
 #endif
 
-#ifndef AUTORELEASE
-#define AUTORELEASE(x)  ([(x) autorelease])
-#endif
 
 #ifndef DESTROY
-#define DESTROY(x)  ([(x) release])
+#define DESTROY(x)  RELEASE(x)
 #endif
 
 #ifndef ASSIGN
@@ -166,5 +192,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #ifndef ASSIGNCOPY
 #define ASSIGNCOPY(var,value) ASSIGN(var,[(value) copy])
 #endif
+
 
 #endif

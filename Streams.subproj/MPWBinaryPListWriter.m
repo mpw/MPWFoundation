@@ -244,6 +244,30 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     INTEXPECT([[a lastObject] intValue], 42, @"array with 2 values");
 }
 
++(void)testWriteNestedArray
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    [writer writeHeader];
+    [writer beginArray];
+    [writer writeAndRecordTaggedInteger:31];
+    [writer beginArray];
+    [writer writeAndRecordTaggedInteger:51];
+    [writer writeAndRecordTaggedInteger:123];
+    [writer endArray];
+    [writer writeAndRecordTaggedInteger:42];
+    [writer endArray];
+    [writer flush];
+    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
+    NSArray *a=[self _plistForStream:writer];
+    NSLog(@"a: %@",a);
+    INTEXPECT([a count], 3, @"top level array count");
+    NSArray *nested=[a objectAtIndex:1];
+    INTEXPECT([nested count], 2, @"nested array count");
+    INTEXPECT([[a objectAtIndex:0] intValue], 31, @"array with 2 values");
+    INTEXPECT([[a lastObject] intValue], 42, @"array with 2 values");
+    INTEXPECT([[nested objectAtIndex:0] intValue], 51, @"array with 2 values");
+    INTEXPECT([[nested lastObject] intValue], 123, @"array with 2 values");
+}
 
 +testSelectors
 {

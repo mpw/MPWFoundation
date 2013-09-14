@@ -184,6 +184,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 
 -(BOOL)isMPWObject { return YES; }
 
+#if 0           // we no longer do this, I think...
 +(void)initialize
 {
     static BOOL inited=NO;
@@ -202,6 +203,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 {
     INIT_LOCK( retain_lock );
 }
+#endif 
 
 + alloc
 {

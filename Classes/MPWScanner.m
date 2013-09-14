@@ -140,9 +140,9 @@ idAccessor( dataSource, setDataSource )
 
 -(void)validate
 {
-	if ( [[self data] length] == 0 ) {
-		NSLog(@"invalid scanner for 0-length data");
-	}
+//	if ( [[self data] length] == 0 ) {
+//		NSLog(@"invalid scanner for 0-length data");
+//	}
 	[[self data] validate];
 }
 
