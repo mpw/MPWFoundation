@@ -53,4 +53,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)addObject:anObject;
 -(void)replaceIntegerAtIndex:(unsigned)anIndex withInteger:(int)anInt;
 -(NSUInteger)count;
+-(void)reset;
+
 @end

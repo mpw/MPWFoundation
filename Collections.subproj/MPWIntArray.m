@@ -132,6 +132,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	return count;
 }
 
+-(void)reset
+{
+    count=0;
+}
+
 -description
 {
 	if ( [self count] ) {
