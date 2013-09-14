@@ -73,12 +73,19 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 }
 
 
--(void)writeIntArray:(MPWIntArray*)array numBytes:(int)numBytes
+-(void)writeIntArray:(MPWIntArray*)array offset:(int)start skip:(int)stride numBytes:(int)numBytes
 {
-    for (int i=0;i<[array count];i++) {
-//        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
+    for (int i=start;i<[array count];i+=stride) {
+        //        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
         [self writeInteger:[array integerAtIndex:i] numBytes:numBytes];
     }
+}
+
+
+
+-(void)writeIntArray:(MPWIntArray*)array numBytes:(int)numBytes
+{
+    [self writeIntArray:array offset:0 skip:1 numBytes:numBytes];
 }
 
 
@@ -124,7 +131,13 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 -(void)beginArray
 {
     [self pushIndexStack];
-//    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
+    //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
+}
+
+-(void)beginDictionary
+{
+    [self pushIndexStack];
+    //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
 }
 
 -(void)writeHeader:(int)headerByte length:(int)length
@@ -140,6 +153,12 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     }
 }
 
+-(void)writeInt:(int)anInteger forKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+    [self writeAndRecordTaggedInteger:anInteger];
+}
+
 -(void)endArray
 {
     @autoreleasepool {
@@ -147,6 +166,18 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
         [self _recordByteOffset];
         [self writeHeader:0xa0 length:[arrayIndexes count]];
         [self writeIntArray:arrayIndexes numBytes:[self inlineOffsetEntryByteSize]];
+    }
+}
+
+
+-(void)endDictionary
+{
+    @autoreleasepool {
+        MPWIntArray *arrayIndexes=[self popIndexStack];
+        [self _recordByteOffset];
+        [self writeHeader:0xd0 length:[arrayIndexes count]/2];
+        [self writeIntArray:arrayIndexes offset:0 skip:2 numBytes:[self inlineOffsetEntryByteSize]];
+        [self writeIntArray:arrayIndexes offset:1 skip:2 numBytes:[self inlineOffsetEntryByteSize]];
     }
 }
 
@@ -361,6 +392,24 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     IDEXPECT([nested lastObject], @"nested", @"array with 2 values");
 }
 
+
++(void)testSimpleDict
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    [writer writeHeader];
+    [writer beginDictionary];
+    [writer writeInt:42 forKey:@"theAnswer"];
+    [writer endDictionary];
+     [writer flush];
+    //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
+    NSDictionary *a=[self _plistForStream:writer];
+    INTEXPECT([a count], 1, @"size of dict");
+    IDEXPECT([a objectForKey:@"theAnswer"], @42, @"theAnswer");
+    //    NSLog(@"a: %@",a);
+}
+
+
+
 +testSelectors
 {
     return @[
@@ -370,6 +419,7 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
              @"testWriteNestedArray",
              @"testWriteString",
              @"testArrayWithStringsAndInts",
+             @"testSimpleDict",
              ];
 }
 
