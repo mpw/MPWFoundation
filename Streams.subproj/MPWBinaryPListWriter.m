@@ -10,6 +10,52 @@
 #import "AccessorMacros.h"
 #import "MPWIntArray.h"
 
+/*
+ From CFBinaryPlist.c
+ 
+ HEADER
+ magic number ("bplist")
+ file format version
+ 
+ OBJECT TABLE
+ variable-sized objects
+ 
+ Object Formats (marker byte followed by additional info in some cases)
+ null	0000 0000
+ bool	0000 1000			// false
+ bool	0000 1001			// true
+ fill	0000 1111			// fill byte
+ int	0001 nnnn	...		// # of bytes is 2^nnnn, big-endian bytes
+ real	0010 nnnn	...		// # of bytes is 2^nnnn, big-endian bytes
+ date	0011 0011	...		// 8 byte float follows, big-endian bytes
+ data	0100 nnnn	[int]	...	// nnnn is number of bytes unless 1111 then int count follows, followed by bytes
+ string	0101 nnnn	[int]	...	// ASCII string, nnnn is # of chars, else 1111 then int count, then bytes
+ string	0110 nnnn	[int]	...	// Unicode string, nnnn is # of chars, else 1111 then int count, then big-endian 2-byte uint16_t
+ 0111 xxxx			// unused
+ uid	1000 nnnn	...		// nnnn+1 is # of bytes
+ 1001 xxxx			// unused
+ array	1010 nnnn	[int]	objref*	// nnnn is count, unless '1111', then int count follows
+ 1011 xxxx			// unused
+ set	1100 nnnn	[int]	objref* // nnnn is count, unless '1111', then int count follows
+ dict	1101 nnnn	[int]	keyref* objref*	// nnnn is count, unless '1111', then int count follows
+ 1110 xxxx			// unused
+ 1111 xxxx			// unused
+ 
+ OFFSET TABLE
+ list of ints, byte size of which is given in trailer
+ -- these are the byte offsets into the file
+ -- number of these is in the trailer
+ 
+ TRAILER
+ byte size of offset ints in offset table
+ byte size of object refs in arrays and dicts
+ number of offsets in offset table (also is number of objects)
+ element # in offset table which is top level object
+ offset table offset
+ 
+ */
+
+
 @implementation MPWBinaryPListWriter
 
 objectAccessor(MPWIntArray, offsets, setOffsets)
@@ -30,7 +76,7 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 -(void)writeIntArray:(MPWIntArray*)array numBytes:(int)numBytes
 {
     for (int i=0;i<[array count];i++) {
-        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
+//        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
         [self writeInteger:[array integerAtIndex:i] numBytes:numBytes];
     }
 }
@@ -78,28 +124,29 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 -(void)beginArray
 {
     [self pushIndexStack];
-    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
+//    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
+}
+
+-(void)writeHeader:(int)headerByte length:(int)length
+{
+    unsigned char header=headerByte;
+    if ( length <= 15 ) {
+        header=header | length;
+        TARGET_APPEND(&header, 1);
+    } else {
+        header=header | 0xf;
+        TARGET_APPEND(&header, 1);
+        [self writeInteger:length numBytes:4];
+    }
 }
 
 -(void)endArray
 {
     @autoreleasepool {
-        unsigned char header=0xa0;
         MPWIntArray *arrayIndexes=[self popIndexStack];
-        NSLog(@"array indexes after popping: %@",arrayIndexes);
-      int numOffsets=[arrayIndexes count];
         [self _recordByteOffset];
-        if ( numOffsets <= 15 ) {
-            header=header | numOffsets;
-            TARGET_APPEND(&header, 1);
-        } else {
-            header=header | 0xf;
-            TARGET_APPEND(&header, 1);
-            [self writeInteger:numOffsets numBytes:4];
-        }
-        NSLog(@"write array indexes: %@",arrayIndexes);
+        [self writeHeader:0xa0 length:[arrayIndexes count]];
         [self writeIntArray:arrayIndexes numBytes:[self inlineOffsetEntryByteSize]];
-        NSLog(@"done with endArray");
     }
 }
 
@@ -144,6 +191,14 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     TARGET_APPEND(buffer, numBytes+1);
 }
 
+-(void)writeString:(NSString*)aString
+{
+    [self _recordByteOffset];
+    NSData *d=[aString dataUsingEncoding:NSASCIIStringEncoding];
+    [self writeHeader:0x50 length:[aString length]];
+    TARGET_APPEND([d bytes], [d length]);
+}
+
 -(int)offsetTableEntryByteSize
 {
     return 4;
@@ -157,7 +212,7 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 -(void)writeOffsetTable
 {
     offsetOfOffsetTable=[self length];
-    NSLog(@"offsets: %@",offsets);
+//    NSLog(@"offsets: %@",offsets);
     [self writeIntArray:offsets numBytes:[self offsetTableEntryByteSize]];
 }
 
@@ -183,9 +238,9 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 
 -(void)flush
 {
-    NSLog(@"writeOffsetTable: %@",offsets);
+//    NSLog(@"writeOffsetTable: %@",offsets);
     [self writeOffsetTable];
-    NSLog(@"writeTrailer");
+//    NSLog(@"writeTrailer");
     [self writeTrailer];
 }
 
@@ -236,9 +291,9 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     [writer writeAndRecordTaggedInteger:42];
     [writer endArray];
     [writer flush];
-    [[writer target] writeToFile:@"/tmp/fourtytwo-array.plist" atomically:YES];
+//    [[writer target] writeToFile:@"/tmp/fourtytwo-array.plist" atomically:YES];
     NSArray *a=[self _plistForStream:writer];
-    NSLog(@"a: %@",a);
+//    NSLog(@"a: %@",a);
     INTEXPECT([a count], 2, @"array with 2 values");
     INTEXPECT([[a objectAtIndex:0] intValue], 31, @"array with 2 values");
     INTEXPECT([[a lastObject] intValue], 42, @"array with 2 values");
@@ -257,9 +312,9 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     [writer writeAndRecordTaggedInteger:42];
     [writer endArray];
     [writer flush];
-    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
+//    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
     NSArray *a=[self _plistForStream:writer];
-    NSLog(@"a: %@",a);
+//    NSLog(@"a: %@",a);
     INTEXPECT([a count], 3, @"top level array count");
     NSArray *nested=[a objectAtIndex:1];
     INTEXPECT([nested count], 2, @"nested array count");
@@ -269,6 +324,43 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     INTEXPECT([[nested lastObject] intValue], 123, @"array with 2 values");
 }
 
++(void)testWriteString
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    [writer writeHeader];
+    [writer writeString:@"Hello World!"];
+    [writer flush];
+    NSString *s=[self _plistForStream:writer];
+    IDEXPECT(s , @"Hello World!", @"the string I wrote");
+}
+
+
+
++(void)testArrayWithStringsAndInts
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    [writer writeHeader];
+    [writer beginArray];
+    [writer writeString:@"What's up doc?"];
+    [writer beginArray];
+    [writer writeAndRecordTaggedInteger:51];
+    [writer writeString:@"nested"];
+    [writer endArray];
+    [writer writeAndRecordTaggedInteger:42];
+    [writer endArray];
+    [writer flush];
+    //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
+    NSArray *a=[self _plistForStream:writer];
+    //    NSLog(@"a: %@",a);
+    INTEXPECT([a count], 3, @"top level array count");
+    NSArray *nested=[a objectAtIndex:1];
+    INTEXPECT([nested count], 2, @"nested array count");
+    IDEXPECT([a objectAtIndex:0], @"What's up doc?", @"array with 2 values");
+    INTEXPECT([[a lastObject] intValue], 42, @"array with 2 values");
+    INTEXPECT([[nested objectAtIndex:0] intValue], 51, @"array with 2 values");
+    IDEXPECT([nested lastObject], @"nested", @"array with 2 values");
+}
+
 +testSelectors
 {
     return @[
@@ -276,6 +368,8 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
              @"testWriteSingleIntegerValue",
              @"testWriteArrayWithTwoElements",
              @"testWriteNestedArray",
+             @"testWriteString",
+             @"testArrayWithStringsAndInts",
              ];
 }
 
