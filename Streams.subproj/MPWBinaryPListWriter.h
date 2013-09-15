@@ -11,15 +11,17 @@
 @class MPWIntArray;
 
 
-
 @interface MPWBinaryPListWriter : MPWByteStream
 {
     MPWIntArray *offsets;
     int         offsetOfOffsetTable;
-    MPWIntArray *currentIndexes;
+    __unsafe_unretained MPWIntArray *currentIndexes;
     NSMutableArray *indexStack;
     NSMutableArray *reserveIndexes;
     NSMapTable     *objectTable;
+    BOOL        headerWritten;
+    int         inlineOffsetByteSize;
+    
 }
 
 typedef void (^WriterBlock)(MPWBinaryPListWriter* writer,id randomArgument);
@@ -33,5 +35,7 @@ typedef void (^WriterBlock)(MPWBinaryPListWriter* writer,id randomArgument);
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
 
 -(void)writeInt:(int)anInt forKey:(NSString*)aKey;
-
+-(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;
+-(void)writeInteger:(long)anInt;
+-(void)writeFloat:(float)aFloat;
 @end

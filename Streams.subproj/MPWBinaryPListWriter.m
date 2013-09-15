@@ -61,22 +61,31 @@
 objectAccessor(MPWIntArray, offsets, setOffsets)
 objectAccessor(NSMutableArray, indexStack, setIndexStack)
 objectAccessor(NSMutableArray, reserveIndexes, setResrveIndexes)
-objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
+scalarAccessor(MPWIntArray*, currentIndexes, setCurrentIndexes)
 objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(id)initWithTarget:(id)aTarget
 {
 
     self=[super initWithTarget:aTarget];
+    if (self) {
+        inlineOffsetByteSize=4;
+    }
     [self setOffsets:[MPWIntArray array]];
     [self setIndexStack:[NSMutableArray array]];
     [self setResrveIndexes:[NSMutableArray array]];
     [self setObjectTable:[NSMapTable mapTableWithKeyOptions:NSPointerFunctionsOpaquePersonality valueOptions:NSPointerFunctionsOpaquePersonality]];
+    [self writeHeader];
+    
     return self;
 }
 
 
-
+-(void)setTarget:(id)newVar
+{
+    [super setTarget:newVar];
+    headerWritten=NO;
+}
 
 -(MPWIntArray*)getIndexes
 {
@@ -92,24 +101,19 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(void)pushIndexStack
 {
-    if ( currentIndexes) {
-        [indexStack addObject:currentIndexes];
-    }
-    [self setCurrentIndexes:[self getIndexes]];
+    currentIndexes=[self getIndexes];
+    [indexStack addObject:currentIndexes];
 }
 
 -(MPWIntArray*)popIndexStack
 {
-    id lastObject=[currentIndexes retain];
+    id lastObject=currentIndexes;
     if ( lastObject) {
         [reserveIndexes addObject:lastObject];
     }
-    id fromStack=[indexStack lastObject];
-    [self setCurrentIndexes:fromStack];
-    if ( fromStack) {
-        [indexStack removeLastObject];
-    }
-    return [lastObject autorelease];
+    [indexStack removeLastObject];
+    currentIndexes=[indexStack lastObject];
+    return lastObject;
 }
 
 -(void)addIndex:(int)anIndex
@@ -126,8 +130,8 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock
 {
     [self beginArray];
-    for (int i=0;i<[anArray count];i++) {
-        aBlock(self,[anArray objectAtIndex:i]);
+    for ( id o in anArray){
+        aBlock(self,o);
     }
     [self endArray];
 }
@@ -136,7 +140,6 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 -(void)beginDictionary
 {
     [self pushIndexStack];
-    //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
 }
 
 static inline int integerToBuffer( unsigned char *buffer, long anInt, int numBytes  )
@@ -210,7 +213,13 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 -(void)writeInt:(int)anInteger forKey:(NSString*)aKey
 {
     [self writeString:aKey];
-    [self writeAndRecordTaggedInteger:anInteger];
+    [self writeInteger:anInteger];
+}
+
+-(void)writeFloat:(float)aFloat forKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+    [self writeFloat:aFloat];
 }
 
 -(void)endArray
@@ -219,32 +228,36 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
         MPWIntArray *arrayIndexes=[self popIndexStack];
         [self _recordByteOffset];
         [self writeHeader:0xa0 length:[arrayIndexes count]];
-        [self writeIntArray:arrayIndexes numBytes:[self inlineOffsetEntryByteSize]];
+        [self writeIntArray:arrayIndexes numBytes:inlineOffsetByteSize];
     }
 }
 
 
 -(void)endDictionary
 {
-    @autoreleasepool {
-        MPWIntArray *arrayIndexes=[self popIndexStack];
-        [self _recordByteOffset];
-        [self writeHeader:0xd0 length:[arrayIndexes count]/2];
-        [self writeIntArray:arrayIndexes offset:0 skip:2 numBytes:[self inlineOffsetEntryByteSize]];
-        [self writeIntArray:arrayIndexes offset:1 skip:2 numBytes:[self inlineOffsetEntryByteSize]];
-    }
+
+    MPWIntArray *arrayIndexes=[self popIndexStack];
+    [self _recordByteOffset];
+    int len=[arrayIndexes count]/2;
+    [self writeHeader:0xd0 length:len];
+    [self writeIntArray:arrayIndexes offset:0 skip:2 numBytes:inlineOffsetByteSize];
+    [self writeIntArray:arrayIndexes offset:1 skip:2 numBytes:inlineOffsetByteSize];
 }
 
 
 -(void)writeHeader
 {
-    TARGET_APPEND("bplist00", 8);
+    if ( !headerWritten) {
+        TARGET_APPEND("bplist00", 8);
+        headerWritten=YES;
+    }
 }
 
 -(void)_recordByteOffset
 {
+    
     [currentIndexes addInteger:[offsets count]];
-    [offsets addInteger:[self length]];
+    [offsets addInteger:totalBytes];
 }
 
 -(int)currentObjectIndex
@@ -253,7 +266,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 }
 
 
--(void)writeAndRecordTaggedInteger:(long)anInt
+-(void)writeInteger:(long)anInt
 {
     unsigned char buffer[16];
     int log2ofNumBytes=2;
@@ -267,10 +280,24 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     TARGET_APPEND(buffer, numBytes+1);
 }
 
+-(void)writeFloat:(float)aFloat
+{
+    unsigned char buffer[16];
+    int log2ofNumBytes=2;
+    int numBytes=4;
+    unsigned char *floatPtr=(unsigned char*)&aFloat;
+    [self _recordByteOffset];
+    buffer[0]=0x20 + log2ofNumBytes;
+    for (int i=0;i<numBytes;i++) {
+        buffer[i+1]=floatPtr[numBytes-i-1];
+    }
+    TARGET_APPEND(buffer, numBytes+1);
+}
+
 -(void)writeString:(NSString*)aString
 {
     int offset=0;
-    offset=[objectTable objectForKey:aString];
+    offset=(int)[objectTable objectForKey:aString];
     
     if ( offset ) {
         [currentIndexes addInteger:offset];
@@ -281,16 +308,11 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
         [aString getBytes:buffer maxLength:l usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
         [self writeHeader:0x50 length:[aString length]];
         TARGET_APPEND(buffer, l);
-        [objectTable setObject:(id)[currentIndexes lastInteger] forKey:aString];
+        [objectTable setObject:(id)(long)[currentIndexes lastInteger] forKey:aString];
     }
 }
 
 -(int)offsetTableEntryByteSize
-{
-    return 4;
-}
-
--(int)inlineOffsetEntryByteSize
 {
     return 4;
 }
@@ -316,7 +338,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 {
     TARGET_APPEND("\0\0\0\0\0\0", 6);
     [self writeInteger:[self offsetTableEntryByteSize] numBytes:1];
-    [self writeInteger:[self inlineOffsetEntryByteSize] numBytes:1];
+    [self writeInteger:inlineOffsetByteSize numBytes:1];
     [self writeInteger:[self count] numBytes:8]; // num objs in table
     [self writeInteger:[self rootObjectIndex] numBytes:8];       // root
     [self writeInteger:offsetOfOffsetTable numBytes:8];       // root
@@ -328,6 +350,15 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     [self writeOffsetTable];
 //    NSLog(@"writeTrailer");
     [self writeTrailer];
+}
+
+-(void)dealloc
+{
+    [indexStack release];
+    [offsets release];
+    [reserveIndexes release];
+    [objectTable release];
+    [super dealloc];
 }
 
 @end
@@ -344,11 +375,11 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     return plist;
 }
 
-+(void)testWriteHeader
++(void)testHeaderWrittenAutomaticallyAndIgnoredAfter
 {
     MPWBinaryPListWriter *writer=[self stream];
-    INTEXPECT( [[writer target] length],0,@"data written before");
-    INTEXPECT([writer length], 0, @"bytes written before");
+    INTEXPECT( [[writer target] length],8,@"data written before");
+    INTEXPECT([writer length], 8, @"bytes written before");
     [writer writeHeader];
     INTEXPECT([writer length], 8, @"bytes written after header");
 }
@@ -357,14 +388,23 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 +(void)testWriteSingleIntegerValue
 {
     MPWBinaryPListWriter *writer=[self stream];
-    [writer writeHeader];
-    [writer writeAndRecordTaggedInteger:42];
+    [writer writeInteger:42];
     INTEXPECT([[writer offsets] count], 1, @"should have recored an offset");
     INTEXPECT([[writer offsets] integerAtIndex:0], 8, @"offset of first object");
     [writer flush];
-//    [[writer target] writeToFile:@"/tmp/fourtytwo.plist" atomically:YES];
+    //    [[writer target] writeToFile:@"/tmp/fourtytwo.plist" atomically:YES];
     NSNumber *n=[self _plistForStream:writer];
     INTEXPECT([n intValue], 42, @"encoded plist value");
+}
+
+
++(void)testWriteSingleFloatValue
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    [writer writeFloat:3.14159];
+    [writer flush];
+    NSNumber *n=[self _plistForStream:writer];
+    FLOATEXPECTTOLERANCE([n floatValue], 3.14159, 0.000001, @"encoded");
 }
 
 
@@ -373,8 +413,8 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     MPWBinaryPListWriter *writer=[self stream];
     [writer writeHeader];
     [writer beginArray];
-    [writer writeAndRecordTaggedInteger:31];
-    [writer writeAndRecordTaggedInteger:42];
+    [writer writeInteger:31];
+    [writer writeInteger:42];
     [writer endArray];
     [writer flush];
 //    [[writer target] writeToFile:@"/tmp/fourtytwo-array.plist" atomically:YES];
@@ -390,12 +430,12 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     MPWBinaryPListWriter *writer=[self stream];
     [writer writeHeader];
     [writer beginArray];
-    [writer writeAndRecordTaggedInteger:31];
+    [writer writeInteger:31];
     [writer beginArray];
-    [writer writeAndRecordTaggedInteger:51];
-    [writer writeAndRecordTaggedInteger:123];
+    [writer writeInteger:51];
+    [writer writeInteger:123];
     [writer endArray];
-    [writer writeAndRecordTaggedInteger:42];
+    [writer writeInteger:42];
     [writer endArray];
     [writer flush];
 //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
@@ -429,10 +469,10 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     [writer beginArray];
     [writer writeString:@"What's up doc?"];
     [writer beginArray];
-    [writer writeAndRecordTaggedInteger:51];
+    [writer writeInteger:51];
     [writer writeString:@"nested"];
     [writer endArray];
-    [writer writeAndRecordTaggedInteger:42];
+    [writer writeInteger:42];
     [writer endArray];
     [writer flush];
     //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
@@ -471,7 +511,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     NSArray *argument=@[ @1 , @5, @52 ];
     [writer writeHeader];
     [writer writeArray:argument usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
-        [writer writeAndRecordTaggedInteger:[randomArgument intValue]];
+        [writer writeInteger:[randomArgument intValue]];
     }];
     [writer flush];
     NSArray *a=[self _plistForStream:writer];
@@ -490,7 +530,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     }
     [writer writeHeader];
     [writer writeArray:input usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
-        [writer writeAndRecordTaggedInteger:[randomArgument intValue]];
+        [writer writeInteger:[randomArgument intValue]];
     }];
     [writer flush];
     NSArray *a=[self _plistForStream:writer];
@@ -504,8 +544,9 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 +testSelectors
 {
     return @[
-             @"testWriteHeader",
+             @"testHeaderWrittenAutomaticallyAndIgnoredAfter",
              @"testWriteSingleIntegerValue",
+             @"testWriteSingleFloatValue",
              @"testWriteArrayWithTwoElements",
              @"testWriteNestedArray",
              @"testWriteString",
