@@ -10,6 +10,8 @@
 
 @class MPWIntArray;
 
+//  streamWriterMessage:  writeOnPlist:
+
 
 @interface MPWBinaryPListWriter : MPWByteStream
 {
@@ -33,6 +35,7 @@ typedef void (^WriterBlock)(MPWBinaryPListWriter* writer,id randomArgument);
 -(void)endArray;
 
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock;
 
 -(void)writeInt:(int)anInt forKey:(NSString*)aKey;
 -(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;

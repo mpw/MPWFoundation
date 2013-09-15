@@ -10,6 +10,12 @@
 #import "AccessorMacros.h"
 #import "MPWIntArray.h"
 
+
+@interface NSObject(plistWriting)
+
+-(void)writeOnPlist:aPlist;
+
+@end
 /*
  From CFBinaryPlist.c
  
@@ -64,6 +70,11 @@ objectAccessor(NSMutableArray, reserveIndexes, setResrveIndexes)
 scalarAccessor(MPWIntArray*, currentIndexes, setCurrentIndexes)
 objectAccessor(NSMapTable, objectTable, setObjectTable)
 
+-(SEL)streamWriterMessage
+{
+    return @selector(writeOnPlist:);
+}
+
 -(id)initWithTarget:(id)aTarget
 {
 
@@ -87,22 +98,23 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
     headerWritten=NO;
 }
 
--(MPWIntArray*)getIndexes
+-(MPWIntArray*)newIndexes
 {
-    MPWIntArray *result=[reserveIndexes lastObject];
+    MPWIntArray *result=[[reserveIndexes lastObject] retain];
     if ( result ) {
         [result reset];
         [reserveIndexes removeLastObject];
     } else {
-        result=[MPWIntArray array];
+        result=[MPWIntArray new];
     }
     return result;
 }
 
 -(void)pushIndexStack
 {
-    currentIndexes=[self getIndexes];
+    currentIndexes=[self newIndexes];
     [indexStack addObject:currentIndexes];
+    [currentIndexes release];
 }
 
 -(MPWIntArray*)popIndexStack
@@ -134,6 +146,34 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
         aBlock(self,o);
     }
     [self endArray];
+}
+
+-(void)writeDictionary:(NSDictionary *)dict
+{
+    [self beginDictionary];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+        [self writeString:key];
+        [self writeObject:obj ];
+    }];
+    [self endDictionary];
+}
+
+-(void)writeArray:(NSArray *)anArray
+{
+    [self writeArray:anArray usingElementBlock:^( MPWBinaryPListWriter *w,id object){
+        [w writeObject:object];
+    }];
+}
+
+
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock
+{
+    [self beginDictionary];
+    @try {
+        contentBlock(self,anObject);
+    } @finally {
+        [self endDictionary];
+    }
 }
 
 
@@ -220,6 +260,12 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 {
     [self writeString:aKey];
     [self writeFloat:aFloat];
+}
+
+-(void)writeObject:(id)anObject forKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+    [self writeObject:anObject];
 }
 
 -(void)endArray
@@ -368,11 +414,20 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 
 @implementation MPWBinaryPListWriter(tests)
 
-+_plistForStream:(MPWBinaryPListWriter*)aStream
++_plistForData:(NSData*)d
 {
-    NSData *d=[aStream target];
     id plist=[NSPropertyListSerialization propertyListWithData:d options:0 format:NULL error:nil];
     return plist;
+}
+
++_plistForStream:(MPWBinaryPListWriter*)aStream
+{
+    return [self _plistForData:[aStream target]];
+}
+
++_plistViaStream:(id)aPlist
+{
+    return [self _plistForData:[self process:aPlist]];
 }
 
 +(void)testHeaderWrittenAutomaticallyAndIgnoredAfter
@@ -402,7 +457,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 {
     MPWBinaryPListWriter *writer=[self stream];
     [writer writeFloat:3.14159];
-    [writer flush];
+    [writer close];
     NSNumber *n=[self _plistForStream:writer];
     FLOATEXPECTTOLERANCE([n floatValue], 3.14159, 0.000001, @"encoded");
 }
@@ -465,7 +520,6 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 +(void)testArrayWithStringsAndInts
 {
     MPWBinaryPListWriter *writer=[self stream];
-    [writer writeHeader];
     [writer beginArray];
     [writer writeString:@"What's up doc?"];
     [writer beginArray];
@@ -491,7 +545,6 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 +(void)testSimpleDict
 {
     MPWBinaryPListWriter *writer=[self stream];
-    [writer writeHeader];
     [writer beginDictionary];
     [writer writeInt:42 forKey:@"theAnswer"];
     [writer endDictionary];
@@ -509,7 +562,6 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 {
     MPWBinaryPListWriter *writer=[self stream];
     NSArray *argument=@[ @1 , @5, @52 ];
-    [writer writeHeader];
     [writer writeArray:argument usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
         [writer writeInteger:[randomArgument intValue]];
     }];
@@ -528,18 +580,38 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     for (int i=0;i<15;i++) {
         [input addObject:@(i)];
     }
-    [writer writeHeader];
     [writer writeArray:input usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
         [writer writeInteger:[randomArgument intValue]];
     }];
-    [writer flush];
+    [writer close];
     NSArray *a=[self _plistForStream:writer];
     INTEXPECT([a count], 15, @"size of array");
     IDEXPECT([a lastObject], @14, @"theAnswer");
     //    NSLog(@"a: %@",a);
 }
 
++(void)testWriteObjectAndStreamMessage
+{
+    IDEXPECT([self _plistViaStream:@"Hello World!"], @"Hello World!",@"process single string");
 
+    INTEXPECT([[self _plistViaStream:@42] intValue], 42,@"process single integer");
+    FLOATEXPECTTOLERANCE([[self _plistViaStream:@3.14159] floatValue], 3.14159,0.001,@"process single float");
+
+}
+
++(void)testWriteWriteGenericArray
+{
+    NSArray *a=@[ @"abced", @42, @2.713 ];
+    NSArray *result=[self _plistViaStream:a];
+    INTEXPECT([result count], 3, @"result count");
+}
+
++(void)testWriteWriteGenericDictionary
+{
+    NSDictionary *a=@{ @"a": @"hello world", @"b": @42 };
+    NSArray *result=[self _plistViaStream:a];
+    INTEXPECT([result count], 2, @"result count");
+}
 
 +testSelectors
 {
@@ -554,8 +626,36 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
              @"testSimpleDict",
              @"testArrayWriter",
              @"testLargerArray",
+             @"testWriteObjectAndStreamMessage",
+             @"testWriteWriteGenericArray",
+             @"testWriteWriteGenericDictionary",
              ];
 }
 
 @end
+
+@implementation NSObject(plistWriting)
+
+
+-(void)writeOnPlist:(MPWBinaryPListWriter*)aPlist
+{
+    [self writeOnByteStream:aPlist];
+}
+
+@end
+
+@implementation NSNumber(plistWriting)
+
+-(void)writeOnPlist:(MPWBinaryPListWriter*)aPlist
+{
+    if ( CFNumberIsFloatType( (CFNumberRef)self) ) {
+        [aPlist writeFloat:[self floatValue]];
+    } else {
+        [aPlist writeInteger:[self longValue]];
+    }
+}
+
+
+@end
+
 
