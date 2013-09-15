@@ -97,7 +97,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)addInteger:(int)anInt
 {
-	[self addIntegers:&anInt count:1];
+	unsigned newCount=count+1;
+	if ( newCount >= capacity ) {
+		[self _growTo:newCount];
+	}
+    data[count]=anInt;
+    count=newCount;
 }
 
 -(void)addObject:anObject
