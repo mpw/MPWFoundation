@@ -137,6 +137,16 @@ THE POSSIBILITY OF SUCH DAMAGE.
     count=0;
 }
 
+-(int*)integers
+{
+    return data;
+}
+
+-(int)lastInteger
+{
+    return data[count-1];
+}
+
 -description
 {
 	if ( [self count] ) {

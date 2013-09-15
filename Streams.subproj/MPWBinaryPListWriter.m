@@ -62,31 +62,19 @@ objectAccessor(MPWIntArray, offsets, setOffsets)
 objectAccessor(NSMutableArray, indexStack, setIndexStack)
 objectAccessor(NSMutableArray, reserveIndexes, setResrveIndexes)
 objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
+objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(id)initWithTarget:(id)aTarget
 {
+
     self=[super initWithTarget:aTarget];
     [self setOffsets:[MPWIntArray array]];
     [self setIndexStack:[NSMutableArray array]];
     [self setResrveIndexes:[NSMutableArray array]];
+    [self setObjectTable:[NSMapTable mapTableWithKeyOptions:NSPointerFunctionsOpaquePersonality valueOptions:NSPointerFunctionsOpaquePersonality]];
     return self;
 }
 
-
--(void)writeIntArray:(MPWIntArray*)array offset:(int)start skip:(int)stride numBytes:(int)numBytes
-{
-    for (int i=start;i<[array count];i+=stride) {
-        //        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
-        [self writeInteger:[array integerAtIndex:i] numBytes:numBytes];
-    }
-}
-
-
-
--(void)writeIntArray:(MPWIntArray*)array numBytes:(int)numBytes
-{
-    [self writeIntArray:array offset:0 skip:1 numBytes:numBytes];
-}
 
 
 
@@ -94,6 +82,7 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 {
     MPWIntArray *result=[reserveIndexes lastObject];
     if ( result ) {
+        [result reset];
         [reserveIndexes removeLastObject];
     } else {
         result=[MPWIntArray array];
@@ -134,22 +123,87 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
 }
 
+-(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock
+{
+    [self beginArray];
+    for (int i=0;i<[anArray count];i++) {
+        aBlock(self,[anArray objectAtIndex:i]);
+    }
+    [self endArray];
+}
+
+
 -(void)beginDictionary
 {
     [self pushIndexStack];
     //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
 }
 
+static inline int integerToBuffer( unsigned char *buffer, long anInt, int numBytes  )
+{
+    for (int i=numBytes-1;i>=0;i--) {
+        buffer[i]=anInt & 0xff;
+        anInt>>=8;
+    }
+    return numBytes;
+}
+
+-(void)writeInteger:(long)anInt numBytes:(int)numBytes
+{
+    unsigned char buffer[16];
+    integerToBuffer(buffer, anInt, numBytes);
+    TARGET_APPEND(buffer, numBytes);
+}
+
+-(void)writeIntArray:(MPWIntArray*)array offset:(int)start skip:(int)stride numBytes:(int)numBytes
+{
+#define BUFSIZE  8000
+    unsigned char buffer[BUFSIZE];
+    unsigned char *cur=buffer;
+    int maxCount=[array count];
+    int *ptrs=[array integers];
+    for (int i=start;i<maxCount;i+=stride) {
+        //        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
+        cur+=integerToBuffer(cur, ptrs[i], numBytes);
+        if ( cur-buffer > BUFSIZ-100) {
+            TARGET_APPEND(buffer, cur-buffer);
+            cur=buffer;
+        }
+    }
+    TARGET_APPEND(buffer, cur-buffer);
+}
+
+
+
+-(void)writeIntArray:(MPWIntArray*)array numBytes:(int)numBytes
+{
+    [self writeIntArray:array offset:0 skip:1 numBytes:numBytes];
+}
+
+-(void)writeTaggedInteger:(long)anInt
+{
+    unsigned char buffer[16];
+    int log2ofNumBytes=2;
+    int numBytes=4;
+    buffer[0]=0x10 + log2ofNumBytes;
+    for (int i=numBytes-1;i>=0;i--) {
+        buffer[i+1]=anInt & 0xff;
+        anInt>>=8;
+    }
+    TARGET_APPEND(buffer, numBytes+1);
+}
+
+
 -(void)writeHeader:(int)headerByte length:(int)length
 {
     unsigned char header=headerByte;
-    if ( length <= 15 ) {
+    if ( length < 15 ) {
         header=header | length;
         TARGET_APPEND(&header, 1);
     } else {
         header=header | 0xf;
         TARGET_APPEND(&header, 1);
-        [self writeInteger:length numBytes:4];
+        [self writeTaggedInteger:length];
     }
 }
 
@@ -198,15 +252,6 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     return [offsets count];
 }
 
--(void)writeInteger:(long)anInt numBytes:(int)numBytes
-{
-    unsigned char buffer[16];
-    for (int i=numBytes-1;i>=0;i--) {
-        buffer[i]=anInt & 0xff;
-        anInt>>=8;
-    }
-    TARGET_APPEND(buffer, numBytes);
-}
 
 -(void)writeAndRecordTaggedInteger:(long)anInt
 {
@@ -224,10 +269,20 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
 
 -(void)writeString:(NSString*)aString
 {
-    [self _recordByteOffset];
-    NSData *d=[aString dataUsingEncoding:NSASCIIStringEncoding];
-    [self writeHeader:0x50 length:[aString length]];
-    TARGET_APPEND([d bytes], [d length]);
+    int offset=0;
+    offset=[objectTable objectForKey:aString];
+    
+    if ( offset ) {
+        [currentIndexes addInteger:offset];
+    } else {
+        [self _recordByteOffset];
+        int l=[aString length];
+        char buffer[ l + 1];
+        [aString getBytes:buffer maxLength:l usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
+        [self writeHeader:0x50 length:[aString length]];
+        TARGET_APPEND(buffer, l);
+        [objectTable setObject:(id)[currentIndexes lastInteger] forKey:aString];
+    }
 }
 
 -(int)offsetTableEntryByteSize
@@ -267,7 +322,7 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     [self writeInteger:offsetOfOffsetTable numBytes:8];       // root
 }
 
--(void)flush
+-(void)flushLocal
 {
 //    NSLog(@"writeOffsetTable: %@",offsets);
     [self writeOffsetTable];
@@ -400,11 +455,47 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
     [writer beginDictionary];
     [writer writeInt:42 forKey:@"theAnswer"];
     [writer endDictionary];
-     [writer flush];
+    [writer flush];
     //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
     NSDictionary *a=[self _plistForStream:writer];
     INTEXPECT([a count], 1, @"size of dict");
     IDEXPECT([a objectForKey:@"theAnswer"], @42, @"theAnswer");
+    //    NSLog(@"a: %@",a);
+}
+
+
+
++(void)testArrayWriter
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    NSArray *argument=@[ @1 , @5, @52 ];
+    [writer writeHeader];
+    [writer writeArray:argument usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
+        [writer writeAndRecordTaggedInteger:[randomArgument intValue]];
+    }];
+    [writer flush];
+    NSArray *a=[self _plistForStream:writer];
+    INTEXPECT([a count], 3, @"size of array");
+    IDEXPECT([a lastObject], @52, @"theAnswer");
+    //    NSLog(@"a: %@",a);
+}
+
+
++(void)testLargerArray
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    NSMutableArray *input=[NSMutableArray array];
+    for (int i=0;i<15;i++) {
+        [input addObject:@(i)];
+    }
+    [writer writeHeader];
+    [writer writeArray:input usingElementBlock:^(MPWBinaryPListWriter* writer,id randomArgument){
+        [writer writeAndRecordTaggedInteger:[randomArgument intValue]];
+    }];
+    [writer flush];
+    NSArray *a=[self _plistForStream:writer];
+    INTEXPECT([a count], 15, @"size of array");
+    IDEXPECT([a lastObject], @14, @"theAnswer");
     //    NSLog(@"a: %@",a);
 }
 
@@ -420,6 +511,8 @@ objectAccessor(MPWIntArray, currentIndexes, setCurrentIndexes)
              @"testWriteString",
              @"testArrayWithStringsAndInts",
              @"testSimpleDict",
+             @"testArrayWriter",
+             @"testLargerArray",
              ];
 }
 

@@ -328,10 +328,10 @@
 		1F75BBA312D2589800E7ABB4 /* MPWPListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */; };
 		1F75BBA412D2589800E7ABB4 /* MPWPListBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F75BBA512D2589800E7ABB4 /* MPWPListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */; };
-		1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; };
-		1F75FA6917E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; };
-		1F75FA6A17E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; };
-		1F75FA6B17E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; };
+		1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F75FA6917E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F75FA6A17E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F75FA6B17E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F75FA6C17E4908E00D43D15 /* MPWBinaryPListWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */; };
 		1F75FA6D17E4908E00D43D15 /* MPWBinaryPListWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */; };
 		1F75FA6E17E4908E00D43D15 /* MPWBinaryPListWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */; };

@@ -54,5 +54,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)replaceIntegerAtIndex:(unsigned)anIndex withInteger:(int)anInt;
 -(NSUInteger)count;
 -(void)reset;
-
+-(int*)integers;
+-(int)lastInteger;
 @end
