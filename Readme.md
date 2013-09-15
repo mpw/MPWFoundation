@@ -14,6 +14,7 @@ and Objective-C development in general.
     - collection processing with collect, select, do
     - threading with async, syncOnMainThread, asyncOnMainThread etc.
  - Object Streams and Byte Streams
+  - including a preliminary writer for binary property lists
  - Accessor Macros
  - Object Caches
  - Universal Serialization
@@ -25,5 +26,5 @@ and Objective-C development in general.
 
 License:
 
-MPWFoundation is Copyright 1998-2011 by Marcel Weiher.  
+MPWFoundation is Copyright 1998-2013 by Marcel Weiher.  
 Dual licensed under MIT  3 part and LGPL.
