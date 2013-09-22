@@ -35,7 +35,13 @@
 
 -mod:other
 {
-    return [NSNumber numberWithInt:[self intValue] % [other intValue]];
+    int otherInt=[other intValue];
+    if ( otherInt != 0) {
+        return [NSNumber numberWithInt:[self intValue] % otherInt];
+    } else {
+        [NSException raise:@"division by zero" format:@"arithmetic exception dividing %@ by 0",self];
+        return 0;
+    }
 }
 
 defineArithOp( add, + )

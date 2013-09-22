@@ -61,8 +61,11 @@
  
  */
 
+#if ! TARGET_OS_IPHONE
 
 @implementation MPWBinaryPListWriter
+
+
 
 objectAccessor(MPWIntArray, offsets, setOffsets)
 objectAccessor(NSMutableArray, indexStack, setIndexStack)
@@ -148,16 +151,6 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
     [self endArray];
 }
 
--(void)writeDictionary:(NSDictionary *)dict
-{
-    [self beginDictionary];
-    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
-        [self writeString:key];
-        [self writeObject:obj ];
-    }];
-    [self endDictionary];
-}
-
 -(void)writeArray:(NSArray *)anArray
 {
     [self writeArray:anArray usingElementBlock:^( MPWBinaryPListWriter *w,id object){
@@ -176,6 +169,15 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
     }
 }
 
+-(void)writeDictionary:(NSDictionary *)dict
+{
+    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWBinaryPListWriter *writer, id aDict){
+        [aDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+            [writer writeString:key];
+            [writer writeObject:obj ];
+        }];
+    }];
+}
 
 -(void)beginDictionary
 {
@@ -189,6 +191,12 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
         anInt>>=8;
     }
     return numBytes;
+}
+
+static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int numBytes, int upperNibble, int lowerNibble  )
+{
+    buffer[0]=upperNibble | lowerNibble;
+    return integerToBuffer(buffer+1, anInt, numBytes)+1;
 }
 
 -(void)writeInteger:(long)anInt numBytes:(int)numBytes
@@ -228,16 +236,12 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     unsigned char buffer[16];
     int log2ofNumBytes=2;
     int numBytes=4;
-    buffer[0]=0x10 + log2ofNumBytes;
-    for (int i=numBytes-1;i>=0;i--) {
-        buffer[i+1]=anInt & 0xff;
-        anInt>>=8;
-    }
+    taggedIntegerToBuffer(buffer, anInt, numBytes,0x10, log2ofNumBytes);
     TARGET_APPEND(buffer, numBytes+1);
 }
 
 
--(void)writeHeader:(int)headerByte length:(int)length
+-(void)writeCompoundObjectHeader:(int)headerByte length:(int)length
 {
     unsigned char header=headerByte;
     if ( length < 15 ) {
@@ -273,7 +277,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     @autoreleasepool {
         MPWIntArray *arrayIndexes=[self popIndexStack];
         [self _recordByteOffset];
-        [self writeHeader:0xa0 length:[arrayIndexes count]];
+        [self writeCompoundObjectHeader:0xa0 length:[arrayIndexes count]];
         [self writeIntArray:arrayIndexes numBytes:inlineOffsetByteSize];
     }
 }
@@ -285,7 +289,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     MPWIntArray *arrayIndexes=[self popIndexStack];
     [self _recordByteOffset];
     int len=[arrayIndexes count]/2;
-    [self writeHeader:0xd0 length:len];
+    [self writeCompoundObjectHeader:0xd0 length:len];
     [self writeIntArray:arrayIndexes offset:0 skip:2 numBytes:inlineOffsetByteSize];
     [self writeIntArray:arrayIndexes offset:1 skip:2 numBytes:inlineOffsetByteSize];
 }
@@ -319,10 +323,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
     int numBytes=4;
     [self _recordByteOffset];
     buffer[0]=0x10 + log2ofNumBytes;
-    for (int i=numBytes-1;i>=0;i--) {
-        buffer[i+1]=anInt & 0xff;
-        anInt>>=8;
-    }
+    integerToBuffer(buffer+1, anInt, numBytes);
     TARGET_APPEND(buffer, numBytes+1);
 }
 
@@ -352,7 +353,7 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
         int l=[aString length];
         char buffer[ l + 1];
         [aString getBytes:buffer maxLength:l usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
-        [self writeHeader:0x50 length:[aString length]];
+        [self writeCompoundObjectHeader:0x50 length:[aString length]];
         TARGET_APPEND(buffer, l);
         [objectTable setObject:(id)(long)[currentIndexes lastInteger] forKey:aString];
     }
@@ -659,3 +660,4 @@ static inline int integerToBuffer( unsigned char *buffer, long anInt, int numByt
 @end
 
 
+#endif

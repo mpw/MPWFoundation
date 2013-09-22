@@ -348,6 +348,15 @@
 		1F78214F12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
+		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
+		1FA1593D17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
+		1FA1593E17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
+		1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
+		1FA1594017EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
+		1FA1594117EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
+		1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
+		1FA1594417EEF18900BF8F6F /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
+		1FA1594517EEF18900BF8F6F /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
 		1FA1D3E90BB9DACA0097A924 /* MPWFastInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1D3E70BB9DACA0097A924 /* MPWFastInvocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA1D3EA0BB9DACA0097A924 /* MPWFastInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1D3E80BB9DACA0097A924 /* MPWFastInvocation.m */; };
 		1FA1D4580BBAAD520097A924 /* MPWRusage.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1D4560BBAAD520097A924 /* MPWRusage.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -792,6 +801,9 @@
 		1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIgnoreUnknownTrampoline.m; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
+		1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDelimitedTable.h; sourceTree = "<group>"; };
+		1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWDelimitedTable.m; sourceTree = "<group>"; };
+		1FA1594217EEF18900BF8F6F /* first4.tabdelim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = first4.tabdelim; sourceTree = "<group>"; };
 		1FA1D3E70BB9DACA0097A924 /* MPWFastInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWFastInvocation.h; sourceTree = "<group>"; };
 		1FA1D3E80BB9DACA0097A924 /* MPWFastInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWFastInvocation.m; sourceTree = "<group>"; };
 		1FA1D4560BBAAD520097A924 /* MPWRusage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWRusage.h; sourceTree = "<group>"; };
@@ -1085,6 +1097,8 @@
 				66DC61A301397F05005ADD88 /* NSArrayFiltering.m */,
 				1F82D18D059D880200F38A88 /* MPWIntArray.m */,
 				1F766F6D0BBC5F410038DA7D /* MPWSmallStringTable.m */,
+				1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */,
+				1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1116,6 +1130,7 @@
 		07DF198C006686DDC35ADD82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1FA1594217EEF18900BF8F6F /* first4.tabdelim */,
 				07DF198D006686DDC35ADD82 /* Makefile.preamble */,
 				07DF198E006686DDC35ADD82 /* Makefile */,
 				07DF198F006686DDC35ADD82 /* Makefile.postamble */,
@@ -1266,6 +1281,7 @@
 			files = (
 				1F008F5C10BDAC18001F05D5 /* AccessorMacros.h in Headers */,
 				1F008F5D10BDAC18001F05D5 /* DebugMacros.h in Headers */,
+				1FA1593D17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1F008F5E10BDAC18001F05D5 /* MPWObject.h in Headers */,
 				1F008F5F10BDAC18001F05D5 /* NSNil.h in Headers */,
 				1F008F6010BDAC18001F05D5 /* MPWFoundation.h in Headers */,
@@ -1444,6 +1460,7 @@
 			files = (
 				1FCDE1221253A9640002D17A /* AccessorMacros.h in Headers */,
 				1FCDE1231253A9640002D17A /* DebugMacros.h in Headers */,
+				1FA1593E17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1FCDE1241253A9640002D17A /* MPWObject.h in Headers */,
 				1FCDE1251253A9640002D17A /* NSNil.h in Headers */,
 				1FCDE1261253A9640002D17A /* MPWFoundation.h in Headers */,
@@ -1577,6 +1594,7 @@
 				1FF8FDDD09B49D0100652476 /* MPWFlattenStream.h in Headers */,
 				1FF8FDDE09B49D0100652476 /* NSConditionLockSem.h in Headers */,
 				1FF8FDDF09B49D0100652476 /* MPWAsyncProxy.h in Headers */,
+				1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1FF8FDE009B49D0100652476 /* NSObjectInterThreadMessaging.h in Headers */,
 				1FF8FDE109B49D0100652476 /* NSThreadInterThreadMessaging.h in Headers */,
 				1FF8FDE209B49D0100652476 /* NSObjectFiltering.h in Headers */,
@@ -1759,6 +1777,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F008FA510BDAC18001F05D5 /* Concepts.rtf in Resources */,
+				1FA1594417EEF18900BF8F6F /* first4.tabdelim in Resources */,
 				1F008FA610BDAC18001F05D5 /* Log.rtf in Resources */,
 				1F008FA710BDAC18001F05D5 /* Notes.rtf in Resources */,
 				1F008FA910BDAC18001F05D5 /* ResourceTest in Resources */,
@@ -1770,6 +1789,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCDE16B1253A9640002D17A /* Concepts.rtf in Resources */,
+				1FA1594517EEF18900BF8F6F /* first4.tabdelim in Resources */,
 				1FCDE16C1253A9640002D17A /* Log.rtf in Resources */,
 				1FCDE16D1253A9640002D17A /* Notes.rtf in Resources */,
 				1FCDE16F1253A9640002D17A /* ResourceTest in Resources */,
@@ -1781,6 +1801,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
+				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
@@ -1854,6 +1875,7 @@
 				1F008FB310BDAC18001F05D5 /* NSDictAdditions.m in Sources */,
 				1F008FB410BDAC18001F05D5 /* MPWRuntimeAdditions.m in Sources */,
 				1F008FB510BDAC18001F05D5 /* NSObjectAdditions.m in Sources */,
+				1FA1594017EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */,
 				1F008FB610BDAC18001F05D5 /* MPWPoint.m in Sources */,
 				1F008FB710BDAC18001F05D5 /* MPWRect.m in Sources */,
 				1F008FB910BDAC18001F05D5 /* MPWTrampoline.m in Sources */,
@@ -1989,6 +2011,7 @@
 				1FCDE1801253A9640002D17A /* MPWIgnoreTrampoline.m in Sources */,
 				1FCDE1811253A9640002D17A /* bytecoding.c in Sources */,
 				1FCDE1821253A9640002D17A /* MPWASCII85Stream.m in Sources */,
+				1FA1594117EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */,
 				1FCDE1831253A9640002D17A /* MPWFilterStream.m in Sources */,
 				1FCDE1841253A9640002D17A /* MPWLZWStream.m in Sources */,
 				1FCDE1851253A9640002D17A /* MPWRealArray.m in Sources */,
@@ -2087,6 +2110,7 @@
 				1F5E509909B4B7CA000298D9 /* NSNil.m in Sources */,
 				1F05F69E0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m in Sources */,
 				1F4A36580A87EAB9007150E3 /* MPWWorkQueue.m in Sources */,
+				1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */,
 				1FE006040AFC4E7800F4542F /* MPWEnumSelectFilter.m in Sources */,
 				1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */,
 				1FC97CDE0BB0A8B900F8CB51 /* MPWNumber.m in Sources */,
@@ -2283,13 +2307,12 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
 			name = "Release Tiger";
@@ -2303,6 +2326,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
+				GCC_FAST_OBJC_DISPATCH = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MPWFoundation_prefix_header.h;
@@ -2314,13 +2338,9 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOL_FLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRINCIPAL_CLASS = "";
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -2652,13 +2672,12 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = Darwin;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
 			name = Development;
@@ -2676,13 +2695,12 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -2708,12 +2726,9 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOL_FLAGS = "";
-				OTHER_REZFLAGS = "";
-				PRINCIPAL_CLASS = "";
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -2736,6 +2751,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
+				GCC_FAST_OBJC_DISPATCH = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MPWFoundation_prefix_header.h;
@@ -2747,13 +2763,10 @@
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOL_FLAGS = "";
-				OTHER_REZFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRINCIPAL_CLASS = "";
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
