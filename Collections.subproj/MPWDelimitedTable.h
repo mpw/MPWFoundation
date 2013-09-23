@@ -10,7 +10,12 @@
 
 @interface MPWDelimitedTable : MPWObject
 {
-    NSArray *lines;
+    NSData  *data;
+//    NSArray *lines;
+    NSArray *headerKeys;
+    NSString *fieldDelimiter;
+    MPWIntArray *lineOffsets;
+    int eolLength;
 }
 
 @end

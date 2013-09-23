@@ -11,68 +11,109 @@
 
 @implementation MPWDelimitedTable
 
-objectAccessor(NSArray, lines, setLines)
+objectAccessor(NSData, data, setData)
+lazyAccessor(NSArray, headerKeys, setHeaderKeys, computeHeaderKeys)
+objectAccessor(NSString, fieldDelimiter, setFieldDelimiter)
+lazyAccessor(MPWIntArray, lineOffsets, setLineOffsets, computeLineOffsets)
+intAccessor(eolLength, setEOLLength)
 
 -(NSString*)lineDelimiter
 {
     return @"\r\n";
 }
 
--(NSString*)fieldDelimiter
+-(MPWIntArray*)computeLineOffsets
 {
-    return @"\011";
-}
-
--(void)setLinesFromData:(NSData*)newTableData
-{
-    NSString *s=[[[NSString alloc] initWithData:newTableData encoding:NSASCIIStringEncoding] autorelease];
-    [self setLines:[s componentsSeparatedByString:[self lineDelimiter]]];
-    if ( [[lines lastObject] length] < 2) {
-        [self setLines:[[self lines] subarrayWithRange:NSMakeRange(0, [lines count]-1)]];
+    unsigned const char *bytes=[[self data] bytes];
+    unsigned const char *cur=bytes;
+    unsigned const char *end=cur+[[self data] length];
+    MPWIntArray *offsets=[MPWIntArray array];
+    [offsets addInteger:0];
+    if ( bytes) {
+        while ( cur < end ) {
+            char last = *cur++;
+            if ( last == '\r' || last=='\n') {
+                if ( last == '\r' && *cur=='\n') {
+                    cur++;
+                    [self setEOLLength:2];
+                } else {
+                    [self setEOLLength:1];
+                }
+                if ( cur < end) {
+                    [offsets addInteger:cur-bytes];
+                }
+            }
+        }
+        [offsets addInteger:end-bytes];
     }
+    return offsets;
 }
 
--initWithData:(NSData*)newTableData
+-initWithData:(NSData*)newTableData delimiter:(NSString*)newFieldDelimiter
 {
     self=[super init];
-    [self setLinesFromData:newTableData];
+    [self setFieldDelimiter:newFieldDelimiter];
+    [self setData:newTableData];
     return self;
+}
+
+-initWithTabSeparatedData:(NSData*)newTableData
+{
+    return [self initWithData:newTableData delimiter:@"\011"];
+}
+
+-initWithCommaSeparatedData:(NSData*)newTableData
+{
+    return [self initWithData:newTableData delimiter:@","];
 }
 
 -(void)dealloc
 {
-    RELEASE(lines);
+    RELEASE(lineOffsets);
+    RELEASE(fieldDelimiter);
+    RELEASE(headerKeys);
     [super dealloc];
 }
 
--(int)totalLines
+-(int)totalLineCount
 {
-    return [lines count];
+    return [[self lineOffsets] count]-1;
 }
 
--(int)dataLines
+-(int)count
 {
-    return [self totalLines]-1;
+    return [self totalLineCount]-1;
+}
+
+-(NSString*)lineAtIndex:(int)anIndex
+{
+    unsigned const char *bytes=[[self data] bytes];
+    int offset=[[self lineOffsets] integerAtIndex:anIndex];
+    int nextOffset=[[self lineOffsets] integerAtIndex:anIndex+1];
+    int len = nextOffset-offset-[self eolLength];
+    return [[[NSString alloc] initWithBytes:bytes+offset length:len encoding:NSASCIIStringEncoding] autorelease];
 }
 
 -(NSString*)headerLine
 {
-    return [lines objectAtIndex:0];
+    return [self lineAtIndex:0];
 }
 
--(NSArray*)headerKeys
+-(NSArray*)computeHeaderKeys
 {
     return [[self headerLine] componentsSeparatedByString:[self fieldDelimiter]];
 }
 
 -(NSArray*)dataAtIndex:(int)anIndex
 {
-    return [[lines objectAtIndex:anIndex+1] componentsSeparatedByString:[self fieldDelimiter]];
+    return [[self lineAtIndex:anIndex+1] componentsSeparatedByString:[self fieldDelimiter]];
 }
 
 -(NSDictionary*)dictionaryAtIndex:(int)anIndex
 {
-    return [NSDictionary dictionaryWithObjects:[self dataAtIndex:anIndex]
+    return [NSDictionary
+            
+            dictionaryWithObjects:[self dataAtIndex:anIndex]
                                        forKeys:[self headerKeys]];
 }
 
@@ -82,18 +123,27 @@ objectAccessor(NSArray, lines, setLines)
 
 @implementation MPWDelimitedTable(testing)
 
+
+
 +_testTable
 {
     NSData *tableData=[self resourceWithName:@"first4" type:@"tabdelim"];
-    MPWDelimitedTable *table=[[[self alloc] initWithData:tableData] autorelease];
+    MPWDelimitedTable *table=[[[self alloc] initWithTabSeparatedData:tableData] autorelease];
+    return table;
+}
+
++_testCSVTable
+{
+    NSData *tableData=[self resourceWithName:@"archiving-times-and-sizes" type:@"csv"];
+    MPWDelimitedTable *table=[[[self alloc] initWithCommaSeparatedData:tableData] autorelease];
     return table;
 }
 
 +(void)testGetNumberOfLines
 {
     MPWDelimitedTable *table=[self _testTable];
-    INTEXPECT([table totalLines], 4, @"total lines");
-    INTEXPECT([table dataLines], 3, @"data lines");
+    INTEXPECT([table totalLineCount], 4, @"total lines");
+    INTEXPECT([table count], 3, @"data lines");
 }
 
 +(void)testHeaderKeys
@@ -247,12 +297,39 @@ objectAccessor(NSArray, lines, setLines)
     IDEXPECT([dict objectForKey:@"NA"], @"Ehinger-Schwarz GmbH & Co KG", @"NA");
 }
 
++(void)testCSVTable
+{
+    MPWDelimitedTable *table=[self _testCSVTable];
+    INTEXPECT([table totalLineCount], 18, @"total lines");
+    INTEXPECT([table count], 17, @"data lines");
+    NSArray *keys=[table headerKeys];
+    NSArray *expectedKeys=@[     @"",
+                                 @"serialize",
+                                 @"deserialize",
+                                 @"size (MB)",
+                                 @"compressed size (MB)",
+                                 @"raw peak memory (MB)",
+                                 @"peak overhead  (MB)",
+                                 @"% time",
+                                 @"% space",
+                                 @"deserialize - object creation",
+                                 ];
+    
+
+    
+    IDEXPECT(keys, expectedKeys, @"header keys");
+    NSDictionary *dict=[table dictionaryAtIndex:2];
+    IDEXPECT([dict objectForKey:@""], @"JSON", @"label");
+    IDEXPECT([dict objectForKey:@"serialize"], @"2.39", @"time");
+}
+
 +testSelectors
 {
     return @[
              @"testGetNumberOfLines",
              @"testHeaderKeys",
              @"testDictionary",
+             @"testCSVTable",
              ];
 }
 

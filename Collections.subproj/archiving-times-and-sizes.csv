@@ -1,0 +1,18 @@
+,serialize,deserialize,size (MB),compressed size (MB),raw peak memory (MB),peak overhead  (MB),% time,% space,deserialize - object creation
+Raw XML,0.84,0.91,40,7,93,11,,,0.71
+NSArchiver,2.12,0.81,17,6,190,131,,,0.61
+JSON,2.39,2.55,44,7.2,327,241,,,2.35
+Binary Plist,4.7,2.56,44,15,405,319,,,2.36
+Keyed Archiver,9.14,2.62,77,32,938,819,,,2.42
+XML Plist,11.18,4.99,179,16,519,298,,,4.79
+CoreData SQL,30.2,9.84,46,13,1120,1032,,,9.64
+CoreData SQL/10,38,9.84,46,13,701,613,,,9.64
+CoreData XML,95.2,71,399,36,5020,4579,,,70.8
+My BPList direct,0.96,2.01,49,18,105,14,,,1.81
+My BPList via plist,1.98,2.01,49,18,335,244,,,1.81
+asPlist (no serialization),1.1,0.45,0,0,263,221,100.00%,100.00%,0.25
+asPlist (shared keys),0.9,0.38,0,0,248,206,81.82%,93.21%,0.18
+asPlist @{} syntax,0.79,0.45,0,0,217,175,71.82%,79.19%,0.25
+objectsAndKeys:,0.89,,,,217,175,,,-0.2
+bplist @{} syntax,4.96,2.56,44,15,259,173,,,2.36
+keyed archive no attributes,,,,,,-63,,,-0.2

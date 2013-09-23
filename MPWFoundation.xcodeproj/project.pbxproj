@@ -289,6 +289,7 @@
 		1F4FCDDD110450EE00376799 /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; };
 		1F4FCDDE110450EE00376799 /* MPWFoundation_prefix_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */; };
 		1F4FCE5E1104511F00376799 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
+		1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */; };
 		1F5E509909B4B7CA000298D9 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
 		1F64205E12CB19D700240B02 /* MPWCachingDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F64205C12CB19D700240B02 /* MPWCachingDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F64205F12CB19D700240B02 /* MPWCachingDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64205D12CB19D700240B02 /* MPWCachingDownloader.m */; };
@@ -779,6 +780,7 @@
 		1F4A36550A87EAB8007150E3 /* MPWWorkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWWorkQueue.h; sourceTree = "<group>"; };
 		1F4A36560A87EAB8007150E3 /* MPWWorkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWWorkQueue.m; sourceTree = "<group>"; };
 		1F4FC66910F7F6AC00376799 /* libMPWFoundationTouch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMPWFoundationTouch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "archiving-times-and-sizes.csv"; sourceTree = "<group>"; };
 		1F64205C12CB19D700240B02 /* MPWCachingDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCachingDownloader.h; sourceTree = "<group>"; };
 		1F64205D12CB19D700240B02 /* MPWCachingDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCachingDownloader.m; sourceTree = "<group>"; };
 		1F64206612CB19E200240B02 /* MPWResourceLoadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWResourceLoadRequest.h; sourceTree = "<group>"; };
@@ -1130,6 +1132,7 @@
 		07DF198C006686DDC35ADD82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */,
 				1FA1594217EEF18900BF8F6F /* first4.tabdelim */,
 				07DF198D006686DDC35ADD82 /* Makefile.preamble */,
 				07DF198E006686DDC35ADD82 /* Makefile */,
@@ -1802,6 +1805,7 @@
 			files = (
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
+				1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
