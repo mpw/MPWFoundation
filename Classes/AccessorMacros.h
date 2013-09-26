@@ -163,6 +163,18 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 //---- RETAIN/RELEASE Macros for GNUStep compatibility
 
+#if __has_feature(objc_arc)
+#define DEALLOC( x) \
+-(void)dealloc { \
+    x; \
+}
+#else
+#define DEALLOC( x) \
+-(void)dealloc { \
+    x; \
+    [super dealloc]; \
+}
+#endif
 
 #ifndef RETAIN
 #if !__has_feature(objc_arc)

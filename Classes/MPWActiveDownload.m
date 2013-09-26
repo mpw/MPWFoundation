@@ -109,11 +109,10 @@ intAccessor( downloadSize, setDownloadeSize )
 	//      [self release];
 }
 
--(void)dealloc{
+DEALLOC (
 	[urlConnection release];
 	[output release];
 	[request release];
-	[super dealloc];
-}
+)
 
 @end
