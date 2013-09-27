@@ -170,7 +170,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 #else
 #define DEALLOC( x) \
--(void)dealloc { \
+-(oneway void)dealloc { \
     x; \
     [super dealloc]; \
 }
@@ -188,7 +188,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #if !__has_feature(objc_arc)
 #define RELEASE(x)  ([(x) release])
 #else
-#define RELEASE(x)   
+#define RELEASE(x)
 #endif
 #endif
 
