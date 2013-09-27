@@ -151,7 +151,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
   return AUTORELEASE([[self alloc] initsel]); \
 } 
 
-#define SHORTCONVENIENCE( name, initsel )  CONVENIENCE( name##initsel , init##initself )
+#define SHORTCONVENIENCE( name, initsel )  CONVENIENCE( name##initsel , init##initsel )
 #endif
 
 
@@ -188,7 +188,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #if !__has_feature(objc_arc)
 #define RELEASE(x)  ([(x) release])
 #else
-#define RELEASE(x)   (x)
+#define RELEASE(x)   
 #endif
 #endif
 

@@ -258,12 +258,10 @@ intAccessor( _maxConcurrent, setMaxConcurrent )
 
 
 
--(void)dealloc
-{
-	[observer release];
-	[cacheBaseDir release];
-	[super dealloc];
-}
+DEALLOC(
+        RELEASE(observer);
+        RELEASE(cacheBaseDir);
+)
 
 @end
 

@@ -110,9 +110,9 @@ intAccessor( downloadSize, setDownloadeSize )
 }
 
 DEALLOC (
-	[urlConnection release];
-	[output release];
-	[request release];
+    RELEASE(urlConnection);
+    RELEASE(output);
+    RELEASE(request);
 )
 
 @end

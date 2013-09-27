@@ -38,12 +38,10 @@ scalarAccessor( SEL, progressSelector, setProgressSelector )
 }
 
 
--(void)dealloc
-{
-	[target release];
-	[urlstring release];
-	[super dealloc];
-}
+DEALLOC(
+        RELEASE(target);
+        RELEASE(urlstring);
+)
 
 
 @end
