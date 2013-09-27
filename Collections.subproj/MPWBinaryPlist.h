@@ -22,4 +22,9 @@
     int     offsetReferenceSizeInBytes;
 }
 
+
+-initWithData:(NSData*)newPlistData;
++bplistWithData:(NSData*)newPlistData;
+
+
 @end

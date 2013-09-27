@@ -185,8 +185,8 @@
 		1F1A30DD154DAE0C00BAC8D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A30DC154DAE0C00BAC8D7 /* Accelerate.framework */; };
 		1F2006FC1226F1E800140C63 /* bytecoding.c in Sources */ = {isa = PBXBuildFile; fileRef = 07DF195E006686DDC35ADD82 /* bytecoding.c */; };
 		1F20070F1226F23500140C63 /* MPWIgnoreTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1945006686DDC35ADD82 /* MPWIgnoreTrampoline.m */; };
-		1F273F3B17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; };
-		1F273F3C17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; };
+		1F273F3B17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F273F3C17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F273F3D17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; };
 		1F273F3E17F554F600F5FF9E /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; };
 		1F273F3F17F554F600F5FF9E /* MPWBinaryPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F273F3A17F554F600F5FF9E /* MPWBinaryPlist.m */; };

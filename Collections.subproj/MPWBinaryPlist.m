@@ -42,6 +42,7 @@ static const char headerString[]="bplist00";
     }
     return self;
 }
+SHORTCONVENIENCE(bplist, WithData:(NSData*)newPlistData)
 
 static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset, int numBytes  ) {
     long result=0;
@@ -83,15 +84,70 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
     return [self offsetOfObjectNo:[self _rootIndex]];
 }
 
+-(long)parseIntegerAtOffset:(long)offset
+{
+    int topNibble=(bytes[offset] & 0xf0) >> 4;
+    int bottomNibble=bytes[offset] & 0x0f;
+    offset++;
+    if ( topNibble == 0x1 ){
+        return [self readIntegerOfSize:1<<bottomNibble atOffset:offset];
+    } else {
+        [NSException raise:@"unsupported" format:@"unsupported data in bplist"];
+    }
+    return 0;
+}
+
+typedef void (^ArrayElementBlock)(MPWBinaryPlist* plist,long offset,long anIndex);
+
+-(long)parseArrayAtOffset:(long)offset usingBlock:(ArrayElementBlock)block
+{
+    int topNibble=(bytes[offset] & 0xf0) >> 4;
+    int length=bytes[offset] & 0x0f;
+    offset++;
+    if ( topNibble == 0xa ){
+        if (  length==0xf ) {
+            int nextHeader=bytes[offset++];
+            int byteLen=1<<(nextHeader&0xf);
+            length = [self readIntegerOfSize:byteLen atOffset:offset];
+            offset+=byteLen;
+        }
+        for (long i=0;i<length;i++) {
+            long nextFileOffset = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset];
+            block( self, nextFileOffset, i);
+            offset+=offsetReferenceSizeInBytes;
+
+        }
+    } else {
+        [NSException raise:@"unsupported" format:@"unsupported data in bplist"];
+    }
+    return length;
+}
+
 -parseObjectAtOffset:(long)offset
 {
-    int topNibble=bytes[offset] & 0xf0;
+    int topNibble=(bytes[offset] & 0xf0) >> 4;
     int bottomNibble=bytes[offset] & 0x0f;
     id result=nil;
+    int length=bottomNibble;
     offset++;
+    if ( (topNibble == 0x5 ) && length==0xf ) {
+        int nextHeader=bytes[offset++];
+        int byteLen=1<<(nextHeader&0xf);
+        length = [self readIntegerOfSize:byteLen atOffset:offset];
+        offset+=byteLen;
+    }
     switch ( topNibble) {
-        case 0x10:
+        case 0x1:
             result = [NSNumber numberWithLong:[self readIntegerOfSize:1<<bottomNibble atOffset:offset]];
+            break;
+        case 0x5:
+            result = AUTORELEASE([[NSString alloc]
+                                  initWithBytes:bytes+offset  length:length encoding:NSASCIIStringEncoding]);
+            break;
+        case 0x6:
+            result = AUTORELEASE([[NSString alloc]
+                                  initWithBytes:bytes+offset  length:length*2 encoding:NSUTF16BigEndianStringEncoding]);
+            
             break;
         default:
             [NSException raise:@"unsupported" format:@"unsupported data in bplist"];
@@ -118,7 +174,6 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
 -(long)_numObjects { return numObjects; }
 -(long)_rootIndex  { return rootIndex;  }
 
-SHORTCONVENIENCE(bplist, WithData:(NSData*)newPlistData)
 
 DEALLOC(
         RELEASE(data);
@@ -156,12 +211,47 @@ DEALLOC(
     INTEXPECT([[bplist rootObject] intValue],  42, @"root object");
 }
 
++(void)testReadString
+{
+    NSString *tester=@"Hello World!";
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
+    IDEXPECT([bplist rootObject],  tester, @"root object");
+}
+
++(void)testReadLongString
+{
+    NSString *tester=@"Hello World with some more data to get more than 15 characters!";
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
+    IDEXPECT([bplist rootObject],  tester, @"root object");
+}
+
++(void)testReadIntegerArray
+{
+    NSArray *tester=@[ @42, @51, @1 , @93];
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
+    long testArray[20];
+    long *arrayPtr=testArray;
+    int length=[bplist parseArrayAtOffset:[bplist _rootOffset] usingBlock:^( MPWBinaryPlist *bplist, long offset, long anIndex ){
+        if (anIndex <10) {
+            arrayPtr[anIndex]=[bplist parseIntegerAtOffset:[bplist offsetOfObjectNo:offset]];
+        }
+    }];
+    INTEXPECT(length, 4, @"length");
+    INTEXPECT(testArray[0], 42, @"first element");
+    INTEXPECT(testArray[1], 51, @"2nd element");
+    INTEXPECT(testArray[2], 1, @"3rd element");
+    INTEXPECT(testArray[3], 93, @"4th element");
+    
+}
 
 +testSelectors
 {
     return @[ @"testRecognizesHeader",
               @"testReadTrailerAndOffsets",
               @"testReadInteger",
+              @"testReadString",
+              @"testReadLongString",
+              @"testReadIntegerArray",
               ];
 }
 
