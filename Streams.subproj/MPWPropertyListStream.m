@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation NSObject(PropertyListStreaming)
 
--(void)writeOnPropertyListStream:(MPWByteStream*)aStream
+-(void)writeOnPropertyList:(MPWByteStream*)aStream
 {
     [self writeOnByteStream:aStream];
 }
@@ -61,16 +61,45 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self appendBytes:") " length:2];
 }
 
--(void)beginDict
+-(void)beginDictionary
 {
     [self appendBytes:"{ " length:2];
 }
 
--(void)endDict
+-(void)endDictionary
 {
     [self appendBytes:"} " length:2];
 }
 
+-(void)writeKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+}
+
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock
+{
+    [self beginDictionary];
+    @try {
+        contentBlock(self,anObject);
+    } @finally {
+        [self endDictionary];
+    }
+}
+
+-(void)writeDictionary:(NSDictionary *)dict
+{
+    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWStream *writer, id aDict){
+        [aDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+            [self writeObject:obj forKey:key];
+        }];
+    }];
+}
+
+
+-(void)writeInteger:(long)anInteger
+{
+    [self printf:@"%d",anInteger];
+}
 
 
 -(void)writeString:(NSString*)anObject
@@ -113,14 +142,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(SEL)streamWriterMessage
 {
-    return @selector(writeOnPropertyListStream:);
+    return @selector(writeOnPropertyList:);
 }
 
 
 @end
 @implementation NSString(PropertyListStreaming)
 
--(void)writeOnPropertyListStream:(MPWByteStream*)aStream
+-(void)writeOnPropertyList:(MPWByteStream*)aStream
 {
     [aStream writeString:self ];
 }
@@ -160,7 +189,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testWriteDict
 {
-	NSString *expectedEncoding= @"{\n    key = \"value\";\n    key1 = \"value1\";\n}";
+	NSString *expectedEncoding= @"{ key = \"value\";\nkey1 = \"value1\";\n} ";
 	NSString *actualEncoding=[self _encode:[NSDictionary dictionaryWithObjectsAndKeys:@"value",@"key",
 											@"value1",@"key1",nil ]];
 	//	INTEXPECT( [actualEncoding length], [expectedEncoding length], @"lengths");

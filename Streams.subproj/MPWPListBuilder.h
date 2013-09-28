@@ -12,8 +12,8 @@
 
 -(void)beginArray;
 -(void)endArray;
--(void)beginDict;
--(void)endDict;
+-(void)beginDictionary;
+-(void)endDictionary;
 -(void)writeKey:aKey;
 -(void)writeString:aString;
 -(void)writeNumber:aNumber;

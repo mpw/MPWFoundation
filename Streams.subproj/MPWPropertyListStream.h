@@ -37,6 +37,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 }
 
+typedef void (^WriterBlock)(MPWStream* writer,id randomArgument);
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock;
+
 @end
 
 

@@ -88,12 +88,12 @@ idAccessor( plist , setPlist )
 	tos--;
 }
 
--(void)beginDict
+-(void)beginDictionary
 {
 	[self pushContainer:[[NSMutableDictionary alloc] init]];
 }
 
--(void)endDict
+-(void)endDictionary
 {
 	tos--;
 }
@@ -137,31 +137,31 @@ idAccessor( plist , setPlist )
 +(void)testBuildTopLevelDicts
 {
 	MPWPListBuilder *builder=[self builder];
-	[builder beginDict];
+	[builder beginDictionary];
 	[builder writeKey:@"key"];
 	[builder writeString:@"Hello World"];
-	[builder endDict];
+	[builder endDictionary];
 	IDEXPECT([[builder result] objectForKey:@"key"],@"Hello World", @"simple string in dict");
 }
 
 +(void)testNestedContainers
 {
 	MPWPListBuilder *builder=[self builder];
-	[builder beginDict];
+	[builder beginDictionary];
 	[builder writeKey:@"key1"];
 	[builder beginArray];
-	[builder beginDict];
+	[builder beginDictionary];
 	[builder writeKey:@"key2"];
 	[builder writeString:@"hello world"];
-	[builder endDict];
+	[builder endDictionary];
 	[builder writeString:@"array string"];
 	[builder endArray];
 	[builder writeKey:@"key3"];
-	[builder beginDict];
+	[builder beginDictionary];
 	[builder writeKey:@"key34"];
 	[builder writeString:@"nested dict"];
-	[builder endDict];
-	[builder endDict];
+	[builder endDictionary];
+	[builder endDictionary];
 	NSDictionary *dict=[builder result];
 	INTEXPECT( [dict count], 2, @"top level dict size");
 	NSArray *array=[dict objectForKey:@"key1"];

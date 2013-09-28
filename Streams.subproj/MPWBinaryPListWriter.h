@@ -6,14 +6,14 @@
 //
 //
 
-#import "MPWByteStream.h"
+#import "MPWPropertyListStream.h"
 
 @class MPWIntArray;
 
 //  streamWriterMessage:  writeOnPlist:
 
 
-@interface MPWBinaryPListWriter : MPWByteStream
+@interface MPWBinaryPListWriter : MPWPropertyListStream
 {
     MPWIntArray *offsets;
     int         offsetOfOffsetTable;
@@ -26,7 +26,6 @@
     
 }
 
-typedef void (^WriterBlock)(MPWBinaryPListWriter* writer,id randomArgument);
 
 -(void)beginDictionary;
 -(void)endDictionary;
@@ -35,7 +34,6 @@ typedef void (^WriterBlock)(MPWBinaryPListWriter* writer,id randomArgument);
 -(void)endArray;
 
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
--(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock;
 
 -(void)writeInt:(int)anInt forKey:(NSString*)aKey;
 -(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;
