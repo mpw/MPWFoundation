@@ -299,27 +299,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return [self isDictAtIndex:currentObjectNo];
 }
 
--(float)readFloatAtIndex:(long)anIndex
-{
-    float result=0;
-    long offset=offsets[anIndex];
-    int bottomNibble=bytes[offset] & 0x0f;
-    char buffer[8];
-    int byteSize =1<<bottomNibble;
-    for (int i=0;i<byteSize;i++) {
-        buffer[i]=bytes[offset+byteSize-i];
-    }
-    if ( byteSize==4) {
-        result = *(float*)buffer;
-    } else if ( byteSize==8) {
-        result = *(double*)buffer;
-    } else {
-        [NSException raise:@"invalidformat" format:@"invalid length of real: %d",byteSize];
-    }
-    return result;
-}
-
--(double)readDoubleAtIndex:(long)anIndex
+static inline double readRealAtIndex( int anIndex, const unsigned char *bytes, long *offsets )
 {
     double result=0;
     long offset=offsets[anIndex];
@@ -339,14 +319,24 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return result;
 }
 
+-(float)readFloatAtIndex:(long)anIndex
+{
+    return readRealAtIndex(  anIndex, bytes, offsets );
+}
+
+-(double)readDoubleAtIndex:(long)anIndex
+{
+    return readRealAtIndex(  anIndex, bytes, offsets );
+}
+
 -(float)readFloat
 {
-    return [self readFloatAtIndex:currentObjectNo];
+    return readRealAtIndex(  currentObjectNo, bytes, offsets );
 }
 
 -(double)readDouble
 {
-    return [self readDoubleAtIndex:currentObjectNo];
+    return readRealAtIndex(  currentObjectNo, bytes, offsets );
 }
 
 -parseObjectAtIndex:(long)anIndex
