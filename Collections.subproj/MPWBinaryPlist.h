@@ -25,6 +25,8 @@
     long     currentKeyNo;
     MPWIntArray *objectNoStack;
     MPWIntArray *keyNoStack;
+    
+    long    currentDictOffset,currentDictLength,currentDictIndex;
 }
 
 typedef void (^ArrayElementBlock)(MPWBinaryPlist* plist,long offset,long anIndex);
@@ -51,5 +53,17 @@ typedef void (^DictElementBlock)(MPWBinaryPlist* plist,long keyOffset,long value
 -(long)rootIndex;
 -(float)readFloat;
 -(double)readDouble;
+-(BOOL)verifyKey:keyToCheck forIndex:(long)keyOffset;
+
+-(long)readIntegerForKey:(NSString*)aKey;
+-(double)readRealForKey:(NSString*)aKey;
+-(id)readObjectForKey:(NSString*)aKey;
+-(BOOL)isArrayAtKey:(NSString*)aKey;
+
+-(long)parseDictAtIndex:(long)anIndex usingContentBlock:(DictElementBlock)block;
+-(long)parseDictUsingContentBlock:(DictElementBlock)block;
+
+-(long)parseArrayAtKey:(NSString*)aKey usingBlock:(ArrayElementBlock)block;
+
 
 @end

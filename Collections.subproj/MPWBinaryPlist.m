@@ -36,6 +36,7 @@
     return self;
 }
 
+
 -objectAtIndex:(NSUInteger)anIndex
 {
     id obj=nil;
@@ -235,6 +236,84 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return [[[MPWLazyBListArray alloc] initWithPlist:self offsets:arrayOffsets] autorelease];
 }
 
+-(int)keyIndexAtCurrentDictIndex:(int)anIndex
+{
+    return [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:currentDictOffset+anIndex*offsetReferenceSizeInBytes];
+}
+
+-(int)valueIndexAtCurrentDictIndex:(int)anIndex
+{
+    if ( anIndex >=0 && anIndex < currentDictLength) {
+        return [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:currentDictOffset+(anIndex+currentDictLength)*offsetReferenceSizeInBytes];
+    } else {
+        [NSException raise:@"rangecheck" format:@"dict index %d out of range: %d",anIndex,(int)currentDictLength];
+    }
+    return 0;
+}
+
+-(long)readIntegerForKey:(NSString*)aKey
+{
+    if ( [self verifyKey:aKey forIndex:[self keyIndexAtCurrentDictIndex:currentDictIndex]]) {
+        return [self parseIntegerAtOffset:offsets[[self valueIndexAtCurrentDictIndex:currentDictIndex++]]];
+    } else {
+        [NSException raise:@"keycheck" format:@"dict index %d expected key %@ got %@",(int)currentDictIndex,aKey,[self objectAtIndex:currentDictIndex]];
+    }
+    return 0;
+}
+
+-(double)readRealForKey:(NSString*)aKey
+{
+    return [self readDoubleAtIndex:[self valueIndexAtCurrentDictIndex:currentDictIndex++]];
+}
+
+-(id)readObjectForKey:(NSString*)aKey
+{
+    return [self objectAtIndex:[self valueIndexAtCurrentDictIndex:currentDictIndex++]];
+}
+
+-(long)parseArrayAtKey:(NSString*)aKey usingBlock:(ArrayElementBlock)block
+{
+    long anIndex=[self valueIndexAtCurrentDictIndex:currentDictIndex++];
+    return [self parseArrayAtIndex:anIndex usingBlock:block];
+}
+
+-(BOOL)isArrayAtKey:(NSString*)aKey
+{
+    long anIndex=[self valueIndexAtCurrentDictIndex:currentDictIndex];
+    return [self isArrayAtIndex:anIndex];
+}
+
+
+
+-(long)parseDictAtIndex:(long)anIndex usingContentBlock:(DictElementBlock)block
+{
+    long offset=offsets[anIndex];
+    int topNibble=(bytes[offset] & 0xf0) >> 4;
+    int length=bytes[offset] & 0x0f;
+    
+    long oldLength=currentDictLength;
+    long oldOffset=currentDictOffset;
+    long oldIndex=currentDictIndex;
+    offset++;
+    if ( topNibble == 0xd ){
+        [self pushCurrentObjectNo];
+        currentDictIndex=0;
+        length = lengthForNibbleAtOffset(  length, bytes,  &offset );
+        currentDictOffset=offset;
+        currentDictLength=length;
+        
+        block( self,  0,  0, length);
+
+        [self popObjectNo];
+    } else {
+        [NSException raise:@"unsupported" format:@"bplist expected dict (0xd), got %x",topNibble];
+    }
+    currentDictLength=oldLength;
+    currentDictOffset=oldOffset;
+    currentDictIndex=oldIndex;
+    
+    return length;
+}
 
 
 -(long)parseDictAtIndex:(long)anIndex usingBlock:(DictElementBlock)block
@@ -265,6 +344,11 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 -(long)parseDictUsingBlock:(DictElementBlock)block
 {
     return [self parseDictAtIndex:currentObjectNo usingBlock:block];
+}
+
+-(long)parseDictUsingContentBlock:(DictElementBlock)block
+{
+    return [self parseDictAtIndex:currentObjectNo usingContentBlock:block];
 }
 
 -(NSDictionary*)readDictAtIndex:(long)anIndex
@@ -383,14 +467,26 @@ static inline double readRealAtIndex( int anIndex, const unsigned char *bytes, l
     return result;
 }
 
--objectAtIndex:(NSUInteger)anIndex
+static inline id objectAtIndex( MPWBinaryPlist *self, NSUInteger anIndex )
 {
-    id result=objects[anIndex];
+    id result=self->objects[anIndex];
     if ( !result ){
         result=[self parseObjectAtIndex:anIndex];
-        objects[anIndex]=RETAIN(result);
+        self->objects[anIndex]=RETAIN(result);
     }
     return result;
+}
+
+-objectAtIndex:(NSUInteger)anIndex
+{
+    return objectAtIndex(self, anIndex);
+}
+
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:(id)object
+{
+    RETAIN(object);
+    RELEASE(objects[anIndex]);
+    objects[anIndex]=object;
 }
 
 -(long)currentInt
@@ -422,6 +518,19 @@ static inline double readRealAtIndex( int anIndex, const unsigned char *bytes, l
 -(NSUInteger)count { return numObjects; }
 -(long)rootIndex  { return rootIndex;  }
 
+-(BOOL)verifyKey:keyToCheck forIndex:(long)keyOffset
+{
+    id keyInArchive=objectAtIndex(self, keyOffset );
+    if ( keyInArchive == keyToCheck) {
+        return YES;
+    } else {
+        if ( [keyInArchive isEqual:keyToCheck] ) {
+            [self replaceObjectAtIndex:keyOffset withObject:keyToCheck];
+            return YES;
+        }
+    }
+    return NO;
+}
 
 DEALLOC(
         RELEASE(data);
@@ -534,6 +643,40 @@ DEALLOC(
     IDEXPECT(result, tester,@"dict");
 }
 
++(void)testVerifyDictKeys
+{
+    NSString *key1=@"hello";
+    NSString *key2=@"answer";
+    NSDictionary *tester=@{ key1: @"world", key2: @42 };
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
+    [bplist parseDictUsingBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long anIndex) {
+        switch (anIndex) {
+            case 0:
+                EXPECTTRUE([plist verifyKey:key1 forIndex:keyOffset], @"key1 matches");
+                EXPECTFALSE([plist verifyKey:key2 forIndex:keyOffset], @"key2 matches case 0");
+                break;
+            case 1:
+                EXPECTTRUE([plist verifyKey:key2 forIndex:keyOffset], @"key2 matches");
+                EXPECTFALSE([plist verifyKey:key1 forIndex:keyOffset], @"key1 matches");
+                break;
+        }
+    } ];
+}
+
+
++(void)testReadDictActively
+{
+    NSString *key1=@"hello";
+    NSString *key2=@"answer";
+    NSDictionary *tester=@{ key1: @"world", key2: @42 };
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
+    [bplist parseDictUsingContentBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long anIndex) {
+        IDEXPECT([plist readObjectForKey:key1], @"world", @"readObjectForKey");
+        INTEXPECT([plist readIntegerForKey:key2], 42, @"readIntegerForKey");
+    } ];
+}
+
+
 +(void)testReadLazyArray
 {
     NSArray *tester=@[ @42, @"Hello World!", @[ @12, @"nested"], @"last"];
@@ -556,6 +699,8 @@ DEALLOC(
               @"testReadIntegerArrayAsObject",
               @"testReadMixedIntStringArray",
               @"testReadDict",
+              @"testVerifyDictKeys",
+              @"testReadDictActively",
               @"testReadLazyArray",
               ];
 }
