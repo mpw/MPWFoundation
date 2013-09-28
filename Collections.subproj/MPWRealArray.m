@@ -57,15 +57,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <stdlib.h>
 #import <stdio.h>
-#ifdef	NeXT
-#import <libc.h>
-#endif
 
-//---	DPS includes
-
-#ifdef NeXT
-//#import <dpsclient/dpsclient.h>			//	for the definition of binary object sequences
-#endif
 
 //---	ANSI-C
 
@@ -136,7 +128,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     capacity=newCapacity;
     count=0;
     data=malloc( (capacity+6) * sizeof(float) );
-    floatStart = (float*)(data+ 4);
+    floatStart = (float*)(data);
 
     return self;
 }
@@ -163,7 +155,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     } else {
         data=calloc( (capacity+6), sizeof(float) );
     }
-    floatStart = (float*)(data+4);
+    floatStart = (float*)(data);
 }
 
 -(id)initWithStart:(float)start end:(float)end step:(float)step
@@ -362,14 +354,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
--(unsigned char*)dpsNumArray
-{
-    data[0]=149;
-    data[1]=49;
-    *((unsigned int*)data+2)=count;
-    return data;
-}
-
 -interpolate:otherVector into:targetVector weight:(float)weight
 {
     int i;
@@ -380,6 +364,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         target[i]=(1-weight)*other[i]+weight*floatStart[i];
     return targetVector;
 }
+
 -interpolate:otherVector weight:(float)weight
 {
     return [self interpolate:otherVector into:[[self class] arrayWithCount:count] weight:weight];
@@ -396,11 +381,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
-
--(unsigned)dpsNumArraySize
-{
-    return count*4 + 4;
-}
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
