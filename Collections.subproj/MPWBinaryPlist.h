@@ -21,6 +21,10 @@
     int     offsetIntegerSizeInBytes;
     int     offsetReferenceSizeInBytes;
     BOOL    lazyArray;
+    long     currentObjectNo;
+    long     currentKeyNo;
+    MPWIntArray *objectNoStack;
+    MPWIntArray *keyNoStack;
 }
 
 typedef void (^ArrayElementBlock)(MPWBinaryPlist* plist,long offset,long anIndex);
@@ -36,12 +40,16 @@ typedef void (^DictElementBlock)(MPWBinaryPlist* plist,long keyOffset,long value
 -(long)_rootOffset;
 
 -(long)parseArrayAtIndex:(long)anIndex usingBlock:(ArrayElementBlock)block;
+-(long)currentInt;
 
 -(NSArray*)readArrayAtIndex:(long)anIndex;
 -(long)parseDictAtIndex:(long)anIndex usingBlock:(DictElementBlock)block;
 -(NSDictionary*)readDictAtIndex:(long)anIndex;
 -(BOOL)isArrayAtIndex:(long)anIndex;
+-(BOOL)isArray;
 -objectAtIndex:(NSUInteger)anIndex;
 -(long)rootIndex;
+-(float)readFloat;
+-(double)readDouble;
 
 @end

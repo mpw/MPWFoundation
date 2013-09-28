@@ -56,4 +56,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)reset;
 -(int*)integers;
 -(int)lastInteger;
+-(void)removeLastObject;
+
 @end

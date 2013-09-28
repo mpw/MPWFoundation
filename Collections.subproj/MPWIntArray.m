@@ -110,6 +110,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	[self addInteger:[anObject intValue]];
 }
 
+-(void)removeLastObject
+{
+    if ( count) {
+        count--;
+    }
+}
+
 -(void)replaceIntegerAtIndex:(unsigned)anIndex withInteger:(int)anInt
 {
 	if ( anIndex < count ) {

@@ -68,6 +68,8 @@ DEALLOC(
 @implementation MPWBinaryPlist
 
 objectAccessor(NSData, data, setData)
+objectAccessor(MPWIntArray, objectNoStack, setObjectNoStack)
+objectAccessor(MPWIntArray, keyNoStack, setKeyNoStack)
 boolAccessor(lazyArray, setLazyArray)
 
 static const char headerString[]="bplist00";
@@ -95,6 +97,9 @@ static const char headerString[]="bplist00";
         numObjects=-1;
         [self _readTrailer];
         [self _readOffsetTable];
+        currentObjectNo=rootIndex;
+        [self setKeyNoStack:[MPWIntArray array]];
+        [self setObjectNoStack:[MPWIntArray array]];
     } else {
         RELEASE(self);
         self=nil;
@@ -109,6 +114,17 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
         result=(result<<8) |  bytes[offset+i];
     }
     return result;
+}
+
+-(void)pushCurrentObjectNo
+{
+    [objectNoStack addInteger:currentObjectNo];
+}
+
+-(void)popObjectNo
+{
+    currentObjectNo=[objectNoStack lastInteger];
+    [objectNoStack removeLastObject];
 }
 
 -(long)readIntegerOfSize:(int)numBytes atOffset:(long)offset
@@ -177,17 +193,26 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     int length=bytes[offset] & 0x0f;
     offset++;
     if ( topNibble == 0xa ){
+        [self pushCurrentObjectNo];
         length = lengthForNibbleAtOffset(  length, bytes,  &offset );
         for (long i=0;i<length;i++) {
-            long nextFileOffset = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset];
-            block( self, nextFileOffset, i);
+            long nextIndex = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset];
+            currentObjectNo=nextIndex;
+            block( self, nextIndex, i);
             offset+=offsetReferenceSizeInBytes;
 
         }
+        [self popObjectNo];
+
     } else {
         [NSException raise:@"unsupported" format:@"bplist expected dict (0xa), got %x",topNibble];
     }
     return length;
+}
+
+-(long)parseArrayUsingBlock:(ArrayElementBlock)block
+{
+    return [self parseArrayAtIndex:currentObjectNo usingBlock:block];
 }
 
 -(NSArray*)readArrayAtIndex:(long)anIndex
@@ -219,20 +244,28 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     int length=bytes[offset] & 0x0f;
     offset++;
     if ( topNibble == 0xd ){
+        [self pushCurrentObjectNo];
         length = lengthForNibbleAtOffset(  length, bytes,  &offset );
         for (long i=0;i<length;i++) {
             long nextKeyOffset = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset];
             long nextValueOffset = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset+length*offsetReferenceSizeInBytes];
+            currentObjectNo=nextValueOffset;
+            currentKeyNo=nextKeyOffset;
             block( self,  nextKeyOffset,  nextValueOffset, i);
-            offset+=offsetReferenceSizeInBytes;
+           offset+=offsetReferenceSizeInBytes;
             
         }
+        [self popObjectNo];
     } else {
         [NSException raise:@"unsupported" format:@"bplist expected dict (0xd), got %x",topNibble];
     }
     return length;
 }
 
+-(long)parseDictUsingBlock:(DictElementBlock)block
+{
+    return [self parseDictAtIndex:currentObjectNo usingBlock:block];
+}
 
 -(NSDictionary*)readDictAtIndex:(long)anIndex
 {
@@ -250,13 +283,71 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return (bytes[offset] & 0xf0) == 0xa0;
 }
 
+-(BOOL)isArray
+{
+    return [self isArrayAtIndex:currentObjectNo];
+}
+
 -(BOOL)isDictAtIndex:(long)anIndex
 {
     long offset=offsets[anIndex];
     return (bytes[offset] & 0xf0) == 0xd0;
 }
 
+-(BOOL)isDict
+{
+    return [self isDictAtIndex:currentObjectNo];
+}
 
+-(float)readFloatAtIndex:(long)anIndex
+{
+    float result=0;
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    char buffer[8];
+    int byteSize =1<<bottomNibble;
+    for (int i=0;i<byteSize;i++) {
+        buffer[i]=bytes[offset+byteSize-i];
+    }
+    if ( byteSize==4) {
+        result = *(float*)buffer;
+    } else if ( byteSize==8) {
+        result = *(double*)buffer;
+    } else {
+        [NSException raise:@"invalidformat" format:@"invalid length of real: %d",byteSize];
+    }
+    return result;
+}
+
+-(double)readDoubleAtIndex:(long)anIndex
+{
+    double result=0;
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    char buffer[8];
+    int byteSize =1<<bottomNibble;
+    for (int i=0;i<byteSize;i++) {
+        buffer[i]=bytes[offset+byteSize-i];
+    }
+    if ( byteSize==4) {
+        result = *(float*)buffer;
+    } else if ( byteSize==8) {
+        result = *(double*)buffer;
+    } else {
+        [NSException raise:@"invalidformat" format:@"invalid length of real: %d",byteSize];
+    }
+    return result;
+}
+
+-(float)readFloat
+{
+    return [self readFloatAtIndex:currentObjectNo];
+}
+
+-(double)readDouble
+{
+    return [self readDoubleAtIndex:currentObjectNo];
+}
 
 -parseObjectAtIndex:(long)anIndex
 {
@@ -270,6 +361,10 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
         case 0x1:
             result = [NSNumber numberWithLong:[self readIntegerOfSize:1<<bottomNibble atOffset:offset]];
             break;
+        case 0x2:
+            result = ((1<<bottomNibble)==4) ? [NSNumber numberWithFloat:[self readFloatAtIndex:anIndex]] : [NSNumber numberWithDouble:[self readDoubleAtIndex:anIndex]];
+            break;
+
         case 0x5:
             length = lengthForNibbleAtOffset(  length, bytes,  &offset );
             result = AUTORELEASE([[NSString alloc]
@@ -308,6 +403,15 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return result;
 }
 
+-(long)currentInt
+{
+    return [self parseIntegerAtOffset:offsets[currentObjectNo]];
+}
+
+-currentObject
+{
+    return [self objectAtIndex:currentObjectNo];
+}
 
 -rootObject
 {
@@ -325,7 +429,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     offsetTableLocation=[self readIntegerOfSize:8 atOffset:trailerOffset+18];
 }
 
--(long)_numObjects { return numObjects; }
+-(NSUInteger)count { return numObjects; }
 -(long)rootIndex  { return rootIndex;  }
 
 
@@ -336,6 +440,8 @@ DEALLOC(
         }
         free(objects);
         free(offsets);
+        RELEASE(objectNoStack);
+        RELEASE(keyNoStack);
 )
 
 @end
@@ -358,7 +464,7 @@ DEALLOC(
 +(void)testReadTrailerAndOffsets
 {
     MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:@(42)]];
-    INTEXPECT([bplist _numObjects],  1, @"number of objects");
+    INTEXPECT([bplist count],  1, @"number of objects");
     INTEXPECT([bplist rootIndex],  0, @"rootIndex" );
     INTEXPECT([bplist _rootOffset], 8, @"offset of root object");
 }
@@ -367,6 +473,13 @@ DEALLOC(
 {
     MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:@(42)]];
     INTEXPECT([[bplist rootObject] intValue],  42, @"root object");
+}
+
+
++(void)testReadReal
+{
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:@(3.14159)]];
+    FLOATEXPECTTOLERANCE([[bplist rootObject] doubleValue], 3.14159, 0.000001, @"float or double");
 }
 
 +(void)testReadString
@@ -391,7 +504,7 @@ DEALLOC(
     long *arrayPtr=testArray;
     int length=[bplist parseArrayAtIndex:[bplist rootIndex] usingBlock:^( MPWBinaryPlist *bplist, long offset, long anIndex ){
         if (anIndex <10) {
-            arrayPtr[anIndex]=[bplist parseIntegerAtOffset:[bplist offsetOfObjectNo:offset]];
+            arrayPtr[anIndex]=[bplist currentInt];
         }
     }];
     INTEXPECT(length, 4, @"length");
@@ -410,6 +523,8 @@ DEALLOC(
     INTEXPECT([result count], 4, @"length");
     IDEXPECT(result, tester,@"array");
 }
+
+
 
 +(void)testReadMixedIntStringArray
 {
@@ -444,6 +559,7 @@ DEALLOC(
     return @[ @"testRecognizesHeader",
               @"testReadTrailerAndOffsets",
               @"testReadInteger",
+              @"testReadReal",
               @"testReadString",
               @"testReadLongString",
               @"testReadIntegerArray",
