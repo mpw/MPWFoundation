@@ -134,11 +134,26 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock
 {
-    [self beginArray];
-    for ( id o in anArray){
-        aBlock(self,o);
+    int offset=0;
+    offset=(int)[objectTable objectForKey:anArray];
+    
+    if ( offset ) {
+        [currentIndexes addInteger:offset];
+    } else {
+        if ( [anArray count]) {
+            [self beginArray];
+            for ( id o in anArray){
+                aBlock(self,o);
+            }
+            [self endArray];
+        } else {
+            [self _recordByteOffset];
+            [self writeCompoundObjectHeader:0xa0 length:0];
+            
+        }
+        [objectTable setObject:(id)(long)[currentIndexes lastInteger] forKey:anArray];
+
     }
-    [self endArray];
 }
 
 -(void)writeArray:(NSArray *)anArray
