@@ -37,6 +37,7 @@
 
 -(void)writeInt:(int)anInt forKey:(NSString*)aKey;
 -(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;
+-(void)writeObject:anObject forKey:(NSString*)aKey;
 -(void)writeInteger:(long)anInt;
 -(void)writeFloat:(float)aFloat;
 @end
