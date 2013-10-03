@@ -8,18 +8,27 @@
 
 #import "MPWDelimitedTable.h"
 #import "NSBundleConveniences.h"
+#import "MPWSubData.h"
 
 @implementation MPWDelimitedTable
 
 objectAccessor(NSData, data, setData)
 lazyAccessor(NSArray, headerKeys, setHeaderKeys, computeHeaderKeys)
-objectAccessor(NSString, fieldDelimiter, setFieldDelimiter)
+objectAccessor(NSString, fieldDelimiter, _setFieldDelimiter)
 lazyAccessor(MPWIntArray, lineOffsets, setLineOffsets, computeLineOffsets)
 intAccessor(eolLength, setEOLLength)
+objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
--(NSString*)lineDelimiter
+-(void)setFieldDelimiter:(NSString*)newFieldDelim
 {
-    return @"\r\n";
+    [self _setFieldDelimiter:newFieldDelim];
+    int newLen =[newFieldDelim length];
+    if ( fieldDelimiterLength> 10 ) {
+        [NSException raise:@"limitcheck" format:@"field delimiter length %d exceed max 10",newLen];
+    }
+    fieldDelimiterLength=newLen;
+    [newFieldDelim getBytes:fieldDelimiterBytes maxLength:10 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0,10) remainingRange:NULL];
+    fieldDelimiterBytes[fieldDelimiterLength]=0;
 }
 
 -(MPWIntArray*)computeLineOffsets
@@ -54,6 +63,7 @@ intAccessor(eolLength, setEOLLength)
     self=[super init];
     [self setFieldDelimiter:newFieldDelimiter];
     [self setData:newTableData];
+    [self setSubdatas:[[[MPWObjectCache alloc] initWithCapacity:220 class:[MPWSubData class]] autorelease]];
     return self;
 }
 
@@ -75,23 +85,31 @@ intAccessor(eolLength, setEOLLength)
     [super dealloc];
 }
 
--(int)totalLineCount
+-(NSUInteger)totalLineCount
 {
     return [[self lineOffsets] count]-1;
 }
 
--(int)count
+-(NSUInteger)count
 {
     return [self totalLineCount]-1;
 }
 
+-(MPWSubData*)subdataWithStart:(const char*)start length:(int)len
+{
+    MPWSubData *subdata=GETOBJECT(subdatas);
+    [subdata reInitWithData:data bytes:start length:len
+     ];
+    return subdata;
+}
+
 -(NSString*)lineAtIndex:(int)anIndex
 {
-    unsigned const char *bytes=[[self data] bytes];
+    const char *bytes=[[self data] bytes];
     int offset=[[self lineOffsets] integerAtIndex:anIndex];
     int nextOffset=[[self lineOffsets] integerAtIndex:anIndex+1];
     int len = nextOffset-offset-[self eolLength];
-    return [[[NSString alloc] initWithBytes:bytes+offset length:len encoding:NSASCIIStringEncoding] autorelease];
+    return [self subdataWithStart:bytes+offset length:len ];
 }
 
 -(NSString*)headerLine
@@ -104,9 +122,31 @@ intAccessor(eolLength, setEOLLength)
     return [[self headerLine] componentsSeparatedByString:[self fieldDelimiter]];
 }
 
+
 -(NSArray*)dataAtIndex:(int)anIndex
 {
-    return [[self lineAtIndex:anIndex+1] componentsSeparatedByString:[self fieldDelimiter]];
+    MPWSubData *lineData=(MPWSubData*)[self lineAtIndex:anIndex+1];
+    const char *start=[lineData bytes];
+    const char *cur=start;
+    int maxElements =[[self headerKeys] count];
+    id elements[ maxElements+10];
+    int delimLength=[[self fieldDelimiter] length];
+    const char *end =start+[lineData length];
+    int elemNo=0;
+    while ( cur < end && elemNo < maxElements ) {
+        const char *next=strnstr(cur, fieldDelimiterBytes, end-cur);
+        if ( !next)  {
+            next=end;
+        }
+        if ( next ) {
+            elements[ elemNo++ ] =[self subdataWithStart:cur length:next-cur ];
+            cur=next+delimLength;
+        } else {
+
+        }
+    }
+    return [NSArray arrayWithObjects:elements count:maxElements];
+//    return [[self lineAtIndex:anIndex+1] componentsSeparatedByString:[self fieldDelimiter]];
 }
 
 -(NSDictionary*)dictionaryAtIndex:(int)anIndex
