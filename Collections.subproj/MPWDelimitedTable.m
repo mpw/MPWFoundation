@@ -64,6 +64,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     [self setFieldDelimiter:newFieldDelimiter];
     [self setData:newTableData];
     [self setSubdatas:[[[MPWObjectCache alloc] initWithCapacity:220 class:[MPWSubData class]] autorelease]];
+    [[self subdatas] setUnsafeFastAlloc:YES];
     return self;
 }
 
@@ -123,13 +124,12 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 }
 
 
--(NSArray*)dataAtIndex:(int)anIndex
+
+-(long)dataAtIndex:(int)anIndex into:(id*)elements max:(int)maxElements
 {
     MPWSubData *lineData=(MPWSubData*)[self lineAtIndex:anIndex+1];
     const char *start=[lineData bytes];
     const char *cur=start;
-    int maxElements =[[self headerKeys] count];
-    id elements[ maxElements+10];
     int delimLength=[[self fieldDelimiter] length];
     const char *end =start+[lineData length];
     int elemNo=0;
@@ -142,12 +142,21 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
             elements[ elemNo++ ] =[self subdataWithStart:cur length:next-cur ];
             cur=next+delimLength;
         } else {
-
+            
         }
     }
-    return [NSArray arrayWithObjects:elements count:maxElements];
-//    return [[self lineAtIndex:anIndex+1] componentsSeparatedByString:[self fieldDelimiter]];
+    return elemNo;
 }
+
+-(NSArray*)dataAtIndex:(int)anIndex
+{
+    int maxElements =[[self headerKeys] count];
+    id elements[ maxElements+10];
+    [self dataAtIndex:anIndex into:elements max:maxElements];
+    return [NSArray arrayWithObjects:elements count:maxElements];
+
+}
+
 
 -(NSDictionary*)dictionaryAtIndex:(int)anIndex
 {
@@ -155,6 +164,45 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
             
             dictionaryWithObjects:[self dataAtIndex:anIndex]
                                        forKeys:[self headerKeys]];
+}
+
+-(void)iterateTableDictionaries:(void(^)(NSDictionary* theDict, int anIndex))block
+{
+    int maxElements =[[self headerKeys] count];
+    id elements[ maxElements+10];
+    id headerArray[ maxElements+10];
+    NSArray *keys=[self headerKeys];
+    NSMutableDictionary *theDict=[NSMutableDictionary dictionaryWithSharedKeySet:[NSMutableDictionary sharedKeySetForKeys:keys]];
+    [keys getObjects:headerArray];
+    int keyCount=[keys count];
+    
+    for (int i=0;i<[self count];i++) {
+        bzero(elements, maxElements * sizeof(id));
+        int numElems=[self dataAtIndex:i into:elements max:maxElements];
+        numElems=MIN(numElems,keyCount);
+        for (int j=0;j<numElems;j++) {
+//            NSLog(@"row:%d column: %d",i,j);
+//            NSLog(@"key: %@",headerArray[j]);
+//            NSLog(@"value: %@",elements[j]);
+            
+            [theDict setObject:elements[j] forKey:headerArray[j]];
+        }
+        block( theDict,i);
+        [theDict removeAllObjects];
+    }
+    
+}
+
+-(NSArray*)collect:(id(^)(id theDict))block
+{
+    NSMutableArray *array=[NSMutableArray arrayWithCapacity:[self count]];
+    [self iterateTableDictionaries:^(NSDictionary* theDict, int anIndex){
+        id obj= block(theDict);
+        if (obj) {
+            [array addObject:obj];
+        }
+    }];
+    return array;
 }
 
 @end

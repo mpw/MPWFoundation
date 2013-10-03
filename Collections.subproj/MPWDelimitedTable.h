@@ -28,5 +28,7 @@
 -(NSArray*)headerKeys;
 -(NSDictionary*)dictionaryAtIndex:(int)anIndex;
 
+-(void)iterateTableDictionaries:(void(^)(NSDictionary* theDict, int anIndex))block;
+
 @end
 
