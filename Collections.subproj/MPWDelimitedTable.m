@@ -63,7 +63,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     self=[super init];
     [self setFieldDelimiter:newFieldDelimiter];
     [self setData:newTableData];
-    [self setSubdatas:[[[MPWObjectCache alloc] initWithCapacity:220 class:[MPWSubData class]] autorelease]];
+    [self setSubdatas:[[[MPWObjectCache alloc] initWithCapacity:220 class: [MPWSubData class]] autorelease]];
     [[self subdatas] setUnsafeFastAlloc:YES];
     return self;
 }
@@ -78,11 +78,21 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     return [self initWithData:newTableData delimiter:@","];
 }
 
+-(instancetype)cloneForThrading
+{
+    MPWDelimitedTable *clone=[[[self class] alloc] initWithData:data delimiter:fieldDelimiter];
+    [clone setLineOffsets:[self lineOffsets]];
+    [clone setHeaderKeys:[self headerKeys]];
+    return  [clone autorelease];
+}
+
 -(void)dealloc
 {
     RELEASE(lineOffsets);
     RELEASE(fieldDelimiter);
     RELEASE(headerKeys);
+    RELEASE(subdatas);
+    RELEASE(data);
     [super dealloc];
 }
 
@@ -96,12 +106,18 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     return [self totalLineCount]-1;
 }
 
+
+
+
 -(MPWSubData*)subdataWithStart:(const char*)start length:(int)len
 {
+#if 1
     MPWSubData *subdata=GETOBJECT(subdatas);
-    [subdata reInitWithData:data bytes:start length:len
-     ];
+    [subdata reInitWithData:data bytes:start length:len];
     return subdata;
+#else
+    return [[[MPWSubData alloc] initWithData:data bytes:start length:len] autorelease];
+#endif
 }
 
 -(NSString*)lineAtIndex:(int)anIndex
@@ -166,7 +182,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
                                        forKeys:[self headerKeys]];
 }
 
--(void)iterateTableDictionaries:(void(^)(NSDictionary* theDict, int anIndex))block
+-(void)inRange:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
 {
     int maxElements =[[self headerKeys] count];
     id elements[ maxElements+10];
@@ -176,33 +192,66 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     [keys getObjects:headerArray];
     int keyCount=[keys count];
     
-    for (int i=0;i<[self count];i++) {
-        bzero(elements, maxElements * sizeof(id));
-        int numElems=[self dataAtIndex:i into:elements max:maxElements];
-        numElems=MIN(numElems,keyCount);
-        for (int j=0;j<numElems;j++) {
-//            NSLog(@"row:%d column: %d",i,j);
-//            NSLog(@"key: %@",headerArray[j]);
-//            NSLog(@"value: %@",elements[j]);
-            
-            [theDict setObject:elements[j] forKey:headerArray[j]];
+    for (int i=range.location;i<range.location + range.length;i++) {
+        @autoreleasepool {
+            bzero(elements, maxElements * sizeof(id));
+            int numElems=[self dataAtIndex:i into:elements max:maxElements];
+            numElems=MIN(numElems,keyCount);
+            for (int j=0;j<numElems;j++) {
+                //            NSLog(@"row:%d column: %d",i,j);
+                //            NSLog(@"key: %@",headerArray[j]);
+                //            NSLog(@"value: %@",elements[j]);
+                
+                [theDict setObject:elements[j] forKey:headerArray[j]];
+            }
+            block( theDict,i);
+            [theDict removeAllObjects];
         }
-        block( theDict,i);
-        [theDict removeAllObjects];
     }
     
 }
 
--(NSArray*)collect:(id(^)(id theDict))block
+-(void)do:(void(^)(NSDictionary* theDict, int anIndex))block
+{
+    [self inRange:NSMakeRange(0, [self count]) do:block];
+}
+
+-(NSArray*)inRange:(NSRange)r collect:(id(^)(id theDict))block
 {
     NSMutableArray *array=[NSMutableArray arrayWithCapacity:[self count]];
-    [self iterateTableDictionaries:^(NSDictionary* theDict, int anIndex){
+    [self inRange:r do:^(NSDictionary* theDict, int anIndex){
         id obj= block(theDict);
         if (obj) {
             [array addObject:obj];
         }
     }];
     return array;
+}
+
+-(NSArray*)collect:(id(^)(id theDict))block
+{
+    return [self inRange:NSMakeRange(0, [self count]) collect:block];
+}
+
+-(NSArray*)parcollect_doesntwork:(id(^)(id theDict))block
+{
+    int numParts=4;
+    int partLen=[self count]/numParts + 1;
+    NSMutableArray *partialResults=[NSMutableArray array];
+    for (int i=0;i<[self count];i+=partLen) {
+        int thisPartLen=MIN( partLen, [self count]-i-1);
+        MPWDelimitedTable *threadClone=[self cloneForThrading];
+        
+        NSArray *partialResult=[[threadClone future] inRange:NSMakeRange(i, thisPartLen) collect:
+                                
+                                block ];
+        [partialResults addObject:partialResult];
+    }
+    NSMutableArray *results=[NSMutableArray array];
+    for (NSArray *temp in partialResults) {
+        [results addObjectsFromArray:temp];
+    }
+    return results;
 }
 
 @end

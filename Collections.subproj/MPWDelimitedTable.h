@@ -11,14 +11,13 @@
 @interface MPWDelimitedTable : MPWObject
 {
     NSData  *data;
-//    NSArray *lines;
     NSArray *headerKeys;
     NSString *fieldDelimiter;
     MPWIntArray *lineOffsets;
     int eolLength;
-    MPWObjectCache  *subdatas;
     char fieldDelimiterBytes[20];
     int  fieldDelimiterLength;
+    MPWObjectCache *subdatas;
 }
 
 -initWithData:(NSData*)newTableData delimiter:(NSString*)newFieldDelimiter;
@@ -28,7 +27,9 @@
 -(NSArray*)headerKeys;
 -(NSDictionary*)dictionaryAtIndex:(int)anIndex;
 
--(void)iterateTableDictionaries:(void(^)(NSDictionary* theDict, int anIndex))block;
+-(void)do:(void(^)(NSDictionary* theDict, int anIndex))block;
+-(NSArray*)collect:(id(^)(id theDict))block;
+//-(NSArray*)parcollect:(id(^)(id theDict))block;
 
 @end
 
