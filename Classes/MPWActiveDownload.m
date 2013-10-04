@@ -53,6 +53,7 @@ intAccessor( downloadSize, setDownloadeSize )
 		NSURLRequest *urlrequest = [[[NSURLRequest alloc] initWithURL:[NSURL URLWithString:[[self request] urlstring]]] autorelease];
 		[self setUrlConnection:[[[NSURLConnection alloc] initWithRequest:urlrequest delegate:self] autorelease]];
 		requestStarted=YES;
+        startTime=[NSDate timeIntervalSinceReferenceDate];
 	}
 }
 
@@ -89,7 +90,9 @@ intAccessor( downloadSize, setDownloadeSize )
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	if(log) NSLog(@"connection: %@ didFailWithError: %@", connection, error);
-	// should abort the stream 
+	// should abort the stream
+    finishTime=[NSDate timeIntervalSinceReferenceDate];
+
 	if ( [request target] && [request failureSelector] ) {
 		[[request target] performSelector:[request failureSelector]];
 	}
@@ -98,6 +101,7 @@ intAccessor( downloadSize, setDownloadeSize )
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	if(log) NSLog(@"connectionDidFinishLoading: %@ stream: %@", connection,output);
+    finishTime=[NSDate timeIntervalSinceReferenceDate];
 	[output close];
 	if ( [[output target] isKindOfClass:[NSData class]] ) {
 		[downloader finishedLoading:request withData:[output target]];
@@ -108,6 +112,16 @@ intAccessor( downloadSize, setDownloadeSize )
 	//    [connection release];
 	//      [self release];
 }
+
+-(double)downloadTime
+{
+    if ( finishTime > startTime) {
+        return finishTime-startTime;
+    } else {
+        return 0;
+    }
+}
+
 
 DEALLOC (
     RELEASE(urlConnection);

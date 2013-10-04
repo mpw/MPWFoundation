@@ -20,6 +20,7 @@
 	BOOL	done;
 	BOOL	log;
 	BOOL	requestStarted;
+    double  startTime,finishTime;
 }
 
 -(float)percentDone;
@@ -27,6 +28,7 @@
 -(id)initWithRequest:(MPWResourceLoadRequest*)newRequest downloader:(MPWCachingDownloader*)newDownloader;
 -(id)initWithRequest:(MPWResourceLoadRequest*)newRequest downloadingToPath:(NSString*)targetPath;
 -(BOOL)isRunning;
+-(double)downloadTime;
 
 
 @end
