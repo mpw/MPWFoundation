@@ -20,7 +20,7 @@
     int  fieldDelimiterLength;
     MPWObjectCache *subdatas;
     NSArray   *keysOfInterest;
-    MPWIntArray *_indexesOfInterest;
+    MPWIntArray *indexesOfInterest;
 }
 
 -initWithData:(NSData*)newTableData delimiter:(NSString*)newFieldDelimiter;

@@ -21,6 +21,11 @@ lazyAccessor(MPWIntArray, lineOffsets, setLineOffsets, computeLineOffsets)
 intAccessor(eolLength, setEOLLength)
 objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
+lazyAccessor(NSArray, keysOfInterest , _setKeysOfInterest, headerKeys)
+lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndexesOfInterest)
+
+
+
 -(void)setData:(NSData*)newData
 {
     [self _setData:newData];
@@ -85,7 +90,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     return [self initWithData:newTableData delimiter:@","];
 }
 
--(instancetype)cloneForThrading
+-(instancetype)cloneForThreading
 {
     MPWDelimitedTable *clone=[[[self class] alloc] initWithData:data delimiter:fieldDelimiter];
     [clone setLineOffsets:[self lineOffsets]];
@@ -101,6 +106,8 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     RELEASE(headerKeys);
     RELEASE(subdatas);
     RELEASE(data);
+    RELEASE(indexesOfInterest);
+    RELEASE(keysOfInterest);
     [super dealloc];
 }
 
@@ -130,8 +137,9 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
 -(NSString*)lineAtIndex:(int)anIndex
 {
-    int offset=[[self lineOffsets] integerAtIndex:anIndex];
-    int nextOffset=[[self lineOffsets] integerAtIndex:anIndex+1];
+    int *offsets=[[self lineOffsets] integers];
+    int offset=offsets[anIndex];
+    int nextOffset=offsets[anIndex+1];
     int len = nextOffset-offset-[self eolLength];
     return [self subdataWithStart:(const char*)bytes+offset length:len ];
 }
@@ -148,7 +156,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
 
 
--(long)dataAtIndex:(int)anIndex into:(id*)elements max:(int)maxElements
+-(long)dataAtIndex:(int)anIndex into:(id*)elements mapper:(int*)mapper max:(int)maxElements
 {
     MPWSubData *lineData=(MPWSubData*)[self lineAtIndex:anIndex+1];
     const char *start=[lineData bytes];
@@ -156,27 +164,30 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     int delimLength=[[self fieldDelimiter] length];
     const char *end =start+[lineData length];
     int elemNo=0;
-    while ( cur < end && elemNo < maxElements ) {
+    int mappedElemNo=0;
+    while ( cur < end && mappedElemNo < maxElements ) {
 //        const char *next=strnstr(cur, fieldDelimiterBytes, end-cur);
         const char *next=strchr(cur, fieldDelimiterBytes[0]);
         if ( !next)  {
             next=end;
         }
-        if ( next ) {
-            elements[ elemNo++ ] =[self subdataWithStart:cur length:next-cur ];
-            cur=next+delimLength;
+        if ( next && (elemNo == mapper[mappedElemNo] )) {
+//            NSLog(@"matched input col %d with output col %d",elemNo,mappedElemNo);
+            elements[ mappedElemNo++ ] =[self subdataWithStart:cur length:next-cur ];
         } else {
-            
+//            NSLog(@"skip input col %d",elemNo);
         }
+        cur=next+delimLength;
+        elemNo++;
     }
-    return elemNo;
+    return mappedElemNo;
 }
 
 -(NSArray*)dataAtIndex:(int)anIndex
 {
     int maxElements =[[self headerKeys] count];
     id elements[ maxElements+10];
-    [self dataAtIndex:anIndex into:elements max:maxElements];
+    [self dataAtIndex:anIndex into:elements mapper:[[self indexesOfInterest] integers]max:maxElements];
     return [NSArray arrayWithObjects:elements count:maxElements];
 
 }
@@ -192,48 +203,36 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
 -(void)inRange:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
 {
-    int maxElements =[[self headerKeys] count];
+    NSArray *keys=[self keysOfInterest];
+    MPWIntArray *indexes=[self indexesOfInterest];
+    MPWSmallStringTable *theDict;
+    
+    int maxElements =[indexes count];
     id elements[ maxElements+10];
     id headerArray[ maxElements+10];
-    NSArray *keys=[self headerKeys];
-    
-//    NSMutableDictionary *theDict=[NSMutableDictionary dictionaryWithSharedKeySet:[NSMutableDictionary sharedKeySetForKeys:keys]];
-    [keys getObjects:headerArray];
-    MPWSmallStringTable *theDict=[[[MPWSmallStringTable alloc] initWithObjects:headerArray forKeys:headerArray count:maxElements] autorelease];
-    int keyCount=[keys count];
-    int keyIndexes[keyCount];
-    int maxElementsOfInterest=keyCount;
     int stringTableOffsets[ maxElements+10];
+    int *keyIndexes=[indexes integers];
     
-    if (  _indexesOfInterest) {
-        maxElementsOfInterest=[_indexesOfInterest count];
-        for (int i=0;i<maxElementsOfInterest;i++) {
-            keyIndexes[i]=[_indexesOfInterest integerAtIndex:i];
-            stringTableOffsets[i]=[theDict offsetForKey:headerArray[keyIndexes[i]]];
-        }
-    } else {
-        for (int i=0;i<keyCount;i++) {
-            keyIndexes[i]=i;
-            stringTableOffsets[i]=[theDict offsetForKey:headerArray[keyIndexes[i]]];
-        }
+    [keys getObjects:headerArray];
+    theDict=[MPWSmallStringTable dictionaryWithObjects:headerArray
+                                               forKeys:headerArray
+                                                 count:maxElements];
+    
+    for (int i=0;i<maxElements;i++) {
+        stringTableOffsets[i]=[theDict offsetForKey:headerArray[i]];
     }
     for (int i=range.location;i<range.location + range.length;i++) {
         @autoreleasepool {
-            bzero(elements, maxElements * sizeof(id));
-            int numElems=[self dataAtIndex:i into:elements max:maxElements];
-            numElems=MIN(numElems,maxElementsOfInterest);
+            int numElems=[self dataAtIndex:i into:elements mapper:keyIndexes max:maxElements];
+            numElems=MIN(numElems,maxElements);
                 for (int j=0;j<numElems;j++) {
-                //            NSLog(@"row:%d column: %d",i,j);
-                //            NSLog(@"key: %@",headerArray[j]);
-                //            NSLog(@"value: %@",elements[j]);
-                    id elem=elements[keyIndexes[j]];
+                    id elem=elements[j];
                     if ( elem ) {
-//                        [theDict setObject:elem forKey:headerArray[keyIndexes[j]]];
                         [theDict replaceObjectAtIndex:stringTableOffsets[j] withObject:elem];
                     }
                 }
+
             block( theDict,i);
-//            [theDict removeAllObjects];
         }
     }
     
@@ -252,19 +251,20 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     return @"dummresult";
 }
 
-objectAccessor(NSArray, keysOfInterest , _setKeysOfInterest)
-objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
-
--(void)setKeysOfInterest:(NSArray*)keys
+-(MPWIntArray*)computeIndexesOfInterest
 {
-    [self _setKeysOfInterest:keys];
     MPWIntArray *newIndexes=[MPWIntArray array];
-    for ( NSString *key in keys) {
+    for ( NSString *key in [self keysOfInterest]) {
         [newIndexes addInteger:[[self headerKeys] indexOfObject:key]];
     }
-    [self _setIndexesOfInterest:newIndexes];
+    return newIndexes;
 }
 
+-(void)setKeysOfInterest:newKeys
+{
+    [self setIndexesOfInterest:nil];
+    [self _setKeysOfInterest:newKeys];
+}
 
 -(void)pardo:(void(^)(NSDictionary* theDict, int anIndex))block
 {
@@ -273,7 +273,7 @@ objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
     NSMutableArray *dummyResults=[NSMutableArray array];
     for (int i=0;i<[self count];i+=partLen) {
         int thisPartLen=MIN( partLen, [self count]-i-1);
-        MPWDelimitedTable *threadClone=[self cloneForThrading];
+        MPWDelimitedTable *threadClone=[self cloneForThreading];
         
         [dummyResults addObject:[[threadClone future] inRangeWithDummResult:NSMakeRange(i, thisPartLen) do:Block_copy(block)   ]];
     }
@@ -303,11 +303,12 @@ objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
 -(NSArray*)parcollect:(id(^)(id theDict))block
 {
     int numParts=4;
+    
     int partLen=[self count]/numParts + 1;
     NSMutableArray *partialResults=[NSMutableArray array];
     for (int i=0;i<[self count];i+=partLen) {
-        int thisPartLen=MIN( partLen, [self count]-i-1);
-        MPWDelimitedTable *threadClone=[self cloneForThrading];
+        int thisPartLen=MIN( partLen, [self count]-i);
+        MPWDelimitedTable *threadClone=[self cloneForThreading];
         
         NSArray *partialResult=[[threadClone future] inRange:NSMakeRange(i, thisPartLen) collect: block ];
         [partialResults addObject:partialResult];
@@ -505,7 +506,7 @@ objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
     INTEXPECT([table totalLineCount], 18, @"total lines");
     INTEXPECT([table count], 17, @"data lines");
     NSArray *keys=[table headerKeys];
-    NSArray *expectedKeys=@[     @"",
+    NSArray *expectedKeys=@[     @"Name",
                                  @"serialize",
                                  @"deserialize",
                                  @"size (MB)",
@@ -521,9 +522,69 @@ objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
     
     IDEXPECT(keys, expectedKeys, @"header keys");
     NSDictionary *dict=[table dictionaryAtIndex:2];
-    IDEXPECT([dict objectForKey:@""], @"JSON", @"label");
+    IDEXPECT([dict objectForKey:@"Name"], @"JSON", @"label");
     IDEXPECT([dict objectForKey:@"serialize"], @"2.39", @"time");
+    IDEXPECT([dict objectForKey:@"% space"], @"", @"empty");
 }
+
++(void)testCollect
+{
+    MPWDelimitedTable *table=[self _testTable];
+    NSArray *dicts=[table collect:^id(NSDictionary* theDict) {
+        return [NSDictionary dictionaryWithDictionary:theDict];
+    }];
+    NSDictionary *dict=[dicts objectAtIndex:2];
+    INTEXPECT([dicts count], 3, @"collected dict");
+    IDEXPECT([dict objectForKey:@"ID"], @"213596507", @"ID");
+    IDEXPECT([dict objectForKey:@"NA"], @"Ehinger-Schwarz GmbH & Co KG", @"NA");
+}
+
++(void)testCollect1
+{
+    MPWDelimitedTable *table=[self _testCSVTable];
+    NSArray *dicts=[table collect:^id(NSDictionary* theDict) {
+        return [NSDictionary dictionaryWithDictionary:theDict];
+    }];
+    INTEXPECT([dicts count], 17, @"collected dict");
+    NSDictionary *dict=[dicts objectAtIndex:2];
+    IDEXPECT([dict objectForKey:@"Name"], @"JSON", @"label");
+    IDEXPECT([dict objectForKey:@"serialize"], @"2.39", @"time");
+    NSDictionary *dict1=[dicts objectAtIndex:14];
+    IDEXPECT([dict1 objectForKey:@"Name"], @"objectsAndKeys:", @"label");
+    IDEXPECT([dict1 objectForKey:@"serialize"], @"0.89", @"time");
+}
+
++(void)testParCollect
+{
+    MPWDelimitedTable *table=[self _testCSVTable];
+    NSArray *dicts=[table parcollect:^id(NSDictionary* theDict) {
+        return [NSDictionary dictionaryWithDictionary:theDict];
+    }];
+    INTEXPECT([dicts count], 17, @"collected dict");
+    NSDictionary *dict=[dicts objectAtIndex:2];
+    IDEXPECT([dict objectForKey:@"Name"], @"JSON", @"label");
+    IDEXPECT([dict objectForKey:@"serialize"], @"2.39", @"time");
+    NSDictionary *dict1=[dicts objectAtIndex:14];
+    IDEXPECT([dict1 objectForKey:@"Name"], @"objectsAndKeys:", @"label");
+    IDEXPECT([dict1 objectForKey:@"serialize"], @"0.89", @"time");
+}
+
+
++(void)testKeysOfInterest
+{
+    MPWDelimitedTable *table=[self _testTable];
+    [table setKeysOfInterest:@[@"ID" , @"NA"]];
+    NSArray *dicts=[table collect:^id(NSDictionary* theDict) {
+        return [NSDictionary dictionaryWithDictionary:theDict];
+    }];
+    NSDictionary *dict=[dicts objectAtIndex:2];
+    INTEXPECT([dicts count], 3, @"collected dict");
+    INTEXPECT([dict count], 2, @"should only have these two keys");
+    IDEXPECT([dict objectForKey:@"ID"], @"213596507", @"ID");
+    IDEXPECT([dict objectForKey:@"NA"], @"Ehinger-Schwarz GmbH & Co KG", @"NA");
+}
+
+
 
 +testSelectors
 {
@@ -532,6 +593,10 @@ objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
              @"testHeaderKeys",
              @"testDictionary",
              @"testCSVTable",
+             @"testCollect",
+//             @"testCollect1",
+//             @"testParCollect",
+             @"testKeysOfInterest",
              ];
 }
 
