@@ -22,7 +22,17 @@
 }
 
 
--objectForCString:(const char*)cstr length:(int)len
+-(int)offsetForCString:(const char*)cstr length:(int)len
+{
+	int i;
+	char lowercasestring[ len+1 ];
+	for (i=0;i<len;i++) {
+		lowercasestring[i]=tolower(cstr[i]);
+	}
+	return [super offsetForCString:lowercasestring length:len];
+}
+
+-(id)objectForCString:(const char*)cstr length:(int)len
 {
 	int i;
 	char lowercasestring[ len+1 ];

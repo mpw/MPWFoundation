@@ -221,22 +221,7 @@ IMP __stringTableLookupFun=NULL;
 	return tableLength;
 }
 
--objectForKey:(NSString*)key
-{
-    if ( tableLength ) {
-        int encoding=NSUTF8StringEncoding;
-#if WINDOWS
-        encoding=NSISOLatin1StringEncoding;
-#endif
-        int len=[key lengthOfBytesUsingEncoding:encoding];
-        char buffer[len+20];
-        [key getCString:buffer maxLength:len+10 encoding:encoding];
-        buffer[len]=0;
-        return [self objectForCString:buffer length:len];
-    } else {
-        return defaultValue;
-    }
-}
+
 
 -objectAtIndex:(NSUInteger)anIndex
 {
@@ -349,10 +334,36 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 	return [self offsetForCString:cstr length:strlen(cstr)];
 }
 
+-(int)offsetForKey:(NSString*)key
+{
+    int encoding=NSUTF8StringEncoding;
+#if WINDOWS
+    encoding=NSISOLatin1StringEncoding;
+#endif
+    int len=[key lengthOfBytesUsingEncoding:encoding];
+    char buffer[len+20];
+    [key getCString:buffer maxLength:len+10 encoding:encoding];
+    buffer[len]=0;
+    int offset= [self offsetForCString:buffer];
+//    NSLog(@"key: '%@' buffer: '%s' len:%d offset=%d",key,buffer,len,offset);
+    return offset;
+}
+
+
+-objectForKey:(NSString*)key
+{
+    if ( tableLength ) {
+        int offset=[self offsetForKey:key];
+        if ( offset >= 0 ) {
+            return tableValues[offset];
+        }
+    }
+    return defaultValue;
+}
+
 -(void)setObject:anObject forKey:aKey
 {
-	const char *str=[aKey UTF8String];
-	int offset=[self offsetForCString:str];
+	int offset=[self offsetForKey:aKey];
 	if ( offset >= 0 ) {
 		[self replaceObjectAtIndex:offset  withObject:anObject];
 	} else {

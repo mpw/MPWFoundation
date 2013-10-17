@@ -10,6 +10,7 @@
 #import "NSBundleConveniences.h"
 #import "MPWSubData.h"
 #import "MPWFuture.h"
+#import "MPWSmallStringTable.h"
 
 @implementation MPWDelimitedTable
 
@@ -195,33 +196,40 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     id elements[ maxElements+10];
     id headerArray[ maxElements+10];
     NSArray *keys=[self headerKeys];
-    NSMutableDictionary *theDict=[NSMutableDictionary dictionaryWithSharedKeySet:[NSMutableDictionary sharedKeySetForKeys:keys]];
+    
+//    NSMutableDictionary *theDict=[NSMutableDictionary dictionaryWithSharedKeySet:[NSMutableDictionary sharedKeySetForKeys:keys]];
     [keys getObjects:headerArray];
+    MPWSmallStringTable *theDict=[[[MPWSmallStringTable alloc] initWithObjects:headerArray forKeys:headerArray count:maxElements] autorelease];
     int keyCount=[keys count];
     int keyIndexes[keyCount];
     int maxElementsOfInterest=keyCount;
-    if ( NO && _indexesOfInterest) {
+    int stringTableOffsets[ maxElements+10];
+    
+    if (  _indexesOfInterest) {
         maxElementsOfInterest=[_indexesOfInterest count];
         for (int i=0;i<maxElementsOfInterest;i++) {
             keyIndexes[i]=[_indexesOfInterest integerAtIndex:i];
+            stringTableOffsets[i]=[theDict offsetForKey:headerArray[keyIndexes[i]]];
         }
     } else {
         for (int i=0;i<keyCount;i++) {
             keyIndexes[i]=i;
+            stringTableOffsets[i]=[theDict offsetForKey:headerArray[keyIndexes[i]]];
         }
     }
     for (int i=range.location;i<range.location + range.length;i++) {
         @autoreleasepool {
             bzero(elements, maxElements * sizeof(id));
             int numElems=[self dataAtIndex:i into:elements max:maxElements];
-            numElems=MIN(numElems,keyCount);
-                for (int j=0;j<maxElementsOfInterest;j++) {
+            numElems=MIN(numElems,maxElementsOfInterest);
+                for (int j=0;j<numElems;j++) {
                 //            NSLog(@"row:%d column: %d",i,j);
                 //            NSLog(@"key: %@",headerArray[j]);
                 //            NSLog(@"value: %@",elements[j]);
                     id elem=elements[keyIndexes[j]];
                     if ( elem ) {
-                        [theDict setObject:elem forKey:headerArray[keyIndexes[j]]];
+//                        [theDict setObject:elem forKey:headerArray[keyIndexes[j]]];
+                        [theDict replaceObjectAtIndex:stringTableOffsets[j] withObject:elem];
                     }
                 }
             block( theDict,i);
