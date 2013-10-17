@@ -357,7 +357,7 @@
 		1F78214F12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
-		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
+		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA1593D17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
 		1FA1593E17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; };
 		1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };

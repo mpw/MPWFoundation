@@ -173,13 +173,15 @@ idAccessor( observer, setObserver )
 -(int)reportDoneFromRequests:(NSMutableSet*)downloads into:(NSMutableSet*)doneSet
 {
 	int numDone=0;
+    NSMutableSet *newDone=[NSMutableSet set];
 	for ( MPWActiveDownload *download in downloads ) {
 		if ( [download done] ) {
 			[doneSet addObject:download];
+            [newDone addObject:download];
 			numDone++;
 		}
 	}
-	[downloads minusSet:doneSet];
+	[downloads minusSet:newDone];
 	return numDone;
 }
 

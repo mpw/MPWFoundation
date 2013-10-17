@@ -55,9 +55,9 @@ typedef void (^DictElementBlock)(MPWBinaryPlist* plist,long keyOffset,long value
 -(double)readDouble;
 -(BOOL)verifyKey:keyToCheck forIndex:(long)keyOffset;
 
--(long)readIntegerForKey:(NSString*)aKey;
--(double)readRealForKey:(NSString*)aKey;
--(id)readObjectForKey:(NSString*)aKey;
+-(long)decodeIntForKey:(NSString*)aKey;
+-(double)decodeDoubleForKey:(NSString*)aKey;
+-(id)decodeObjectForKey:(NSString*)aKey;
 -(BOOL)isArrayAtKey:(NSString*)aKey;
 
 -(long)parseDictAtIndex:(long)anIndex usingContentBlock:(DictElementBlock)block;

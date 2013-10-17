@@ -251,7 +251,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return 0;
 }
 
--(long)readIntegerForKey:(NSString*)aKey
+-(long)decodeIntForKey:(NSString*)aKey
 {
     if ( [self verifyKey:aKey forIndex:[self keyIndexAtCurrentDictIndex:currentDictIndex]]) {
         return [self parseIntegerAtOffset:offsets[[self valueIndexAtCurrentDictIndex:currentDictIndex++]]];
@@ -261,15 +261,37 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return 0;
 }
 
--(double)readRealForKey:(NSString*)aKey
+-(double)decodeDoubleForKey:(NSString*)aKey
 {
     return [self readDoubleAtIndex:[self valueIndexAtCurrentDictIndex:currentDictIndex++]];
 }
 
--(id)readObjectForKey:(NSString*)aKey
+-(id)decodeObjectForKey:(NSString*)aKey
 {
     return [self objectAtIndex:[self valueIndexAtCurrentDictIndex:currentDictIndex++]];
 }
+
+-(id)decodeObjectOfClass:(Class)aClass forKey:(NSString*)aKey
+{
+    long anIndex =[self valueIndexAtCurrentDictIndex:currentDictIndex++];
+    id instance=NSAllocateObject(aClass, 0, NULL);
+    [self parseDictAtIndex:anIndex usingContentBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long anIndex) {
+        [instance initWithCoder:(NSCoder*)plist];
+    }];
+    return instance;
+}
+
+-(id)decodeArrayWithElementsOfClass:(Class)aClass forKey:(NSString*)aKey
+{
+    long anIndex =[self valueIndexAtCurrentDictIndex:currentDictIndex++];
+    NSMutableArray *result=[NSMutableArray array];
+    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long offset, long anIndex) {
+        [result addObject:[plist decodeObjectOfClass:aClass forKey:nil]];
+    }];
+    return result;
+}
+
+
 
 -(long)parseArrayAtKey:(NSString*)aKey usingBlock:(ArrayElementBlock)block
 {
@@ -671,8 +693,8 @@ DEALLOC(
     NSDictionary *tester=@{ key1: @"world", key2: @42 };
     MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
     [bplist parseDictUsingContentBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long anIndex) {
-        IDEXPECT([plist readObjectForKey:key1], @"world", @"readObjectForKey");
-        INTEXPECT([plist readIntegerForKey:key2], 42, @"readIntegerForKey");
+        IDEXPECT([plist decodeObjectForKey:key1], @"world", @"readObjectForKey");
+        INTEXPECT([plist decodeIntForKey:key2], 42, @"decodeIntForKey");
     } ];
 }
 
@@ -701,6 +723,7 @@ DEALLOC(
               @"testReadDict",
               @"testVerifyDictKeys",
               @"testReadDictActively",
+              @"testReadLazyArray",
               @"testReadLazyArray",
               ];
 }

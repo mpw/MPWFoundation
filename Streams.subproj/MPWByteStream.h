@@ -35,7 +35,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @protocol ByteStreaming
 
-#define FORWARDCHARS( x )    ([target appendBytes:x length:strlen(x)])
 
 -(void)appendBytes:(const void*)data length:(NSUInteger)count;
 -(void)appendHexBytes:(const void*)data length:(NSUInteger)count;
@@ -73,8 +72,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)indent;
 -(void)outdent;
 -(void)setIndentAmount:(int)indent;
+-(void)writeObject:anObject forKey:aKey;
 
-#define  TARGET_APPEND( data, count)   { targetAppend( target, @selector(appendBytes:length:), data , count ); totalBytes+=count; }
+#define  TARGET_APPEND( data, count)   { targetAppend( self->target, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
+
+#define FORWARDCHARSLEN( x,l )  [self->target appendBytes:(x) length:(l)]
+#define FORWARDCHARS( x )       FORWARDCHARSLEN( x,strlen(x))
 
 @end
 

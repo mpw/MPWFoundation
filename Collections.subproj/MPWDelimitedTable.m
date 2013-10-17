@@ -9,15 +9,22 @@
 #import "MPWDelimitedTable.h"
 #import "NSBundleConveniences.h"
 #import "MPWSubData.h"
+#import "MPWFuture.h"
 
 @implementation MPWDelimitedTable
 
-objectAccessor(NSData, data, setData)
+objectAccessor(NSData, data, _setData)
 lazyAccessor(NSArray, headerKeys, setHeaderKeys, computeHeaderKeys)
 objectAccessor(NSString, fieldDelimiter, _setFieldDelimiter)
 lazyAccessor(MPWIntArray, lineOffsets, setLineOffsets, computeLineOffsets)
 intAccessor(eolLength, setEOLLength)
 objectAccessor(MPWObjectCache, subdatas, setSubdatas)
+
+-(void)setData:(NSData*)newData
+{
+    [self _setData:newData];
+    bytes=[[self data] bytes];
+}
 
 -(void)setFieldDelimiter:(NSString*)newFieldDelim
 {
@@ -33,7 +40,6 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
 -(MPWIntArray*)computeLineOffsets
 {
-    unsigned const char *bytes=[[self data] bytes];
     unsigned const char *cur=bytes;
     unsigned const char *end=cur+[[self data] length];
     MPWIntArray *offsets=[MPWIntArray array];
@@ -83,6 +89,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     MPWDelimitedTable *clone=[[[self class] alloc] initWithData:data delimiter:fieldDelimiter];
     [clone setLineOffsets:[self lineOffsets]];
     [clone setHeaderKeys:[self headerKeys]];
+    [clone setKeysOfInterest:[self keysOfInterest]];
     return  [clone autorelease];
 }
 
@@ -122,11 +129,10 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 
 -(NSString*)lineAtIndex:(int)anIndex
 {
-    const char *bytes=[[self data] bytes];
     int offset=[[self lineOffsets] integerAtIndex:anIndex];
     int nextOffset=[[self lineOffsets] integerAtIndex:anIndex+1];
     int len = nextOffset-offset-[self eolLength];
-    return [self subdataWithStart:bytes+offset length:len ];
+    return [self subdataWithStart:(const char*)bytes+offset length:len ];
 }
 
 -(NSString*)headerLine
@@ -150,7 +156,8 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     const char *end =start+[lineData length];
     int elemNo=0;
     while ( cur < end && elemNo < maxElements ) {
-        const char *next=strnstr(cur, fieldDelimiterBytes, end-cur);
+//        const char *next=strnstr(cur, fieldDelimiterBytes, end-cur);
+        const char *next=strchr(cur, fieldDelimiterBytes[0]);
         if ( !next)  {
             next=end;
         }
@@ -191,21 +198,34 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     NSMutableDictionary *theDict=[NSMutableDictionary dictionaryWithSharedKeySet:[NSMutableDictionary sharedKeySetForKeys:keys]];
     [keys getObjects:headerArray];
     int keyCount=[keys count];
-    
+    int keyIndexes[keyCount];
+    int maxElementsOfInterest=keyCount;
+    if ( NO && _indexesOfInterest) {
+        maxElementsOfInterest=[_indexesOfInterest count];
+        for (int i=0;i<maxElementsOfInterest;i++) {
+            keyIndexes[i]=[_indexesOfInterest integerAtIndex:i];
+        }
+    } else {
+        for (int i=0;i<keyCount;i++) {
+            keyIndexes[i]=i;
+        }
+    }
     for (int i=range.location;i<range.location + range.length;i++) {
         @autoreleasepool {
             bzero(elements, maxElements * sizeof(id));
             int numElems=[self dataAtIndex:i into:elements max:maxElements];
             numElems=MIN(numElems,keyCount);
-            for (int j=0;j<numElems;j++) {
+                for (int j=0;j<maxElementsOfInterest;j++) {
                 //            NSLog(@"row:%d column: %d",i,j);
                 //            NSLog(@"key: %@",headerArray[j]);
                 //            NSLog(@"value: %@",elements[j]);
-                
-                [theDict setObject:elements[j] forKey:headerArray[j]];
-            }
+                    id elem=elements[keyIndexes[j]];
+                    if ( elem ) {
+                        [theDict setObject:elem forKey:headerArray[keyIndexes[j]]];
+                    }
+                }
             block( theDict,i);
-            [theDict removeAllObjects];
+//            [theDict removeAllObjects];
         }
     }
     
@@ -215,6 +235,45 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
 {
     [self inRange:NSMakeRange(0, [self count]) do:block];
 }
+
+-(id)inRangeWithDummResult:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
+{
+//    NSLog(@"start inRange: (%d,%d)",range.location,range.length);
+    [self inRange:range do:block];
+//    NSLog(@"done inRange: (%d,%d)",range.location,range.length);
+    return @"dummresult";
+}
+
+objectAccessor(NSArray, keysOfInterest , _setKeysOfInterest)
+objectAccessor(MPWIntArray, _indexesOfInterest , _setIndexesOfInterest)
+
+-(void)setKeysOfInterest:(NSArray*)keys
+{
+    [self _setKeysOfInterest:keys];
+    MPWIntArray *newIndexes=[MPWIntArray array];
+    for ( NSString *key in keys) {
+        [newIndexes addInteger:[[self headerKeys] indexOfObject:key]];
+    }
+    [self _setIndexesOfInterest:newIndexes];
+}
+
+
+-(void)pardo:(void(^)(NSDictionary* theDict, int anIndex))block
+{
+    int numParts=4;
+    int partLen=[self count]/numParts + 1;
+    NSMutableArray *dummyResults=[NSMutableArray array];
+    for (int i=0;i<[self count];i+=partLen) {
+        int thisPartLen=MIN( partLen, [self count]-i-1);
+        MPWDelimitedTable *threadClone=[self cloneForThrading];
+        
+        [dummyResults addObject:[[threadClone future] inRangeWithDummResult:NSMakeRange(i, thisPartLen) do:Block_copy(block)   ]];
+    }
+    for (NSString *dummy in dummyResults) {
+        [dummy stringByAppendingString:@","];
+    }
+}
+
 
 -(NSArray*)inRange:(NSRange)r collect:(id(^)(id theDict))block
 {
@@ -233,7 +292,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
     return [self inRange:NSMakeRange(0, [self count]) collect:block];
 }
 
--(NSArray*)parcollect_doesntwork:(id(^)(id theDict))block
+-(NSArray*)parcollect:(id(^)(id theDict))block
 {
     int numParts=4;
     int partLen=[self count]/numParts + 1;
@@ -242,9 +301,7 @@ objectAccessor(MPWObjectCache, subdatas, setSubdatas)
         int thisPartLen=MIN( partLen, [self count]-i-1);
         MPWDelimitedTable *threadClone=[self cloneForThrading];
         
-        NSArray *partialResult=[[threadClone future] inRange:NSMakeRange(i, thisPartLen) collect:
-                                
-                                block ];
+        NSArray *partialResult=[[threadClone future] inRange:NSMakeRange(i, thisPartLen) collect: block ];
         [partialResults addObject:partialResult];
     }
     NSMutableArray *results=[NSMutableArray array];

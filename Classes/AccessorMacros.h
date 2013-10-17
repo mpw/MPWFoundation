@@ -129,13 +129,26 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	setAccessor( ltype*, lvar, setLVar ) \
 \
 -(ltype*)lvar { \
-    @synchronized( self ) { \
-        if ( ![self _##lvar] )  { \
-        [self setLVar:[self computeVar]]; \
-        }  \
-    } \
+    if ( ![self _##lvar] )  { \
+      [self setLVar:[self computeVar]]; \
+    }  \
 	return [self _##lvar]; \
 } \
+
+#define slazyAccessor( ltype, lvar ,setLVar, computeVar )   \
+readAccessorName( ltype*, lvar, _##lvar ) \
+setAccessor( ltype*, lvar, setLVar ) \
+\
+-(ltype*)lvar { \
+@synchronized( self ) { \
+if ( ![self _##lvar] )  { \
+[self setLVar:[self computeVar]]; \
+}  \
+} \
+return [self _##lvar]; \
+} \
+
+
 
 #define dictAccessor( objectType, var, setVar, someDict ) \
     -(objectType*)var { return [someDict objectForKey:@""#var]; } \
