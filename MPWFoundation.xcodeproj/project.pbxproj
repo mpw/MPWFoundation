@@ -525,6 +525,8 @@
 		1FE006030AFC4E7800F4542F /* MPWEnumSelectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE006040AFC4E7800F4542F /* MPWEnumSelectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */; };
 		1FE09082137821B6003B18B9 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
+		1FEC3A50181152A100EC4226 /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
+		1FEC3A531811541C00EC4226 /* MPWFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07CDA007F8E1EA00C389FA /* MPWFuture.m */; };
 		1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1947006686DDC35ADD82 /* AccessorMacros.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1948006686DDC35ADD82 /* DebugMacros.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
 		1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1949006686DDC35ADD82 /* MPWObject.h */; settings = {ATTRIBUTES = (Public, Project, ); }; };
@@ -1968,10 +1970,12 @@
 				1F4FC68510F7F6D000376799 /* MPWSubData.m in Sources */,
 				1F4FC68810F7F6D000376799 /* MPWStream.m in Sources */,
 				1F4FC68910F7F6D000376799 /* MPWByteStream.m in Sources */,
+				1FEC3A531811541C00EC4226 /* MPWFuture.m in Sources */,
 				1F4FC68A10F7F6D000376799 /* MPWHierarchicalStream.m in Sources */,
 				1F4FC68B10F7F6D000376799 /* MPWPropertyListStream.m in Sources */,
 				1F4FC68C10F7F6D000376799 /* MPWFlattenStream.m in Sources */,
 				1F4FC68D10F7F6D000376799 /* NSObjectFiltering.m in Sources */,
+				1FEC3A50181152A100EC4226 /* MPWDelimitedTable.m in Sources */,
 				1F4FC68E10F7F6D000376799 /* NSArrayFiltering.m in Sources */,
 				1F4FC68F10F7F6D000376799 /* NSBundleConveniences.m in Sources */,
 				1F4FC69010F7F6D000376799 /* MPWUShortArray.m in Sources */,
