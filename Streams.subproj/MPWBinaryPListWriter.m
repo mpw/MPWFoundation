@@ -12,35 +12,41 @@
 
 
 /*
- From CFBinaryPlist.c
+From:  https://github.com/opensource-apple/CF/blob/master/CFBinaryPList.c
  
  HEADER
  magic number ("bplist")
  file format version
+ byte length of plist incl. header, an encoded int number object (as below) [v.2+ only]
+ 32-bit CRC (ISO/IEC 8802-3:1989) of plist bytes w/o CRC, encoded always as
+ "0x12 0x__ 0x__ 0x__ 0x__", big-endian, may be 0 to indicate no CRC [v.2+ only]
  
  OBJECT TABLE
  variable-sized objects
  
  Object Formats (marker byte followed by additional info in some cases)
- null	0000 0000
- bool	0000 1000			// false
- bool	0000 1001			// true
- fill	0000 1111			// fill byte
- int	0001 nnnn	...		// # of bytes is 2^nnnn, big-endian bytes
- real	0010 nnnn	...		// # of bytes is 2^nnnn, big-endian bytes
- date	0011 0011	...		// 8 byte float follows, big-endian bytes
- data	0100 nnnn	[int]	...	// nnnn is number of bytes unless 1111 then int count follows, followed by bytes
- string	0101 nnnn	[int]	...	// ASCII string, nnnn is # of chars, else 1111 then int count, then bytes
- string	0110 nnnn	[int]	...	// Unicode string, nnnn is # of chars, else 1111 then int count, then big-endian 2-byte uint16_t
- 0111 xxxx			// unused
- uid	1000 nnnn	...		// nnnn+1 is # of bytes
- 1001 xxxx			// unused
- array	1010 nnnn	[int]	objref*	// nnnn is count, unless '1111', then int count follows
- 1011 xxxx			// unused
- set	1100 nnnn	[int]	objref* // nnnn is count, unless '1111', then int count follows
- dict	1101 nnnn	[int]	keyref* objref*	// nnnn is count, unless '1111', then int count follows
- 1110 xxxx			// unused
- 1111 xxxx			// unused
+ null        0000 0000                        // null object [v1+ only]
+ bool        0000 1000                        // false
+ bool        0000 1001                        // true
+ url        0000 1100        string                // URL with no base URL, recursive encoding of URL string [v1+ only]
+ url        0000 1101        base string        // URL with base URL, recursive encoding of base URL, then recursive encoding of URL string [v1+ only]
+ uuid        0000 1110                        // 16-byte UUID [v1+ only]
+ fill        0000 1111                        // fill byte
+ int        0001 0nnn        ...                // # of bytes is 2^nnn, big-endian bytes
+ real        0010 0nnn        ...                // # of bytes is 2^nnn, big-endian bytes
+ date        0011 0011        ...                // 8 byte float follows, big-endian bytes
+ data        0100 nnnn        [int]        ...        // nnnn is number of bytes unless 1111 then int count follows, followed by bytes
+ string        0101 nnnn        [int]        ...        // ASCII string, nnnn is # of chars, else 1111 then int count, then bytes
+ string        0110 nnnn        [int]        ...        // Unicode string, nnnn is # of chars, else 1111 then int count, then big-endian 2-byte uint16_t
+ 0111 xxxx                        // unused
+ uid        1000 nnnn        ...                // nnnn+1 is # of bytes
+ 1001 xxxx                        // unused
+ array        1010 nnnn        [int]        objref*        // nnnn is count, unless '1111', then int count follows
+ ordset        1011 nnnn        [int]        objref* // nnnn is count, unless '1111', then int count follows [v1+ only]
+ set        1100 nnnn        [int]        objref* // nnnn is count, unless '1111', then int count follows [v1+ only]
+ dict        1101 nnnn        [int]        keyref* objref*        // nnnn is count, unless '1111', then int count follows
+ 1110 xxxx                        // unused
+ 1111 xxxx                        // unused
  
  OFFSET TABLE
  list of ints, byte size of which is given in trailer
@@ -53,6 +59,11 @@
  number of offsets in offset table (also is number of objects)
  element # in offset table which is top level object
  offset table offset
+ 
+ Version 1.5 binary plists do not use object references (uid),
+ but instead inline the object serialization itself at that point.
+ It also doesn't use an offset table or a trailer.  It does have
+ an extended header, and the top-level object follows the header.
  
  */
 

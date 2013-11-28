@@ -8,6 +8,8 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+@class MPWIntArray;
+
 @interface MPWBinaryPlist : MPWObject
 {
     NSData  *data;

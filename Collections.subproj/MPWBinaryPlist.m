@@ -445,32 +445,57 @@ static inline double readRealAtIndex( int anIndex, const unsigned char *bytes, l
     return readRealAtIndex(  currentObjectNo, bytes, offsets );
 }
 
+-(NSNumber*)readIntegerNumberAtIndex:(long)anIndex
+{
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    return [NSNumber numberWithLong:readIntegerOfSizeAt(bytes, offset+1, 1<<bottomNibble)];
+}
+
+-(NSNumber*)readRealNumberAtIndex:(long)anIndex
+{
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    return ((1<<bottomNibble)==4) ? [NSNumber numberWithFloat:[self readFloatAtIndex:anIndex]] : ((1<<bottomNibble)==8) ?  [NSNumber numberWithDouble:[self readDoubleAtIndex:anIndex]] : nil;
+}
+
+-(NSString*)readASCIIStringAtIndex:(long)anIndex
+{
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    offset++;
+    long length = lengthForNibbleAtOffset(  bottomNibble, bytes,  &offset );
+    return AUTORELEASE([[NSString alloc]
+                        initWithBytes:bytes+offset  length:length encoding:NSASCIIStringEncoding]);
+}
+
+-(NSString*)readUTF16StringAtIndex:(long)anIndex
+{
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    offset++;
+    long length = lengthForNibbleAtOffset(  bottomNibble, bytes,  &offset );
+    return AUTORELEASE([[NSString alloc]
+                        initWithBytes:bytes+offset  length:length*2 encoding:NSUTF16BigEndianStringEncoding]);
+}
+
 -parseObjectAtIndex:(long)anIndex
 {
     long offset=offsets[anIndex];
     int topNibble=(bytes[offset] & 0xf0) >> 4;
-    int bottomNibble=bytes[offset] & 0x0f;
     id result=nil;
-    int length=bottomNibble;
-    offset++;
     switch ( topNibble) {
         case 0x1:
-            result = [NSNumber numberWithLong:[self readIntegerOfSize:1<<bottomNibble atOffset:offset]];
+            result = [self readIntegerNumberAtIndex:anIndex];
             break;
         case 0x2:
-            result = ((1<<bottomNibble)==4) ? [NSNumber numberWithFloat:[self readFloatAtIndex:anIndex]] : [NSNumber numberWithDouble:[self readDoubleAtIndex:anIndex]];
+            result = [self readRealNumberAtIndex:anIndex];
             break;
-
         case 0x5:
-            length = lengthForNibbleAtOffset(  length, bytes,  &offset );
-            result = AUTORELEASE([[NSString alloc]
-                                  initWithBytes:bytes+offset  length:length encoding:NSASCIIStringEncoding]);
+            result = [self readASCIIStringAtIndex:anIndex];
             break;
         case 0x6:
-            length = lengthForNibbleAtOffset(  length, bytes,  &offset );
-            result = AUTORELEASE([[NSString alloc]
-                                  initWithBytes:bytes+offset  length:length*2 encoding:NSUTF16BigEndianStringEncoding]);
-            
+            result = [self readUTF16StringAtIndex:anIndex];
             break;
         case 0xa:
             if ( lazyArray) {

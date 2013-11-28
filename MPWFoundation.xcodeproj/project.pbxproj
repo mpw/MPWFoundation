@@ -377,6 +377,7 @@
 		1FB93A951292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB93A961292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; };
 		1FB93A971292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FBAABB91847651B00086047 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
 		1FBBEFD80E11EF6400977797 /* MPWFoundation_prefix_header.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */; };
 		1FC7C901132501FC00FD39D1 /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FC97CDD0BB0A8B900F8CB51 /* MPWNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC97CDB0BB0A8B900F8CB51 /* MPWNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -826,6 +827,7 @@
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
 		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dllmain.m; path = windows/dllmain.m; sourceTree = "<group>"; };
 		1FB93A941292012200D9D630 /* PhoneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneGeometry.h; sourceTree = "<group>"; };
+		1FBAABB81847651B00086047 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
 		1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWFoundation_prefix_header.h; sourceTree = "<group>"; };
 		1FC9240705C597EF008047EB /* MPWObjectReference.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObjectReference.m; sourceTree = "<group>"; };
 		1FC9240C05C5980E008047EB /* MPWObjectReference.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWObjectReference.h; sourceTree = "<group>"; };
@@ -1146,6 +1148,7 @@
 		07DF198C006686DDC35ADD82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1FBAABB81847651B00086047 /* stops.txt */,
 				1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */,
 				1FA1594217EEF18900BF8F6F /* first4.tabdelim */,
 				07DF198D006686DDC35ADD82 /* Makefile.preamble */,
@@ -1825,6 +1828,7 @@
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
 				1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
+				1FBAABB91847651B00086047 /* stops.txt in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
 			);
