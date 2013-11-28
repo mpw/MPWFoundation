@@ -121,9 +121,6 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     return [self totalLineCount]-1;
 }
 
-
-
-
 -(MPWSubData*)subdataWithStart:(const char*)start length:(int)len
 {
 #if 1
@@ -166,16 +163,26 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     int elemNo=0;
     int mappedElemNo=0;
     while ( cur < end && mappedElemNo < maxElements ) {
-//        const char *next=strnstr(cur, fieldDelimiterBytes, end-cur);
-        const char *next=strchr(cur, fieldDelimiterBytes[0]);
+        BOOL quoted=NO;
+        const char *next=cur;
+        if ( *next == '"') {
+            quoted=YES;
+            next++;
+            while ( *next != '"' && next < end ) {
+                next++;
+            }
+        }
+        next=strchr(next, fieldDelimiterBytes[0]);
+        
         if ( !next)  {
             next=end;
         }
         if ( next && (elemNo == mapper[mappedElemNo] )) {
-//            NSLog(@"matched input col %d with output col %d",elemNo,mappedElemNo);
-            elements[ mappedElemNo++ ] =[self subdataWithStart:cur length:next-cur ];
+            if ( quoted ) {
+                cur++;
+            }
+            elements[ mappedElemNo++ ] =[self subdataWithStart:cur length:next-cur - (quoted ? 1 : 0)];
         } else {
-//            NSLog(@"skip input col %d",elemNo);
         }
         cur=next+delimLength;
         elemNo++;
@@ -198,7 +205,14 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     return [NSDictionary
             
             dictionaryWithObjects:[self dataAtIndex:anIndex]
-                                       forKeys:[self headerKeys]];
+            forKeys:[self headerKeys]];
+}
+
+-(NSDictionary*)slowDictionaryAtIndex:(int)anIndex
+{
+    return [NSDictionary
+            dictionaryWithObjects:[[self lineAtIndex:anIndex] componentsSeparatedByString:fieldDelimiter]
+            forKeys:[self headerKeys]];
 }
 
 -(void)inRange:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
@@ -338,6 +352,13 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 +_testCSVTable
 {
     NSData *tableData=[self resourceWithName:@"archiving-times-and-sizes" type:@"csv"];
+    MPWDelimitedTable *table=[[[self alloc] initWithCommaSeparatedData:tableData] autorelease];
+    return table;
+}
+
++_testQuotedCSVTable
+{
+    NSData *tableData=[self resourceWithName:@"stops" type:@"txt"];
     MPWDelimitedTable *table=[[[self alloc] initWithCommaSeparatedData:tableData] autorelease];
     return table;
 }
@@ -584,7 +605,15 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     IDEXPECT([dict objectForKey:@"NA"], @"Ehinger-Schwarz GmbH & Co KG", @"NA");
 }
 
-
++(void)testQuoteEscapedEntries
+{
+    MPWDelimitedTable *table=[self _testQuotedCSVTable];
+    NSArray *dicts=[table collect:^id(NSDictionary* theDict) {
+        return [NSDictionary dictionaryWithDictionary:theDict];
+    }];
+    INTEXPECT([dicts count], 2, @"entries");
+    IDEXPECT([[dicts lastObject] objectForKey:@"stop_name"], @"Berlin, Staaken Bhf", @"quoted name");
+}
 
 +testSelectors
 {
@@ -597,6 +626,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 //             @"testCollect1",
 //             @"testParCollect",
              @"testKeysOfInterest",
+             @"testQuoteEscapedEntries",
              ];
 }
 

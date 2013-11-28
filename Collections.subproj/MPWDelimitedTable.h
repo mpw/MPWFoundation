@@ -36,5 +36,9 @@
 -(void)pardo:(void(^)(NSDictionary* theDict, int anIndex))block;
 -(void)setKeysOfInterest:(NSArray*)keys;
 
+
+-(NSDictionary*)slowDictionaryAtIndex:(int)anIndex;
+
+
 @end
 

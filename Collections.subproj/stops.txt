@@ -1,0 +1,3 @@
+stop_id,stop_code,stop_name,stop_desc,stop_lat,stop_lon,zone_id,stop_url,location_type,parent_station
+9029303,,Breite Str./Markt (Berlin),,52.5360360,13.2047610,,,0,
+9029305,,"Berlin, Staaken Bhf",,52.5377400,13.1417260,,,0,
