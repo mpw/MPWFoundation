@@ -325,7 +325,7 @@ DEALLOC(
 	INTEXPECT( done, 0, @"number of requests finished before actually starting downloads");
 	INTEXPECT( [doneSet count], 0, @"same for finished array");
 	[[downloads do] start];
-	done = [dl runRequests:downloads forSeconds:0.05 reportDone:doneSet];
+	done = [dl runRequests:downloads forSeconds:0.005 reportDone:doneSet];
 	INTEXPECT( done, 1, @"number of requests finished");
 	INTEXPECT( [doneSet count], 1, @"finished request array");
 	
@@ -349,7 +349,7 @@ DEALLOC(
 	INTEXPECT( done, 0, @"nothing done because I haven't started the downloads");
 	INTEXPECT( [doneSet count], 0, @"nothing added to doneSet, again because the downloads haven't been started");
 	[[downloadControl lastObject] start];
-	done = [dl runRequests:downloads forSeconds:0.05 reportDone:doneSet];
+	done = [dl runRequests:downloads forSeconds:0.005 reportDone:doneSet];
 	INTEXPECT( done, 1, @"activated one download, so should have gotten 1");
 	INTEXPECT( [doneSet count], 1, @"should have 1 in done set ");
 	INTEXPECT( [downloads count], 2, @"should have 1 fewer in downloads ");

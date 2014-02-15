@@ -251,7 +251,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 	id slow=[self simpleSendWithInvocationOfClass:[MPWConvenientInvocation class]];
 	IMP invoke = [slow methodForSelector:@selector(resultOfInvoking)];
 	MPWRusage* slowStart=[MPWRusage current];
-#define SEND_COUNT 100000
+#define SEND_COUNT 10000
 
 	for (i=0;i<SEND_COUNT;i++) {
 		invoke( slow, @selector(resultOfInvoking));
@@ -293,7 +293,7 @@ extern id objc_msgSend( id target, SEL selector, ... );
 }
 
 #undef SEND_COUNT
-#define SEND_COUNT 10000000
+#define SEND_COUNT 100000
 
 +(void)testCachedInvocationFasterThanMessaging
 {

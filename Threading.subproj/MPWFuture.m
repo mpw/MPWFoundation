@@ -270,7 +270,7 @@ idAccessor( _result, setResult )
 +(void)futuresAreFasterThanSerial
 {
 	int i;
-	const int WAIT_TIME_MS = 120;
+	const int WAIT_TIME_MS = 1;
 	id tester=[[[_MPWFutureTestDummyClass alloc] init] autorelease];
 	NSArray *sourceArray = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"e",nil];
 	NSMutableArray *futureArrayResult,*serialArrayResult;

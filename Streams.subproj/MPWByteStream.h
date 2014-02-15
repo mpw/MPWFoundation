@@ -39,6 +39,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)appendBytes:(const void*)data length:(NSUInteger)count;
 -(void)appendHexBytes:(const void*)data length:(NSUInteger)count;
 -(void)printf:(NSString*)format,...;
+-(void)printLine:(NSString*)format,...;
 -(void)printFormat:(NSString*)format,...;
 -(NSUInteger)length;
 -(void)writeNewline;

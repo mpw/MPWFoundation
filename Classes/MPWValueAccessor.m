@@ -194,7 +194,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     IDEXPECT([[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
 }
 
-#define ACCESS_COUNT  100000
+#define ACCESS_COUNT  10000
 
 +(void)testPerformanceOfPathAccess
 {

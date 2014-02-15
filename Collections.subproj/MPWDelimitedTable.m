@@ -257,7 +257,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     [self inRange:NSMakeRange(0, [self count]) do:block];
 }
 
--(id)inRangeWithDummResult:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
+-(id)inRangeWithDummyResult:(NSRange)range do:(void(^)(NSDictionary* theDict, int anIndex))block
 {
 //    NSLog(@"start inRange: (%d,%d)",range.location,range.length);
     [self inRange:range do:block];
@@ -289,7 +289,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
         int thisPartLen=MIN( partLen, [self count]-i-1);
         MPWDelimitedTable *threadClone=[self cloneForThreading];
         
-        [dummyResults addObject:[[threadClone future] inRangeWithDummResult:NSMakeRange(i, thisPartLen) do:Block_copy(block)   ]];
+        [dummyResults addObject:[[threadClone future] inRangeWithDummyResult:NSMakeRange(i, thisPartLen) do:[[block copy] autorelease]   ]];
     }
     for (NSString *dummy in dummyResults) {
         [dummy stringByAppendingString:@","];

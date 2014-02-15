@@ -18,7 +18,7 @@ idAccessor( block, _setBlock )
 
 -(void)setBlock:aBlock
 {
-	[self _setBlock:[Block_copy( aBlock ) autorelease]];
+	[self _setBlock:[[aBlock copy] autorelease]];
 }
 
 -initWithBlock:aBlock

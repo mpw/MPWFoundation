@@ -69,6 +69,11 @@ defineArithOp( div, / )
     }
 }
 
+-(NSNumber*)random
+{
+    return [NSNumber numberWithInteger:arc4random_uniform( [self intValue])];
+}
+
 -(double)sin
 {
     return sin([self doubleValue] * M_PI/180.0);
@@ -113,6 +118,41 @@ return pow( [self doubleValue], otherNumber );
 
 -objcTypeString {
 	return [NSString stringWithCString:[self objCType] encoding:NSASCIIStringEncoding];
+}
+
+static int fib( int n) {
+    if ( n <= 1 ) {
+        return n;
+    } else {
+        return fib(n-1) + fib(n-2);
+    }
+}
+
+-fib
+{
+    return [NSNumber numberWithInt:fib([self intValue])];
+    
+}
+
+
+-fastfib
+{
+    int c;
+    int n=[self intValue];
+    int first=0,second=1,next=0;
+    for ( c = 0 ; c < n ; c++ )
+    {
+        if ( c <= 1 )
+            next = c;
+        else
+        {
+            next = first + second;
+            first = second;
+            second = next;
+        }
+    }
+    return [NSNumber numberWithInt:next];
+
 }
 
 @end

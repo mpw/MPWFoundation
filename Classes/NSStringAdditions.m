@@ -114,6 +114,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	}
 }
 
+-(NSString*)camelCaseString
+{
+    NSEnumerator *words=[[self componentsSeparatedByString:@" "] objectEnumerator];
+    NSMutableString *result=[NSMutableString string];
+    [result appendString:[[words nextObject] lowercaseString]];
+    for ( NSString *word in words) {
+        [result appendString:[word capitalizedString]];
+    }
+    return result;
+}
+
 #if WINDOWS
 
 -(char*)_fastCStringContents:(BOOL)blah
@@ -275,9 +286,18 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
     NSAssert2( [res3 isEqual:@"test-3"], @"expected 'test-3' got %@ when uniqing 'test' against %@",res1,pool3);
 }
 
++(void)testCamelCase
+{
+    IDEXPECT([@"Polymorphic" camelCaseString], @"polymorphic", @"single word");
+    IDEXPECT([@"Polymorphic Identifiers" camelCaseString], @"polymorphicIdentifiers", @"single word");
+}
+
 +testSelectors
 {
-    return [NSArray arrayWithObjects:@"testUniquedByNumbering",@"testUniquedUpdating",nil];
+    return @[ @"testUniquedByNumbering",
+              @"testUniquedUpdating",
+              @"testCamelCase",
+              ];
 }
 
 @end

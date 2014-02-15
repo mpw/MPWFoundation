@@ -34,10 +34,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWPropertyListStream.h"
 
 
-@interface NSString(_accessToInternalQuotedRep)
--quotedStringRepresentation;
-@end
-
 
 @implementation NSObject(PropertyListStreaming)
 
@@ -104,7 +100,15 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)writeString:(NSString*)anObject
 {
-	[self outputString:[anObject quotedStringRepresentation]];
+    // FIXME:  not really allowed to access this
+    static SEL strRep=NULL;
+    if (!strRep) {
+        strRep=NSSelectorFromString(@"quotedStringRepresentation");
+    }
+    if ( strRep) {
+        id temp=objc_msgSend( anObject, strRep);
+        [self outputString:temp];
+    }
 }
 
 -(void)writeEnumerator:(NSEnumerator*)e spacer:spacer

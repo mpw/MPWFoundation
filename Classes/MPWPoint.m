@@ -300,6 +300,7 @@ reversePointNumberArithmetic( reverseSubPoint )
     FLOATEXPECT(reals[1], 3.0, @"got y into real[1]");
 
 }
+
 +(void)testCount
 {
 	id point1 = [self pointWithX:20 y:30];

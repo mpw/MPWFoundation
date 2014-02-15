@@ -248,34 +248,33 @@ intAccessor( indentAmount , setIndentAmount )
     TARGET_APPEND(cString, strlen(cString));
 }
 
--(void)outputString1:(NSString*)aString
+-(NSStringEncoding)outputEncoding
 {
-	NSData *encoded=[aString dataUsingEncoding:NSUTF8StringEncoding];
-	[self appendBytes:[encoded bytes] length:[encoded length]];
+    return NSUTF8StringEncoding;
 }
 
 -(void)outputString:(NSString*)aString
 {
-//	NSLog(@"-[MPWByteStream outputString:%@ length:%d]",aString,(int)[aString length]);
-	char *stringbytes=NULL;
-	char *mallocedbytes=NULL;
-	int stringlen;
-	stringlen = [aString length];
-//	stringbytes = [aString _fastCStringContents:NO];
-	if ( !stringbytes ) {
-		if ( stringlen > 1000 ) {
-			mallocedbytes=malloc(stringlen+100);
-			stringbytes=mallocedbytes;
-		} else {
-			stringbytes=alloca(stringlen+100);
-		}
-		[aString getCString:stringbytes maxLength:stringlen+10 encoding:NSUTF8StringEncoding];
-		stringbytes[stringlen]=0;
-	}
-    TARGET_APPEND(stringbytes, stringlen);
-	if ( mallocedbytes ) {
-		free(mallocedbytes);
-	}
+#define MAXLEN 8192
+
+    char buffer[MAXLEN];
+    BOOL done=NO;
+    int length=[aString length];
+    NSRange range={0,length};
+    NSRange remainingRange;
+
+    while (range.length > 0) {
+        NSUInteger usedBufferCount;
+        [aString getBytes:buffer maxLength:MAXLEN
+               usedLength:&usedBufferCount
+                 encoding:[self outputEncoding]
+                  options:0
+                    range:range
+           remainingRange:&remainingRange];
+        TARGET_APPEND(buffer, usedBufferCount);
+        range=remainingRange;
+        
+    }
 }
 
 -(void)writeString:(NSString*)string
@@ -289,29 +288,49 @@ intAccessor( indentAmount , setIndentAmount )
     TARGET_APPEND([data bytes], [data length]);
 }
 
--(void)printf:(NSString*)format,...
+-(void)printf:(NSString*)format args:(va_list)ap
 {
-    va_list ap;
     char fmt[[format length]+10];
     char buf[10000];
     int bytes;
 	[format getCString:fmt maxLength:[format length]+1 encoding:NSASCIIStringEncoding];
     fmt[[format length]]=0;
-    va_start(ap,format);
     bytes = vsprintf(buf, fmt,ap);
     [self appendBytes:buf length:bytes];
+}
+
+
+-(void)printf:(NSString*)format,...
+{
+    va_list ap;
+    va_start(ap,format);
+    [self printf:format args:ap];
 	va_end(ap);
+}
+
+
+-(void)printFormat:(NSString *)format args:(va_list)ap
+{
+    NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:ap];
+    [self outputString:formattedString];
+    [formattedString release];
 }
 
 -(void)printFormat:(NSString*)format,...
 {
     va_list ap;
-    id formattedString;
-    va_start(ap,format);
-    formattedString = [[NSString alloc] initWithFormat:format arguments:ap];
-    [self outputString:formattedString];
-    [formattedString release];
+    va_start(ap, format);
+    [self printFormat:format args:ap];
     va_end(ap);
+}
+
+-(void)printLine:(NSString*)format,...
+{
+    va_list ap;
+    va_start(ap,format);
+    [self printFormat:format args:ap];
+	va_end(ap);
+    [self appendBytes:"\n" length:1];
 }
 
 -(void)print:anObject
@@ -652,20 +671,6 @@ intAccessor( fd, setFd )
 @implementation MPWByteStream(testing)
 
 
-+testSelectors
-{
-    return [NSArray arrayWithObjects:
-			@"testFloatPrintf",
-			@"testNumberPrint",
-//			@"testPrintDictionary",
-			@"testStdoutIsUnique",
-			@"testBasicWritingToNSData",
-			@"testIndent",
-			@"testBasicWritingToNSDataViaForwarder",
-		nil
-];
-}
-
 +(void)testPrintDictionary
 {
     MPWByteStream* stream=[self stringStream];
@@ -706,8 +711,27 @@ intAccessor( fd, setFd )
     MPWByteStream* stream=[self streamWithTarget:[NSMutableString string]];
     [stream printf:@"%g",1.0];
     [stream close];
-//    NSLog(@"stream target='%@'",[stream target]);
+    //    NSLog(@"stream target='%@'",[stream target]);
     NSAssert1( [[stream target] isEqual:@"1"],@"Writing 1.0 to stream produces '%@'",[stream target]);
+}
+
+
++(void)testFloatPrintFormatted
+{
+    MPWByteStream* stream=[self streamWithTarget:[NSMutableString string]];
+    [stream printFormat:@"%g",1.0];
+    [stream close];
+    //    NSLog(@"stream target='%@'",[stream target]);
+    NSAssert1( [[stream target] isEqual:@"1"],@"Writing 1.0 to stream produces '%@'",[stream target]);
+}
+
++(void)testPrintLineObject
+{
+    MPWByteStream* stream=[self streamWithTarget:[NSMutableString string]];
+    [stream printLine:@"%@",@(1.0)];
+    [stream close];
+    //    NSLog(@"stream target='%@'",[stream target]);
+    NSAssert1( [[stream target] isEqual:@"1\n"],@"Writing 1.0 to stream produces '%@'",[stream target]);
 }
 
 
@@ -732,6 +756,35 @@ intAccessor( fd, setFd )
 //	INTEXPECT( [result length], 11 , @"hello world len");
 	IDEXPECT( [result stringValue], @"Hello World", @"hello world ");
 }
+
++(void)testUnicodeUTF8
+{
+    MPWByteStream *s=[self stream];
+    unichar pichar=960;
+    NSString *pi=[NSString stringWithCharacters:&pichar length:1];
+    [s outputString:pi];
+    NSData *encodedResult=[s target];
+    INTEXPECT([encodedResult length], 2, @"length of pi in utf-8");
+    
+}
+
+
++testSelectors
+{
+    return @[
+			@"testFloatPrintf",
+			@"testFloatPrintFormatted",
+			@"testNumberPrint",
+            @"testPrintLineObject",
+            //			@"testPrintDictionary",
+			@"testStdoutIsUnique",
+			@"testBasicWritingToNSData",
+			@"testIndent",
+			@"testBasicWritingToNSDataViaForwarder",
+            @"testUnicodeUTF8",
+            ];
+}
+
 
 @end
 
