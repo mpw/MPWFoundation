@@ -9,20 +9,53 @@
 			<key>orderHint</key>
 			<integer>20</integer>
 		</dict>
+		<key>MPWFoundation (Linux Cocotron).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>MPWFoundation (Linux Cocotron).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>31</integer>
+		</dict>
+		<key>MPWFoundation (Windows Cocotron).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>11</integer>
 		</dict>
 		<key>MPWFoundation (Windows Cocotron).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>29</integer>
 		</dict>
+		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>MPWFoundationTouch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>12</integer>
+		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>24</integer>
+		</dict>
+		<key>MPWFoundationTouchFat.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>13</integer>
 		</dict>
 		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
 		<dict>

@@ -258,7 +258,6 @@ intAccessor( indentAmount , setIndentAmount )
 #define MAXLEN 8192
 
     char buffer[MAXLEN];
-    BOOL done=NO;
     int length=[aString length];
     NSRange range={0,length};
     NSRange remainingRange;
@@ -788,7 +787,7 @@ intAccessor( fd, setFd )
 
 @end
 
-#if !Darwin && !TARGET_OS_IPHONE
+#if 0 && !Darwin && !TARGET_OS_IPHONE
 @implementation NSString(lossyCString)
 
 -(const char*)lossyCString
