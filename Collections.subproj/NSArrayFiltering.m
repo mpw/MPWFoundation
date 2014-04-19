@@ -95,7 +95,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	SEL selector = [invocation selector];
 //    Class class=nil;
     int j,count=[self count];
-	id args[4];
+	id args[4]={nil,nil,nil,nil};
     id objs[ OBJECTS_PER_ITERATION ];
 	NSMutableArray *result=[NSMutableArray arrayWithCapacity:[self count]+20];
 //	IMP addObject = [result methodForSelector:@selector(addObject:)];
@@ -159,7 +159,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 				   
 -(void)doInvocation:(NSInvocation*)invocation
 {
-	id args[4];
+	id args[4]={nil,nil,nil,nil};
 	int j;
 	int maxArgs = [[invocation methodSignature] numberOfArguments];
 	maxArgs-=2;			//	0 is target, 1 is selector, 'real' args start at 2

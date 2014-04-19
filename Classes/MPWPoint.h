@@ -56,6 +56,7 @@ scalarAccessor_h( NSPoint, point, setPoint )
 -(double)y;
 +zero;
 -(MPWRect*)extent:otherPoint;
+-(NSPoint)pointValue;
 
 @end
 @interface NSString(pointCreation)

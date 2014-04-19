@@ -258,7 +258,6 @@ intAccessor( indentAmount , setIndentAmount )
 #define MAXLEN 8192
 
     char buffer[MAXLEN];
-    BOOL done=NO;
     int length=[aString length];
     NSRange range={0,length};
     NSRange remainingRange;
@@ -273,7 +272,6 @@ intAccessor( indentAmount , setIndentAmount )
            remainingRange:&remainingRange];
         TARGET_APPEND(buffer, usedBufferCount);
         range=remainingRange;
-        
     }
 }
 
@@ -463,7 +461,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)appendBytes:(const void*)bytes length:(unsigned)len
 {
-#if Darwin || TARGET_OS_IPHONE
+#if Darwin || TARGET_OS_IPHONE || TARGET_OS_MAC
     [self appendFormat:@"%.*s",len,bytes];
 #else
 	[self appendString:[NSString stringWithCString:bytes length:len]];
@@ -515,9 +513,10 @@ idAccessor( finalFileName, setFinalFileName )
 
 -initWithFile:(FILE*)newFile close:(BOOL)shouldClose
 {
-    [super init];
-    outfile=newFile;
-    doClose=shouldClose;
+    if ( self=[super init] ) {
+        outfile=newFile;
+        doClose=shouldClose;
+    }
     return self;
 }
 
@@ -764,8 +763,10 @@ intAccessor( fd, setFd )
     NSString *pi=[NSString stringWithCharacters:&pichar length:1];
     [s outputString:pi];
     NSData *encodedResult=[s target];
+    const unsigned char *bytes=[encodedResult bytes];
     INTEXPECT([encodedResult length], 2, @"length of pi in utf-8");
-    
+    INTEXPECT(bytes[0], 0xcf, @"pi as utf-8 first byte");
+    INTEXPECT(bytes[1], 0x80, @"pi as utf-8 second byte");
 }
 
 

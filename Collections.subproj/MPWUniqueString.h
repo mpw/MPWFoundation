@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	BOOL	freeWhenDone;
 }
 
--private_initWithCString:(const char*)cStr length:(NSUInteger)newLen;
+-initWithPrivateCString:(const char*)cStr length:(NSUInteger)newLen;
 -(NSUInteger)hash;
 -(BOOL)isEqual:other;
 -(const char*)cString;

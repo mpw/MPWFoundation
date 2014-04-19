@@ -47,7 +47,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	NSUInteger	capacity;
 	NSUInteger	count;
-	unsigned char	*data;
 	float			*floatStart;
 }
 

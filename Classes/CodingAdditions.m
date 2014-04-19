@@ -124,7 +124,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	return self;
 }
 
--(NSArray*)copyKeys
+-(NSArray*)theKeysToCopy
 {
 	return [self encodingKeys];
 }
@@ -137,10 +137,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	}
 }
 
--reflectiveCopyWithZone:(NSZone*)aZone
+-copyReflectivelyWithZone:(NSZone*)aZone
 {
 	id copy = [[[self class] allocWithZone:aZone] init];
-	id keys = [self copyKeys];
+	id keys = [self theKeysToCopy];
 	[[copy do] takeKey:[keys each] from:self];
 	return copy;
 }

@@ -37,11 +37,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -initWithTarget:aTarget
 {
-    [super initWithTarget:aTarget];
-    targetStack=[[NSMutableArray alloc] init];
+    if (self=[super initWithTarget:aTarget] ) {
+        targetStack=[[NSMutableArray alloc] init];
+    }
     return self;
 }
-    
+
 -(void)pushTarget:newTarget
 {
     [targetStack addObject:[self target]];

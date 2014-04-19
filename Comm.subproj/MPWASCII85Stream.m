@@ -56,13 +56,12 @@ static void lineLimited_putc( MPWASCII85Stream* self, unsigned char byte )
 
 -initWithTarget:aStream
 {
-    [super initWithTarget:aStream];
-
-    base256 = 0;
-    phase = 0;
-    inbytes = 0;
-    outbytes = 0;
-
+    if ( self=[super initWithTarget:aStream]) {
+        base256 = 0;
+        phase = 0;
+        inbytes = 0;
+        outbytes = 0;
+    }
 
     return self;
 }

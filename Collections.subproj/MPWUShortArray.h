@@ -37,8 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     unsigned int	capacity;
     unsigned int	count;
-    unsigned char	*data;
-    unsigned short	*ushortStart;
+    unsigned short	*data;
 }
 
 -initWithCapacity:(NSUInteger)newCap;

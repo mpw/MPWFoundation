@@ -30,6 +30,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#import <objc/message.h>
 
 #import "MPWPropertyListStream.h"
 

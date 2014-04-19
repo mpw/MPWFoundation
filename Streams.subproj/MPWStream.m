@@ -248,7 +248,9 @@ SEL visSel;
             writeOnStream = [nextObject methodForSelector: streamWriterMessage];
             lastClass = *(Class*)nextObject;
         }
-        writeOnStream( nextObject, streamWriterMessage, self );
+        if (writeOnStream) {
+            writeOnStream( nextObject, streamWriterMessage, self );
+        }
     }
 }
 

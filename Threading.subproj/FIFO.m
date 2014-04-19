@@ -79,13 +79,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -init:(unsigned )count
 {
-	[super init];
-	condition_lock=[[NSConditionLock alloc] initWithCondition:NO_DATA];
-	capacity=count+20;
-	fifoSize=count;
-	size=0;
-	base=0;
-	data=calloc( capacity+2, sizeof( id ) );
+	if ( self=[super init] ) {
+        condition_lock=[[NSConditionLock alloc] initWithCondition:NO_DATA];
+        capacity=count+20;
+        fifoSize=count;
+        size=0;
+        base=0;
+        data=calloc( capacity+2, sizeof( id ) );
+    }
 	return self;
 }
 

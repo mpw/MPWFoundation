@@ -183,6 +183,11 @@ scalarAccessor( NSRect, rect, setRect )
     return [self inset:x :y];
 }
 
+-(NSRect)rectValue
+{
+    return rect;
+}
+
 @end
 
 @implementation NSString(rectCreation)
@@ -192,9 +197,9 @@ scalarAccessor( NSRect, rect, setRect )
     return [MPWRect rectWithNSString:self];
 }
 
--(NSRect)rect
+-(NSRect)rectValue
 {
-    return [[self asRect] rect];
+    return [[self asRect] rectValue];
 }
 
 @end

@@ -73,9 +73,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 +(NSArray*)defaultEncodingKeys;
 -(NSArray*)encodingKeys;
 -(void)encodeWithCoder:(NSCoder*)aCoder;
--initWithCoder:(NSCoder*)aCoder;-(NSArray*)copyKeys;
+-initWithCoder:(NSCoder*)aCoder;
+-(NSArray*)theKeysToCopy;
 -(void)takeKey:aKey from:otherObject;
--reflectiveCopyWithZone:(NSZone*)aZone;
+-copyReflectivelyWithZone:(NSZone*)aZone;
 
 
 

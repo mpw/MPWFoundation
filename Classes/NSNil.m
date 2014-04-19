@@ -18,7 +18,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     Provides an object that is considered nil.
 "*/
 
-id nsnil=nil;
+static id nsnil=nil;
 static BOOL installed=NO;
 
 -_internalInitNil
@@ -27,13 +27,20 @@ static BOOL installed=NO;
     return self;
 }
 
-+nsNil
++sharedNil
 {
     if (nsnil==nil) {
-        nsnil = [[super alloc] _internalInitNil];
+        nsnil = [[super allocWithZone:NULL] init];
     }
     return nsnil;
 }
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    return [[self sharedNil] retain];
+}
+
++(id)nsNil { return [self sharedNil]; }
 
 typedef id (*id2id)(id);
 static id2id nil_handler=nil;
@@ -71,15 +78,6 @@ static id dummy(id arg) { return arg; }
     [self nilHandlerSetter](nil);
 }
 
-+alloc
-{
-    return [self nsNil];
-}
-
-+allocFromZone:(NSZone*)zone
-{
-    return [self nsNil];
-}
 
 -init
 {

@@ -33,11 +33,12 @@
 -(void)beginArray;
 -(void)endArray;
 
--(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
-
 -(void)writeInt:(int)anInt forKey:(NSString*)aKey;
 -(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;
 -(void)writeObject:anObject forKey:(NSString*)aKey;
+
+
+-(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
 -(void)writeInteger:(long)anInt;
 -(void)writeFloat:(float)aFloat;
 @end

@@ -85,19 +85,20 @@ typedef struct {
 @implementation MPWUniqueString 
 
 
--private_initWithCString:(const char*)cStr length:(NSUInteger)newLen
+-initWithPrivateCString:(const char*)cStr length:(NSUInteger)newLen
 {
-	char *buffer=malloc( newLen+ 2 );
-	char *dest=buffer;
 
-	[super init];
-	data=buffer;
-	len=newLen;
-	while ( newLen-- ) {
-		*dest++ = *cStr++;
-	}
-	*dest=0;
-    hash=[super hash];
+	if ( self=[super init] ) {
+        char *buffer=malloc( newLen+ 2 );
+        char *dest=buffer;
+        data=buffer;
+        len=newLen;
+        while ( newLen-- ) {
+            *dest++ = *cStr++;
+        }
+        *dest=0;
+        hash=[super hash];
+    }
 	return self;
 }
 
@@ -294,8 +295,9 @@ MPWUniqueString *MPWUniqueStringWithCString( const char *string, int len )
     if ( nil == (result = NSMapGet( table, &s )) ) {
 //		fprintf(stderr,"have to insert: '%.*s'\n",len,string);
         result = [[MPWUniqueString alloc]
-							private_initWithCString:string length:len];
+							initWithPrivateCString:string length:len];
         _insertNSString( table, result );
+        [result release];
     } else {
 //		fprintf(stderr,"did NOT have to insert: '%.*s'\n",len,string);
 

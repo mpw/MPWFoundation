@@ -220,12 +220,11 @@ intAccessor( _maxConcurrent, setMaxConcurrent )
 
 -(void)runUntilAllRequestsDownloaded:(NSArray*)downloadsIn maxConcurrent:(int)maxConcurrent
 {
-	int numDone=0;
 	NSMutableArray *requests = [NSMutableArray arrayWithArray:downloadsIn];
 	NSMutableSet *active=[NSMutableSet set];
 	NSMutableSet *done=[NSMutableSet set];
 	while ( [requests count] + [active count] > 0 ) {
-		numDone = [self runRequests:requests active:active forSeconds:0.001 reportDone:done maxConcurrent:maxConcurrent];
+		[self runRequests:requests active:active forSeconds:0.001 reportDone:done maxConcurrent:maxConcurrent];
 	}
 }
 
@@ -387,7 +386,7 @@ DEALLOC(
 	done=[dl runRequests:downloadControl active:downloads forSeconds:0.01 reportDone:doneSet maxConcurrent:2];
 	INTEXPECT( done, 2 , @"should have 2 done now");
 	INTEXPECT( [downloadControl count], 1, @"moved from request to active");
-	done=[dl runRequests:downloadControl active:downloads forSeconds:0.001 reportDone:doneSet maxConcurrent:2];
+	[dl runRequests:downloadControl active:downloads forSeconds:0.001 reportDone:doneSet maxConcurrent:2];
 	INTEXPECT( [downloadControl count], 0, @"no more download requests left");
 	INTEXPECT( [downloads count], 0 , @"no more active downloads" );
 	INTEXPECT( [doneSet count], 5, @"all done");

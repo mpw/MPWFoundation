@@ -147,7 +147,7 @@ boolAccessor( mustUnique, setMustUnique )
 #else
 #warning cannot do [super init] in an NSString subclass in GNUStep
 #endif
-	self = [self reInitWithData:data bytes:bytes length:len];
+	[self reInitWithData:data bytes:bytes length:len];
     return self;   
 }
 

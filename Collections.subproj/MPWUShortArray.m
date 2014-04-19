@@ -38,10 +38,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -initWithCapacity:(NSUInteger)newCap
 {
-    self = [super init];
-    data = calloc( newCap+10 , sizeof(unsigned short));
-    capacity=newCap;
-    count=0;
+    if (self = [super init]) {
+        data = calloc( newCap+10 , sizeof(unsigned short));
+        capacity=newCap;
+        count=0;
+    }
     return self;
 }
 
@@ -53,7 +54,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 -(unsigned short*)ushorts
 {
-    return (unsigned short*)data;
+    return data;
 }
 -(unsigned)ushortAtIndex:(unsigned)index
 {

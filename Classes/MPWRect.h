@@ -55,6 +55,7 @@ scalarAccessor_h( NSRect, rect, setRect )
 -(double)y;
 -(double)width;
 -(double)height;
+-(NSRect)rectValue;
 
 
 
@@ -62,6 +63,6 @@ scalarAccessor_h( NSRect, rect, setRect )
 @interface NSString(rectCreation)
 
 -asRect;
--(NSRect)rect;
+-(NSRect)rectValue;
 
 @end

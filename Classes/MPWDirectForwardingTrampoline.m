@@ -91,7 +91,7 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 
 @implementation NSString(dummy_return_direct)
 
--dummy_return_direct:arg
+-_dummy_return_direct:arg
 {
     return @"bozo";
 }
@@ -107,7 +107,7 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
     id obj=[self trampoline];
     NSString* result;
     [obj setXxxTarget:@"dummy_target"];
-    [obj setXxxSelector:@selector(dummy_return_direct:)];
+    [obj setXxxSelector:@selector(_dummy_return_direct:)];
     result=[obj stringByAppendingString:@"hi"];
     NSAssert2( [result isEqual:@"bozo"],@"return '%@' unexpected, expected %@ ",result,@"bozo");
 }

@@ -49,6 +49,21 @@ scalarAccessor( NSPoint, point, setPoint )
     return size;
 }
 
+-(NSPoint)pointValue
+{
+    return [self point];
+}
+
+-(const char*)objCType
+{
+    return @encode(NSPoint);
+}
+
+-(BOOL)isKindOfClass:(Class)aClass
+{
+    NSLog(@"%@ isKindOFClass: %@",[self class],aClass);
+    return [super isKindOfClass:aClass];
+}
 
 -initWithPoint:(NSPoint)aPoint
 {
@@ -307,6 +322,14 @@ reversePointNumberArithmetic( reverseSubPoint )
     INTEXPECT([point1 count], 2, @"always 2");
 }
 
++(void)testPointValue
+{
+	id point1 = [self pointWithX:20 y:30];
+    NSPoint theNSPoint=[point1 pointValue];
+    FLOATEXPECTTOLERANCE(theNSPoint.x, 20, 0.001, @"x");
+    FLOATEXPECTTOLERANCE(theNSPoint.y, 30, 0.001, @"y");
+}
+
 
 +testSelectors
 {
@@ -316,6 +339,7 @@ reversePointNumberArithmetic( reverseSubPoint )
             @"testDistance",
             @"testGetReals",
             @"testCount",
+            @"testPointValue",
 		nil];
 }
 

@@ -47,8 +47,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -initWithClass:(Class)newClass
 {
-    messages=[[NSMutableArray alloc] init];
-    testClass=newClass;
+    if (self=[super init]) {
+        messages=[[NSMutableArray alloc] init];
+        testClass=newClass;
+    }
     return self;
 }
 

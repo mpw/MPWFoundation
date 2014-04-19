@@ -39,7 +39,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 +nsNil;
-extern id nsnil;
 
 #if !TARGET_OS_IPHONE
 +(void)setNilHandler;
