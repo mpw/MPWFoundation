@@ -789,7 +789,7 @@ intAccessor( fd, setFd )
 
 @end
 
-#if !Darwin && !TARGET_OS_IPHONE
+#if 0 && !Darwin && !TARGET_OS_IPHONE
 @implementation NSString(lossyCString)
 
 -(const char*)lossyCString
