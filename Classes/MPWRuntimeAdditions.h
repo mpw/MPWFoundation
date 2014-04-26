@@ -59,6 +59,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface NSObject(instanceSize)
 
-+(int)instanceSize;
++(long)instanceSize;
 
 @end

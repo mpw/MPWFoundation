@@ -59,7 +59,6 @@ IMP __stringTableLookupFun=NULL;
 	self=[super init];
 #endif
 	if ( self ) {
-		int i;
 		int lengths[ count +1 ];
         maxLen=0;
         NSAssert2(count<255, @"%@ - total number of strings %ld > 255", [self class], (long)count);
@@ -67,9 +66,9 @@ IMP __stringTableLookupFun=NULL;
 		int totalStringLen=0;
 		unsigned char *curptr;
 //		NSLog(@"super init");
-		for (i=0;i<count;i++) {
-            NSUInteger thisLength=[(NSString*)keys[i] lengthOfBytesUsingEncoding:encoding];
-			lengths[i]=thisLength;
+		for (int i=0;i<count;i++) {
+            int thisLength=(int)[(NSString*)keys[i] lengthOfBytesUsingEncoding:encoding];
+			lengths[i]=(int)thisLength;
 			totalStringLen+=thisLength+3;
             NSAssert3(thisLength<255, @"%@ - length of string '%@' %ld > 255", [self class], keys[i], (long)thisLength);
             if (thisLength>maxLen ) {
@@ -81,7 +80,7 @@ IMP __stringTableLookupFun=NULL;
         bzero(stringsOfLen, sizeof(int) * maxLen );
         chainStarts=calloc( maxLen+2, sizeof(int));
         tableOffsetsPerLength=calloc( maxLen+2, sizeof(int));
-		tableLength=count;
+		tableLength=(int)count;
 		table=malloc( totalStringLen +1 );
         tableIndex=calloc( count + 1, sizeof(StringTableIndex));
         for (int i=0;i<=maxLen;i++) {
@@ -93,7 +92,7 @@ IMP __stringTableLookupFun=NULL;
 		curptr=table;
 //		NSLog(@"table=%p curptr=%p",table,curptr);
         
-		for (i=0;i<tableLength;i++) {\
+		for (int i=0;i<tableLength;i++) {\
 			int len=lengths[i];
             tableIndex[i].length=len;
             tableIndex[i].index=i;
@@ -104,7 +103,7 @@ IMP __stringTableLookupFun=NULL;
         
         //--- gather lengths
         
-        for (i=0;i<=maxLen;i++) {
+        for (int i=0;i<=maxLen;i++) {
             int curIndex=chainStarts[i];
 //            NSLog(@"len[%d], start=%d",i,curIndex);
             int number=0;
@@ -121,10 +120,10 @@ IMP __stringTableLookupFun=NULL;
         //---- write the table in ascending order of lengths
         
 #if 1
-        for (i=0;i<=maxLen;i++) {
+        for (int i=0;i<=maxLen;i++) {
             if ( stringsOfLen[i]>0) {
  //               NSLog(@"%d strings of length %d",stringsOfLen[i], i);
-                tableOffsetsPerLength[i]=curptr-table;
+                tableOffsetsPerLength[i]=(int)(curptr-table);
                 *curptr++ = i;
                 *curptr++ = stringsOfLen[i];
                 int curIndex=chainStarts[i];
@@ -140,7 +139,7 @@ IMP __stringTableLookupFun=NULL;
                     }
                     *curptr++=theIndex;   // store the key's index
                     [key getCString:(char*)curptr maxLength:len+1 encoding:encoding];
-                    tableIndex[curIndex].offset=curptr-table;
+                    tableIndex[curIndex].offset=(int)(curptr-table);
                     
                     
 //                    NSLog(@"retain value[%d]: %p/%@ (of %d)",theIndex,values[theIndex],values[theIndex],tableLength);
@@ -205,7 +204,7 @@ IMP __stringTableLookupFun=NULL;
 -initWithKeys:(NSArray*)keys values:(NSArray*)values
 {
 //	NSLog(@"initWithKeys: %d values: %d",[keys count],[values count]);
-    int keyCount = [keys count];
+    int keyCount = (int)[keys count];
 	id keyArray[ keyCount +1 ];
 	id valueArray[ [values count] + 1];
     NSAssert2([keys count]==[values count], @"different numbers of keys and values", [keys count], [values count]);
@@ -259,9 +258,8 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 {
 #if 1
     if (  tableOffsets[len] >= 0 )  {
-        int i;
         const unsigned char *curptr=table+tableOffsets[len];
-        for (i=0; i<1;i++ ) {
+        for (int i=0; i<1;i++ ) {
             int entryLen=*curptr++;
             int numEntries=*curptr++;
 //            NSLog(@"len: %d entryLen: %d",len,entryLen);
@@ -272,10 +270,9 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
                     const unsigned char *tablestring=curptr;
 //                    NSLog(@"'%.*s' = '%.*s' ?",len,cstr,entryLen,tablestring);
                     if ( (cstr[offset])==(tablestring[offset]) ) {
-                        int j;
                         BOOL matches=YES;
-                        for ( j=0;j<len-1;j++) {
-                            if ( cstr[j] != tablestring[j] ) {
+                        for ( int k=0;k<len-1;k++) {
+                            if ( cstr[k] != tablestring[k] ) {
                                 matches=NO;
                                 break;
                             }
@@ -331,7 +328,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 
 -(int)offsetForCString:(const char*)cstr
 {
-	return [self offsetForCString:cstr length:strlen(cstr)];
+	return [self offsetForCString:cstr length:(int)strlen(cstr)];
 }
 
 -(int)offsetForKey:(NSString*)key
@@ -340,7 +337,7 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 #if WINDOWS
     encoding=NSISOLatin1StringEncoding;
 #endif
-    int len=[key lengthOfBytesUsingEncoding:encoding];
+    int len=(int)[key lengthOfBytesUsingEncoding:encoding];
     char buffer[len+20];
     [key getCString:buffer maxLength:len+10 encoding:encoding];
     buffer[len]=0;

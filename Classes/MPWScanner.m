@@ -101,7 +101,7 @@ idAccessor( dataSource, setDataSource )
 
 -(void)addData:(NSData*)newData
 {
-    unsigned probeOffset;
+    long probeOffset;
     NSMutableData *bufferData=nil;
     id subdata=nil;
 //    NSLog(@"addData: entered");
@@ -213,12 +213,12 @@ idAccessor( dataSource, setDataSource )
     return pos;
 }
 
--(unsigned)bufLen
+-(long)bufLen
 {
     return end-pos;
 }
 
--(unsigned)offset
+-(long)offset
 {
     return pos-start;
 }
@@ -237,7 +237,7 @@ idAccessor( dataSource, setDataSource )
     return handler;
 }
 
--makeText:(unsigned int)length
+-makeText:(long)length
 /*"
     Scans length bytes from the data source, returning an MPWSubData referencing
     the original data, no copying of data is performed.
@@ -258,7 +258,7 @@ idAccessor( dataSource, setDataSource )
 	return NSISOLatin1StringEncoding;
 }
 
--makeString:(unsigned int)length
+-makeString:(long)length
 /*"
         Scans length bytes from the data source, returning an NSString copying
         the original data.
@@ -368,7 +368,7 @@ idAccessor( dataSource, setDataSource )
     headRoom=0;
 }
 
--(BOOL)reserve:(int)roomNeeded
+-(BOOL)reserve:(long)roomNeeded
 {
     BOOL gotOne=NO;
 //    NSLog(@"reserve: %d",roomNeeded);
@@ -395,7 +395,7 @@ idAccessor( dataSource, setDataSource )
 
 -(void)skipTo:(NSString*)aString
 {
-	int checkLen=[aString length];
+	long checkLen=[aString length];
 	char checkString[ checkLen  + 4];
 	BOOL found=NO;
     const char *cur=pos;
@@ -413,7 +413,7 @@ idAccessor( dataSource, setDataSource )
 	pos=cur;
 }
 
-static inline void copybuf( char *target,const char *source, int len ) {
+static inline void copybuf( char *target,const char *source, long len ) {
     int i;
     for (i=0;i<len;i++) {
         if ( source[i]==13 ) {
@@ -427,11 +427,11 @@ static inline void copybuf( char *target,const char *source, int len ) {
 
 -(NSString*)description
 {
-    int offs=pos-start;
-    int len=end-start;
-    int contextLen,contextStart;
-    int prev=[self previousContext];
-    int follow=[self followContext];
+    long offs=pos-start;
+    long len=end-start;
+    long contextLen,contextStart;
+    long prev=[self previousContext];
+    long follow=[self followContext];
     char prevbuf[prev+10];
     char followbuf[follow+10];
     contextStart=offs-prev;
@@ -444,7 +444,7 @@ static inline void copybuf( char *target,const char *source, int len ) {
     }
     copybuf( prevbuf, start+contextStart,offs-contextStart );
     copybuf( followbuf, pos, contextLen );
-    return [NSString stringWithFormat:@"%@ with pos=%d probe=%ld len=%d, context='%s''%s'",
+    return [NSString stringWithFormat:@"%@ with pos=%ld probe=%ld len=%ld, context='%s''%s'",
         [self class],offs,(long)(probe-start),len,prevbuf,followbuf];
 }
 

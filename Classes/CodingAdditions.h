@@ -56,8 +56,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -decodeObjectWithName:aName;
 -(void)encodeValueOfObjCType:(const char*)type at:(const void*)var withName:(const char*)name;
 -(void)decodeValueOfObjCType:(const char*)type at:(void*)var withName:(const char*)name;
--(void)encodeArrayOfObjCType:(const char*)type count:(unsigned)count at:(const void*)var withName:(const char*)name;
--(void)decodeArrayOfObjCType:(const char*)type count:(unsigned)count at:(void*)var withName:(const char*)name;
+-(void)encodeArrayOfObjCType:(const char*)type count:(long)count at:(const void*)var withName:(const char*)name;
+-(void)decodeArrayOfObjCType:(const char*)type count:(long)count at:(void*)var withName:(const char*)name;
 -(void)encodeKey:aKey ofObject:anObject;
 -(void)decodeKey:aKey ofObject:anObject;
 

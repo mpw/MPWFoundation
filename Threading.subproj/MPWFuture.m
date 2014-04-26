@@ -52,7 +52,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	id copy =[[NSInvocation invocationWithMethodSignature:[self methodSignature]] retain];
 	char buffer[256];
-	int i,numArgs;
+	long i,numArgs;
 	
 	for (i=0,numArgs=[[self methodSignature] numberOfArguments];i<numArgs;i++) {
 		[self getArgument:buffer atIndex:i];

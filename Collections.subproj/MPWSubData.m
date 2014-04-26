@@ -136,11 +136,11 @@ boolAccessor( mustUnique, setMustUnique )
 
 -(int)intValue
 {
-    return [self longValue];
+    return (int)[self longValue];
 }
 
 
--initWithData:(NSData*)data bytes:(const char*)bytes length:(unsigned)len
+-initWithData:(NSData*)data bytes:(const char*)bytes length:(long)len
 {
 #ifndef GNUSTEP
 	self = [super init];
@@ -162,7 +162,7 @@ boolAccessor( mustUnique, setMustUnique )
 	return (id)CFMakeCollectable( CFStringCreateWithBytes( NULL, myBytes , myLength, [self cfStringEncoding], NO) );
 }
 
--reInitWithData:(NSData*)data bytes:(const char*)bytes length:(unsigned)len
+-reInitWithData:(NSData*)data bytes:(const char*)bytes length:(long)len
 {
 	if ( data != nil ) {
 		if ( myData != data ) {
@@ -193,7 +193,7 @@ boolAccessor( mustUnique, setMustUnique )
     if ( index < myLength ) {
         return ((unsigned char*)myBytes)[index];
     } else {
-        [NSException raise:@"OutOfRangeSubscript" format:@"subscript %ld greater than length %d of %@/%p",
+        [NSException raise:@"OutOfRangeSubscript" format:@"subscript %ld greater than length %ld of %@/%p",
             (long)index,myLength,[self class],self];
         return 0;
     }
@@ -205,7 +205,7 @@ boolAccessor( mustUnique, setMustUnique )
         return YES;
     }
 	if ( other &&  object_getClass( other) == object_getClass( self) ) {
-		int otherLen=[other length];
+		long otherLen=[other length];
 		const void *otherBytes=[other bytes];
 		return otherLen==myLength &&
 		((otherBytes==myBytes) || !strncmp( [other bytes],myBytes, myLength ));
@@ -278,7 +278,7 @@ boolAccessor( mustUnique, setMustUnique )
 
 -(void)getCString:(char*)buffer maxLength:(NSUInteger)len
 {
-	int copyLen=MIN(len,myLength);
+	long copyLen=MIN(len,myLength);
 	memcpy(buffer,myBytes,copyLen);
 }
 
@@ -347,7 +347,7 @@ boolAccessor( mustUnique, setMustUnique )
         char end[3]="  ";
         strncpy( start, myBytes, 2 );
         strncpy( end, myBytes+myLength-2,2);
-        return [NSString stringWithFormat:@"Data with %d bytes, start '%.2s' end '%.2s'",
+        return [NSString stringWithFormat:@"Data with %ld bytes, start '%.2s' end '%.2s'",
             myLength,start,end];
     } else {
         return [self stringValue];
@@ -359,7 +359,7 @@ boolAccessor( mustUnique, setMustUnique )
     [stream appendBytes:myBytes length:myLength];
 }
 
--(unsigned)offset
+-(unsigned long)offset
 {
     return (unsigned char*)myBytes - (unsigned char*)[myData bytes];
 }
@@ -370,7 +370,7 @@ boolAccessor( mustUnique, setMustUnique )
     if ( interned || mustUnique ||
          ([myData retainCount] == 1 && ![NSStringFromClass( [myData class]) isEqual:@"NSPageData"])
           /* && [myData isKindOfClass:[NSData class]] */ ) {
-        int offset = [self offset];
+        long offset = [self offset];
         if ( [myData isKindOfClass:[self class]] ) {
             MPWSubData *mySub=(MPWSubData*)myData;
             id orig=[mySub originalData];
@@ -386,7 +386,7 @@ boolAccessor( mustUnique, setMustUnique )
 
 -(void)encodeWithCoder:(NSCoder*)aCoder
 {
-    int offset = [self offset];
+    long offset = [self offset];
     encodeVar( aCoder, myData );
     //    [aCoder encodeValueOfObjCType:@encode(typeof(offset)) at:&offset withName:"offset"]
     encodeVar( aCoder, offset );
@@ -418,7 +418,7 @@ boolAccessor( mustUnique, setMustUnique )
 
 +_subDataWithString:(char *)string 
 {
-	int len=strlen(string);
+	long len=strlen(string);
 	NSData *data = [NSData dataWithBytes:string length:len];
 	MPWSubData *subData = [[[MPWSubData alloc] initWithData:data bytes:[data bytes] length:len] autorelease];
 	return subData;

@@ -121,14 +121,14 @@ objectAccessor( MPWObjectCache,  cache, setCache )
 
 -(NSInteger)uniqueIdForObjectAddIfNecessary:anObject
 {
-	int idForObject=0;
+	long idForObject=0;
 	id reference=[self referenceForKey:anObject];
 	id val = [self objectForKeyReference:reference];
 	if (val ) {
 		idForObject=[val intValue];
 	} else {
 		idForObject=[self count];
-		[self setObject:[NSNumber numberWithInt:idForObject] forKeyReference:reference];
+		[self setObject:[NSNumber numberWithLong:idForObject] forKeyReference:reference];
 	}
 	return idForObject;
 }
@@ -186,7 +186,7 @@ objectAccessor( MPWObjectCache,  cache, setCache )
 	MPWIdentityDictionary* dictionary = [self dictionary];
 	id array=[NSMutableArray arrayWithObject:@"someTestValue"];
 	id test1,test2,test3;
-	int id1,id2,id3;
+	long id1,id2,id3;
 	test1=@"test1";
 	test2=array;
 	test3=@"test3";

@@ -219,7 +219,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 -(NSArray*)readArrayAtIndex:(long)anIndex
 {
     NSMutableArray *array=[NSMutableArray array];
-    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long offset, long anIndex) {
+    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long offset, long someIndex) {
         [array addObject:[plist objectAtIndex:offset]];
     }];
     return array;
@@ -230,23 +230,23 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 -(NSArray*)readLazyArrayAtIndex:(long)anIndex
 {
     MPWIntArray *arrayOffsets=[MPWIntArray array];
-    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long arrayIndex, long anIndex) {
+    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long arrayIndex, long someInex) {
         [arrayOffsets addInteger:arrayIndex];
     }];
     return [[[MPWLazyBListArray alloc] initWithPlist:self offsets:arrayOffsets] autorelease];
 }
 
--(int)keyIndexAtCurrentDictIndex:(int)anIndex
+-(long)keyIndexAtCurrentDictIndex:(long)anIndex
 {
     return [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:currentDictOffset+anIndex*offsetReferenceSizeInBytes];
 }
 
--(int)valueIndexAtCurrentDictIndex:(int)anIndex
+-(long)valueIndexAtCurrentDictIndex:(long)anIndex
 {
     if ( anIndex >=0 && anIndex < currentDictLength) {
         return [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:currentDictOffset+(anIndex+currentDictLength)*offsetReferenceSizeInBytes];
     } else {
-        [NSException raise:@"rangecheck" format:@"dict index %d out of range: %d",anIndex,(int)currentDictLength];
+        [NSException raise:@"rangecheck" format:@"dict index %ld out of range: %d",anIndex,(int)currentDictLength];
     }
     return 0;
 }
@@ -275,7 +275,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 {
     long anIndex =[self valueIndexAtCurrentDictIndex:currentDictIndex++];
     id instance=NSAllocateObject(aClass, 0, NULL);
-    [self parseDictAtIndex:anIndex usingContentBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long anIndex) {
+    [self parseDictAtIndex:anIndex usingContentBlock:^(MPWBinaryPlist *plist, long keyOffset, long valueOffset, long someIndex) {
         [instance initWithCoder:(NSCoder*)plist];
     }];
     return instance;
@@ -285,7 +285,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 {
     long anIndex =[self valueIndexAtCurrentDictIndex:currentDictIndex++];
     NSMutableArray *result=[NSMutableArray array];
-    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long offset, long anIndex) {
+    [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long offset, long someIndex) {
         [result addObject:[plist decodeObjectOfClass:aClass forKey:nil]];
     }];
     return result;
@@ -377,7 +377,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 {
     NSMutableDictionary *dict=nil;
     dict=[NSMutableDictionary dictionary];
-    [self parseDictAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long keyOffset,long valueOffset, long anIndex) {
+    [self parseDictAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long keyOffset,long valueOffset, long someIndex) {
         [dict setObject:[self objectAtIndex:valueOffset] forKey:[self objectAtIndex:keyOffset]];
         }];
     return dict;
@@ -405,7 +405,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     return [self isDictAtIndex:currentObjectNo];
 }
 
-static inline double readRealAtIndex( int anIndex, const unsigned char *bytes, long *offsets )
+static inline double readRealAtIndex( long  anIndex, const unsigned char *bytes, long *offsets )
 {
     double result=0;
     long offset=offsets[anIndex];
@@ -648,9 +648,9 @@ DEALLOC(
     MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
     long testArray[20];
     long *arrayPtr=testArray;
-    int length=[bplist parseArrayAtIndex:[bplist rootIndex] usingBlock:^( MPWBinaryPlist *bplist, long offset, long anIndex ){
+    int length=[bplist parseArrayAtIndex:[bplist rootIndex] usingBlock:^( MPWBinaryPlist *aBplist, long offset, long anIndex ){
         if (anIndex <10) {
-            arrayPtr[anIndex]=[bplist currentInt];
+            arrayPtr[anIndex]=[aBplist currentInt];
         }
     }];
     INTEXPECT(length, 4, @"length");

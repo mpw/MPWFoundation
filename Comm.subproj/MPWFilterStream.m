@@ -56,7 +56,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
--(void)forwardBytes:(const void*)data length:(unsigned int)count
+-(void)forwardBytes:(const void*)data length:(unsigned long)count
 {
     if ( count + bufSize >= BUFMAX && bufSize > 0 )
         [self flushBuffer];

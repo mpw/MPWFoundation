@@ -109,7 +109,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -initWithRealArray:otherArray start:(NSUInteger)start count:(NSUInteger)newCount
 {
-    int max;
+    long max;
     max=[otherArray count]-start;
     if ( max > newCount ) {
         max=newCount;
@@ -204,7 +204,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return count;
 }
 
--(void)setCapacity:(int)newCapacity
+-(void)setCapacity:(long)newCapacity
 {
     while ( newCapacity > capacity )
         [self _grow];
@@ -258,7 +258,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return ;
 }
 
--(void)getReals:(float*)reals length:(int)max
+-(void)getReals:(float*)reals length:(long)max
 {
 	if ( max > count ) {
 		max=count;
@@ -298,7 +298,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     int level=level1*2;
     id str=[NSMutableString stringWithCapacity:8 * count];
     id space=[@"                                                            " substringToIndex:level+1];
-    int i,base=0;
+    long i,base=0;
 
     [str appendFormat:@"(%g", floatStart[0] ];
     base=level;
@@ -331,8 +331,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //#ifdef Darwin
 -(void)insertValue:(float)fillValue betweenEachElementStartingAt:(int)start
 {
-    int i;
-    int fillOffset,targetOffset;
+    long i;
+    long fillOffset,targetOffset;
 	if ( start < 1 ) {
 		start=1;
 	}
@@ -393,7 +393,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 - (id)initWithCoder:(NSCoder *)coder
 {
-    int localCount;
+    long localCount;
     decodeVarName( coder, localCount, "count" );
     if (self=[self initWithCount:count] ) {
         decodeArray( coder, floatStart, count );
@@ -420,8 +420,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(BOOL)matchesStart:otherObject
 {
-    int i;
-    int max;
+    long i;
+    long max;
     max=[otherObject count];
     if ( max > count ) {
         max=count;
@@ -474,7 +474,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     int	other_real_increment=0;\
     id result=nil;\
     float *result_reals=&temp_real,*my_reals=&temp_real;\
-    int i,max;\
+    long i,max;\
     max=[self count];\
     if ( [other respondsToSelector:@selector(count)] ) {\
         if ( [other count] == max ) {\
@@ -518,7 +518,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {\
     id result;\
     float *result_reals,*my_reals;\
-    int i,max;\
+    long i,max;\
     max=[self count];\
     result = [[[self class] alloc] initWithCount:max];\
     result_reals=[result reals];\
@@ -541,7 +541,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(NSNumber*)reduce_##operationname\
 {\
     float result,*my_reals;\
-    int i,max;\
+    long i,max;\
     max=[self count];\
     my_reals=[self reals];\
     result=my_reals[0];\

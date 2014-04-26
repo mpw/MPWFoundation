@@ -120,7 +120,7 @@ static id returnNil() {  return nil; }
 			NSLog(@"argcount: %d",[sig numberOfArguments]);
         }
 #endif
-        argumentCount = [sig numberOfArguments];
+        argumentCount = (int)[sig numberOfArguments];
 	
         for (i=2;i<argumentCount;i++) {
 			const char *argTypePtr;

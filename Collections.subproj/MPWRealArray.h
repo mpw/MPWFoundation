@@ -76,7 +76,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(NSUInteger)count;
 -(void)clear;
--(void)setCapacity:(int)newCapacity;
+-(void)setCapacity:(long)newCapacity;
 -(BOOL)isEqual:otherObject;
 -(BOOL)matchesStart:otherObject;
 -(void)reverse;
@@ -91,7 +91,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //---	faster access to underlying representation
 
 
--(void)getReals:(float*)reals length:(int)max;
+-(void)getReals:(float*)reals length:(long)max;
 -(float*)reals;
 -(float)realAtIndex:(NSUInteger)index;
 -(void)replaceRealAtIndex:(NSUInteger)index withReal:(float)newValue;

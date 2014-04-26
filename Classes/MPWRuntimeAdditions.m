@@ -143,7 +143,7 @@ static BOOL returnNo() { return NO; }
 
 @implementation NSObject(instanceSize)
 
-+(int)instanceSize
++(long)instanceSize
 {
 
 #if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 ) || TARGET_OS_IPHONE

@@ -64,12 +64,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
     IMP actionMethod=objc_msgSend;
 #endif
  //   Class class=nil;
-    int j,count=[self count];
+    long j,count=[self count];
     id objs[ OBJECTS_PER_ITERATION ];
     NSAssert1( maxArgs < 4 , msg ,maxArgs);
 
     for (j=0;j<count;j+=OBJECTS_PER_ITERATION) {
-        int max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
+        long max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
         int i;
         NSRange range={ j, max };
         [self getObjects:objs range:range];
@@ -94,14 +94,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #endif
 	SEL selector = [invocation selector];
 //    Class class=nil;
-    int j,count=[self count];
+    long j,count=[self count];
 	id args[4]={nil,nil,nil,nil};
     id objs[ OBJECTS_PER_ITERATION ];
 	NSMutableArray *result=[NSMutableArray arrayWithCapacity:[self count]+20];
 //	IMP addObject = [result methodForSelector:@selector(addObject:)];
 //    NSAssert1( maxArgs < 4 , msg ,maxArgs);
     for (j=0;j<count;j+=OBJECTS_PER_ITERATION) {
-        int max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
+        long max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
         int i;
         NSRange range={ j, max };
         [self getObjects:objs range:range];
@@ -126,10 +126,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
     IMP actionMethod=objc_msgSend;
 #endif
 //    Class class=nil;
-    int j,count=[self count];
+    long j,count=[self count];
 	id args[4];
-	int i;
-	for ( i=0;i<4;i++) {
+	for ( int i=0;i<4;i++) {
 		args[i]=va_arg( varargs, id );
 	}
     id objs[ OBJECTS_PER_ITERATION ];
@@ -137,7 +136,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //	IMP addObject = [result methodForSelector:@selector(addObject:)];
 	//    NSAssert1( maxArgs < 4 , msg ,maxArgs);
     for (j=0;j<count;j+=OBJECTS_PER_ITERATION) {
-        int max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
+        long max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);
         int i;
         NSRange range={ j, max };
         [self getObjects:objs range:range];
@@ -161,12 +160,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	id args[4]={nil,nil,nil,nil};
 	int j;
-	int maxArgs = [[invocation methodSignature] numberOfArguments];
+	long maxArgs = [[invocation methodSignature] numberOfArguments];
 	maxArgs-=2;			//	0 is target, 1 is selector, 'real' args start at 2
 	for ( j=0;j<maxArgs;j++ ) {
 		[invocation getArgument:&args+j atIndex:j+2];
 	}
-	[self do:[invocation selector] args:args argCount:maxArgs];
+	[self do:[invocation selector] args:args argCount:(int)maxArgs];
 }
 
 

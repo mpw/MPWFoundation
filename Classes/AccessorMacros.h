@@ -117,12 +117,16 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #define objectAccessor_h( objectType, var, setVar )   scalarAccessor_h( objectType*, var, setVar )
 
-#define intAccessor( var, setVar )	scalarAccessor( int, var, setVar )
-#define intAccessor_h( var, setVar )	scalarAccessor_h( int, var, setVar )
-#define floatAccessor(var,setVar )  scalarAccessor( float, var, setVar )
-#define floatAccessor_h(var,setVar )  scalarAccessor_h( float, var, setVar )
-#define boolAccessor(var,setVar )  scalarAccessor( BOOL, var, setVar )
-#define boolAccessor_h(var,setVar )  scalarAccessor_h( BOOL, var, setVar )
+#define intAccessor( var, setVar )          scalarAccessor( int, var, setVar )
+#define intAccessor_h( var, setVar )        scalarAccessor_h( int, var, setVar )
+#define longAccessor( var, setVar )         scalarAccessor( long, var, setVar )
+#define longAccessor_h( var, setVar )       scalarAccessor_h( long, var, setVar )
+#define longlongAccessor( var, setVar )     scalarAccessor( long long, var, setVar )
+#define longlongAccessor_h( var, setVar )	scalarAccessor_h( longlong, var, setVar )
+#define floatAccessor(var,setVar )          scalarAccessor( float, var, setVar )
+#define floatAccessor_h(var,setVar )        scalarAccessor_h( float, var, setVar )
+#define boolAccessor(var,setVar )           scalarAccessor( BOOL, var, setVar )
+#define boolAccessor_h(var,setVar )         scalarAccessor_h( BOOL, var, setVar )
 
 #define lazyAccessor( ltype, lvar ,setLVar, computeVar )   \
 	readAccessorName( ltype*, lvar, _##lvar ) \

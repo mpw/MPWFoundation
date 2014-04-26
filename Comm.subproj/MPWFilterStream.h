@@ -48,7 +48,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     int	bufSize;
 }
 
--(void)forwardBytes:(const void*)bytes length:(unsigned int)len;
+-(void)forwardBytes:(const void*)bytes length:(unsigned long)len;
 
 -(NSString*)psDecoder;
 -(void)flushLocal;

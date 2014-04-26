@@ -94,7 +94,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(int)countOccurencesOfCharacter:(int)c
 {
-    int count=0,i,len=[self length];
+    long count=0,i,len=[self length];
     unichar buf[ len ];
     [self getCharacters:buf];
     for (i=0;i<len;i++) {
@@ -102,7 +102,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
             count++;
         }
     }
-    return count;
+    return (int)count;
 }
 
 -asNumber

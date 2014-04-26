@@ -46,7 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     id textCache;
     IMP getObject,initData,makeText;
     IMP setScanPosition;
-    int	headRoom;
+    long	headRoom;
     id bufferCache;
 }
 idAccessor_h( dataSource, setDataSource )
@@ -56,11 +56,12 @@ idAccessor_h( dataSource, setDataSource )
 +scannerWithDataSource:aDataSource;
 +scannerWithData:(NSData*)aData;
 -initWithData:(NSData*)aData;
+-(void)addData:(NSData*)newData;
 -initWithDataSource:aDataSource;
 -(void)addHandler:aHandler forKey:(NSString*)aKey;
 -handlerForKey:(NSString*)aKey;
--makeText:(unsigned int)length;
--makeString:(unsigned int)length;
+-makeText:(long)length;
+-makeString:(long)length;
 -(void)skipTo:(NSString*)aString;
 -(void)skipEOL;
 -nextLine;
@@ -69,9 +70,9 @@ idAccessor_h( dataSource, setDataSource )
 
 -(void)setScanPosition:(const  char*)newPos;
 -(const char*)position;
--(unsigned)bufLen;
--(BOOL)reserve:(int)roomNeeded;
--(unsigned)offset;
+-(long)bufLen;
+-(BOOL)reserve:(long)roomNeeded;
+-(long)offset;
 
 #define UPDATEPOSITION(newPos)		setScanPosition(self, @selector(setScanPosition:), newPos )
 #define MAKE_PROBE_CURRENT		UPDATEPOSITION(probe)

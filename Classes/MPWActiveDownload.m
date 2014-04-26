@@ -21,8 +21,8 @@ objectAccessor( MPWCachingDownloader, downloader, setDownloader )
 objectAccessor( NSURLConnection, urlConnection, setUrlConnection )
 boolAccessor( done, setDone )
 boolAccessor( log, setLog )
-intAccessor( downloadedSoFar, setDownloadedSoFar )
-intAccessor( downloadSize, setDownloadeSize )
+scalarAccessor( long long, downloadedSoFar, setDownloadedSoFar )
+scalarAccessor( long long, downloadSize, setDownloadeSize )
 
 -(id)initWithRequest:(MPWResourceLoadRequest*)newRequest downloader:(MPWCachingDownloader*)newDownloader stream:(MPWByteStream*)target
 {

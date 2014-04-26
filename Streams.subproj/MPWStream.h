@@ -70,6 +70,8 @@ idAccessor_h( target, setTarget )
 +streamWithTarget:aTarget;
 +stream;
 -initWithTarget:aTarget;
++defaultTarget;
+
 -(SEL)streamWriterMessage;
 -(void)close;
 -(void)flush;

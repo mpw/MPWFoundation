@@ -351,7 +351,7 @@ intAccessor( indentAmount , setIndentAmount )
     return totalBytes;
 }
 
--(unsigned)targetLength
+-(long)targetLength
 {
     return [target targetLength];
 }
@@ -427,7 +427,7 @@ intAccessor( indentAmount , setIndentAmount )
     [aStream appendBytes:[self bytes] length:[self length]];
 }
 
--(unsigned)targetLength
+-(long)targetLength
 {
     return [self length];
 }
@@ -450,7 +450,7 @@ intAccessor( indentAmount , setIndentAmount )
 {
 }
 
--(unsigned)targetLength
+-(long)targetLength
 {
     return [self length];
 }
@@ -585,7 +585,7 @@ idAccessor( finalFileName, setFinalFileName )
     return ftell( outfile );
 }
 
--(unsigned)targetLength
+-(long)targetLength
 {
     return [self length];
 }
@@ -760,8 +760,8 @@ intAccessor( fd, setFd )
 {
     MPWByteStream *s=[self stream];
     unichar pichar=960;
-    NSString *pi=[NSString stringWithCharacters:&pichar length:1];
-    [s outputString:pi];
+    NSString *pistring=[NSString stringWithCharacters:&pichar length:1];
+    [s outputString:pistring];
     NSData *encodedResult=[s target];
     const unsigned char *bytes=[encodedResult bytes];
     INTEXPECT([encodedResult length], 2, @"length of pi in utf-8");

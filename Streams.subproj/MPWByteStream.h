@@ -68,12 +68,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)writeIndent;
 -(void)writeString:(NSString*)aString;
--(unsigned)targetLength;
+-(long)targetLength;
 -(void)outputString:(NSString*)aString;
 -(void)indent;
 -(void)outdent;
 -(void)setIndentAmount:(int)indent;
 -(void)writeObject:anObject forKey:aKey;
+-(void)println:anObject;
+-(void)print:anObject;
 
 #define  TARGET_APPEND( data, count)   { targetAppend( self->target, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
 

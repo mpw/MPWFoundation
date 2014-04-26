@@ -69,11 +69,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self decodeValueOfObjCType:type at:var];
 }
 
--(void)encodeArrayOfObjCType:(const char*)type count:(unsigned)count at:(const void*)var withName:(const char*)name
+-(void)encodeArrayOfObjCType:(const char*)type count:(long)count at:(const void*)var withName:(const char*)name
 {
     [self encodeArrayOfObjCType:type count:count at:var];
 }
--(void)decodeArrayOfObjCType:(const char*)type count:(unsigned)count at:(void*)var withName:(const char*)name
+-(void)decodeArrayOfObjCType:(const char*)type count:(long)count at:(void*)var withName:(const char*)name
 {
     [self decodeArrayOfObjCType:type count:count at:var];
 }

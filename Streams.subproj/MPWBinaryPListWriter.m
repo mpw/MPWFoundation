@@ -558,13 +558,13 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 
 +(void)testArrayWriter
 {
-    MPWBinaryPListWriter *writer=[self stream];
+    MPWBinaryPListWriter *localWriter=[self stream];
     NSArray *argument=@[ @1 , @5, @52 ];
-    [writer writeArray:argument usingElementBlock:^(MPWStream* writer,id randomArgument){
+    [localWriter writeArray:argument usingElementBlock:^(MPWStream* writer,id randomArgument){
         [(MPWBinaryPListWriter*)writer writeInteger:[randomArgument intValue]];
     }];
-    [writer flush];
-    NSArray *a=[self _plistForStream:writer];
+    [localWriter flush];
+    NSArray *a=[self _plistForStream:localWriter];
     INTEXPECT([a count], 3, @"size of array");
     IDEXPECT([a lastObject], @52, @"theAnswer");
     //    NSLog(@"a: %@",a);
@@ -578,8 +578,8 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     for (int i=0;i<15;i++) {
         [input addObject:@(i)];
     }
-    [writer writeArray:input usingElementBlock:^(MPWStream* writer,id randomArgument){
-        [(MPWBinaryPListWriter*)writer writeInteger:[randomArgument intValue]];
+    [writer writeArray:input usingElementBlock:^(MPWStream* aWriter,id randomArgument){
+        [(MPWBinaryPListWriter*)aWriter writeInteger:[randomArgument intValue]];
     }];
     [writer close];
     NSArray *a=[self _plistForStream:writer];
