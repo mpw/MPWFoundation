@@ -34,6 +34,8 @@ struct Block_struct
 	struct Block_descriptor *descriptor;
 }
 
+-invokeWithTarget:target args:(va_list)args;
+
 
 
 @end
