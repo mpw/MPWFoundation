@@ -236,11 +236,16 @@ intAccessor( indentAmount , setIndentAmount )
     TARGET_APPEND( data , count );
 }
 
--(void)appendHexBytes:(const void*)data length:(NSUInteger)count
+-(void)appendBytesAsHex:(const void*)data length:(NSUInteger)count
 {
     unsigned char hexbytes[count*2+10];
     hexencode( data, hexbytes, count );
     [self appendBytes:hexbytes length:count*2];
+}
+
+-(void)appendDataAsHex:(NSData*)unencodedData
+{
+    [self appendBytesAsHex:[unencodedData bytes] length:[unencodedData length]];
 }
 
 -(void)writeCString:(const char*)cString
