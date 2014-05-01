@@ -114,6 +114,73 @@ static id blockFun( id self, ... ) {
     return nil;
 }
 
+
+-(Method)getMethodForMessage:(SEL)messageName inClass:(Class)aClass
+{
+    unsigned int methodCount=0;
+    Method *methods = class_copyMethodList(aClass, &methodCount);
+    Method result=NULL;
+    
+    if ( methods ) {
+        for ( int i=0;i< methodCount; i++ ) {
+            if ( method_getName(methods[i]) == messageName ) {
+                result = methods[i];
+                break;
+            }
+        }
+        free(methods);
+    }
+    return result;
+}
+
+-(IMP)stub
+{
+    if ( !stub) {
+        stub=imp_implementationWithBlock( self );
+    }
+    return stub;
+}
+
+-(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr
+{
+    Method methodDescriptor=NULL;
+	if ( aClass != nil ) {
+		methodDescriptor=[self getMethodForMessage:aSelector inClass:aClass];
+		
+		if ( methodDescriptor  && oldImpPtr) {
+            IMP old=class_getMethodImplementation(aClass, aSelector);
+			*oldImpPtr = old;
+		}
+		if ( methodDescriptor ) {
+			method_setImplementation(methodDescriptor, [self stub]);
+		} else {
+			if ( class_addMethod(aClass, aSelector, [self stub], signature )) {
+                methodDescriptor=class_getInstanceMethod( aClass, aSelector);
+            }
+            
+		}
+	}
+	return methodDescriptor;
+}
+
+-(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
+{
+    return [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
+}
+
+-(void)installInClass:(Class)aClass withSignatureString:(NSString*)signatureString selectorString:(NSString*)selectorName
+{
+#ifndef __clang_analyzer__  
+    // analyzer reports leak of signature, we have to leak for runtime structs
+    char *signature;
+    long siglen=[signatureString length];
+    signature = malloc( siglen + 10);
+    [signatureString getBytes:signature maxLength:siglen+2 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, siglen) remainingRange:NULL];
+    signature[siglen]=0;
+    [self installInClass:aClass withSignature:(const char*)signature selector:NSSelectorFromString(selectorName)];
+#endif
+}
+
 -invokeWithTarget:target args:(va_list)args
 {
 	//	return [target evaluateScript:script];
@@ -175,7 +242,7 @@ static id blockFun( id self, ... ) {
 #ifdef __x86_64__
 		returnVal=(id)[returnVal longLongValue];
 #else
-		returnVal=(id)[returnVal intValue];
+		returnVal=(id)[returnVal longValue];
 #endif
 	}
 	return returnVal;

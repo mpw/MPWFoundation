@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <objc/runtime.h>
 
 
 struct Block_descriptor {
@@ -32,9 +33,14 @@ struct Block_struct
 	int	flags,reserved;
     IMP invoke;
 	struct Block_descriptor *descriptor;
+	IMP stub;
 }
 
 -invokeWithTarget:target args:(va_list)args;
+-(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
+-(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector;
+-(void)installInClass:(Class)aClass withSignatureString:(NSString*)signature selectorString:(NSString*)selectorName;
+-(IMP)stub;
 
 
 
