@@ -248,9 +248,9 @@ static id blockFun( id self, ... ) {
 		}
 	}
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
-    NSLog(@"signature[0]='%c'",signature[0]);
+//    NSLog(@"signature[0]='%c'",signature[0]);
 	if ( signature[0] == 'i' ) {
-        NSLog(@"converting to int");
+//        NSLog(@"converting to int");
 #ifdef __x86_64__
 		returnVal=(id)[returnVal longValue];
 #else
