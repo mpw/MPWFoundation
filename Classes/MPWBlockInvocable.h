@@ -34,7 +34,9 @@ struct Block_struct
     IMP invoke;
 	struct Block_descriptor *descriptor;
 	IMP stub;
+    char *typeSignature;
 }
+
 
 -invokeWithTarget:target args:(va_list)args;
 -(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;

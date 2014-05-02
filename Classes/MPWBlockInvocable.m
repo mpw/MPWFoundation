@@ -77,6 +77,7 @@ static id blockFun( id self, ... ) {
         flags=1;
 //		flags|=(1 << 28);   // is global
         flags|=(1 << 24);  // we are a heap block
+        typeSignature="@@:@@";
 	}
 	return self;
 }
@@ -106,7 +107,7 @@ static id blockFun( id self, ... ) {
 
 -(const char*)typeSignature
 {
-    return "@@";
+    return typeSignature;
 }
 
 -invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters
@@ -165,6 +166,7 @@ static id blockFun( id self, ... ) {
 
 -(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
 {
+    typeSignature=(char*)signature;
     return [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
 }
 
@@ -183,7 +185,7 @@ static id blockFun( id self, ... ) {
 
 -invokeWithTarget:target args:(va_list)args
 {
-	//	return [target evaluateScript:script];
+//    NSLog(@"ivokeWithTarget:args:");
 	id formalParameters = [self formalParameters];
 	id parameters=[NSMutableArray array];
 	int i;
@@ -200,13 +202,19 @@ static id blockFun( id self, ... ) {
     *dest++=0;
     
 	id returnVal;
-    //	NSLog(@"selector: %s",selname);
-    //	NSLog(@"signature: %s",signature);
-    //	NSLog(@"target: %@",target);
+//    NSLog(@"signature: %s",signature);
+//    NSLog(@"%d parameters",(int)[formalParameters count]);
 	for (i=0;i<[formalParameters count];i++ ) {
-        //		NSLog(@"param[%d]: %c",i,signature[i+3]);
+//        NSLog(@"param[%d]: %c",i,signature[i+3]);
 		switch ( signature[i+3] ) {
 				id theArg;
+			case ':':{
+                
+                SEL sel=va_arg( args,SEL);
+                theArg = NSStringFromSelector(sel);
+				[parameters addObject:theArg];
+                break;
+            }
 			case '@':
 			case '#':
 				theArg = va_arg( args, id );
@@ -233,16 +241,20 @@ static id blockFun( id self, ... ) {
 				[parameters addObject:[NSNumber numberWithFloat:va_arg( args, double )]];
 				break;
 			default:
+                
+                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%c'",i,signature[i+3]];
 				va_arg( args, void* );
-				[parameters addObject:[NSString stringWithFormat:@"unhandled parameter at %d '%c'",i,signature[i+3]]];
+
 		}
 	}
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
+    NSLog(@"signature[0]='%c'",signature[0]);
 	if ( signature[0] == 'i' ) {
+        NSLog(@"converting to int");
 #ifdef __x86_64__
-		returnVal=(id)[returnVal longLongValue];
-#else
 		returnVal=(id)[returnVal longValue];
+#else
+		returnVal=(id)[returnVal intValue];
 #endif
 	}
 	return returnVal;
