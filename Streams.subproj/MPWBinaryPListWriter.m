@@ -592,14 +592,14 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 {
     IDEXPECT([self _plistViaStream:@"Hello World!"], @"Hello World!",@"process single string");
 
-    INTEXPECT([[self _plistViaStream:@42] intValue], 42,@"process single integer");
+    INTEXPECT([[self _plistViaStream:@(42)] intValue], 42,@"process single integer");
     FLOATEXPECTTOLERANCE([[self _plistViaStream:@3.14159] floatValue], 3.14159,0.001,@"process single float");
 
 }
 
 +(void)testWriteWriteGenericArray
 {
-    NSArray *a=@[ @"abced", @42, @2.713 ];
+    NSArray *a=@[ @"abced", @(42), @2.713 ];
     NSArray *result=[self _plistViaStream:a];
     INTEXPECT([result count], 3, @"result count");
 }
@@ -630,20 +630,6 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
              @"testWriteWriteGenericDictionary",
              ];
 }
-
-@end
-
-@implementation NSNumber(plistWriting)
-
--(void)writeOnPropertyList:(MPWBinaryPListWriter*)aPlist
-{
-    if ( CFNumberIsFloatType( (CFNumberRef)self) ) {
-        [aPlist writeFloat:[self floatValue]];
-    } else {
-        [aPlist writeInteger:[self longValue]];
-    }
-}
-
 
 @end
 

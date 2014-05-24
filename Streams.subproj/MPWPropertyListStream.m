@@ -98,6 +98,19 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self printf:@"%d",anInteger];
 }
 
+-(void)writeFloat:(float)aFloat
+{
+    [self printf:@"%g",aFloat];
+}
+
+-(void)writeBoolean:(BOOL)truthValue
+{
+	if ( truthValue ) {
+		[self appendBytes:"true" length:4];
+	} else {
+		[self appendBytes:"false" length:5];
+	}
+}
 
 -(void)writeString:(NSString*)anObject
 {
@@ -145,6 +158,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self writeEnumerator:e spacer:@","];
 }
 
+
 -(SEL)streamWriterMessage
 {
     return @selector(writeOnPropertyList:);
@@ -154,10 +168,34 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 @implementation NSString(PropertyListStreaming)
 
--(void)writeOnPropertyList:(MPWByteStream*)aStream
+-(void)writeOnPropertyList:(MPWPropertyListStream*)aStream
 {
     [aStream writeString:self ];
 }
+
+@end
+
+@implementation NSNumber(PropertyListStreaming)
+
+
+-(void)writeOnPropertyList:(MPWPropertyListStream*)aStream
+{
+    Class boolClass = nil;
+    if ( boolClass == nil) {
+        boolClass=[@YES class];
+    }
+    
+//	if ( [NSStringFromClass([self class]) rangeOfString:@"Boolean"].length > 0)  {
+    if ( [self class] == boolClass)  {
+		[aStream writeBoolean:[self boolValue]];
+	} else if ( CFNumberIsFloatType( (CFNumberRef)self ) ) {
+		[aStream writeFloat:[self doubleValue]];
+	} else {
+		[aStream writeInteger:[self intValue]];
+	}
+	
+}
+
 
 @end
 

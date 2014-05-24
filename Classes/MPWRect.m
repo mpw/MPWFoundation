@@ -105,7 +105,7 @@ scalarAccessor( NSRect, rect, setRect )
     return 4;
 }
 
--(void)getReals:(float*)reals length:(int)len
+-(void)getReals:(float*)reals length:(long)len
 {
     if (len>=4) {
         reals[0]=rect.origin.x;
