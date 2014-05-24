@@ -187,7 +187,7 @@ idAccessor( observer, setObserver )
 
 -(int)runRequests:(NSMutableSet*)downloads forSeconds:(NSTimeInterval)secondsToRun reportDone:(NSMutableSet*)doneSet
 {
-	[[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:secondsToRun]];
+    CFRunLoopRunInMode ( kCFRunLoopDefaultMode , secondsToRun, YES );
 	return [self reportDoneFromRequests:downloads into:doneSet];
 }
 
