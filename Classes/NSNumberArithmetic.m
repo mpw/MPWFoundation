@@ -59,6 +59,16 @@ defineArithOp( div, / )
     return [self compare:other] > 0;
 }
 
+-not
+{
+    if ( [self boolValue]  ) {
+        return (id)kCFBooleanFalse;
+    } else {
+        return (id)kCFBooleanTrue;
+    }
+}
+
+
 -negated
 {
 	const char *type1=[self objCType];
