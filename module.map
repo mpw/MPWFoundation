@@ -1,0 +1,7 @@
+
+framework module MPWFoundation {
+    umbrella header "MPWFoundation.h"
+    module * { export * }
+    export *
+    
+}

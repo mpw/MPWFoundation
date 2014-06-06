@@ -1,5 +1,5 @@
 /*
-    NSEnumeratorFiltering.m created by marcel on Sun 04-Jul-1999 */
+    NSEnumeratorFiltering.m created by marcel on Sun 04-Jul-1999 
     Copyright (c) 1999-2012 by Marcel Weiher. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

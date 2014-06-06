@@ -39,6 +39,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWIgnoreUnknownTrampoline.h"
 #import "NSInvocationAdditions.h"
 #import "MPWObjectCache.h"
+#import <objc/runtime.h>
 
 @implementation MPWIgnoreUnknownTrampoline
 
@@ -75,11 +76,25 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 
 @end
 
+#define HOM_METHOD1( msg, type, conversion, trampileClass ) \
+-msg:(type)arg  { id tramp = [trampileClass trampolineWithTarget:self selector:@selector(msg:withArg:)]; [tramp setXxxAdditionalArg:conversion]; return tramp; } \
+-msg:(NSInvocation*)invocation withArg:arg
 
-@implementation NSObject(sendIfResponds)
+#define HOM_METHOD_DOUBLE( msg )    HOM_METHOD1( msg, double, [NSNumber numberWithDouble:arg] )
 
 
--sendIfResponds:(NSInvocation*)invocation
+
+#define HOM_METHOD( msg , trampileClass ) \
+-msg { return [trampileClass trampolineWithTarget:self selector:@selector(msg:)]; } \
+-msg:(NSInvocation*)invocation
+//   invocation=(NSInvocation*)[MPWStackSaverInvocation withInvocation:invocation];
+
+
+@implementation NSObject(ifResponds)
+
+
+
+HOM_METHOD(ifResponds, MPWIgnoreUnknownTrampoline)
 {
     id retval=nil;
     if ( [self respondsToSelector:[invocation selector]]) {
@@ -88,11 +103,36 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
     return retval;
 }
 
--sendIfResponds
+
+HOM_METHOD(sendSuperChain, MPWIgnoreUnknownTrampoline)
 {
-    id trampoline = [MPWIgnoreUnknownTrampoline trampolineWithTarget:self selector:@selector(sendIfResponds:)];
-	return trampoline;
+    IMP theIMP=NULL;
+    Class oldClass=[self class];
+    Class currentClass=oldClass;
+    SEL selector=[invocation selector];
+    @try {
+        while ( currentClass) {
+            if ( [currentClass instancesRespondToSelector:selector]) {
+                IMP newIMP=[currentClass instanceMethodForSelector:selector];
+                if ( newIMP != theIMP) {
+                    theIMP=newIMP;
+                    if ( theIMP  ) {
+                        object_setClass( self, currentClass);
+                        [invocation invokeWithTarget:self];
+                    }
+                }
+                currentClass=[currentClass superclass];
+            } else {
+                break;
+            }
+        }
+    }
+    @finally {
+        object_setClass( self, oldClass);
+    }
+    return nil;
 }
+
 
 @end
 
@@ -101,21 +141,62 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 -stringValue1;
 @end
 
+static int superChaintTesterCounter=0;
+@interface SuperchainTester1 : NSObject
+@end
+@interface SuperchainTester2 : SuperchainTester1
+@end
+@interface SuperchainTester3 : SuperchainTester2
+@end
+
+@implementation SuperchainTester1
+
+-(void)doit
+{
+    superChaintTesterCounter += 100;
+}
+
+@end
+
+
+@implementation SuperchainTester2
+
+@end
+
+
+@implementation SuperchainTester3
+
+-(void)doit
+{
+    superChaintTesterCounter += 1;
+}
+
+@end
+
 @implementation MPWIgnoreUnknownTrampolineTesting
 
 +testSelectors
 {
     return [NSArray arrayWithObjects:
-        @"testSendIfResponds", nil];
+            @"testIfResponds",
+            @"testSuperchainCaller",
+            nil];
 }
 
 
-+(void)testSendIfResponds
++(void)testIfResponds
 {
     id a = @"John Doe";
     id  str = [a stringValue];
     IDEXPECT( str, a ,@"safely sending should yield same value if exists" );
-    [[a sendIfResponds] stringValue1];
+    [[a ifResponds] stringValue1];
+}
+
++(void)testSuperchainCaller
+{
+    SuperchainTester3 *tester=[[SuperchainTester3 new] autorelease];
+    [[tester sendSuperChain] doit];
+    INTEXPECT(superChaintTesterCounter,101, @"called both implemenations, none twice");
 }
 
 

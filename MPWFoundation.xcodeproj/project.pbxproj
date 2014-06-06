@@ -185,6 +185,77 @@
 		1F78214912D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
 		1F78214C12D953EB00E2DB02 /* MPWBlockInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F78214612D953EB00E2DB02 /* MPWBlockInvocation.h */; };
 		1F78214D12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
+		1F840DAA193F505700589595 /* MPWFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F840DA9193F505700589595 /* MPWFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F840DB0193F505700589595 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
+		1F840DB7193F505700589595 /* MPWFoundationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F840DB6193F505700589595 /* MPWFoundationTests.m */; };
+		1F840DC0193F50AC00589595 /* MPWActiveDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64207312CB1A3700240B02 /* MPWActiveDownload.m */; };
+		1F840DC1193F50AC00589595 /* MPWResourceLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64206712CB19E200240B02 /* MPWResourceLoadRequest.m */; };
+		1F840DC2193F50AC00589595 /* MPWCachingDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64205D12CB19D700240B02 /* MPWCachingDownloader.m */; };
+		1F840DC3193F50AC00589595 /* MPWMessageCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E2216072C5C00007DCDB1 /* MPWMessageCatcher.m */; };
+		1F840DC4193F50AC00589595 /* MPWObjectReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9240705C597EF008047EB /* MPWObjectReference.m */; };
+		1F840DC5193F50AC00589595 /* MPWObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1934006686DDC35ADD82 /* MPWObject.m */; };
+		1F840DC6193F50AC00589595 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
+		1F840DC7193F50AC00589595 /* NSInvocationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1936006686DDC35ADD82 /* NSInvocationAdditions.m */; };
+		1F840DC8193F50AC00589595 /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1937006686DDC35ADD82 /* NSStringAdditions.m */; };
+		1F840DC9193F50AC00589595 /* CodingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1938006686DDC35ADD82 /* CodingAdditions.m */; };
+		1F840DCA193F50AC00589595 /* MPWObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1939006686DDC35ADD82 /* MPWObjectCache.m */; };
+		1F840DCB193F50AC00589595 /* NSRectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193A006686DDC35ADD82 /* NSRectAdditions.m */; };
+		1F840DCC193F50AC00589595 /* MPWScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193B006686DDC35ADD82 /* MPWScanner.m */; };
+		1F840DCD193F50AC00589595 /* NSDictAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193C006686DDC35ADD82 /* NSDictAdditions.m */; };
+		1F840DCE193F50AC00589595 /* MPWRuntimeAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193D006686DDC35ADD82 /* MPWRuntimeAdditions.m */; };
+		1F840DCF193F50AC00589595 /* NSObjectAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193E006686DDC35ADD82 /* NSObjectAdditions.m */; };
+		1F840DD0193F50AC00589595 /* MPWPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193F006686DDC35ADD82 /* MPWPoint.m */; };
+		1F840DD1193F50AC00589595 /* MPWRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1940006686DDC35ADD82 /* MPWRect.m */; };
+		1F840DD2193F50AC00589595 /* MPWTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1942006686DDC35ADD82 /* MPWTrampoline.m */; };
+		1F840DD3193F50AC00589595 /* MPWMsgExpression.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1943006686DDC35ADD82 /* MPWMsgExpression.m */; };
+		1F840DD4193F50AC00589595 /* MPWAssociation.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1944006686DDC35ADD82 /* MPWAssociation.m */; };
+		1F840DD5193F50AC00589595 /* MPWIgnoreTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1945006686DDC35ADD82 /* MPWIgnoreTrampoline.m */; };
+		1F840DD6193F50AC00589595 /* NSBundleConveniences.m in Sources */ = {isa = PBXBuildFile; fileRef = F51B7249013FD70701ABB64E /* NSBundleConveniences.m */; };
+		1F840DD7193F50AC00589595 /* MPWKVCSoftPointer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E70E5052B228C000B8870 /* MPWKVCSoftPointer.m */; };
+		1F840DD8193F50AC00589595 /* MPWSoftPointerProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1B8214052B27DA007DB19F /* MPWSoftPointerProxy.m */; };
+		1F840DD9193F50AC00589595 /* MPWIgnoreUnknownTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */; };
+		1F840DDA193F50AC00589595 /* MPWNamedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF94908E5F82B0011386A /* MPWNamedData.m */; };
+		1F840DDB193F50AC00589595 /* MPWDirectForwardingTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F05F69C0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m */; };
+		1F840DDC193F50AC00589595 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
+		1F840DDD193F50AC00589595 /* MPWNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC97CDC0BB0A8B900F8CB51 /* MPWNumber.m */; };
+		1F840DDE193F50AC00589595 /* MPWFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC97D000BB0AB8B00F8CB51 /* MPWFloat.m */; };
+		1F840DDF193F50AC00589595 /* MPWInteger.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC97CEF0BB0A9B200F8CB51 /* MPWInteger.m */; };
+		1F840DE0193F50AC00589595 /* MPWFastInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1D3E80BB9DACA0097A924 /* MPWFastInvocation.m */; };
+		1F840DE1193F50AC00589595 /* MPWRusage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1D4570BBAAD520097A924 /* MPWRusage.m */; };
+		1F840DE2193F50AC00589595 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
+		1F840DE3193F50AC00589595 /* MPWBlockInvocable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FCE1E141371BB250035A429 /* MPWBlockInvocable.m */; };
+		1F840DE4193F50AC00589595 /* MPWValueAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */; };
+		1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1968006686DDC35ADD82 /* MPWASCII85Stream.m */; };
+		1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1969006686DDC35ADD82 /* MPWFilterStream.m */; };
+		1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF196A006686DDC35ADD82 /* MPWLZWStream.m */; };
+		1F840DE8193F50E400589595 /* MPWBinaryPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F273F3A17F554F600F5FF9E /* MPWBinaryPlist.m */; };
+		1F840DE9193F50E400589595 /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
+		1F840DEA193F50E400589595 /* MPWEnumSelectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */; };
+		1F840DEB193F50E400589595 /* MPWIdentityDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9241C05C5982A008047EB /* MPWIdentityDictionary.m */; };
+		1F840DEC193F50E400589595 /* MPWRealArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1975006686DDC35ADD82 /* MPWRealArray.m */; };
+		1F840DED193F50E400589595 /* MPWEnumFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */; };
+		1F840DEE193F50E400589595 /* MPWUShortArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1977006686DDC35ADD82 /* MPWUShortArray.m */; };
+		1F840DEF193F50E400589595 /* MPWSubData.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1978006686DDC35ADD82 /* MPWSubData.m */; };
+		1F840DF1193F50E400589595 /* MPWEnumeratorEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197A006686DDC35ADD82 /* MPWEnumeratorEnumerator.m */; };
+		1F840DF2193F50E400589595 /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
+		1F840DF3193F50E400589595 /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
+		1F840DF4193F50E400589595 /* NSEnumeratorFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */; };
+		1F840DF6193F50E400589595 /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; };
+		1F840DF7193F50E400589595 /* NSObjectFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DC619C01393D22005ADD88 /* NSObjectFiltering.m */; };
+		1F840DF8193F50E400589595 /* NSArrayFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DC61A301397F05005ADD88 /* NSArrayFiltering.m */; };
+		1F840DF9193F50E400589595 /* MPWIntArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F82D18D059D880200F38A88 /* MPWIntArray.m */; };
+		1F840DFA193F50E400589595 /* MPWSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F766F6D0BBC5F410038DA7D /* MPWSmallStringTable.m */; };
+		1F840DFB193F50E400589595 /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
+		1F840DFC193F50E400589595 /* MPWBlockFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E1615DB922B00640A43 /* MPWBlockFilterStream.m */; };
+		1F840DFD193F50E400589595 /* MPWStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1992006686DDC35ADD82 /* MPWStream.m */; };
+		1F840DFE193F50E400589595 /* MPWByteStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1993006686DDC35ADD82 /* MPWByteStream.m */; };
+		1F840DFF193F50E400589595 /* MPWHierarchicalStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */; };
+		1F840E00193F50E400589595 /* MPWPropertyListStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1995006686DDC35ADD82 /* MPWPropertyListStream.m */; };
+		1F840E01193F50E400589595 /* MPWFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1996006686DDC35ADD82 /* MPWFlattenStream.m */; };
+		1F840E02193F50E400589595 /* MPWPListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */; };
+		1F840E03193F50E400589595 /* MPWMessageFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E0C15DB909B00640A43 /* MPWMessageFilterStream.m */; };
+		1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */; };
+		1F840E05193F527300589595 /* bytecoding.c in Sources */ = {isa = PBXBuildFile; fileRef = 07DF195E006686DDC35ADD82 /* bytecoding.c */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
 		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -325,6 +396,16 @@
 		1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF94908E5F82B0011386A /* MPWNamedData.m */; };
 		1FF8FE2609B49D0200652476 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1F840DB1193F505700589595 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07DF1931006686DDC35ADD82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F840DA4193F505700589595;
+			remoteInfo = MPWFoundation;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		07DF1934006686DDC35ADD82 /* MPWObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObject.m; sourceTree = "<group>"; };
@@ -481,6 +562,12 @@
 		1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocation.m; sourceTree = "<group>"; };
 		1F82D18C059D880200F38A88 /* MPWIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIntArray.h; sourceTree = "<group>"; };
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
+		1F840DA5193F505700589595 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F840DA8193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F840DA9193F505700589595 /* MPWFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFoundation.h; sourceTree = "<group>"; };
+		1F840DAF193F505700589595 /* MPWFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPWFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F840DB5193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1F840DB6193F505700589595 /* MPWFoundationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFoundationTests.m; sourceTree = "<group>"; };
 		1F84750F084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIgnoreUnknownTrampoline.h; sourceTree = "<group>"; };
 		1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIgnoreUnknownTrampoline.m; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
@@ -494,6 +581,7 @@
 		1FA1D4570BBAAD520097A924 /* MPWRusage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWRusage.m; sourceTree = "<group>"; };
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
+		1FAB9ACD193F663600927665 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
 		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dllmain.m; path = windows/dllmain.m; sourceTree = "<group>"; };
 		1FB93A941292012200D9D630 /* PhoneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneGeometry.h; sourceTree = "<group>"; };
 		1FBAABB81847651B00086047 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
@@ -537,6 +625,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F840DA1193F505700589595 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F840DAC193F505700589595 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F840DB0193F505700589595 /* MPWFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF8FE2409B49D0200652476 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -552,6 +655,7 @@
 		07DF1932006686DDC35ADD82 /* MPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				1FAB9ACD193F663600927665 /* module.map */,
 				07DF1933006686DDC35ADD82 /* Classes */,
 				07DF1946006686DDC35ADD82 /* Headers */,
 				07DF1966006686DDC35ADD82 /* Comm */,
@@ -562,6 +666,8 @@
 				F51B7250013FDD5F01ABB64E /* Resources */,
 				07DF195F006686DDC35ADD82 /* Supporting Files */,
 				07DF19B2006686DDC35ADD82 /* External Frameworks and Libraries */,
+				1F840DA6193F505700589595 /* MPWFoundation */,
+				1F840DB3193F505700589595 /* MPWFoundationTests */,
 				07DF19B6006686DDC35ADD82 /* Products */,
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
 				1F008FEF10BDAC18001F05D5 /* Info-MPWFoundation__Framework___Upgraded_ copy.plist */,
@@ -932,8 +1038,44 @@
 			children = (
 				1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */,
 				1F4FC66910F7F6AC00376799 /* libMPWFoundationTouch.a */,
+				1F840DA5193F505700589595 /* MPWFoundation.framework */,
+				1F840DAF193F505700589595 /* MPWFoundationTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1F840DA6193F505700589595 /* MPWFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				1F840DA9193F505700589595 /* MPWFoundation.h */,
+				1F840DA7193F505700589595 /* Supporting Files */,
+			);
+			path = MPWFoundation;
+			sourceTree = "<group>";
+		};
+		1F840DA7193F505700589595 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F840DA8193F505700589595 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F840DB3193F505700589595 /* MPWFoundationTests */ = {
+			isa = PBXGroup;
+			children = (
+				1F840DB6193F505700589595 /* MPWFoundationTests.m */,
+				1F840DB4193F505700589595 /* Supporting Files */,
+			);
+			path = MPWFoundationTests;
+			sourceTree = "<group>";
+		};
+		1F840DB4193F505700589595 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				1F840DB5193F505700589595 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		F51B7250013FDD5F01ABB64E /* Resources */ = {
@@ -1032,6 +1174,14 @@
 				1F11C45715568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */,
 				1F198E0F15DB909B00640A43 /* MPWMessageFilterStream.h in Headers */,
 				1F198E1915DB922C00640A43 /* MPWBlockFilterStream.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F840DA2193F505700589595 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F840DAA193F505700589595 /* MPWFoundation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1166,6 +1316,42 @@
 			productReference = 1F4FC66910F7F6AC00376799 /* libMPWFoundationTouch.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		1F840DA4193F505700589595 /* MPWFoundation */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundation" */;
+			buildPhases = (
+				1F840DA0193F505700589595 /* Sources */,
+				1F840DA1193F505700589595 /* Frameworks */,
+				1F840DA2193F505700589595 /* Headers */,
+				1F840DA3193F505700589595 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MPWFoundation;
+			productName = MPWFoundation;
+			productReference = 1F840DA5193F505700589595 /* MPWFoundation.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1F840DAE193F505700589595 /* MPWFoundationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F840DBF193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTests" */;
+			buildPhases = (
+				1F840DAB193F505700589595 /* Sources */,
+				1F840DAC193F505700589595 /* Frameworks */,
+				1F840DAD193F505700589595 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1F840DB2193F505700589595 /* PBXTargetDependency */,
+			);
+			name = MPWFoundationTests;
+			productName = MPWFoundationTests;
+			productReference = 1F840DAF193F505700589595 /* MPWFoundationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		1FF8FDB309B49D0100652476 /* MPWFoundationFramework */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FF8FE2909B49D0200652476 /* Build configuration list for PBXNativeTarget "MPWFoundationFramework" */;
@@ -1193,7 +1379,16 @@
 		07DF1931006686DDC35ADD82 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
+				TargetAttributes = {
+					1F840DA4193F505700589595 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					1F840DAE193F505700589595 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = 1F840DA4193F505700589595;
+					};
+				};
 			};
 			buildConfigurationList = 1FD75000085DDFC1001487D3 /* Build configuration list for PBXProject "MPWFoundation" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1214,11 +1409,27 @@
 				1F4FC66810F7F6AC00376799 /* MPWFoundationTouch */,
 				1FA5B7D51172CD28001628B6 /* MPWFoundationTouchFat */,
 				1F3AC607143EB3D9009B8504 /* show-build-dir */,
+				1F840DA4193F505700589595 /* MPWFoundation */,
+				1F840DAE193F505700589595 /* MPWFoundationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1F840DA3193F505700589595 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F840DAD193F505700589595 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF8FDF009B49D0100652476 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1334,6 +1545,89 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F840DA0193F505700589595 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F840E05193F527300589595 /* bytecoding.c in Sources */,
+				1F840DE8193F50E400589595 /* MPWBinaryPlist.m in Sources */,
+				1F840DE9193F50E400589595 /* MPWCaseInsensitiveSmallStringTable.m in Sources */,
+				1F840DEA193F50E400589595 /* MPWEnumSelectFilter.m in Sources */,
+				1F840DEB193F50E400589595 /* MPWIdentityDictionary.m in Sources */,
+				1F840DEC193F50E400589595 /* MPWRealArray.m in Sources */,
+				1F840DED193F50E400589595 /* MPWEnumFilter.m in Sources */,
+				1F840DEE193F50E400589595 /* MPWUShortArray.m in Sources */,
+				1F840DEF193F50E400589595 /* MPWSubData.m in Sources */,
+				1F840DF1193F50E400589595 /* MPWEnumeratorEnumerator.m in Sources */,
+				1F840DF2193F50E400589595 /* MPWEnumeratorSource.m in Sources */,
+				1F840DF3193F50E400589595 /* MPWEnumeratorBase.m in Sources */,
+				1F840DF4193F50E400589595 /* NSEnumeratorFiltering.m in Sources */,
+				1F840DF6193F50E400589595 /* MPWFakedReturnMethodSignature.m in Sources */,
+				1F840DF7193F50E400589595 /* NSObjectFiltering.m in Sources */,
+				1F840DF8193F50E400589595 /* NSArrayFiltering.m in Sources */,
+				1F840DF9193F50E400589595 /* MPWIntArray.m in Sources */,
+				1F840DFA193F50E400589595 /* MPWSmallStringTable.m in Sources */,
+				1F840DFB193F50E400589595 /* MPWDelimitedTable.m in Sources */,
+				1F840DFC193F50E400589595 /* MPWBlockFilterStream.m in Sources */,
+				1F840DFD193F50E400589595 /* MPWStream.m in Sources */,
+				1F840DFE193F50E400589595 /* MPWByteStream.m in Sources */,
+				1F840DFF193F50E400589595 /* MPWHierarchicalStream.m in Sources */,
+				1F840E00193F50E400589595 /* MPWPropertyListStream.m in Sources */,
+				1F840E01193F50E400589595 /* MPWFlattenStream.m in Sources */,
+				1F840E02193F50E400589595 /* MPWPListBuilder.m in Sources */,
+				1F840E03193F50E400589595 /* MPWMessageFilterStream.m in Sources */,
+				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
+				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
+				1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */,
+				1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */,
+				1F840DC0193F50AC00589595 /* MPWActiveDownload.m in Sources */,
+				1F840DC1193F50AC00589595 /* MPWResourceLoadRequest.m in Sources */,
+				1F840DC2193F50AC00589595 /* MPWCachingDownloader.m in Sources */,
+				1F840DC3193F50AC00589595 /* MPWMessageCatcher.m in Sources */,
+				1F840DC4193F50AC00589595 /* MPWObjectReference.m in Sources */,
+				1F840DC5193F50AC00589595 /* MPWObject.m in Sources */,
+				1F840DC6193F50AC00589595 /* NSNil.m in Sources */,
+				1F840DC7193F50AC00589595 /* NSInvocationAdditions.m in Sources */,
+				1F840DC8193F50AC00589595 /* NSStringAdditions.m in Sources */,
+				1F840DC9193F50AC00589595 /* CodingAdditions.m in Sources */,
+				1F840DCA193F50AC00589595 /* MPWObjectCache.m in Sources */,
+				1F840DCB193F50AC00589595 /* NSRectAdditions.m in Sources */,
+				1F840DCC193F50AC00589595 /* MPWScanner.m in Sources */,
+				1F840DCD193F50AC00589595 /* NSDictAdditions.m in Sources */,
+				1F840DCE193F50AC00589595 /* MPWRuntimeAdditions.m in Sources */,
+				1F840DCF193F50AC00589595 /* NSObjectAdditions.m in Sources */,
+				1F840DD0193F50AC00589595 /* MPWPoint.m in Sources */,
+				1F840DD1193F50AC00589595 /* MPWRect.m in Sources */,
+				1F840DD2193F50AC00589595 /* MPWTrampoline.m in Sources */,
+				1F840DD3193F50AC00589595 /* MPWMsgExpression.m in Sources */,
+				1F840DD4193F50AC00589595 /* MPWAssociation.m in Sources */,
+				1F840DD5193F50AC00589595 /* MPWIgnoreTrampoline.m in Sources */,
+				1F840DD6193F50AC00589595 /* NSBundleConveniences.m in Sources */,
+				1F840DD7193F50AC00589595 /* MPWKVCSoftPointer.m in Sources */,
+				1F840DD8193F50AC00589595 /* MPWSoftPointerProxy.m in Sources */,
+				1F840DD9193F50AC00589595 /* MPWIgnoreUnknownTrampoline.m in Sources */,
+				1F840DDA193F50AC00589595 /* MPWNamedData.m in Sources */,
+				1F840DDB193F50AC00589595 /* MPWDirectForwardingTrampoline.m in Sources */,
+				1F840DDC193F50AC00589595 /* NSNumberArithmetic.m in Sources */,
+				1F840DDD193F50AC00589595 /* MPWNumber.m in Sources */,
+				1F840DDE193F50AC00589595 /* MPWFloat.m in Sources */,
+				1F840DDF193F50AC00589595 /* MPWInteger.m in Sources */,
+				1F840DE0193F50AC00589595 /* MPWFastInvocation.m in Sources */,
+				1F840DE1193F50AC00589595 /* MPWRusage.m in Sources */,
+				1F840DE2193F50AC00589595 /* MPWBlockInvocation.m in Sources */,
+				1F840DE3193F50AC00589595 /* MPWBlockInvocable.m in Sources */,
+				1F840DE4193F50AC00589595 /* MPWValueAccessor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F840DAB193F505700589595 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F840DB7193F505700589595 /* MPWFoundationTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FF8FDF609B49D0100652476 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1412,11 +1706,18 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1F840DB2193F505700589595 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F840DA4193F505700589595 /* MPWFoundation */;
+			targetProxy = 1F840DB1193F505700589595 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
 		1F0CC1AD0F5B1A9500BB466F /* Release Tiger */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1440,8 +1741,10 @@
 		1F0CC1AE0F5B1A9500BB466F /* Release Tiger */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -1459,8 +1762,10 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -1614,6 +1919,250 @@
 			};
 			name = "Release Tiger";
 		};
+		1F840DB8193F505700589595 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MPWFoundation/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Development;
+		};
+		1F840DB9193F505700589595 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MPWFoundation/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1F840DBA193F505700589595 /* Release Tiger */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MPWFoundation/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = "Release Tiger";
+		};
+		1F840DBB193F505700589595 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = MPWFoundationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Development;
+		};
+		1F840DBC193F505700589595 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MPWFoundationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1F840DBD193F505700589595 /* Release Tiger */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = MPWFoundationTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release Tiger";
+		};
 		1FA5B7D61172CD28001628B6 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1645,7 +2194,6 @@
 		1FD75001085DDFC1001487D3 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "ppc i386 ppc64 x86_64";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
@@ -1670,7 +2218,6 @@
 		1FD75002085DDFC1001487D3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -1694,8 +2241,10 @@
 		1FF8FE2A09B49D0200652476 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -1713,8 +2262,10 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
+				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -1731,8 +2282,10 @@
 		1FF8FE2B09B49D0200652476 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -1750,9 +2303,11 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
+				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -1785,6 +2340,26 @@
 				1F4FC66A10F7F6AD00376799 /* Development */,
 				1F4FC66B10F7F6AD00376799 /* Release */,
 				1F4FC66C10F7F6AD00376799 /* Release Tiger */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F840DB8193F505700589595 /* Development */,
+				1F840DB9193F505700589595 /* Release */,
+				1F840DBA193F505700589595 /* Release Tiger */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		1F840DBF193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F840DBB193F505700589595 /* Development */,
+				1F840DBC193F505700589595 /* Release */,
+				1F840DBD193F505700589595 /* Release Tiger */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;

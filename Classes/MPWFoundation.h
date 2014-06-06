@@ -42,6 +42,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/NSStringAdditions.h>
 #import <MPWFoundation/NSObjectAdditions.h>
 #import <MPWFoundation/MPWAssociation.h>
+#import <MPWFoundation/MPWNumber.h>
+#import <MPWFoundation/MPWFloat.h>
+
 
 #import <MPWFoundation/MPWStream.h>
 #import <MPWFoundation/MPWFlattenStream.h>

@@ -99,7 +99,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)addReal:(float)newValue;
 -(void)addReals:(float*)newReals count:(NSUInteger)realCount;
 -(void)appendArray:anArray;
-
+-(float)vec_reduce_sum;
 
 //---	some computation
 

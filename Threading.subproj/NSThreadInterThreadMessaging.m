@@ -141,4 +141,29 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
      [arg addOperation:op];
 }
 
+-(id)compared:other
+{
+    return [self compare:other];
+}
+
+
+
+@end
+
+@implementation NSArray(sorted)
+
+-sorted { return [MPWTrampoline trampolineWithTarget:self selector:@selector(sorted:)]; }
+-(id)sorted:(NSInvocation*)invocation {
+    id sorted= [self sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(id obj1, id obj2) {
+        [invocation setArgument:&obj2 atIndex:2];
+        [invocation invokeWithTarget:obj1];
+        id retval_id=nil;
+        [invocation getReturnValue:&retval_id];
+        NSComparisonResult r = (NSComparisonResult)retval_id;
+        return r;
+    }];
+    [invocation setReturnValue:&sorted];
+    return sorted;
+}
+
 @end

@@ -33,6 +33,11 @@
 			<key>orderHint</key>
 			<integer>39</integer>
 		</dict>
+		<key>MPWFoundation.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>87</integer>
+		</dict>
 		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -78,6 +83,16 @@
 			<true/>
 		</dict>
 		<key>1F4FC66810F7F6AC00376799</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F840DA4193F505700589595</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F840DAE193F505700589595</key>
 		<dict>
 			<key>primary</key>
 			<true/>

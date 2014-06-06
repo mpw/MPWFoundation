@@ -33,10 +33,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSString.h>
 
 @interface NSCaseInsensitiveUniqueString : NSObject
-{
-	const char	*data;
-	int		len;
-}
+
 
 -initWithCString:(const char*)cStr length:(unsigned int)newLen;
 -(unsigned)hash;
