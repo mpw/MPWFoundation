@@ -67,7 +67,7 @@ scalarAccessor( id, key , setKey )
 	[source release];
 	source=aSource;
     if ( [source respondsToSelector:@selector(nextObject)] ) {
-        argumentNextObject[0]=[source methodForSelector:@selector(nextObject)];
+        argumentNextObject[0]=(IMP0)[source methodForSelector:@selector(nextObject)];
         variableArgumentIndex[0]=1;
         variableArgumentSource[0]=source;
         variableArguments=1;
@@ -146,7 +146,7 @@ static id returnNil() {  return nil; }
         //---	to be an enumerator, we really shouldn't execute at all!
 
         if ( variableArguments==0 ) {
-            argumentNextObject[variableArguments]=(IMP)returnNil;
+            argumentNextObject[variableArguments]=(IMP0)returnNil;
             variableArgumentIndex[variableArguments]=0;
             variableArgumentStart=1;
             variableArgumentSource[variableArguments]=nil;
@@ -190,7 +190,7 @@ static id returnNil() {  return nil; }
         int i;
         for (i=variableArgumentStart;i<variableArguments;i++)
         {
-            IMP fn = argumentNextObject[i];
+            IMP0 fn = argumentNextObject[i];
             id target = variableArgumentSource[i];
 
             if (nil== (arguments[variableArgumentIndex[i]] = fn(target,@selector(nextObject))))
@@ -213,7 +213,7 @@ static id returnNil() {  return nil; }
         arguments[0] =((IMP)objc_msg_lookup( tempTarget, targetSelector))( tempTarget ,targetSelector ,arguments[2] ,arguments[3] ,arguments[4], arguments[5]);
 #else
 //#warning slow path!
-        targetFilterImp = [tempTarget methodForSelector:targetSelector];
+        targetFilterImp = (IMP0)[tempTarget methodForSelector:targetSelector];
         arguments[0] = targetFilterImp( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
 #endif
         result = processResult( self, NULL );
@@ -226,7 +226,7 @@ static id returnNil() {  return nil; }
 -runFilter:(NSInvocation*)newInvocation processingSelector:(SEL)processingSelector
 {
     NSMutableArray *result;
-    IMP arrayAddObject,selfNextObject=[self methodForSelector:@selector(nextObject)];
+    IMP0 arrayAddObject,selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
     id next;
 #if VERBOSEDEBUG
     if ( localDebug ) {
@@ -236,9 +236,9 @@ static id returnNil() {  return nil; }
 //	NSLog(@"key: %x",key);
 //	NSLog(@"key: %@",key);
     result=[NSMutableArray array];
-    arrayAddObject=[result methodForSelector:@selector(addObject:)];
+    arrayAddObject=(IMP0)[result methodForSelector:@selector(addObject:)];
     [self setInvocation:newInvocation];
-    processResult = [self methodForSelector:processingSelector];
+    processResult = (IMP0)[self methodForSelector:processingSelector];
 #if VERBOSEDEBUG
     if ( localDebug ) {
         NSLog(@"got process-result %x",processResult);
@@ -267,7 +267,7 @@ static id returnNil() {  return nil; }
 
 -(void)doInvocation:(NSInvocation*)newInvocation
 {
-    IMP selfNextObject=[self methodForSelector:@selector(nextObject)];
+    IMP0 selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
     processResult = [self methodForSelector: @selector(doResult)];
     [self setInvocation:newInvocation];
     while (nil!=selfNextObject(self ,@selector(nextObject))) {
@@ -294,7 +294,7 @@ static id returnNil() {  return nil; }
 {
     id result;
     [self setInvocation:newInvocation];
-    processResult = [self methodForSelector:@selector(selectResult)];
+    processResult =(IMP0) [self methodForSelector:@selector(selectResult)];
     resultSelector=1;
     result = [self nextObject];
     invocation=nil;
@@ -317,9 +317,9 @@ static id returnNil() {  return nil; }
 
 -reduceInvocation:(NSInvocation*)newInvocation
 {
-    IMP selfNextObject=[self methodForSelector:@selector(nextObject)];
+    IMP0 selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
     id nextObject;
-    processResult = [self methodForSelector:@selector(collectResult)];
+    processResult =(IMP0) [self methodForSelector:@selector(collectResult)];
     [self setInvocation:newInvocation];
 
     if ( variableArgumentIndex[0] == 1 ) {
@@ -462,7 +462,7 @@ static id returnNil() {  return nil; }
 {
     return [NSArray arrayWithObjects:
         @"testCollect",@"testCollectALot",@"testEmptyCollect",@"testReverseCollect",
-        @"testReduce",@"testReduce1",@"testReduce2",@"testSourceRetainCount",
+        @"testReduce",@"testReduceWithNilInitial",@"testReverseReduce",@"testSourceRetainCount",
         @"testEmptyArgumentDo",
        @"testSelect",@"testEmptySelect",
 		@"testSelectArg",@"testSelectCollect",
@@ -482,7 +482,8 @@ static id returnNil() {  return nil; }
     id array = [NSArray arrayWithObjects:@"fondationBozo",@"foundation",@"foundationHI",@"foundationHI",@"foundation",nil];
 
     id result =(id)[[array select] __isEqualToString:@"foundationHI"];
-    NSAssert2( [result count] == 2,@"select didn't find the correct number of instances '%@' of '%@'",result,array);
+    INTEXPECT([result count], 2, @"select number of instances found");
+    
 }
 
 +(void)testSelectCollect
@@ -491,7 +492,8 @@ static id returnNil() {  return nil; }
 	id expected = [NSArray arrayWithObjects:@"foundationHIThere",@"foundationHIThere",nil];
 
     id result =(id)[[(id)(NSUInteger)[[array select] __isEqualToString:@"foundationHI"] collect] stringByAppendingString:@"There"];
-    NSAssert2( [result isEqual:expected] ,@"result: %@ didn't match expected: %@",result,expected);
+    
+    IDEXPECT(result, expected, @"select-collect")
 }
 
 +(void)testSelectArg
@@ -499,14 +501,14 @@ static id returnNil() {  return nil; }
     id array = [NSArray arrayWithObjects:@"fondationBozo",@"foundation",@"foundationHI",@"foundationHI",@"foundation",nil];
 
     id result =(id)(NSUInteger)[[@"foundationHI" select:1] __isEqualToString:[array each]];
-    NSAssert2( [result count] == 2,@"select didn't find the correct number of instances '%@' of '%@'",result,array);
+    INTEXPECT([result count], 2, @"select number of instances found");
 }
 
 +(void)testEmptySelect
 {
     id result = (id)[[[NSArray array] select] __isEqual:@"foundationHI"];
-    NSAssert2( [result isKindOfClass:[NSArray class]] ,@"select of empty array is not an array = %@/%@",result,[result class]);
-    NSAssert( [result count] == 0,@"select of empty array is not empty");
+    EXPECTTRUE([result isKindOfClass:[NSArray class]], @"result should be an array");
+    INTEXPECT([result count], 0, @"empty");
 }
 
 #if 0
@@ -516,7 +518,7 @@ static id returnNil() {  return nil; }
     id result;
 
     result=(id)[[array select] exprValWithSelf:[[[[@"" quote] pathExtension] quote] id_isEqual:@"txt"]];
-    NSAssert2( [result count] == 2,@"select didn't find the correct number of instances '%@' of '%@'",result,array);
+    INTEXPECT([result count], 2, @"select number of instances found");
 }
 #endif
 
@@ -525,15 +527,18 @@ static id returnNil() {  return nil; }
     id array = [NSArray arrayWithObjects:@"fondationBozo",@"foundation",@"foundationHI",@"foundationHI",@"foundation",nil];
 
     id result =(id)(NSUInteger)[[array reject] __isEqual:@"foundationHI"];
-    NSAssert2( [result count] == 3,@"reject didn't find the correct number of instances '%@' of '%@'",result,array);
+    INTEXPECT([result count], 3, @"number of reject-results");
 }
+
+
 +(void)testReverseCollect
 {
     id array = [NSArray arrayWithObjects:@"b",@"c",@"d",nil];
     id testresult = [NSArray arrayWithObjects:@"ab",@"ac",@"ad",nil];
 
     id result =[[@"a" collect] stringByAppendingString:(id)[array objectEnumerator]];
-    NSAssert3( [result isEqual:testresult] ,@"reduce result '%@' not correct for reducing %@ with start %@",result,array,@"a");
+    IDEXPECT(result, testresult, @"reverse collect");
+    
 }
 
 +(void)testCollect
@@ -542,7 +547,7 @@ static id returnNil() {  return nil; }
     id testresult = [NSArray arrayWithObjects:@"ba",@"ca",@"da",nil];
 
     id result =[[array collect] stringByAppendingString:@"a"];
-    NSAssert3( [result isEqual:testresult] ,@"collect result '%@' not correct for appending %@ to each of %@",result,@"a",array);
+    IDEXPECT(result, testresult, @" collect");
 }
 
 +(void)testCollectALot
@@ -554,7 +559,7 @@ static id returnNil() {  return nil; }
         id pool=[[NSAutoreleasePool alloc] init];
         id result;
         result =[[array collect] stringByAppendingString:@"a"];
-        NSAssert3( [result isEqual:testresult] ,@"collect result '%@' not correct for appending %@ to each of %@",result,@"a",array);
+        IDEXPECT(result, testresult, @" collect a lot");
         [pool release];
     }
 }
@@ -562,33 +567,33 @@ static id returnNil() {  return nil; }
 +(void)testEmptyCollect
 {
     id result = [[[NSArray array] collect] stringByAppendingString:@"a"];
-    NSAssert2( [result isKindOfClass:[NSArray class]] ,@"collect of empty array is not an array = %@/%@",result,[result class]);
-    NSAssert( [result count] == 0,@"collect of empty array is not empty");
+    EXPECTTRUE([result isKindOfClass:[NSArray class]], @"result should be an array");
+    INTEXPECT([result count], 0, @"empty collect should have no elements");
 }
 
+
++(void)testReverseReduce
+{
+    id array = [NSArray arrayWithObjects:@"b",@"c",@"d",nil];
+
+    id result =[[@"a" reduce] stringByAppendingString:(id)[array each]];
+    IDEXPECT(result, @"abcd", @" reduce ");
+}
 
 +(void)testReduce
 {
     id array = [NSArray arrayWithObjects:@"b",@"c",@"d",nil];
 
-    id result =[[@"a" reduce] stringByAppendingString:(id)[array objectEnumerator]];
-    NSAssert3( [result isEqual:@"abcd"] ,@"reduce result '%@' not correct for reducing %@ with start %@",result,array,@"a");
-}
-
-+(void)testReduce1
-{
-    id array = [NSArray arrayWithObjects:@"b",@"c",@"d",nil];
-
     id result =[[array reduce] stringByAppendingString:@"a"];
-    NSAssert3( [result isEqual:@"abcd"] ,@"reduce result '%@' not correct for reducing %@ with start %@",result,array,@"a");
+    IDEXPECT(result, @"abcd", @" reduce ");
 }
 
-+(void)testReduce2
++(void)testReduceWithNilInitial
 {
     id array = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",nil];
 
     id result =[[array reduce] stringByAppendingString:nil];
-    NSAssert3( [result isEqual:@"abcd"] ,@"reduce result '%@' not correct for reducing %@ with start %@",result,array,@"a");
+    IDEXPECT(result, @"abcd", @" reduce ");
 }
 
 +(void)testSourceRetainCount
@@ -622,7 +627,7 @@ static id returnNil() {  return nil; }
 {
     NSMutableString* target=[NSMutableString stringWithString:@""];
     [[target do] appendString:[[NSArray array] each]];
-    NSAssert1( [target length]==0 ,@"do addObject with empty arg array still added something %@",target);
+    INTEXPECT([target length], 0, @"empty do");
 }
 
 +(void)testWhereValueForKey
@@ -630,7 +635,7 @@ static id returnNil() {  return nil; }
 	id testArray = [NSArray arrayWithObjects:@"hi.txt",@"there.txt",@"not.hi",nil];
 	id goodResult =[NSArray arrayWithObjects:@"hi.txt",@"there.txt",nil];
 	id testResult =(id)(NSUInteger)[[testArray selectWhereValueForKey:@"pathExtension"] __isEqual:@"txt"];
-	NSAssert3( [goodResult isEqual:testResult], @"getting .txt from %@ yielded %@, not the expected %@",testArray,testResult,goodResult);
+    IDEXPECT(goodResult, testResult, @"getting .txt pathExtension");
 }
 
 +(void)testLotsOfValueForKey
@@ -644,7 +649,7 @@ static id returnNil() {  return nil; }
 		[[emptyArray do] stringByAppendingString:nil];
 	}
 	 testResult =(id)(NSUInteger)[[testArray selectWhereValueForKey:@"pathExtension"] __isEqual:@"txt"];
-	NSAssert3( [goodResult isEqual:testResult], @"getting .txt from %@ yielded %@, not the expected %@",testArray,testResult,goodResult);
+    IDEXPECT(goodResult, testResult, @"getting .txt pathExtension");
 }
 
 +(void)testSelectFirst

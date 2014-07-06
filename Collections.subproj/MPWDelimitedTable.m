@@ -39,7 +39,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     if ( fieldDelimiterLength> 10 ) {
         [NSException raise:@"limitcheck" format:@"field delimiter length %ld exceed max 10",newLen];
     }
-    fieldDelimiterLength=newLen;
+    fieldDelimiterLength=(int)newLen;
     [newFieldDelim getBytes:fieldDelimiterBytes maxLength:10 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0,10) remainingRange:NULL];
     fieldDelimiterBytes[fieldDelimiterLength]=0;
 }
@@ -283,10 +283,10 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 -(void)pardo:(void(^)(NSDictionary* theDict, int anIndex))block
 {
     int numParts=4;
-    int partLen=[self count]/numParts + 1;
+    int partLen=(int)[self count]/numParts + 1;
     NSMutableArray *dummyResults=[NSMutableArray array];
     for (int i=0;i<[self count];i+=partLen) {
-        int thisPartLen=MIN( partLen, [self count]-i-1);
+        int thisPartLen=(int)MIN( partLen, [self count]-i-1);
         MPWDelimitedTable *threadClone=[self cloneForThreading];
         
         [dummyResults addObject:[[threadClone future] inRangeWithDummyResult:NSMakeRange(i, thisPartLen) do:[[block copy] autorelease]   ]];

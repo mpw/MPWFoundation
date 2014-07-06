@@ -35,6 +35,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/AccessorMacros.h>
 #import <Foundation/Foundation.h>
 
+typedef id (*IMP0)(id, SEL, ...);
+
 @interface MPWScanner : MPWObject
 {
     NSData *data;
@@ -42,10 +44,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
     const char *start,*end,*pos,*probe;
     NSMutableDictionary		*handlers;
     id defaultHandler;
-    IMP	  charSwitch[260];
+    IMP0	  charSwitch[260];
     id textCache;
-    IMP getObject,initData,makeText;
-    IMP setScanPosition;
+    IMP0 getObject,initData,makeText;
+    IMP0 setScanPosition;
     long	headRoom;
     id bufferCache;
 }

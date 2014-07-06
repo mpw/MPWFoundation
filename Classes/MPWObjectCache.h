@@ -37,23 +37,29 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @class MPWObject;
 
+typedef id (*IMP0)(id, SEL, ...);
+typedef long (*INT_IMP)(id, SEL );
+typedef void (*VOID_IMP)(id, SEL, ...);
+
+
+
 @interface MPWObjectCache : MPWObject  
 {
-    MPWObject **objs;
-    Class	objClass;
-    SEL		allocSel,initSel;
-    IMP		allocImp,initImp;
-    IMP		retainImp,autoreleaseImp,retainCountImp,removeFromCacheImp;
-    int		cacheSize;
-    int		objIndex;
-    void*		cachelock;
-    BOOL	unsafeFastAlloc;
-    @public
-    IMP		getObject;
-    @private
-    IMP		releaseImp;
-    SEL		reInitSelector;
-    IMP		reInitImp;
+    MPWObject   **objs;
+    Class       objClass;
+    SEL         allocSel,initSel;
+    IMP0        allocImp,initImp,retainImp,autoreleaseImp;
+    INT_IMP     retainCountImp;
+    VOID_IMP    removeFromCacheImp;
+    int         cacheSize;
+    int         objIndex;
+    void        *cachelock;
+    BOOL        unsafeFastAlloc;
+    VOID_IMP	releaseImp;
+    SEL         reInitSelector;
+    IMP0		reInitImp;
+@public
+    IMP0		getObject;
 }
 
 +cacheWithCapacity:(int)newCap class:(Class)newClass;

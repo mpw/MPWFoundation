@@ -186,7 +186,7 @@
 		1F78214C12D953EB00E2DB02 /* MPWBlockInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F78214612D953EB00E2DB02 /* MPWBlockInvocation.h */; };
 		1F78214D12D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
 		1F840DAA193F505700589595 /* MPWFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F840DA9193F505700589595 /* MPWFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F840DB0193F505700589595 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
+		1F840DB0193F505700589595 /* MPWFoundationTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundationTouch.framework */; };
 		1F840DB7193F505700589595 /* MPWFoundationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F840DB6193F505700589595 /* MPWFoundationTests.m */; };
 		1F840DC0193F50AC00589595 /* MPWActiveDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64207312CB1A3700240B02 /* MPWActiveDownload.m */; };
 		1F840DC1193F50AC00589595 /* MPWResourceLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64206712CB19E200240B02 /* MPWResourceLoadRequest.m */; };
@@ -562,7 +562,7 @@
 		1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocation.m; sourceTree = "<group>"; };
 		1F82D18C059D880200F38A88 /* MPWIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIntArray.h; sourceTree = "<group>"; };
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
-		1F840DA5193F505700589595 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F840DA5193F505700589595 /* MPWFoundationTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundationTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F840DA8193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F840DA9193F505700589595 /* MPWFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFoundation.h; sourceTree = "<group>"; };
 		1F840DAF193F505700589595 /* MPWFoundationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MPWFoundationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -636,7 +636,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F840DB0193F505700589595 /* MPWFoundation.framework in Frameworks */,
+				1F840DB0193F505700589595 /* MPWFoundationTouch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1038,7 +1038,7 @@
 			children = (
 				1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */,
 				1F4FC66910F7F6AC00376799 /* libMPWFoundationTouch.a */,
-				1F840DA5193F505700589595 /* MPWFoundation.framework */,
+				1F840DA5193F505700589595 /* MPWFoundationTouch.framework */,
 				1F840DAF193F505700589595 /* MPWFoundationTests.xctest */,
 			);
 			name = Products;
@@ -1299,9 +1299,9 @@
 /* End PBXLegacyTarget section */
 
 /* Begin PBXNativeTarget section */
-		1F4FC66810F7F6AC00376799 /* MPWFoundationTouch */ = {
+		1F4FC66810F7F6AC00376799 /* libMPWFoundationTouch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */;
+			buildConfigurationList = 1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "libMPWFoundationTouch" */;
 			buildPhases = (
 				1F4FC66510F7F6AC00376799 /* Headers */,
 				1F4FC66610F7F6AC00376799 /* Sources */,
@@ -1311,14 +1311,14 @@
 			);
 			dependencies = (
 			);
-			name = MPWFoundationTouch;
+			name = libMPWFoundationTouch;
 			productName = MPWFoundationTouch;
 			productReference = 1F4FC66910F7F6AC00376799 /* libMPWFoundationTouch.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		1F840DA4193F505700589595 /* MPWFoundation */ = {
+		1F840DA4193F505700589595 /* MPWFoundationTouch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundation" */;
+			buildConfigurationList = 1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */;
 			buildPhases = (
 				1F840DA0193F505700589595 /* Sources */,
 				1F840DA1193F505700589595 /* Frameworks */,
@@ -1329,9 +1329,9 @@
 			);
 			dependencies = (
 			);
-			name = MPWFoundation;
+			name = MPWFoundationTouch;
 			productName = MPWFoundation;
-			productReference = 1F840DA5193F505700589595 /* MPWFoundation.framework */;
+			productReference = 1F840DA5193F505700589595 /* MPWFoundationTouch.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1F840DAE193F505700589595 /* MPWFoundationTests */ = {
@@ -1406,10 +1406,10 @@
 			projectRoot = "";
 			targets = (
 				1FF8FDB309B49D0100652476 /* MPWFoundationFramework */,
-				1F4FC66810F7F6AC00376799 /* MPWFoundationTouch */,
+				1F4FC66810F7F6AC00376799 /* libMPWFoundationTouch */,
 				1FA5B7D51172CD28001628B6 /* MPWFoundationTouchFat */,
 				1F3AC607143EB3D9009B8504 /* show-build-dir */,
-				1F840DA4193F505700589595 /* MPWFoundation */,
+				1F840DA4193F505700589595 /* MPWFoundationTouch */,
 				1F840DAE193F505700589595 /* MPWFoundationTests */,
 			);
 		};
@@ -1709,7 +1709,7 @@
 /* Begin PBXTargetDependency section */
 		1F840DB2193F505700589595 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1F840DA4193F505700589595 /* MPWFoundation */;
+			target = 1F840DA4193F505700589595 /* MPWFoundationTouch */;
 			targetProxy = 1F840DB1193F505700589595 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1727,6 +1727,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -1947,10 +1948,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1964,7 +1962,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2003,7 +2000,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2043,7 +2039,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_CFLAGS = "-DOBJC_OLD_DISPATCH_PROTOTYPES=1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2203,7 +2198,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = Darwin;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2227,6 +2222,7 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -2334,7 +2330,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;
 		};
-		1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
+		1F4FC66D10F7F6CB00376799 /* Build configuration list for PBXNativeTarget "libMPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F4FC66A10F7F6AD00376799 /* Development */,
@@ -2344,7 +2340,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;
 		};
-		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundation" */ = {
+		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1F840DB8193F505700589595 /* Development */,

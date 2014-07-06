@@ -120,7 +120,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         strRep=NSSelectorFromString(@"quotedStringRepresentation");
     }
     if ( strRep) {
-        id temp=objc_msgSend( anObject, strRep);
+        id temp=((IMP0)objc_msgSend)( anObject, strRep);
         [self outputString:temp];
     }
 }

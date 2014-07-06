@@ -41,7 +41,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 {
 	self = [super init];
     if ( self && !invokeFun) {
-        invokeFun=[self methodForSelector:@selector(resultOfInvoking)];
+        invokeFun=(IMP0)[self methodForSelector:@selector(resultOfInvoking)];
     }
 	return self;
 }
@@ -61,14 +61,14 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	return [self  invocation];
 }
 
-extern id objc_msgSend( id target, SEL selector, ... );
+//extern id objc_msgSend( id target, SEL selector, ... );
 
 -(void)recache
 {
 	cached=NULL;
 	if ( useCaching && target && selector) {
 //		cached=objc_msg_lookup( target, selector );
-		cached=[target methodForSelector:selector];
+		cached=(IMP0)[target methodForSelector:selector];
 	}
 #if !LINUX	
 	if (!cached) {

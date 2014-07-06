@@ -55,7 +55,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 #if !WINDOWS && !LINUX
-extern id objc_msgSend(id, SEL, ...);
+//extern id objc_msgSend(id, SEL, ...);
 
 -(IMP)methodForSelector:(SEL)sel withDefault:(IMP)defaultMethod
 {
@@ -131,7 +131,7 @@ extern id objc_msgSend(id, SEL, ...);
 
 +(void)testBasicCatch
 {
-    id catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
+    MPWMessageCatcher* catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
     INTEXPECT( [catcher xxxMessageCount],0 ,@"before first catch");
     [catcher objectAtIndex:0];
     INTEXPECT( [catcher xxxMessageCount],1,@"after first catch" );
@@ -140,13 +140,13 @@ extern id objc_msgSend(id, SEL, ...);
 
 +(void)testShouldNotRespondToSelectorNotPartOfClass
 {
-    id catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
-	NSAssert( ! [catcher respondsToSelector:@selector(addObject:)], @"shouldn't respond to addObject:");
+    MPWMessageCatcher* catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
+    EXPECTFALSE([catcher respondsToSelector:@selector(addObject:)], @"shouldn't respond to addObject:");
 }
 
 +(void)testMessageArgument
 {
-    id catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
+    MPWMessageCatcher* catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
     [catcher objectAtIndex:32];
     INTEXPECT( (NSUInteger)[catcher xxxMessageArgumentNumber:0 atIndex:0], 32, @"message argument");
 }

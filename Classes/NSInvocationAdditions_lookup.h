@@ -56,7 +56,7 @@ static inline IMP objc_class_msg_lookup( Class aClass, SEL msg )
 }
 
 // #warning define objc_msg_lookup in terms of class_getMethodImplementation
-extern id objc_msgSend( id, SEL, ... );
+//extern id objc_msgSend( id, SEL, ... );
 static inline IMP objc_msg_lookup( id obj, SEL msg )
 {
 //	return objc_msgSend;

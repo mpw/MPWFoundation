@@ -43,7 +43,7 @@
     if ( anIndex < count) {
         obj=objs[anIndex];
         if ( obj == nil)  {
-            obj = [plist objectAtIndex:[offsets integerAtIndex:anIndex]];
+            obj = [plist objectAtIndex:[offsets integerAtIndex:(int)anIndex]];
             objs[anIndex]=[obj retain];
         }
     } else {
@@ -119,7 +119,7 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
 
 -(void)pushCurrentObjectNo
 {
-    [objectNoStack addInteger:currentObjectNo];
+    [objectNoStack addInteger:(int)currentObjectNo];
 }
 
 -(void)popObjectNo

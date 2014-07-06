@@ -331,7 +331,7 @@ idAccessor( dataSource, setDataSource )
 -(unsigned)count
 {
     unsigned count=0;
-    IMP nextObject=[self methodForSelector:@selector(nextObject)];
+    IMP0 nextObject=[self methodForSelector:@selector(nextObject)];
     while (nil!=nextObject( self, @selector(nextObject))) {
         count++;
     }

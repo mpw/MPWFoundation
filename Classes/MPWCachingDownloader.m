@@ -65,7 +65,7 @@ idAccessor( observer, setObserver )
 -(NSData*)loadDataWithWebURL:(NSString*)webURLString
 {
 //	NSLog(@"fetch: %@ -> %@",webURLString,[self pathForWebURL:webURLString]);
-	return [NSData dataWithContentsOfMappedFile:[self pathForWebURL:webURLString]];
+    return [NSData dataWithContentsOfFile:[self pathForWebURL:webURLString] options:NSDataReadingMapped error:nil];
 }
 
 -(BOOL)haveLocalDataForWebURL:(NSString*)webURLString

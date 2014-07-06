@@ -34,28 +34,29 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWObject.h"
 #import <Foundation/Foundation.h>
 
+typedef id (*IMP0)(id, SEL, ...);
+
 
 @interface MPWEnumFilters : MPWObject
 {
-//    Class isa;
-    id	source;
-    NSInvocation *invocation;
-    id	arguments[10];
-    int argumentCount;
-    int	variableArguments;
-    int variableArgumentStart;
-    IMP	argumentNextObject[10];
-    int	variableArgumentIndex[10];
-    id	variableArgumentSource[10];
+    id              source;
+    NSInvocation    *invocation;
+    id              arguments[10];
+    int             argumentCount;
+    int             variableArguments;
+    int             variableArgumentStart;
+    IMP0            argumentNextObject[10];
+    int             variableArgumentIndex[10];
+    id              variableArgumentSource[10];
 
-    Class	targetClass;
-    SEL		targetSelector;
-    IMP		targetFilterImp;
-    IMP		selfDoFilter;
-    int		resultSelector;
-    BOOL	delayedEvaluation;
-    IMP         processResult;
-	id		key;
+    Class           targetClass;
+    SEL             targetSelector;
+    IMP0            targetFilterImp;
+    IMP0            selfDoFilter;
+    int             resultSelector;
+    BOOL            delayedEvaluation;
+    IMP0            processResult;
+	id              key;
 }
 
 +quickFilter;

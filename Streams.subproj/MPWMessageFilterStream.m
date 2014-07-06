@@ -15,7 +15,7 @@ scalarAccessor(SEL, selector, setSelector )
 
 -(void)writeObject:(id)anObject
 {
-    [target writeObject:objc_msgSend( anObject , selector)];
+    [target writeObject:((IMP0)objc_msgSend)( anObject , selector)];
 }
 
 

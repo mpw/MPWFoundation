@@ -35,6 +35,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import "MPWObject.h"
 
+typedef id (*IMP0)(id, SEL, ...);
+
 @protocol Streaming
 
 -(void)writeObject:anObject;
@@ -52,7 +54,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     id	target;
     SEL streamWriterMessage;
-    IMP	targetWriteObject;
+    IMP0	targetWriteObject;
     id	pad[4];
 }
 

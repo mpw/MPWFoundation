@@ -33,6 +33,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWFlattenStream.h"
 
+typedef id (*IMP0)(id, SEL, ...);
+
 @protocol ByteStreaming
 
 
@@ -54,7 +56,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @interface MPWByteStream : MPWFlattenStream<ByteStreaming>
 {
     unsigned int totalBytes;
-    IMP	targetAppend;
+    IMP0	targetAppend;
     int indent;
 	int indentAmount;
 }

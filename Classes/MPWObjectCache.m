@@ -57,7 +57,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
  
 "*/
 
-static int _collecting=NO;
 
 -initWithCapacity:(int)newCap class:(Class)newClass allocSel:(SEL)aSel initSel:(SEL)iSel
 {
@@ -75,12 +74,12 @@ static int _collecting=NO;
     NSAssert( retainImp != NULL , @"retainImp");
     autoreleaseImp = [newClass instanceMethodForSelector:@selector(autorelease)];
     NSAssert( autoreleaseImp != NULL , @"autoreleaseImp");
-    releaseImp = [newClass instanceMethodForSelector:@selector(release)];
+    releaseImp = (VOID_IMP)[newClass instanceMethodForSelector:@selector(release)];
     NSAssert( releaseImp != NULL , @"releaseImp");
-    retainCountImp = [newClass instanceMethodForSelector:@selector(retainCount)];
+    retainCountImp = (INT_IMP)[newClass instanceMethodForSelector:@selector(retainCount)];
     NSAssert( retainCountImp != NULL , @"retainCountImp");
 	if ( [newClass instancesRespondToSelector:@selector(removeFromCache:)] ) {
-		removeFromCacheImp=[newClass instanceMethodForSelector:@selector(removeFromCache:)];
+		removeFromCacheImp=(VOID_IMP)[newClass instanceMethodForSelector:@selector(removeFromCache:)];
 	} else {
 		removeFromCacheImp=NULL;
 	}
@@ -170,9 +169,7 @@ intAccessor( hits, setHits )
     Returns an object as if freshly allocated.
 "*/
 {
-	if (_collecting) {
-		return initImp( allocImp( objClass, allocSel ),initSel);
-	} else {
+    {
 		int i,maxIndex;
 		MPWObject *obj=nil;
 	//	look back just a bit, a lot can be stacking order

@@ -46,38 +46,53 @@ static inline BOOL _idsAreEqual( id a, id b ) {
     return a==b || [a isEqual:b];
 }
 #define ROUNDTOINTFORTEST( aValue )   ((int)round(aValue))
+
+#if !defined(MPWTESTASSERT)
+#define MPWTESTASSERT(condition, desc, ...)	\
+do {				\
+    __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
+    if (!(condition)) {		\
+        [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
+              object:self file:[NSString stringWithUTF8String:__FILE__] \
+          lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+    }				\
+__PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
+} while(0)
+#endif
+
+
 #define EXPECTTRUE( got , msg ) \
-NSAssert1( (got) , ([NSString stringWithFormat:@"%@ was false instead of expected true",msg]),@"");
+MPWTESTASSERT( (got) , ([NSString stringWithFormat:@"%@ was false instead of expected true",msg]),@"");
 #define EXPECTFALSE( got , msg ) \
-NSAssert1( !(got) , ([NSString stringWithFormat:@"%@ was true instead of expected false",msg]),@"");
+MPWTESTASSERT( !(got) , ([NSString stringWithFormat:@"%@ was true instead of expected false",msg]),@"");
 #define EXPECTNOTNIL( got , msg ) \
-NSAssert1( (got)!=NULL, ([NSString stringWithFormat:@"%@ was nil but expected non-nil",msg]),@"");
+MPWTESTASSERT( (got)!=NULL, ([NSString stringWithFormat:@"%@ was nil but expected non-nil",msg]),@"");
 #define EXPECTNIL( got , msg ) \
-NSAssert1( (got) == nil , ([NSString stringWithFormat:@"%@ was %p instead of nil",msg,got]),@"");
+MPWTESTASSERT( (got) == nil , ([NSString stringWithFormat:@"%@ was %p instead of nil",msg,got]),@"");
 #define INTEXPECT( got, expect, msg  ) \
-NSAssert1(((long)expect)==((long)got) , ([NSString stringWithFormat:@"got %ld instead of expected %ld for %@",(long)got,(long)expect,msg]),@"");
+MPWTESTASSERT(((long)expect)==((long)got) , ([NSString stringWithFormat:@"got %ld instead of expected %ld for %@",(long)got,(long)expect,msg]),@"");
 #define RECTEXPECT( rect, ex,ey,ew,eh , msg) \
 { \
 int _ax=ROUNDTOINTFORTEST(rect.origin.x);\
 int _ay=ROUNDTOINTFORTEST(rect.origin.y);\
 int _aw=ROUNDTOINTFORTEST(rect.size.width);\
 int _ah=ROUNDTOINTFORTEST(rect.size.height);\
-NSAssert1( _ax==ex &&  _ay==ey && \
+MPWTESTASSERT( _ax==ex &&  _ay==ey && \
 _aw==ew && _ah==eh , \
 ([NSString stringWithFormat:@"%@ instead of expected %@ for %@", \
 NSStringFromRect(NSMakeRect(_ax, _ay, _aw, _ah)),\
 NSStringFromRect(NSMakeRect(ex, ey, ew, eh)),msg]),@""); \
 }
 #define FLOATEXPECT( got, expect, msg  ) \
-NSAssert1((expect)==(got) , ([NSString stringWithFormat:@"%g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
+MPWTESTASSERT((expect)==(got) , ([NSString stringWithFormat:@"%g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
 
 #define FLOATEXPECTTOLERANCE( got, expect, tol, msg  ) \
-NSAssert1(fabs((expect)-(got)) < (tol) ,  ([NSString stringWithFormat:@"got %g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
+MPWTESTASSERT(fabs((expect)-(got)) < (tol) ,  ([NSString stringWithFormat:@"got %g instead of expected %g for %@",(double)got,(double)expect,msg]),@"");
 
 #define _IDEXPECT(  got,  expected,  msg,  self,  _cmd ) { \
 id _expected=expected;\
 id _got = got; \
-NSAssert1( _idsAreEqual(_expected,_got),  ([NSString stringWithFormat:@"got '%@' instead of expected '%@' for %@",_got,_expected,msg]),@""); \
+MPWTESTASSERT( _idsAreEqual(_expected,_got),  ([NSString stringWithFormat:@"got '%@' instead of expected '%@' for %@",_got,_expected,msg]),@""); \
 } 
 
 #define IDEXPECT( got , expected, msg )  _IDEXPECT( got, expected, msg, self, _cmd )

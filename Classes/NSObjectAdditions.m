@@ -178,12 +178,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(NSString*)ivarNameForVarPointer:(const void*)address orIndex:(int)index ofInstance:(const void*)instaddr
 {
-    return [self ivarNameAtOffset:address-instaddr orIndex:index];
+    return [self ivarNameAtOffset:(int)(address-instaddr) orIndex:index];
 }
 
 -(NSString*)ivarNameForVarPointer:(const void*)address orIndex:(int)index
 {
-    return [object_getClass(self) ivarNameAtOffset:address-(const void*)self orIndex:index];
+    return [object_getClass(self) ivarNameAtOffset:(int)(address-(const void*)self) orIndex:index];
 }
 
 @end

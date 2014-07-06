@@ -118,7 +118,7 @@ idAccessor( target, _setTarget )
 -(void)setTarget:newTarget
 {
     [self _setTarget:newTarget];
-    targetWriteObject = [target methodForSelector:@selector(writeObject:)];
+    targetWriteObject = (IMP0)[target methodForSelector:@selector(writeObject:)];
 #ifdef Darwin
     if ( targetWriteObject == NULL ) {
         targetWriteObject = objc_msgSend;
@@ -230,13 +230,13 @@ SEL visSel;
 -(void)writeEnumerator_fast:(NSEnumerator*)e spacer:spacer
 {
     id nextObject;
-    IMP getNextObject = [e methodForSelector:@selector(nextObject)];
+    IMP0 getNextObject = (IMP0)[e methodForSelector:@selector(nextObject)];
     Class lastClass = nil;
-    IMP writeOnStream = (void*)0;
-    IMP writeSpacer = [spacer methodForSelector:streamWriterMessage];
+    IMP0 writeOnStream = (void*)0;
+    IMP0 writeSpacer = (IMP0)[spacer methodForSelector:streamWriterMessage];
 
     if (nil!=(nextObject=getNextObject( e, @selector(nextObject)))) {
-        writeOnStream =[nextObject methodForSelector: streamWriterMessage];
+        writeOnStream =(IMP0)[nextObject methodForSelector: streamWriterMessage];
         lastClass = *(Class*)nextObject;
         writeOnStream( nextObject, streamWriterMessage, self );
     }
@@ -245,7 +245,7 @@ SEL visSel;
             writeSpacer( spacer, streamWriterMessage, self );
         }
         if ( lastClass != *(Class*)nextObject) {
-            writeOnStream = [nextObject methodForSelector: streamWriterMessage];
+            writeOnStream = (IMP0)[nextObject methodForSelector: streamWriterMessage];
             lastClass = *(Class*)nextObject;
         }
         if (writeOnStream) {

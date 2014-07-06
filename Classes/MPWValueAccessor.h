@@ -8,11 +8,13 @@
 
 #import "MPWObject.h"
 
+typedef id (*IMP0)(id, SEL, ...);
+
 typedef struct {
     Class       targetClass;
     int         targetOffset;
     SEL         getSelector,putSelector;
-    IMP         getIMP,putIMP;
+    IMP0         getIMP,putIMP;
     id          additionalArg;
 } AccessPathComponent;
 

@@ -11,13 +11,14 @@
 #import <Foundation/Foundation.h>
 #import <MPWFoundation/MPWByteStream.h>
 #import <objc/runtime.h>
+#import <objc/message.h>
 
 
 @implementation MPWValueAccessor
 
 idAccessor(target, _setTarget)
 
-extern id objc_msgSend(id, SEL, ...);
+//extern id objc_msgSend(id, SEL, ...);
 
 +valueForName:(NSString*)name
 {
@@ -52,7 +53,7 @@ extern id objc_msgSend(id, SEL, ...);
 
 -(void)setComponentsForPath:(NSArray*)pathComponents
 {
-    int componentCount=[pathComponents count];
+    int componentCount=(int)[pathComponents count];
     NSAssert1(componentCount<6, @"only support up to 6 path components got %d", componentCount);
     count=componentCount;
     for (int i=0;i<count;i++) {

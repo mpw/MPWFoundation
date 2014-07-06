@@ -39,7 +39,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include <dispatch/dispatch.h>
 #endif
 #import "MPWStackSaverInvocation.h"
-
+#import "MPWFastInvocation.h"
 NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyAlreadyActiveException";
 
 
@@ -152,8 +152,8 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
 
 @implementation NSArray(sorted)
 
--sorted { return [MPWTrampoline trampolineWithTarget:self selector:@selector(sorted:)]; }
--(id)sorted:(NSInvocation*)invocation {
+-sortedBy { return [MPWTrampoline trampolineWithTarget:self selector:@selector(sorted:)]; }
+-(id)sortedBy:(NSInvocation*)invocation {
     id sorted= [self sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(id obj1, id obj2) {
         [invocation setArgument:&obj2 atIndex:2];
         [invocation invokeWithTarget:obj1];
@@ -164,6 +164,11 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
     }];
     [invocation setReturnValue:&sorted];
     return sorted;
+}
+
+-sorted
+{
+    return [self sortedArrayUsingSelector:@selector(compare:)];
 }
 
 @end

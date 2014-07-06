@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F4FC66810F7F6AC00376799"
                BuildableName = "libMPWFoundationTouch.a"
-               BlueprintName = "MPWFoundationTouch"
+               BlueprintName = "libMPWFoundationTouch"
                ReferencedContainer = "container:MPWFoundation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

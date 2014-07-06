@@ -43,6 +43,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include <objc/runtime.h>
 #include <objc/message.h>
 
+typedef id (*IMP0)(id, SEL, ...);
+
 @interface MPWTrampoline(isEqual)
 
 -(id)isEqual:otherObject;
@@ -256,7 +258,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 +(IMP)instanceMethodForSelector:(SEL)sel
 {
-    static IMP ims=(IMP)nil;
+    static IMP0 ims=(IMP)nil;
     if (!ims) {
         ims = [NSObject methodForSelector:_cmd];
     }
@@ -265,7 +267,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 +(IMP)methodForSelector:(SEL)sel
 {
-    static IMP mfs=(IMP)nil;
+    static IMP0 mfs=(IMP)nil;
     if (!mfs) {
         mfs = [NSObject methodForSelector:_cmd];
     }
