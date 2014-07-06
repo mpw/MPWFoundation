@@ -107,7 +107,7 @@ HOM_METHOD_DOUBLE( afterDelay )
 HOM_METHOD1( asyncOn , dispatch_queue_t , (id)arg )
     SEL sel = [invocation selector];
     if ( sel && !strchr(sel_getName(sel), ':') ) {
-        dispatch_async((dispatch_queue_t)arg, ^{ objc_msgSend(self,sel); });
+        dispatch_async((dispatch_queue_t)arg, ^{ ((IMP0)objc_msgSend)(self,sel); });
     } else {
         dispatch_async((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
     }
@@ -117,7 +117,7 @@ HOM_METHOD1( asyncOn , dispatch_queue_t , (id)arg )
 HOM_METHOD1( syncOn  , dispatch_queue_t , (id)arg )
     SEL sel = [invocation selector];
     if ( sel && !strchr(sel_getName(sel), ':') ) {
-        dispatch_sync((dispatch_queue_t)arg, ^{ objc_msgSend(self,sel); });
+        dispatch_sync((dispatch_queue_t)arg, ^{ ((IMP0)objc_msgSend)(self,sel); });
     } else {
         dispatch_sync((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
     }
