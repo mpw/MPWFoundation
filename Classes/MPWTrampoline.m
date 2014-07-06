@@ -43,7 +43,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #include <objc/runtime.h>
 #include <objc/message.h>
 
-typedef id (*IMP0)(id, SEL, ...);
 
 @interface MPWTrampoline(isEqual)
 
@@ -133,7 +132,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
     MPWFastInvocation *invocationToForward=[MPWFastInvocation quickInvocation];
     [invocationToForward setSelector:selector];
     [invocationToForward setTarget:target->xxxTarget];
-    objc_msgSend(target->xxxTarget,target->xxxSelector, invocationToForward, target->xxxAdditionalArg);
+    ((IMP0)objc_msgSend)(target->xxxTarget,target->xxxSelector, invocationToForward, target->xxxAdditionalArg);
 //    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:target->xxxAdditionalArg];
 }
 
@@ -227,10 +226,9 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 }
 
 #ifdef Darwin
-extern id _objc_msgForward( id, SEL ,...);
 -_class
 {
-    return (id)_objc_msgForward( self, @selector(class));
+    return (id)((IMP0)_objc_msgForward)( self, @selector(class));
 }
 #endif
 
@@ -258,18 +256,18 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 +(IMP)instanceMethodForSelector:(SEL)sel
 {
-    static IMP0 ims=(IMP)nil;
+    static IMP0 ims=(IMP0)nil;
     if (!ims) {
-        ims = [NSObject methodForSelector:_cmd];
+        ims = (IMP0)[NSObject methodForSelector:_cmd];
     }
     return (IMP)ims( self, _cmd, sel );
 }
 
 +(IMP)methodForSelector:(SEL)sel
 {
-    static IMP0 mfs=(IMP)nil;
+    static IMP0 mfs=(IMP0)nil;
     if (!mfs) {
-        mfs = [NSObject methodForSelector:_cmd];
+        mfs = (IMP0)[NSObject methodForSelector:_cmd];
     }
     return (IMP)mfs( self, _cmd, sel );
 }

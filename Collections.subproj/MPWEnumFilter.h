@@ -34,7 +34,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWObject.h"
 #import <Foundation/Foundation.h>
 
-typedef id (*IMP0)(id, SEL, ...);
 
 
 @interface MPWEnumFilters : MPWObject

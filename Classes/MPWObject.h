@@ -34,6 +34,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSObject.h>
 //#import <glib.h>
 
+typedef id (*IMP0)(id, SEL, ...);
+
 @interface MPWObject : NSObject
 {
     @public

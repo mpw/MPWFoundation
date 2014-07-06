@@ -74,7 +74,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #define	setAccessor( type, var,setVar ) \
 -(void)setVar:(type)newVar { \
-    ASSIGN_ID(var,newVar)\
+    ASSIGN_ID(var,newVar);\
 } \
 
 #define readAccessorName( type, var , name )\

@@ -152,7 +152,7 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
 
 @implementation NSArray(sorted)
 
--sortedBy { return [MPWTrampoline trampolineWithTarget:self selector:@selector(sorted:)]; }
+-sortedBy { return [MPWTrampoline trampolineWithTarget:self selector:@selector(sortedBy:)]; }
 -(id)sortedBy:(NSInvocation*)invocation {
     id sorted= [self sortedArrayWithOptions:0 usingComparator:^NSComparisonResult(id obj1, id obj2) {
         [invocation setArgument:&obj2 atIndex:2];

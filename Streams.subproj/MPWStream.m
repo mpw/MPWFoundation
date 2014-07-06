@@ -121,7 +121,7 @@ idAccessor( target, _setTarget )
     targetWriteObject = (IMP0)[target methodForSelector:@selector(writeObject:)];
 #ifdef Darwin
     if ( targetWriteObject == NULL ) {
-        targetWriteObject = objc_msgSend;
+        targetWriteObject = (IMP0)objc_msgSend;
     }
 #endif
 }

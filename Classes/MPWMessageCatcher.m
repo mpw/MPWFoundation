@@ -131,7 +131,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testBasicCatch
 {
-    MPWMessageCatcher* catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
+    id catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
     INTEXPECT( [catcher xxxMessageCount],0 ,@"before first catch");
     [catcher objectAtIndex:0];
     INTEXPECT( [catcher xxxMessageCount],1,@"after first catch" );
@@ -146,7 +146,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testMessageArgument
 {
-    MPWMessageCatcher* catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
+    id catcher = [[[MPWMessageCatcher alloc] initWithClass:[NSArray class]] autorelease];
     [catcher objectAtIndex:32];
     INTEXPECT( (NSUInteger)[catcher xxxMessageArgumentNumber:0 atIndex:0], 32, @"message argument");
 }

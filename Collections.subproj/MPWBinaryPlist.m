@@ -133,9 +133,9 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
     return readIntegerOfSizeAt(bytes, offset, numBytes);
 }
 
--(void)readNumIntegers:(int)numIntegers atOffset:(long)baseOffset numBytes:(int)numBytes into:(long*)offsetPtrs
+-(void)readNumIntegers:(long)numIntegers atOffset:(long)baseOffset numBytes:(int)numBytes into:(long*)offsetPtrs
 {
-    for (int i=0;i<numObjects;i++) {
+    for (long i=0;i<numObjects;i++) {
         offsetPtrs[i]=readIntegerOfSizeAt(bytes, baseOffset+i*numBytes, numBytes);
     }
 }
@@ -144,7 +144,7 @@ static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset,
 {
     offsets=malloc( numObjects * sizeof *offsets  );
     objects=calloc( numObjects , sizeof *objects  );
-    [self readNumIntegers:numObjects atOffset:offsetTableLocation numBytes:offsetIntegerSizeInBytes into:offsets];
+    [self readNumIntegers:numObjects atOffset:offsetTableLocation numBytes:(int)offsetIntegerSizeInBytes into:offsets];
 }
 
 -(long)offsetOfObjectNo:(long)offsetNo
@@ -197,7 +197,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
         [self pushCurrentObjectNo];
         length = lengthForNibbleAtOffset(  length, bytes,  &offset );
         for (long i=0;i<length;i++) {
-            long nextIndex = [self readIntegerOfSize:offsetReferenceSizeInBytes atOffset:offset];
+            long nextIndex = [self readIntegerOfSize:(int)offsetReferenceSizeInBytes atOffset:offset];
             currentObjectNo=nextIndex;
             block( self, nextIndex, i);
             offset+=offsetReferenceSizeInBytes;
@@ -231,7 +231,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
 {
     MPWIntArray *arrayOffsets=[MPWIntArray array];
     [self parseArrayAtIndex:anIndex usingBlock:^(MPWBinaryPlist *plist, long arrayIndex, long someInex) {
-        [arrayOffsets addInteger:arrayIndex];
+        [arrayOffsets addInteger:(int)arrayIndex];
     }];
     return [[[MPWLazyBListArray alloc] initWithPlist:self offsets:arrayOffsets] autorelease];
 }
@@ -555,8 +555,8 @@ static inline id objectAtIndex( MPWBinaryPlist *self, NSUInteger anIndex )
 -(void)_readTrailer
 {
     long trailerOffset=dataLen-TRAILER_SIZE;
-    offsetIntegerSizeInBytes=[self readIntegerOfSize:1 atOffset:trailerOffset];
-    offsetReferenceSizeInBytes=[self readIntegerOfSize:1 atOffset:trailerOffset+1];
+    offsetIntegerSizeInBytes=(int)[self readIntegerOfSize:1 atOffset:trailerOffset];
+    offsetReferenceSizeInBytes=(int)[self readIntegerOfSize:1 atOffset:trailerOffset+1];
     numObjects=[self readIntegerOfSize:8 atOffset:trailerOffset+2];
     rootIndex=[self readIntegerOfSize:8 atOffset:trailerOffset+10];
     offsetTableLocation=[self readIntegerOfSize:8 atOffset:trailerOffset+18];
@@ -597,14 +597,14 @@ DEALLOC(
 
 +(NSData*)_createBinaryPlist:plistObjects
 {
-    return [NSPropertyListSerialization dataFromPropertyList:plistObjects format:NSPropertyListBinaryFormat_v1_0 errorDescription:nil];
+    return [NSPropertyListSerialization dataWithPropertyList:plistObjects format:NSPropertyListBinaryFormat_v1_0 options:0 error:nil];
 }
 
 +(void)testRecognizesHeader
 {
     EXPECTFALSE([self isValidBPlist:[NSData data]], @"empty plist valid");
     EXPECTTRUE([self isValidBPlist:[self _createBinaryPlist:@"hello world"]], @"string plist");
-    EXPECTFALSE([self isValidBPlist:[NSPropertyListSerialization dataFromPropertyList:@"hello world" format:NSPropertyListXMLFormat_v1_0 errorDescription:nil]], @"XML string plist");
+    EXPECTFALSE([self isValidBPlist:[NSPropertyListSerialization dataWithPropertyList:@"hello world" format:NSPropertyListXMLFormat_v1_0 options:0 error:nil]], @"XML string plist");
 }
 
 +(void)testReadTrailerAndOffsets

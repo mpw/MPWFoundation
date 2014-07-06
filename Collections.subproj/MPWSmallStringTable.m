@@ -189,7 +189,7 @@ IMP __stringTableLookupFun=NULL;
 		}
 #endif
 		if ( !__stringTableLookupFun ) {
-			__stringTableLookupFun=[self methodForSelector:@selector(objectForCString:length:)];
+			__stringTableLookupFun=(IMP2)[self methodForSelector:@selector(objectForCString:length:)];
 		}
 		[self setDefaultValue:nil];
 	}
@@ -381,9 +381,10 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 		return defaultValue;
 	}
 }
+
 -objectForCString:(const char*)cstr
 {
-	return [self objectForCString:cstr length:strlen(cstr)];
+	return [self objectForCString:cstr length:(int)strlen(cstr)];
 }
 
 -description

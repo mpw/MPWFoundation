@@ -36,8 +36,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWNamedData.h>
 #import <objc/runtime.h>
+#import "AccessorMacros.h"
+#import "CodingAdditions.h"
 
 @interface NSCoder(namedDataCoding)
 
@@ -45,6 +47,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -decodeNamedData:(MPWNamedData*)data;
 
 @end
+
+
 
 @implementation MPWNamedData
 

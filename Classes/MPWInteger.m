@@ -26,13 +26,13 @@
 -initWithInteger:(NSInteger)newValue
 {
     self = [super init];
-    intValue=newValue;
+    intValue=(int)newValue;
     return self;
 }
 
 -(int)intValue
 {
-    return intValue;
+    return (int)intValue;
 }
 
 -(float)floatValue
@@ -52,7 +52,7 @@
 
 #define defineArithOp( opName, intOpName, op ) \
 -intOpName:(int)anInt {\
-	return [[self class] integer:anInt op intValue];\
+	return [[self class] integer:(int)(anInt op intValue)];\
 }\
 -opName:other {\
 	return [other intOpName:intValue];\

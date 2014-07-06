@@ -33,7 +33,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWFlattenStream.h"
 
-typedef id (*IMP0)(id, SEL, ...);
+// typedef id (*IMP0)(id, SEL, ...);
 
 @protocol ByteStreaming
 

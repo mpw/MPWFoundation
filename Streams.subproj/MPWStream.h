@@ -35,7 +35,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import "MPWObject.h"
 
-typedef id (*IMP0)(id, SEL, ...);
 
 @protocol Streaming
 

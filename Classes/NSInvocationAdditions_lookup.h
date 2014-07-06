@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <objc/objc-runtime.h>
 #endif
 //#define FAST_MSG_LOOKUPS  1
-
+#import <objc/message.h>
 
 // extern IMP class_lookupMethod( Class aClass , SEL msg );		for 10.4 or earlier
 #if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 ) || TARGET_OS_IPHONE

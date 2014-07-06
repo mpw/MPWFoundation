@@ -46,7 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	NSString *path = [self pathForResource:aName ofType:aType];
 	NSData *data;
-    data =  [NSData dataWithContentsOfMappedFile:path];
+    data =  [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil];
     return data;
 }
 

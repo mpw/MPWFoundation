@@ -72,7 +72,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	}
 #if !LINUX	
 	if (!cached) {
-		cached=objc_msgSend;
+		cached=(IMP0)objc_msgSend;
 	}
 #endif
 }

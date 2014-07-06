@@ -87,7 +87,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     unsigned int i;
     IMP scanText=[self methodForSelector:@selector(scanText)];
     for (i=0;i<256;i++) {
-        charSwitch[i]=scanText;
+        charSwitch[i]=(IMP0)scanText;
     }
 }
 
@@ -168,10 +168,10 @@ idAccessor( dataSource, setDataSource )
 //    [textCache setUnsafeFastAlloc:YES];
     bufferCache= [[MPWObjectCache alloc] initWithCapacity:8 class:[NSMutableData class] ];
     [bufferCache setUnsafeFastAlloc:YES];
-    getObject = [textCache methodForSelector:@selector(getObject)];
-    initData=[[MPWSubData class] instanceMethodForSelector:@selector(reInitWithData:bytes:length:)];
-    makeText=[self methodForSelector:@selector(makeText:)];
-    setScanPosition=[self methodForSelector:@selector(setScanPosition:)];
+    getObject = (IMP0)[textCache methodForSelector:@selector(getObject)];
+    initData=(IMP0)[[MPWSubData class] instanceMethodForSelector:@selector(reInitWithData:bytes:length:)];
+    makeText=(IMP0)[self methodForSelector:@selector(makeText:)];
+    setScanPosition=(IMP0)[self methodForSelector:@selector(setScanPosition:)];
     [self _initCharSwitch];
     [self reInitWithSource:aDataSource];
 
@@ -331,7 +331,7 @@ idAccessor( dataSource, setDataSource )
 -(unsigned)count
 {
     unsigned count=0;
-    IMP0 nextObject=[self methodForSelector:@selector(nextObject)];
+    IMP0 nextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
     while (nil!=nextObject( self, @selector(nextObject))) {
         count++;
     }

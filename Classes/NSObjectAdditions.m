@@ -55,7 +55,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	NSBundle *bundle=[NSBundle bundleForClass:self];
 	id path = [bundle pathForResource:aPath ofType:category];
 	if ( path ) {
-		return [NSData dataWithContentsOfMappedFile:path];
+        return [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil]; 
 	} else {
 		[NSException raise:@"ResourceUnavailable" format:@"Couldn't find resource '%@' of type '%@' (nil path) for bundle '%@' class %@",aPath,category,bundle,self];
 		return nil;

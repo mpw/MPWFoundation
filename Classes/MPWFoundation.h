@@ -45,6 +45,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWNumber.h>
 #import <MPWFoundation/MPWFloat.h>
 
+#import <MPWFoundation/MPWBlockInvocable.h>
+#import <MPWFoundation/NSNil.h>
+
+
 
 #import <MPWFoundation/MPWStream.h>
 #import <MPWFoundation/MPWFlattenStream.h>
@@ -77,7 +81,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWIntArray.h>
 #import <MPWFoundation/NSNumberArithmetic.h>
 
-#import <MPWFoundation/MPWNamedData.h>
 
 
 #ifndef MIN

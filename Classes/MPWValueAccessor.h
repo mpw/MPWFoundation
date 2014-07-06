@@ -8,7 +8,6 @@
 
 #import "MPWObject.h"
 
-typedef id (*IMP0)(id, SEL, ...);
 
 typedef struct {
     Class       targetClass;

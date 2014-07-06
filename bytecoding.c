@@ -174,7 +174,7 @@ static unsigned int output_delta( unsigned int offset, unsigned int length , con
         length-=curLength;
     }
 //	printf("\tencoded to %d bytes\n",out-target);
-    return out - target;
+    return (unsigned int)(out - target);
 }
 #define	EQUAL	0
 #define	DIFF	1
@@ -232,7 +232,7 @@ delta_row_encode(unsigned char *dest, const unsigned char *src, unsigned int cou
         out+=output_delta( i>0 ? state_changes[i] - state_changes[i-1] - lengths[i-1]: state_changes[i] , lengths[i] , src+state_changes[i], out );
     }
 //	return 5000;
-    return out-dest;
+    return (unsigned int)(out-dest);
 }
 
 unsigned nonzero_length( const unsigned char *source, unsigned int len )
@@ -247,7 +247,7 @@ unsigned nonzero_length( const unsigned char *source, unsigned int len )
     while ( cur >= source && *cur==0 ) {
         cur--;
     }
-    return cur-source+1;
+    return (unsigned int)(cur-source+1);
 }
 
 void hexencode( const unsigned char *source, unsigned char *dest, unsigned int sourceLen )
@@ -317,7 +317,7 @@ int hexdecode( const unsigned char *from, const unsigned char *end, unsigned cha
     if ( odd_target ) {
         *odd_target=odd;
     }
-    return cur-from;
+    return (unsigned int)(cur-from);
 }
 
 

@@ -35,6 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "NSEnumeratorFiltering.h"
 #import <MPWFoundation/MPWTrampoline.h>
 #import <MPWFoundation/NSInvocationAdditions_lookup.h>
+#import "MPWObject.h"
 
 @implementation NSEnumerator(Filtering)
 
@@ -44,8 +45,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
     id nextObject;
     IMP invoke = [self methodForSelector: [invocation selector]];
     IMP selfNextObject = [self methodForSelector: @selector(nextObject)];
-    while ( nextObject = selfNextObject(self, @selector(nextObject)) ) {
-        invoke( nextObject, NULL);
+    while ( (nextObject = ((IMP0)selfNextObject)(self, @selector(nextObject))) ) {
+        ((IMP0)invoke)( nextObject, NULL);
     }
 }
 #endif

@@ -29,8 +29,8 @@ idAccessor(target, _setTarget)
 {
     component->getSelector= NSSelectorFromString(newName);
     component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"]);
-    component->getIMP=objc_msgSend;
-    component->putIMP=objc_msgSend;
+    component->getIMP=(IMP0)objc_msgSend;
+    component->putIMP=(IMP0)objc_msgSend;
     component->targetOffset=-1;
     component->additionalArg=[newName retain];
 }
@@ -41,11 +41,11 @@ idAccessor(target, _setTarget)
     if ( ![aTarget respondsToSelector:component->getSelector] ) {
         component->getSelector = @selector(objectForKey:);
     }
-    component->getIMP=[aTarget methodForSelector:component->getSelector];
+    component->getIMP=(IMP0)[aTarget methodForSelector:component->getSelector];
     if ( ![aTarget respondsToSelector:component->putSelector] ) {
         component->putSelector = @selector(setObject:forKey:);
     }
-    component->putIMP=[aTarget methodForSelector:component->putSelector];
+    component->putIMP=(IMP0)[aTarget methodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
     }
@@ -221,15 +221,17 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     MPWRusage* kvcTime=[MPWRusage timeRelativeTo:kvcStart];
     double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
 #define EXPECTEDUNBOUNDRATIO 18
-    NSAssert2( unboundRatio > EXPECTEDUNBOUNDRATIO ,@"ratio of value accessor to kvc path %g < %g",
-              unboundRatio,(double)EXPECTEDUNBOUNDRATIO);
+    
+    EXPECTTRUE(unboundRatio > EXPECTEDUNBOUNDRATIO, ([NSString stringWithFormat:@"ratio of value accessor to kvc path %g < %g",
+                                                      unboundRatio,(double)EXPECTEDUNBOUNDRATIO]));
+
     
 //    NSLog(@"unboundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",unboundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[accessorTime userMicroseconds]);
     double boundRatio = (double)[kvcTime userMicroseconds] / (double)[boundAccessorTime userMicroseconds];
 //    NSLog(@"boundRatio: %g %d iterations raw KVC: %ld raw accessor: %ld",boundRatio,ACCESS_COUNT,[kvcTime userMicroseconds],[boundAccessorTime userMicroseconds]);
 #define EXPECTEDBOUNDRATIO 20
-    NSAssert2( boundRatio > EXPECTEDBOUNDRATIO ,@"ratio of bound value accessor to kvc path %g < %g",
-              boundRatio,(double)EXPECTEDBOUNDRATIO);
+    EXPECTTRUE(unboundRatio > EXPECTEDBOUNDRATIO, ([NSString stringWithFormat:@"ratio of bound value accessor to kvc path %g < %g",
+                                                      boundRatio,(double)EXPECTEDBOUNDRATIO]));
     
 
     

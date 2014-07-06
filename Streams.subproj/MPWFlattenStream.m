@@ -75,6 +75,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 @end
+#import "DebugMacros.h"
 
 @implementation MPWFlattenStream(testing)
 
@@ -84,7 +85,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
     id source = [NSArray arrayWithObjects:[NSArray arrayWithObjects:@"a",@"b",nil]
         ,@"c",@"d",[NSArray arrayWithObjects:@"e",@"f",nil],nil];
     [stream writeObject:source];
-    NSAssert1( [[[stream target] componentsJoinedByString:@""] isEqual:@"abcdef"] , @"result wasn't flattened but is '%@' instead",[stream target]);
+    id result =[[stream target] componentsJoinedByString:@""];
+    IDEXPECT(result, @"abcdef", @"result not flattened");
 }
 
 +(void)testNestedDictFlatteningWithProcess
@@ -93,7 +95,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     NSSet* correctResult=[NSSet setWithObjects:@"a",@"b",@"world",@"bar",nil];
     NSSet* actualResult;
     actualResult=[NSSet setWithArray:[MPWFlattenStream process:source]];
-    NSAssert3( [correctResult isEqual:actualResult] , @"result of dict-flattening %@ was:%@ should have been %@",source,actualResult,correctResult);
+    IDEXPECT(actualResult,correctResult,@"nested dict flattening");
 }
 
 +testSelectors

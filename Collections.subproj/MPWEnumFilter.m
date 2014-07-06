@@ -133,7 +133,7 @@ static id returnNil() {  return nil; }
 			argType = *argTypePtr;
             if ( argType=='@' ) {
                 if( [arguments[i] respondsToSelector:@selector(nextObject)]) {
-                    argumentNextObject[variableArguments]=[arguments[i] methodForSelector:@selector(nextObject)];
+                    argumentNextObject[variableArguments]=(IMP0)[arguments[i] methodForSelector:@selector(nextObject)];
                     variableArgumentIndex[variableArguments]=i;
                     variableArgumentSource[variableArguments]=arguments[i];
                     variableArguments++;
@@ -268,7 +268,7 @@ static id returnNil() {  return nil; }
 -(void)doInvocation:(NSInvocation*)newInvocation
 {
     IMP0 selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
-    processResult = [self methodForSelector: @selector(doResult)];
+    processResult = (IMP0)[self methodForSelector: @selector(doResult)];
     [self setInvocation:newInvocation];
     while (nil!=selfNextObject(self ,@selector(nextObject))) {
     }

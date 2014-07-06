@@ -65,14 +65,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
     initSel=iSel;
     objClass = newClass;
 
-    allocImp = [newClass methodForSelector:allocSel];
+    allocImp = (IMP0)[newClass methodForSelector:allocSel];
     NSAssert( allocImp != NULL , @"allocImp");
-    initImp = [newClass instanceMethodForSelector:initSel];
+    initImp = (IMP0)[newClass instanceMethodForSelector:initSel];
     [self setReInitSelector:initSel];
     NSAssert( initImp != NULL , @"initImp");
-    retainImp = [newClass instanceMethodForSelector:@selector(retain)];
+    retainImp = (IMP0)[newClass instanceMethodForSelector:@selector(retain)];
     NSAssert( retainImp != NULL , @"retainImp");
-    autoreleaseImp = [newClass instanceMethodForSelector:@selector(autorelease)];
+    autoreleaseImp = (IMP0)[newClass instanceMethodForSelector:@selector(autorelease)];
     NSAssert( autoreleaseImp != NULL , @"autoreleaseImp");
     releaseImp = (VOID_IMP)[newClass instanceMethodForSelector:@selector(release)];
     NSAssert( releaseImp != NULL , @"releaseImp");
@@ -85,7 +85,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	}
     objs = calloc( newCap+2, sizeof *objs);
     cacheSize = newCap;
-    getObject = [self getObjectIMP];
+    getObject = (IMP0)[self getObjectIMP];
     return self;
 }
 
@@ -135,7 +135,7 @@ scalarAccessor( SEL, reInitSelector, _setReInitSelector )
 -(void)setReInitSelector:(SEL)newSelector
 {
     [self _setReInitSelector:newSelector];
-    reInitImp = [objClass instanceMethodForSelector:newSelector];
+    reInitImp = (IMP0)[objClass instanceMethodForSelector:newSelector];
     NSAssert( reInitImp != NULL , @"reInitImp");
 }
 

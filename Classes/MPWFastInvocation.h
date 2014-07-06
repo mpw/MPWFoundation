@@ -10,7 +10,6 @@
 #import <Foundation/Foundation.h>
 
 @class MPWBlockInvocable;
-typedef id (*IMP0)(id, SEL, ...);
 
 @interface MPWFastInvocation : MPWObject {
 	SEL selector;

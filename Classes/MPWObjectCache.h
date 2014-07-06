@@ -35,9 +35,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import <pthread.h>
 
-@class MPWObject;
 
-typedef id (*IMP0)(id, SEL, ...);
 typedef long (*INT_IMP)(id, SEL );
 typedef void (*VOID_IMP)(id, SEL, ...);
 
