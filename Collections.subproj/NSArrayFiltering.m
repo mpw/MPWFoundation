@@ -270,3 +270,30 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+
+@implementation NSSet(filtering)
+
+-emptyIgnoreTrampoline
+{
+    NSLog(@"emptyIgnore, will get trampoline");
+    id trampoline = [MPWIgnoreTrampoline trampoline];
+    NSLog(@"got trampoline: %p",trampoline);
+    [trampoline setXxxTarget:[NSArray array]];
+    NSLog(@"after set target, trampoline: %p",trampoline);
+    return trampoline;
+}
+
+
+-collect
+{
+    if ( [self count] > 0 ) {
+        return [super collect];
+    } else {
+        NSLog(@"return emptyIgnoreTrampile");
+        return [self emptyIgnoreTrampoline];
+    }
+}
+
+
+
+@end
