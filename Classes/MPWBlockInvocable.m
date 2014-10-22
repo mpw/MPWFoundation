@@ -8,6 +8,7 @@
 
 #import "MPWBlockInvocable.h"
 #import "NSNil.h"
+#import "MPWRect.h"
 
 enum {
     BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
@@ -112,7 +113,7 @@ static id blockFun( id self, ... ) {
 
 -invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters
 {
-    return nil;
+    return parameters;
 }
 
 
@@ -240,9 +241,41 @@ static id blockFun( id self, ... ) {
 			case 'F':
 				[parameters addObject:[NSNumber numberWithFloat:va_arg( args, double )]];
 				break;
+#if 1
+            case '{':
+            {
+                char *nsrectsig="{CGRect={CGPoint=dd}{CGSize=dd}}";
+                char *nspointsig="{CGPoint=dd}";
+                char *nssizesig="{CGSize=dd}";
+                int nsrectsiglen=strlen(nsrectsig);
+                int nspointsiglen=strlen(nspointsig);
+                int nssizesiglen=strlen(nssizesig);
+                int sigRemainder=signatureLen-signatureIndex;
+                NSLog(@"struct: '%s'",signature+signatureIndex);
+                if ( sigRemainder >= nsrectsiglen &&
+                    !strncmp(nsrectsig, signature+signatureIndex, nsrectsiglen)) {
+                    NSRect rectArg=va_arg(args, NSRect);
+                    [parameters addObject:[MPWRect rectWithNSRect:rectArg]];
+                    signatureIndex+=nsrectsiglen-1;
+                    break;
+                } else if ( sigRemainder >= nspointsiglen &&
+                           !strncmp(nspointsig, signature+signatureIndex, nspointsiglen)) {
+                    NSPoint pointArg=va_arg(args, NSPoint);
+                    [parameters addObject:[MPWPoint pointWithNSPoint:pointArg]];
+                    signatureIndex+=nspointsiglen-1;
+                    break;
+                } else if ( sigRemainder >= nssizesiglen &&
+                           !strncmp(nssizesig, signature+signatureIndex, nssizesiglen)) {
+                    NSSize sizeArg=va_arg(args, NSSize);
+                    [parameters addObject:[MPWPoint pointWithNSSize:sizeArg]];
+                    signatureIndex+=nssizesiglen-1;
+                    break;
+                }
+            }
+#endif
 			default:
                 
-                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%c'",i,signature[i+3]];
+                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%s'",i,signature+signatureIndex];
 				va_arg( args, void* );
 
 		}
@@ -261,6 +294,7 @@ static id blockFun( id self, ... ) {
 }
 
 
+
 @end
 
 #if NS_BLOCKS_AVAILABLE
@@ -270,18 +304,44 @@ static id blockFun( id self, ... ) {
 @interface MPWBlockInvocableTest : MPWBlockInvocable
 {
 }
+
+@property (strong) NSArray *formalParameters;
+
 @end
 
+@interface MPWBlockInvocableTest(nonImplementedSignatures)
+
+-(id)doWithInt:(int)intArg;
+-(id)doWithFloat:(float)floatArg;
+-(id)doWithDouble:(double)doubleArg;
+-(id)doWithRect:(NSRect)r;
+-(id)doWithPoint:(NSPoint)p;
+-(id)doWithSize:(NSSize)p;
+
+
+@end
 
 @implementation MPWBlockInvocableTest
 
 typedef int (^intBlock)(int arg );
+typedef id (^idBlock)(id arg );
 
 
 -(id)invokeWithArgs:(va_list)args
 {
 	return (id)(va_arg( args, long ) * 3);
 }
+
+-invokeWithTarget:target,...
+{
+    va_list ap;
+    va_start(ap,target);
+    id result =[self invokeWithTarget:target args:ap];
+    va_end(ap);
+
+    return result;
+}
+
 
 +(void)testBlockInvoke
 {
@@ -300,11 +360,76 @@ typedef int (^intBlock)(int arg );
 
 +(void)testBlockCopy
 {
-	id blockObj = [[[self alloc] init] autorelease];
+    id blockObj = [[[self alloc] init] autorelease];
     intBlock firstBlock=(intBlock)blockObj;
     intBlock copiedBlock=Block_copy(firstBlock);
-	INTEXPECT( ((intBlock)copiedBlock)( 3 ), 9, @"block(3) ");
+    INTEXPECT( ((intBlock)copiedBlock)( 3 ), 9, @"block(3) ");
     Block_release(copiedBlock);
+}
+
+
++(void)testIntArg
+{
+    MPWBlockInvocableTest *invocable=[[self new] autorelease];
+    
+    [invocable installInClass:self withSignature:"v@:i" selector:@selector(doWithInt:)];
+    [invocable setFormalParameters:@[ @"anInt" ] ];
+    id args=[invocable invokeWithTarget:invocable,42];
+    INTEXPECT([args count], 1, @"number of args");
+    IDEXPECT([args firstObject], @(42), @"integer arg");
+}
+
++(void)testDoubleArg
+{
+    MPWBlockInvocableTest *invocable=[[self new] autorelease];
+    
+    [invocable installInClass:self withSignature:"v@:f" selector:@selector(doWithDouble:)];
+    [invocable setFormalParameters:@[ @"aDouble" ] ];
+    id args=[invocable invokeWithTarget:invocable,42.74];
+    INTEXPECT([args count], 1, @"number of args");
+    
+    INTEXPECT((int)([[args firstObject] doubleValue]* 100.0), 4274, @"double arg");
+}
+
++(void)testRectArg
+{
+    MPWBlockInvocableTest *invocable=[[self new] autorelease];
+    
+    [invocable installInClass:self withSignature:"v@:{CGRect={CGPoint=dd}{CGSize=dd}}" selector:@selector(doWithRect:)];
+    [invocable setFormalParameters:@[ @"aRect" ] ];
+    NSArray* args=[invocable invokeWithTarget:invocable,NSMakeRect(2,12, 42, 52)];
+    INTEXPECT([args count], 1, @"number of args");
+    MPWRect *rectArg=[args firstObject];
+    FLOATEXPECTTOLERANCE([rectArg x], 2, 0.0001, @"x");
+    FLOATEXPECTTOLERANCE([rectArg y], 12, 0.0001, @"y");
+    FLOATEXPECTTOLERANCE([rectArg width], 42, 0.0001, @"width");
+    FLOATEXPECTTOLERANCE([rectArg height], 52, 0.0001, @"height");
+}
+
++(void)testPointArg
+{
+    MPWBlockInvocableTest *invocable=[[self new] autorelease];
+    
+    [invocable installInClass:self withSignature:"v@:{CGPoint=dd}" selector:@selector(doWithPoint:)];
+    [invocable setFormalParameters:@[ @"aPoint" ] ];
+    NSArray* args=[invocable invokeWithTarget:invocable,NSMakePoint(203,120)];
+    INTEXPECT([args count], 1, @"number of args");
+    MPWPoint *pointArg=[args firstObject];
+    FLOATEXPECTTOLERANCE([pointArg x], 203, 0.0001, @"x");
+    FLOATEXPECTTOLERANCE([pointArg y], 120, 0.0001, @"y");
+}
+
++(void)testSizeArg
+{
+    MPWBlockInvocableTest *invocable=[[self new] autorelease];
+    
+    [invocable installInClass:self withSignature:"v@:{CGSize=dd}" selector:@selector(doWithSize:)];
+    [invocable setFormalParameters:@[ @"aPoint" ] ];
+    NSArray* args=[invocable invokeWithTarget:invocable,NSMakeSize(283,9991)];
+    INTEXPECT([args count], 1, @"number of args");
+    MPWPoint *pointArg=[args firstObject];
+    FLOATEXPECTTOLERANCE([pointArg x], 283, 0.0001, @"x");
+    FLOATEXPECTTOLERANCE([pointArg y], 9991, 0.0001, @"y");
 }
 
 +testSelectors
@@ -313,7 +438,11 @@ typedef int (^intBlock)(int arg );
             @"testBlockInvoke",
             @"testNSBlockTypes",
             @"testBlockCopy",
-            @"testBlockCopy",
+            @"testIntArg",
+            @"testDoubleArg",
+            @"testRectArg",
+            @"testPointArg",
+            @"testSizeArg",
 			nil];
 }
 
