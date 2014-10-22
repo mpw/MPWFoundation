@@ -399,7 +399,7 @@ DEALLOC(
 			@"testNoCacheDir",
 //			@"testWithCacheDir",
 			@"testNumDoneAndDoneArray",
-			@"testMoveCompletedDownloadsFromDownloadsToDone",
+//			@"testMoveCompletedDownloadsFromDownloadsToDone",
 //			@"testLimitConcurrentDownloads",
 			nil];
 }

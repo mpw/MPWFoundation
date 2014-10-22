@@ -44,6 +44,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 static pthread_key_t key=0;
 static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
 +quickTrampoline  {
+//    NSLog(@"quickTrampoline");
 	if ( !key ) {
 		pthread_key_create(&key, __objc_cache_destructor);
 	}
@@ -53,6 +54,8 @@ static void __objc_cache_destructor( void *objref )  { [(id)objref release]; }
 		[cache setUnsafeFastAlloc:YES];
 		pthread_setspecific( key, cache );
 	}
+//    NSLog(@"quickTrampoline initialized about to GETOBJECT");
+
 	return GETOBJECT(cache);
 }
 
@@ -64,6 +67,7 @@ static id  __ignore( MPWIgnoreTrampoline* target, SEL selector )
 
 +(BOOL)resolveInstanceMethod:(SEL)selector
 {
+//    NSLog(@"methodSignatureForSelector");
     class_addMethod(self, selector, (IMP)__ignore, "@@:");
     return YES;
 }
@@ -72,6 +76,7 @@ static id  __ignore( MPWIgnoreTrampoline* target, SEL selector )
 
 -methodSignatureForSelector:(SEL)aSelector
 {
+    NSLog(@"methodSignatureForSelector");
     id sig = [NSObject methodSignatureForSelector:@selector(class)];
     return sig;
 }
@@ -93,7 +98,8 @@ static id  __ignore( MPWIgnoreTrampoline* target, SEL selector )
 
 -(void)forwardInvocation:(NSInvocation*)invocationToForward
 {
-    NSLog(@"empty ignore trampoline forwardInvocation: %@",invocationToForward);
+    NSLog(@"empty ignore trampoline forwardInvocation");
+//    NSLog(@"empty ignore trampoline forwardInvocation: %@",invocationToForward);
     [invocationToForward setReturnValue:&xxxTarget];
 }
 

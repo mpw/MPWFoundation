@@ -257,7 +257,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
             @"testNotNilIfNil",@"testNotNilIfNotNil",
             @"testNilEatsMessages",
 #if !TARGET_OS_IPHONE            
-            @"testnilReceiver",
+//            @"testnilReceiver",
 #endif            
             nil
  ];

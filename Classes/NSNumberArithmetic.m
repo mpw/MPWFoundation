@@ -97,7 +97,7 @@ defineArithOp( div, / )
 
 -(double)pow:(double)otherNumber
 {
-return pow( [self doubleValue], otherNumber );
+    return pow( [self doubleValue], otherNumber );
 }
 
 -(double)sqrt

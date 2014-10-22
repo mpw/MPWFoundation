@@ -40,6 +40,15 @@
       debugDocumentVersioning = "YES"
       debugXPCServices = "NO"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1FF8FDB309B49D0100652476"
+            BuildableName = "MPWFoundation.framework"
+            BlueprintName = "MPWFoundationFramework"
+            ReferencedContainer = "container:MPWFoundation.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

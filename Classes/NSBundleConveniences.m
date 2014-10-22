@@ -45,8 +45,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType 
 {
 	NSString *path = [self pathForResource:aName ofType:aType];
-	NSData *data;
-    data =  [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil];
+	NSData *data=nil;
+    if ( path ) {
+        data =  [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil];
+    } else {
+        NSLog(@"couldn't find resource %@.%@",aName,aType);
+    }
     return data;
 }
 

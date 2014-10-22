@@ -188,11 +188,11 @@ static id blockFun( id self, ... ) {
 //    NSLog(@"ivokeWithTarget:args:");
 	id formalParameters = [self formalParameters];
 	id parameters=[NSMutableArray array];
-	int i;
 	const char *sig_in=[self typeSignature];
-    char signature[30];
+    char signature[128];
     const char *source=sig_in;
     char *dest=signature;
+
     while ( *source ) {
         if ( !isdigit(*source)  ) {
             *dest++=*source;
@@ -200,13 +200,13 @@ static id blockFun( id self, ... ) {
         source++;
     }
     *dest++=0;
-    
+    int signatureLen=dest-signature;
 	id returnVal;
 //    NSLog(@"signature: %s",signature);
 //    NSLog(@"%d parameters",(int)[formalParameters count]);
-	for (i=0;i<[formalParameters count];i++ ) {
+	for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex++ ) {
 //        NSLog(@"param[%d]: %c",i,signature[i+3]);
-		switch ( signature[i+3] ) {
+		switch ( signature[signatureIndex] ) {
 				id theArg;
 			case ':':{
                 
@@ -312,6 +312,7 @@ typedef int (^intBlock)(int arg );
 	return [NSArray arrayWithObjects:
             @"testBlockInvoke",
             @"testNSBlockTypes",
+            @"testBlockCopy",
             @"testBlockCopy",
 			nil];
 }
