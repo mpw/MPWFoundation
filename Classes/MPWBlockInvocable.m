@@ -9,6 +9,7 @@
 #import "MPWBlockInvocable.h"
 #import "NSNil.h"
 #import "MPWRect.h"
+#import "MPWBoxerUnboxer.h"
 
 enum {
     BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
@@ -184,6 +185,24 @@ static id blockFun( id self, ... ) {
 #endif
 }
 
+static NSString *extractStructType( char *s )
+{
+    char *start=s;
+    int braceCount=0;
+    do {
+        switch ( *s++ ) {
+            case '{':
+                braceCount++;
+                break;
+            case '}':
+                braceCount--;
+        }
+    } while ( *s && braceCount >0);
+    
+    return [[[NSString alloc] initWithBytes:start length:s-start encoding:NSASCIIStringEncoding] autorelease];
+
+}
+
 -invokeWithTarget:target args:(va_list)args
 {
 //    NSLog(@"ivokeWithTarget:args:");
@@ -244,33 +263,17 @@ static id blockFun( id self, ... ) {
 #if 1
             case '{':
             {
-                char *nsrectsig="{CGRect={CGPoint=dd}{CGSize=dd}}";
-                char *nspointsig="{CGPoint=dd}";
-                char *nssizesig="{CGSize=dd}";
-                int nsrectsiglen=strlen(nsrectsig);
-                int nspointsiglen=strlen(nspointsig);
-                int nssizesiglen=strlen(nssizesig);
-                int sigRemainder=signatureLen-signatureIndex;
-                NSLog(@"struct: '%s'",signature+signatureIndex);
-                if ( sigRemainder >= nsrectsiglen &&
-                    !strncmp(nsrectsig, signature+signatureIndex, nsrectsiglen)) {
-                    NSRect rectArg=va_arg(args, NSRect);
-                    [parameters addObject:[MPWRect rectWithNSRect:rectArg]];
-                    signatureIndex+=nsrectsiglen-1;
-                    break;
-                } else if ( sigRemainder >= nspointsiglen &&
-                           !strncmp(nspointsig, signature+signatureIndex, nspointsiglen)) {
-                    NSPoint pointArg=va_arg(args, NSPoint);
-                    [parameters addObject:[MPWPoint pointWithNSPoint:pointArg]];
-                    signatureIndex+=nspointsiglen-1;
-                    break;
-                } else if ( sigRemainder >= nssizesiglen &&
-                           !strncmp(nssizesig, signature+signatureIndex, nssizesiglen)) {
-                    NSSize sizeArg=va_arg(args, NSSize);
-                    [parameters addObject:[MPWPoint pointWithNSSize:sizeArg]];
-                    signatureIndex+=nssizesiglen-1;
+                NSString *structType=extractStructType( signature+signatureIndex);
+                id result=nil;
+                MPWBoxerUnboxer *boxer = [MPWBoxerUnboxer converterForTypeString:structType];
+                if ( boxer ) {
+                    result=[boxer boxedObjectForVararg:args];
+                }
+                if ( result ) {
+                    [parameters addObject:result];
                     break;
                 }
+
             }
 #endif
 			default:
@@ -405,6 +408,7 @@ typedef id (^idBlock)(id arg );
     FLOATEXPECTTOLERANCE([rectArg width], 42, 0.0001, @"width");
     FLOATEXPECTTOLERANCE([rectArg height], 52, 0.0001, @"height");
 }
+
 
 +(void)testPointArg
 {
