@@ -105,7 +105,7 @@ idAccessor( targetObject, setTargetObject )
 	id ref1,ref2;
 	ref1=[refedObject referenceToSelf];
 	ref2=[refedObject referenceToSelf];
-	IDEXPECT( ref1, ref2 , @"two separate references should be equal ");
+	IDEXPECT( ref1, ref2 , @"two separate references to same object should be equal ");
 }
 
 +testSelectors
