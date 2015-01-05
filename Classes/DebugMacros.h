@@ -1,7 +1,7 @@
 /*
 	DeubgMacros.h 
 
-    Copyright (c) 1997-2012 by Marcel Weiher. All rights reserved.
+    Copyright (c) 1997-2015 by Marcel Weiher. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
@@ -103,49 +103,50 @@ MPWTESTASSERT( _idsAreEqual(_expected,_got),  ([NSString stringWithFormat:@"got 
 #define	D0PRINTF( msg,arg...)	\
 	NSLog( @"%s:%d(%s): %c%s -> "#msg@"\n", \
 			__FILE__,__LINE__, \
-			[[[self class] description] cString], \
+			[[[self class] description] UTF8String], \
 			((id)[self class] == self) ? '+' : '-', \
-			[NSStringFromSelector(_cmd) cString],arg )
+			[NSStringFromSelector(_cmd) UTF8String],arg )
 */
 #endif
 #define D0PRINTF3( msg, arg1, arg2,arg3 ) \
 	NSLog( @"%s:%d(%s): %c%s -> "#msg@"\n", \
 			__FILE__,__LINE__, \
-			[[[self class] description] cString], \
+			[[[self class] description] UTF8String], \
 			((id)[self class] == self) ? '+' : '-', \
-			[NSStringFromSelector(_cmd) cString],arg1,arg2,arg3 )
+			[NSStringFromSelector(_cmd) UTF8String],arg1,arg2,arg3 )
 #define	D0PRINTF2( msg, arg1,arg2 )	\
 	NSLog( @"%s:%d(%s): %c%s -> "#msg@"\n", \
 			__FILE__,__LINE__, \
-			[[[self class] description] cString], \
+			[[[self class] description] UTF8String], \
 			((id)[self class] == self) ? '+' : '-', \
-			[NSStringFromSelector(_cmd) cString],arg1,arg2 )
+			[NSStringFromSelector(_cmd) UTF8String],arg1,arg2 )
 #define D0PRINTF1( msg, arg1 ) \
 	NSLog( @"%s:%d(%s): %c%s -> "#msg@"\n", \
 			__FILE__,__LINE__, \
-			[[[self class] description] cString], \
+			[[[self class] description] UTF8String], \
 			((id)[self class] == self) ? '+' : '-', \
-			[NSStringFromSelector(_cmd) cString],arg1 )
+			[NSStringFromSelector(_cmd) UTF8String],arg1 )
 #define	D0PRINTF0( msg )	\
 	NSLog( @"%s:%d(%s): %c%s -> "#msg@"\n", \
 			__FILE__,__LINE__, \
-			[[[self class] description] cString], \
+			[[[self class] description] UTF8String], \
 			((id)[self class] == self) ? '+' : '-', \
-			[NSStringFromSelector(_cmd) cString],msg )
+			[NSStringFromSelector(_cmd) UTF8String])
 
 
-#define DEBUG1 (NSDebugEnabled)
-#define DEBUG2 (NSDebugEnabled >= 2)
-#define DEBUG3 (NSDebugEnabled >= 3)
-#define DEBUG4 (NSDebugEnabled >= 4)
-#define DEBUG5 (NSDebugEnabled >= 5)
-#define DEBUG6 (NSDebugEnabled >= 6)
-#define DEBUG7 (NSDebugEnabled >= 7)
-#define DEBUG8 (NSDebugEnabled >= 8)
-#define DEBUG9 (NSDebugEnabled >= 9)
-#define DEBUG10 (NSDebugEnabled >= 10)
-#define DEBUG11 (NSDebugEnabled >= 11)
-#define DEBUG12 (NSDebugEnabled >= 12)
+
+#define DEBUG1 ([NSObject debugLevel])
+#define DEBUG2 ([NSObject debugLevel] >= 2)
+#define DEBUG3 ([NSObject debugLevel] >= 3)
+#define DEBUG4 ([NSObject debugLevel] >= 4)
+#define DEBUG5 ([NSObject debugLevel] >= 5)
+#define DEBUG6 ([NSObject debugLevel] >= 6)
+#define DEBUG7 ([NSObject debugLevel] >= 7)
+#define DEBUG8 ([NSObject debugLevel] >= 8)
+#define DEBUG9 ([NSObject debugLevel] >= 9)
+#define DEBUG10 ([NSObject debugLevel] >= 10)
+#define DEBUG11 ([NSObject debugLevel] >= 11)
+#define DEBUG12 ([NSObject debugLevel] >= 12)
 
 #define D1PRINTF0 if (DEBUG1) D0PRINTF0
 #define D1PRINTF1 if (DEBUG1) D0PRINTF1

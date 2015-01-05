@@ -1,4 +1,4 @@
-/* MPWPropertyListStream.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
+/* MPWPropertyListStream.m Copyright (c) 1998-2015 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without

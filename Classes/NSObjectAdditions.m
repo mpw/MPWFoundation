@@ -1,4 +1,4 @@
-/* NSObjectAdditions.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
+/* NSObjectAdditions.m Copyright (c) 1998-2015 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -42,6 +42,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWUniqueString.h>
 #ifdef Darwin
 #endif
+
+#import "AccessorMacros.h"
+
+
+@import Foundation.NSDebug;
+
 
 @implementation NSObject(FramweworkPathAdditions)
 
@@ -236,9 +242,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -addressKey
 {
-	long long address = (long long)(NSUInteger)self;
+    long long address = (long long)(NSUInteger)self;
     return [NSString stringWithFormat:@"%llu",address];
 }
+
+@end
+
+@implementation NSObject(NSDebugEnabled)
+
+static int debugLevel=0;
+
+intAccessor( debugLevel, setDebugLevel )
 
 @end
 
@@ -266,6 +280,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 //	IDEXPECT( [self ivarNameAtOffset:((char*)&b - (char*)self)], @"b" ,@"name of second ivar");
 }
+
+
 
 +testSelectors
 {

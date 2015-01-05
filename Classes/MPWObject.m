@@ -1,4 +1,4 @@
-/* MPWObject.m Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
+/* MPWObject.m Copyright (c) 1998-2015 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -232,7 +232,7 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
 
 -(NSString*)copyrightString
 {
-    return @"Copyright 1998-2012 by Marcel Weiher, All Rights Reserved.";
+    return @"Copyright 1998-2015 by Marcel Weiher, All Rights Reserved.";
 }
 
 @end

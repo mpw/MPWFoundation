@@ -1,4 +1,4 @@
-/* NSObjectAdditions.h Copyright (c) 1998-2012 by Marcel Weiher, All Rights Reserved.
+/* NSObjectAdditions.h Copyright (c) 1998-2015 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -60,5 +60,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(id)memberOfSet:(NSSet*)aSet;
 
-@end 
+@end
+
+@interface NSObject(debugLevel)
+
+-(int)debugLevel;
+-(void)setDebugLevel:(int)newLevel;
+
+@end
+
 
