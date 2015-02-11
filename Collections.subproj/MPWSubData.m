@@ -139,6 +139,10 @@ boolAccessor( mustUnique, setMustUnique )
     return (int)[self longValue];
 }
 
+-(void*)mutableBytes
+{
+    return (void*)[self bytes];
+}
 
 -initWithData:(NSData*)data bytes:(const char*)bytes length:(long)len
 {
