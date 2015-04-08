@@ -46,7 +46,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 
 
-@import Foundation.NSDebug;
+//#import "Foundation/NSDebug.h"
 
 
 @implementation NSObject(FramweworkPathAdditions)

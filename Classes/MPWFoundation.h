@@ -54,6 +54,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWFlattenStream.h>
 #import <MPWFoundation/MPWByteStream.h>
 #import <MPWFoundation/MPWHierarchicalStream.h>
+#import <MPWFoundation/MPWThreadSwitchStream.h>
+#import <MPWFoundation/MPWConvertFromJSONStream.h>
+#import <MPWFoundation/MPWDict2ObjStream.h>
+#import <MPWFoundation/MPWURLFetchStream.h>
+#import <MPWFoundation/MPWASCII85Stream.h>
+#import <MPWFoundation/MPWBlockFilterStream.h>
+#import <MPWFoundation/MPWBlockTargetStream.h>
+
 
 #import <MPWFoundation/MPWTrampoline.h>
 #import <MPWFoundation/MPWIgnoreTrampoline.h>
@@ -63,9 +71,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWRealArray.h>
 #import <MPWFoundation/MPWUniqueString.h>
 #import <MPWFoundation/MPWUShortArray.h>
+
 #if !__has_feature(objc_arc)
 #import <MPWFoundation/MPWObjectCache.h>
 #endif
+
 #import <MPWFoundation/MPWSubData.h>
 #import <MPWFoundation/MPWScanner.h>
 #import <MPWFoundation/MPWPoint.h>

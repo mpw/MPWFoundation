@@ -115,12 +115,17 @@ HOM_METHOD1( asyncOn , dispatch_queue_t , (id)arg )
 
 
 HOM_METHOD1( syncOn  , dispatch_queue_t , (id)arg )
-    SEL sel = [invocation selector];
-    if ( sel && !strchr(sel_getName(sel), ':') ) {
-        dispatch_sync((dispatch_queue_t)arg, ^{ ((IMP0)objc_msgSend)(self,sel); });
-    } else {
-        dispatch_sync((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
-    }
+SEL sel = [invocation selector];
+if ( sel && !strchr(sel_getName(sel), ':') ) {
+    dispatch_sync((dispatch_queue_t)arg, ^{ ((IMP0)objc_msgSend)(self,sel); });
+} else {
+    dispatch_sync((dispatch_queue_t)arg, ^{ [invocation invokeWithTarget:self];});
+}
+}
+
+HOM_METHOD1( onThread  , NSThread* , (id)arg )
+[invocation performSelector:@selector(invokeWithTarget:) onThread:arg withObject:self waitUntilDone:NO];
+
 }
 
 

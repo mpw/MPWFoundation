@@ -34,6 +34,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWStream.h"
 #import "MPWRuntimeAdditions.h"
 #import "NSInvocationAdditions_lookup.h"
+#import "MPWConvertFromJSONStream.h"
+#import "MPWDict2ObjStream.h"
+#import "MPWThreadSwitchStream.h"
+#import "MPWBlockTargetStream.h"
 
 @interface MPWStream(private)
 
@@ -109,6 +113,15 @@ idAccessor( target, _setTarget )
     return [target finalTarget];
 }
 
+-(void)setFinalTarget:newTarget
+{
+    if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
+        [[self target] setFinalTarget:newTarget];
+    } else {
+        [self setTarget:newTarget];
+    }
+}
+
 -result
 {
     return [self finalTarget];
@@ -148,6 +161,8 @@ SEL visSel;
 #else
       [anObject performSelector:streamWriterMessage withObject:self];
 #endif
+    } else {
+        [target writeObject:nil];
     }
 }
 
@@ -196,6 +211,11 @@ SEL visSel;
     if ( n>0 ) {
         [target close:n-1];
     }
+}
+
+-(void)reportError:(NSError*)error
+{
+    NSLog(@"%@ encountered error: %@",self,error);
 }
 
 -(void)close
@@ -262,6 +282,40 @@ SEL visSel;
 -(void)writeEnumerator:e
 {
     [self writeEnumerator:e spacer:[self defaultSpacer]];
+}
+
+#pragma mark convenience
+
+-parseJSONWithKey:(NSString*)key
+{
+    [self setFinalTarget:[MPWConvertFromJSONStream streamWithKey:key target:nil]];
+    return self;
+}
+
+-dict2objWithClass:(Class)targetClass selector:(SEL)creationSelector
+{
+    [self setFinalTarget:[MPWDict2ObjStream streamWithClass:targetClass selector:creationSelector target:nil]];
+    
+    return self;
+}
+
+-dict2objWithClass:(Class)targetClass
+{
+    return [self dict2objWithClass:targetClass selector:NULL];
+}
+
+-onMainThreadStream
+{
+    [self setFinalTarget:[MPWThreadSwitchStream streamWithTarget:nil]];
+    
+    return self;
+}
+
+-onBlock:aBlock
+{
+    [self setFinalTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+    
+    return self;
 }
 
 @end

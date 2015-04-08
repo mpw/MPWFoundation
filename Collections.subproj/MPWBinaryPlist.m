@@ -87,7 +87,7 @@ static const char headerString[]="bplist00";
         !strncmp(bytes, headerString, sizeof headerString-1);
 }
 
--initWithData:(NSData*)newPlistData
+CONVENIENCEANDINIT(bplist, WithData:(NSData*)newPlistData)
 {
     self=[super init];
     if ( [[self class] isValidBPlist:newPlistData]) {
@@ -107,7 +107,6 @@ static const char headerString[]="bplist00";
     }
     return self;
 }
-SHORTCONVENIENCE(bplist, WithData:(NSData*)newPlistData)
 
 static inline long readIntegerOfSizeAt( const unsigned char *bytes, long offset, int numBytes  ) {
     long result=0;

@@ -223,9 +223,11 @@ static NSString *extractStructType( char *s )
     int signatureLen=dest-signature;
 	id returnVal;
 //    NSLog(@"signature: %s",signature);
+    int singleParamSignatureLen=1;
 //    NSLog(@"%d parameters",(int)[formalParameters count]);
-	for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex++ ) {
+	for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex+=singleParamSignatureLen ) {
 //        NSLog(@"param[%d]: %c",i,signature[i+3]);
+         singleParamSignatureLen=1;
 		switch ( signature[signatureIndex] ) {
 				id theArg;
 			case ':':{
@@ -264,6 +266,7 @@ static NSString *extractStructType( char *s )
             case '{':
             {
                 NSString *structType=extractStructType( signature+signatureIndex);
+                singleParamSignatureLen=[structType length];
                 id result=nil;
                 MPWBoxerUnboxer *boxer = [MPWBoxerUnboxer converterForTypeString:structType];
                 if ( boxer ) {
@@ -273,12 +276,12 @@ static NSString *extractStructType( char *s )
                     [parameters addObject:result];
                     break;
                 }
-
+                
             }
 #endif
 			default:
                 
-                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%s'",i,signature+signatureIndex];
+                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%@'",i,extractStructType( signature+signatureIndex)];
 				va_arg( args, void* );
 
 		}

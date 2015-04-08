@@ -17,8 +17,9 @@ idAccessor( block, setBlock )
 -(void)writeObject:(id)anObject
 {
     filterBlock theFilter = (filterBlock)[self block];
-
-    [target writeObject:theFilter(anObject)];
+    if ( theFilter) {
+        [target writeObject:theFilter(anObject)];
+    }
 }
 
 -(void)dealloc

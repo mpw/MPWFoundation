@@ -82,6 +82,15 @@ idAccessor_h( target, setTarget )
 -(void)closeLocal;
 -(void)flushLocal;
 
+-(void)reportError:(NSError*)error;
+
+-parseJSONWithKey:(NSString*)key;
+-dict2objWithClass:(Class)targetClass selector:(SEL)creationSelector;
+-dict2objWithClass:(Class)targetClass; 
+-onMainThreadStream;
+-onBlock:aBlock;
+
+
 @end
 
 @interface NSObject(BaseStreaming)

@@ -44,6 +44,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -asyncOnMainThread;
 -asyncOn:(dispatch_queue_t)queue;
 -asyncOnOperationQueue:(NSOperationQueue*)aQueue;
+-onThread:(NSThread*)targetThread;
 -onMainThread;
 -afterDelay:(NSTimeInterval)delay;
 

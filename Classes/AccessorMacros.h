@@ -169,6 +169,16 @@ return [self _##lvar]; \
 } 
 
 #define SHORTCONVENIENCE( name, initsel )  CONVENIENCE( name##initsel , init##initsel )
+
+//--- Create both the initializer and the convenience factory method in one go
+//---
+
+#define CONVENIENCEANDINIT( name, initsel )  \
+CONVENIENCE( name##initsel , init##initsel ) \
+\
+-(instancetype)init##initsel  \
+\
+
 #endif
 
 
