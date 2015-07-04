@@ -22,6 +22,21 @@
      return [self bitOr:other];
 }
 
+-or:other
+{
+    return [self boolValue] || [other boolValue] ? @true : @false;
+}
+
+-and:other
+{
+    return [self boolValue] && [other boolValue] ? @true : @false;
+}
+
+-xor:other
+{
+    return [self boolValue] ^ [other boolValue] ? @true : @false;
+}
+
 #define defineArithOp( opName, op ) \
 -opName:other {\
 	const char *type1=[self objCType];\
