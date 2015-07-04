@@ -226,8 +226,12 @@ static NSString *extractStructType( char *s )
     int singleParamSignatureLen=1;
 //    NSLog(@"%d parameters",(int)[formalParameters count]);
 	for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex+=singleParamSignatureLen ) {
-//        NSLog(@"param[%d]: %c",i,signature[i+3]);
+//        NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
          singleParamSignatureLen=1;
+        if ( signature[i+3]==0) {
+            NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,[formalParameters count],formalParameters);
+            break;
+        }
 		switch ( signature[signatureIndex] ) {
 				id theArg;
 			case ':':{
