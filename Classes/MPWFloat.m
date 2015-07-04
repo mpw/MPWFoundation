@@ -68,6 +68,10 @@ defineArithOp( sub, subInt, - )
 defineArithOp( div, divInt, / )
 
 
+-(NSUInteger)hash
+{
+    return (NSUInteger)floatValue;
+}
 
 -(int)intValue
 {
