@@ -6,7 +6,6 @@
 //
 //
 
-#import <UIKit/UIKit.h>
 
 //! Project version number for MPWFoundation.
 FOUNDATION_EXPORT double MPWFoundationVersionNumber;
