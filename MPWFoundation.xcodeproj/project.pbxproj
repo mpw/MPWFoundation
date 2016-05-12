@@ -521,7 +521,7 @@
 		1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocation.m; sourceTree = "<group>"; };
 		1F82D18C059D880200F38A88 /* MPWIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIntArray.h; sourceTree = "<group>"; };
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
-		1F840DA5193F505700589595 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F840DA5193F505700589595 /* MPWFoundationTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundationTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F840DA8193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F840DA9193F505700589595 /* MPWFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFoundation.h; sourceTree = "<group>"; };
 		1F840DB5193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -993,7 +993,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */,
-				1F840DA5193F505700589595 /* MPWFoundation.framework */,
+				1F840DA5193F505700589595 /* MPWFoundationTouch.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1267,7 +1267,7 @@
 			);
 			name = MPWFoundationTouch;
 			productName = MPWFoundation;
-			productReference = 1F840DA5193F505700589595 /* MPWFoundation.framework */;
+			productReference = 1F840DA5193F505700589595 /* MPWFoundationTouch.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1FF8FDB309B49D0100652476 /* MPWFoundationFramework */ = {
@@ -1606,7 +1606,6 @@
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MODULEMAP_FILE = module.map;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
@@ -1735,7 +1734,8 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = MPWFoundation;
+				PRODUCT_NAME = MPWFoundationTouch;
+				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1775,7 +1775,8 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = MPWFoundation;
+				PRODUCT_NAME = MPWFoundationTouch;
+				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1816,7 +1817,8 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = MPWFoundation;
+				PRODUCT_NAME = MPWFoundationTouch;
+				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1933,7 +1935,6 @@
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MODULEMAP_FILE = module.map;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
@@ -1974,7 +1975,6 @@
 				INSTALL_PATH = "@rpath/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MODULEMAP_FILE = module.map;
-				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;

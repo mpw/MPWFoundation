@@ -16,7 +16,7 @@ objectAccessor(NSURLSession, downloader, setDownloader)
 CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
     self=[super initWithTarget:aTarget];
-    [self setDownloader:[NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
+    [self setDownloader:[NSURLSession sessionWithConfiguration:[self config]
                                                       delegate:nil
                                                   delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
@@ -26,6 +26,28 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(id)initWithTarget:(id)aTarget
 {
     return [self initWithBaseURL:nil target:target];
+}
+
+
+-(NSURLSessionConfiguration *)config
+{
+    NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    sessionConfiguration.allowsCellularAccess = YES;
+    sessionConfiguration.HTTPShouldUsePipelining = YES;
+    sessionConfiguration.HTTPShouldSetCookies = YES;
+    sessionConfiguration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+    sessionConfiguration.URLCache = nil;
+    return sessionConfiguration;
+}
+
+-(void)setHeaderDict:(NSDictionary *)newHeaderDict
+{
+    NSURLSessionConfiguration *config=[self config];
+    config.HTTPAdditionalHeaders = newHeaderDict;
+    
+    [self setDownloader:[NSURLSession sessionWithConfiguration:config
+                                                      delegate:nil
+                                                 delegateQueue:nil]] ;
 }
 
 -(SEL)streamWriterMessage
@@ -58,16 +80,20 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
-//    NSLog(@"fetch absolute: %@",theURL);
+    NSLog(@"fetch absolute: %@",theURL);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        NSLog(@"got back with result %@ for %@",response,theURL);
+        NSLog(@"got back with result %@ for %@",response,theURL);
 //        NSLog(@"data: %@",[data stringValue]);
-        if (data && !error /* && [response statusCode] < 400 */ ){
+        if ( [response statusCode] >= 400){
+            error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
+                                                                                               @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
+                                                                                               @"content": [data stringValue]}];
+        }
+        if (data && !error   ){
             [target writeObject:data];
-            [target close];
+//            [target close];
         } else {
             [self reportError:error];
-            [target writeObject:nil];
         }
     }];
     [task resume];
@@ -76,8 +102,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeObject:(id)anObject
 {
-    NSLog(@"-[%@ %@ %@]",[self class],NSStringFromSelector(_cmd),anObject);
-    NSLog(@"streamWriterMessage: %@",NSStringFromSelector(streamWriterMessage));
+//    NSLog(@"-[%@ %@ %@]",[self class],NSStringFromSelector(_cmd),anObject);
+//    NSLog(@"streamWriterMessage: %@",NSStringFromSelector(streamWriterMessage));
     [super writeObject:anObject];
 //    [anObject performSelector:[[self class] streamWriterMessage] withObject:self];
 }
@@ -91,7 +117,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-//    NSLog(@"[%@ writeOnURLFetchStream:%@]",self,aStream);
+//    NSLog(@"NSString [%@ writeOnURLFetchStream:%@]",self,aStream);
     [aStream writeString:self];
 }
 
@@ -101,7 +127,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-    NSLog(@"[%@ writeOnURLFetchStream:%@]",self,aStream);
+//    NSLog(@"[NSURL: %@ writeOnURLFetchStream:%@]",self,aStream);
+//    NSLog(@"will fetch");
     [aStream fetch:self];
 }
 
