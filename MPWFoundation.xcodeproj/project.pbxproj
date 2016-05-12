@@ -523,7 +523,6 @@
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
 		1F840DA5193F505700589595 /* MPWFoundationTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundationTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F840DA8193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F840DA9193F505700589595 /* MPWFoundation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFoundation.h; sourceTree = "<group>"; };
 		1F840DB5193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F840DB6193F505700589595 /* MPWFoundationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFoundationTests.m; sourceTree = "<group>"; };
 		1F84750F084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIgnoreUnknownTrampoline.h; sourceTree = "<group>"; };
@@ -1001,7 +1000,6 @@
 		1F840DA6193F505700589595 /* MPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				1F840DA9193F505700589595 /* MPWFoundation.h */,
 				1F840DA7193F505700589595 /* Supporting Files */,
 			);
 			path = MPWFoundation;
