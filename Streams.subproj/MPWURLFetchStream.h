@@ -10,11 +10,11 @@
 
 @interface MPWURLFetchStream : MPWStream
 {
-    NSURL *baseURL;
     NSURLSession *downloader;
 }
 
 @property (nonatomic, strong) NSURL *baseURL;
+@property (nonatomic, strong) id <Streaming> errorTarget;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget;

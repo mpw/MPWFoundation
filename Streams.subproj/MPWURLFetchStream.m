@@ -10,7 +10,6 @@
 
 @implementation MPWURLFetchStream
 
-objectAccessor(NSURL, baseURL, setBaseURL)
 objectAccessor(NSURLSession, downloader, setDownloader)
 
 CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
@@ -20,6 +19,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                                                       delegate:nil
                                                   delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
+    [self setErrorTarget:[MPWByteStream Stderr]];
     return self;
 }
 
@@ -63,9 +63,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(NSURL*)resolve:(NSURL*)theURL
 {
-    if ( baseURL) {
+    if ( self.baseURL) {
         NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
-        theURL=[components URLRelativeToURL:baseURL];
+        theURL=[components URLRelativeToURL:self.baseURL];
     }
     return theURL;
     
@@ -73,16 +73,16 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)reportError:(NSError*)error
 {
-    NSLog(@"error: %@",error);
+    [self.errorTarget writeObject:error];
 }
 
 -(void)fetch:(NSURL*)theURL
 {
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
-    NSLog(@"fetch absolute: %@",theURL);
+//    NSLog(@"fetch absolute: %@",theURL);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"got back with result %@ for %@",response,theURL);
+//        NSLog(@"got back with result %@ for %@",response,theURL);
 //        NSLog(@"data: %@",[data stringValue]);
         if ( [response statusCode] >= 400){
             error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
