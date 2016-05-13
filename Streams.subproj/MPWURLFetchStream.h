@@ -19,5 +19,6 @@
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 
+-(void)setHeaderDict:(NSDictionary *)newHeaders;
 
 @end
