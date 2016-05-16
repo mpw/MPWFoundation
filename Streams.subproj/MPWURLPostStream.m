@@ -25,12 +25,12 @@
 {
     MPWByteStream *s=[MPWByteStream stream];
     BOOL first=YES;
-    NSLog(@"should encode dictionary: %@",aDict);
+//    NSLog(@"should encode dictionary: %@",aDict);
     for ( NSString *key in aDict.allKeys ) {
         [s printFormat:@"%@%@=%@",first?@"":@"&", key,aDict[key]];
         first=NO;
     }
-    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
+//    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
     [self writeObject:[s target]];
 }
 

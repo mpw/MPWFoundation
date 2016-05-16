@@ -66,10 +66,10 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(NSURL*)resolve:(NSURL*)theURL
 {
     if ( self.baseURL) {
-        NSLog(@"base URL: %@ new url: %@",self.baseURL,theURL);
+//        NSLog(@"base URL: %@ new url: %@",self.baseURL,theURL);
         NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
         theURL=[components URLRelativeToURL:self.baseURL];
-        NSLog(@"components: %@ new result url: %@",components,theURL);
+//        NSLog(@"components: %@ new result url: %@",components,theURL);
     }
     return theURL;
     
