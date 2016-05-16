@@ -56,8 +56,8 @@
 		1F2DCFE11ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2DCFCB1ACB50F3004A39FB /* MPWURLFetchStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F2DCFE21ACB50F3004A39FB /* MPWURLFetchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2DCFCC1ACB50F3004A39FB /* MPWURLFetchStream.m */; };
 		1F2DCFE41ACB50F3004A39FB /* MPWURLFetchStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F2DCFCC1ACB50F3004A39FB /* MPWURLFetchStream.m */; };
-		1F313D621CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */; };
-		1F313D631CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */; };
+		1F313D621CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F313D631CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F313D641CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */; };
 		1F313D651CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */; };
 		1F4A36570A87EAB9007150E3 /* MPWWorkQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4A36550A87EAB8007150E3 /* MPWWorkQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };

@@ -25,6 +25,11 @@
     return self;
 }
 
+-(SEL)streamWriterMessage
+{
+    return @selector(writeOnObjectCreationStream:);
+}
+
 
 -(void)writeDictionary:(NSDictionary *)aDictionary
 {

@@ -59,17 +59,14 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeString:(NSString*)aString
 {
-//    NSLog(@"writeString: %@",aString);
     [self writeObject:[NSURL URLWithString:aString]];
 }
 
 -(NSURL*)resolve:(NSURL*)theURL
 {
     if ( self.baseURL) {
-//        NSLog(@"base URL: %@ new url: %@",self.baseURL,theURL);
         NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
         theURL=[components URLRelativeToURL:self.baseURL];
-//        NSLog(@"components: %@ new result url: %@",components,theURL);
     }
     return theURL;
     
@@ -82,7 +79,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)fetch:(NSURL*)theURL
 {
-    NSLog(@"fetch: %@",theURL);
+//    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
 //    NSLog(@"fetch absolute: %@",theURL);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -95,21 +92,12 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
         }
         if (data && !error   ){
             [target writeObject:data];
-//            [target close];
         } else {
             [self reportError:error];
         }
     }];
     [task resume];
 
-}
-
--(void)writeObject:(id)anObject
-{
-//    NSLog(@"-[%@ %@ %@]",[self class],NSStringFromSelector(_cmd),anObject);
-//    NSLog(@"streamWriterMessage: %@",NSStringFromSelector(streamWriterMessage));
-    [super writeObject:anObject];
-//    [anObject performSelector:[[self class] streamWriterMessage] withObject:self];
 }
 
 
