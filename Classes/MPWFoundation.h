@@ -58,6 +58,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWConvertFromJSONStream.h>
 #import <MPWFoundation/MPWDict2ObjStream.h>
 #import <MPWFoundation/MPWURLFetchStream.h>
+#import <MPWFoundation/MPWURLPostStream.h>
 #import <MPWFoundation/MPWASCII85Stream.h>
 #import <MPWFoundation/MPWBlockFilterStream.h>
 #import <MPWFoundation/MPWBlockTargetStream.h>

@@ -1,12 +1,14 @@
 //
 //  MPWURLFetchStream.m
-//  StackOverflow
+//  
 //
 //  Created by Marcel Weiher on 3/31/15.
 //  Copyright (c) 2015 Marcel Weiher. All rights reserved.
 //
 
 #import "MPWURLFetchStream.h"
+#import "MPWByteStream.h"
+
 
 @implementation MPWURLFetchStream
 
@@ -64,8 +66,10 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(NSURL*)resolve:(NSURL*)theURL
 {
     if ( self.baseURL) {
+        NSLog(@"base URL: %@ new url: %@",self.baseURL,theURL);
         NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
         theURL=[components URLRelativeToURL:self.baseURL];
+        NSLog(@"components: %@ new result url: %@",components,theURL);
     }
     return theURL;
     
@@ -78,7 +82,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)fetch:(NSURL*)theURL
 {
-//    NSLog(@"fetch: %@",theURL);
+    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
 //    NSLog(@"fetch absolute: %@",theURL);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -117,7 +121,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-//    NSLog(@"NSString [%@ writeOnURLFetchStream:%@]",self,aStream);
     [aStream writeString:self];
 }
 
@@ -127,8 +130,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-//    NSLog(@"[NSURL: %@ writeOnURLFetchStream:%@]",self,aStream);
-//    NSLog(@"will fetch");
     [aStream fetch:self];
 }
 
