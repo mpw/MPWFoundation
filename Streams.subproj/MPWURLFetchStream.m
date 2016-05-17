@@ -81,7 +81,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
-//    NSLog(@"fetch absolute: %@",theURL);
+    NSLog(@"fetch absolute: %@",[theURL absoluteString]);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 //        NSLog(@"got back with result %@ for %@",response,theURL);
 //        NSLog(@"data: %@",[data stringValue]);
