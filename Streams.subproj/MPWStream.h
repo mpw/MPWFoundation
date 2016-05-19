@@ -99,3 +99,8 @@ idAccessor_h( target, setTarget )
 -(void)writeOnMPWStream:(MPWStream*)aStream;
 @end
 
+
+@interface NSMutableArray(StreamTarget) <Streaming>
+
+@end
+
