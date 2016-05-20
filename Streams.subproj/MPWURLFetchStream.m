@@ -9,6 +9,12 @@
 #import "MPWURLFetchStream.h"
 #import "MPWByteStream.h"
 
+@interface MPWURLFetchStream()
+
+@property (assign )  int inflight;
+
+@end
+
 
 @implementation MPWURLFetchStream
 
@@ -22,6 +28,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                                                   delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
+    self.inflight=0;
     return self;
 }
 
@@ -82,18 +89,21 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
     NSLog(@"fetch absolute: %@",[theURL absoluteString]);
+    self.inflight++;
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//        NSLog(@"got back with result %@ for %@",response,theURL);
-//        NSLog(@"data: %@",[data stringValue]);
-        if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
-            error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
-                                                                                               @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                                                                                               @"content": [data stringValue]}];
-        }
-        if (data && !error   ){
-            [target writeObject:data];
-        } else {
-            [self reportError:error];
+        @try {
+            if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
+                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
+                                                                                                   @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
+                                                                                                   @"content": [data stringValue]}];
+            }
+            if (data && !error   ){
+                [target writeObject:data];
+            } else {
+                [self reportError:error];
+            }
+        } @finally {
+            self.inflight--;
         }
     }];
     [task resume];
