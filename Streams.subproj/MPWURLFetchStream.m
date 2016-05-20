@@ -81,11 +81,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
-//    NSLog(@"fetch absolute: %@",theURL);
+    NSLog(@"fetch absolute: %@",[theURL absoluteString]);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
 //        NSLog(@"got back with result %@ for %@",response,theURL);
 //        NSLog(@"data: %@",[data stringValue]);
-        if ( [response statusCode] >= 400){
+        if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
             error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
                                                                                                @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
                                                                                                @"content": [data stringValue]}];

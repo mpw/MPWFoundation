@@ -72,6 +72,7 @@ idAccessor_h( target, setTarget )
 +stream;
 -initWithTarget:aTarget;
 +defaultTarget;
+-(void)setFinalTarget:newTarget;
 
 -(SEL)streamWriterMessage;
 -(void)close;
@@ -96,5 +97,10 @@ idAccessor_h( target, setTarget )
 @interface NSObject(BaseStreaming)
 
 -(void)writeOnMPWStream:(MPWStream*)aStream;
+@end
+
+
+@interface NSMutableArray(StreamTarget) <Streaming>
+
 @end
 

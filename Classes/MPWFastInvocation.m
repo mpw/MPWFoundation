@@ -324,7 +324,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 {
 	MPWFastInvocation *invocation = [self invocation];
 	
-	int three=3;
+	long three=3;
 	NSInteger charAtThree;
 	[invocation setSelector:@selector(characterAtIndex:)];
 	[invocation setTarget:@"Hello World!"];

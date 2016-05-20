@@ -395,7 +395,7 @@ SEL visSel;
 
 @end
 
-@implementation NSMutableArray(StreamingTarget)
+@implementation NSMutableArray(StreamTarget)
 
 -(void)writeObject:anObject
 {

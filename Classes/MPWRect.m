@@ -167,7 +167,12 @@ scalarAccessor( NSRect, rect, setRect )
 
 -(MPWRect*)inset:(double)xInset :(double)yInset
 {
-    return [[self  class] rectWithRect:NSInsetRect( rect, xInset, yInset )];
+    NSRect r=rect;
+    r.origin.x+=xInset;
+    r.origin.y+=yInset;
+    r.size.width-=xInset*2;
+    r.size.height-=yInset*2;
+    return [[self  class] rectWithRect:r];
 }
 
 -(MPWRect*)inset:anObject
