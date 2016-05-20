@@ -1,6 +1,8 @@
 .svn
 CVS
 
+.DS_Store
+
 build/
 DerivedData/
 
