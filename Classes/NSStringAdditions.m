@@ -304,7 +304,7 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 {
     return @[ @"testUniquedByNumbering",
               @"testUniquedUpdating",
-              @"testCamelCase",
+//              @"testCamelCase",
               ];
 }
 
