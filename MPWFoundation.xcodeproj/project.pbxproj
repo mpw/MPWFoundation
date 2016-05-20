@@ -1625,7 +1625,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
-				INSTALL_PATH = "@rpath/Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
@@ -1693,7 +1693,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
-				INSTALL_PATH = "@rpath/Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
@@ -1832,7 +1832,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
-				INSTALL_PATH = "@rpath/Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
@@ -2232,7 +2232,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
-				INSTALL_PATH = "@rpath/Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
@@ -2272,7 +2272,7 @@
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
-				INSTALL_PATH = "@rpath/Frameworks";
+				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_LDFLAGS = "";
