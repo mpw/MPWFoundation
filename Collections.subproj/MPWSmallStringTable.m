@@ -215,6 +215,11 @@ IMP __stringTableLookupFun=NULL;
 	return [self initWithObjects:valueArray forKeys:keyArray count:[keys count]];
 }
 
+-(instancetype)initWithObjects:(NSArray *)objects forKeys:(NSArray<id<NSCopying>> *)keys
+{
+    return [self initWithKeys:keys values:objects];
+}
+
 -(NSUInteger)count
 {
 	return tableLength;
@@ -568,7 +573,7 @@ int _small_string_table_releaseIndex=0;
     double ratio1 = (double)[slowerTime absoluteMicroseconds] / (double)[fastTime absoluteMicroseconds];
 	NSLog(@"dict with string time:  %d (%g ns/iter) dict with constant string time: %d (%g ns/iter) stringtable time: %d (%g ns/iter)",[slowerTime absoluteMicroseconds],(1000.0*[slowerTime absoluteMicroseconds])/LOOKUP_COUNT,[slowTime absoluteMicroseconds],(1000.0*[slowTime absoluteMicroseconds])/LOOKUP_COUNT,[fastTime absoluteMicroseconds],(1000.0*[fastTime absoluteMicroseconds])/LOOKUP_COUNT);
 	NSLog(@"string table vs dict lookup time ratio: %g  vs. dict with computed key: %g",ratio,ratio1);
-#define CONSTANT_STRING_RATIO 2.2
+#define CONSTANT_STRING_RATIO 1.2
 	NSAssert2( ratio > CONSTANT_STRING_RATIO ,@"ratio of small string table to NSDictionary with constant string  %g < %g",
               ratio, CONSTANT_STRING_RATIO );
 #define COMPUTED_STRING_RATIO 3.8
