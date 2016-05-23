@@ -49,7 +49,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSArray.h>
 #import <Foundation/NSData.h>
 #import <Foundation/NSCoder.h>
+#if !TARGET_OS_WATCH
 #import <Accelerate/Accelerate.h>
+#endif
 
 #import "MPWByteStream.h"
 

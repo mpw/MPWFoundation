@@ -40,8 +40,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWIntArray.h"
 #import <Foundation/Foundation.h>
 #import "DebugMacros.h"
+#if !TARGET_OS_WATCH
 #import <Accelerate/Accelerate.h>
- 
+#endif
+
 @implementation MPWIntArray
 
 +array
