@@ -18,6 +18,17 @@ scalarAccessor(SEL, selector, setSelector )
     [target writeObject:((IMP0)objc_msgSend)( anObject , selector)];
 }
 
++(instancetype)streamWithSelector:(SEL)newSelector
+{
+    return [[[self alloc] initWithSelector:newSelector] autorelease];
+}
+
+-(instancetype)initWithSelector:(SEL)newSelector
+{
+    self=[super init];
+    [self setSelector:newSelector];
+    return self;
+}
 
 @end
 
@@ -26,8 +37,7 @@ scalarAccessor(SEL, selector, setSelector )
 
 +(void)testUppercase
 {
-    id stream=[self stream];
-    [stream setSelector:@selector(uppercaseString)];
+    id stream=[self streamWithSelector:@selector(uppercaseString)];
     [stream writeObject:@"lower"];
     IDEXPECT([[stream target] lastObject],@"LOWER",@"uppercase of lower");
 }

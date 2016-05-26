@@ -38,7 +38,7 @@
 		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>

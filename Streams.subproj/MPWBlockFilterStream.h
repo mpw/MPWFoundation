@@ -16,4 +16,6 @@
 
 idAccessor_h( block, setBlock )
 
++(instancetype)streamWithBlock:aBlock;
+
 @end

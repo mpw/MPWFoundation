@@ -14,6 +14,13 @@ typedef id (^filterBlock)(id );
 
 idAccessor( block, setBlock )
 
++(instancetype)streamWithBlock:aBlock
+{
+    MPWBlockFilterStream *s=[self stream];
+    [s setBlock:aBlock];
+    return s;
+}
+
 -(void)writeObject:(id)anObject
 {
     filterBlock theFilter = (filterBlock)[self block];
@@ -36,8 +43,7 @@ idAccessor( block, setBlock )
 
 +(void)testUppercase
 {
-    id stream=[self stream];
-    [stream setBlock:^(id input){ return [input uppercaseString];}];
+    id stream=[self streamWithBlock:^(id input){ return [input uppercaseString];}];
     [stream writeObject:@"lower"];
     IDEXPECT([[stream target] lastObject], @"LOWER", @"lower as uppercase after filtering");
 }

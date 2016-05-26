@@ -14,5 +14,6 @@
 }
 
 scalarAccessor_h(SEL, selector, setSelector )
++(instancetype)streamWithSelector:(SEL)newSelector;
 
 @end
