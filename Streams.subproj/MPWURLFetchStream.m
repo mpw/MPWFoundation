@@ -72,8 +72,12 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(NSURL*)resolve:(NSURL*)theURL
 {
     if ( self.baseURL) {
-        NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
-        theURL=[components URLRelativeToURL:self.baseURL];
+        if ( theURL) {
+            NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
+            theURL=[components URLRelativeToURL:self.baseURL];
+        } else {
+            theURL=self.baseURL;
+        }
     }
     return theURL;
     
@@ -84,20 +88,16 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     [self.errorTarget writeObject:error];
 }
 
--(void)fetch:(NSURL*)theURL
-{
-//    NSLog(@"fetch: %@",theURL);
-    theURL=[self resolve:theURL];
-    NSLog(@"fetch absolute: %@",[theURL absoluteString]);
 
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
-    request.HTTPMethod = @"GET";
+-(void)executeRequest:(NSURLRequest*)request
+{
+    //    NSLog(@"fetch: %@",theURL);
 
     self.inflight++;
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
-                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
+                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": request.URL,
                                                                                                    @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
                                                                                                    @"content": [data stringValue]}];
             }
@@ -111,7 +111,33 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
         }
     }];
     [task resume];
+    
+}
 
+-(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
+{
+    theURL=[self resolve:theURL];
+    NSLog(@"absolute: %@",[theURL absoluteString]);
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
+    request.HTTPMethod = method;
+    request.HTTPBody = body;
+    [self executeRequest:request];
+}
+
+
+-(void)get:(NSURL*)theURL
+{
+    [self executeRequestWithURL:theURL method:@"GET" body:nil];
+}
+
+-(void)post:(NSData*)theData toURL:(NSURL *)theURL
+{
+    [self executeRequestWithURL:theURL method:@"POST" body:theData];
+}
+
+-(void)patch:(NSData*)theData toURL:(NSURL *)theURL
+{
+    [self executeRequestWithURL:theURL method:@"PATCH" body:theData];
 }
 
 
@@ -132,7 +158,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-    [aStream fetch:self];
+    [aStream get:self];
 }
 
 @end

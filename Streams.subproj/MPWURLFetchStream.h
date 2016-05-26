@@ -22,4 +22,12 @@
 
 -(void)setHeaderDict:(NSDictionary *)newHeaders;
 
+-(void)executeRequest:(NSURLRequest*)request;
+-(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
+
+-(void)get:(NSURL*)theURL;
+-(void)post:(NSData*)theData toURL:(NSURL *)theURL;
+-(void)patch:(NSData*)theData toURL:(NSURL *)theURL;
+
+
 @end

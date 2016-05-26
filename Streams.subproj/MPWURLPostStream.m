@@ -35,37 +35,11 @@
 }
 
 
--(void)post:(NSData*)theData
-{
-    //    NSLog(@"fetch: %@",theURL);
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:[self baseURL]];
-    request.HTTPBody = theData;
-    request.HTTPMethod = @"POST";
-    
-    //    NSLog(@"fetch absolute: %@",theURL);
-    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request completionHandler:^(NSData *responseData, NSURLResponse *response, NSError *error) {
-        //        NSLog(@"got back with result %@ for %@",response,theURL);
-        //        NSLog(@"data: %@",[data stringValue]);
-        if ( [response statusCode] >= 400){
-            error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": [self baseURL],
-                                                                                               @"postData": [theData stringValue],
-                                                                                               @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                                                                                               @"content": [responseData stringValue]}];
-        }
-        if (responseData && !error   ){
-            [target writeObject:responseData];
-            //            [target close];
-        } else {
-            [self reportError:error];
-        }
-    }];
-    [task resume];
-    
-}
+
 
 -(void)writeData:(NSData *)d
 {
-    [self post:d];
+    [self post:d toURL:nil];
 }
 
 
