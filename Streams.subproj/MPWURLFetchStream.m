@@ -114,6 +114,20 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     
 }
 
+#define CHECKS_PER_SECOND 100
+
+-(void)awaitResultForSeconds:(int)numSeconds
+{
+    for (int i = 0 ; i<numSeconds * CHECKS_PER_SECOND; i++) {
+        if ( [self inflight] == 0){
+            break;
+        }
+        [NSThread sleepForTimeInterval:1.0 / CHECKS_PER_SECOND];
+    }
+}
+
+
+
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
     theURL=[self resolve:theURL];

@@ -44,6 +44,13 @@
     [self.filters.firstObject writeObject:anObject];
 }
 
+-(void)setErrorTarget:newErrorTarget
+{
+    for ( id s in self.filters) {
+        [[s ifResponds] setErrorTarget:newErrorTarget];
+    }
+}
+
 @end
 
 
