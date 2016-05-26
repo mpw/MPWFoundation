@@ -89,8 +89,12 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 //    NSLog(@"fetch: %@",theURL);
     theURL=[self resolve:theURL];
     NSLog(@"fetch absolute: %@",[theURL absoluteString]);
+
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
+    request.HTTPMethod = @"GET";
+
     self.inflight++;
-    NSURLSessionDataTask *task = [[self downloader] dataTaskWithURL:theURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
                 error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": theURL,
