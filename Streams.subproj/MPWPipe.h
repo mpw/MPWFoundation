@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) NSArray *filters;
 
+-(instancetype)initWithFilters:(NSArray *)filters;
 -(void)setErrorTarget:newErrorTarget;
+-(void)addFilter:(id <Streaming>)newFilter;
 
 @end

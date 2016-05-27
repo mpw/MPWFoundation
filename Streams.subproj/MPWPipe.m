@@ -15,11 +15,9 @@
 
 -(instancetype)initWithFilters:(NSArray *)filters
 {
-    NSLog(@"initWithFilters");
     self=[super initWithTarget:[NSMutableArray array]];
     self.filters=filters;
     [self connect];
-    NSLog(@"return from initWithFilters");
     return self;
 }
 
@@ -47,8 +45,16 @@
 -(void)setErrorTarget:newErrorTarget
 {
     for ( id s in self.filters) {
-        [[s ifResponds] setErrorTarget:newErrorTarget];
+        if ( [s respondsToSelector:@selector(setErrorTarget:)]) {
+            [s setErrorTarget:newErrorTarget];
+        }
     }
+}
+
+-(void)addFilter:(id <Streaming>)newFilter
+{
+    self.filters = [self.filters arrayByAddingObject:newFilter];
+    [self connect];
 }
 
 @end
