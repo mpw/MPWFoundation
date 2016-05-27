@@ -17,6 +17,12 @@
 
 @implementation MPWObjectCreatorStream
 
+
++streamWithClass:(Class)newTargetClass
+{
+    return [[[self alloc] initWithClass:newTargetClass target:nil] autorelease];
+}
+
 -initWithClass:(Class)newTargetClass target:newTarget
 {
     self=[super initWithTarget:newTarget];
