@@ -131,7 +131,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
     theURL=[self resolve:theURL];
-    NSLog(@"absolute: %@",[theURL absoluteString]);
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
     request.HTTPMethod = method;
     request.HTTPBody = body;

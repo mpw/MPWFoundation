@@ -10,7 +10,7 @@
 
 @interface MPWPipe : MPWStream
 
-@property (nonatomic, strong) NSArray *filters;
+@property (nonatomic, strong, readonly) NSArray *filters;
 
 -(instancetype)initWithFilters:(NSArray *)filters;
 -(void)setErrorTarget:newErrorTarget;

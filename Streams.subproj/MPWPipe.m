@@ -10,8 +10,17 @@
 #import "MPWMessageFilterStream.h"
 #import "MPWBlockFilterStream.h"
 
+@interface MPWPipe()
+
+@property (nonatomic, strong) NSArray *filters;
+
+
+@end
+
 
 @implementation MPWPipe
+
+
 
 -(instancetype)initWithFilters:(NSArray *)filters
 {
@@ -21,8 +30,26 @@
     return self;
 }
 
+-(NSArray *)normalizedFilters
+{
+    NSMutableArray *normalized=[NSMutableArray array];
+    for (int i=0;i<self.filters.count;i++) {
+        MPWStream *s=self.filters[i];
+        if ( [s target]==self.target || ((i<self.filters.count-1) && [s target]==self.filters[i+1])) {
+            [s setTarget:nil];
+        }
+        while (s && [s respondsToSelector:@selector(target)]) {
+            [normalized addObject:s];
+            s=[s target];
+        }
+    }
+    return normalized;
+}
+
+
 -(void)connect
 {
+    self.filters=[self normalizedFilters];
     if ( self.filters.count > 1) {
         for (int i=0; i<self.filters.count-1;i++) {
             [self.filters[i] setTarget:self.filters[i+1]];
@@ -74,10 +101,27 @@
     IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
 }
 
++(void)testMulteElementStreamCanBeAddedToPipe
+{
+    MPWStream *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
+    MPWStream *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
+    MPWStream *third=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
+    [first setTarget:second];
+    
+        NSArray *filters =
+    @[
+        first,third
+      ];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@"Hello"];
+    IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
+}
+
 +(NSArray *)testSelectors
 {
     return @[
              @"testBasicPipe",
+             @"testMulteElementStreamCanBeAddedToPipe",
              ];
 }
 

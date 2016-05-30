@@ -53,6 +53,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWStream.h>
 #import <MPWFoundation/MPWFlattenStream.h>
 #import <MPWFoundation/MPWByteStream.h>
+#import <MPWFoundation/MPWPipe.h>
 #import <MPWFoundation/MPWHierarchicalStream.h>
 #import <MPWFoundation/MPWThreadSwitchStream.h>
 #import <MPWFoundation/MPWConvertFromJSONStream.h>
