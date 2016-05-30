@@ -51,6 +51,18 @@
     }
 }
 
+-(int)inflight
+{
+    int inflight=0;
+    for ( id s in self.filters) {
+        if ( [s respondsToSelector:@selector(inflight)]) {
+            inflight+=[s inflight];
+        }
+    }
+    return inflight;
+}
+
+
 -(void)addFilter:(id <Streaming>)newFilter
 {
     self.filters = [self.filters arrayByAddingObject:newFilter];
