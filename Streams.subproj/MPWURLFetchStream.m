@@ -118,12 +118,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)awaitResultForSeconds:(int)numSeconds
 {
-    for (int i = 0 ; i<numSeconds * CHECKS_PER_SECOND; i++) {
-        if ( [self inflight] == 0){
-            break;
-        }
-        [NSThread sleepForTimeInterval:1.0 / CHECKS_PER_SECOND];
-    }
+    [NSThread sleepForTimeInterval:numSeconds orUntilConditionIsMet:^{
+        [self inflight] == 0;
+    }];
 }
 
 

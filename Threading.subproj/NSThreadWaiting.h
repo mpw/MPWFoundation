@@ -10,7 +10,7 @@
 
 @interface NSThread(Waiting)
 
-+ (BOOL)sleepForTimeInterval:(NSTimeInterval)ti orUnitlConditionIsMet:(NSNumber* (^)(void))conditionBlock;
++ (BOOL)sleepForTimeInterval:(NSTimeInterval)ti orUntilConditionIsMet:(NSNumber* (^)(void))conditionBlock;
 
 
 @end

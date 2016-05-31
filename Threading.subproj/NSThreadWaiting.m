@@ -13,7 +13,7 @@
 
 #define CHECKS_PER_SECOND 100
 
-+ (BOOL)sleepForTimeInterval:(NSTimeInterval)timeToWait orUnitlConditionIsMet:(NSNumber* (^)(void))conditionBlock
++ (BOOL)sleepForTimeInterval:(NSTimeInterval)timeToWait orUntilConditionIsMet:(NSNumber* (^)(void))conditionBlock
 {
     NSTimeInterval end=[NSDate timeIntervalSinceReferenceDate] + timeToWait;
     do {
@@ -34,7 +34,7 @@
 +(void)testTrueIsDoneImmediately
 {
     NSTimeInterval start=[NSDate timeIntervalSinceReferenceDate];
-    [self sleepForTimeInterval:0.2 orUnitlConditionIsMet:^{ return @YES; }];
+    [self sleepForTimeInterval:0.2 orUntilConditionIsMet:^{ return @YES; }];
     NSTimeInterval end=[NSDate timeIntervalSinceReferenceDate];
     EXPECTTRUE(end-start < 0.03 , @"wait time significantly less than timeout");
 }
@@ -42,7 +42,7 @@
 +(void)testFalseWaitsFullTime
 {
     NSTimeInterval start=[NSDate timeIntervalSinceReferenceDate];
-    [self sleepForTimeInterval:0.2 orUnitlConditionIsMet:^{ return @NO; }];
+    [self sleepForTimeInterval:0.2 orUntilConditionIsMet:^{ return @NO; }];
     NSTimeInterval end=[NSDate timeIntervalSinceReferenceDate];
     EXPECTTRUE(end-start >= 0.2 , @"wait time greater than or equal timeout");
 }
