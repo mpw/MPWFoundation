@@ -91,8 +91,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)executeRequest:(NSURLRequest*)request
 {
-    //    NSLog(@"fetch: %@",theURL);
-
     self.inflight++;
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
@@ -110,6 +108,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
             self.inflight--;
         }
     }];
+    if (!task) {
+        [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.URL}]];
+    }
     [task resume];
     
 }
