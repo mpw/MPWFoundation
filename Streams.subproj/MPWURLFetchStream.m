@@ -128,6 +128,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
     theURL=[self resolve:theURL];
+    NSLog(@"final URL: %@",[theURL absoluteString]);
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
     request.HTTPMethod = method;
     request.HTTPBody = body;
@@ -148,6 +149,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL
 {
     [self executeRequestWithURL:theURL method:@"PATCH" body:theData];
+}
+
+-(void)delete:(NSURL*)theURL
+{
+    [self executeRequestWithURL:theURL method:@"DELETE" body:nil];
 }
 
 
