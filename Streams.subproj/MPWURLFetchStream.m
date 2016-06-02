@@ -8,6 +8,7 @@
 
 #import "MPWURLFetchStream.h"
 #import "MPWByteStream.h"
+#import "MPWURLRequest.h"
 
 @interface MPWURLFetchStream()
 
@@ -28,6 +29,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                                                   delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
+    [self setDefaultMethod:@"GET"];
     self.inflight=0;
     return self;
 }
@@ -69,8 +71,49 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     [self writeObject:[NSURL URLWithString:aString]];
 }
 
+
+
+-(NSData *)formEncodeDictionary:(NSDictionary*)aDict
+{
+    MPWByteStream *s=[MPWByteStream stream];
+    BOOL first=YES;
+    //    NSLog(@"should encode dictionary: %@",aDict);
+    for ( NSString *key in aDict.allKeys ) {
+        [s printFormat:@"%@%@=%@",first?@"":@"&", key,aDict[key]];
+        first=NO;
+    }
+    //    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
+    return [s target];
+}
+
+
+
+
+-(NSData *)jsonEncodeDictionary:(NSDictionary *)aDictionary
+{
+    return [NSJSONSerialization dataWithJSONObject:aDictionary options:0 error:nil];
+}
+
+-(NSData *)serializeDictionary:(NSDictionary *)aDictionary
+{
+    if ( self.formEncode) {
+        return [self formEncodeDictionary:aDictionary];
+    } else {
+        return [self jsonEncodeDictionary:aDictionary];
+    }
+}
+
+
+-(void)writeDictionary:(NSDictionary *)aDictionary
+{
+    [self writeObject:[self serializeDictionary:aDictionary]];
+}
+
+
 -(NSURL*)resolve:(NSURL*)theURL
 {
+//    NSLog(@"baseURL URL:\n%@\n",[self.baseURL absoluteString]);
+//    NSLog(@"relative URL:\n%@\n",[theURL absoluteString]);
     if ( self.baseURL) {
         if ( theURL) {
             NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
@@ -79,6 +122,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
             theURL=self.baseURL;
         }
     }
+//    NSLog(@"resolved URL:\n%@\n",[theURL absoluteString]);
     return theURL;
     
 }
@@ -89,30 +133,46 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 }
 
 
--(void)executeRequest:(NSURLRequest*)request
+-processResponse:(MPWURLRequest *)response            // hack for nowr
+{
+    return response.data;
+}
+
+-(void)executeRequest:(MPWURLRequest*)request
 {
     self.inflight++;
-    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request.request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
+            request.response=response;
+            request.data = data;
             if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
-                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": request.URL,
+                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": request.request.URL,
                                                                                                    @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
                                                                                                    @"content": [data stringValue]}];
             }
+            request.error = error;
             if (data && !error   ){
-                [target writeObject:data];
+                [target writeObject:[self processResponse:request]];
             } else {
-                [self reportError:error];
+                [self reportError:request];
             }
         } @finally {
             self.inflight--;
         }
     }];
     if (!task) {
-        [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.URL}]];
+        self.inflight--;
+        [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
     [task resume];
     
+}
+
+-(void)executeNSURLRequest:(NSURLRequest*)nsrequest
+{
+    MPWURLRequest *urlrequest=[[MPWURLRequest new] autorelease];
+    urlrequest.request=nsrequest;
+    [self executeRequest:urlrequest];
 }
 
 #define CHECKS_PER_SECOND 100
@@ -129,11 +189,10 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
     theURL=[self resolve:theURL];
-    NSLog(@"final URL: %@",[theURL absoluteString]);
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
     request.HTTPMethod = method;
     request.HTTPBody = body;
-    [self executeRequest:request];
+    [self executeNSURLRequest:request];
 }
 
 
@@ -157,6 +216,15 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     [self executeRequestWithURL:theURL method:@"DELETE" body:nil];
 }
 
+-(void)writeData:(NSData *)d
+{
+    [self patch:d toURL:nil];
+}
+
+-(void)writeNSURL:(NSURL*)url
+{
+    [self executeRequestWithURL:url method:self.defaultMethod body:nil];
+}
 
 @end
 
@@ -175,7 +243,42 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream
 {
-    [aStream get:self];
+    [aStream writeNSURL:self];
 }
 
 @end
+
+
+@implementation NSDictionary(streamPosting)
+
+-(void)writeOnURLFetchStream:aStream
+{
+    [aStream writeDictionary:self];
+}
+
+@end
+
+
+
+@implementation NSData(streamPosting)
+
+-(void)writeOnURLFetchStream:aStream
+{
+    [aStream writeData:self];
+}
+
+@end
+
+
+
+@implementation MPWURLRequest(streamPosting)
+
+-(void)writeOnURLFetchStream:aStream
+{
+    [aStream executeRequest:self];
+}
+
+@end
+
+
+

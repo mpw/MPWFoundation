@@ -8,6 +8,8 @@
 
 #import <MPWFoundation/MPWStream.h>
 
+@class MPWURLRequest;
+
 @interface MPWURLFetchStream : MPWStream
 {
     NSURLSession *downloader;
@@ -16,13 +18,16 @@
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) id <Streaming> errorTarget;
 @property (assign, readonly)  int inflight;
+@property (nonatomic,strong) NSString *defaultMethod;
+@property (assign) BOOL  formEncode;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 
 -(void)setHeaderDict:(NSDictionary *)newHeaders;
 
--(void)executeRequest:(NSURLRequest*)request;
+-(void)executeNSURLRequest:(NSURLRequest*)request;
+-(void)executeRequest:(MPWURLRequest*)request;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
 
 -(void)get:(NSURL*)theURL;

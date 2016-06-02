@@ -38,7 +38,7 @@
         if ( [s target]==self.target || ((i<self.filters.count-1) && [s target]==self.filters[i+1])) {
             [s setTarget:nil];
         }
-        while (s && [s respondsToSelector:@selector(target)]) {
+        while (s && [s respondsToSelector:@selector(target)] && s!=self.target) {
             [normalized addObject:s];
             s=[s target];
         }
@@ -60,6 +60,7 @@
 
 -(void)setTarget:(id <Streaming>)newTarget
 {
+    [[[self filters] lastObject] setTarget:nil];
     [super setTarget:newTarget];
     [self connect];
 }
@@ -81,6 +82,7 @@
 -(int)inflight
 {
     int inflight=0;
+//    NSLog(@"inflight status for filters: %@",self.filters);
     for ( id s in self.filters) {
         if ( [s respondsToSelector:@selector(inflight)]) {
             inflight+=[s inflight];
@@ -89,11 +91,25 @@
     return inflight;
 }
 
+-(void)setHeaderDict:aDict
+{
+    for ( id s in self.filters) {
+        if ( [s respondsToSelector:@selector(setHeaderDict:)]) {
+            [s setHeaderDict:aDict];
+        }
+    }
+}
+
 
 -(void)addFilter:(id <Streaming>)newFilter
 {
     self.filters = [self.filters arrayByAddingObject:newFilter];
     [self connect];
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: filters: %@ target: %@>",[self class],self,self.filters,self.target];
 }
 
 @end
@@ -136,5 +152,8 @@
              @"testMulteElementStreamCanBeAddedToPipe",
              ];
 }
+
+
+
 
 @end
