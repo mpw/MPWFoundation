@@ -122,7 +122,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
             theURL=self.baseURL;
         }
     }
-//    NSLog(@"resolved URL:\n%@\n",[theURL absoluteString]);
+//    NSLog(@"%@ resolved URL:\n%@\n",self,[theURL absoluteString]);
     return theURL;
     
 }
@@ -135,18 +135,23 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -processResponse:(MPWURLRequest *)response            // hack for nowr
 {
-    return response.data;
+    return [response processed];
 }
 
 -(void)executeRequest:(MPWURLRequest*)request
 {
     self.inflight++;
-    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:request.request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSURLRequest *r=request.request;
+    NSMutableURLRequest *resolvedRequest=[r mutableCopy];
+    resolvedRequest.URL=[self resolve:r.URL];
+    [request retain];
+    [resolvedRequest retain];
+    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             request.response=response;
             request.data = data;
             if ( [response respondsToSelector:@selector(statusCode)] && [response statusCode] >= 400){
-                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": request.request.URL,
+                error = [NSError errorWithDomain:@"network" code:[response statusCode] userInfo:@{ @"url": resolvedRequest.URL,
                                                                                                    @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
                                                                                                    @"content": [data stringValue]}];
             }
@@ -184,17 +189,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     }];
 }
 
-
-
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
-    theURL=[self resolve:theURL];
-    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:theURL];
-    request.HTTPMethod = method;
-    request.HTTPBody = body;
-    [self executeNSURLRequest:request];
+    MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:method data:body] autorelease];
+    [self executeRequest:request];
 }
-
 
 -(void)get:(NSURL*)theURL
 {

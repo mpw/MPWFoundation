@@ -159,9 +159,9 @@
 		1F840E05193F527300589595 /* bytecoding.c in Sources */ = {isa = PBXBuildFile; fileRef = 07DF195E006686DDC35ADD82 /* bytecoding.c */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
-		1F9726A51D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; };
-		1F9726A61D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; };
-		1F9726A71D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; };
+		1F9726A51D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F9726A61D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F9726A71D00397800D76F3A /* MPWURLRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9726A81D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
 		1F9726A91D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
 		1F9726AA1D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
