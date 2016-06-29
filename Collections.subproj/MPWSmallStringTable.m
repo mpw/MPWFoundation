@@ -576,7 +576,7 @@ int _small_string_table_releaseIndex=0;
 #define CONSTANT_STRING_RATIO 1.2
 	NSAssert2( ratio > CONSTANT_STRING_RATIO ,@"ratio of small string table to NSDictionary with constant string  %g < %g",
               ratio, CONSTANT_STRING_RATIO );
-#define COMPUTED_STRING_RATIO 3.8
+#define COMPUTED_STRING_RATIO 1.8
 
 	NSAssert2( ratio1 > COMPUTED_STRING_RATIO ,@"ratio of small string table to NSDictionary with computed key %g < %g",
               ratio1, COMPUTED_STRING_RATIO );

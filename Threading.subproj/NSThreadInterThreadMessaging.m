@@ -89,10 +89,12 @@ typedef void (^voidBlock)(void );
 
 
 HOM_METHOD(asyncOnMainThread)
+    [invocation retainArguments];
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:NO];
 }
 
 HOM_METHOD(onMainThread)
+    [invocation retainArguments];
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:YES];
 }
 

@@ -13,6 +13,7 @@
 @interface MPWURLFetchStream()
 
 @property (assign )  int inflight;
+@property (nonatomic, strong) NSDictionary *theHeaderDict;
 
 @end
 
@@ -54,11 +55,16 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)setHeaderDict:(NSDictionary *)newHeaderDict
 {
     NSURLSessionConfiguration *config=[self config];
-    config.HTTPAdditionalHeaders = newHeaderDict;
+    NSDictionary *oldDict=self.theHeaderDict;
     
-    [self setDownloader:[NSURLSession sessionWithConfiguration:config
-                                                      delegate:nil
-                                                 delegateQueue:nil]] ;
+    if ( ![oldDict isEqual:newHeaderDict]) {
+        self.theHeaderDict = newHeaderDict;
+        config.HTTPAdditionalHeaders = newHeaderDict;
+        
+        [self setDownloader:[NSURLSession sessionWithConfiguration:config
+                                                          delegate:nil
+                                                     delegateQueue:nil]] ;
+    }
 }
 
 -(SEL)streamWriterMessage
@@ -133,7 +139,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 }
 
 
--processResponse:(MPWURLRequest *)response            // hack for nowr
+-processResponse:(MPWURLRequest *)response
 {
     return [response processed];
 }
@@ -146,6 +152,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     resolvedRequest.URL=[self resolve:r.URL];
     [request retain];
     [resolvedRequest retain];
+//    NSLog(@"executeRequest: %@",request);
     NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             request.response=response;
@@ -157,8 +164,10 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
             }
             request.error = error;
             if (data && !error   ){
+//                NSLog(@"Success: %@",request);
                 [target writeObject:[self processResponse:request]];
             } else {
+//                NSLog(@"Error: %@",request);
                 [self reportError:request];
             }
         } @finally {

@@ -314,8 +314,8 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",(int)[fastTime userMicroseconds],(int)[slowTime userMicroseconds],ratio);
-	NSAssert2( ratio > 0.4 ,@"ratio of cached fast invocation to normal message send %g < %g",
-				ratio,0.4);
+	NSAssert2( ratio > 0.2 ,@"ratio of cached fast invocation to normal message send %g < %g",
+				ratio,0.2);
 }
 
 #endif
