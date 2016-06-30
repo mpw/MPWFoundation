@@ -78,7 +78,11 @@ scalarAccessor( id, xxxAdditionalArg, setXxxAdditionalArg )
 
 +trampolineWithTarget:target selector:(SEL)selector
 {
-    id trampoline=[self quickTrampoline];
+#if 0
+    id trampoline=[self quickTrampoline];           // quickTrampoline crashes on iPhone 6S with a NULL in methodForSelector: initializing the cache
+#else
+    id trampoline=[self trampoline];
+#endif
     [trampoline setXxxTarget:target];
     [trampoline setXxxSelector:selector];
     return trampoline;
