@@ -12,6 +12,7 @@
 
 -(instancetype)initWithURL:(NSURL *)requestURL method:(NSString *)method data:(NSData *)bodyData;
 
+-(void)setHeaderDict:(NSDictionary *)headerDict;
 -(void)setBodyData:(NSData *)bodyData;
 
 -(id)processed;

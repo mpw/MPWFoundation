@@ -21,6 +21,13 @@
     return self;
 }
 
+-(void)setHeaderDict:(NSDictionary *)headerDict
+{
+    NSMutableURLRequest *r=[self.request mutableCopy];
+    r.allHTTPHeaderFields=headerDict;
+    self.request=r;
+}
+
 -(void)setBodyData:(NSData *)bodyData
 {
     NSMutableURLRequest *r=[self.request mutableCopy];
