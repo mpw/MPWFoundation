@@ -26,7 +26,6 @@
 
 -(void)setHeaderDict:(NSDictionary *)newHeaders;
 
--(void)executeNSURLRequest:(NSURLRequest*)request;
 -(void)executeRequest:(MPWURLRequest*)request;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
 

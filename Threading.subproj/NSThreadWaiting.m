@@ -20,7 +20,8 @@
         if ( [conditionBlock() boolValue] ) {
             return YES;
         } else {
-            [self sleepForTimeInterval:1.0 / CHECKS_PER_SECOND];
+            [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0/CHECKS_PER_SECOND]];
+//            [self sleepForTimeInterval:1.0 / CHECKS_PER_SECOND];
         }
     } while ( [NSDate timeIntervalSinceReferenceDate] < end );
     return NO;
