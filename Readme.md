@@ -24,7 +24,7 @@ and Objective-C development in general.
  - Caching batch URL downloader
 
 
-License:
+# License:
 
 MPWFoundation is Copyright 1998-2013 by Marcel Weiher.  
 Dual licensed under MIT  3 part and LGPL.
