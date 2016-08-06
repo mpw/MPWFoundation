@@ -145,18 +145,20 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     return [response processed];
 }
 
--(void)executeRequest:(MPWURLRequest*)request isStreaming:(BOOL)shouldStream
+-(void)executeRequest:(MPWURLRequest*)request
 {
     self.inflight++;
+    BOOL shouldStream=NO;
     NSURLRequest *r=request.request;
-    NSMutableURLRequest *resolvedRequest=[r mutableCopy];
+    NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
     resolvedRequest.URL=[self resolve:r.URL];
     [request retain];
-    [resolvedRequest retain];
-    NSLog(@"executeRequest: %@",request);
+    shouldStream = [request isStreaming];
+//    NSLog(@"executeRequest: %@",request);
     NSURLSessionDataTask *task=nil;
     if ( shouldStream ) {
-        task = [[self downloader] dataTaskWithURL: resolvedRequest.URL];
+        task = [[self downloader] dataTaskWithRequest: resolvedRequest];
+//        NSLog(@"task: %@",task);
     } else {
         task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             @try {
@@ -193,15 +195,10 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     
 }
 
--(void)executeRequest:(MPWURLRequest*)request
-{
-    return [self executeRequest:request isStreaming:NO];
-}
-
 
 #define CHECKS_PER_SECOND 100
 
--(void)awaitResultForSeconds:(int)numSeconds
+-(void)awaitResultForSeconds:(NSTimeInterval)numSeconds
 {
     [NSThread sleepForTimeInterval:numSeconds orUntilConditionIsMet:^{
         return @([self inflight] == 0);
@@ -218,7 +215,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)streamingGet:(NSURL *)theURL body:(NSData *)body
 {
     MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
-    [self executeRequest:request isStreaming:YES];
+    request.isStreaming=YES;
+    [self executeRequest:request];
 }
 
 -(void)get:(NSURL*)theURL
@@ -254,8 +252,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    NSLog(@"did receive data: '%@'",[data stringValue]);
-    NSLog(@"target: %@",target);
     [target writeObject:data];
 }
 
@@ -326,7 +322,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
     MPWURLFetchStream* stream=[self streamWithTarget:target];
     [stream streamingGet:testURL body:nil];
-    [stream awaitResultForSeconds:1];
+    [stream awaitResultForSeconds:0.01];
     IDEXPECT( testTarget, @"This is a simple resource",@"should have written");
     
 }

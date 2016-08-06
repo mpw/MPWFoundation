@@ -22,6 +22,7 @@
 @property (nonatomic, strong)  NSURLResponse *response;
 @property (nonatomic, strong)  NSError       *error;
 @property (nonatomic, strong)  NSData        *data;
+@property (nonatomic, assign)  BOOL          isStreaming;
 
 
 @end

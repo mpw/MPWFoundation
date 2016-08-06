@@ -17,7 +17,7 @@
     request.HTTPMethod=method;
     request.HTTPBody=bodyData;
     self.request = request;
-
+    
     return self;
 }
 
@@ -53,7 +53,7 @@
     [_request release];
     [_response release];
     [_error release];
-
+    
     [super dealloc];
 }
 
