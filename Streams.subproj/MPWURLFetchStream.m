@@ -131,7 +131,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     }
 //    NSLog(@"%@ resolved URL:\n%@\n",self,[theURL absoluteString]);
     return theURL;
-    
 }
 
 -(void)reportError:(NSError*)error
