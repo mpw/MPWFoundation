@@ -1758,10 +1758,10 @@
 		};
 		1FF8FE2809B49D0200652476 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\n\nif  [ -f ${tester}  ]  ; then\n    $tester ${framework}\nelse\n    echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
