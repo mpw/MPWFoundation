@@ -15,5 +15,6 @@
 -(instancetype)initWithFilters:(NSArray *)filters;
 -(void)setErrorTarget:newErrorTarget;
 -(void)addFilter:(id <Streaming>)newFilter;
+-(int)inflight;
 
 @end

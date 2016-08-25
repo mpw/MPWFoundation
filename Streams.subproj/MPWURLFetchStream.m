@@ -171,7 +171,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                 if ( [response respondsToSelector:@selector(statusCode)] ) {
                     httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
                 }
-                //                NSLog(@"data: %@",[data stringValue]);
+//                NSLog(@"data: %@",[data stringValue]);
                 if ( httpStatusCode >= 400){
                     error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:@{ @"url": resolvedRequest.URL,
                                                                                                 @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
@@ -181,7 +181,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                              ];
                 }
                 if (data && !error   ){
-                    //                    NSLog(@"Success: %@",request);
+//                    NSLog(@"Success: %@",request);
                     [target writeObject:[self processResponse:request]];
                 } else {
                     NSLog(@"Error: %@",request);

@@ -40,7 +40,7 @@
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>8</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme</key>
 		<dict>
@@ -54,14 +54,14 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>10</integer>
 		</dict>
 		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>18</integer>
+			<integer>13</integer>
 		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>
