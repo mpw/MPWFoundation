@@ -2078,6 +2078,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
@@ -2147,6 +2151,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;
@@ -2223,6 +2231,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -2287,6 +2299,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;
@@ -2363,6 +2379,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -2486,6 +2506,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -2527,6 +2551,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -2569,6 +2597,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -2655,6 +2687,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2697,6 +2733,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2740,6 +2780,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2783,6 +2827,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2826,6 +2874,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2869,6 +2921,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
@@ -2961,6 +3017,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
@@ -3001,6 +3061,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;
@@ -3070,6 +3134,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;
@@ -3146,6 +3214,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -3210,6 +3282,10 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_MODULE_NAME = MPWFoundation;
@@ -3286,6 +3362,10 @@
 				MACH_O_TYPE = staticlib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_NAME = MPWFoundationTouch;
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
 				SDKROOT = iphoneos;
@@ -3327,6 +3407,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-fpie",
+					"-fstack-protector-strong",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationWatch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
