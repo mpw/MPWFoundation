@@ -17,7 +17,7 @@
 
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) id <Streaming> errorTarget;
-@property (assign, readonly)  int inflight;
+@property (assign, readonly)  int inflightCount;
 @property (nonatomic,strong) NSString *defaultMethod;
 @property (assign) BOOL  formEncode;
 
@@ -32,6 +32,7 @@
 -(void)get:(NSURL*)theURL;
 -(void)post:(NSData*)theData toURL:(NSURL *)theURL;
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL;
+-(void)cancel;
 
 
 @end

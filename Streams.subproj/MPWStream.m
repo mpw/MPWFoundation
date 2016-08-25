@@ -213,6 +213,12 @@ SEL visSel;
     }
 }
 
+-(int)inflightCount
+{
+    return 0;
+}
+
+
 -(void)reportError:(NSError*)error
 {
     NSLog(@"%@ encountered error: %@",self,error);

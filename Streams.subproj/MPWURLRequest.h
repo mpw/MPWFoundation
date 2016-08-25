@@ -18,11 +18,12 @@
 -(id)processed;
 
 
-@property (nonatomic, strong)  NSURLRequest  *request;
-@property (nonatomic, strong)  NSURLResponse *response;
-@property (nonatomic, strong)  NSError       *error;
-@property (nonatomic, strong)  NSData        *data;
-@property (nonatomic, assign)  BOOL          isStreaming;
+@property (nonatomic, strong)  NSURLRequest     *request;
+@property (nonatomic, strong)  NSURLResponse    *response;
+@property (nonatomic, strong)  NSError          *error;
+@property (nonatomic, strong)  NSData           *data;
+@property (nonatomic, strong)  NSURLSessionTask *task;
+@property (nonatomic, assign)  BOOL             isStreaming;
 
 
 @end

@@ -79,13 +79,13 @@
     }
 }
 
--(int)inflight
+-(int)inflightCount
 {
     int inflight=0;
 //    NSLog(@"inflight status for filters: %@",self.filters);
     for ( id s in self.filters) {
-        if ( [s respondsToSelector:@selector(inflight)]) {
-            inflight+=[s inflight];
+        if ( [s respondsToSelector:@selector(inflightCount)]) {
+            inflight+=[s inflightCount];
         }
     }
     return inflight;

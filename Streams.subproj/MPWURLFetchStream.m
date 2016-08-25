@@ -1,6 +1,6 @@
 //
 //  MPWURLFetchStream.m
-//  
+//
 //
 //  Created by Marcel Weiher on 3/31/15.
 //  Copyright (c) 2015 Marcel Weiher. All rights reserved.
@@ -13,8 +13,8 @@
 
 @interface MPWURLFetchStream() <NSURLSessionDelegate>
 
-@property (assign )  int inflight;
 @property (nonatomic, strong) NSDictionary *theHeaderDict;
+@property (nonatomic, strong) NSMutableSet *inflight;
 
 @end
 
@@ -28,11 +28,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     self=[super initWithTarget:aTarget];
     [self setDownloader:[NSURLSession sessionWithConfiguration:[self config]
                                                       delegate:self
-                                                  delegateQueue:nil]] ;
+                                                 delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
     [self setDefaultMethod:@"GET"];
-    self.inflight=0;
+    [self setInflight:[NSMutableSet set]];
     return self;
 }
 
@@ -41,6 +41,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     return [self initWithBaseURL:nil target:aTarget];
 }
 
+
+-(int)inflightCount
+{
+    return self.inflight.count;
+}
 
 -(NSURLSessionConfiguration *)config
 {
@@ -119,8 +124,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(NSURL*)resolve:(NSURL*)theURL
 {
-//    NSLog(@"baseURL URL:\n%@\n",[self.baseURL absoluteString]);
-//    NSLog(@"relative URL:\n%@\n",[theURL absoluteString]);
+    //    NSLog(@"baseURL URL:\n%@\n",[self.baseURL absoluteString]);
+    //    NSLog(@"relative URL:\n%@\n",[theURL absoluteString]);
     if ( self.baseURL) {
         if ( theURL) {
             NSURLComponents *components=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
@@ -129,9 +134,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
             theURL=self.baseURL;
         }
     }
-//    NSLog(@"%@ resolved URL:\n%@\n",self,[theURL absoluteString]);
+    //    NSLog(@"%@ resolved URL:\n%@\n",self,[theURL absoluteString]);
     return theURL;
-    
 }
 
 -(void)reportError:(NSError*)error
@@ -147,20 +151,19 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 
 -(void)executeRequest:(MPWURLRequest*)request
 {
-    self.inflight++;
     BOOL shouldStream=NO;
+    [self.inflight addObject:request];
     NSURLRequest *r=request.request;
     NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
     resolvedRequest.URL=[self resolve:r.URL];
     [request retain];
     shouldStream = [request isStreaming];
-//    NSLog(@"executeRequest: %@",request);
-    NSURLSessionDataTask *task=nil;
+    //    NSLog(@"executeRequest: %@",request);
     if ( shouldStream ) {
-        task = [[self downloader] dataTaskWithRequest: resolvedRequest];
-//        NSLog(@"task: %@",task);
+        request.task = [[self downloader] dataTaskWithRequest: resolvedRequest];
+        //        NSLog(@"task: %@",task);
     } else {
-        task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        request.task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             @try {
                 request.response=response;
                 request.data = data;
@@ -168,30 +171,31 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                 if ( [response respondsToSelector:@selector(statusCode)] ) {
                     httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
                 }
-                NSLog(@"data: %@",[data stringValue]);
+                //                NSLog(@"data: %@",[data stringValue]);
                 if ( httpStatusCode >= 400){
                     error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:@{ @"url": resolvedRequest.URL,
                                                                                                 @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                                                                                                @"content": [data stringValue]}];
+                                                                                                @"content": [data stringValue],
+                                                                                                @"request": request,
+                                                                                                }
+                             ];
                 }
-                request.error = error;
                 if (data && !error   ){
-                    NSLog(@"Success: %@",request);
+                    //                    NSLog(@"Success: %@",request);
                     [target writeObject:[self processResponse:request]];
                 } else {
                     NSLog(@"Error: %@",request);
-                    [self reportError:request];
+                    [self reportError:error];
                 }
             } @finally {
-                self.inflight--;
+                [self.inflight removeObject:request.task];
             }
         }];
     }
-    if (!task) {
-        self.inflight--;
+    if (!request.task) {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
-    [task resume];
+    [request.task resume];
     
 }
 
@@ -253,6 +257,16 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     didReceiveData:(NSData *)data
 {
     [target writeObject:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+didCompleteWithError:(nullable NSError *)error
+{
+    [self.inflight removeObject:task];
+    if ( error ){
+        [self reportError:error];
+    }
+    [target close];
 }
 
 
@@ -331,9 +345,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 +testSelectors
 {
     return
-  @[
-    @"testCanHandleDataStreamingResponse",
-    ];
+    @[
+      @"testCanHandleDataStreamingResponse",
+      ];
 }
 
 @end

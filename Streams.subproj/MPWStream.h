@@ -90,6 +90,7 @@ idAccessor_h( target, setTarget )
 -dict2objWithClass:(Class)targetClass; 
 -onMainThreadStream;
 -onBlock:aBlock;
+-(int)inflightCount;
 
 
 @end
