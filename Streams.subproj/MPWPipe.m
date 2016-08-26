@@ -20,6 +20,10 @@
 
 @implementation MPWPipe
 
++(instancetype)filters:(NSArray *)filters
+{
+    return [[[self alloc] initWithFilters:filters] autorelease];
+}
 
 
 -(instancetype)initWithFilters:(NSArray *)filters
