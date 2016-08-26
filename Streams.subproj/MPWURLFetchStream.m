@@ -188,7 +188,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     [self reportError:error];
                 }
             } @finally {
-                [self.inflight removeObject:request.task];
+                [self.inflight removeObject:request];
             }
         }];
     }
@@ -306,7 +306,7 @@ didCompleteWithError:(nullable NSError *)error
 
 @implementation NSData(streamPosting)
 
--(void)writeOnURLFetchStream:aStream
+-(void)writeOnURLFetchStream:(MPWURLFetchStream *)aStream
 {
     [aStream writeData:self];
 }
