@@ -131,7 +131,7 @@ idAccessor( target, _setTarget )
 -(void)setTarget:newTarget
 {
     [self _setTarget:newTarget];
-    targetWriteObject = (IMP0)[target methodForSelector:@selector(writeObject:)];
+    targetWriteObject = (IMP0)[target methodForSelector:@selector(writeObject:sender:)];
 #ifdef Darwin
     if ( targetWriteObject == NULL ) {
         targetWriteObject = (IMP0)objc_msgSend;
@@ -153,7 +153,7 @@ idAccessor( target, _setTarget )
 
 id visObj,visStream;
 SEL visSel;
--(void)writeObject:anObject
+-(void)writeObject:anObject sender:sender
 {
     if ( anObject != nil ) {
 #if FAST_MSG_LOOKUPS
@@ -162,8 +162,13 @@ SEL visSel;
       [anObject performSelector:streamWriterMessage withObject:self];
 #endif
     } else {
-        [target writeObject:nil];
+        [target writeObject:nil sender:self];
     }
+}
+
+-(void)writeObject:anObject
+{
+    [self writeObject:anObject sender:nil];
 }
 
 -(void)writeObjectAndClose:anObject
@@ -397,6 +402,11 @@ SEL visSel;
 -finalTarget
 {
     return self;
+}
+
+-(void)writeObject:anObject sender:aSender
+{
+    [self writeObject:anObject];
 }
 
 @end

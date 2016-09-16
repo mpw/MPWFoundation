@@ -48,7 +48,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-#define	FORWARD(object)	if ( targetWriteObject ) { targetWriteObject( target, @selector(writeObject:), object ); } else { [target writeObject:object]; }
+#define	FORWARD(object)	if ( targetWriteObject ) { targetWriteObject( target, @selector(writeObject:sender:), object ,self); } else { [target writeObject:object sender:self]; }
 @interface MPWStream : MPWObject<Streaming>
 {
     id	target;

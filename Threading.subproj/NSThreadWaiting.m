@@ -21,7 +21,6 @@
             return YES;
         } else {
             [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1.0/CHECKS_PER_SECOND]];
-//            [self sleepForTimeInterval:1.0 / CHECKS_PER_SECOND];
         }
     } while ( [NSDate timeIntervalSinceReferenceDate] < end );
     return NO;
@@ -29,8 +28,10 @@
 
 @end
 
+@interface NSThreadWaitingTests : NSThread
+@end
 
-@implementation NSThreadWaitingTests : NSThread
+@implementation NSThreadWaitingTests
 
 +(void)testTrueIsDoneImmediately
 {

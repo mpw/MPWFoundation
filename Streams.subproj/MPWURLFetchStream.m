@@ -173,12 +173,13 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                 }
 //                NSLog(@"data: %@",[data stringValue]);
                 if ( httpStatusCode >= 400){
-                    error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:@{ @"url": resolvedRequest.URL,
-                                                                                                @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                                                                                                @"content": [data stringValue],
-                                                                                                @"request": request,
-                                                                                                }
-                             ];
+                    NSDictionary *userInfo=
+                    @{ @"url": resolvedRequest.URL,
+                       @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
+                       @"content": [data stringValue],
+                       @"request": request,
+                       };
+                    error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
                 }
                 if (data && !error   ){
 //                    NSLog(@"Success: %@",request);

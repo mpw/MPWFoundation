@@ -448,6 +448,12 @@
 		1FE37C4F196978CA00C9A378 /* MPWPListBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C50196978CA00C9A378 /* MPWMessageFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E0B15DB909B00640A43 /* MPWMessageFilterStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C51196978CA00C9A378 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; };
+		1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; };
+		1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; };
+		1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
+		1FF08F691D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
+		1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
 		1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1947006686DDC35ADD82 /* AccessorMacros.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1948006686DDC35ADD82 /* DebugMacros.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1949006686DDC35ADD82 /* MPWObject.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
@@ -776,6 +782,8 @@
 		1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumSelectFilter.h; sourceTree = "<group>"; };
 		1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumSelectFilter.m; sourceTree = "<group>"; };
 		1FE1C8C9042755B5005ADD8A /* SpinLocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinLocks.h; sourceTree = "<group>"; };
+		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
+		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBlockTargetStream.h; sourceTree = "<group>"; };
 		1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockTargetStream.m; sourceTree = "<group>"; };
@@ -1113,6 +1121,8 @@
 				1FA296951CF74A6500F19039 /* MPWPipe.m */,
 				1F3D01FC1D702902001A9732 /* MPWScatterStream.h */,
 				1F3D01FD1D702902001A9732 /* MPWScatterStream.m */,
+				1FF08F631D7061C400C6273F /* MPWNotificationStream.h */,
+				1FF08F641D7061C400C6273F /* MPWNotificationStream.m */,
 				1F9726A31D00397800D76F3A /* MPWURLRequest.h */,
 				1F9726A41D00397800D76F3A /* MPWURLRequest.m */,
 				07DF1993006686DDC35ADD82 /* MPWByteStream.m */,
@@ -1293,6 +1303,7 @@
 			files = (
 				1FE37C22196976C500C9A378 /* NSObjectAdditions.h in Headers */,
 				1FE37C481969773C00C9A378 /* NSObjectFiltering.h in Headers */,
+				1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */,
 				1FE37C1A196976C500C9A378 /* NSStringAdditions.h in Headers */,
 				1FE37C04196976C500C9A378 /* AccessorMacros.h in Headers */,
 				1F81BF9C19698F3A0066DF43 /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
@@ -1443,6 +1454,7 @@
 				1FCF26301CF3993C00AC64CE /* MPWActiveDownload.h in Headers */,
 				1FCF26681CF39B4E00AC64CE /* MPWASCII85Stream.h in Headers */,
 				1FCF26721CF39BB700AC64CE /* MPWEnumFilter.h in Headers */,
+				1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */,
 				1FCF262F1CF3993C00AC64CE /* DebugMacros.h in Headers */,
 				1FCF26501CF3993C00AC64CE /* MPWTrampoline.h in Headers */,
 				1FCF262C1CF3993C00AC64CE /* MPWBlockInvocation.h in Headers */,
@@ -1549,6 +1561,7 @@
 				1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1FF8FDE009B49D0100652476 /* NSObjectInterThreadMessaging.h in Headers */,
 				1F2DCFDF1ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */,
+				1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */,
 				1F3D01FE1D702902001A9732 /* MPWScatterStream.h in Headers */,
 				1FF8FDE109B49D0100652476 /* NSThreadInterThreadMessaging.h in Headers */,
 				1FF8FDE209B49D0100652476 /* NSObjectFiltering.h in Headers */,
@@ -1771,10 +1784,10 @@
 		};
 		1FF8FE2809B49D0200652476 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\n\nif  [ -f ${tester}  ]  ; then\n    $tester ${framework}\nelse\n    echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
@@ -1824,6 +1837,7 @@
 				1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */,
 				1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */,
 				1F840DC0193F50AC00589595 /* MPWActiveDownload.m in Sources */,
+				1FF08F691D7061C400C6273F /* MPWNotificationStream.m in Sources */,
 				1F840DC1193F50AC00589595 /* MPWResourceLoadRequest.m in Sources */,
 				1F840DC2193F50AC00589595 /* MPWCachingDownloader.m in Sources */,
 				1F840DC3193F50AC00589595 /* MPWMessageCatcher.m in Sources */,
@@ -1874,6 +1888,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FCF261B1CF3990400AC64CE /* MPWFlattenStream.m in Sources */,
+				1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */,
 				1F3D02031D702902001A9732 /* MPWScatterStream.m in Sources */,
 				1FCF25EC1CF398F400AC64CE /* CodingAdditions.m in Sources */,
 				1FCF26071CF398F400AC64CE /* MPWValueAccessor.m in Sources */,
@@ -1974,6 +1989,7 @@
 				1FF8FE0809B49D0100652476 /* bytecoding.c in Sources */,
 				1FF8FE0909B49D0100652476 /* MPWASCII85Stream.m in Sources */,
 				1FCBEDE01CFC2DA800F2EE0E /* NSThreadWaiting.m in Sources */,
+				1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */,
 				1FF8FE0A09B49D0100652476 /* MPWFilterStream.m in Sources */,
 				1F7A22851B786F9000FF6C03 /* MPWPoint.m in Sources */,
 				1FA296991CF74A6500F19039 /* MPWPipe.m in Sources */,

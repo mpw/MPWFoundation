@@ -539,15 +539,26 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [result autorelease];\
 }\
 
+
+#define REDUCE_LOOP_OPERATOR( operationname, operator , dummy )\
+-(NSNumber*)reduce_operator_##operationname\
+{\
+     float *my_reals=[self reals],result=my_reals[0];\
+     for ( long i=1,max=[self count];i<max;i++) {\
+        result=result operator my_reals[i];\
+    }\
+    return @(result);\
+}\
+
+
+
 #define REDUCE_LOOP_OPERATION( operationname, expression, safetyCheckPredicate )\
 -(NSNumber*)reduce_##operationname\
 {\
     float result,*my_reals;\
-    long i,max;\
-    max=[self count];\
     my_reals=[self reals];\
     result=my_reals[0];\
-    for ( i=1;i<max;i++) {\
+    for ( long i=1,max=[self count];i<max;i++) {\
         float a=0,b=0,c=0;\
         a=result;\
         b=my_reals[i];\
@@ -559,12 +570,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
         }\
         result=c;\
     }\
-    return [NSNumber numberWithFloat:result];\
+    return @(result);\
 }\
 
 #define BINARY_LOOP_OPERATOR( opname, op, safetyCheckPredicate )	BINARY_LOOP_OPERATION( operator_##opname , c=a op b ,safetyCheckPredicate )
 #define BINARY_LOOP_CONDTION( opname, op )              BINARY_LOOP_OPERATION( operator_##opname , c=(float)(a op b) ,YES )
-#define REDUCE_LOOP_OPERATOR( opname, op, safetyCheckPredicate )	REDUCE_LOOP_OPERATION( operator_##opname , c=a op b ,safetyCheckPredicate )
+#define REDUCE_LOOP_OPERATOR1( opname, op, safetyCheckPredicate )	REDUCE_LOOP_OPERATION( operator_##opname , c=a op b ,safetyCheckPredicate )
 #define LOOP_FUNCTION( fn, safetyCheckPredicate )					UNARY_LOOP_OPERATION( fn, b=fn((double)a); ,safetyCheckPredicate )
 
 #if 1
@@ -603,6 +614,17 @@ REDUCE_LOOP_OPERATOR( plus, + , YES)
 REDUCE_LOOP_OPERATOR( slash, / , b != 0)
 REDUCE_LOOP_OPERATION( min, c=(a<b ? a:b) , YES)
 REDUCE_LOOP_OPERATION( max, c=(a>b ? a:b) , YES)
+
+-(float)reduce:(float(*)(float,float))reduceFun
+{
+    float result=0,*my_reals=[self reals];
+    for ( long i=0,max=[self count];i<max;i++) {
+        result=reduceFun( result, my_reals[i]);
+    }
+    return result;
+}
+
+
 
 #ifdef PPC
 LOOP_FUNCTION( log1p, a>=-1 )
@@ -686,13 +708,21 @@ LOOP_FUNCTION( log1p, a>=-1 )
     INTEXPECT((int)(10*[tenWithBaseOffsetAndOvershoot realAtIndex:5]), 61, @"1.1-10.1, 10 * realAtIndex:5");
 }
 
+static float add( float a, float b) { return a+b; }
+
++(void)testReduceFun
+{
+    FLOATEXPECT([[self _testArray] reduce:add], 10, @"");
+}
+
 +testSelectors
 {
     return [NSArray arrayWithObjects:
-//            @"testReducePlus",
+            @"testReducePlus",
             @"testVecReducePlus",
-//            @"testReduceMultiply",
+            @"testReduceMultiply",
             @"testGenerate",
+            @"testReduceFun",
             nil];
 }
 

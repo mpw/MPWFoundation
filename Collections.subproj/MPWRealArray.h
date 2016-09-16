@@ -100,6 +100,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)addReals:(float*)newReals count:(NSUInteger)realCount;
 -(void)appendArray:anArray;
 -(float)vec_reduce_sum;
+-reduce_operator_plus;
+-(float)reduce:(float(*)(float,float))reduceFun;
 
 //---	some computation
 

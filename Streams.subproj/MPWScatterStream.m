@@ -12,6 +12,31 @@
 
 @implementation MPWScatterStream
 
+
+-(NSArray *)filters
+{
+    return [super target];
+}
+
+-(void)setFilters:(NSArray *)newFilters
+{
+    return [super setTarget:newFilters];
+}
+
+-(id)target
+{
+    return [[self filters].firstObject target];
+}
+
+-(void)setTarget:(id)newTarget
+{
+    for ( id  scatterTarget in self.target) {
+        if ( [scatterTarget respondsToSelector:@selector(setTarget:)] ) {
+            [(MPWStream*)scatterTarget setTarget:newTarget];
+        }
+    }
+}
+
 +(instancetype)filters:(NSArray *)filters
 {
     return [[[self alloc] initWithFilters:filters] autorelease];
@@ -20,12 +45,16 @@
 
 -(instancetype)initWithFilters:(NSArray *)filters
 {
-    return [self initWithTarget:filters];
+    self = [super initWithTarget:nil];
+    self.filters = filters;
+    return self;
 }
 
 -(void)writeObject:(id)anObject
 {
-    for ( id <Streaming> scatterTarget in self.target) {
+    NSLog(@"filters: %@",self.filters);
+    for ( id <Streaming> scatterTarget in self.filters ) {
+        NSLog(@"write: %@ to %@",anObject,scatterTarget);
         [scatterTarget writeObject:anObject];
     }
 }
