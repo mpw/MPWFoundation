@@ -27,4 +27,4 @@ and Objective-C development in general.
 # License:
 
 MPWFoundation is Copyright 1998-2013 by Marcel Weiher.  
-Dual licensed under MIT  3 part and LGPL.
+Dual licensed under BSD 3 part and LGPL.
