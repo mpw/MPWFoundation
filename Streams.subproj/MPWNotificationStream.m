@@ -18,11 +18,13 @@
 
 @implementation MPWNotificationStream
 
-+(instancetype)streamWithNotificationName:(NSString *)name
+-(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
 {
-    
+    self=[super initWithTarget:nil];
+    self.notificationName=name;
+    self.shouldPostOnMainThread=shouldPostOnMainThread;
+    return self;
 }
-
 
 -(void)postNotificationObject:anObject
 {
@@ -39,5 +41,8 @@
     }
     [super writeObject:anObject];
 }
+
+
+
 
 @end

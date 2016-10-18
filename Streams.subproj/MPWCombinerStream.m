@@ -77,6 +77,8 @@
     [source1 writeObject:@"test1 from source 1"];
     INTEXPECT( testTarget.count, 1, @"now written to both");
     IDEXPECT( testTarget.firstObject, (@[ @"test1 from source 1",@"test2 from source 2" ]), @"combined contents");
+    [source1 writeObject:@"test2 from source 1"];
+    IDEXPECT( testTarget.lastObject, (@[ @"test2 from source 1",@"test2 from source 2" ]), @"combined contents");
     
 }
 
