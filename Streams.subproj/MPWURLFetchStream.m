@@ -152,7 +152,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)executeRequest:(MPWURLRequest*)request
 {
     BOOL shouldStream=NO;
-    [self.inflight addObject:request];
+    @synchronized (self) {
+        [self.inflight addObject:request];
+    }
     NSURLRequest *r=request.request;
     NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
     resolvedRequest.URL=[self resolve:r.URL];
@@ -189,7 +191,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     [self reportError:error];
                 }
             } @finally {
-                [self.inflight removeObject:request];
+                @synchronized (self) {
+                    [self.inflight removeObject:request];
+                }
             }
         }];
     }
@@ -206,7 +210,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 -(void)awaitResultForSeconds:(NSTimeInterval)numSeconds
 {
     [NSThread sleepForTimeInterval:numSeconds orUntilConditionIsMet:^{
-        return @([self inflight] == 0);
+        return @([self inflightCount] == 0);
     }];
 }
 
@@ -263,7 +267,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error
 {
-    [self.inflight removeObject:task];
+    @synchronized (self) {
+        [self.inflight removeObject:task];
+    }
     if ( error ){
         [self reportError:error];
     }

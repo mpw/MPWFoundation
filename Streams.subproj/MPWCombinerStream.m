@@ -35,17 +35,32 @@
     self.sourcePointers = sourcePointers;
 }
 
+
+-(void)insertNewObject:(id)anObject forSender:aSender
+{
+    @synchronized (self) {
+        NSValue *senderPointer = [NSValue valueWithNonretainedObject:aSender];
+        if ( [self.sourcePointers containsObject:senderPointer]) {
+            self.values[senderPointer]=anObject;
+        }
+    }
+}
+
+-(NSArray *)combinedResult
+{
+    NSArray *combined=nil;
+    @synchronized (self) {
+        if ( self.values.count ==  self.sourcePointers.count ) {
+            combined=[self.values objectsForKeys:self.sourcePointers notFoundMarker:[NSNull null]];
+        }
+    }
+    return combined;
+}
+
 -(void)writeObject:(id)anObject sender:aSender
 {
-    NSValue *senderPointer = [NSValue valueWithNonretainedObject:aSender];
-    if ( [self.sourcePointers containsObject:senderPointer]) {
-        self.values[senderPointer]=anObject;
-    } else {
-        NSLog(@"not in my set of sources");
-    }
-    if ( self.values.count ==  self.sourcePointers.count ) {
-        [self.target writeObject:[self.values objectsForKeys:self.sourcePointers notFoundMarker:[NSNull null]] sender:self];
-    }
+    [self insertNewObject:anObject forSender:aSender];
+    [self.target writeObject:[self combinedResult] sender:self];
 }
 
 -(void)dealloc
@@ -64,8 +79,8 @@
 
 +(void)testBasicCombinationSemantics
 {
-    NSMutableArray *testTarget=[NSMutableArray array];
-    MPWCombinerStream *combiner=[self streamWithTarget:testTarget];
+    MPWCombinerStream *combiner=[self stream];
+    NSMutableArray *testTarget=combiner.target;
     MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
     MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1, source2]];
@@ -80,6 +95,13 @@
     [source1 writeObject:@"test2 from source 1"];
     IDEXPECT( testTarget.lastObject, (@[ @"test2 from source 1",@"test2 from source 2" ]), @"combined contents");
     
+}
+
+
++(void)testIncompleteAllowed
+{
+    MPWCombinerStream *combiner=[self stream];
+    NSMutableArray *testTarget=combiner.target;
 }
 
 +testSelectors

@@ -12,4 +12,6 @@
 
 -(void)setSources:(NSArray *)newSources;
 
+@property (assign) BOOL allowIncomplete;
+
 @end
