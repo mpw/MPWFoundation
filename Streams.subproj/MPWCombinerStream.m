@@ -51,7 +51,14 @@
     NSArray *combined=nil;
     @synchronized (self) {
         if ( self.values.count ==  self.sourcePointers.count ) {
-            combined=[self.values objectsForKeys:self.sourcePointers notFoundMarker:[NSNull null]];
+            NSMutableArray *tempCombined=[NSMutableArray arrayWithCapacity:self.values.count];
+            for ( id key in self.sourcePointers ) {
+                id value=self.values[key];
+                if (value) {
+                    [tempCombined addObject:value];
+                }
+            }
+            combined=[[tempCombined copy] autorelease];
         }
     }
     return combined;
