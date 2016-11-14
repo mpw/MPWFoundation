@@ -21,9 +21,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; };
-		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; };
-		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; };
+		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BC1D8BF836009538C5 /* MPWCombinerStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */; };
 		1F0200BD1D8BF836009538C5 /* MPWCombinerStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */; };
 		1F0200BE1D8BF836009538C5 /* MPWCombinerStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */; };
@@ -192,9 +192,9 @@
 		1FA2969B1CF74A6500F19039 /* MPWPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA296951CF74A6500F19039 /* MPWPipe.m */; };
 		1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
-		1FB6EB591DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; };
-		1FB6EB5A1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; };
-		1FB6EB5B1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; };
+		1FB6EB591DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB6EB5A1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB6EB5B1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB6EB5C1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6EB581DDA28B1002B82A5 /* MPWDelayStream.m */; };
 		1FB6EB5D1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6EB581DDA28B1002B82A5 /* MPWDelayStream.m */; };
 		1FB6EB5E1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6EB581DDA28B1002B82A5 /* MPWDelayStream.m */; };
@@ -781,7 +781,6 @@
 		1FB6EB6A1DDA31CD002B82A5 /* MPWStreamCompositionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWStreamCompositionTests.m; sourceTree = "<group>"; };
 		1FB93A941292012200D9D630 /* PhoneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneGeometry.h; sourceTree = "<group>"; };
 		1FBAABB81847651B00086047 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
-		1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWFoundation_prefix_header.h; sourceTree = "<group>"; };
 		1FC9240705C597EF008047EB /* MPWObjectReference.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObjectReference.m; sourceTree = "<group>"; };
 		1FC9240C05C5980E008047EB /* MPWObjectReference.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWObjectReference.h; sourceTree = "<group>"; };
 		1FC9241B05C5982A008047EB /* MPWIdentityDictionary.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWIdentityDictionary.h; sourceTree = "<group>"; };
@@ -969,7 +968,6 @@
 				1FE1C8C9042755B5005ADD8A /* SpinLocks.h */,
 				1F1E70E4052B228C000B8870 /* MPWKVCSoftPointer.h */,
 				1F1B8213052B27DA007DB19F /* MPWSoftPointerProxy.h */,
-				1FBBEFD70E11EF6400977797 /* MPWFoundation_prefix_header.h */,
 			);
 			name = Headers;
 			path = Classes;
@@ -2139,7 +2137,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -2158,6 +2156,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -2212,7 +2211,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: 6 Wunderkinder GmbH";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -2231,6 +2230,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -2360,7 +2360,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: 6 Wunderkinder GmbH";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -2379,6 +2379,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -3078,7 +3079,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -3097,6 +3098,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -3122,7 +3124,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -3141,6 +3143,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -3195,7 +3198,7 @@
 				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: 6 Wunderkinder GmbH (QA2G25RMZ4)";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -3214,6 +3217,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -3343,7 +3347,7 @@
 				CODE_SIGN_IDENTITY = "Developer ID Application: 6 Wunderkinder GmbH";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
-				DEFINES_MODULE = NO;
+				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = "";
@@ -3362,6 +3366,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",

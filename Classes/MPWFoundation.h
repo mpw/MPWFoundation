@@ -64,7 +64,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWASCII85Stream.h>
 #import <MPWFoundation/MPWBlockFilterStream.h>
 #import <MPWFoundation/MPWBlockTargetStream.h>
-
+#import <MPWFoundation/MPWCombinerStream.h>
+#import <MPWFoundation/MPWDelayStream.h>
 
 #import <MPWFoundation/MPWTrampoline.h>
 #import <MPWFoundation/MPWIgnoreTrampoline.h>
