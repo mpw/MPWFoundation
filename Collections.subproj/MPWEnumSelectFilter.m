@@ -48,8 +48,7 @@ CACHING_ALLOC( quickFilter, 30, NO )
 
 +testSelectors
 {
-	return [NSArray arrayWithObjects:		// nothing for now
-		nil];
+	return @[];         // no tests (and don't want superclass tests)
 }
 
 

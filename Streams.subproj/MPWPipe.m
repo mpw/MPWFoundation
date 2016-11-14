@@ -69,10 +69,16 @@
     [self connect];
 }
 
+-(void)writeObject:(id)anObject sender:aStream
+{
+    [self.filters.firstObject writeObject:anObject sender:aStream];
+}
+
 -(void)writeObject:(id)anObject
 {
-    [self.filters.firstObject writeObject:anObject];
+    [self.filters.firstObject writeObject:anObject sender:self];
 }
+
 
 -(void)setErrorTarget:newErrorTarget
 {

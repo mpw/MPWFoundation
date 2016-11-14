@@ -21,12 +21,17 @@ idAccessor( block, setBlock )
     return s;
 }
 
--(void)writeObject:(id)anObject
+-(void)writeObject:(id)anObject sender:aSender
 {
     filterBlock theFilter = (filterBlock)[self block];
     if ( theFilter) {
-        [target writeObject:theFilter(anObject)];
+        [target writeObject:theFilter(anObject) sender:aSender];
     }
+}
+
+-(void)writeObject:(id)anObject
+{
+    [self writeObject:anObject sender:nil];
 }
 
 -(void)dealloc
