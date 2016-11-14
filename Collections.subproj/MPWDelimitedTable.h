@@ -6,9 +6,11 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <Foundation/Foundation.h>
 
-@interface MPWDelimitedTable : MPWObject
+@class MPWIntArray,MPWObjectCache;
+
+@interface MPWDelimitedTable : NSObject
 {
     NSData  *data;
     unsigned const char *bytes;

@@ -67,6 +67,25 @@ DEALLOC(
 
 
 @implementation MPWBinaryPlist
+{
+    NSData  *data;
+    const unsigned char *bytes;
+    long  dataLen;
+    long    rootIndex;
+    long    numObjects;
+    long    offsetTableLocation;
+    long    *offsets;
+    id      *objects;
+    int     offsetIntegerSizeInBytes;
+    int     offsetReferenceSizeInBytes;
+    BOOL    lazyArray;
+    long     currentObjectNo;
+    long     currentKeyNo;
+    MPWIntArray *objectNoStack;
+    MPWIntArray *keyNoStack;
+    
+    long    currentDictOffset,currentDictLength,currentDictIndex;
+}
 
 objectAccessor(NSData, data, setData)
 objectAccessor(MPWIntArray, objectNoStack, setObjectNoStack)

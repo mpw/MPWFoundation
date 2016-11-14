@@ -11,25 +11,7 @@
 @class MPWIntArray;
 
 @interface MPWBinaryPlist : MPWObject
-{
-    NSData  *data;
-    const unsigned char *bytes;
-    long  dataLen;
-    long    rootIndex;
-    long    numObjects;
-    long    offsetTableLocation;
-    long    *offsets;
-    id      *objects;
-    int     offsetIntegerSizeInBytes;
-    int     offsetReferenceSizeInBytes;
-    BOOL    lazyArray;
-    long     currentObjectNo;
-    long     currentKeyNo;
-    MPWIntArray *objectNoStack;
-    MPWIntArray *keyNoStack;
-    
-    long    currentDictOffset,currentDictLength,currentDictIndex;
-}
+
 
 typedef void (^ArrayElementBlock)(MPWBinaryPlist* plist,long offset,long anIndex);
 

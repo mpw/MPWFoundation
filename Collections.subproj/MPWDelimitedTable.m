@@ -11,6 +11,7 @@
 #import "MPWSubData.h"
 #import "MPWFuture.h"
 #import "MPWSmallStringTable.h"
+#import "MPWObjectCache.h"
 
 @implementation MPWDelimitedTable
 

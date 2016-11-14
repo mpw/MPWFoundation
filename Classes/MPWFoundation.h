@@ -31,76 +31,83 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <Foundation/Foundation.h>
-#import <MPWFoundation/AccessorMacros.h>
-#import <MPWFoundation/CodingAdditions.h>
-#import <MPWFoundation/DebugMacros.h>
-#import <MPWFoundation/MPWObject.h>
-#import <MPWFoundation/NSInvocationAdditions.h>
-#import <MPWFoundation/MPWRuntimeAdditions.h>
-#import <MPWFoundation/MPWMsgExpression.h>
-#import <MPWFoundation/NSStringAdditions.h>
-#import <MPWFoundation/NSObjectAdditions.h>
-#import <MPWFoundation/MPWAssociation.h>
-#import <MPWFoundation/MPWNumber.h>
-#import <MPWFoundation/MPWFloat.h>
+#import "Foundation/Foundation.h"
+#import "MPWFoundation/AccessorMacros.h"
+#import "MPWFoundation/CodingAdditions.h"
+#import "MPWFoundation/DebugMacros.h"
+#import "MPWFoundation/MPWObject.h"
+#import "MPWFoundation/NSInvocationAdditions.h"
+#import "MPWFoundation/MPWFastInvocation.h"
+#import "MPWFoundation/MPWBlockInvocation.h"
+#import "MPWFoundation/MPWRuntimeAdditions.h"
+#import "MPWFoundation/MPWMsgExpression.h"
+#import "MPWFoundation/NSStringAdditions.h"
+#import "MPWFoundation/NSObjectAdditions.h"
+#import "MPWFoundation/MPWAssociation.h"
+#import "MPWFoundation/MPWNumber.h"
+#import "MPWFoundation/MPWFloat.h"
 
-#import <MPWFoundation/MPWBlockInvocable.h>
-#import <MPWFoundation/NSNil.h>
+#import "MPWFoundation/MPWBlockInvocable.h"
+#import "MPWFoundation/NSNil.h"
 
 
 
-#import <MPWFoundation/MPWStream.h>
-#import <MPWFoundation/MPWFlattenStream.h>
-#import <MPWFoundation/MPWByteStream.h>
-#import <MPWFoundation/MPWPipe.h>
-#import <MPWFoundation/MPWHierarchicalStream.h>
-#import <MPWFoundation/MPWThreadSwitchStream.h>
-#import <MPWFoundation/MPWConvertFromJSONStream.h>
-#import <MPWFoundation/MPWDict2ObjStream.h>
-#import <MPWFoundation/MPWObjectCreatorStream.h>
-#import <MPWFoundation/MPWURLFetchStream.h>
-#import <MPWFoundation/MPWURLPostStream.h>
-#import <MPWFoundation/MPWASCII85Stream.h>
-#import <MPWFoundation/MPWBlockFilterStream.h>
-#import <MPWFoundation/MPWBlockTargetStream.h>
-#import <MPWFoundation/MPWCombinerStream.h>
-#import <MPWFoundation/MPWDelayStream.h>
+#import "MPWFoundation/MPWStream.h"
+#import "MPWFoundation/MPWFlattenStream.h"
+#import "MPWFoundation/MPWByteStream.h"
+#import "MPWFoundation/MPWPipe.h"
+#import "MPWFoundation/MPWHierarchicalStream.h"
+#import "MPWFoundation/MPWThreadSwitchStream.h"
+#import "MPWFoundation/MPWConvertFromJSONStream.h"
+#import "MPWFoundation/MPWDict2ObjStream.h"
+#import "MPWFoundation/MPWObjectCreatorStream.h"
+#import "MPWFoundation/MPWURLFetchStream.h"
+#import "MPWFoundation/MPWURLPostStream.h"
+#import "MPWFoundation/MPWASCII85Stream.h"
+#import "MPWFoundation/MPWBlockFilterStream.h"
+#import "MPWFoundation/MPWBlockTargetStream.h"
+#import "MPWFoundation/MPWCombinerStream.h"
+#import "MPWFoundation/MPWDelayStream.h"
+#import "MPWFoundation/MPWURLRequest.h"
 
-#import <MPWFoundation/MPWTrampoline.h>
-#import <MPWFoundation/MPWIgnoreTrampoline.h>
-//#import <MPWFoundation/MPWEnumFilter.h>
-#import <MPWFoundation/NSObjectFiltering.h>
-#import <MPWFoundation/MPWEnumeratorEnumerator.h>
-#import <MPWFoundation/MPWRealArray.h>
-#import <MPWFoundation/MPWUniqueString.h>
-#import <MPWFoundation/MPWUShortArray.h>
+#import "MPWFoundation/MPWTrampoline.h"
+#import "MPWFoundation/MPWIgnoreTrampoline.h"
+//#import "MPWFoundation/MPWEnumFilter.h"
+#import "MPWFoundation/NSObjectFiltering.h"
+#import "MPWFoundation/MPWEnumeratorEnumerator.h"
+#import "MPWFoundation/MPWRealArray.h"
+#import "MPWFoundation/MPWUniqueString.h"
+#import "MPWFoundation/MPWUShortArray.h"
 
 #if !__has_feature(objc_arc)
-#import <MPWFoundation/MPWObjectCache.h>
+#import "MPWFoundation/MPWObjectCache.h"
 #endif
 
-#import <MPWFoundation/MPWSubData.h>
-#import <MPWFoundation/MPWScanner.h>
-#import <MPWFoundation/MPWPoint.h>
-#import <MPWFoundation/MPWRect.h>
-#import <MPWFoundation/NSDictAdditions.h>
-#import <MPWFoundation/MPWIdentityDictionary.h>
-#import <MPWFoundation/MPWObjectReference.h>
+#import "MPWFoundation/MPWSubData.h"
+#import "MPWFoundation/MPWBinaryPlist.h"
+#import "MPWFoundation/MPWDelimitedTable.h"
+#import "MPWFoundation/MPWSmallStringTable.h"
+#import "MPWFoundation/MPWSmallStringTable.h"
+#import "MPWFoundation/MPWScanner.h"
+#import "MPWFoundation/MPWPoint.h"
+#import "MPWFoundation/MPWRect.h"
+#import "MPWFoundation/NSDictAdditions.h"
+#import "MPWFoundation/MPWIdentityDictionary.h"
+#import "MPWFoundation/MPWObjectReference.h"
 
-#import <MPWFoundation/NSThreadInterThreadMessaging.h>
-#import <MPWFoundation/bytecoding.h>
-#import <MPWFoundation/NSRectAdditions.h>
-#import <MPWFoundation/NSBundleConveniences.h>
-#import <MPWFoundation/MPWIntArray.h>
-#import <MPWFoundation/NSNumberArithmetic.h>
+#import "MPWFoundation/NSThreadInterThreadMessaging.h"
+#import "MPWFoundation/bytecoding.h"
+#import "MPWFoundation/NSRectAdditions.h"
+#import "MPWFoundation/NSBundleConveniences.h"
+#import "MPWFoundation/MPWIntArray.h"
+#import "MPWFoundation/NSNumberArithmetic.h"
 
 
 
 #ifndef MIN
-#define MIN(a,b)  ((a)<(b) ? (a):(b))
+#define MIN(a,b)  ((a)"(b) ? (a):(b))
 #endif
 #ifndef MAX
-#define MAX(a,b)  ((a)>(b) ? (a):(b))
+#define MAX(a,b)  ((a)"(b) ? (a):(b))
 #endif
 
