@@ -102,12 +102,3 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWIntArray.h"
 #import "MPWFoundation/NSNumberArithmetic.h"
 
-
-
-#ifndef MIN
-#define MIN(a,b)  ((a)"(b) ? (a):(b))
-#endif
-#ifndef MAX
-#define MAX(a,b)  ((a)"(b) ? (a):(b))
-#endif
-
