@@ -67,7 +67,10 @@
 -(void)writeObject:(id)anObject sender:aSender
 {
     [self insertNewObject:anObject forSender:aSender];
-    [self.target writeObject:[self combinedResult] sender:self];
+    NSArray *combined=[self combinedResult];
+    if ( combined) {
+        [self.target writeObject:combined sender:self];
+    }
 }
 
 -(void)dealloc
@@ -105,16 +108,39 @@
 }
 
 
-+(void)testIncompleteAllowed
++(void)testNoNullsGetPassed
 {
+    static BOOL gotNil=NO;
+    static BOOL *gotNilPtr=&gotNil;
     MPWCombinerStream *combiner=[self stream];
-    NSMutableArray *testTarget=combiner.target;
+    MPWBlockFilterStream *nilChecker=[MPWBlockFilterStream streamWithBlock:^(id arg){
+        if ( arg==nil) {
+                *gotNilPtr=YES;
+        }
+        return arg;
+    }];
+    
+    NSMutableArray *testTarget=[NSMutableArray array];
+    nilChecker.target=testTarget;
+    combiner.target=nilChecker;
+    MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
+    MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
+    [combiner setSources:@[ source1, source2]];
+    INTEXPECT( testTarget.count, 0, @"haven't written anything yet");
+    [source2 writeObject:@"test1 from source 2"];
+    INTEXPECT( testTarget.count, 0, @"haven't written to both yet");
+    [source2 writeObject:@"test2 from source 2"];
+    INTEXPECT( testTarget.count, 0, @"still haven't written to both yet");
+    [source1 writeObject:@"test1 from source 1"];
+    INTEXPECT( testTarget.count, 1, @"now written to both");
+    EXPECTFALSE(gotNil, @"should not be passing nils");
 }
 
 +testSelectors
 {
     return @[
              @"testBasicCombinationSemantics",
+             @"testNoNullsGetPassed",
              ];
 }
 

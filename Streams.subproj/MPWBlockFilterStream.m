@@ -25,7 +25,10 @@ idAccessor( block, setBlock )
 {
     filterBlock theFilter = (filterBlock)[self block];
     if ( theFilter) {
-        [target writeObject:theFilter(anObject) sender:aSender];
+        id processed =theFilter(anObject);
+        if ( processed ) {
+            [target writeObject:processed sender:aSender];
+        }
     }
 }
 
