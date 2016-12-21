@@ -139,7 +139,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     int offset=offsets[anIndex];
     int nextOffset=offsets[anIndex+1];
     int len = nextOffset-offset-[self eolLength];
-    return [self subdataWithStart:(const char*)bytes+offset length:len ];
+    return [self subdataWithStart:bytes+offset length:len ];
 }
 
 -(NSString*)headerLine

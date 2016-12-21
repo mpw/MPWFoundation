@@ -59,6 +59,17 @@
     }
 }
 
+-(NSNumber*)interestPercent:(NSNumber*)interest overYears:(NSNumber*)years
+{
+    double factor=interest.doubleValue / 100.0 + 1.0;
+    double start=self.doubleValue;
+    int numYears=years.intValue;
+    for (int i=0;i<numYears;i++) {
+        start*=factor;
+    }
+    return @(start);
+}
+
 defineArithOp( add, + )
 defineArithOp( mul, * )
 defineArithOp( sub, - )
