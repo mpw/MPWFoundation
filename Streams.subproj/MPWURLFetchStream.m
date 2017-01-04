@@ -178,7 +178,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     NSDictionary *userInfo=
                     @{ @"url": resolvedRequest.URL,
                        @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                       @"content": [data stringValue],
+                       @"content": data ? [data stringValue] : @"",
                        @"request": request,
                        };
                     error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];

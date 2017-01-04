@@ -60,7 +60,7 @@
     [delayer writeObject:@"hello"];
     NSTimeInterval after=[NSDate timeIntervalSinceReferenceDate];
     EXPECTTRUE( after-before > toDelay, @"should have delayed at least 5ms");
-    EXPECTTRUE( after-before < (toDelay*1.5), @"should have delayed at most 7.5ms");
+    EXPECTTRUE( after-before < (toDelay*10), @"should have delayed at most 50ms");
     IDEXPECT( [delayer.target firstObject], @"hello" , @"did write the object");
     
 }
