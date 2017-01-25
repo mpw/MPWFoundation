@@ -44,6 +44,8 @@
             filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString(filter)];
         } else if ( [filter respondsToSelector:@selector(value:)] ) {
             filter=[MPWBlockFilterStream streamWithBlock:filter];
+        } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
+            filter=[(Class)filter streamWithTarget:nil];
         }
         [processedFilters addObject:filter];
     }
@@ -205,10 +207,20 @@ typedef id (^ZeroArgBlock)(void);
     NSArray *filters =
     @[
       ^(NSString *s){ return [s stringByAppendingString:@" World!"]; },
-      ];
+       ];
     MPWPipe *pipe=[[self alloc] initWithFilters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
+}
+
+
++(void)testCanUseClassToSpecifyFilterOfThatClass
+{
+    NSArray *filters = @[[MPWFlattenStream class] ];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@[ @"Hello", @"World"]];
+    IDEXPECT([[pipe target] firstObject], @"Hello", @"Hello world, processed");
+    IDEXPECT([[pipe target] lastObject], @"World", @"Hello world, processed");
 }
 
 
@@ -220,6 +232,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testMultiElementStreamCanBeAddedToPipe",
              @"testCanUseStringsToSpecifyMessageFilter",
              @"testCanUseBlockToSpecifyBlockFilter",
+             @"testCanUseClassToSpecifyFilterOfThatClass",
              ];
 }
 
