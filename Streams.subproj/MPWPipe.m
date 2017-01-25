@@ -26,12 +26,34 @@
 }
 
 
--(instancetype)initWithFilters:(NSArray *)filters
+
+
+-(instancetype)initWithProcessedFilters:(NSArray *)filters
 {
     self=[super initWithTarget:[NSMutableArray array]];
     self.filters=filters;
     [self connect];
     return self;
+}
+
+-(NSArray*)processFilters:(NSArray*)filters
+{
+    NSMutableArray *processedFilters=[NSMutableArray arrayWithCapacity:filters.count];
+    for ( id filter in filters ) {
+        if ( [filter isKindOfClass:[NSString class]]) {
+            filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString(filter)];
+        } else if ( [filter respondsToSelector:@selector(value:)] ) {
+            filter=[MPWBlockFilterStream streamWithBlock:filter];
+        }
+        [processedFilters addObject:filter];
+    }
+    return processedFilters;
+}
+
+-(instancetype)initWithFilters:(NSArray *)filters
+{
+    return [self initWithProcessedFilters:[self processFilters:filters]];
+
 }
 
 -(NSArray *)normalizedFilters
@@ -121,6 +143,20 @@
 {
     return [NSString stringWithFormat:@"<%@:%p: filters: %@ target: %@>",[self class],self,self.filters,self.target];
 }
+typedef id (^OneArgBlock)(id randomArgument);
+typedef id (^ZeroArgBlock)(void);
+
++(void)initialize
+{
+    static int initialized=NO;
+    if  ( !initialized) {
+        Class blockClass=NSClassFromString(@"NSBlock");
+        IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id argument){ ((OneArgBlock)blockSelf)(argument); } );
+        class_addMethod(blockClass, @selector(value:), theImp, "@@:@");
+        initialized=YES;
+    }
+}
+
 
 @end
 
@@ -139,7 +175,7 @@
     IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
 }
 
-+(void)testMulteElementStreamCanBeAddedToPipe
++(void)testMultiElementStreamCanBeAddedToPipe
 {
     MPWStream *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
     MPWStream *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
@@ -155,11 +191,35 @@
     IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
 }
 
+
++(void)testCanUseStringsToSpecifyMessageFilter
+{
+    NSArray *filters = @[ @"uppercaseString"];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@"Hello"];
+    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+}
+
++(void)testCanUseBlockToSpecifyBlockFilter
+{
+    NSArray *filters =
+    @[
+      ^(NSString *s){ return [s stringByAppendingString:@" World!"]; },
+      ];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@"Hello"];
+    IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
+}
+
+
+
 +(NSArray *)testSelectors
 {
     return @[
              @"testBasicPipe",
-             @"testMulteElementStreamCanBeAddedToPipe",
+             @"testMultiElementStreamCanBeAddedToPipe",
+             @"testCanUseStringsToSpecifyMessageFilter",
+             @"testCanUseBlockToSpecifyBlockFilter",
              ];
 }
 
