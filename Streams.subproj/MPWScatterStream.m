@@ -30,7 +30,8 @@
 
 -(void)setTarget:(id)newTarget
 {
-    for ( id  scatterTarget in self.target) {
+
+    for ( id  scatterTarget in self.filters) {
         if ( [scatterTarget respondsToSelector:@selector(setTarget:)] ) {
             [(MPWStream*)scatterTarget setTarget:newTarget];
         }
@@ -50,13 +51,17 @@
     return self;
 }
 
--(void)writeObject:(id)anObject
+-(void)writeObject:(id)anObject sender:aSender
 {
-    NSLog(@"filters: %@",self.filters);
     for ( id <Streaming> scatterTarget in self.filters ) {
-        NSLog(@"write: %@ to %@",anObject,scatterTarget);
-        [scatterTarget writeObject:anObject];
+        [scatterTarget writeObject:anObject sender:aSender];
     }
+}
+
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p filters: %@>",[self class],self,self.filters];
 }
 
 

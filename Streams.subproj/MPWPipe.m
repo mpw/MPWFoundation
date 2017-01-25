@@ -9,6 +9,7 @@
 #import "MPWPipe.h"
 #import "MPWMessageFilterStream.h"
 #import "MPWBlockFilterStream.h"
+#import "MPWScatterStream.h"
 
 @interface MPWPipe()
 
@@ -36,18 +37,36 @@
     return self;
 }
 
+-(MPWStream *)processFilterSpec:filter
+{
+    if ( [filter isKindOfClass:[NSString class]]) {
+        filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString(filter)];
+    } else if ( [filter respondsToSelector:@selector(value:)] ) {
+        filter=[MPWBlockFilterStream streamWithBlock:filter];
+    } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
+        filter=[(Class)filter streamWithTarget:nil];
+    } else if ( [filter isKindOfClass:[NSArray class]]) {
+        NSArray *scatterTargetSpecs=(NSArray*)filter;
+        NSMutableArray *scatterFilters=[NSMutableArray array];
+        for ( id fspec in scatterTargetSpecs) {
+            if ( [fspec isKindOfClass:[NSArray class]]) {
+                fspec=[[self class] filters:fspec];
+            } else {
+                fspec=[self processFilterSpec:fspec];
+            }
+            [scatterFilters addObject:fspec];
+        }
+        filter=[MPWScatterStream filters:scatterFilters];
+    }
+    return filter;
+}
+
+
 -(NSArray*)processFilters:(NSArray*)filters
 {
     NSMutableArray *processedFilters=[NSMutableArray arrayWithCapacity:filters.count];
     for ( id filter in filters ) {
-        if ( [filter isKindOfClass:[NSString class]]) {
-            filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString(filter)];
-        } else if ( [filter respondsToSelector:@selector(value:)] ) {
-            filter=[MPWBlockFilterStream streamWithBlock:filter];
-        } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
-            filter=[(Class)filter streamWithTarget:nil];
-        }
-        [processedFilters addObject:filter];
+        [processedFilters addObject:[self processFilterSpec:filter]];
     }
     return processedFilters;
 }
@@ -217,13 +236,39 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseClassToSpecifyFilterOfThatClass
 {
     NSArray *filters = @[[MPWFlattenStream class] ];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[self filters:filters];
     [pipe writeObject:@[ @"Hello", @"World"]];
     IDEXPECT([[pipe target] firstObject], @"Hello", @"Hello world, processed");
     IDEXPECT([[pipe target] lastObject], @"World", @"Hello world, processed");
 }
 
++(void)testCanUseNestedArrayToSpecifyFanout
+{
+    NSArray *filters = @[ @[ @"uppercaseString", @"lowercaseString"] ];
+    MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
+    NSMutableArray *target=[NSMutableArray array];
+    [pipe.filters.lastObject setTarget:target];
+    [pipe writeObject: @"Hello"];
+    
+    IDEXPECT([target firstObject], @"HELLO", @"processed by first branch");
+    IDEXPECT([target lastObject], @"hello", @"processed by second branch");
+}
 
++(void)testFanoutCanContainPipes
+{
+    NSArray *filters = @[
+                         @[ @[ @"uppercaseString", ],
+                            @[ @"lowercaseString", ^(NSString *s){ return [s stringByAppendingString:@" World!"]; } ],
+                            ],
+                         ];
+    MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
+    NSMutableArray *target=[NSMutableArray array];
+    [pipe.filters.lastObject setTarget:target];
+    [pipe writeObject: @"Hello"];
+    
+    IDEXPECT([target firstObject], @"HELLO", @"processed by first branch");
+    IDEXPECT([target lastObject], @"hello World!", @"processed by second branch");
+}
 
 +(NSArray *)testSelectors
 {
@@ -233,6 +278,8 @@ typedef id (^ZeroArgBlock)(void);
              @"testCanUseStringsToSpecifyMessageFilter",
              @"testCanUseBlockToSpecifyBlockFilter",
              @"testCanUseClassToSpecifyFilterOfThatClass",
+             @"testCanUseNestedArrayToSpecifyFanout",
+             @"testFanoutCanContainPipes",
              ];
 }
 
