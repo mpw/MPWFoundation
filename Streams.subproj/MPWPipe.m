@@ -40,7 +40,15 @@
 -(MPWStream *)processFilterSpec:filter
 {
     if ( [filter isKindOfClass:[NSString class]]) {
-        filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString(filter)];
+        if ( [(NSString*)filter hasPrefix:@"-"]) {
+            filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString([filter substringFromIndex:1])];
+        } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
+            NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
+            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o objectForKey:key]; } copy]];
+        } else {
+            NSString *key=[filter copy];
+            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o valueForKey:key]; } copy]];
+        }
     } else if ( [filter respondsToSelector:@selector(value:)] ) {
         filter=[MPWBlockFilterStream streamWithBlock:filter];
     } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
@@ -215,10 +223,26 @@ typedef id (^ZeroArgBlock)(void);
 
 +(void)testCanUseStringsToSpecifyMessageFilter
 {
+    NSArray *filters = @[ @"-uppercaseString"];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@"Hello"];
+    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+}
+
++(void)testCanUseStringsToSpecifyValueForKey
+{
     NSArray *filters = @[ @"uppercaseString"];
     MPWPipe *pipe=[[self alloc] initWithFilters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+}
+
++(void)testCanUseStringsToSpecifyObjectForKey
+{
+    NSArray *filters = @[ @"[key1]"];
+    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    [pipe writeObject:@{ @"key1": @"Hello", @"key2": @"World"}];
+    IDEXPECT([[pipe target] firstObject], @"Hello", @"hello, extracted");
 }
 
 +(void)testCanUseBlockToSpecifyBlockFilter
@@ -244,7 +268,7 @@ typedef id (^ZeroArgBlock)(void);
 
 +(void)testCanUseNestedArrayToSpecifyFanout
 {
-    NSArray *filters = @[ @[ @"uppercaseString", @"lowercaseString"] ];
+    NSArray *filters = @[ @[ @"-uppercaseString", @"-lowercaseString"] ];
     MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
     NSMutableArray *target=[NSMutableArray array];
     [pipe.filters.lastObject setTarget:target];
@@ -257,8 +281,8 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testFanoutCanContainPipes
 {
     NSArray *filters = @[
-                         @[ @[ @"uppercaseString", ],
-                            @[ @"lowercaseString", ^(NSString *s){ return [s stringByAppendingString:@" World!"]; } ],
+                         @[ @[ @"-uppercaseString", ],
+                            @[ @"-lowercaseString", ^(NSString *s){ return [s stringByAppendingString:@" World!"]; } ],
                             ],
                          ];
     MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
@@ -276,6 +300,8 @@ typedef id (^ZeroArgBlock)(void);
              @"testBasicPipe",
              @"testMultiElementStreamCanBeAddedToPipe",
              @"testCanUseStringsToSpecifyMessageFilter",
+             @"testCanUseStringsToSpecifyValueForKey",
+             @"testCanUseStringsToSpecifyObjectForKey",
              @"testCanUseBlockToSpecifyBlockFilter",
              @"testCanUseClassToSpecifyFilterOfThatClass",
              @"testCanUseNestedArrayToSpecifyFanout",
