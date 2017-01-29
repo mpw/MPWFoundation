@@ -88,6 +88,10 @@
 		1F64206912CB19E200240B02 /* MPWResourceLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64206712CB19E200240B02 /* MPWResourceLoadRequest.m */; };
 		1F64207412CB1A3700240B02 /* MPWActiveDownload.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F64207212CB1A3700240B02 /* MPWActiveDownload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F64207512CB1A3700240B02 /* MPWActiveDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64207312CB1A3700240B02 /* MPWActiveDownload.m */; };
+		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; };
+		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; };
+		1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
+		1F71B6A71E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
 		1F75BB9E12D2589800E7ABB4 /* MPWPListBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F75BB9F12D2589800E7ABB4 /* MPWPListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */; };
 		1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -772,6 +776,8 @@
 		1F64207312CB1A3700240B02 /* MPWActiveDownload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWActiveDownload.m; sourceTree = "<group>"; };
 		1F6EF94808E5F82B0011386A /* MPWNamedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNamedData.h; sourceTree = "<group>"; };
 		1F6EF94908E5F82B0011386A /* MPWNamedData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNamedData.m; sourceTree = "<group>"; };
+		1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWExternalFilter.h; sourceTree = "<group>"; };
+		1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWExternalFilter.m; sourceTree = "<group>"; };
 		1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWPListBuilder.h; sourceTree = "<group>"; };
 		1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWPListBuilder.m; sourceTree = "<group>"; };
 		1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBinaryPListWriter.h; sourceTree = "<group>"; };
@@ -1189,6 +1195,8 @@
 				1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */,
 				1FA296941CF74A6500F19039 /* MPWPipe.h */,
 				1FA296951CF74A6500F19039 /* MPWPipe.m */,
+				1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */,
+				1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */,
 				1F3D01FC1D702902001A9732 /* MPWScatterStream.h */,
 				1F3D01FD1D702902001A9732 /* MPWScatterStream.m */,
 				1FF08F631D7061C400C6273F /* MPWNotificationStream.h */,
@@ -1476,6 +1484,7 @@
 				1FE37C451969773C00C9A378 /* NSEnumeratorFiltering.h in Headers */,
 				1FE37C311969770000C9A378 /* MPWFlattenStream.h in Headers */,
 				1FE37C421969773C00C9A378 /* MPWEnumeratorEnumerator.h in Headers */,
+				1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
 				1FE37C27196976C500C9A378 /* MPWAssociation.h in Headers */,
 				1FE37C4D1969784B00C9A378 /* MPWValueAccessor.h in Headers */,
 				1FE37C11196976C500C9A378 /* MPWNamedData.h in Headers */,
@@ -1656,6 +1665,7 @@
 				1FF8FDCB09B49D0100652476 /* MPWASCII85Stream.h in Headers */,
 				1FF8FDCC09B49D0100652476 /* MPWFilterStream.h in Headers */,
 				1FF8FDCD09B49D0100652476 /* MPWLZWStream.h in Headers */,
+				1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
 				1FF8FDCE09B49D0100652476 /* MPWRealArray.h in Headers */,
 				1FF8FDCF09B49D0100652476 /* MPWEnumFilter.h in Headers */,
 				1FF8FDD009B49D0100652476 /* MPWUShortArray.h in Headers */,
@@ -2035,6 +2045,7 @@
 				1F840E02193F50E400589595 /* MPWPListBuilder.m in Sources */,
 				1F840E03193F50E400589595 /* MPWMessageFilterStream.m in Sources */,
 				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
+				1F71B6A71E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */,
 				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
 				1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */,
 				1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */,
@@ -2203,6 +2214,7 @@
 				1F0200BC1D8BF836009538C5 /* MPWCombinerStream.m in Sources */,
 				1F7A22851B786F9000FF6C03 /* MPWPoint.m in Sources */,
 				1FB6EB6E1DDA31CD002B82A5 /* MPWStreamCompositionTests.m in Sources */,
+				1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */,
 				1FA296991CF74A6500F19039 /* MPWPipe.m in Sources */,
 				1FF8FE0B09B49D0100652476 /* MPWLZWStream.m in Sources */,
 				1FF8FE0C09B49D0100652476 /* MPWRealArray.m in Sources */,
@@ -4287,6 +4299,7 @@
 				1F4FC9981DF818AF00B35D27 /* Release Tiger */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
 		};
 		1F4FC9A11DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundationUITests" */ = {
 			isa = XCConfigurationList;
@@ -4300,6 +4313,7 @@
 				1F4FC99F1DF818AF00B35D27 /* Release Tiger */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
 		};
 		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
