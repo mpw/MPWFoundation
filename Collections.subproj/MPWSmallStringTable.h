@@ -3,7 +3,7 @@
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 29/3/07.
-//  Copyright 2007-2015 by Marcel Weiher. All rights reserved.
+//  Copyright 2007-2017 by Marcel Weiher. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

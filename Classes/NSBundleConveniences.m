@@ -4,7 +4,7 @@
 //
 //  Created by marcel on Fri Aug 31 2001.
 /*  
-    Copyright (c) 2001-2015 by Marcel Weiher.  All rights reserved.
+    Copyright (c) 2001-2017 by Marcel Weiher.  All rights reserved.
 
 
 Redistribution and use in source and binary forms, with or without
