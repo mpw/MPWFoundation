@@ -10,6 +10,7 @@
 #import "MPWMessageFilterStream.h"
 #import "MPWBlockFilterStream.h"
 #import "MPWScatterStream.h"
+#import "MPWExternalFilter.h"
 
 @interface MPWPipe()
 
@@ -45,6 +46,10 @@
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
             filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o objectForKey:key]; } copy]];
+        } else if ( [(NSString*)filter hasPrefix:@"!"]) {
+            NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
+            filter=[MPWExternalFilter filterWithCommandString:command];
+            [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];
             filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o valueForKey:key]; } copy]];
@@ -101,6 +106,10 @@
     return normalized;
 }
 
+-(void)close
+{
+    [[[self filters] do] close];
+}
 
 -(void)connect
 {
@@ -294,6 +303,14 @@ typedef id (^ZeroArgBlock)(void);
     IDEXPECT([target lastObject], @"hello World!", @"processed by second branch");
 }
 
+
++(void)testToUpperWithExternalFilter
+{
+    MPWPipe *pipe=[self filters:@[ @"!tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
+    [pipe writeObjectAndClose:@"Hello"];
+    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+}
+
 +(NSArray *)testSelectors
 {
     return @[
@@ -306,6 +323,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testCanUseClassToSpecifyFilterOfThatClass",
              @"testCanUseNestedArrayToSpecifyFanout",
              @"testFanoutCanContainPipes",
+             @"testToUpperWithExternalFilter",
              ];
 }
 

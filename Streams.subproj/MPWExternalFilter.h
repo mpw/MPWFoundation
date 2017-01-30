@@ -9,5 +9,6 @@
 #import <MPWFoundation/MPWFoundation.h>
 
 @interface MPWExternalFilter : MPWStream
++(instancetype)filterWithCommandString:(NSString *)command;
 
 @end

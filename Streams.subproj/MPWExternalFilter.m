@@ -64,12 +64,10 @@
     self=[super initWithTarget:[self defaultTarget]];
     ;
     if ( [self runCommand:command] ) {
-        NSLog(@"dispatch reader");
         [NSThread detachNewThreadWithBlock:^{
             [self readFromStreamAndWriteToTarget];
         }];
     } else {
-        NSLog(@"couldn't popen(%@)",command);
         self=nil;
     }
     return self;
@@ -77,39 +75,37 @@
 
 
 
--(void)writeObject:(id)anObject
+-(void)writeObject:(id)anObject sender:aSender
 {
+    NSLog(@"will write: %@",anObject);
     @autoreleasepool {
         NSData *dataToWrite=[anObject asData];
-        NSLog(@"will write %d bytes",(int)[dataToWrite length]);
         int written=write( self.fdout, [dataToWrite bytes], [dataToWrite length] );
-        NSLog(@"did write %d bytes",written);
     }
+    NSLog(@"did write: %@",anObject);
 }
 
 
 -(void)readFromStreamAndWriteToTarget
 {
     char buffer[8200];
-    NSLog(@"before read");
     int actual=0;
+    NSLog(@"read loop");
     while ( (actual=read(self.fdin, buffer, 8192)) > 0 ) {
-        NSLog(@"did read %d",actual);
+        NSLog(@"did read %d bytes",actual);
         @autoreleasepool {
             NSData *dataToWrite=[NSData dataWithBytes:buffer length:strlen(buffer)];
-            NSLog(@"got %@",[dataToWrite stringValue]);
-            [target writeObject:dataToWrite];
+            [target writeObject:dataToWrite sender:self];
 
         }
     }
-    NSLog(@"end of read loop");
+    NSLog(@"done: read loop");
 }
 
 -(void)closeLocal
 {
     NSLog(@"will close");
     close(self.fdout);
-    NSLog(@"did close, will waitpid()");
     int stat_loc=0;
     waitpid( self.pid,&stat_loc, 0 );
     NSLog(@"did waitpid()");
