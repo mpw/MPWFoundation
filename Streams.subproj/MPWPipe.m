@@ -111,6 +111,11 @@
     [[[self filters] do] close];
 }
 
+-(void)flush
+{
+    [[[self filters] do] flush];
+}
+
 -(void)connect
 {
     self.filters=[self normalizedFilters];

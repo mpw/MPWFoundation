@@ -115,7 +115,7 @@
 //    NSLog(@"done: read loop");
 }
 
--(void)closeLocal
+-(void)flushLocal
 {
 //    NSLog(@"will close");
     close(self.fdout);
