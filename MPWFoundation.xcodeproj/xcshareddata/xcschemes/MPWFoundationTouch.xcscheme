@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0820"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,16 +14,16 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1F4FC66810F7F6AC00376799"
-               BuildableName = "libMPWFoundationTouch.a"
-               BlueprintName = "libMPWFoundationTouch"
+               BlueprintIdentifier = "1F840DA4193F505700589595"
+               BuildableName = "MPWFoundationTouch.framework"
+               BlueprintName = "MPWFoundationTouch"
                ReferencedContainer = "container:MPWFoundation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Development"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -33,7 +33,7 @@
       </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Development"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1F4FC66810F7F6AC00376799"
-            BuildableName = "libMPWFoundationTouch.a"
-            BlueprintName = "libMPWFoundationTouch"
+            BlueprintIdentifier = "1F840DA4193F505700589595"
+            BuildableName = "MPWFoundationTouch.framework"
+            BlueprintName = "MPWFoundationTouch"
             ReferencedContainer = "container:MPWFoundation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -60,9 +60,18 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1F840DA4193F505700589595"
+            BuildableName = "MPWFoundationTouch.framework"
+            BlueprintName = "MPWFoundationTouch"
+            ReferencedContainer = "container:MPWFoundation.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Release">
+      buildConfiguration = "Development">
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Release"
