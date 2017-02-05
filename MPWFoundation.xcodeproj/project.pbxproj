@@ -2520,7 +2520,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2669,7 +2669,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3353,7 +3353,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3398,7 +3398,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3444,7 +3444,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4064,7 +4064,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4213,7 +4213,7 @@
 					"-fstack-protector-strong",
 				);
 				PRODUCT_NAME = MPWFoundationTouch;
-				PUBLIC_HEADERS_FOLDER_PATH = MPWFoundation;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
