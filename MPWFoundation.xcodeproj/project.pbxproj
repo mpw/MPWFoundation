@@ -788,7 +788,7 @@
 		1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocation.m; sourceTree = "<group>"; };
 		1F82D18C059D880200F38A88 /* MPWIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIntArray.h; sourceTree = "<group>"; };
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
-		1F840DA5193F505700589595 /* MPWFoundationTouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundationTouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F840DA5193F505700589595 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F840DA8193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F840DB5193F505700589595 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F840DB6193F505700589595 /* MPWFoundationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFoundationTests.m; sourceTree = "<group>"; };
@@ -1320,7 +1320,7 @@
 			isa = PBXGroup;
 			children = (
 				1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */,
-				1F840DA5193F505700589595 /* MPWFoundationTouch.framework */,
+				1F840DA5193F505700589595 /* MPWFoundation.framework */,
 				1FCF25D41CF3983B00AC64CE /* MPWFoundationWatch.framework */,
 				1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */,
 				1F4FC98B1DF818AF00B35D27 /* TestMPWFoundationUITests.xctest */,
@@ -1808,7 +1808,7 @@
 			);
 			name = MPWFoundationTouch;
 			productName = MPWFoundation;
-			productReference = 1F840DA5193F505700589595 /* MPWFoundationTouch.framework */;
+			productReference = 1F840DA5193F505700589595 /* MPWFoundation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		1FCF25D31CF3983B00AC64CE /* MPWFoundationWatch */ = {
@@ -2519,7 +2519,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -2668,7 +2668,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3352,7 +3352,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3397,7 +3397,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3443,7 +3443,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -4063,7 +4063,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -4212,7 +4212,7 @@
 					"-fpie",
 					"-fstack-protector-strong",
 				);
-				PRODUCT_NAME = MPWFoundationTouch;
+				PRODUCT_NAME = MPWFoundation;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
