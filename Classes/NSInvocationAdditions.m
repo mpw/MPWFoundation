@@ -51,7 +51,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     id retval=nil;
     [self invokeWithTarget:target];
-    [self getReturnValue:&retval];
+    int returnLength=[[self methodSignature] methodReturnLength];
+    if (returnLength > 0 && returnLength <= sizeof retval) {
+        [self getReturnValue:&retval];
+    }
     return retval;
 }
 

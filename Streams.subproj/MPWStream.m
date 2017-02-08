@@ -187,7 +187,7 @@ SEL visSel;
 {
     [self writeObjectAndFlush:anObject];
     id result=[self finalTarget];
-    if ( [result respondsToSelector:@selector(firstObject)]) {
+    if ( [result respondsToSelector:@selector(firstObject)] && [result count]==1) {
         NSMutableArray *a=result;
         result=[a firstObject];
         [a removeObjectAtIndex:0];

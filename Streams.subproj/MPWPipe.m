@@ -42,7 +42,12 @@
 {
     if ( [filter isKindOfClass:[NSString class]]) {
         if ( [(NSString*)filter hasPrefix:@"-"]) {
-            filter=[MPWMessageFilterStream streamWithSelector:NSSelectorFromString([filter substringFromIndex:1])];
+            SEL selector=NSSelectorFromString([filter substringFromIndex:1]);
+            if (selector) {
+                filter=[MPWMessageFilterStream streamWithSelector:selector];
+            } else {
+                [NSException raise:@"SelectorNotFound" format:@"%@ selector not found: %@",[self className],filter];
+            }
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
             filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o objectForKey:key]; } copy]];
@@ -316,6 +321,19 @@ typedef id (^ZeroArgBlock)(void);
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
 
++(void)testRaiseOnUnknownSelector
+{
+    @try {
+        [self filters:@[ @"-bozoStringStringNotASelector" ]];
+        EXPECTFALSE(true, @"shouldn't get here");
+    } @catch (NSException * e ){
+        IDEXPECT( [e reason], @"SelectorNotFound",@"exception reason");
+    }
+
+
+}
+
+
 +(NSArray *)testSelectors
 {
     return @[
@@ -329,6 +347,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testCanUseNestedArrayToSpecifyFanout",
              @"testFanoutCanContainPipes",
              @"testToUpperWithExternalFilter",
+//             @"testRaiseOnUnknownSelector",
              ];
 }
 

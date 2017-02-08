@@ -180,6 +180,8 @@ static int superChaintTesterCounter=0;
     return [NSArray arrayWithObjects:
             @"testIfResponds",
             @"testSuperchainCaller",
+            @"testIfRespondsWithVoidReturn",
+
             nil];
 }
 
@@ -190,6 +192,20 @@ static int superChaintTesterCounter=0;
     id  str = [a stringValue];
     IDEXPECT( str, a ,@"safely sending should yield same value if exists" );
     [[a ifResponds] stringValue1];
+}
+
+static int tester=0;
++(void)tester
+{
+    tester=42;
+    return ;
+}
+
++(void)testIfRespondsWithVoidReturn
+{
+    tester=0;
+    [[self ifResponds] tester];
+    INTEXPECT(tester,42,@"should have called the test method");
 }
 
 +(void)testSuperchainCaller

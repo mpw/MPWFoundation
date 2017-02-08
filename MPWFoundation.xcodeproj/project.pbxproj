@@ -2359,7 +2359,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -2433,7 +2433,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -2582,7 +2582,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3858,7 +3858,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3903,7 +3903,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3977,7 +3977,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4126,7 +4126,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MODULEMAP_FILE = module.map;
 				OTHER_CFLAGS = (
 					"-fpie",
