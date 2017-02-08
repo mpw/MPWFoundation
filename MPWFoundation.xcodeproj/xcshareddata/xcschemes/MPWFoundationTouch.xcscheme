@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F840DA4193F505700589595"
-               BuildableName = "MPWFoundationTouch.framework"
+               BuildableName = "MPWFoundation.framework"
                BlueprintName = "MPWFoundationTouch"
                ReferencedContainer = "container:MPWFoundation.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F840DA4193F505700589595"
-            BuildableName = "MPWFoundationTouch.framework"
+            BuildableName = "MPWFoundation.framework"
             BlueprintName = "MPWFoundationTouch"
             ReferencedContainer = "container:MPWFoundation.xcodeproj">
          </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F840DA4193F505700589595"
-            BuildableName = "MPWFoundationTouch.framework"
+            BuildableName = "MPWFoundation.framework"
             BlueprintName = "MPWFoundationTouch"
             ReferencedContainer = "container:MPWFoundation.xcodeproj">
          </BuildableReference>
