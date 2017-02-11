@@ -7,12 +7,16 @@
 //
 
 #import "MPWExternalFilter.h"
+#import "MPWFDStreamSource.h"
+
+
 
 @interface MPWExternalFilter ()
 
 @property (nonatomic, strong) NSString *commandString;
 @property (nonatomic, assign) int fdout,fdin,pid;
 @property (nonatomic, assign) BOOL running;
+@property (nonatomic, strong) MPWFDStreamSource *source;
 
 
 @end
@@ -65,9 +69,8 @@
 -(BOOL)run
 {
     if ( [self runCommand:self.commandString] ) {
-        [NSThread detachNewThreadWithBlock:^{
-            [self readFromStreamAndWriteToTarget];
-        }];
+        [self.source setFdin:self.fdin];
+        [[self source] runInThread];
         return YES;
     }
     return NO;
@@ -75,12 +78,23 @@
 
 -(instancetype)initWithCommandString:(NSString *)command
 {
-    self=[super initWithTarget:[self defaultTarget]];
+    self=[super initWithTarget:nil];
     self.commandString=command;
+    self.source = [[MPWFDStreamSource new] autorelease];
+    [self setTarget:[self defaultTarget]];
     return self;
 }
 
 
+-(void)setTarget:(id)newVar
+{
+    [self.source setTarget:newVar];
+}
+
+-(id)target
+{
+    return [self.source target];
+}
 
 -(void)writeObject:(id)anObject sender:aSender
 {
@@ -98,22 +112,6 @@
 }
 
 
--(void)readFromStreamAndWriteToTarget
-{
-    char buffer[8200];
-    int actual=0;
-//    NSLog(@"read loop");
-    while ( (actual=read(self.fdin, buffer, 8192)) > 0 ) {
-//        NSLog(@"did read %d bytes",actual);
-        @autoreleasepool {
-            NSData *dataToWrite=[NSData dataWithBytes:buffer length:strlen(buffer)];
-            [target writeObject:dataToWrite sender:self];
-
-        }
-    }
-    self.fdin=-1;
-//    NSLog(@"done: read loop");
-}
 
 -(void)flushLocal
 {
@@ -129,6 +127,7 @@
 -(void)dealloc
 {
     [self closeLocal];
+    [self.source release];
     [super dealloc];
 }
 
