@@ -6,18 +6,17 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWStreamSource.h>
 
-@protocol Streaming;
 
-@interface MPWFDStreamSource : NSObject
+@interface MPWFDStreamSource : MPWStreamSource
 
-@property (nonatomic, strong) id <Streaming> target;
 @property (nonatomic, assign) int fdin;
+@property (nonatomic, assign) int closeWhenDone;
 
+-initWithFilename:(NSString *)filename;
 -initWithFD:(int)fd;
 +fd:(int)fd;
--(void)run;
--(void)runInThread;
++name:(NSString*)filename;
 
 @end

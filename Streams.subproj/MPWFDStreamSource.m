@@ -9,20 +9,34 @@
 #import "MPWFDStreamSource.h"
 #import "MPWStream.h"
 
+
+
 @implementation MPWFDStreamSource
 
--initWithFD:(int)fd
+-(instancetype)initWithFilename:(NSString*)name
+{
+    int fd=open( [name fileSystemRepresentation], O_RDONLY);
+    self=[self initWithFD:fd];
+    self.closeWhenDone=YES;
+    return self;
+}
+
+-(instancetype)initWithFD:(int)fd
 {
     self=[super init];
     self.fdin=fd;
     return self;
 }
 
-+fd:(int)fd
++(instancetype)fd:(int)fd
 {
     return [[[self alloc] initWithFD:fd] autorelease];
 }
 
++(instancetype)name:(NSString *)filename
+{
+    return [[[self alloc] initWithFilename:filename] autorelease];
+}
 
 -(void)readFromStreamAndWriteToTarget
 {
@@ -35,7 +49,17 @@
             
         }
     }
-    self.fdin=-1;
+    if (self.closeWhenDone) {
+        [self close];
+    }
+}
+
+-(void)close
+{
+    if ( self.fdin >= 0) {
+        close(self.fdin);
+        self.fdin=-1;
+    }
 }
 
 -(void)run
@@ -43,10 +67,12 @@
     [self readFromStreamAndWriteToTarget];
 }
 
--(void)runInThread
+-(void)dealloc
 {
-    [NSThread detachNewThreadSelector:@selector(readFromStreamAndWriteToTarget) toTarget:self withObject:nil];
+    if ( self.closeWhenDone) {
+        [self close];
+    }
+    [super dealloc];
 }
-
 
 @end
