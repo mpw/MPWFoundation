@@ -119,7 +119,6 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 -(void)setValue:newValue forTarget:aTarget
 {
      setValueForComponents( aTarget, components, count,newValue);
-
 }
 
 

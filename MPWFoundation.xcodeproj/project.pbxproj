@@ -214,6 +214,10 @@
 		1FA2969B1CF74A6500F19039 /* MPWPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA296951CF74A6500F19039 /* MPWPipe.m */; };
 		1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
+		1FB0A8061E520FB600E552A0 /* MPWSocketStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB0A8071E520FB600E552A0 /* MPWSocketStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB0A8051E520FB600E552A0 /* MPWSocketStream.m */; };
+		1FB0A8081E520FC000E552A0 /* MPWSocketStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB0A8051E520FB600E552A0 /* MPWSocketStream.m */; };
+		1FB0A8091E520FC500E552A0 /* MPWSocketStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB6EB591DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB6EB5A1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB6EB5B1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -826,6 +830,8 @@
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
 		1FAB9ACD193F663600927665 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSocketStream.h; sourceTree = "<group>"; };
+		1FB0A8051E520FB600E552A0 /* MPWSocketStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSocketStream.m; sourceTree = "<group>"; };
 		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dllmain.m; path = windows/dllmain.m; sourceTree = "<group>"; };
 		1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDelayStream.h; sourceTree = "<group>"; };
 		1FB6EB581DDA28B1002B82A5 /* MPWDelayStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWDelayStream.m; sourceTree = "<group>"; };
@@ -1198,6 +1204,8 @@
 		07DF1991006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */,
+				1FB0A8051E520FB600E552A0 /* MPWSocketStream.m */,
 				1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */,
 				1FCCC5411CE6098B007DCDE9 /* MPWURLPostStream.m */,
 				1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */,
@@ -1463,6 +1471,7 @@
 				1FE37C23196976C500C9A378 /* MPWPoint.h in Headers */,
 				1FE37C07196976C500C9A378 /* MPWResourceLoadRequest.h in Headers */,
 				1FE37C21196976C500C9A378 /* MPWRuntimeAdditions.h in Headers */,
+				1FB0A8091E520FC500E552A0 /* MPWSocketStream.h in Headers */,
 				1FE37C28196976C500C9A378 /* MPWIgnoreTrampoline.h in Headers */,
 				1FE37C13196976C500C9A378 /* MPWMessageCatcher.h in Headers */,
 				1FE37C12196976C500C9A378 /* MPWIgnoreUnknownTrampoline.h in Headers */,
@@ -1677,6 +1686,7 @@
 				1FA296961CF74A6500F19039 /* MPWPipe.h in Headers */,
 				1FCCC5421CE6098B007DCDE9 /* MPWURLPostStream.h in Headers */,
 				1FF8FDC509B49D0100652476 /* MPWRect.h in Headers */,
+				1FB0A8061E520FB600E552A0 /* MPWSocketStream.h in Headers */,
 				1FF8FDC609B49D0100652476 /* MPWTrampoline.h in Headers */,
 				1FB6EB6B1DDA31CD002B82A5 /* MPWStreamCompositionTests.h in Headers */,
 				1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */,
@@ -2107,6 +2117,7 @@
 				1F840DD6193F50AC00589595 /* NSBundleConveniences.m in Sources */,
 				1FB6EB6F1DDA31CD002B82A5 /* MPWStreamCompositionTests.m in Sources */,
 				1FB6EB5D1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
+				1FB0A8081E520FC000E552A0 /* MPWSocketStream.m in Sources */,
 				1F840DD7193F50AC00589595 /* MPWKVCSoftPointer.m in Sources */,
 				1F840DD8193F50AC00589595 /* MPWSoftPointerProxy.m in Sources */,
 				1F2DCFDE1ACB50F3004A39FB /* MPWThreadSwitchStream.m in Sources */,
@@ -2269,6 +2280,7 @@
 				1FF8FE1C09B49D0200652476 /* MPWIntArray.m in Sources */,
 				1FF8FE1D09B49D0200652476 /* MPWObjectReference.m in Sources */,
 				1FF8FE1E09B49D0200652476 /* MPWIdentityDictionary.m in Sources */,
+				1FB0A8071E520FB600E552A0 /* MPWSocketStream.m in Sources */,
 				1FF8FE1F09B49D0200652476 /* MPWMessageCatcher.m in Sources */,
 				1FF8FE2009B49D0200652476 /* FIFO.m in Sources */,
 				1F7A22861B786F9000FF6C03 /* MPWRect.m in Sources */,

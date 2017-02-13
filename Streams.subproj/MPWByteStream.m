@@ -196,7 +196,8 @@ intAccessor( indentAmount , setIndentAmount )
 	SEL targetAppendSeleector = @selector(appendBytes:length:);
     targetAppend=(IMP0)[newTarget methodForSelector:targetAppendSeleector];
 	if ( targetAppend == NULL ) {
-		[NSException raise:@"InvalidTarget" format:@"target: %@ does not respond to %@",newTarget,NSStringFromSelector(targetAppendSeleector)];
+        
+//		[NSException raise:@"InvalidTarget" format:@"target: %@ does not respond to %@",newTarget,NSStringFromSelector(targetAppendSeleector)];
 	}
     [super setTarget:newTarget];
 }

@@ -1,0 +1,124 @@
+//
+//  MPWSocketStream.m
+//  MPWFoundation
+//
+//  Created by Marcel Weiher on 2/13/17.
+//
+//
+
+#import "MPWSocketStream.h"
+
+@interface MPWSocketStream()
+
+@property (nonatomic, strong) NSInputStream *inputStream;
+@property (nonatomic, strong) NSOutputStream *outputStream;
+@property (nonatomic, strong) NSURL *url;
+
+
+@end
+
+@implementation MPWSocketStream
+
+-(instancetype)initWithURL:(NSURL*)socketURL
+{
+    self=[super initWithTarget:self];
+    self.url=socketURL;
+    NSLog(@"url: %@",self.url);
+    NSLog(@"port: %d",[socketURL.port intValue]);
+    return self;
+}
+
+-(int)port
+{
+    return [self.url.port intValue];
+}
+
+
+-(void)open
+{
+    CFReadStreamRef readStream;
+    CFWriteStreamRef writeStream;
+    int port=[self port];
+    CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)[self.url host], port, &readStream, &writeStream);
+ 
+    self.inputStream = readStream;
+    self.outputStream = writeStream;
+    [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [self.inputStream open];
+    [self.outputStream open];
+    CFRelease(readStream);
+    CFRelease(writeStream);
+}
+
+-(void)appendBytes:(const void*)data length:(NSUInteger)count
+{
+    NSInteger r=[self.outputStream write:data maxLength:count];
+}
+
+
+
+-(BOOL)forwardAvailableBytes
+{
+    @autoreleasepool {
+        int len=0;
+        uint8_t buffer[8192];
+        len=[self.inputStream read:buffer maxLength:8192];
+        if ( len > 0) {
+            NSData *bytesRead=[NSData dataWithBytes:buffer length:len];
+            [self.target writeObject:bytesRead sender:self];
+            return YES;
+        }
+//        if ([self.inputStream getBuffer:&buffer length:&len] ) {
+//            if ( len>0) {
+//                NSData *bytesRead=[NSData dataWithBytes:buffer length:len];
+//                [self.target writeObject:bytesRead sender:self];
+//            }
+//        }
+    }
+    return NO;
+}
+
+-(void)run
+{
+    while ( [self forwardAvailableBytes]) {
+        ;
+    }
+}
+
+
+- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode
+{
+    if ( aStream == self.inputStream && eventCode == NSStreamEventHasBytesAvailable){
+        [self forwardAvailableBytes];
+    }
+}
+
+-(void)closeInput
+{
+    [self.inputStream close];
+}
+
+-(void)closeOutput
+{
+    [self.outputStream close];
+}
+
+-(void)dealloc
+{
+    [self.url release];
+    [self.inputStream release];
+    [self.outputStream release];
+    [super dealloc];
+}
+
+@end
+
+
+@implementation MPWSocketStream(testing)
+
+
+
++testSelectors {  return @[]; }
+
+@end
