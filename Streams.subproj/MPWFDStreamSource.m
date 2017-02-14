@@ -25,7 +25,19 @@
 {
     self=[super init];
     self.fdin=fd;
+    self.bufferSize=[self defaultBufferSize];
+//    NSLog(@"bufferSize: %d default: %d",self.bufferSize,[self defaultBufferSize]);
     return self;
+}
+
+-(instancetype)init
+{
+    return [self initWithFD:0];
+}
+
+-(int)defaultBufferSize
+{
+    return 8192;
 }
 
 +(instancetype)fd:(int)fd
@@ -40,9 +52,10 @@
 
 -(void)readFromStreamAndWriteToTarget
 {
-    char buffer[8200];
+    char buffer[self.bufferSize+10];
     int actual=0;
-    while ( (actual=read(self.fdin, buffer, 8192)) > 0 ) {
+    NSLog(@"buffersize: %d",self.bufferSize);
+    while ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) {
         @autoreleasepool {
             NSData *dataToWrite=[NSData dataWithBytes:buffer length:actual];
             [self.target writeObject:dataToWrite sender:self];
