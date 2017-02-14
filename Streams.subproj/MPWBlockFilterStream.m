@@ -45,6 +45,8 @@ idAccessor( block, setBlock )
 
 @end
 
+#import "DebugMacros.h"
+
 
 @implementation MPWBlockFilterStream(testing)
 

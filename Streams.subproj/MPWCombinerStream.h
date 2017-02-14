@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWStream.h>
 
 @interface MPWCombinerStream : MPWStream
 

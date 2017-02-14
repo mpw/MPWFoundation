@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Marcel Weiher. All rights reserved.
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWFlattenStream.h>
 
 @interface MPWDict2ObjStream : MPWFlattenStream
 {

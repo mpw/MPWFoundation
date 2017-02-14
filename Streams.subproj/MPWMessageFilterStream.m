@@ -37,6 +37,7 @@ scalarAccessor(SEL, selector, setSelector )
 
 @end
 
+#import "DebugMacros.h"
 
 @implementation MPWMessageFilterStream(testing)
 

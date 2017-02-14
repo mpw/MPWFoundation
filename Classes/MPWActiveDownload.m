@@ -7,7 +7,6 @@
 //
 
 #import "MPWActiveDownload.h"
-//#import <MPWFoundation/MPWFoundation.h>
 #import "MPWResourceLoadRequest.h"
 #import "MPWCachingDownloader.h"
 #import "MPWByteStream.h"

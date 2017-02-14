@@ -7,6 +7,7 @@
 //
 
 #import "MPWBinaryPlist.h"
+#import "AccessorMacros.h"
 
 @interface MPWLazyBListArray : NSArray
 {
@@ -610,6 +611,7 @@ DEALLOC(
 
 @end
 
+#import "DebugMacros.h"
 
 @implementation MPWBinaryPlist(testing)
 

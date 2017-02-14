@@ -6,11 +6,11 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <Foundation/Foundation.h>
 
 @class MPWIntArray;
 
-@interface MPWBinaryPlist : MPWObject
+@interface MPWBinaryPlist : NSObject
 
 
 typedef void (^ArrayElementBlock)(MPWBinaryPlist* plist,long offset,long anIndex);

@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWStream.h>
 
 typedef void (^TargetBlock)( id );
 

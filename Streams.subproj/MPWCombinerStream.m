@@ -7,6 +7,8 @@
 //
 
 #import "MPWCombinerStream.h"
+#import "MPWFlattenStream.h"
+#import "MPWBlockFilterStream.h"
 
 @interface MPWCombinerStream ()
 
@@ -82,6 +84,7 @@
 
 @end
 
+#import "DebugMacros.h"
 
 
 @implementation MPWCombinerStream(testing)

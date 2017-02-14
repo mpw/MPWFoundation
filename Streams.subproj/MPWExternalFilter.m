@@ -8,7 +8,7 @@
 
 #import "MPWExternalFilter.h"
 #import "MPWFDStreamSource.h"
-
+#import "MPWByteStream.h"
 
 
 @interface MPWExternalFilter ()
@@ -138,6 +138,7 @@
 
 @end
 
+#import "DebugMacros.h"
 
 @implementation MPWExternalFilter(testimng)
 
