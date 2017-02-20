@@ -71,6 +71,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWURLRequest.h"
 #import "MPWFoundation/MPWSocketStream.h"
 #import "MPWFoundation/MPWScatterStream.h"
+#import "MPWFoundation/MPWActionStreamAdapter.h"
 
 
 #import "MPWFoundation/MPWTrampoline.h"

@@ -231,9 +231,9 @@
 		1FB6EB6F1DDA31CD002B82A5 /* MPWStreamCompositionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6EB6A1DDA31CD002B82A5 /* MPWStreamCompositionTests.m */; };
 		1FB6EB701DDA31CD002B82A5 /* MPWStreamCompositionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6EB6A1DDA31CD002B82A5 /* MPWStreamCompositionTests.m */; };
 		1FB6EB761DDA4F4D002B82A5 /* MPWBinaryPlist.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FB7B5E01E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; };
-		1FB7B5E11E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; };
-		1FB7B5E21E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; };
+		1FB7B5E01E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB7B5E11E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB7B5E21E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB7B5E31E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */; };
 		1FB7B5E41E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */; };
 		1FB7B5E51E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */; };
