@@ -34,5 +34,7 @@
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL;
 -(void)cancel;
 
+-(void)writeDictionary:(NSDictionary *)aDictionary;
+
 
 @end

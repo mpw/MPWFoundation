@@ -21,7 +21,7 @@
 
 -(instancetype)initWithURL:(NSURL*)socketURL
 {
-    self=[super initWithTarget:self];
+    self=[super initWithTarget:nil];
     self.url=socketURL;
     NSLog(@"url: %@",self.url);
     NSLog(@"port: %d",[socketURL.port intValue]);
@@ -47,6 +47,7 @@
     [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.inputStream open];
     [self.outputStream open];
+    [self.inputStream setDelegate:self];
     CFRelease(readStream);
     CFRelease(writeStream);
 }

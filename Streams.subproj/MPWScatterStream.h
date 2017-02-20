@@ -10,4 +10,7 @@
 
 @interface MPWScatterStream : MPWStream
 
++(instancetype)filters:(NSArray *)filters;
+-(instancetype)initWithFilters:(NSArray *)filters;
+
 @end

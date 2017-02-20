@@ -69,6 +69,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWCombinerStream.h"
 #import "MPWFoundation/MPWDelayStream.h"
 #import "MPWFoundation/MPWURLRequest.h"
+#import "MPWFoundation/MPWSocketStream.h"
+#import "MPWFoundation/MPWScatterStream.h"
+
 
 #import "MPWFoundation/MPWTrampoline.h"
 #import "MPWFoundation/MPWIgnoreTrampoline.h"

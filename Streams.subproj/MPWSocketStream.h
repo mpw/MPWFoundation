@@ -10,4 +10,9 @@
 
 @interface MPWSocketStream : MPWStream
 
+-(instancetype)initWithURL:(NSURL*)socketURL;
+
+-(void)open;
+-(void)run;
+
 @end
