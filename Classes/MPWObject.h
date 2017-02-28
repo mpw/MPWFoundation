@@ -42,6 +42,7 @@ typedef id (*IMP0)(id, SEL, ...);
 			int _retainCount;
 			int flags;
 }
+-(void)mydealloc;
 
 @end
 extern id retainMPWObject( MPWObject *obj );

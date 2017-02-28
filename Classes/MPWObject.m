@@ -235,6 +235,11 @@ void releaseMPWObjects( MPWObject **objs, unsigned count )
     return @"Copyright 1998-2017 by Marcel Weiher, All Rights Reserved.";
 }
 
+-(void)mydealloc
+{
+    [self dealloc];
+}
+
 @end
 
 #ifndef RELEASE

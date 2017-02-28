@@ -9,20 +9,9 @@
 #import "MPWObject.h"
 
 
-typedef struct {
-    Class       targetClass;
-    int         targetOffset;
-    SEL         getSelector,putSelector;
-    IMP0         getIMP,putIMP;
-    id          additionalArg;
-} AccessPathComponent;
 
 @interface MPWValueAccessor : MPWObject
 {
-    id target;
-    AccessPathComponent components[6];
-    int count;
-    id name;
     @public
     IMP value;
 }

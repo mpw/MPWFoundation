@@ -17,6 +17,6 @@ static inline id _retainMPWObject( MPWObject *obj ) {
 
 static inline void _releaseMPWObject( MPWObject *obj ) {
     if (obj && (--(obj->_retainCount) < 0)  ) {
-        [obj dealloc];
+        [obj mydealloc];
     }
 }

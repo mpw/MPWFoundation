@@ -44,6 +44,22 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 @implementation MPWObjectCache
+{
+    MPWObject   **objs;
+    Class       objClass;
+    SEL         allocSel,initSel;
+    IMP0        allocImp,initImp,retainImp,autoreleaseImp;
+    INT_IMP     retainCountImp;
+    VOID_IMP    removeFromCacheImp;
+    int         cacheSize;
+    int         objIndex;
+    void        *cachelock;
+    BOOL        unsafeFastAlloc;
+    VOID_IMP	releaseImp;
+    SEL         reInitSelector;
+    IMP0		reInitImp;
+
+}
 /*"
    Provides a local, circular buffer for re-cycling objects.  Needs objects that can be
    re-initialized.  Can be made thread-safe if necessary, default is non-thread-safe

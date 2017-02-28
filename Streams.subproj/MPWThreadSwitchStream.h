@@ -3,7 +3,7 @@
 //  StackOverflow
 //
 //  Created by Marcel Weiher on 3/31/15.
-//  Copyright (c) 2015 Marcel Weiher. All rights reserved.
+//  Copyright (c) Copyright (c) 2015-2017 Marcel Weiher. All rights reserved.
 //
 
 #import <MPWFoundation/MPWFoundation.h>

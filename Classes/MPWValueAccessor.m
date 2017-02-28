@@ -13,8 +13,22 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+typedef struct {
+    Class       targetClass;
+    int         targetOffset;
+    SEL         getSelector,putSelector;
+    IMP0         getIMP,putIMP;
+    id          additionalArg;
+} AccessPathComponent;
+
 
 @implementation MPWValueAccessor
+{
+    id target;
+    AccessPathComponent components[6];
+    int count;
+    id name;
+}
 
 idAccessor(target, _setTarget)
 

@@ -25,10 +25,6 @@
 
 
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming> {
-	id	plist;
-	id  containerStack[1000];
-	id  *tos;
-	id	key;
 }
 
 -result;
