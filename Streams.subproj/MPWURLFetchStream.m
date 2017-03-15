@@ -183,7 +183,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
                 }
                 if (data && !error   ){
-                    //                    NSLog(@"Success: %@",request);
+//                    NSLog(@"Success: %@",request);
                     [target writeObject:[self processResponse:request]];
                 } else {
                     NSLog(@"Error: %@",request);
