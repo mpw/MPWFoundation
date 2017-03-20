@@ -178,8 +178,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     NSDictionary *userInfo=
                     @{ @"url": resolvedRequest.URL,
                        @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                       @"content": data ? [data stringValue] : @"",
-                       @"request": request,
+                       @"content": data ? [data stringValue] : @""
                        };
                     error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
                 }
@@ -188,7 +187,12 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     [target writeObject:[self processResponse:request]];
                 } else {
                     NSLog(@"Error: %@",request);
-                    [self reportError:error];
+                    NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
+                    userInfoWithRequest[@"request"] = request;
+                    NSError *errorWithRequest = [NSError errorWithDomain:error.domain
+                                                                    code:error.code
+                                                                userInfo:userInfoWithRequest];
+                    [self reportError:errorWithRequest];
                 }
             } @finally {
                 @synchronized (self) {
