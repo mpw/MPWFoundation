@@ -93,12 +93,12 @@ HOM_METHOD(asyncOnMainThread)
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:NO];
 }
 
-HOM_METHOD(onMainThread)
+HOM_METHOD(syncOnMainThread)
     [invocation retainArguments];
 	[invocation performSelectorOnMainThread:@selector(invokeWithTarget:) withObject:self waitUntilDone:YES];
 }
 
--syncOnMainThread {  return [self onMainThread]; }
+-onMainThread {  return [self asyncOnMainThread]; }
 
 
 HOM_METHOD_DOUBLE( afterDelay )

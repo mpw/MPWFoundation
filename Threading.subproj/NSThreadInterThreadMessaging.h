@@ -41,10 +41,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -async;
 -asyncPrio;
 -asyncBackground;
--asyncOnMainThread;
 -asyncOn:(dispatch_queue_t)queue;
 -asyncOnOperationQueue:(NSOperationQueue*)aQueue;
 -onThread:(NSThread*)targetThread;
+-asyncOnMainThread;
+-syncOnMainThread;
 -onMainThread;
 -afterDelay:(NSTimeInterval)delay;
 
