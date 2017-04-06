@@ -59,6 +59,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     IMP0	targetAppend;
     int indent;
 	int indentAmount;
+    id  byteTarget;
 }
 
 +(NSString*)makeString:anObject;
@@ -79,7 +80,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)println:anObject;
 -(void)print:anObject;
 
-#define  TARGET_APPEND( data, count)   { targetAppend( self->target, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
+#define  TARGET_APPEND( data, count)   { targetAppend( self->byteTarget, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
 
 #define FORWARDCHARSLEN( x,l )  [self->target appendBytes:(x) length:(l)]
 #define FORWARDCHARS( x )       FORWARDCHARSLEN( x,strlen(x))

@@ -232,7 +232,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testWriteDict
 {
-	NSString *expectedEncoding= @"{ key = \"value\";\nkey1 = \"value1\";\n} ";
+	NSString *expectedEncoding= @"{ \"key\" = \"value\";\n\"key1\" = \"value1\";\n} ";
 	NSString *actualEncoding=[self _encode:[NSDictionary dictionaryWithObjectsAndKeys:@"value",@"key",
 											@"value1",@"key1",nil ]];
 	//	INTEXPECT( [actualEncoding length], [expectedEncoding length], @"lengths");

@@ -101,8 +101,13 @@
 -(instancetype)initWithFilters:(NSArray *)filters
 {
     return [self initWithProcessedFilters:[self processFilters:filters]];
-
 }
+
+-(instancetype)initWithArray:(NSArray *)filters
+{
+    return [self initWithFilters:filters];
+}
+
 
 -(NSArray *)normalizedFilters
 {
@@ -212,6 +217,17 @@ typedef id (^ZeroArgBlock)(void);
         class_addMethod(blockClass, @selector(value:), theImp, "@@:@");
         initialized=YES;
     }
+}
+
+
+-(void)run
+{
+    [self.filters.firstObject run];
+}
+
+-(void)runInThread
+{
+    [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
 }
 
 

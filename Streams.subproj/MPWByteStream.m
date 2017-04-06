@@ -88,6 +88,27 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWByteStream
 
+idAccessor(byteTarget, _setByteTarget)
+
+-(id)initWithTarget:(id)aTarget
+{
+    self=[super initWithTarget:nil];
+    [self setByteTarget:aTarget];
+    [self setIndentAmount:4];
+
+    return self;
+}
+
+-unusedTarget
+{
+    return [super target];
+}
+
+-(id)target
+{
+    return [self byteTarget];
+}
+
 -(void)writeIndent
 {
 	char  spaces[] = "                                                                                            ";
@@ -171,12 +192,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [self fileName:fileName mode:[self defaultFileMode]];
 }
 
--initWithTarget:newTarget
-{
-	self=[super initWithTarget:newTarget];
-	[self setIndentAmount:4];
-	return self;
-}
 
 -(void)indent
 {
@@ -190,7 +205,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 intAccessor( indentAmount , setIndentAmount )
 
--(void)setTarget:newTarget
+-(void)setByteTarget:newTarget
 {
     totalBytes=0;
 	SEL targetAppendSeleector = @selector(appendBytes:length:);
@@ -199,7 +214,12 @@ intAccessor( indentAmount , setIndentAmount )
         
 //		[NSException raise:@"InvalidTarget" format:@"target: %@ does not respond to %@",newTarget,NSStringFromSelector(targetAppendSeleector)];
 	}
-    [super setTarget:newTarget];
+    [self _setByteTarget:newTarget];
+}
+
+-(void)setTarget:(id)newVar
+{
+    ;
 }
 
 -(void)writeNSObject:anNSObject
@@ -365,7 +385,7 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)writeObject:anObject forKey:aKey
 {
     [self writeIndent];
-    [self outputString:aKey];
+    [self writeObject:aKey];
     [self appendBytes:" = " length:3];
     [self writeObject:anObject];
     [self appendBytes:";\n" length:2];
@@ -391,9 +411,20 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(NSString*)description
 {
-	return [NSString stringWithFormat:@"<%@/%p: target %@/%p",[self class],self,[target class],target];
+	return [NSString stringWithFormat:@"<%@/%p: byteTarget %@/%p",[self class],self,[target class],byteTarget];
 }
 
+
+-(void)dealloc
+{
+    [byteTarget release];
+    [super dealloc];
+}
+
+-finalTarget
+{
+    return [self byteTarget];
+}
 
 @end
 
