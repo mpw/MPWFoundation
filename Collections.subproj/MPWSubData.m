@@ -418,6 +418,24 @@ boolAccessor( mustUnique, setMustUnique )
 
 @end
 
+@implementation NSData(stringValue)
+
+-stringValue
+{
+    NSString *s=nil;
+    @try {
+        s=[[[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding] autorelease];
+    } @catch ( id e) {
+    }
+    if (!s) {
+        s=[[[NSString alloc] initWithData:self encoding:NSISOLatin1StringEncoding] autorelease];
+    }
+    return s; 
+}
+
+@end
+
+
 @implementation MPWSubData(testing)
 
 +_subDataWithString:(char *)string 
