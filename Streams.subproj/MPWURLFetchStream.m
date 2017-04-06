@@ -11,12 +11,20 @@
 #import "MPWURLRequest.h"
 #import "NSThreadWaiting.h"
 
-@interface MPWURLFetchStream() <NSURLSessionDelegate>
+@interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
+
+@property (nonatomic, strong)  NSMutableSet *inflight;
+
+@end
+
+@interface MPWURLFetchStream()
 
 @property (nonatomic, strong) NSDictionary *theHeaderDict;
 @property (nonatomic, strong) NSMutableSet *inflight;
+@property (nonatomic, strong) MPWURLStreamingFetchHelper *streamingDelegate;
 
 @end
+
 
 
 @implementation MPWURLFetchStream
@@ -26,13 +34,15 @@ objectAccessor(NSURLSession, downloader, setDownloader)
 CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
     self=[super initWithTarget:aTarget];
+    self.streamingDelegate=[MPWURLStreamingFetchHelper streamWithTarget:aTarget];
     [self setDownloader:[NSURLSession sessionWithConfiguration:[self config]
-                                                      delegate:self
+                                                      delegate:self.streamingDelegate
                                                  delegateQueue:nil]] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
     [self setDefaultMethod:@"GET"];
     [self setInflight:[NSMutableSet set]];
+    self.streamingDelegate.inflight = self.inflight;
     return self;
 }
 
@@ -41,6 +51,11 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     return [self initWithBaseURL:nil target:aTarget];
 }
 
+-(void)setTarget:(id)newVar
+{
+    [super setTarget:newVar];
+    [self.streamingDelegate setTarget:newVar];
+}
 
 -(int)inflightCount
 {
@@ -162,6 +177,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     shouldStream = [request isStreaming];
     //    NSLog(@"executeRequest: %@",request);
     if ( shouldStream ) {
+//        [[self downloader] setDelegate:self];
         request.task = [[self downloader] dataTaskWithRequest: resolvedRequest];
         //        NSLog(@"task: %@",task);
     } else {
@@ -262,6 +278,20 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     [self executeRequestWithURL:url method:self.defaultMethod body:nil];
 }
 
+
+-(void)dealloc
+{
+    NSLog(@"deallocating MPWURLFetchStream %p",self);
+    [_inflight release];
+    [_streamingDelegate release];
+    [_theHeaderDict release];
+    [super dealloc];
+}
+
+@end
+
+@implementation MPWURLStreamingFetchHelper
+
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
@@ -280,10 +310,13 @@ didCompleteWithError:(nullable NSError *)error
     [target close];
 }
 
+-(void)dealloc
+{
+    [_inflight release];
+    [super dealloc];
+}
 
 @end
-
-
 
 @implementation NSString(writeOnURLFetchStream)
 
@@ -323,7 +356,6 @@ didCompleteWithError:(nullable NSError *)error
 }
 
 @end
-
 
 
 @implementation MPWURLRequest(streamPosting)
