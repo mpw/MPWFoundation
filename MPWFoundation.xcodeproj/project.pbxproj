@@ -836,7 +836,7 @@
 		1FA296951CF74A6500F19039 /* MPWPipe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWPipe.m; sourceTree = "<group>"; };
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
-		1FAB9ACD193F663600927665 /* module.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = "<group>"; };
+		1FAB9ACD193F663600927665 /* MPWFoundation.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MPWFoundation.map; sourceTree = "<group>"; };
 		1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWSocketStream.h; sourceTree = "<group>"; };
 		1FB0A8051E520FB600E552A0 /* MPWSocketStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWSocketStream.m; sourceTree = "<group>"; };
 		1FB4363710BDF6EF00490AA6 /* dllmain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dllmain.m; path = windows/dllmain.m; sourceTree = "<group>"; };
@@ -933,7 +933,7 @@
 		07DF1932006686DDC35ADD82 /* MPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				1FAB9ACD193F663600927665 /* module.map */,
+				1FAB9ACD193F663600927665 /* MPWFoundation.map */,
 				07DF1933006686DDC35ADD82 /* Classes */,
 				07DF1946006686DDC35ADD82 /* Headers */,
 				07DF1966006686DDC35ADD82 /* Comm */,
@@ -2423,7 +2423,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -2497,7 +2497,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -2576,7 +2576,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -2647,7 +2647,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -2726,7 +2726,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3411,7 +3411,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = YES;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3457,7 +3457,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3504,7 +3504,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3594,6 +3594,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -3641,6 +3642,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3688,6 +3690,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3735,6 +3738,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3782,6 +3786,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3829,6 +3834,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3928,7 +3934,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -3972,7 +3978,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4046,7 +4052,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4125,7 +4131,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4196,7 +4202,7 @@
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4275,7 +4281,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
-				MODULEMAP_FILE = module.map;
+				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4321,6 +4327,7 @@
 				INFOPLIST_FILE = MPWFoundationWatch/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = MPWFoundation.map;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
