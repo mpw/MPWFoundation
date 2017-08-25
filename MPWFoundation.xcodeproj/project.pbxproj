@@ -2429,7 +2429,6 @@
 					"-fstack-protector-strong",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -2505,7 +2504,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -2655,7 +2653,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -3932,7 +3929,6 @@
 					"-fstack-protector-strong",
 				);
 				OTHER_LDFLAGS = "";
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -3978,7 +3974,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -4053,7 +4048,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
@@ -4203,7 +4197,6 @@
 				);
 				OTHER_LDFLAGS = "";
 				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
-				PRODUCT_MODULE_NAME = MPWFoundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
