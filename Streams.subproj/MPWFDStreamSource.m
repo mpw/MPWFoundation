@@ -54,7 +54,7 @@
 {
     char buffer[self.bufferSize+10];
     int actual=0;
-    NSLog(@"buffersize: %d",self.bufferSize);
+//    NSLog(@"buffersize: %d",self.bufferSize);
     while ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) {
         @autoreleasepool {
             NSData *dataToWrite=[NSData dataWithBytes:buffer length:actual];

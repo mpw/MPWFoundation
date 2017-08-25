@@ -164,18 +164,22 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     return [response processed];
 }
 
+-(void)removeFromInflight:(MPWURLRequest*)request
+{
+    @synchronized (self) {
+        [self.inflight removeObject:request];
+    }
+}
+
 -(void)executeRequest:(MPWURLRequest*)request
 {
     BOOL shouldStream=NO;
-    @synchronized (self) {
-        [self.inflight addObject:request];
-    }
     NSURLRequest *r=request.request;
     NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
     resolvedRequest.URL=[self resolve:r.URL];
     [request retain];
     shouldStream = [request isStreaming];
-    //    NSLog(@"executeRequest: %@",request);
+//    NSLog(@"number of inflight requests before executing: %p %d ",request,[self inflightCount]);
     if ( shouldStream ) {
 //        [[self downloader] setDelegate:self];
         request.task = [[self downloader] dataTaskWithRequest: resolvedRequest];
@@ -183,6 +187,9 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     } else {
         request.task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
             @try {
+//                NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
+                [self removeFromInflight:request];
+//                NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
                 request.response=response;
                 request.data = data;
                 int httpStatusCode=0;
@@ -202,7 +209,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 //                    NSLog(@"Success: %@",request);
                     [target writeObject:[self processResponse:request]];
                 } else {
-                    NSLog(@"Error: %@",request);
+                    NSLog(@"Error: %p %@",request,request);
                     NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
                     userInfoWithRequest[@"request"] = request;
                     NSError *errorWithRequest = [NSError errorWithDomain:error.domain
@@ -211,15 +218,18 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
                     [self reportError:errorWithRequest];
                 }
             } @finally {
-                @synchronized (self) {
-                    [self.inflight removeObject:request];
-                }
+                [self removeFromInflight:request];
             }
         }];
     }
-    if (!request.task) {
+    if (request.task) {
+        @synchronized (self) {
+            [self.inflight addObject:request];
+        }
+    } else {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
+//    NSLog(@"number of inflight requests after executing: %p %d ",request,[self inflightCount]);
     [request.task resume];
     
 }
