@@ -104,7 +104,6 @@
 		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
-		1F71B6A71E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
 		1F75BB9E12D2589800E7ABB4 /* MPWPListBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F75BB9F12D2589800E7ABB4 /* MPWPListBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */; };
 		1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2097,7 +2096,6 @@
 				1F840E02193F50E400589595 /* MPWPListBuilder.m in Sources */,
 				1F840E03193F50E400589595 /* MPWMessageFilterStream.m in Sources */,
 				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
-				1F71B6A71E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */,
 				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
 				1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */,
 				1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */,
@@ -2422,7 +2420,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -2496,7 +2494,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -2646,7 +2644,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3933,7 +3931,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -3977,7 +3975,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4051,7 +4049,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4201,7 +4199,7 @@
 				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
 				INSTALL_PATH = "@rpath";
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",

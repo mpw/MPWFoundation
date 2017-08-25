@@ -58,7 +58,7 @@
             [filter setTarget:nil];
         } else if ( [(NSString*)filter hasPrefix:@"!"]) {
             NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
-            filter=[MPWExternalFilter filterWithCommandString:command];
+            filter=[NSClassFromString(@"MPWExternalFilter") filterWithCommandString:command];
             [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];

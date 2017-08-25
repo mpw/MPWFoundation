@@ -200,6 +200,11 @@ SEL visSel;
     FORWARD( anObject );
 }
 
+-(void)forward:anObject
+{
+    FORWARD( anObject );
+}
+
 -(void)writeData:(NSData*)d
 {
     [self writeNSObject:d];
