@@ -95,9 +95,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //#import "MPWFoundation/MPWEnumFilter.h"
 #import "MPWFoundation/NSObjectFiltering.h"
 #import "MPWFoundation/MPWEnumeratorEnumerator.h"
+#import "MPWFoundation/MPWEnumeratorSource.h"
 #import "MPWFoundation/MPWRealArray.h"
 #import "MPWFoundation/MPWUniqueString.h"
 #import "MPWFoundation/MPWUShortArray.h"
+#import "MPWFoundation/MPWFakedReturnMethodSignature.h"
+#import "MPWFoundation/MPWKVCSoftPointer.h"
+#import "MPWFoundation/MPWSoftPointerProxy.h"
+#import "MPWFoundation/NSArrayFiltering.h"
+#import "MPWFoundation/NSCaseInsensitiveUniqueString.h"
+#import "MPWFoundation/NSConditionLockSem.h"
+#import "MPWFoundation/NSEnumeratorFiltering.h"
 
 #if !__has_feature(objc_arc)
 #import "MPWFoundation/MPWObjectCache.h"
