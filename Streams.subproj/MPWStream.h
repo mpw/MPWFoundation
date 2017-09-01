@@ -78,6 +78,7 @@ idAccessor_h( target, setTarget )
 -(SEL)streamWriterMessage;
 -(void)close;
 -(void)flush;
+-(void)forward:anObject;
 -result;
 -finalTarget;
 
