@@ -28,7 +28,7 @@
     if ( relativeDelay > 0) {
         if ( self.synchronous) {
             [NSThread sleepForTimeInterval:relativeDelay];
-            [self.target writeObject:anObject sender:sender];
+            FORWARD(anObject);
         } else {
             [[self afterDelay:relativeDelay] forward:anObject];
         }
