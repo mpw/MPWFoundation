@@ -48,13 +48,16 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-#define	FORWARD(object)	if ( targetWriteObject ) { targetWriteObject( target, @selector(writeObject:sender:), object ,self); } else { [target writeObject:object sender:self]; }
+typedef id (*IMP_2_id_args)(id, SEL, id,id);
+
+
+#define	FORWARD(object)	if (  targetWriteObject ) { targetWriteObject( target, @selector(writeObject:sender:), object ,self); } else { [target writeObject:object sender:self]; }
 
 @interface MPWStream : NSObject <Streaming>
 {
     id	target;
     SEL streamWriterMessage;
-    IMP0	targetWriteObject;
+    IMP_2_id_args	targetWriteObject;
     id	pad[4];
 }
 

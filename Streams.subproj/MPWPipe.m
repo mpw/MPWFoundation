@@ -371,7 +371,9 @@ typedef id (^ZeroArgBlock)(void);
              @"testCanUseClassToSpecifyFilterOfThatClass",
              @"testCanUseNestedArrayToSpecifyFanout",
              @"testFanoutCanContainPipes",
+#if !TARGET_OS_IOS
              @"testToUpperWithExternalFilter",
+#endif
 //             @"testRaiseOnUnknownSelector",
              ];
 }

@@ -542,7 +542,7 @@ int _small_string_table_releaseIndex=0;
 	MPWSmallStringTable *table=[self _testCreateTestTable];
 	NSDictionary *dict=[NSDictionary dictionaryWithObjects:[self _testValues] forKeys:[self _testKeys]];
 	int i;
-#define CKEY  "me"
+#define CKEY  "m#$;eMemem1"
     NSString *nskey=[NSString stringWithUTF8String:CKEY];
     NSLog(@"nskey class: %@",[nskey class]);
     

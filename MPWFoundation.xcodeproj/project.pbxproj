@@ -199,6 +199,10 @@
 		1F9726A81D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
 		1F9726A91D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
 		1F9726AA1D00397800D76F3A /* MPWURLRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLRequest.m */; };
+		1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
+		1F9D63CD1F601F1500DA9514 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F9D63CC1F601F1500DA9514 /* MPWTest.framework */; };
+		1F9D63CF1F60202C00DA9514 /* MPWTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F9D63CC1F601F1500DA9514 /* MPWTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
 		1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
@@ -629,6 +633,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1F9D63CE1F60200C00DA9514 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */,
+				1F9D63CF1F60202C00DA9514 /* MPWTest.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		07DF1934006686DDC35ADD82 /* MPWObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObject.m; sourceTree = "<group>"; };
 		07DF1935006686DDC35ADD82 /* NSNil.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSNil.m; sourceTree = "<group>"; };
@@ -828,6 +846,8 @@
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLRequest.h; sourceTree = "<group>"; };
 		1F9726A41D00397800D76F3A /* MPWURLRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWURLRequest.m; sourceTree = "<group>"; };
+		1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MPWTest (iOS).framework"; path = "../../Build/Development-iphoneos/MPWTest (iOS).framework"; sourceTree = "<group>"; };
+		1F9D63CC1F601F1500DA9514 /* MPWTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MPWTest.framework; path = "../../Build/Development-iphoneos/MPWTest.framework"; sourceTree = "<group>"; };
 		1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDelimitedTable.h; sourceTree = "<group>"; };
 		1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWDelimitedTable.m; sourceTree = "<group>"; };
 		1FA1594217EEF18900BF8F6F /* first4.tabdelim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = first4.tabdelim; sourceTree = "<group>"; };
@@ -897,6 +917,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9D63CD1F601F1500DA9514 /* MPWTest.framework in Frameworks */,
+				1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -956,6 +978,7 @@
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
 				1F008FEF10BDAC18001F05D5 /* Info-MPWFoundation__Framework___Upgraded_ copy.plist */,
 				1FCDE1B21253A9640002D17A /* Info-MPWFoundation__Framework___Upgraded_ copy 2.plist */,
+				1F9D63C91F601E1800DA9514 /* Frameworks */,
 			);
 			name = MPWFoundation;
 			sourceTree = "<group>";
@@ -1436,6 +1459,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		1F9D63C91F601E1800DA9514 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1F9D63CC1F601F1500DA9514 /* MPWTest.framework */,
+				1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1FCF25D51CF3983C00AC64CE /* MPWFoundationWatch */ = {
 			isa = PBXGroup;
 			children = (
@@ -1820,6 +1852,7 @@
 				1F4FC96F1DF818AE00B35D27 /* Sources */,
 				1F4FC9701DF818AE00B35D27 /* Frameworks */,
 				1F4FC9711DF818AE00B35D27 /* Resources */,
+				1F9D63CE1F60200C00DA9514 /* CopyFiles */,
 			);
 			buildRules = (
 			);

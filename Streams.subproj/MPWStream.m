@@ -354,6 +354,8 @@ SEL visSel;
 
 @end
 
+
+
 @implementation MPWStream(testing)
 
 +(void)defaultStreamTarget
@@ -362,9 +364,17 @@ SEL visSel;
     NSAssert1( [[stream target] isKindOfClass:[NSMutableArray class]] , @"stream target not NSArray but %@ instead",[[stream target] class]);
 }
 
++(void)testForwardingWorks
+{
+    
+}
+
 +testSelectors
 {
-    return [NSArray arrayWithObjects:@"defaultStreamTarget",nil];
+    return @[
+            
+             @"defaultStreamTarget",
+             ];
 }
 
 
@@ -444,4 +454,6 @@ SEL visSel;
 }
 
 @end
+
+
 

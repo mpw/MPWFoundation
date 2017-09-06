@@ -10,7 +10,7 @@
 #import "MPWObject.h"
 #import "AccessorMacros.h"
 
-typedef id (*IMP2)(id, SEL, ...);
+typedef id (*IMP2)(id, SEL,...);
 
 
 typedef struct {
