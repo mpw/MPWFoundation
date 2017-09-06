@@ -27,10 +27,8 @@
     NSTimeInterval relativeDelay=self.relativeDelay;
     if ( relativeDelay > 0) {
         if ( self.synchronous) {
-            [anObject retain];
             [NSThread sleepForTimeInterval:relativeDelay];
-            FORWARD(anObject);
-            [anObject autorelease];
+            [self.target writeObject:anObject sender:sender];
         } else {
             [[self afterDelay:relativeDelay] forward:anObject];
         }
