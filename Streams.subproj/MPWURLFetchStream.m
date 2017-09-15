@@ -11,17 +11,11 @@
 #import "MPWURLRequest.h"
 #import "NSThreadWaiting.h"
 
-@interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
-
-@property (nonatomic, strong)  NSMutableSet *inflight;
-
-@end
 
 @interface MPWURLFetchStream()
 
 @property (nonatomic, strong) NSDictionary *theHeaderDict;
 @property (nonatomic, strong) NSMutableSet *inflight;
-@property (nonatomic, strong) MPWURLStreamingFetchHelper *streamingDelegate;
 
 @end
 
@@ -31,36 +25,67 @@
 
 objectAccessor(NSURLSession, downloader, setDownloader)
 
-CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
+CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session)
 {
     self=[super initWithTarget:aTarget];
-    self.streamingDelegate=[MPWURLStreamingFetchHelper streamWithTarget:aTarget];
-    [self setDownloader:[NSURLSession sessionWithConfiguration:[self config]
-                                                      delegate:self.streamingDelegate
-                                                 delegateQueue:nil]] ;
+    [self setDownloader:session] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
     [self setDefaultMethod:@"GET"];
     [self setInflight:[NSMutableSet set]];
-    self.streamingDelegate.inflight = self.inflight;
     return self;
 }
+
+CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
+{
+    return [self initWithBaseURL:newBaseURL target:aTarget session:[self defaultURLSession]];
+}
+
 
 -(id)initWithTarget:(id)aTarget
 {
     return [self initWithBaseURL:nil target:aTarget];
 }
 
--(void)setTarget:(id)newVar
+
+
+static NSURLSession *_defaultURLSession=nil;
+
++(NSURLSession*)createDefaultURLSession
 {
-    [super setTarget:newVar];
-    [self.streamingDelegate setTarget:newVar];
+    return [NSURLSession sharedSession];
 }
+
++(void)setDefaultURLSession:(NSURLSession*)newDefault
+{
+    [newDefault retain];
+    [_defaultURLSession release];
+    _defaultURLSession=newDefault;
+}
+
++(NSURLSession*)defaultURLSession
+{
+    NSURLSession *session=_defaultURLSession;
+    if (!session) {
+        [self setDefaultURLSession:[self createDefaultURLSession]];
+        session=_defaultURLSession;
+    }
+    return session;
+}
+
+-(NSURLSession*)defaultURLSession
+{
+    return [[self class] defaultURLSession];
+}
+
+
 
 -(int)inflightCount
 {
     return self.inflight.count;
 }
+
+
 
 -(NSURLSessionConfiguration *)config
 {
@@ -72,6 +97,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     sessionConfiguration.URLCache = nil;
     return sessionConfiguration;
 }
+
+//--- legacy
 
 -(void)setHeaderDict:(NSDictionary *)newHeaderDict
 {
@@ -171,57 +198,67 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     }
 }
 
--(void)executeRequest:(MPWURLRequest*)request
+-(NSURLRequest*)resolvedRequest:(MPWURLRequest*)request
 {
-    BOOL shouldStream=NO;
     NSURLRequest *r=request.request;
     NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
     resolvedRequest.URL=[self resolve:r.URL];
-    [request retain];
-    shouldStream = [request isStreaming];
-//    NSLog(@"number of inflight requests before executing: %p %d ",request,[self inflightCount]);
-    if ( shouldStream ) {
-//        [[self downloader] setDelegate:self];
-        request.task = [[self downloader] dataTaskWithRequest: resolvedRequest];
-        //        NSLog(@"task: %@",task);
-    } else {
-        request.task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-            @try {
-//                NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
-                [self removeFromInflight:request];
-//                NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
-                request.response=response;
-                request.data = data;
-                int httpStatusCode=0;
-                if ( [response respondsToSelector:@selector(statusCode)] ) {
-                    httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
-                }
-//                NSLog(@"data: %@",[data stringValue]);
-                if ( httpStatusCode >= 400){
-                    NSDictionary *userInfo=
-                    @{ @"url": resolvedRequest.URL,
-                       @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
-                       @"content": data ? [data stringValue] : @""
-                       };
-                    error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
-                }
-                if (data && !error   ){
-//                    NSLog(@"Success: %@",request);
-                    [target writeObject:[self processResponse:request]];
-                } else {
-                    NSLog(@"Error: %p %@",request,request);
-                    NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
-                    userInfoWithRequest[@"request"] = request;
-                    NSError *errorWithRequest = [NSError errorWithDomain:error.domain
-                                                                    code:error.code
-                                                                userInfo:userInfoWithRequest];
-                    [self reportError:errorWithRequest];
-                }
-            } @finally {
-                [self removeFromInflight:request];
+    return resolvedRequest;
+}
+
+
+- (NSURLSessionTask*)taskForExecutingRequest:(MPWURLRequest*)request
+{
+    NSParameterAssert( ![request isStreaming]);
+    NSURLRequest *resolvedRequest=[self resolvedRequest:request];
+    NSLog(@"url: %@",resolvedRequest.URL);
+    NSURLSessionTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        @try {
+                NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
+            [self removeFromInflight:request];
+                NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
+            request.response=response;
+            request.data = data;
+            int httpStatusCode=0;
+            if ( [response respondsToSelector:@selector(statusCode)] ) {
+                httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
             }
-        }];
-    }
+            NSLog(@"data: %@",[data stringValue]);
+            if ( httpStatusCode >= 400){
+                NSDictionary *userInfo=
+                @{ @"url": resolvedRequest.URL,
+                   @"headers": [(NSHTTPURLResponse*)response allHeaderFields],
+                   @"content": data ? [data stringValue] : @""
+                   };
+                error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
+            }
+            if (data && !error   ){
+                                   NSLog(@"Success: %@",request);
+                id processed=[self processResponse:request];
+                NSLog(@"will write processed: %@ to %@",processed,target);
+                [target writeObject:processed];
+            } else {
+                NSLog(@"Error: %p %@",request,request);
+                NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
+                userInfoWithRequest[@"request"] = request;
+                NSError *errorWithRequest = [NSError errorWithDomain:error.domain
+                                                                code:error.code
+                                                            userInfo:userInfoWithRequest];
+                [self reportError:errorWithRequest];
+            }
+        } @finally {
+            [self removeFromInflight:request];
+        }
+    }];
+    return task;
+}
+
+
+-(void)executeRequest:(MPWURLRequest*)request
+{
+    [request retain];
+    NSLog(@"number of inflight requests before executing: %p %d ",request,[self inflightCount]);
+    request.task = [self taskForExecutingRequest:request];
     if (request.task) {
         @synchronized (self) {
             [self.inflight addObject:request];
@@ -229,7 +266,8 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
     } else {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
-//    NSLog(@"number of inflight requests after executing: %p %d ",request,[self inflightCount]);
+    NSLog(@"number of inflight requests after executing: %p %d ",request,[self inflightCount]);
+    NSLog(@"task: %@",request.task);
     [request.task resume];
     
 }
@@ -293,36 +331,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget)
 {
     NSLog(@"deallocating MPWURLFetchStream %p",self);
     [_inflight release];
-    [_streamingDelegate release];
     [_theHeaderDict release];
-    [super dealloc];
-}
-
-@end
-
-@implementation MPWURLStreamingFetchHelper
-
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
-    didReceiveData:(NSData *)data
-{
-    [target writeObject:data];
-}
-
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
-didCompleteWithError:(nullable NSError *)error
-{
-    @synchronized (self) {
-        [self.inflight removeObject:task];
-    }
-    if ( error ){
-        [self reportError:error];
-    }
-    [target close];
-}
-
--(void)dealloc
-{
-    [_inflight release];
     [super dealloc];
 }
 
@@ -379,7 +388,6 @@ didCompleteWithError:(nullable NSError *)error
 
 #import "DebugMacros.h"
 
-
 @implementation MPWURLFetchStream(testing)
 
 +(void)testCanHandleDataStreamingResponse
@@ -388,8 +396,8 @@ didCompleteWithError:(nullable NSError *)error
     NSURL *testURL=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:nil];
     MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
     MPWURLFetchStream* stream=[self streamWithTarget:target];
-    [stream streamingGet:testURL body:nil];
-    [stream awaitResultForSeconds:0.01];
+    [stream get:testURL];
+    [stream awaitResultForSeconds:1];
     IDEXPECT( testTarget, @"This is a simple resource",@"should have written");
     
 }
@@ -404,3 +412,5 @@ didCompleteWithError:(nullable NSError *)error
 }
 
 @end
+
+

@@ -20,19 +20,26 @@
 @property (assign, readonly)  int inflightCount;
 @property (nonatomic,strong) NSString *defaultMethod;
 @property (assign) BOOL  formEncode;
+@property (nonatomic, readonly) NSMutableSet *inflight;
+@property (nonatomic, readonly) NSURLSession *downloader;
+
++streamWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;
+-initWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget;
 
 -(void)setHeaderDict:(NSDictionary *)newHeaders;
 
+-(NSURLRequest*)resolvedRequest:(MPWURLRequest*)request;
 -(void)executeRequest:(MPWURLRequest*)request;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
+-(NSURLSessionConfiguration *)config;
+
 
 -(void)get:(NSURL*)theURL;
 -(void)post:(NSData*)theData toURL:(NSURL *)theURL;
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL;
--(void)cancel;
 
 -(void)writeDictionary:(NSDictionary *)aDictionary;
 
