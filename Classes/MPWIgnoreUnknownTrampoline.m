@@ -194,18 +194,18 @@ static int superChaintTesterCounter=0;
     [[a ifResponds] stringValue1];
 }
 
-static int tester=0;
+static int globalTester=0;
 +(void)tester
 {
-    tester=42;
+    globalTester=42;
     return ;
 }
 
 +(void)testIfRespondsWithVoidReturn
 {
-    tester=0;
+    globalTester=0;
     [[self ifResponds] tester];
-    INTEXPECT(tester,42,@"should have called the test method");
+    INTEXPECT(globalTester,42,@"should have called the test method");
 }
 
 +(void)testSuperchainCaller

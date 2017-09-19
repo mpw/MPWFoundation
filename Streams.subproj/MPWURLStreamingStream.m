@@ -25,7 +25,6 @@
     NSURLSession *session=[NSURLSession sessionWithConfiguration:[self config]
                                                         delegate:helper
                                                    delegateQueue:nil];
-    NSLog(@"===============  set up with session: %@ helper: %@ target: %@",session,helper,target);
     self.streamingDelegate=helper;
     self=[super initWithBaseURL:newBaseURL target:aTarget session:session];
     self.streamingDelegate.inflight = self.inflight;
@@ -61,14 +60,12 @@
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    NSLog(@"did receive data: %@",data);
     [target writeObject:data];
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error
 {
-    NSLog(@"did complete, error: %@",error);
     @synchronized (self) {
         [self.inflight removeObject:task];
     }

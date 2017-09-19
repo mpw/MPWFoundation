@@ -101,9 +101,9 @@
 		1F64206912CB19E200240B02 /* MPWResourceLoadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64206712CB19E200240B02 /* MPWResourceLoadRequest.m */; };
 		1F64207412CB1A3700240B02 /* MPWActiveDownload.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F64207212CB1A3700240B02 /* MPWActiveDownload.h */; };
 		1F64207512CB1A3700240B02 /* MPWActiveDownload.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F64207312CB1A3700240B02 /* MPWActiveDownload.m */; };
-		1F7078A21F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; };
-		1F7078A31F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; };
-		1F7078A41F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; };
+		1F7078A21F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F7078A31F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F7078A41F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7078A51F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };
 		1F7078A61F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };
 		1F7078A71F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };

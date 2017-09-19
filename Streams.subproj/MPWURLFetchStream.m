@@ -211,19 +211,19 @@ static NSURLSession *_defaultURLSession=nil;
 {
     NSParameterAssert( ![request isStreaming]);
     NSURLRequest *resolvedRequest=[self resolvedRequest:request];
-    NSLog(@"url: %@",resolvedRequest.URL);
+//  NSLog(@"url: %@",resolvedRequest.URL);
     NSURLSessionTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
-                NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
+//          NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
             [self removeFromInflight:request];
-                NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
+//          NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
             request.response=response;
             request.data = data;
             int httpStatusCode=0;
             if ( [response respondsToSelector:@selector(statusCode)] ) {
                 httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
             }
-            NSLog(@"data: %@",[data stringValue]);
+//            NSLog(@"data: %@",[data stringValue]);
             if ( httpStatusCode >= 400){
                 NSDictionary *userInfo=
                 @{ @"url": resolvedRequest.URL,
@@ -233,12 +233,11 @@ static NSURLSession *_defaultURLSession=nil;
                 error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
             }
             if (data && !error   ){
-                                   NSLog(@"Success: %@",request);
                 id processed=[self processResponse:request];
-                NSLog(@"will write processed: %@ to %@",processed,target);
+//                NSLog(@"will write processed: %@ to %@",processed,target);
                 [target writeObject:processed];
             } else {
-                NSLog(@"Error: %p %@",request,request);
+//                NSLog(@"Error: %p %@",request,request);
                 NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
                 userInfoWithRequest[@"request"] = request;
                 NSError *errorWithRequest = [NSError errorWithDomain:error.domain
@@ -257,7 +256,6 @@ static NSURLSession *_defaultURLSession=nil;
 -(void)executeRequest:(MPWURLRequest*)request
 {
     [request retain];
-    NSLog(@"number of inflight requests before executing: %p %d ",request,[self inflightCount]);
     request.task = [self taskForExecutingRequest:request];
     if (request.task) {
         @synchronized (self) {
@@ -266,14 +264,10 @@ static NSURLSession *_defaultURLSession=nil;
     } else {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
-    NSLog(@"number of inflight requests after executing: %p %d ",request,[self inflightCount]);
-    NSLog(@"task: %@",request.task);
     [request.task resume];
     
 }
 
-
-#define CHECKS_PER_SECOND 100
 
 -(void)awaitResultForSeconds:(NSTimeInterval)numSeconds
 {
@@ -329,7 +323,7 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)dealloc
 {
-    NSLog(@"deallocating MPWURLFetchStream %p",self);
+//    NSLog(@"deallocating MPWURLFetchStream %p",self);
     [_inflight release];
     [_theHeaderDict release];
     [super dealloc];

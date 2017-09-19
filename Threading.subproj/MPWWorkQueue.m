@@ -271,7 +271,6 @@ static id sentinel=nil;
 	INTEXPECT( [resultSet count],2, @"");
 	NSAssert( [resultSet containsObject:@"hello"] , @"resultSet should contain 'hello'" );
 	NSAssert( [resultSet containsObject:@"world"] , @"resultSet should contain 'world'" );
-	NSLog(@"resultSet: %@",resultSet);
 }
 
 +testSelectors

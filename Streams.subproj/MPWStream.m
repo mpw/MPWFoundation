@@ -131,10 +131,10 @@ idAccessor( target, _setTarget )
 -(void)setTarget:newTarget
 {
     [self _setTarget:newTarget];
-    targetWriteObject = (IMP0)[target methodForSelector:@selector(writeObject:sender:)];
+    targetWriteObject = (IMP_2_id_args)[target methodForSelector:@selector(writeObject:sender:)];
 #ifdef Darwin
     if ( targetWriteObject == NULL ) {
-        targetWriteObject = (IMP0)objc_msgSend;
+        targetWriteObject = (IMP_2_id_args)objc_msgSend;
     }
 #endif
 }

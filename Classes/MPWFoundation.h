@@ -69,6 +69,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWDict2ObjStream.h"
 #import "MPWFoundation/MPWObjectCreatorStream.h"
 #import "MPWFoundation/MPWURLFetchStream.h"
+#import "MPWFoundation/MPWURLStreamingStream.h"
 #import "MPWFoundation/MPWURLPostStream.h"
 #import "MPWFoundation/MPWASCII85Stream.h"
 #import "MPWFoundation/MPWMessageFilterStream.h"
