@@ -216,6 +216,7 @@ static NSURLSession *_defaultURLSession=nil;
         @try {
 //          NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
             [self removeFromInflight:request];
+            NSLog(@"-inflight: %d",self.inflightCount);
 //          NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
             request.response=response;
             request.data = data;
@@ -252,10 +253,21 @@ static NSURLSession *_defaultURLSession=nil;
     return task;
 }
 
+-(int)maxInflight
+{
+    return 5;
+}
+
 
 -(void)executeRequest:(MPWURLRequest*)request
 {
     [request retain];
+    int counter=0;
+    while ( [self inflightCount] > [self maxInflight] && counter++ < 10) {
+        NSLog(@"delay");
+        int over=([self inflightCount]-[self maxInflight]);
+        [NSThread sleepForTimeInterval:0.1 * (over*over)];
+    }
     request.task = [self taskForExecutingRequest:request];
     if (request.task) {
         @synchronized (self) {
@@ -265,6 +277,7 @@ static NSURLSession *_defaultURLSession=nil;
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
     [request.task resume];
+    NSLog(@"+inflight: %d",self.inflightCount);
     
 }
 
