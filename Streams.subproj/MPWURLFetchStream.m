@@ -284,7 +284,9 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)awaitResultForSeconds:(NSTimeInterval)numSeconds
 {
+    NSLog(@"await result for %g seconds",numSeconds);
     [NSThread sleepForTimeInterval:numSeconds orUntilConditionIsMet:^{
+        NSLog(@"inflight count: %d",[self inflightCount]);
         return @([self inflightCount] == 0);
     }];
 }

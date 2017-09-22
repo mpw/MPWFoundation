@@ -41,8 +41,8 @@
     int port=[self port];
     CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)[self.url host], port, &readStream, &writeStream);
  
-    self.inputStream = readStream;
-    self.outputStream = writeStream;
+    self.inputStream = (NSInputStream*)readStream;
+    self.outputStream = (NSOutputStream*)writeStream;
     [self.inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.outputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     [self.inputStream open];

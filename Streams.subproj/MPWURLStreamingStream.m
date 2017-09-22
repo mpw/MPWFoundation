@@ -7,6 +7,7 @@
 //
 
 #import "MPWURLStreamingStream.h"
+#import "MPWByteStream.h"
 
 @interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
 
@@ -83,6 +84,7 @@ didCompleteWithError:(nullable NSError *)error
 
 @end
 
+#import "DebugMacros.h"
 
 @implementation MPWURLStreamingStream(testing)
 
@@ -91,9 +93,9 @@ didCompleteWithError:(nullable NSError *)error
     NSMutableString *testTarget=[NSMutableString string];
     NSURL *testURL=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:nil];
     MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
-    MPWURLFetchStream* stream=[self streamWithTarget:target];
+    MPWURLStreamingStream* stream=[self streamWithTarget:target];
     [stream streamingGet:testURL body:nil];
-    [stream awaitResultForSeconds:1];
+    [stream awaitResultForSeconds:0.5];
     IDEXPECT( testTarget, @"This is a simple resource",@"should have written");
     
 }

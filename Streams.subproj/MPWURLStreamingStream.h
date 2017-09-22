@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWURLFetchStream.h>
 
 @class MPWURLStreamingFetchHelper;
 

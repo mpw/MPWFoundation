@@ -42,7 +42,7 @@
 
 -(NSString *)description1
 {
-    return [NSString stringWithFormat:@"<%@:%p: url=%@ method: %@ request: %@ responseData='%@' error: %@>",
+    return [NSString stringWithFormat:@"<%@:%p: url=%@ method: %@ responseData='%@' error: %@>",
             [self class],self,[self.request.URL absoluteString],self.request.HTTPMethod,
             [self.request.HTTPBody stringValue],self.error];
 }

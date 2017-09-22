@@ -43,5 +43,6 @@
 
 -(void)writeDictionary:(NSDictionary *)aDictionary;
 
+-(void)awaitResultForSeconds:(NSTimeInterval)seconds;
 
 @end
