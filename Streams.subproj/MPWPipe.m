@@ -37,6 +37,12 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [_filters release];
+    [super dealloc];
+}
+
 -(MPWStream *)processFilterSpec:filter
 {
     if ( [filter isKindOfClass:[NSString class]]) {
