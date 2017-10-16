@@ -117,7 +117,10 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(SEL)streamWriterMessage
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     return @selector(writeOnURLFetchStream:);
+#pragma clang diagnostic pop
 }
 
 -(void)writeString:(NSString*)aString
@@ -339,6 +342,9 @@ static NSURLSession *_defaultURLSession=nil;
 //    NSLog(@"deallocating MPWURLFetchStream %p",self);
     [_inflight release];
     [_theHeaderDict release];
+    [_defaultMethod release];
+    [(NSObject *)_errorTarget release];
+    [_baseURL release];
     [super dealloc];
 }
 
