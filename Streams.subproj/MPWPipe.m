@@ -223,7 +223,10 @@ typedef id (^ZeroArgBlock)(void);
     if  ( !initialized) {
         Class blockClass=NSClassFromString(@"NSBlock");
         IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id argument){ ((OneArgBlock)blockSelf)(argument); } );
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         class_addMethod(blockClass, @selector(value:), theImp, "@@:@");
+#pragma clang diagnostic pop
         initialized=YES;
     }
 }
