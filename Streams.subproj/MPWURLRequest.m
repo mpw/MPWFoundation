@@ -25,14 +25,14 @@
 {
     NSMutableURLRequest *r=[self.request mutableCopy];
     r.allHTTPHeaderFields=headerDict;
-    self.request=r;
+    self.request=[r autorelease];
 }
 
 -(void)setBodyData:(NSData *)bodyData
 {
     NSMutableURLRequest *r=[self.request mutableCopy];
     r.HTTPBody=bodyData;
-    self.request=r;
+    self.request=[r autorelease];
 }
 
 -(id)processed
@@ -53,6 +53,7 @@
     [_request release];
     [_response release];
     [_error release];
+    [_task release];
     
     [super dealloc];
 }
