@@ -55,12 +55,12 @@
             }
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o objectForKey:key]; } copy]];
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o objectForKey:key]; } copy] autorelease]];
         } else if ( [(NSString*)filter hasPrefix:@"%"]) {
             NSString *formatString=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(NSString *s){
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(NSString *s){
                 return [NSString stringWithFormat:formatString,s];
-                        } copy]];
+                        } copy] autorelease]];
             [filter setTarget:nil];
         } else if ( [(NSString*)filter hasPrefix:@"!"]) {
             NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
@@ -68,14 +68,17 @@
             [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o valueForKey:key]; } copy]];
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o valueForKey:key]; } copy] autorelease]];
         }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     } else if ( [filter respondsToSelector:@selector(value:)] ) {
         filter=[MPWBlockFilterStream streamWithBlock:filter];
     } else if ( [filter respondsToSelector:@selector(setTarget:)] &&
                 [filter respondsToSelector:@selector(setAction:)] &&
                 [filter respondsToSelector:@selector(objectValue)] ) {
-        filter=[[MPWActionStreamAdapter alloc] initWithUIControl:filter target:nil];
+#pragma clang diagnostic pop
+        filter=[[[MPWActionStreamAdapter alloc] initWithUIControl:filter target:nil] autorelease];
     } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
         filter=[(Class)filter streamWithTarget:nil];
     } else if ( [filter isKindOfClass:[NSArray class]]) {
