@@ -37,6 +37,12 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [_filters release];
+    [super dealloc];
+}
+
 -(MPWStream *)processFilterSpec:filter
 {
     if ( [filter isKindOfClass:[NSString class]]) {
@@ -49,12 +55,12 @@
             }
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o objectForKey:key]; } copy]];
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o objectForKey:key]; } copy] autorelease]];
         } else if ( [(NSString*)filter hasPrefix:@"%"]) {
             NSString *formatString=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(NSString *s){
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(NSString *s){
                 return [NSString stringWithFormat:formatString,s];
-                        } copy]];
+                        } copy] autorelease]];
             [filter setTarget:nil];
         } else if ( [(NSString*)filter hasPrefix:@"!"]) {
             NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
@@ -62,14 +68,17 @@
             [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];
-            filter=[MPWBlockFilterStream streamWithBlock:[^(id o){ return [o valueForKey:key]; } copy]];
+            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o valueForKey:key]; } copy] autorelease]];
         }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
     } else if ( [filter respondsToSelector:@selector(value:)] ) {
         filter=[MPWBlockFilterStream streamWithBlock:filter];
     } else if ( [filter respondsToSelector:@selector(setTarget:)] &&
                 [filter respondsToSelector:@selector(setAction:)] &&
                 [filter respondsToSelector:@selector(objectValue)] ) {
-        filter=[[MPWActionStreamAdapter alloc] initWithUIControl:filter target:nil];
+#pragma clang diagnostic pop
+        filter=[[[MPWActionStreamAdapter alloc] initWithUIControl:filter target:nil] autorelease];
     } else if ( [filter respondsToSelector:@selector(streamWithTarget:)] ) {
         filter=[(Class)filter streamWithTarget:nil];
     } else if ( [filter isKindOfClass:[NSArray class]]) {
@@ -214,7 +223,10 @@ typedef id (^ZeroArgBlock)(void);
     if  ( !initialized) {
         Class blockClass=NSClassFromString(@"NSBlock");
         IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id argument){ ((OneArgBlock)blockSelf)(argument); } );
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
         class_addMethod(blockClass, @selector(value:), theImp, "@@:@");
+#pragma clang diagnostic pop
         initialized=YES;
     }
 }
@@ -243,7 +255,7 @@ typedef id (^ZeroArgBlock)(void);
       [MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)],
       [MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"]; }],
       ];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
 }
@@ -259,7 +271,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
         first,third
       ];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
 }
@@ -268,7 +280,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyMessageFilter
 {
     NSArray *filters = @[ @"-uppercaseString"];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -276,7 +288,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyValueForKey
 {
     NSArray *filters = @[ @"uppercaseString"];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -284,7 +296,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyObjectForKey
 {
     NSArray *filters = @[ @"[key1]"];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@{ @"key1": @"Hello", @"key2": @"World"}];
     IDEXPECT([[pipe target] firstObject], @"Hello", @"hello, extracted");
 }
@@ -295,7 +307,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
       ^(NSString *s){ return [s stringByAppendingString:@" World!"]; },
        ];
-    MPWPipe *pipe=[[self alloc] initWithFilters:filters];
+    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
 }
