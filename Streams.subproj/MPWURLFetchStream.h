@@ -23,6 +23,7 @@
 @property (nonatomic, readonly) NSMutableSet *inflight;
 @property (nonatomic, readonly) NSURLSession *downloader;
 @property (assign)  int maxInflight;
+@property (nonatomic, strong) NSThread *targetThread;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;

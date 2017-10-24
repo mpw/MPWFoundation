@@ -186,7 +186,14 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)reportError:(NSError*)error
 {
-    [self.errorTarget writeObject:error];
+    if (self.targetThread) {
+        [(NSObject<Streaming> *)self.errorTarget performSelector:@selector(writeObject:)
+                                                        onThread:self.targetThread
+                                                      withObject:error
+                                                   waitUntilDone:NO];
+    } else {
+        [self.errorTarget writeObject:error];
+    }
 }
 
 
@@ -239,7 +246,14 @@ static NSURLSession *_defaultURLSession=nil;
             if (data && !error   ){
                 id processed=[self processResponse:request];
 //                NSLog(@"will write processed: %@ to %@",processed,target);
-                [target writeObject:processed];
+                if (self.targetThread) {
+                    [target performSelector:@selector(writeObject:)
+                                   onThread:self.targetThread
+                                 withObject:processed
+                              waitUntilDone:NO];
+                } else {
+                    [target writeObject:processed];
+                }
             } else {
 //                NSLog(@"Error: %p %@",request,request);
                 NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
@@ -342,6 +356,7 @@ static NSURLSession *_defaultURLSession=nil;
     [_defaultMethod release];
     [(NSObject *)_errorTarget release];
     [_baseURL release];
+    [_targetThread release];
     [super dealloc];
 }
 
