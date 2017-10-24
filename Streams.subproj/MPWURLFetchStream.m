@@ -188,7 +188,7 @@ static NSURLSession *_defaultURLSession=nil;
 {
     if (self.targetThread) {
         [(NSObject<Streaming> *)self.errorTarget performSelector:@selector(writeObject:)
-                                                        onThread:[NSThread currentThread]
+                                                        onThread:self.targetThread
                                                       withObject:error
                                                    waitUntilDone:NO];
     } else {
