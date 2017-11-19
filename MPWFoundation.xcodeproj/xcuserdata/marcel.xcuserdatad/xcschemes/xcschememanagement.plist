@@ -7,7 +7,7 @@
 		<key>MPWFoundation (Framework).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>43</integer>
+			<integer>41</integer>
 		</dict>
 		<key>MPWFoundation (Linux Cocotron).xcscheme</key>
 		<dict>
@@ -19,7 +19,7 @@
 		<key>MPWFoundation (Linux Cocotron).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>53</integer>
+			<integer>51</integer>
 		</dict>
 		<key>MPWFoundation (Windows Cocotron).xcscheme</key>
 		<dict>
@@ -33,28 +33,28 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>51</integer>
+			<integer>49</integer>
 		</dict>
 		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>22</integer>
+			<integer>20</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>98</integer>
+			<integer>96</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>25</integer>
+			<integer>23</integer>
 		</dict>
 		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
 		<dict>
@@ -66,7 +66,7 @@
 		<key>TestMPWFoundation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>108</integer>
+			<integer>106</integer>
 		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>
@@ -78,7 +78,7 @@
 		<key>show-build-dir.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>65</integer>
+			<integer>63</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
