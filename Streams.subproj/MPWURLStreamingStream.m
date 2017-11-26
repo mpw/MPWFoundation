@@ -20,16 +20,21 @@
 @implementation MPWURLStreamingStream
 
 
--(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget
+-(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget queue:(NSOperationQueue*)targetQueue
 {
     MPWURLStreamingFetchHelper *helper = [MPWURLStreamingFetchHelper streamWithTarget:aTarget];
     NSURLSession *session=[NSURLSession sessionWithConfiguration:[self config]
                                                         delegate:helper
-                                                   delegateQueue:nil];
+                                                   delegateQueue:targetQueue];
     self.streamingDelegate=helper;
     self=[super initWithBaseURL:newBaseURL target:aTarget session:session];
     self.streamingDelegate.inflight = self.inflight;
     return self;
+}
+
+-(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget
+{
+    return [self initWithBaseURL:newBaseURL target:aTarget queue:nil];
 }
 
 

@@ -14,5 +14,7 @@
 
 @property (nonatomic, strong) MPWURLStreamingFetchHelper *streamingDelegate;
 
+-(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget queue:(NSOperationQueue*)targetQueue;
+
 
 @end
