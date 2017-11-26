@@ -22,7 +22,6 @@
 @property (assign) BOOL  formEncode;
 @property (nonatomic, readonly) NSMutableSet *inflight;
 @property (nonatomic, readonly) NSURLSession *downloader;
-@property (assign)  int maxInflight;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;
 -initWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;

@@ -33,7 +33,6 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget session
     [self setErrorTarget:[MPWByteStream Stderr]];
     [self setDefaultMethod:@"GET"];
     [self setInflight:[NSMutableSet set]];
-    self.maxInflight=[self defaultMaxInflight];
     return self;
 }
 
@@ -256,20 +255,10 @@ static NSURLSession *_defaultURLSession=nil;
     return task;
 }
 
--(int)defaultMaxInflight
-{
-    return 5;
-}
-
 
 -(void)executeRequest:(MPWURLRequest*)request
 {
     [request retain];
-    int counter=0;
-    while ( [self inflightCount] > [self maxInflight] && counter++ < 10) {
-        int over=([self inflightCount]-[self maxInflight]);
-        [NSThread sleepForTimeInterval:0.1 * (over*over)];
-    }
     request.task = [self taskForExecutingRequest:request];
     if (request.task) {
         @synchronized (self) {
