@@ -34,7 +34,8 @@
 -(NSTimeInterval)delay
 {
     int over=[self howMuchOverMaxInflight];
-    return MAX(0,0.1 * over);
+    over=MAX(0,over);
+    return 0.1 * (over*over);
 }
 
 -(BOOL)isOver
@@ -52,3 +53,43 @@
 }
 
 @end
+
+#import "DebugMacros.h"
+
+@implementation MPWInflightThrottleStream(testing)
+
++(void)testDelayCompuation
+{
+    NSMutableArray *target=[@[]  mutableCopy];
+    MPWInflightThrottleStream *s=[self streamWithTarget:target];
+    EXPECTFALSE([s isOver],@"0 inflightCount should not be over");
+    FLOATEXPECT([s delay],0,@"0 inflightCount, no delay");
+    [target addObject:@"a"];
+    [target addObject:@"a"];
+    [target addObject:@"a"];
+    [target addObject:@"a"];
+    EXPECTFALSE([s isOver],@"4 inflightCount should not be over");
+    FLOATEXPECT([s delay],0,@"4 inflightCount, no delay");
+    [target addObject:@"a"];
+    EXPECTFALSE([s isOver],@"5 inflightCount should not be over");
+    FLOATEXPECT([s delay],0,@"5 inflightCount, no delay");
+    [target addObject:@"a"];
+    EXPECTTRUE([s isOver],@"6 inflightCount should be over");
+    FLOATEXPECT([s delay],0.1,@"6 inflightCount, delay");
+    [target addObject:@"a"];
+    EXPECTTRUE([s isOver],@"7 inflightCount should be over");
+    FLOATEXPECT([s delay],0.4,@"7 inflightCount, delay");
+    [target addObject:@"a"];
+    FLOATEXPECT([s delay],0.9,@"8 inflightCount, delay");
+}
+
+
++testSelectors
+{
+    return @[
+             @"testDelayCompuation",
+             ];
+}
+
+@end
+

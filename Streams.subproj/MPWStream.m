@@ -453,6 +453,11 @@ SEL visSel;
 	}
 }
 
+-(int)inflightCount
+{
+    return (int)self.count;
+}
+
 @end
 
 
