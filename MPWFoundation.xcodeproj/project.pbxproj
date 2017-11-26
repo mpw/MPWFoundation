@@ -694,9 +694,6 @@
 		07DF195B006686DDC35ADD82 /* MPWIgnoreTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWIgnoreTrampoline.h; sourceTree = "<group>"; };
 		07DF195C006686DDC35ADD82 /* bytecoding.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = bytecoding.h; sourceTree = "<group>"; };
 		07DF195E006686DDC35ADD82 /* bytecoding.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = bytecoding.c; sourceTree = "<group>"; };
-		07DF1960006686DDC35ADD82 /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
-		07DF1961006686DDC35ADD82 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		07DF1962006686DDC35ADD82 /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		07DF1963006686DDC35ADD82 /* m.template */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = m.template; sourceTree = "<group>"; };
 		07DF1964006686DDC35ADD82 /* h.template */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = h.template; sourceTree = "<group>"; };
 		07DF1968006686DDC35ADD82 /* MPWASCII85Stream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWASCII85Stream.m; sourceTree = "<group>"; };
@@ -705,9 +702,6 @@
 		07DF196C006686DDC35ADD82 /* MPWASCII85Stream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWASCII85Stream.h; sourceTree = "<group>"; };
 		07DF196D006686DDC35ADD82 /* MPWFilterStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFilterStream.h; sourceTree = "<group>"; };
 		07DF196E006686DDC35ADD82 /* MPWLZWStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWLZWStream.h; sourceTree = "<group>"; };
-		07DF1970006686DDC35ADD82 /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
-		07DF1971006686DDC35ADD82 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		07DF1972006686DDC35ADD82 /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		07DF1975006686DDC35ADD82 /* MPWRealArray.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWRealArray.m; sourceTree = "<group>"; };
 		07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumFilter.m; sourceTree = "<group>"; };
 		07DF1977006686DDC35ADD82 /* MPWUShortArray.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWUShortArray.m; sourceTree = "<group>"; };
@@ -730,9 +724,6 @@
 		07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSEnumeratorFiltering.h; sourceTree = "<group>"; };
 		07DF198A006686DDC35ADD82 /* MPWUniqueString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWUniqueString.h; sourceTree = "<group>"; };
 		07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFakedReturnMethodSignature.h; sourceTree = "<group>"; };
-		07DF198D006686DDC35ADD82 /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
-		07DF198E006686DDC35ADD82 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		07DF198F006686DDC35ADD82 /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		07DF1992006686DDC35ADD82 /* MPWStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWStream.m; sourceTree = "<group>"; };
 		07DF1993006686DDC35ADD82 /* MPWByteStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWByteStream.m; sourceTree = "<group>"; };
 		07DF1994006686DDC35ADD82 /* MPWHierarchicalStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWHierarchicalStream.m; sourceTree = "<group>"; };
@@ -743,9 +734,6 @@
 		07DF199A006686DDC35ADD82 /* MPWHierarchicalStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWHierarchicalStream.h; sourceTree = "<group>"; };
 		07DF199B006686DDC35ADD82 /* MPWPropertyListStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWPropertyListStream.h; sourceTree = "<group>"; };
 		07DF199C006686DDC35ADD82 /* MPWFlattenStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFlattenStream.h; sourceTree = "<group>"; };
-		07DF199E006686DDC35ADD82 /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
-		07DF199F006686DDC35ADD82 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		07DF19A0006686DDC35ADD82 /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		07DF19A3006686DDC35ADD82 /* NSConditionLockSem.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSConditionLockSem.m; sourceTree = "<group>"; };
 		07DF19A4006686DDC35ADD82 /* MPWAsyncProxy.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWAsyncProxy.m; sourceTree = "<group>"; };
 		07DF19A5006686DDC35ADD82 /* NSObjectInterThreadMessaging.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSObjectInterThreadMessaging.m; sourceTree = "<group>"; };
@@ -756,9 +744,6 @@
 		07DF19AB006686DDC35ADD82 /* NSObjectInterThreadMessaging.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSObjectInterThreadMessaging.h; sourceTree = "<group>"; };
 		07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSThreadInterThreadMessaging.h; sourceTree = "<group>"; };
 		07DF19AD006686DDC35ADD82 /* FIFO.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FIFO.h; sourceTree = "<group>"; };
-		07DF19AF006686DDC35ADD82 /* Makefile.preamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.preamble; sourceTree = "<group>"; };
-		07DF19B0006686DDC35ADD82 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
-		07DF19B1006686DDC35ADD82 /* Makefile.postamble */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = Makefile.postamble; sourceTree = "<group>"; };
 		07DF19B3006686DDC35ADD82 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		07DF19B4006686DDC35ADD82 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCTests-Info.plist"; sourceTree = "<group>"; };
@@ -1093,9 +1078,6 @@
 		07DF195F006686DDC35ADD82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				07DF1960006686DDC35ADD82 /* Makefile.preamble */,
-				07DF1961006686DDC35ADD82 /* Makefile */,
-				07DF1962006686DDC35ADD82 /* Makefile.postamble */,
 				07DF1963006686DDC35ADD82 /* m.template */,
 				07DF1964006686DDC35ADD82 /* h.template */,
 				66DC61AE01398925005ADD88 /* Concepts.rtf */,
@@ -1108,16 +1090,6 @@
 		07DF1966006686DDC35ADD82 /* Comm */ = {
 			isa = PBXGroup;
 			children = (
-				07DF1967006686DDC35ADD82 /* Classes */,
-				07DF196F006686DDC35ADD82 /* Supporting Files */,
-			);
-			name = Comm;
-			path = Comm.subproj;
-			sourceTree = "<group>";
-		};
-		07DF1967006686DDC35ADD82 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
 				07DF196C006686DDC35ADD82 /* MPWASCII85Stream.h */,
 				07DF1968006686DDC35ADD82 /* MPWASCII85Stream.m */,
 				07DF196D006686DDC35ADD82 /* MPWFilterStream.h */,
@@ -1125,30 +1097,11 @@
 				07DF196E006686DDC35ADD82 /* MPWLZWStream.h */,
 				07DF196A006686DDC35ADD82 /* MPWLZWStream.m */,
 			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		07DF196F006686DDC35ADD82 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				07DF1970006686DDC35ADD82 /* Makefile.preamble */,
-				07DF1971006686DDC35ADD82 /* Makefile */,
-				07DF1972006686DDC35ADD82 /* Makefile.postamble */,
-			);
-			name = "Supporting Files";
+			name = Comm;
+			path = Comm.subproj;
 			sourceTree = "<group>";
 		};
 		07DF1973006686DDC35ADD82 /* Collections */ = {
-			isa = PBXGroup;
-			children = (
-				07DF1974006686DDC35ADD82 /* Classes */,
-				07DF198C006686DDC35ADD82 /* Supporting Files */,
-			);
-			name = Collections;
-			path = Collections.subproj;
-			sourceTree = "<group>";
-		};
-		07DF1974006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */,
@@ -1191,8 +1144,10 @@
 				07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */,
 				66DC619D01393D22005ADD88 /* NSObjectFiltering.h */,
 				66DC619C01393D22005ADD88 /* NSObjectFiltering.m */,
+				07DF198C006686DDC35ADD82 /* Supporting Files */,
 			);
-			name = Classes;
+			name = Collections;
+			path = Collections.subproj;
 			sourceTree = "<group>";
 		};
 		07DF198C006686DDC35ADD82 /* Supporting Files */ = {
@@ -1201,24 +1156,11 @@
 				1FBAABB81847651B00086047 /* stops.txt */,
 				1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */,
 				1FA1594217EEF18900BF8F6F /* first4.tabdelim */,
-				07DF198D006686DDC35ADD82 /* Makefile.preamble */,
-				07DF198E006686DDC35ADD82 /* Makefile */,
-				07DF198F006686DDC35ADD82 /* Makefile.postamble */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		07DF1990006686DDC35ADD82 /* Streams */ = {
-			isa = PBXGroup;
-			children = (
-				07DF1991006686DDC35ADD82 /* Classes */,
-				07DF199D006686DDC35ADD82 /* Supporting Files */,
-			);
-			name = Streams;
-			path = Streams.subproj;
-			sourceTree = "<group>";
-		};
-		07DF1991006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */,
@@ -1280,30 +1222,11 @@
 				1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */,
 				1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */,
 			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		07DF199D006686DDC35ADD82 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				07DF199E006686DDC35ADD82 /* Makefile.preamble */,
-				07DF199F006686DDC35ADD82 /* Makefile */,
-				07DF19A0006686DDC35ADD82 /* Makefile.postamble */,
-			);
-			name = "Supporting Files";
+			name = Streams;
+			path = Streams.subproj;
 			sourceTree = "<group>";
 		};
 		07DF19A1006686DDC35ADD82 /* Threading */ = {
-			isa = PBXGroup;
-			children = (
-				07DF19A2006686DDC35ADD82 /* Classes */,
-				07DF19AE006686DDC35ADD82 /* Supporting Files */,
-			);
-			name = Threading;
-			path = Threading.subproj;
-			sourceTree = "<group>";
-		};
-		07DF19A2006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				07DF19AD006686DDC35ADD82 /* FIFO.h */,
@@ -1327,17 +1250,8 @@
 				1FCBEDDB1CFC2DA800F2EE0E /* NSThreadWaiting.h */,
 				1FCBEDDC1CFC2DA800F2EE0E /* NSThreadWaiting.m */,
 			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
-		07DF19AE006686DDC35ADD82 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				07DF19AF006686DDC35ADD82 /* Makefile.preamble */,
-				07DF19B0006686DDC35ADD82 /* Makefile */,
-				07DF19B1006686DDC35ADD82 /* Makefile.postamble */,
-			);
-			name = "Supporting Files";
+			name = Threading;
+			path = Threading.subproj;
 			sourceTree = "<group>";
 		};
 		07DF19B2006686DDC35ADD82 /* External Frameworks and Libraries */ = {
