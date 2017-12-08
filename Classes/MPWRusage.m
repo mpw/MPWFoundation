@@ -105,6 +105,11 @@ scalarAccessor(long long, absolute , setAbsolute)
         return [[self current] subtractStartTime:start];
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: userMicros: %ld >",[self className],self,[self userMicroseconds]];
+}
+
 
 @end
 
@@ -122,8 +127,6 @@ scalarAccessor(long long, absolute , setAbsolute)
 	[usertime autorelease];
 	return usertime;
 }
-
-
 
 -userMicrosecondsToRun
 {

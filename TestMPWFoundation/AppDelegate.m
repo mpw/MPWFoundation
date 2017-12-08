@@ -44,6 +44,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
       @"MPWStream",
       @"MPWPipe",
       @"MPWDelayStream",
+      @"MPWFastInvocation",
       ];
     NSMutableArray *mirrors=[NSMutableArray array];
     for ( NSString *className in classNamesToTest ) {
