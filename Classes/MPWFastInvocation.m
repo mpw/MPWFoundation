@@ -251,22 +251,22 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	id slow=[self simpleSendWithInvocationOfClass:[MPWConvenientInvocation class]];
 	IMP0 invoke = [slow methodForSelector:@selector(resultOfInvoking)];
 	MPWRusage* slowStart=[MPWRusage current];
-#define SEND_COUNT 10000
+#define SEND_COUNT 1000000
 
 	for (i=0;i<SEND_COUNT;i++) {
 		invoke( slow, @selector(resultOfInvoking));
 	}
 	MPWRusage* slowTime=[MPWRusage timeRelativeTo:slowStart];
-    NSLog(@"slowTime: %@",slowTime);
-    NSLog(@"slowTime: %g",(double)[slowTime userMicroseconds]);
+//    NSLog(@"slowTime: %@",slowTime);
+//    NSLog(@"slowTime: %g",(double)[slowTime userMicroseconds]);
 	[fast setUseCaching:caching];
 	MPWRusage* fastStart=[MPWRusage current];
 	for (i=0;i<SEND_COUNT;i++) {
 		INVOKE(fast);
 	}
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
-    NSLog(@"fastTime: %@",fastTime);
-    NSLog(@"fastTime: %g",(double)[fastTime userMicroseconds]);
+//    NSLog(@"fastTime: %@",fastTime);
+//    NSLog(@"fastTime: %g",(double)[fastTime userMicroseconds]);
 	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
 	NSLog(@"ratio of %@cached MPWFastInvocation compared to NSInvocation: %g",caching?@"":@"un",ratio);
 	return ratio;
@@ -297,7 +297,7 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 }
 
 #undef SEND_COUNT
-#define SEND_COUNT 100000
+#define SEND_COUNT 1000000
 
 +(void)testCachedInvocationFasterThanMessaging
 {

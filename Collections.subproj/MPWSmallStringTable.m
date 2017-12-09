@@ -189,7 +189,7 @@ IMP __stringTableLookupFun=NULL;
 		}
 #endif
 		if ( !__stringTableLookupFun ) {
-			__stringTableLookupFun=(IMP2)[self methodForSelector:@selector(objectForCString:length:)];
+			__stringTableLookupFun=(LOOKUPIMP)[self methodForSelector:@selector(objectForCString:length:)];
 		}
 		[self setDefaultValue:nil];
 	}

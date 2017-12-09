@@ -10,7 +10,7 @@
 #import "MPWObject.h"
 #import "AccessorMacros.h"
 
-typedef id (*IMP2)(id, SEL,...);
+typedef id (*LOOKUPIMP)(id, SEL, char*, int);
 
 
 typedef struct {
@@ -39,7 +39,7 @@ typedef struct {
 	BOOL    caseInsensitive;
     
 	@public
-	IMP2    __stringTableLookupFun;
+	LOOKUPIMP    __stringTableLookupFun;
 }
 
 //extern IMP __stringTableLookupFun;
