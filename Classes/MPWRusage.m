@@ -107,7 +107,7 @@ scalarAccessor(long long, absolute , setAbsolute)
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: userMicros: %ld >",[self className],self,[self userMicroseconds]];
+    return [NSString stringWithFormat:@"<%@:%p: userMicros: %ld >",[self class],self,[self userMicroseconds]];
 }
 
 

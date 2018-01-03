@@ -51,7 +51,7 @@
             if (selector) {
                 filter=[MPWMessageFilterStream streamWithSelector:selector];
             } else {
-                [NSException raise:@"SelectorNotFound" format:@"%@ selector not found: %@",[self className],filter];
+                [NSException raise:@"SelectorNotFound" format:@"%@ selector not found: %@",[self class],filter];
             }
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
