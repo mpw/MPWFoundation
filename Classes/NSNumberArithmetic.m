@@ -75,6 +75,11 @@ defineArithOp( mul, * )
 defineArithOp( sub, - )
 defineArithOp( div, / )
 
+-squared
+{
+    return [self mul:self];
+}
+
 -(BOOL)isLessThan:other
 {
     return [self compare:other] < 0;
