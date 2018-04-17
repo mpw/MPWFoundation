@@ -75,3 +75,5 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)close;
 -(void)flush;
 @end
+
+

@@ -88,6 +88,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	[[aCoder do] encodeKey:[keys each] ofObject:self];
 }
 
+
 -initWithCoder:(NSCoder*)aCoder keys:keys
 {
 	[[aCoder do] decodeKey:[keys each] ofObject:self];

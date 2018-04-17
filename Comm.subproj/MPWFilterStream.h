@@ -44,7 +44,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @interface MPWFilterStream:MPWByteStream
 {
 @public
-    unsigned char buffer[BUFMAX+10];
+    char buffer[BUFMAX+10];
     int	bufSize;
 }
 

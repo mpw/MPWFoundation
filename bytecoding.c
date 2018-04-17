@@ -103,10 +103,12 @@ limited_rle_encode(unsigned char *out,const unsigned char *in, int  width, int m
          } else {                            /* ignore this run */
 
             for(cdata = crun; (width > cdata) && (crun < 4);) {
-               if(run  == in[cdata])
+                if(run  == in[cdata]) {
                    crun += 1;
-               else
-                   run = in[cdata], crun  = 1;
+                } else {
+                    run = in[cdata];
+                    crun  = 1;
+                }
                if(++cdata == maxRLE)
                    break;
             }
@@ -334,7 +336,7 @@ int hexdecodeNoSkip( const unsigned char *from, const unsigned char *end, unsign
 }
 
 
-unsigned hashCStringLen( const unsigned char *ch, unsigned len )
+unsigned hashCStringLen( const unsigned char *ch, unsigned long len )
 {
     unsigned hashResult = 0, hash2;
     if (ch) {

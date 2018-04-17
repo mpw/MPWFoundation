@@ -47,7 +47,7 @@
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>96</integer>
+			<integer>92</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
@@ -66,7 +66,7 @@
 		<key>TestMPWFoundation.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>106</integer>
+			<integer>102</integer>
 		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>

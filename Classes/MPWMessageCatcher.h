@@ -49,7 +49,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(NSInvocation*)xxxMessageAtIndex:(unsigned)anIndex;
 -(NSString*)xxxMessageNameAtIndex:(unsigned)anIndex;
 -xxxMessageArgumentNumber:(unsigned)argIndex atIndex:(unsigned)messageIndex;
--(int)xxxMessageCount;
+-(long)xxxMessageCount;
 
 
 

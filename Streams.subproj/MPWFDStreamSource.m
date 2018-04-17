@@ -53,7 +53,7 @@
 -(void)readFromStreamAndWriteToTarget
 {
     char buffer[self.bufferSize+10];
-    int actual=0;
+    long actual=0;
 //    NSLog(@"buffersize: %d",self.bufferSize);
     while ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) {
         @autoreleasepool {

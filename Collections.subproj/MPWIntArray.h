@@ -43,7 +43,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface MPWIntArray : MPWObject {
 	int *data;
-	unsigned count,capacity;
+	unsigned long count,capacity;
 }
 
 +array;

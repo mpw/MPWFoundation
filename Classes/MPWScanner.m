@@ -461,7 +461,7 @@ static inline void copybuf( char *target,const char *source, long len ) {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     id result,result1check;
     BOOL silent=[[NSUserDefaults standardUserDefaults] boolForKey:@"silent"];
-    result=[self scan:[NSData dataWithContentsOfMappedFile:filename]];
+    result=[self scan:[NSData dataWithContentsOfFiles:filename]];
 
     if (!silent) {
         id resultfilename = [NSString stringWithFormat:@"%@.%@-result",filename,self];

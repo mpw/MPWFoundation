@@ -592,7 +592,7 @@ static id returnNil() {  return nil; }
 {
     id array = [NSArray arrayWithObjects:@"a",@"b",@"c",@"d",nil];
 
-    id result =[[array reduce] stringByAppendingString:nil];
+    id result =[[array reduce] stringByAppendingString:@""];
     IDEXPECT(result, @"abcd", @" reduce ");
 }
 
@@ -646,7 +646,7 @@ static id returnNil() {  return nil; }
 	id testResult;
 	id emptyArray=[NSArray array];
 	for (i=0;i<100;i++) {
-		[[emptyArray do] stringByAppendingString:nil];
+		[[emptyArray do] stringByAppendingString:@""];
 	}
 	 testResult =(id)(NSUInteger)[[testArray selectWhereValueForKey:@"pathExtension"] __isEqual:@"txt"];
     IDEXPECT(goodResult, testResult, @"getting .txt pathExtension");

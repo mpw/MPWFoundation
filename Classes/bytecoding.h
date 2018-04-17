@@ -41,6 +41,6 @@ int hexdecode( const unsigned char *from, const unsigned char *end, unsigned cha
 int hexdecodeSkip( const unsigned char *from, const unsigned char *end, unsigned char *to, unsigned int length,unsigned int *written_target, int *odd_target );
 int hexdecodeNoSkip( const unsigned char *from, const unsigned char *end, unsigned char *to, unsigned int length,unsigned int *written_target, int *odd_target );
 
-unsigned hashCStringLen( const unsigned char *cstring, unsigned len );
+unsigned hashCStringLen( const unsigned char *cstring, unsigned long len );
 
 

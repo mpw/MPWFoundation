@@ -36,7 +36,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @interface MPWUniqueString : NSString
 {
 	const char	*data;
-	int		len;
+	long	len;
     int		hash;
 	BOOL	freeWhenDone;
 }
@@ -54,8 +54,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-MPWUniqueString *MPWUniqueStringWithCString( const char *string, int len );
-MPWUniqueString *MPWUniqueStringWithUnichars( const unichar *string, int len );
+MPWUniqueString *MPWUniqueStringWithCString( const char *string, long len );
+MPWUniqueString *MPWUniqueStringWithUnichars( const unichar *string, long len );
 MPWUniqueString *MPWUniqueStringWithString( id string );
 
 @interface NSString(unique)

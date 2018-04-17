@@ -23,8 +23,8 @@
 {
     self=[super initWithTarget:nil];
     self.url=socketURL;
-    NSLog(@"url: %@",self.url);
-    NSLog(@"port: %d",[socketURL.port intValue]);
+//    NSLog(@"url: %@",self.url);
+//    NSLog(@"port: %d",[socketURL.port intValue]);
     return self;
 }
 
@@ -54,7 +54,7 @@
 
 -(void)appendBytes:(const void*)data length:(NSUInteger)count
 {
-    NSInteger r=[self.outputStream write:data maxLength:count];
+    [self.outputStream write:data maxLength:count];
 }
 
 
@@ -62,7 +62,7 @@
 -(BOOL)forwardAvailableBytes
 {
     @autoreleasepool {
-        int len=0;
+        long len=0;
         uint8_t buffer[8192];
         len=[self.inputStream read:buffer maxLength:8192];
         if ( len > 0) {

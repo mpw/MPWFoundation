@@ -81,7 +81,7 @@ static void lineLimited_putc( MPWASCII85Stream* self, unsigned char byte )
         {
             for(index = 4; index >= 0; index--)
             {
-                if((base85digit[index] = base256 / divarray[index]) != 0)
+                if((base85digit[index] = (int)(base256 / divarray[index])) != 0)
                 {
                     nz = !0;
                 }

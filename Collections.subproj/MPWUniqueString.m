@@ -49,7 +49,7 @@ static void empty3( NSMapTable *t, const void *p) {}
 
 typedef struct {
 	const char *str;
-	int len;
+	long len;
 } pstr;
 
 
@@ -195,11 +195,14 @@ typedef struct {
 {
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
 -(void)dealloc
 {
 	return;
-	[super dealloc];
 }
+#pragma clang diagnostic pop
+
 
  -(pstr*)pstring
  {
@@ -286,7 +289,7 @@ static NSMapTable *_tokenTable() {
     return theTable;
 }
 
-MPWUniqueString *MPWUniqueStringWithCString( const char *string, int len )
+MPWUniqueString *MPWUniqueStringWithCString( const char *string, long len )
 {
     NSMapTable *table=_tokenTable();
     MPWUniqueString *result;
@@ -305,7 +308,7 @@ MPWUniqueString *MPWUniqueStringWithCString( const char *string, int len )
     return result;
 }
 
-MPWUniqueString *MPWUniqueStringWithUnichars( const unichar *string, int len )
+MPWUniqueString *MPWUniqueStringWithUnichars( const unichar *string, long len )
 {
     unsigned char str[len];
     int i;

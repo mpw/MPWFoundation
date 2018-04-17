@@ -67,7 +67,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     }
     else
     {
-        TARGET_APPEND( data, count );
+        TARGET_APPEND( (char*)data, count );
     }
 }
 

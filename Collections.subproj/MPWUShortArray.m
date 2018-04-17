@@ -56,12 +56,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
     return data;
 }
--(unsigned)ushortAtIndex:(unsigned)index
+-(unsigned)ushortAtIndex:(unsigned long)index
 {
     if ( index < count ) {
         return data[index];
     } else {
-        [NSException raise:@"range exception" format:@"accesing ushort at index %d max %d",index,count];
+        [NSException raise:@"range exception" format:@"accesing ushort at index %ld max %ld",index,count];
         return -1;
     }
 }
@@ -82,7 +82,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         memcpy( data+count, newData, newCount*sizeof(unsigned short));
         count+=newCount;
     } else {
-        [NSException raise:@"capacity exceeded" format:@"%d new + %d current exceeds capacity %d",newCount,count,capacity];
+        [NSException raise:@"capacity exceeded" format:@"%d new + %ld current exceeds capacity %ld",newCount,count,capacity];
     }
         
 }
@@ -117,7 +117,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	id str=[NSMutableString string];
 	int i;
-	[str appendFormat:@"<%@ %p: count: %d elements:",[self class],self,count];
+	[str appendFormat:@"<%@ %p: count: %ld elements:",[self class],self,count];
 	for (i=0;i<count;i++) {
 		[str appendFormat:@" %d",[self ushortAtIndex:i]];
 	}

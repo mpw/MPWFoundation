@@ -99,7 +99,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return messages;
 }
 
--(int)xxxMessageCount
+-(long)xxxMessageCount
 {
     return [[self xxxMesssages] count];
 }

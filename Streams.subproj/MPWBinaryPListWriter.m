@@ -205,9 +205,9 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 -(void)writeIntArray:(MPWIntArray*)array offset:(int)start skip:(int)stride numBytes:(int)numBytes
 {
 #define BUFSIZE  8000
-    unsigned char buffer[BUFSIZE];
-    unsigned char *cur=buffer;
-    int maxCount=[array count];
+    char buffer[BUFSIZE];
+    char *cur=buffer;
+    int maxCount=(int)[array count];
     int *ptrs=[array integers];
     for (int i=start;i<maxCount;i+=stride) {
         //        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
@@ -237,9 +237,9 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 }
 
 
--(void)writeCompoundObjectHeader:(int)headerByte length:(int)length
+-(void)writeCompoundObjectHeader:(int)headerByte length:(long)length
 {
-    unsigned char header=headerByte;
+    char header=headerByte;
     if ( length < 15 ) {
         header=header | length;
         TARGET_APPEND(&header, 1);

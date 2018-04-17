@@ -261,7 +261,7 @@ SEL visSel;
 {
     BOOL first=YES;
     id nextObject;
-    NSAutoreleasePool *pool=[[NSAutoreleasePool alloc] init];
+    NSAutoreleasePool *pool=[NSAutoreleasePool new];
     int objectCount=0;
     while (nil!=(nextObject=[e nextObject])){
         if ( first ) {
@@ -275,7 +275,8 @@ SEL visSel;
         [self writeObject:nextObject];
         if ( objectCount++ > 10 ) {
             objectCount=0;
-            [pool release], pool=[[NSAutoreleasePool alloc] init];
+            [pool release];
+            pool=[NSAutoreleasePool new];
         }
     }
     [pool drain];

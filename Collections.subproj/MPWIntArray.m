@@ -71,7 +71,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	if ( index < count ) {
 		return data[index];
 	} else {
-		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %d beyond count: %d (capacity: %d)",[self class],index,count,capacity];
+		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %d beyond count: %ld (capacity: %d)",[self class],index,count,capacity];
 		return 0;
 	}
 }

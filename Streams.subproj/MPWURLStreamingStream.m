@@ -8,6 +8,7 @@
 
 #import "MPWURLStreamingStream.h"
 #import "MPWByteStream.h"
+#import "MPWURLRequest.h"
 
 @interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
 

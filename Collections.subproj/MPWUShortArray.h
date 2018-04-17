@@ -35,15 +35,15 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface MPWUShortArray : MPWObject
 {
-    unsigned int	capacity;
-    unsigned int	count;
+    unsigned long	capacity;
+    unsigned long	count;
     unsigned short	*data;
 }
 
 -initWithCapacity:(NSUInteger)newCap;
 -initWithUshorts:(const unsigned short*)newData count:(unsigned)count;
 -(unsigned short*)ushorts;
--(unsigned)ushortAtIndex:(unsigned)index;
+-(unsigned)ushortAtIndex:(unsigned long)index;
 -(unsigned)lastUshort;
 -(NSUInteger)count;
 -(void)appendUshorts:(const unsigned short*)newData count:(unsigned)newCount;
