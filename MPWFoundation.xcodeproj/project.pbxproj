@@ -83,6 +83,12 @@
 		1F3D02011D702902001A9732 /* MPWScatterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D01FD1D702902001A9732 /* MPWScatterStream.m */; };
 		1F3D02021D702902001A9732 /* MPWScatterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D01FD1D702902001A9732 /* MPWScatterStream.m */; };
 		1F3D02031D702902001A9732 /* MPWScatterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3D01FD1D702902001A9732 /* MPWScatterStream.m */; };
+		1F3F678F2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */; };
+		1F3F67902085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */; };
+		1F3F67912085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */; };
+		1F3F67922085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
+		1F3F67932085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
+		1F3F67942085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
 		1F4A36570A87EAB9007150E3 /* MPWWorkQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4A36550A87EAB8007150E3 /* MPWWorkQueue.h */; };
 		1F4A36580A87EAB9007150E3 /* MPWWorkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4A36560A87EAB8007150E3 /* MPWWorkQueue.m */; };
 		1F4FC9771DF818AE00B35D27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9761DF818AE00B35D27 /* main.m */; };
@@ -797,6 +803,8 @@
 		1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWObjectCreatorStream.m; sourceTree = "<group>"; };
 		1F3D01FC1D702902001A9732 /* MPWScatterStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWScatterStream.h; sourceTree = "<group>"; };
 		1F3D01FD1D702902001A9732 /* MPWScatterStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWScatterStream.m; sourceTree = "<group>"; };
+		1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+MPWNotificationProtocol.h"; sourceTree = "<group>"; };
+		1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MPWNotificationProtocol.m"; sourceTree = "<group>"; };
 		1F4A36550A87EAB8007150E3 /* MPWWorkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWWorkQueue.h; sourceTree = "<group>"; };
 		1F4A36560A87EAB8007150E3 /* MPWWorkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWWorkQueue.m; sourceTree = "<group>"; };
 		1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestMPWFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1070,6 +1078,8 @@
 				07DF1937006686DDC35ADD82 /* NSStringAdditions.m */,
 				1FB93A941292012200D9D630 /* PhoneGeometry.h */,
 				1FE1C8C9042755B5005ADD8A /* SpinLocks.h */,
+				1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */,
+				1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1415,6 +1425,7 @@
 				1FB0A8091E520FC500E552A0 /* MPWSocketStream.h in Headers */,
 				1FE37C28196976C500C9A378 /* MPWIgnoreTrampoline.h in Headers */,
 				1FE37C13196976C500C9A378 /* MPWMessageCatcher.h in Headers */,
+				1F3F67902085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */,
 				1FE37C12196976C500C9A378 /* MPWIgnoreUnknownTrampoline.h in Headers */,
 				1FE37C2B196976C500C9A378 /* MPWKVCSoftPointer.h in Headers */,
 				1FE37C1C196976C500C9A378 /* CodingAdditions.h in Headers */,
@@ -1583,6 +1594,7 @@
 				1FCF25D71CF3983C00AC64CE /* MPWFoundationWatch.h in Headers */,
 				1FCF262B1CF3993C00AC64CE /* AccessorMacros.h in Headers */,
 				1FCF26481CF3993C00AC64CE /* MPWObjectCache.h in Headers */,
+				1F3F67912085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */,
 				1FCF26201CF3990A00AC64CE /* MPWPListBuilder.h in Headers */,
 				1FCF26251CF3990A00AC64CE /* MPWHierarchicalStream.h in Headers */,
 				1FCF26701CF39BB700AC64CE /* MPWIdentityDictionary.h in Headers */,
@@ -1718,6 +1730,7 @@
 				437265141F56B645006B489A /* NSCaseInsensitiveUniqueString.h in Headers */,
 				1F11C44B15567F6300E597D9 /* MPWValueAccessor.h in Headers */,
 				1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */,
+				1F3F678F2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */,
 				1FD64E5D158A181800D96811 /* MPWObject_fastrc.h in Headers */,
 				1F198E0D15DB909B00640A43 /* MPWMessageFilterStream.h in Headers */,
 				1F198E1715DB922C00640A43 /* MPWBlockFilterStream.h in Headers */,
@@ -2006,6 +2019,7 @@
 				1F840DEC193F50E400589595 /* MPWRealArray.m in Sources */,
 				1F2DCFD81ACB50F3004A39FB /* MPWDict2ObjStream.m in Sources */,
 				1F840DED193F50E400589595 /* MPWEnumFilter.m in Sources */,
+				1F3F67932085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */,
 				1FCBEDE11CFC2DA800F2EE0E /* NSThreadWaiting.m in Sources */,
 				1F9726A91D00397800D76F3A /* MPWURLRequest.m in Sources */,
 				1F840DEE193F50E400589595 /* MPWUShortArray.m in Sources */,
@@ -2124,6 +2138,7 @@
 				1FCF25ED1CF398F400AC64CE /* MPWObjectCache.m in Sources */,
 				1FCF26601CF39ABD00AC64CE /* MPWSubData.m in Sources */,
 				1FCF25E81CF398F400AC64CE /* MPWObject.m in Sources */,
+				1F3F67942085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */,
 				1FCF26191CF3990400AC64CE /* MPWHierarchicalStream.m in Sources */,
 				1FCF25EE1CF398F400AC64CE /* NSRectAdditions.m in Sources */,
 				4372650C1F56B45A006B489A /* MPWEnumeratorSource.m in Sources */,
@@ -2248,6 +2263,7 @@
 				1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */,
 				1FFA48A81ACDEA51002FF8EA /* MPWBlockTargetStream.m in Sources */,
 				1F313D641CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */,
+				1F3F67922085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */,
 				1F5E509909B4B7CA000298D9 /* NSNil.m in Sources */,
 				1F05F69E0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m in Sources */,
 				1FCCC5441CE6098B007DCDE9 /* MPWURLPostStream.m in Sources */,
