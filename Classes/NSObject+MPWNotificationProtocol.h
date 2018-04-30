@@ -9,9 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWNotificationProtocol
-
+//  empty, this is a marker protocol
 @end
 
 @interface NSObject (MPWNotificationProtocol)
 
+-(void)installProtocolNotifications;
+
 @end
+
+void sendProtocolNotification( Protocol *aProtocol, id anObject );
+
+
+#define PROTOCOL_NOTIFY(protocolName, object)   sendProtocolNotification(@protocol(protocolName),object )

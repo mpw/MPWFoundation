@@ -9,7 +9,7 @@
 #import "MPWExternalFilter.h"
 #import "MPWFDStreamSource.h"
 #import "MPWByteStream.h"
-
+#import "NSStringAdditions.h"
 
 @interface MPWExternalFilter ()
 
@@ -96,7 +96,7 @@
     return [self.source target];
 }
 
--(void)writeObject:(id)anObject sender:aSender
+-(void)writeObject:anObject sender:aSender
 {
     if ( !self.running)  {
         [self run];

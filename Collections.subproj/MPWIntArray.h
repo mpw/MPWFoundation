@@ -48,10 +48,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +array;
 -(int)integerAtIndex:(unsigned)index;
--(void)addIntegers:(int*)intArray count:(unsigned)numIntsToAdd;
+-(void)addIntegers:(int*)intArray count:(unsigned long)numIntsToAdd;
 -(void)addInteger:(int)anInt;
 -(void)addObject:anObject;
--(void)replaceIntegerAtIndex:(unsigned)anIndex withInteger:(int)anInt;
+-(void)replaceIntegerAtIndex:(unsigned long)anIndex withInteger:(int)anInt;
 -(NSUInteger)count;
 -(void)reset;
 -(int*)integers;

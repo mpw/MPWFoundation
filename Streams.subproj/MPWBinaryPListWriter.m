@@ -199,7 +199,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 {
     unsigned char buffer[16];
     integerToBuffer(buffer, anInt, numBytes);
-    TARGET_APPEND(buffer, numBytes);
+    TARGET_APPEND((char*)buffer, numBytes);
 }
 
 -(void)writeIntArray:(MPWIntArray*)array offset:(int)start skip:(int)stride numBytes:(int)numBytes
@@ -211,7 +211,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     int *ptrs=[array integers];
     for (int i=start;i<maxCount;i+=stride) {
         //        NSLog(@"write array[%d]=%d",i,[array integerAtIndex:i]);
-        cur+=integerToBuffer(cur, ptrs[i], numBytes);
+        cur+=integerToBuffer((unsigned char*)cur, ptrs[i], numBytes);
         if ( cur-buffer > BUFSIZ-100) {
             TARGET_APPEND(buffer, cur-buffer);
             cur=buffer;
@@ -233,7 +233,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     int log2ofNumBytes=2;
     int numBytes=4;
     taggedIntegerToBuffer(buffer, anInt, numBytes,0x10, log2ofNumBytes);
-    TARGET_APPEND(buffer, numBytes+1);
+    TARGET_APPEND((char*)buffer, numBytes+1);
 }
 
 
@@ -284,7 +284,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 
     MPWIntArray *arrayIndexes=[self popIndexStack];
     [self _recordByteOffset];
-    int len=[arrayIndexes count]/2;
+    int len=(int)([arrayIndexes count]/2);
     [self writeCompoundObjectHeader:0xd0 length:len];
     [self writeIntArray:arrayIndexes offset:0 skip:2 numBytes:inlineOffsetByteSize];
     [self writeIntArray:arrayIndexes offset:1 skip:2 numBytes:inlineOffsetByteSize];
@@ -302,24 +302,24 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 -(void)_recordByteOffset
 {
     
-    [currentIndexes addInteger:[offsets count]];
-    [offsets addInteger:totalBytes];
+    [currentIndexes addInteger:(int)[offsets count]];
+    [offsets addInteger:(int)totalBytes];
 }
 
 -(int)currentObjectIndex
 {
-    return [offsets count];
+    return (int)[offsets count];
 }
 
 
 -(void)writeInteger:(long)anInt
 {
-    unsigned char buffer[16];
+    char buffer[16];
     int log2ofNumBytes=2;
     int numBytes=4;
     [self _recordByteOffset];
     buffer[0]=0x10 + log2ofNumBytes;
-    integerToBuffer(buffer+1, anInt, numBytes);
+    integerToBuffer((unsigned char*)buffer+1, anInt, numBytes);
     TARGET_APPEND(buffer, numBytes+1);
 }
 
@@ -335,7 +335,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     for (int i=0;i<numBytes;i++) {
         buffer[i+1]=floatPtr[numBytes-i-1];
     }
-    TARGET_APPEND(buffer, numBytes+1);
+    TARGET_APPEND((char*)buffer, numBytes+1);
 }
 
 -(void)writeString:(NSString*)aString
@@ -347,7 +347,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
         [currentIndexes addInteger:offset];
     } else {
         [self _recordByteOffset];
-        int l=[aString length];
+        long l=[aString length];
         char buffer[ l + 1];
         [aString getBytes:buffer maxLength:l usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
         [self writeCompoundObjectHeader:0x50 length:[aString length]];

@@ -285,13 +285,6 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
--(void)streamingGet:(NSURL *)theURL body:(NSData *)body
-{
-    MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
-    request.isStreaming=YES;
-    [self executeRequest:request];
-}
-
 -(void)get:(NSURL*)theURL
 {
     [self executeRequestWithURL:theURL method:@"GET" body:nil];

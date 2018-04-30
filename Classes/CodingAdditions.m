@@ -89,7 +89,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
--initWithCoder:(NSCoder*)aCoder keys:keys
+-decodeWithCoder:(NSCoder*)aCoder keys:keys
 {
 	[[aCoder do] decodeKey:[keys each] ofObject:self];
 	return self;
@@ -110,20 +110,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	return [object_getClass(self) defaultEncodingKeys];
 }
 
--(void)encodeWithCoder:(NSCoder*)aCoder
-{
-	if ( [object_getClass(self) doReflectiveCoding] ) {
-		[self encodeKeys:[self encodingKeys] withCoder:aCoder];
-	}
-}
-
--initWithCoder:(NSCoder*)aCoder
-{
-	if ( [object_getClass(self) doReflectiveCoding] ) {
-		self = [self initWithCoder:aCoder keys:[self encodingKeys]];
-	}
-	return self;
-}
 
 -(NSArray*)theKeysToCopy
 {

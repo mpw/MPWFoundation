@@ -115,7 +115,7 @@ typedef struct {
 		if ( object_getClass( self )  == object_getClass( other ) ) {
 			return NO;
 		} else {
-			int otherLen=[other length];
+			long otherLen=[other length];
 			if ( len == otherLen ) {
 				const char *otherCString=(const char*)[other _fastCStringContents:NO];
 				if ( otherCString ) {
@@ -150,6 +150,7 @@ typedef struct {
     return data[index];
 }
 
+/*
 - (void)getCString:(char*)buffer maxLength:(unsigned int)maxLength
   range:(NSRange)aRange remainingRange:(NSRange*)leftoverRange
 {
@@ -169,7 +170,7 @@ typedef struct {
 		leftoverRange->length = len - leftoverRange->location;
     }
 }
-
+*/
 
 -(NSUInteger)length
 {

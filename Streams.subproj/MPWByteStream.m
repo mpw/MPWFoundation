@@ -254,7 +254,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)appendBytes:(const void*)data length:(NSUInteger)count
 {
-    TARGET_APPEND( data , count );
+    TARGET_APPEND( (char*)data , count );
 }
 
 -(void)appendBytesAsHex:(const void*)data length:(NSUInteger)count
@@ -271,7 +271,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeCString:(const char*)cString
 {
-    TARGET_APPEND(cString, strlen(cString));
+    TARGET_APPEND((char*)cString, strlen(cString));
 }
 
 -(NSStringEncoding)outputEncoding
@@ -309,7 +309,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeData:(NSData*)data
 {
-    TARGET_APPEND([data bytes], [data length]);
+    TARGET_APPEND((char*)[data bytes], [data length]);
 }
 
 -(void)printf:(NSString*)format args:(va_list)ap
@@ -436,7 +436,7 @@ intAccessor( indentAmount , setIndentAmount )
     [self flattenOntoStream:aStream];
 }
 
--(void)appendBytes:(const void*)bytes length:(unsigned)len
+-(void)appendBytes:(const void*)bytes length:(long)len
 {
     //---	method used by both MPWStream and NSDPSContext
     id newData = [[NSData alloc] initWithBytes:bytes length:len];
@@ -496,7 +496,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 @implementation NSMutableString(ByteStreamTarget)
 
--(void)appendBytes:(const void*)bytes length:(unsigned)len
+-(void)appendBytes:(const void*)bytes length:(long)len
 {
 #if Darwin || TARGET_OS_IPHONE || TARGET_OS_MAC
     [self appendFormat:@"%.*s",len,bytes];
@@ -525,7 +525,7 @@ scalarAccessor( SEL, selector, setSelector )
 	return [[[self alloc] initWithTarget:data selector:newSelector] autorelease];
 }
 
--(void)appendBytes:(const void*)bytes length:(unsigned)len
+-(void)appendBytes:(const void*)bytes length:(long)len
 {
 	[[self target] performSelector:[self selector] withObject:[NSData dataWithBytes:bytes length:len]];
 }
@@ -611,7 +611,7 @@ idAccessor( finalFileName, setFinalFileName )
 }
 
 
--(void)appendBytes:(const void*)bytes length:(unsigned int)len
+-(void)appendBytes:(const void*)bytes length:(unsigned long)len
 {
 //    NSAssert2( outfile != NULL,@"outfile is NULL, %@=%p",[self class],self );
     fwrite( bytes, len,1,outfile );
@@ -685,7 +685,7 @@ intAccessor( fd, setFd )
 	return [[[self alloc] initWithFd:newFd] autorelease];
 }
 
--(void)appendBytes:(const void *)bytes length:(unsigned)len
+-(void)appendBytes:(const void *)bytes length:(unsigned long)len
 {
 	write(fd, bytes, len );
 }
@@ -696,7 +696,7 @@ intAccessor( fd, setFd )
 @implementation MPWNullTarget
 
 
--(void)appendBytes:(const void *)bytes length:(unsigned)len
+-(void)appendBytes:(const void *)bytes length:(unsigned long)len
 {
 }
 

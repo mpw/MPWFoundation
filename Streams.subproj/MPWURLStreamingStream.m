@@ -45,11 +45,19 @@
     return [[self downloader] dataTaskWithRequest: [self resolvedRequest:request]];
 }
 
+-(void)streamingGet:(NSURL *)theURL body:(NSData *)body
+{
+    MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
+    request.isStreaming=YES;
+    [self executeRequest:request];
+}
+
 -(void)setTarget:(id)newVar
 {
     [super setTarget:newVar];
     [self.streamingDelegate setTarget:newVar];
 }
+
 
 
 -(void)dealloc
@@ -81,6 +89,7 @@ didCompleteWithError:(nullable NSError *)error
     }
     [target close];
 }
+
 
 -(void)dealloc
 {

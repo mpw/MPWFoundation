@@ -220,7 +220,7 @@ static NSString *extractStructType( char *s )
         source++;
     }
     *dest++=0;
-    int signatureLen=dest-signature;
+    int signatureLen=(int)(dest-signature);
 	id returnVal;
 //    NSLog(@"signature: %s",signature);
     int singleParamSignatureLen=1;

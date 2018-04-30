@@ -11,6 +11,7 @@
 @interface MPWObjectCreatorStream : MPWFlattenStream
 
 -initWithClass:(Class)newTargetClass target:newTarget;
++streamWithClass:(Class)newTargetClass;
 
 
 @end

@@ -148,11 +148,6 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
      [arg addOperation:op];
 }
 
--(id)compared:other
-{
-    return [self compare:other];
-}
-
 
 
 @end

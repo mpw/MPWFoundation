@@ -71,12 +71,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	if ( index < count ) {
 		return data[index];
 	} else {
-		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %d beyond count: %ld (capacity: %d)",[self class],index,count,capacity];
+		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %d beyond count: %ld (capacity: %ld)",[self class],index,count,capacity];
 		return 0;
 	}
 }
 
--(void)_growTo:(unsigned)newCapacity
+-(void)_growTo:(unsigned long)newCapacity
 {
     capacity=capacity*2+2;
 	capacity=MAX( capacity, newCapacity );
@@ -88,9 +88,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
--(void)addIntegers:(int*)intArray count:(unsigned)numIntsToAdd
+-(void)addIntegers:(int*)intArray count:(unsigned long)numIntsToAdd
 {
-	unsigned newCount=count+numIntsToAdd;
+	unsigned long newCount=count+numIntsToAdd;
 	if ( newCount >= capacity ) {
 		[self _growTo:newCount];
 	}
@@ -109,7 +109,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)addInteger:(int)anInt
 {
-	unsigned newCount=count+1;
+	unsigned long newCount=count+1;
 	if ( newCount >= capacity ) {
 		[self _growTo:newCount];
 	}
@@ -129,12 +129,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
     }
 }
 
--(void)replaceIntegerAtIndex:(unsigned)anIndex withInteger:(int)anInt
+-(void)replaceIntegerAtIndex:(unsigned long)anIndex withInteger:(int)anInt
 {
 	if ( anIndex < count ) {
 		data[anIndex]=anInt;
 	} else {
-		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %d beyond count: %d (capacity: %d)",[self class],anIndex,count,capacity];
+		[NSException raise:@"MPWRangeException" format:@"%@ range exception: %ld beyond count: %ld (capacity: %ld)",[self class],anIndex,count,capacity];
 	}
 }
 
@@ -426,7 +426,7 @@ static void doSort(int a[], int left, int right) {
 
 -(void)dualPivotQuicksort
 {
-    doSort(data, 0, count -1);
+    doSort(data, 0, (int)(count -1));
 }
 
 

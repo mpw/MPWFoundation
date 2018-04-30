@@ -54,7 +54,7 @@
 -(void)writeObject:(id)anObject sender:aSender
 {
     for ( id <Streaming> scatterTarget in self.filters ) {
-        [scatterTarget writeObject:anObject sender:aSender];
+        [(id)scatterTarget writeObject:anObject sender:aSender];
     }
 }
 

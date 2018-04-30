@@ -52,12 +52,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-typedef id (*APPENDIMP)(id, SEL, char *, int);
+typedef id (*APPENDIMP)(id, SEL, char *, long);
 
 
 @interface MPWByteStream : MPWFlattenStream<ByteStreaming>
 {
-    unsigned int totalBytes;
+    unsigned long totalBytes;
     APPENDIMP	targetAppend;
     int indent;
 	int indentAmount;

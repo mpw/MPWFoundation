@@ -37,7 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 {
 	const char	*data;
 	long	len;
-    int		hash;
+    long	hash;
 	BOOL	freeWhenDone;
 }
 

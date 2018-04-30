@@ -438,6 +438,8 @@ SEL visSel;
     return self;
 }
 
+-(void)writeObject:anObject {}
+
 -(void)writeObject:anObject sender:aSender
 {
     [self writeObject:anObject];

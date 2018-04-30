@@ -16,7 +16,7 @@
 @interface MPWBinaryPListWriter : MPWPropertyListStream
 {
     MPWIntArray *offsets;
-    int         offsetOfOffsetTable;
+    long         offsetOfOffsetTable;
     __unsafe_unretained MPWIntArray *currentIndexes;
     NSMutableArray *indexStack;
     NSMutableArray *reserveIndexes;

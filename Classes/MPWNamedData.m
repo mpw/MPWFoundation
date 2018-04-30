@@ -63,14 +63,9 @@ objectAccessor( NSString, name, setName )
     return self;
 }
 
--initWithContentsOfFile:(NSString*)filename
+-initWithContentsOfFile:(NSString*)filename options:(NSDataReadingOptions)readOptionsMask error:(NSError * _Nullable * _Nullable)errorPtr
 {
-    return [self initWithData:[NSData dataWithContentsOfFile:filename] name:filename ];
-}
-
--initWithContentsOfMappedFile:(NSString*)filename
-{
-    return [self initWithData:[NSData dataWithContentsOfMappedFile:filename] name:filename];
+    return [self initWithData:[NSData dataWithContentsOfFile:filename options:readOptionsMask error:errorPtr ] name:filename ];
 }
 
 -(void)writeToFileAtomically:(BOOL)atomically

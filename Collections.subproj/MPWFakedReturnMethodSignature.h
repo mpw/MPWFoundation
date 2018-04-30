@@ -39,7 +39,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	char *myTypes;
 }
 
-+fakeSignatureWithSignature:aSignature;
+// +fakeSignatureWithSignature:aSignature;
 
 
 @end

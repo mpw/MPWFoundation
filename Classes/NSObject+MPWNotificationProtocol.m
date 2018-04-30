@@ -10,16 +10,27 @@
 #import "DebugMacros.h"
 #import <objc/runtime.h>
 
-@implementation NSObject (MPWNotificationProtocol)
-
--(BOOL)isNotificationProtocol:(Protocol*)aProtocol
+static BOOL isNotificationProtocol( Protocol* aProtocol )
 {
     return protocol_conformsToProtocol(aProtocol,@protocol(MPWNotificationProtocol));
 }
 
--(void)sendMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName
+void sendProtocolNotification( Protocol *aProtocol, id anObject )
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@(protocol_getName(aProtocol)) object:anObject];
+}
+
+
+@implementation NSObject (MPWNotificationProtocol)
+
+-(void)registerMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:aMessage name:notificationName object:nil];
+}
+
+-(void)registerNotificationMessage:(SEL)aMessage
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:aMessage name:NSStringFromSelector(aMessage) object:nil];
 }
 
 -(void)handleNotificationProtocol:(Protocol*)aProtocol
@@ -29,7 +40,7 @@
     protocolMethods=protocol_copyMethodDescriptionList(aProtocol,YES,YES,&count);
     if (protocolMethods && count==1) {
         SEL message=protocolMethods[0].name;
-        [self sendMessage:message forNotificationName:@(protocol_getName(aProtocol))];
+        [self registerMessage:message forNotificationName:@(protocol_getName(aProtocol))];
     }
     free(protocolMethods);
 }
@@ -39,17 +50,13 @@
     unsigned int protocolCount;
     Protocol** protocols=class_copyProtocolList([self class], &protocolCount);
     for (int i=0;i<protocolCount;i++ ) {
-        if ( [self isNotificationProtocol:protocols[i]])  {
+        if ( isNotificationProtocol( protocols[i]))  {
             [self handleNotificationProtocol:protocols[i]];
         }
     }
     free(protocols);
 }
 
--(void)sendProtocolMessage:(Protocol*)aProtocol with:anObject
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@(protocol_getName(aProtocol)) object:anObject];
-}
 
 @end
 
@@ -75,8 +82,8 @@
 
 +(void)testCanIdentifyProtocolIsANotificationProtocol
 {
-    EXPECTTRUE( [self isNotificationProtocol:@protocol(MPWTestNotificationProtocol) ], @"should be");
-    EXPECTFALSE( [self isNotificationProtocol:@protocol(NSObject) ], @"should not be");
+    EXPECTTRUE( isNotificationProtocol(@protocol(MPWTestNotificationProtocol)), @"should be");
+    EXPECTFALSE( isNotificationProtocol( @protocol(NSObject) ), @"should not be");
 
 }
 
@@ -84,7 +91,7 @@
 {
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
-    [tester sendMessage:@selector(theTestNotificationMessage:) forNotificationName:@"hi"];
+    [tester registerMessage:@selector(theTestNotificationMessage:) forNotificationName:@"hi"];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"hi" object:nil];
     EXPECTTRUE(tester.messageReceived, @"message received");
     
@@ -105,7 +112,7 @@
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
     [tester handleNotificationProtocol:@protocol(MPWTestNotificationProtocol)];
-    [[[NSObject new] autorelease] sendProtocolMessage:@protocol(MPWTestNotificationProtocol) with:nil];
+    PROTOCOL_NOTIFY(MPWTestNotificationProtocol,nil);
     EXPECTTRUE(tester.messageReceived, @"message received");
     
 }
@@ -115,7 +122,7 @@
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
     [tester installProtocolNotifications];
-    [[[NSObject new] autorelease] sendProtocolMessage:@protocol(MPWTestNotificationProtocol) with:nil];
+    PROTOCOL_NOTIFY(MPWTestNotificationProtocol,nil);
     EXPECTTRUE(tester.messageReceived, @"message received");
     
 }
