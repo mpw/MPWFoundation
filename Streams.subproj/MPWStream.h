@@ -69,6 +69,7 @@ idAccessor_h( target, setTarget )
 -(void)insertStream:aStream;
 -(void)writeNSObject:anObject;
 -(void)writeObjectAndClose:anObject;
+-(void)writeObject:anObject sender:sourceStream;
 -(void)writeEnumerator:e spacer:spacer;
 -(void)writeEnumerator:e;
 -(void)writeData:(NSData*)d;

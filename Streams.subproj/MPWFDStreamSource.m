@@ -58,7 +58,7 @@
     while ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) {
         @autoreleasepool {
             NSData *dataToWrite=[NSData dataWithBytes:buffer length:actual];
-            [self.target writeObject:dataToWrite sender:self];
+            [(id)(self.target) writeObject:dataToWrite sender:self];
             
         }
     }

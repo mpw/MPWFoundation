@@ -9,6 +9,15 @@
 #import "MPWURLPostStream.h"
 #import "MPWByteStream.h"
 
+@implementation NSObject(streamPosting)
+
+-(void)writeOnURLPostStream:aStream
+{
+    [self writeOnURLFetchStream:aStream];
+}
+
+@end
+
 @implementation MPWURLPostStream
 
 -(SEL)streamWriterMessage
@@ -28,17 +37,6 @@
 
 
 @end
-
-@implementation NSObject(streamPosting)
-
--(void)writeOnURLPostStream:aStream
-{
-    [self writeOnURLFetchStream:aStream];
-}
-
-@end
-
-
 
 
 @implementation NSString(streamPosting)

@@ -46,3 +46,10 @@
 -(void)awaitResultForSeconds:(NSTimeInterval)seconds;
 
 @end
+
+@interface NSObject(urlFetching)
+
+-(void)writeOnURLFetchStream:(MPWURLFetchStream*)aStream;
+
+@end
+

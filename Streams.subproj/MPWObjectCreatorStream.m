@@ -14,6 +14,15 @@
 
 @end
 
+@implementation NSObject(StreamClassCreating)
+
+-(void)writeOnObjectCreationStream:(MPWObjectCreatorStream *)aStream
+{
+    [self flattenOntoStream:aStream];
+}
+
+@end
+
 
 @implementation MPWObjectCreatorStream
 
@@ -54,14 +63,6 @@
 @end
 
 
-@implementation NSObject(StreamClassCreating)
-
--(void)writeOnObjectCreationStream:(MPWObjectCreatorStream *)aStream
-{
-    [self flattenOntoStream:aStream];
-}
-
-@end
 
 @implementation NSData(StreamClassCreating)
 
