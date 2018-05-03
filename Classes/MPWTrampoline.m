@@ -239,13 +239,16 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 idAccessor( xxxTarget, setXxxTarget )
 scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
 -(void)dealloc
 {
     [xxxTarget release];
     NSDeallocateObject( (NSObject*)self );
 	return; 
-	[super dealloc];
 }
+#pragma clang diagnostic pop
+
 
 //---	scripting support:
 //---	WebScript sends 'isKindOfClass:' before sending the actual message.

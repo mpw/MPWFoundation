@@ -133,11 +133,15 @@ FORWARDMESSAGE( BOOL, isOneWay, signature )
 }
 #endif
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
 
 -(void)dealloc
 {
 	free( myTypes );
     NSDeallocateObject(self);
-	return; [super dealloc];
+	return;
 }
+#pragma clang diagnostic pop
+
 @end
