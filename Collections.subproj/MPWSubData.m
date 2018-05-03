@@ -279,12 +279,21 @@ boolAccessor( mustUnique, setMustUnique )
 		myData=nil;
 	}
 }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
 
 -(void)getCString:(char*)buffer maxLength:(NSUInteger)len
 {
 	long copyLen=MIN(len,myLength);
 	memcpy(buffer,myBytes,copyLen);
 }
+
+-(NSUInteger)cStringLength
+{
+    return myLength;
+}
+
+#pragma clang diagnostic pop
 
 -(void)validate
 {
@@ -304,11 +313,6 @@ boolAccessor( mustUnique, setMustUnique )
 }
 
 -(NSUInteger)length
-{
-    return myLength;
-}
-
--(NSUInteger)cStringLength
 {
     return myLength;
 }
