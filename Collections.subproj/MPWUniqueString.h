@@ -45,10 +45,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(NSUInteger)hash;
 -(BOOL)isEqual:other;
 -(const char*)cString;
-- (void)getCString:(char*)buffer maxLength:(unsigned int)maxLength
-             range:(NSRange)aRange remainingRange:(NSRange*)leftoverRange;
 -(NSUInteger)length;
--(NSUInteger)cStringLength;
+//-(NSUInteger)lengthOfBytesUsingEncoding:(NSStringEncoding)enc;
 -uniqueString;
 -(void)writeOnByteStream:aStream;
 

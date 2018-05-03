@@ -177,10 +177,10 @@ typedef struct {
 	return len;
 }
 
--(NSUInteger)cStringLength
-{
-	return len;
-}
+//-(NSUInteger)cStringLength
+//{
+//    return len;
+//}
 
 -uniqueString
 {
@@ -321,7 +321,7 @@ MPWUniqueString *MPWUniqueStringWithUnichars( const unichar *string, long len )
 
 MPWUniqueString *MPWUniqueStringWithString( id string )
 {
-	return MPWUniqueStringWithCString( [string cString], [string cStringLength] );
+	return MPWUniqueStringWithCString( [string UTF8String], [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding] );
 }
 
 @implementation NSString(unique)
