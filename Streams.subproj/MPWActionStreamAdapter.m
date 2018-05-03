@@ -14,6 +14,13 @@
 -(void)writeObject:(id)anObject sender:aSender;
 @end
 
+@interface NSObject(appkit)
+
+-(void)setAction:(SEL)aSelector;
+-(void)setDelegate:delegate;
+
+@end
+
 
 @implementation MPWActionStreamAdapter
 

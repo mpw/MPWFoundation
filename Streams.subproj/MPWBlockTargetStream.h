@@ -12,7 +12,7 @@ typedef void (^TargetBlock)( id );
 
 @interface MPWBlockTargetStream : MPWStream
 
--(instancetype)initWitBblock:(TargetBlock)newBlock;
+-(instancetype)initWithBlock:(TargetBlock)newBlock;
 +(instancetype)streamWithBlock:(TargetBlock)newBlock;
 
 @end

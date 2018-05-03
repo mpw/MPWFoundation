@@ -241,6 +241,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-missing-super-calls"
+
 -(void)dealloc
 {
     [xxxTarget release];
@@ -248,7 +249,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 	return; 
 }
 #pragma clang diagnostic pop
-
 
 //---	scripting support:
 //---	WebScript sends 'isKindOfClass:' before sending the actual message.
