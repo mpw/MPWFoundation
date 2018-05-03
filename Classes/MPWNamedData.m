@@ -40,6 +40,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <objc/runtime.h>
 #import "AccessorMacros.h"
 #import "CodingAdditions.h"
+#import "MPWStream.h"
+#import "NSStringAdditions.h"
 
 @interface NSCoder(namedDataCoding)
 
