@@ -8,6 +8,8 @@
 
 #import "MPWBinaryPlist.h"
 #import "AccessorMacros.h"
+#import "MPWIntArray.h"
+
 
 @interface MPWLazyBListArray : NSArray
 {
@@ -185,7 +187,7 @@ static inline int lengthForNibbleAtOffset( int length, const unsigned char *byte
     if ( length==0xf ) {
         int nextHeader=bytes[offset++];
         int byteLen=1<<(nextHeader&0xf);
-        length = readIntegerOfSizeAt( bytes, offset, byteLen  ) ;
+        length = (int)readIntegerOfSizeAt( bytes, offset, byteLen  ) ;
         offset+=byteLen;
         *offsetPtr=offset;
     }
@@ -668,7 +670,7 @@ DEALLOC(
     MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:tester]];
     long testArray[20];
     long *arrayPtr=testArray;
-    int length=[bplist parseArrayAtIndex:[bplist rootIndex] usingBlock:^( MPWBinaryPlist *aBplist, long offset, long anIndex ){
+    long length=[bplist parseArrayAtIndex:[bplist rootIndex] usingBlock:^( MPWBinaryPlist *aBplist, long offset, long anIndex ){
         if (anIndex <10) {
             arrayPtr[anIndex]=[aBplist currentInt];
         }
