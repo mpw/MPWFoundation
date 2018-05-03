@@ -260,7 +260,7 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)appendBytesAsHex:(const void*)data length:(NSUInteger)count
 {
     unsigned char hexbytes[count*2+10];
-    hexencode( data, hexbytes, count );
+    hexencode( data, hexbytes, (int)count );
     [self appendBytes:hexbytes length:count*2];
 }
 
@@ -284,7 +284,7 @@ intAccessor( indentAmount , setIndentAmount )
 #define MAXLEN 8192
 
     char buffer[MAXLEN];
-    int length=[aString length];
+    long length=[aString length];
     NSRange range={0,length};
     NSRange remainingRange;
 
@@ -499,7 +499,7 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)appendBytes:(const void*)bytes length:(long)len
 {
 #if Darwin || TARGET_OS_IPHONE || TARGET_OS_MAC
-    [self appendFormat:@"%.*s",len,bytes];
+    [self appendFormat:@"%.*s",(int)len,bytes];
 #else
 	[self appendString:[NSString stringWithCString:bytes length:len]];
 #endif

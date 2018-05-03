@@ -7,6 +7,8 @@
 //
 
 #import "MPWURLRequest.h"
+#import "NSStringAdditions.h"
+
 
 @implementation MPWURLRequest
 

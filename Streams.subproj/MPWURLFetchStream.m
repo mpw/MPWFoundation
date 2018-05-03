@@ -10,7 +10,7 @@
 #import "MPWByteStream.h"
 #import "MPWURLRequest.h"
 #import "NSThreadWaiting.h"
-
+#import "NSStringAdditions.h"
 
 @interface MPWURLFetchStream()
 
@@ -82,7 +82,7 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(int)inflightCount
 {
-    return self.inflight.count;
+    return (int)self.inflight.count;
 }
 
 
@@ -222,7 +222,7 @@ static NSURLSession *_defaultURLSession=nil;
 //          NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
             request.response=response;
             request.data = data;
-            int httpStatusCode=0;
+            long httpStatusCode=0;
             if ( [response respondsToSelector:@selector(statusCode)] ) {
                 httpStatusCode=[(NSHTTPURLResponse*)response statusCode];
             }
