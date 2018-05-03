@@ -37,7 +37,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 //
 
 #import "MPWFuture.h"
-#import "MPWWorkQueue.h"
 #import "AccessorMacros.h"
 #import "MPWTrampoline.h"
 #import "DebugMacros.h"
@@ -136,15 +135,7 @@ idAccessor( _result, setResult )
 -(void)startRunning
 {
 	running=YES;
-//    [[self async] performJob];
-#if NS_BLOCKS_AVAILABLE
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self performJob];});
-#else
-	[[MPWWorkQueue defaultQueue] addJob:self];
-    
-#endif
-//	[[self asyncJob] invokeInvocationOnceInNewThread];
-//	[NSThread detachNewThreadSelector:@selector(invokeInvocationOnceInNewThread) toTarget:self withObject:nil];
 }
 
 -(void)lazyEval:(NSInvocation*)newInvocation
