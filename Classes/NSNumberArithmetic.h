@@ -12,6 +12,8 @@
 @interface NSNumber(Arithmetic)
 
 -add:other;
-
+-mul:other;
+-sub:other;
+-div:other;
 
 @end

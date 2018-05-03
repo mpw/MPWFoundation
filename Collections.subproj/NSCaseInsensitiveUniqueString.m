@@ -75,9 +75,9 @@ typedef struct {
 	return self;
 }
 
--(unsigned)hash
+-(unsigned long)hash
 {
-	return (unsigned)self;
+	return (unsigned long)self;
 }
 
 -(BOOL)isEqual:other

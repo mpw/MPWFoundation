@@ -36,7 +36,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 -initWithCString:(const char*)cStr length:(unsigned int)newLen;
--(unsigned)hash;
+-(unsigned long)hash;
 -(BOOL)isEqual:other;
 -(const char*)cString;
 - (void)getCString:(char*)buffer maxLength:(unsigned int)maxLength
