@@ -114,13 +114,11 @@ defineArithOp( div, divInt, / )
 
 -(void)encodeWithCoder:(NSCoder*)coder
 {
-    [super encodeWithCoder:coder];
     encodeVar( coder, floatValue );
 }
 
 -initWithCoder:(NSCoder*)coder
 {
-    self = [super initWithCoder:coder];
     decodeVar( coder, floatValue );
    return self;
 }

@@ -229,11 +229,12 @@ static NSString *extractStructType( char *s )
 //        NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
          singleParamSignatureLen=1;
         if ( signature[i+3]==0) {
-            NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,[formalParameters count],formalParameters);
+            NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,(int)[formalParameters count],formalParameters);
             break;
         }
+        id theArg;
+
 		switch ( signature[signatureIndex] ) {
-				id theArg;
 			case ':':{
                 
                 SEL sel=va_arg( args,SEL);
@@ -270,7 +271,7 @@ static NSString *extractStructType( char *s )
             case '{':
             {
                 NSString *structType=extractStructType( signature+signatureIndex);
-                singleParamSignatureLen=[structType length];
+                singleParamSignatureLen=(int)[structType length];
                 id result=nil;
                 MPWBoxerUnboxer *boxer = [MPWBoxerUnboxer converterForTypeString:structType];
                 if ( boxer ) {

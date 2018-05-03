@@ -249,7 +249,7 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	int i;
 	MPWFastInvocation* fast=[self simpleSendWithInvocationOfClass:[MPWFastInvocation class]];
 	id slow=[self simpleSendWithInvocationOfClass:[MPWConvenientInvocation class]];
-	IMP0 invoke = [slow methodForSelector:@selector(resultOfInvoking)];
+	IMP0 invoke = (IMP0)[slow methodForSelector:@selector(resultOfInvoking)];
 	MPWRusage* slowStart=[MPWRusage current];
 #define SEND_COUNT 1000000
 

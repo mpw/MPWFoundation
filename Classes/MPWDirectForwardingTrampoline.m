@@ -115,9 +115,9 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 
 +testSelectors
 {
-    return [NSArray arrayWithObjects:
+    return @[
 //       @"testJump",
-	    nil];
+	    ];
 }
 
 @end
