@@ -12,6 +12,7 @@
 #import "MPWFuture.h"
 #import "MPWSmallStringTable.h"
 #import "MPWObjectCache.h"
+#import "MPWIntArray.h"
 
 @implementation MPWDelimitedTable
 
@@ -47,8 +48,8 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 
 -(MPWIntArray*)computeLineOffsets
 {
-    unsigned const char *cur=bytes;
-    unsigned const char *end=cur+[[self data] length];
+    const char *cur=bytes;
+    const char *end=cur+[[self data] length];
     MPWIntArray *offsets=[MPWIntArray array];
     [offsets addInteger:0];
     if ( bytes) {
@@ -62,11 +63,11 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
                     [self setEOLLength:1];
                 }
                 if ( cur < end) {
-                    [offsets addInteger:cur-bytes];
+                    [offsets addInteger:(int)(cur-bytes)];
                 }
             }
         }
-        [offsets addInteger:end-bytes];
+        [offsets addInteger:(int)(end-bytes)];
     }
     return offsets;
 }
@@ -159,7 +160,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     MPWSubData *lineData=(MPWSubData*)[self lineAtIndex:anIndex+1];
     const char *start=[lineData bytes];
     const char *cur=start;
-    int delimLength=[[self fieldDelimiter] length];
+    int delimLength=(int)[[self fieldDelimiter] length];
     const char *end =start+[lineData length];
     int elemNo=0;
     int mappedElemNo=0;
@@ -182,7 +183,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
             if ( quoted ) {
                 cur++;
             }
-            elements[ mappedElemNo++ ] =[self subdataWithStart:cur length:next-cur - (quoted ? 1 : 0)];
+            elements[ mappedElemNo++ ] =[self subdataWithStart:cur length:(int)(next-cur - (quoted ? 1 : 0))];
         } else {
         }
         cur=next+delimLength;
@@ -193,9 +194,9 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 
 -(NSArray*)dataAtIndex:(int)anIndex
 {
-    int maxElements =[[self headerKeys] count];
+    int maxElements = (int)[[self headerKeys] count];
     id elements[ maxElements+10];
-    [self dataAtIndex:anIndex into:elements mapper:[[self indexesOfInterest] integers]max:maxElements];
+    [self dataAtIndex:anIndex into:elements mapper:[[self indexesOfInterest] integers] max:maxElements];
     return [NSArray arrayWithObjects:elements count:maxElements];
 
 }
@@ -222,7 +223,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     MPWIntArray *indexes=[self indexesOfInterest];
     MPWSmallStringTable *theDict;
     
-    int maxElements =[indexes count];
+    long maxElements =[indexes count];
     id elements[ maxElements+10];
     id headerArray[ maxElements+10];
     int stringTableOffsets[ maxElements+10];
@@ -236,9 +237,9 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     for (int i=0;i<maxElements;i++) {
         stringTableOffsets[i]=[theDict offsetForKey:headerArray[i]];
     }
-    for (int i=range.location;i<range.location + range.length;i++) {
+    for (long i=range.location;i<range.location + range.length;i++) {
         @autoreleasepool {
-            int numElems=[self dataAtIndex:i into:elements mapper:keyIndexes max:maxElements];
+            long numElems=[self dataAtIndex:(int)i into:elements mapper:keyIndexes max:(int)maxElements];
             numElems=MIN(numElems,maxElements);
                 for (int j=0;j<numElems;j++) {
                     id elem=elements[j];
@@ -247,7 +248,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
                     }
                 }
 
-            block( theDict,i);
+            block( theDict,(int)i);
         }
     }
     
@@ -270,7 +271,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 {
     MPWIntArray *newIndexes=[MPWIntArray array];
     for ( NSString *key in [self keysOfInterest]) {
-        [newIndexes addInteger:[[self headerKeys] indexOfObject:key]];
+        [newIndexes addInteger:(int)[[self headerKeys] indexOfObject:key]];
     }
     return newIndexes;
 }

@@ -13,7 +13,7 @@
 @interface MPWDelimitedTable : NSObject
 {
     NSData  *data;
-    unsigned const char *bytes;
+    const char *bytes;
     NSArray *headerKeys;
     NSString *fieldDelimiter;
     MPWIntArray *lineOffsets;
