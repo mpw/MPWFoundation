@@ -66,14 +66,12 @@
     return success;
 }
 
--(BOOL)run
+-(void)run
 {
     if ( [self runCommand:self.commandString] ) {
         [self.source setFdin:self.fdin];
         [[self source] runInThread];
-        return YES;
     }
-    return NO;
 }
 
 -(instancetype)initWithCommandString:(NSString *)command

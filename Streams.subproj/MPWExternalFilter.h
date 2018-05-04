@@ -11,4 +11,6 @@
 @interface MPWExternalFilter : MPWStream
 +(instancetype)filterWithCommandString:(NSString *)command;
 
+-(void)run;
+
 @end

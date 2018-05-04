@@ -31,23 +31,22 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "MPWStream.h"
+#import <MPWFoundation/MPWArrayFlattenStream.h>
 
-@interface MPWFlattenStream : MPWStream
+@interface MPWFlattenStream : MPWArrayFlattenStream
 {
 
 }
 
--(void)writeArray:(NSArray*)array;
 -(void)writeDictionary:(NSDictionary*)dict;
 -(void)writeKeyEnumerator:(NSEnumerator*)keys withDict:(NSDictionary*)dict;
 
 
 @end
 
-@interface NSObject(Flattening)
+@interface NSObject(StructureFlattening)
 
--(void)flattenOntoStream:(MPWFlattenStream*)aStream;
+-(void)flattenStructureOntoStream:(MPWFlattenStream*)aStream;
 
 @end
 

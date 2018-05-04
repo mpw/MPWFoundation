@@ -433,7 +433,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeOnByteStream:(MPWByteStream*)aStream
 {
-    [self flattenOntoStream:aStream];
+    [self flattenStructureOntoStream:aStream];
 }
 
 -(void)appendBytes:(const void*)bytes length:(long)len

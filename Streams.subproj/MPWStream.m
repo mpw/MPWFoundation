@@ -319,42 +319,7 @@ SEL visSel;
     [self writeEnumerator:e spacer:[self defaultSpacer]];
 }
 
-#pragma mark convenience
-
--parseJSONWithKey:(NSString*)key
-{
-    [self setFinalTarget:[MPWConvertFromJSONStream streamWithKey:key target:nil]];
-    return self;
-}
-
--dict2objWithClass:(Class)targetClass selector:(SEL)creationSelector
-{
-    [self setFinalTarget:[MPWDict2ObjStream streamWithClass:targetClass selector:creationSelector target:nil]];
-    
-    return self;
-}
-
--dict2objWithClass:(Class)targetClass
-{
-    return [self dict2objWithClass:targetClass selector:NULL];
-}
-
--onMainThreadStream
-{
-    [self setFinalTarget:[MPWThreadSwitchStream streamWithTarget:nil]];
-    
-    return self;
-}
-
--onBlock:aBlock
-{
-    [self setFinalTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
-    
-    return self;
-}
-
 @end
-
 
 
 @implementation MPWStream(testing)

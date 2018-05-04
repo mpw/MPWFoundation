@@ -60,6 +60,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #import "MPWFoundation/MPWStream.h"
+#import "MPWFoundation/MPWArrayFlattenStream.h"
 #import "MPWFoundation/MPWFlattenStream.h"
 #import "MPWFoundation/MPWByteStream.h"
 #import "MPWFoundation/MPWPipe.h"
@@ -130,4 +131,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/NSBundleConveniences.h"
 #import "MPWFoundation/MPWIntArray.h"
 #import "MPWFoundation/NSNumberArithmetic.h"
+
+#import "MPWFoundation/NSObject+MPWNotificationProtocol.h"
 

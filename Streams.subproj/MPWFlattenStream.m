@@ -35,26 +35,25 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <objc/runtime.h>
 #import <objc/message.h>
 
+
+@implementation NSObject(MPWStructureFlattening)
+
+-(void)flattenStructureOntoStream:(MPWFlattenStream*)aStream
+{
+    [self flattenOntoStream:aStream];
+}
+
+@end
+
+
 @implementation MPWFlattenStream
 
-+(void)initialize
-{
-#if 0
-    Class NSObjectClass = [NSObject class];
-    SEL superMessage;
-    IMP skewIMP = imp_implementationWithBlock(^(id _s, id stream) { objc_msgSend( _s, superMessage,stream); });
-#endif
-}
 
 -(SEL)streamWriterMessage
 {
-    return @selector(flattenOntoStream:);
+    return @selector(flattenStructureOntoStream:);
 }
 
--(void)writeArray:(NSArray*)anArray
-{
-    [[anArray objectEnumerator] writeOnStream:self];
-}
 
 -(void)writeObject:anObject forKey:aKey
 {
@@ -108,40 +107,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 
-@implementation NSArray(MPWFlattening)
-
--(void)flattenOntoStream:(MPWFlattenStream*)aStream
-{
-    [aStream writeArray:self];
-}
-
-@end
 
 @implementation NSDictionary(MPWFlattening)
 
--(void)flattenOntoStream:(MPWFlattenStream*)aStream
+-(void)flattenStructureOntoStream:(MPWFlattenStream*)aStream
 {
     [aStream writeDictionary:self];
-}
-
-@end
-
-
-
-@implementation NSEnumerator(MPWFlattening)
-
--(void)flattenOntoStream:(MPWFlattenStream*)aStream
-{
-    [aStream writeEnumerator:self];
-}
-
-@end
-
-@implementation NSObject(MPWFlattening)
-
--(void)flattenOntoStream:(MPWFlattenStream*)aStream
-{
-    [aStream writeNSObject:self];
 }
 
 @end
