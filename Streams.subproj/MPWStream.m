@@ -269,10 +269,10 @@ SEL visSel;
         } else {
             if (spacer) {
 //				NSLog(@"write spacer '%@' length: %d",spacer,[spacer length]);
-                [self writeObject:spacer];
+                [self writeObject:spacer sender:self];
             }
         }
-        [self writeObject:nextObject];
+        [self writeObject:nextObject sender:self];
         if ( objectCount++ > 10 ) {
             objectCount=0;
             [pool release];

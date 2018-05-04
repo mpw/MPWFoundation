@@ -18,7 +18,7 @@
 
 -(void)writeOnObjectCreationStream:(MPWObjectCreatorStream *)aStream
 {
-    [self flattenOntoStream:aStream];
+    [self flattenStructureOntoStream:aStream];
 }
 
 @end
