@@ -1,23 +1,11 @@
-{
-  "name": "MPWFoundatioin",
-  "version": "2.0",
-  "summary": "HOM, Streams and more",
-  "description": "HOM, Streams and more"
-  "homepage": "https://github.com/mpw/mpwfoundation/",
-  "license": {
-    "type": "public",
-    "file": "LICENSE"
-  },
-  "authors": {
-    "marcel": "marcel@metaobject.com"
-  },
-  "platforms": {
-    "ios": "9.0"
-    "macos": "10.9"
-  },
-  "source": {
-    "git": "https://github.com/mpw/mpwfoundation/",
-  },
-  "source_files": "Source/**/*/*.[hm]",
-  "resources": "Resources/**/*"
-}
+Pod::Spec.new do |spec|
+  spec.name         = 'MPWFoundation'
+  spec.version      = '3.0.0'
+  spec.license      = { :type => 'BSD' }
+  spec.homepage     = 'https://github.com/mpw/MPWFoundation'
+  spec.authors      = { 'Marcel Weiher' => 'marcel@metaobject.com' }
+  spec.summary      = 'HOM and ObjectStreams.'
+  spec.source       = { :git => 'https://github.com/mpw/MPWFoundation.git', :tag => '3.0.0' }
+  spec.source_files = 'Classes/MPWObject.{h,m}'
+  spec.framework    = 'Foundation'
+end
