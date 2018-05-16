@@ -101,7 +101,6 @@
 		1F54A15E209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
 		1F54A15F209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
 		1F54A160209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
-		1F55A5D21E6592B900C0ACDB /* FIFO.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AD006686DDC35ADD82 /* FIFO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F5E509909B4B7CA000298D9 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
 		1F69F7CC1FCB198B00BF0945 /* MPWInflightThrottleStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F69F7CA1FCB198B00BF0945 /* MPWInflightThrottleStream.h */; };
 		1F69F7CD1FCB198B00BF0945 /* MPWInflightThrottleStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F69F7CA1FCB198B00BF0945 /* MPWInflightThrottleStream.h */; };
@@ -425,7 +424,6 @@
 		1FCF267F1CF39CE600AC64CE /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26821CF39CE600AC64CE /* MPWFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26861CF39CE600AC64CE /* NSThreadInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FCF26871CF39CE600AC64CE /* FIFO.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AD006686DDC35ADD82 /* FIFO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26881CF39CF900AC64CE /* MPWFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07CDA007F8E1EA00C389FA /* MPWFuture.m */; };
 		1FCF26891CF39D0100AC64CE /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FD64E5D158A181800D96811 /* MPWObject_fastrc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -551,7 +549,6 @@
 		1FF8FDE909B49D0100652476 /* MPWObjectReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC9240C05C5980E008047EB /* MPWObjectReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDEA09B49D0100652476 /* MPWIdentityDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC9241B05C5982A008047EB /* MPWIdentityDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDEB09B49D0100652476 /* MPWMessageCatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E2215072C5C00007DCDB1 /* MPWMessageCatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF8FDEC09B49D0100652476 /* FIFO.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AD006686DDC35ADD82 /* FIFO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDED09B49D0100652476 /* MPWFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDEE09B49D0100652476 /* MPWIgnoreUnknownTrampoline.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F84750F084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.h */; };
 		1FF8FDEF09B49D0100652476 /* MPWNamedData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6EF94808E5F82B0011386A /* MPWNamedData.h */; };
@@ -596,7 +593,6 @@
 		1FF8FE1D09B49D0200652476 /* MPWObjectReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9240705C597EF008047EB /* MPWObjectReference.m */; };
 		1FF8FE1E09B49D0200652476 /* MPWIdentityDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC9241C05C5982A008047EB /* MPWIdentityDictionary.m */; };
 		1FF8FE1F09B49D0200652476 /* MPWMessageCatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E2216072C5C00007DCDB1 /* MPWMessageCatcher.m */; };
-		1FF8FE2009B49D0200652476 /* FIFO.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A7006686DDC35ADD82 /* FIFO.m */; };
 		1FF8FE2109B49D0200652476 /* MPWFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07CDA007F8E1EA00C389FA /* MPWFuture.m */; };
 		1FF8FE2209B49D0200652476 /* MPWIgnoreUnknownTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */; };
 		1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF94908E5F82B0011386A /* MPWNamedData.m */; };
@@ -712,9 +708,7 @@
 		07DF199B006686DDC35ADD82 /* MPWPropertyListStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWPropertyListStream.h; sourceTree = "<group>"; };
 		07DF199C006686DDC35ADD82 /* MPWFlattenStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFlattenStream.h; sourceTree = "<group>"; };
 		07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSThreadInterThreadMessaging.m; sourceTree = "<group>"; };
-		07DF19A7006686DDC35ADD82 /* FIFO.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FIFO.m; sourceTree = "<group>"; };
 		07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSThreadInterThreadMessaging.h; sourceTree = "<group>"; };
-		07DF19AD006686DDC35ADD82 /* FIFO.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FIFO.h; sourceTree = "<group>"; };
 		07DF19B3006686DDC35ADD82 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		07DF19B4006686DDC35ADD82 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCTests-Info.plist"; sourceTree = "<group>"; };
@@ -1192,8 +1186,6 @@
 		07DF19A1006686DDC35ADD82 /* Threading */ = {
 			isa = PBXGroup;
 			children = (
-				07DF19AD006686DDC35ADD82 /* FIFO.h */,
-				07DF19A7006686DDC35ADD82 /* FIFO.m */,
 				1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */,
 				1F07CDA007F8E1EA00C389FA /* MPWFuture.m */,
 				1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */,
@@ -1400,7 +1392,6 @@
 				1FE37C421969773C00C9A378 /* MPWEnumeratorEnumerator.h in Headers */,
 				1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
 				1FE37C27196976C500C9A378 /* MPWAssociation.h in Headers */,
-				1F55A5D21E6592B900C0ACDB /* FIFO.h in Headers */,
 				1FE37C4D1969784B00C9A378 /* MPWValueAccessor.h in Headers */,
 				1FE37C11196976C500C9A378 /* MPWNamedData.h in Headers */,
 				1FE37C401969773C00C9A378 /* MPWSubData.h in Headers */,
@@ -1462,7 +1453,6 @@
 				1F54A15D209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */,
 				1FCF26531CF3993C00AC64CE /* MPWIgnoreTrampoline.h in Headers */,
 				1FCF26401CF3993C00AC64CE /* MPWObject.h in Headers */,
-				1FCF26871CF39CE600AC64CE /* FIFO.h in Headers */,
 				1FCF26511CF3993C00AC64CE /* MPWMsgExpression.h in Headers */,
 				1FCF264A1CF3993C00AC64CE /* MPWScanner.h in Headers */,
 				1FCF26231CF3990A00AC64CE /* MPWStream.h in Headers */,
@@ -1627,7 +1617,6 @@
 				1FC97CF00BB0A9B200F8CB51 /* MPWInteger.h in Headers */,
 				1FC97D010BB0AB8B00F8CB51 /* MPWFloat.h in Headers */,
 				1FA1D3E90BB9DACA0097A924 /* MPWFastInvocation.h in Headers */,
-				1FF8FDEC09B49D0100652476 /* FIFO.h in Headers */,
 				1FA1D4580BBAAD520097A924 /* MPWRusage.h in Headers */,
 				1F766F6E0BBC5F410038DA7D /* MPWSmallStringTable.h in Headers */,
 				1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
@@ -2167,7 +2156,6 @@
 				1FB0A8071E520FB600E552A0 /* MPWSocketStream.m in Sources */,
 				1FF8FE1F09B49D0200652476 /* MPWMessageCatcher.m in Sources */,
 				1F7078A51F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
-				1FF8FE2009B49D0200652476 /* FIFO.m in Sources */,
 				1F7A22861B786F9000FF6C03 /* MPWRect.m in Sources */,
 				1FF8FE2109B49D0200652476 /* MPWFuture.m in Sources */,
 				1FF8FE2209B49D0200652476 /* MPWIgnoreUnknownTrampoline.m in Sources */,
