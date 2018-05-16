@@ -441,7 +441,6 @@
 		1FCF267F1CF39CE600AC64CE /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26821CF39CE600AC64CE /* MPWFuture.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26831CF39CE600AC64CE /* NSConditionLockSem.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19A9006686DDC35ADD82 /* NSConditionLockSem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FCF26841CF39CE600AC64CE /* MPWAsyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AA006686DDC35ADD82 /* MPWAsyncProxy.h */; };
 		1FCF26851CF39CE600AC64CE /* NSObjectInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AB006686DDC35ADD82 /* NSObjectInterThreadMessaging.h */; };
 		1FCF26861CF39CE600AC64CE /* NSThreadInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26871CF39CE600AC64CE /* FIFO.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AD006686DDC35ADD82 /* FIFO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -566,7 +565,6 @@
 		1FF8FDDC09B49D0100652476 /* MPWPropertyListStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF199B006686DDC35ADD82 /* MPWPropertyListStream.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDDD09B49D0100652476 /* MPWFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF199C006686DDC35ADD82 /* MPWFlattenStream.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDDE09B49D0100652476 /* NSConditionLockSem.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19A9006686DDC35ADD82 /* NSConditionLockSem.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF8FDDF09B49D0100652476 /* MPWAsyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AA006686DDC35ADD82 /* MPWAsyncProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1FF8FDE009B49D0100652476 /* NSObjectInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AB006686DDC35ADD82 /* NSObjectInterThreadMessaging.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		1FF8FDE109B49D0100652476 /* NSThreadInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDE209B49D0100652476 /* NSObjectFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC619D01393D22005ADD88 /* NSObjectFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -747,12 +745,10 @@
 		07DF199B006686DDC35ADD82 /* MPWPropertyListStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWPropertyListStream.h; sourceTree = "<group>"; };
 		07DF199C006686DDC35ADD82 /* MPWFlattenStream.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFlattenStream.h; sourceTree = "<group>"; };
 		07DF19A3006686DDC35ADD82 /* NSConditionLockSem.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSConditionLockSem.m; sourceTree = "<group>"; };
-		07DF19A4006686DDC35ADD82 /* MPWAsyncProxy.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWAsyncProxy.m; sourceTree = "<group>"; };
 		07DF19A5006686DDC35ADD82 /* NSObjectInterThreadMessaging.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSObjectInterThreadMessaging.m; sourceTree = "<group>"; };
 		07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSThreadInterThreadMessaging.m; sourceTree = "<group>"; };
 		07DF19A7006686DDC35ADD82 /* FIFO.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = FIFO.m; sourceTree = "<group>"; };
 		07DF19A9006686DDC35ADD82 /* NSConditionLockSem.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSConditionLockSem.h; sourceTree = "<group>"; };
-		07DF19AA006686DDC35ADD82 /* MPWAsyncProxy.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWAsyncProxy.h; sourceTree = "<group>"; };
 		07DF19AB006686DDC35ADD82 /* NSObjectInterThreadMessaging.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSObjectInterThreadMessaging.h; sourceTree = "<group>"; };
 		07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSThreadInterThreadMessaging.h; sourceTree = "<group>"; };
 		07DF19AD006686DDC35ADD82 /* FIFO.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = FIFO.h; sourceTree = "<group>"; };
@@ -1251,8 +1247,6 @@
 			children = (
 				07DF19AD006686DDC35ADD82 /* FIFO.h */,
 				07DF19A7006686DDC35ADD82 /* FIFO.m */,
-				07DF19AA006686DDC35ADD82 /* MPWAsyncProxy.h */,
-				07DF19A4006686DDC35ADD82 /* MPWAsyncProxy.m */,
 				1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */,
 				1F07CDA007F8E1EA00C389FA /* MPWFuture.m */,
 				1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */,
@@ -1530,7 +1524,6 @@
 				1FCBEDDF1CFC2DA800F2EE0E /* NSThreadWaiting.h in Headers */,
 				1FCF25E11CF398F400AC64CE /* MPWBoxerUnboxer.h in Headers */,
 				1FCF26691CF39B5600AC64CE /* MPWFilterStream.h in Headers */,
-				1FCF26841CF39CE600AC64CE /* MPWAsyncProxy.h in Headers */,
 				1F54A15D209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */,
 				1FCF26531CF3993C00AC64CE /* MPWIgnoreTrampoline.h in Headers */,
 				1FCF26401CF3993C00AC64CE /* MPWObject.h in Headers */,
@@ -1677,7 +1670,6 @@
 				1FF8FDDC09B49D0100652476 /* MPWPropertyListStream.h in Headers */,
 				1FF8FDDD09B49D0100652476 /* MPWFlattenStream.h in Headers */,
 				1FF8FDDE09B49D0100652476 /* NSConditionLockSem.h in Headers */,
-				1FF8FDDF09B49D0100652476 /* MPWAsyncProxy.h in Headers */,
 				1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1FF8FDE009B49D0100652476 /* NSObjectInterThreadMessaging.h in Headers */,
 				1F2DCFDF1ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */,
