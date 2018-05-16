@@ -237,7 +237,7 @@ SEL visSel;
 {
     [self closeLocal];
     if ( n>0 ) {
-        [target close:n-1];
+        [(MPWStream*)target close:n-1];
     }
 }
 
@@ -328,6 +328,7 @@ SEL visSel;
 {
     MPWStream* stream=[MPWStream stream];
     NSAssert1( [[stream target] isKindOfClass:[NSMutableArray class]] , @"stream target not NSArray but %@ instead",[[stream target] class]);
+    (void)stream;
 }
 
 +(void)testForwardingWorks

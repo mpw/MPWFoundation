@@ -66,7 +66,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
  //   Class class=nil;
     long j,count=[self count];
     id objs[ OBJECTS_PER_ITERATION ];
-    NSAssert1( maxArgs < 4 , msg ,maxArgs);
+    NSAssert1( maxArgs < 4 , msg ,maxArgs);  (void)msg;
 
     for (j=0;j<count;j+=OBJECTS_PER_ITERATION) {
         long max = (count-j)>OBJECTS_PER_ITERATION ? OBJECTS_PER_ITERATION : (count-j);

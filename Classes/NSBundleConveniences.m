@@ -132,10 +132,10 @@ static id frameworkSearchPaths=nil;
 @implementation MPWBundleTesting
 +(void)testSimpleResource
 {
-    id expectedResource = @"This is a simple resource";
-    id resource = [[self resourceWithName:@"ResourceTest" type:@""] stringValue];
+    NSString* expectedResource = @"This is a simple resource";
+    NSString* resource = [[self resourceWithName:@"ResourceTest" type:@""] stringValue];
     NSAssert2( [resource isEqual:expectedResource], @"Got resource '%@', expected '%@'",
-        resource,expectedResource);
+              resource,expectedResource);  (void)expectedResource; (void)resource;
 }
 
 +(NSArray*)testSelectors

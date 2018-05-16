@@ -293,18 +293,3 @@ intAccessor( debugLevel, setDebugLevel )
 
 @end
 
-
-@interface NSURL(stuff)
-
-+ (id)URLWithScheme:(NSString *)scheme host:(NSString *)host path:(NSString *)path;
-
-@end
-
-@implementation NSURL(stuff)
-
-+ (id)URLWithScheme:(NSString *)scheme host:(NSString *)host path:(NSString *)path
-{
-    return [[[self alloc] initWithScheme:scheme host:host path:path] autorelease];
-}
-
-@end

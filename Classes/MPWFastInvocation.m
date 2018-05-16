@@ -277,6 +277,7 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	double ratio = [self ratioOfNSInvocationToMPWFastInvocationSpeed:NO];
 	NSAssert2( ratio > 5 ,@"ratio of non-cached fast invocation to normal invocation %g < %d  (this may fluctuate)",
 				ratio,5);
+    (void)ratio;
 
 }
 
@@ -286,6 +287,7 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	NSAssert2( ratio > 12 ,@"ratio of cached fast invocation to normal invocation %g < %d  (this may fluctuate)",
 				ratio,12);   //  actual up to factor 18
 
+    (void)ratio;
 }
 
 +(void)testCachingFasterThanNonCaching
@@ -294,6 +296,9 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	double ratio2 = [self ratioOfNSInvocationToMPWFastInvocationSpeed:NO];
 	NSAssert2( ratio1 > ratio2 ,@"cached ratio (%g) slower than noncaced %g",
 				ratio1,ratio2);
+    (void)ratio1;
+    (void)ratio2;
+
 }
 
 #undef SEND_COUNT

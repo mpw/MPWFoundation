@@ -185,7 +185,6 @@
 		1F840DF1193F50E400589595 /* MPWEnumeratorEnumerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197A006686DDC35ADD82 /* MPWEnumeratorEnumerator.m */; };
 		1F840DF2193F50E400589595 /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		1F840DF3193F50E400589595 /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
-		1F840DF4193F50E400589595 /* NSEnumeratorFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */; };
 		1F840DF6193F50E400589595 /* MPWFakedReturnMethodSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */; };
 		1F840DF7193F50E400589595 /* NSObjectFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DC619C01393D22005ADD88 /* NSObjectFiltering.m */; };
 		1F840DF8193F50E400589595 /* NSArrayFiltering.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DC61A301397F05005ADD88 /* NSArrayFiltering.m */; };
@@ -418,7 +417,6 @@
 		1FCF26761CF39BB700AC64CE /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26771CF39BB700AC64CE /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26781CF39BB700AC64CE /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FCF26791CF39BB700AC64CE /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267A1CF39BB700AC64CE /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267B1CF39BB700AC64CE /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267C1CF39BB700AC64CE /* NSObjectFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC619D01393D22005ADD88 /* NSObjectFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -485,7 +483,6 @@
 		1FE37C421969773C00C9A378 /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C431969773C00C9A378 /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C441969773C00C9A378 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FE37C451969773C00C9A378 /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C461969773C00C9A378 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C471969773C00C9A378 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C481969773C00C9A378 /* NSObjectFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC619D01393D22005ADD88 /* NSObjectFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -536,7 +533,6 @@
 		1FF8FDD309B49D0100652476 /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD409B49D0100652476 /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDD509B49D0100652476 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
-		1FF8FDD609B49D0100652476 /* NSEnumeratorFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDD709B49D0100652476 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD809B49D0100652476 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD909B49D0100652476 /* MPWStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1998006686DDC35ADD82 /* MPWStream.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
@@ -694,7 +690,6 @@
 		07DF197A006686DDC35ADD82 /* MPWEnumeratorEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorEnumerator.m; sourceTree = "<group>"; };
 		07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorSource.m; sourceTree = "<group>"; };
 		07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorBase.m; sourceTree = "<group>"; };
-		07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSEnumeratorFiltering.m; sourceTree = "<group>"; };
 		07DF197E006686DDC35ADD82 /* MPWUniqueString.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWUniqueString.m; sourceTree = "<group>"; };
 		07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWFakedReturnMethodSignature.m; sourceTree = "<group>"; };
 		07DF1981006686DDC35ADD82 /* MPWRealArray.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWRealArray.h; sourceTree = "<group>"; };
@@ -704,7 +699,6 @@
 		07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorEnumerator.h; sourceTree = "<group>"; };
 		07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorSource.h; sourceTree = "<group>"; };
 		07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorBase.h; sourceTree = "<group>"; };
-		07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSEnumeratorFiltering.h; sourceTree = "<group>"; };
 		07DF198A006686DDC35ADD82 /* MPWUniqueString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWUniqueString.h; sourceTree = "<group>"; };
 		07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFakedReturnMethodSignature.h; sourceTree = "<group>"; };
 		07DF1992006686DDC35ADD82 /* MPWStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWStream.m; sourceTree = "<group>"; };
@@ -1107,8 +1101,6 @@
 				07DF1977006686DDC35ADD82 /* MPWUShortArray.m */,
 				66DC61A401397F05005ADD88 /* NSArrayFiltering.h */,
 				66DC61A301397F05005ADD88 /* NSArrayFiltering.m */,
-				07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */,
-				07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */,
 				66DC619D01393D22005ADD88 /* NSObjectFiltering.h */,
 				66DC619C01393D22005ADD88 /* NSObjectFiltering.m */,
 				07DF198C006686DDC35ADD82 /* Supporting Files */,
@@ -1404,7 +1396,6 @@
 				1FE37C2C196976C500C9A378 /* MPWSoftPointerProxy.h in Headers */,
 				1FCCC5431CE6098B007DCDE9 /* MPWURLPostStream.h in Headers */,
 				1FE37C431969773C00C9A378 /* MPWEnumeratorSource.h in Headers */,
-				1FE37C451969773C00C9A378 /* NSEnumeratorFiltering.h in Headers */,
 				1FE37C311969770000C9A378 /* MPWFlattenStream.h in Headers */,
 				1FE37C421969773C00C9A378 /* MPWEnumeratorEnumerator.h in Headers */,
 				1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
@@ -1454,7 +1445,6 @@
 				1FCF264B1CF3993C00AC64CE /* NSDictAdditions.h in Headers */,
 				1FCF26101CF3990400AC64CE /* MPWDict2ObjStream.h in Headers */,
 				1FB7B5E21E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */,
-				1FCF26791CF39BB700AC64CE /* NSEnumeratorFiltering.h in Headers */,
 				1FCF26241CF3990A00AC64CE /* MPWByteStream.h in Headers */,
 				1FCF26571CF3993C00AC64CE /* MPWSoftPointerProxy.h in Headers */,
 				1FCF26371CF3993C00AC64CE /* NSNumberArithmetic.h in Headers */,
@@ -1598,7 +1588,6 @@
 				1F313D621CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */,
 				1FF8FDD509B49D0100652476 /* MPWEnumeratorBase.h in Headers */,
 				1F2DCFD91ACB50F3004A39FB /* MPWThreadSwitchStream.h in Headers */,
-				1FF8FDD609B49D0100652476 /* NSEnumeratorFiltering.h in Headers */,
 				1FF8FDD709B49D0100652476 /* MPWUniqueString.h in Headers */,
 				1F7078A21F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */,
 				1FF8FDD809B49D0100652476 /* MPWFakedReturnMethodSignature.h in Headers */,
@@ -1952,7 +1941,6 @@
 				1F840DF1193F50E400589595 /* MPWEnumeratorEnumerator.m in Sources */,
 				1F840DF2193F50E400589595 /* MPWEnumeratorSource.m in Sources */,
 				1F840DF3193F50E400589595 /* MPWEnumeratorBase.m in Sources */,
-				1F840DF4193F50E400589595 /* NSEnumeratorFiltering.m in Sources */,
 				1F22E01A1A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */,
 				1F840DF6193F50E400589595 /* MPWFakedReturnMethodSignature.m in Sources */,
 				1F840DF7193F50E400589595 /* NSObjectFiltering.m in Sources */,
