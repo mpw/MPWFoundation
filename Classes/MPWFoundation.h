@@ -105,7 +105,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWKVCSoftPointer.h"
 #import "MPWFoundation/MPWSoftPointerProxy.h"
 #import "MPWFoundation/NSArrayFiltering.h"
-#import "MPWFoundation/NSCaseInsensitiveUniqueString.h"
 #import "MPWFoundation/NSConditionLockSem.h"
 #import "MPWFoundation/NSEnumeratorFiltering.h"
 
