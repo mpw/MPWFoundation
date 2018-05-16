@@ -32,7 +32,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #import "NSThreadInterThreadMessaging.h"
-#import "NSConditionLockSem.h"
 #import "MPWTrampoline.h"
 #import <MPWFoundation/NSInvocationAdditions_lookup.h>
 #if NS_BLOCKS_AVAILABLE
