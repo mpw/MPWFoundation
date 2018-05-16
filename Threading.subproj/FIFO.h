@@ -48,7 +48,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	unsigned int	base;
 	id	*data;
 	int	exception;
-	OSSpinLock   lock;
 }
 
 +fifo:(unsigned)count;
