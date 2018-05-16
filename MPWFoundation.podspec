@@ -132,7 +132,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = false
 
-  # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  s.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "FULL_MPWFOUNDATION=1 Darwin" }
   # s.dependency "JSONKit", "~> 1.4"
 
 end
