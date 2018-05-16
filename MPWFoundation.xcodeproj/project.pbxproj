@@ -617,9 +617,6 @@
 		1FFA48AA1ACDEA51002FF8EA /* MPWBlockTargetStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */; };
 		4372650B1F56B455006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		4372650C1F56B45A006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
-		437265141F56B645006B489A /* NSCaseInsensitiveUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1985006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		437265151F56B647006B489A /* NSCaseInsensitiveUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1985006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		437265161F56B647006B489A /* NSCaseInsensitiveUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1985006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		43AE45B11F55C6A50048A79E /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
 /* End PBXBuildFile section */
 
@@ -700,7 +697,6 @@
 		07DF1976006686DDC35ADD82 /* MPWEnumFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumFilter.m; sourceTree = "<group>"; };
 		07DF1977006686DDC35ADD82 /* MPWUShortArray.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWUShortArray.m; sourceTree = "<group>"; };
 		07DF1978006686DDC35ADD82 /* MPWSubData.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWSubData.m; sourceTree = "<group>"; };
-		07DF1979006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSCaseInsensitiveUniqueString.m; sourceTree = "<group>"; };
 		07DF197A006686DDC35ADD82 /* MPWEnumeratorEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorEnumerator.m; sourceTree = "<group>"; };
 		07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorSource.m; sourceTree = "<group>"; };
 		07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorBase.m; sourceTree = "<group>"; };
@@ -711,7 +707,6 @@
 		07DF1982006686DDC35ADD82 /* MPWEnumFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumFilter.h; sourceTree = "<group>"; };
 		07DF1983006686DDC35ADD82 /* MPWUShortArray.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWUShortArray.h; sourceTree = "<group>"; };
 		07DF1984006686DDC35ADD82 /* MPWSubData.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWSubData.h; sourceTree = "<group>"; };
-		07DF1985006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSCaseInsensitiveUniqueString.h; sourceTree = "<group>"; };
 		07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorEnumerator.h; sourceTree = "<group>"; };
 		07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorSource.h; sourceTree = "<group>"; };
 		07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorBase.h; sourceTree = "<group>"; };
@@ -1122,8 +1117,6 @@
 				07DF1977006686DDC35ADD82 /* MPWUShortArray.m */,
 				66DC61A401397F05005ADD88 /* NSArrayFiltering.h */,
 				66DC61A301397F05005ADD88 /* NSArrayFiltering.m */,
-				07DF1985006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.h */,
-				07DF1979006686DDC35ADD82 /* NSCaseInsensitiveUniqueString.m */,
 				07DF1989006686DDC35ADD82 /* NSEnumeratorFiltering.h */,
 				07DF197D006686DDC35ADD82 /* NSEnumeratorFiltering.m */,
 				66DC619D01393D22005ADD88 /* NSObjectFiltering.h */,
@@ -1453,7 +1446,6 @@
 				1FE37C3F1969773C00C9A378 /* MPWUShortArray.h in Headers */,
 				1FE37C461969773C00C9A378 /* MPWUniqueString.h in Headers */,
 				1FE37C341969770E00C9A378 /* MPWFuture.h in Headers */,
-				437265151F56B647006B489A /* NSCaseInsensitiveUniqueString.h in Headers */,
 				1FE37C10196976C500C9A378 /* MPWDirectForwardingTrampoline.h in Headers */,
 				1FE37C351969770E00C9A378 /* NSConditionLockSem.h in Headers */,
 				1FE37C03196974BC00C9A378 /* MPWFoundation.h in Headers */,
@@ -1506,7 +1498,6 @@
 				1FCF267E1CF39BB700AC64CE /* MPWIntArray.h in Headers */,
 				1FCF260A1CF3990400AC64CE /* MPWURLPostStream.h in Headers */,
 				1FCF266F1CF39BB700AC64CE /* MPWEnumSelectFilter.h in Headers */,
-				437265161F56B647006B489A /* NSCaseInsensitiveUniqueString.h in Headers */,
 				1FCF26141CF3990400AC64CE /* MPWURLFetchStream.h in Headers */,
 				1FCF266E1CF39BB700AC64CE /* MPWSmallStringTable.h in Headers */,
 				1FCF26441CF3993C00AC64CE /* NSInvocationAdditions.h in Headers */,
@@ -1677,7 +1668,6 @@
 				1F080E511E4F13F600B78EF3 /* MPWFDStreamSource.h in Headers */,
 				1F78214812D953EB00E2DB02 /* MPWBlockInvocation.h in Headers */,
 				1FCE1E1B1371BB250035A429 /* MPWBlockInvocable.h in Headers */,
-				437265141F56B645006B489A /* NSCaseInsensitiveUniqueString.h in Headers */,
 				1F11C44B15567F6300E597D9 /* MPWValueAccessor.h in Headers */,
 				1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */,
 				1F3F678F2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h in Headers */,
