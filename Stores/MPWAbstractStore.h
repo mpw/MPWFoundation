@@ -7,15 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class MPWReference;
+
 @protocol MPWStorage
 
--objectForReference:aReference;
--(void)setObject:theObject forReference:aReference;
--(void)deleteObjectForReference:aReference;
+-objectForReference:(MPWReference*)aReference;
+-(void)setObject:theObject forReference:(MPWReference*)aReference;
+-(void)deleteObjectForReference:(MPWReference*)aReference;
 
--referenceForName:(NSString*)name;
+-(MPWReference*)referenceForName:(NSString*)name;
 
 @end
+
 
 @interface MPWAbstractStore<__covariant ReferenceType, __covariant ObjectType> : NSObject<MPWStorage>
 
@@ -23,6 +26,7 @@
 -(void)setObject:(ObjectType)theObject forReference:(ReferenceType)aReference;
 -(void)deleteObjectForReference:(ReferenceType)aReference;
 
+-(ReferenceType)referenceForName:(NSString*)name inContext:aContext;
 -(ReferenceType)referenceForName:(NSString*)name;
 
 @end

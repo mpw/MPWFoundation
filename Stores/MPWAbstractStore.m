@@ -6,50 +6,63 @@
 //
 
 #import "MPWAbstractStore.h"
+#import "MPWReference.h"
+
 
 @implementation MPWAbstractStore
 
--objectForReference:aReference
+-objectForReference:(MPWReference*)aReference
 {
     return nil;
 }
 
--(void)setObject:theObject forReference:aReference
+-(void)setObject:theObject forReference:(MPWReference*)aReference
 {
     return ;
 }
 
--(void)deleteObjectForReference:aReference
+-(void)deleteObjectForReference:(MPWReference*)aReference
 {
     return ;
 }
 
--(NSArray*)childrenForReference:aReference
+-(NSArray*)childrenForReference:(MPWReference*)aReference
 {
     return nil;
 }
 
--(BOOL)hasChildren:aReference
+-(BOOL)hasChildren:(MPWReference*)aReference
 {
     return NO;
 }
 
--referenceForName:(NSString*)name
+-(MPWReference*)referenceForName:(NSString*)name inContext:aContext
 {
     return nil;
 }
 
+-(MPWReference*)referenceForName:(NSString*)name
+{
+    return [self referenceForName:name inContext:nil];
+}
+
 @end
 
+#import "DebugMacros.h"
 
 @implementation MPWAbstractStore(testing)
 
-+(void)testSomething
++(void)testGenericsWork
 {
-    MPWAbstractStore<NSString,NSObject> *store=[MPWAbstractStore new];
-    
+    MPWAbstractStore<NSString*,NSArray*> *store=[MPWAbstractStore new];
+    [store setObject:@[] forReference:@""];
+    NSArray *a=[store objectForReference:@""];
+    EXPECTNOTNIL( store, @"should have a store");
+    EXPECTNIL( a, @"should not have a result");
 }
 
-+(NSArray*)testSelectors {  return @[]; }
++(NSArray*)testSelectors {  return @[
+                                     @"testGenericsWork",
+                                     ]; }
 
 @end

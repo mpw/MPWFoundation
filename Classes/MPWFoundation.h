@@ -130,3 +130,5 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWFoundation/NSObject+MPWNotificationProtocol.h"
 
+#import "MPWFoundation/MPWAbstractStore.h"
+
