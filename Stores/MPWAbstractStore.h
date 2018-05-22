@@ -9,9 +9,10 @@
 
 @class MPWReference;
 
+
 @protocol MPWStorage
 
--objectForReference:(MPWReference*)aReference;
+-objectForReference:( MPWReference*)aReference;
 -(void)setObject:theObject forReference:(MPWReference*)aReference;
 -(void)deleteObjectForReference:(MPWReference*)aReference;
 
@@ -29,5 +30,9 @@
 -(ReferenceType)referenceForName:(NSString*)name inContext:aContext;
 -(ReferenceType)referenceForName:(NSString*)name;
 
+-(ObjectType)objectForKeyedSubscript:key;
+-(void)setObject:(ObjectType)theObject forKeyedSubscript:(id<NSCopying>)key;
+
 @end
+
 

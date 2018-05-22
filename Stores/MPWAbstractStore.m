@@ -46,6 +46,16 @@
     return [self referenceForName:name inContext:nil];
 }
 
+-objectForKeyedSubscript:key
+{
+    return [self objectForReference:key];
+}
+
+-(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
+{
+    [self setObject:theObject forReference:key];
+}
+
 @end
 
 #import "DebugMacros.h"
