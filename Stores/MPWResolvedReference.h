@@ -15,7 +15,7 @@
 @property (nonatomic, strong) MPWAbstractStore *store;
 
 -value;
--setValue:newValue;
+-(void)setValue:newValue;
 -(void)delete;
 
 @end

@@ -16,9 +16,9 @@
     return [self.store objectForReference:self.reference];
 }
 
--setValue:newValue
+-(void)setValue:newValue
 {
-    [self.store setValue:newValue forReference:self.reference];
+    [self.store setObject:newValue forReference:self.reference];
 }
 
 

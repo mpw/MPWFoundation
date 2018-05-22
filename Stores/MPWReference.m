@@ -9,4 +9,9 @@
 
 @implementation MPWReference
 
+-(NSURL *)asURL
+{
+    return nil;
+}
+
 @end
