@@ -5,11 +5,11 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import "MPWResolvedReference.h"
+#import "MPWBinding.h"
 #import "MPWAbstractStore.h"
 #import "MPWReference.h"
 
-@implementation MPWResolvedReference
+@implementation MPWBinding
 
 -value
 {

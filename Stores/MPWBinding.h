@@ -9,13 +9,20 @@
 
 @class MPWReference,MPWAbstractStore;
 
-@interface MPWResolvedReference : NSObject
-
-@property (nonatomic, strong) MPWReference *reference;
-@property (nonatomic, strong) MPWAbstractStore *store;
+@protocol MPWBinding
 
 -value;
 -(void)setValue:newValue;
 -(void)delete;
+
+@end
+
+
+
+@interface MPWBinding : NSObject<MPWBinding>
+
+@property (nonatomic, strong) MPWReference *reference;
+@property (nonatomic, strong) MPWAbstractStore *store;
+
 
 @end
