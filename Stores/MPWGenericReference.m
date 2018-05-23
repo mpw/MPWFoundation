@@ -43,7 +43,22 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return components.count >0 && [components[0] length]==0;
 }
 
+// FIXME: legacy/compatibility
 
+-(NSString*)identifierName
+{
+    return [self.pathComponents componentsJoinedByString:@"/"];
+}
+
+-(void)setIdentifierName:(NSString*)path
+{
+    self.pathComponents = [path componentsSeparatedByString:@"/"];
+}
+
+-(NSString*)name
+{
+    return [self identifierName];
+}
 
 @end
 

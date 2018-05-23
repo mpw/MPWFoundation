@@ -13,6 +13,7 @@
 
 -value
 {
+    NSLog(@"store: %@ reference: %@",self.store,self.reference);
     return [self.store objectForReference:self.reference];
 }
 

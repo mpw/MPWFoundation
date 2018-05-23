@@ -9,4 +9,7 @@
 
 @interface MPWGenericReference : MPWReference
 
+-(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
+-(instancetype)initWithPath:(NSString*)pathName;
+
 @end
