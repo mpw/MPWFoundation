@@ -11,7 +11,7 @@
 @interface MPWGenericReference()
 
 @property (nonatomic, strong) NSArray *pathComponents;
-@property (nonatomic, strong) NSString *scheme;
+@property (nonatomic, strong) NSString *schemeName;
 
 
 @end
@@ -22,7 +22,7 @@
 {
     self=[super init];
     self.pathComponents=pathComponents;
-    self.scheme=scheme;
+    self.schemeName=scheme;
     return self;
 }
 
@@ -43,9 +43,16 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return components.count >0 && [components[0] length]==0;
 }
 
+-(void)dealloc
+{
+    [_pathComponents release];
+    [_schemeName release];
+    [super dealloc];
+}
+
 // FIXME: legacy/compatibility
 
--(NSString*)identifierName
+-(NSString*)path
 {
     return [self.pathComponents componentsJoinedByString:@"/"];
 }
@@ -57,8 +64,14 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(NSString*)name
 {
-    return [self identifierName];
+    return [self path];
 }
+
+-(NSString*)identifierName
+{
+    return [self path];
+}
+
 
 @end
 
