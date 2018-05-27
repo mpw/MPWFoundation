@@ -56,6 +56,17 @@
     [self setObject:theObject forReference:key];
 }
 
+-(BOOL)isLeafReference:(MPWReference*)aReference
+{
+    return YES;
+}
+
+-(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference
+{
+    return @[];
+}
+
+
 @end
 
 #import "DebugMacros.h"

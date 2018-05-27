@@ -153,6 +153,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     IDEXPECT([[MPWGenericReference referenceWithPath:@"trail/"] relativePathComponents], @[@"trail"],@"path");
     IDEXPECT([[MPWGenericReference referenceWithPath:@"relative/path"] relativePathComponents], (@[@"relative",@"path"]),@"relative");
     IDEXPECT([[MPWGenericReference referenceWithPath:@"/"] relativePathComponents], @[] ,@"cleanedPathComponents");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
 }
 
 +(void)testAsURL
