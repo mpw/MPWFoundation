@@ -11,5 +11,10 @@
 
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
 -(instancetype)initWithPath:(NSString*)pathName;
++(instancetype)referenceWithPath:(NSString*)pathName;
+
+
+-(NSArray*)relativePathComponents;
+
 
 @end

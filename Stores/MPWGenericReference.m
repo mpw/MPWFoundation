@@ -18,6 +18,11 @@
 
 @implementation MPWGenericReference
 
+-(NSArray*)componentsOfPath:(NSString*)path
+{
+    return [path componentsSeparatedByString:@"/"];
+}
+
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme
 {
     self=[super init];
@@ -28,7 +33,7 @@
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 {
-    return [self initWithPathComponents:[path componentsSeparatedByString:@"/"] scheme:nil];
+    return [self initWithPathComponents:[self componentsOfPath:path] scheme:nil];
 }
 
 -(BOOL)isRoot
@@ -41,6 +46,25 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 {
     NSArray *components=self.pathComponents;
     return components.count >0 && [components[0] length]==0;
+}
+
+-(BOOL)hasTrailingSlash
+{
+    return [self.pathComponents.lastObject length]==0;
+}
+
+-(NSArray*)relativePathComponents
+{
+    NSArray *rawPathComponents=self.pathComponents;
+    NSRange r={0,rawPathComponents.count};
+    if ( [self isAbsolute] && r.length>0) {
+        r.location+=1;
+        r.length--;
+    }
+    if ( [self hasTrailingSlash]  && r.length>0) {
+        r.length--;
+    }
+    return [rawPathComponents subarrayWithRange:r];
 }
 
 -(void)dealloc
@@ -59,7 +83,18 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(void)setIdentifierName:(NSString*)path
 {
-    self.pathComponents = [path componentsSeparatedByString:@"/"];
+    self.pathComponents = [self componentsOfPath:path];
+}
+
+-(NSURL *)asURL
+{
+    NSMutableString *s=[NSMutableString string];
+    if ( [self schemeName]) {
+        [s appendString:[self schemeName]];
+        [s appendString:@":"];
+    }
+    [s appendString:[self path]];
+    return [NSURL URLWithString:s];
 }
 
 -(NSString*)name
@@ -94,12 +129,51 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative/path"] isAbsolute], @"relative/path isRoot");
 }
 
++(void)testIdentifyTrailingSlash
+{
+    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"/"] hasTrailingSlash], @"/ hasTrailingSlash");
+    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"trail/"] hasTrailingSlash], @"trail/ hasTrailingSlash");
+    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"notrail"] hasTrailingSlash], @"notrail hasTrailingSlash");
+    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative/path"] hasTrailingSlash], @"relative/path hasTrailingSlash");
+}
+
++(void)testReturnsSamePath
+{
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"/"] path], @"/",@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"/absolute"] path], @"/absolute",@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative"] path], @"relative",@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"trail/"] path], @"trail/",@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative/path"] path], @"relative/path",@"path");
+}
+
++(void)testCleanedPath
+{
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"/absolute"] relativePathComponents], @[ @"absolute"] ,@"cleanedPathComponents");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative"] relativePathComponents], @[@"relative"],@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"trail/"] relativePathComponents], @[@"trail"],@"path");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative/path"] relativePathComponents], (@[@"relative",@"path"]),@"relative");
+    IDEXPECT([[MPWGenericReference referenceWithPath:@"/"] relativePathComponents], @[] ,@"cleanedPathComponents");
+}
+
++(void)testAsURL
+{
+    NSString *urlString=@"https://www.metaobject.com";
+    NSURL *sourceURL=[NSURL URLWithString:urlString];
+    MPWGenericReference *ref=[[self alloc] initWithPathComponents:[@"//www.metaobject.com" componentsSeparatedByString:@"/"] scheme:[sourceURL scheme]];
+    IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
+    IDEXPECT( [ref asURL], sourceURL, @"urls");
+}
+
 
 +testSelectors
 {
     return @[
              @"testIdentifyRoot",
              @"testIdentifyAbsolute",
+             @"testIdentifyTrailingSlash",
+             @"testAsURL",
+             @"testReturnsSamePath",
+             @"testCleanedPath",
              ];
 }
 
