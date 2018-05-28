@@ -8,14 +8,18 @@
 #import "MPWPathRelativeStore.h"
 #import "MPWGenericReference.h"
 
+@interface MPWPathRelativeStore()
+
+@property (nonatomic, strong) MPWGenericReference* baseReference;
+
+@end
+
 @implementation MPWPathRelativeStore
 
 +(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef
 {
     return [[[self alloc] initWithSource:newSource reference:newRef] autorelease];
 }
-
-
 
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef
 {

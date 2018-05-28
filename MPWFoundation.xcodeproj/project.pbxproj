@@ -107,9 +107,9 @@
 		1F54A15E209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
 		1F54A15F209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
 		1F54A160209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */; };
-		1F575D8520BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; };
-		1F575D8620BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; };
-		1F575D8720BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; };
+		1F575D8520BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F575D8620BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F575D8720BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F575D8820BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };
 		1F575D8920BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };
 		1F575D8A20BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };

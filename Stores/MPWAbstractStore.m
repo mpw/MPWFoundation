@@ -6,7 +6,7 @@
 //
 
 #import "MPWAbstractStore.h"
-#import "MPWReference.h"
+#import "MPWGenericReference.h"
 
 
 @implementation MPWAbstractStore
@@ -73,6 +73,32 @@
 
 
 @end
+
+@implementation MPWAbstractStore(legacy)
+
+-evaluateIdentifier:anIdentifer withContext:aContext
+{
+    id value = [self objectForReference:anIdentifer];
+    
+    if ( [value respondsToSelector:@selector(isNotNil)]  && ![value isNotNil] ) {
+        value=nil;
+    }
+    return value;
+}
+
+-(MPWGenericReference*)referenceForPath:(NSString*)path
+{
+    return [MPWGenericReference referenceWithPath:path];
+}
+
+-get:(NSString*)uriString parameters:uriParameters
+{
+    return [self objectForReference:[self referenceForPath:uriString]];
+}
+
+
+@end
+
 
 #import "DebugMacros.h"
 

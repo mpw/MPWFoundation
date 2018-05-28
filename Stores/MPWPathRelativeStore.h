@@ -11,6 +11,7 @@
 
 @interface MPWPathRelativeStore : MPWMappingStore
 
-@property (nonatomic, strong) MPWGenericReference* baseReference;
++(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef;
+-(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef;
 
 @end
