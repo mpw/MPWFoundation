@@ -8,6 +8,7 @@
 #import "MPWDictStore.h"
 #import "MPWGenericReference.h"
 #import "NSStringAdditions.h"
+#import "AccessorMacros.h"
 
 @interface MPWDictStore()
 
@@ -18,11 +19,16 @@
 
 @implementation MPWDictStore
 
--(instancetype)init
+CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
     self=[super init];
-    self.dict=[NSMutableDictionary dictionary];
+    self.dict = newDict;
     return self;
+}
+
+-(instancetype)init
+{
+    return [self initWithDictionary:[NSMutableDictionary dictionary]];
 }
 
 -referenceToKey:(MPWReference*)ref

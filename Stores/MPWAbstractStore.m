@@ -7,7 +7,7 @@
 
 #import "MPWAbstractStore.h"
 #import "MPWGenericReference.h"
-
+#import "NSNil.h"
 
 @implementation MPWAbstractStore
 
@@ -95,6 +95,12 @@
 {
     return [self objectForReference:[self referenceForPath:uriString]];
 }
+
+-get:uri
+{
+    return [self get:uri parameters:nil];
+}
+
 
 
 @end
