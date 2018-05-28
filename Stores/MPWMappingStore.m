@@ -6,7 +6,7 @@
 //
 
 #import "MPWMappingStore.h"
-#import "MPWReference.h"
+#import "MPWGenericReference.h"
 #import "AccessorMacros.h"
 
 @implementation MPWMappingStore
@@ -75,7 +75,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     MPWDictStore *store=[MPWDictStore store];
     store[@"hi"]=@"there";
     MPWMappingStore *mapper=[self storeWithSource:store];
-    IDEXPECT( mapper[@"hi"], @"there", @"via mapper");
+    IDEXPECT( mapper[@"hi"], @"there", @"read via mapper");
+    mapper[@"hello"]=@"world";
+    IDEXPECT( store[@"hello"], @"world", @"write via mapper");
+    [mapper deleteObjectForReference:@"hello"];
+    EXPECTNIL( store[@"hello"], @"original after delete via mapper");
 }
 
 +testSelectors

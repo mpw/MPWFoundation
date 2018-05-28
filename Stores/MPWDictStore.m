@@ -64,6 +64,14 @@
     IDEXPECT(store[@"World"], @"Hello", @"should be there after I store it");
 }
 
++(void)testDelete
+{
+    MPWDictStore* store = [self store];
+    EXPECTNIL(store[@"World"], @"shouldn't be there before I store it");
+    store[@"World"]=@"Hello";
+    IDEXPECT(store[@"World"], @"Hello", @"should be there after I store it");
+}
+
 
 +(NSArray<NSString*>*)testSelectors
 {
