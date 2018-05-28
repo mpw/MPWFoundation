@@ -16,5 +16,8 @@
 
 -(NSArray*)relativePathComponents;
 
+@property (readonly) NSArray *pathComponents;
+@property (readonly) NSString *schemeName;
+
 
 @end
