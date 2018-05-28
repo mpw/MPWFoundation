@@ -6,6 +6,8 @@
 //
 
 #import "MPWDictStore.h"
+#import "MPWGenericReference.h"
+#import "NSStringAdditions.h"
 
 @interface MPWDictStore()
 
@@ -25,7 +27,7 @@
 
 -referenceToKey:(MPWReference*)ref
 {
-    return ref;
+    return [ref stringValue];
 }
 
 -objectForReference:(MPWReference*)aReference
@@ -56,6 +58,17 @@
     IDEXPECT([store objectForReference:@"World"], @"Hello", @"should be there after I store it");
 }
 
++(void)testStoreAndRetrieveViaReference
+{
+    NSString *path=@"World";
+    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
+    MPWDictStore* store = [self store];
+    EXPECTNIL([store objectForReference:ref], @"shouldn't be there before I store it");
+    [store setObject:@"Hello" forReference:ref];
+    IDEXPECT([store objectForReference:ref], @"Hello", @"should be there after I store it");
+    IDEXPECT([store objectForReference:path], @"Hello", @"should be there after I store it");
+}
+
 +(void)testSubscripts
 {
     MPWDictStore* store = [self store];
@@ -77,6 +90,7 @@
 {
     return @[
              @"testStoreAndRetrieve",
+             @"testStoreAndRetrieveViaReference",
              @"testSubscripts",
              ];
 }

@@ -67,6 +67,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [rawPathComponents subarrayWithRange:r];
 }
 
+-(NSString*)stringValue
+{
+    return [self path];
+}
+
 -(void)dealloc
 {
     [_pathComponents release];
