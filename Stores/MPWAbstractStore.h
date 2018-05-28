@@ -29,6 +29,7 @@
 
 @interface MPWAbstractStore<__covariant ReferenceType, __covariant ObjectType> : NSObject<MPWStorage,MPWHierarchicalStorage>
 
++(instancetype)store;
 -(ObjectType)objectForReference:(ReferenceType)aReference;
 -(void)setObject:(ObjectType)theObject forReference:(ReferenceType)aReference;
 -(void)deleteObjectForReference:(ReferenceType)aReference;

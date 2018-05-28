@@ -31,7 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "Foundation/Foundation.h"
+#import <Foundation/Foundation.h>
 #import "MPWFoundation/AccessorMacros.h"
 #import "MPWFoundation/CodingAdditions.h"
 #import "MPWFoundation/DebugMacros.h"
@@ -133,4 +133,5 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWAbstractStore.h"
 #import "MPWFoundation/MPWGenericReference.h"
 #import "MPWFoundation/MPWDictStore.h"
+#import "MPWFoundation/MPWMappingStore.h"
 

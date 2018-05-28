@@ -11,6 +11,11 @@
 
 @implementation MPWAbstractStore
 
++(instancetype)store
+{
+    return [[[self alloc] init] autorelease];
+}
+
 -objectForReference:(MPWReference*)aReference
 {
     return nil;

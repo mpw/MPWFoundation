@@ -50,7 +50,7 @@
 
 +(void)testStoreAndRetrieve
 {
-    MPWDictStore* store = [[self new] autorelease];
+    MPWDictStore* store = [self store];
     EXPECTNIL([store objectForReference:@"World"], @"shouldn't be there before I store it");
     [store setObject:@"Hello" forReference:@"World"];
     IDEXPECT([store objectForReference:@"World"], @"Hello", @"should be there after I store it");
@@ -58,7 +58,7 @@
 
 +(void)testSubscripts
 {
-    MPWDictStore* store = [[self new] autorelease];
+    MPWDictStore* store = [self store];
     EXPECTNIL(store[@"World"], @"shouldn't be there before I store it");
     store[@"World"]=@"Hello";
     IDEXPECT(store[@"World"], @"Hello", @"should be there after I store it");
