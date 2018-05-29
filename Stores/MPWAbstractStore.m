@@ -41,16 +41,6 @@
     return NO;
 }
 
--(MPWReference*)referenceForName:(NSString*)name inContext:aContext
-{
-    return nil;
-}
-
--(MPWReference*)referenceForName:(NSString*)name
-{
-    return [self referenceForName:name inContext:nil];
-}
-
 -objectForKeyedSubscript:key
 {
     return [self objectForReference:key];
@@ -71,6 +61,11 @@
     return @[];
 }
 
+-(MPWGenericReference*)referenceForPath:(NSString*)path
+{
+    return [MPWGenericReference referenceWithPath:path];
+}
+
 
 @end
 
@@ -84,11 +79,6 @@
         value=nil;
     }
     return value;
-}
-
--(MPWGenericReference*)referenceForPath:(NSString*)path
-{
-    return [MPWGenericReference referenceWithPath:path];
 }
 
 -get:(NSString*)uriString parameters:uriParameters

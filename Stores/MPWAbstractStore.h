@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class MPWReference;
+@class MPWReference,MPWGenericReference;
 
 
 @protocol MPWStorage
@@ -15,7 +15,7 @@
 -objectForReference:( MPWReference*)aReference;
 -(void)setObject:theObject forReference:(MPWReference*)aReference;
 -(void)deleteObjectForReference:(MPWReference*)aReference;
--(MPWReference*)referenceForName:(NSString*)name;
+-(MPWGenericReference*)referenceForPath:(NSString*)path;
 
 @end
 
@@ -34,8 +34,7 @@
 -(void)setObject:(ObjectType)theObject forReference:(ReferenceType)aReference;
 -(void)deleteObjectForReference:(ReferenceType)aReference;
 
--(ReferenceType)referenceForName:(NSString*)name inContext:aContext;
--(ReferenceType)referenceForName:(NSString*)name;
+-(ReferenceType)referenceForPath:(NSString*)name;
 
 -(ObjectType)objectForKeyedSubscript:key;
 -(void)setObject:(ObjectType)theObject forKeyedSubscript:(id<NSCopying>)key;

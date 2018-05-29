@@ -121,44 +121,44 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 +(void)testIdentifyRoot
 {
-    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"/"] isRoot], @"isRoot");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"/absolute"] isRoot], @"absolute isRoot");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative"] isRoot], @"relative isRoot");
+    EXPECTTRUE([[self referenceWithPath:@"/"] isRoot], @"isRoot");
+    EXPECTFALSE([[self referenceWithPath:@"/absolute"] isRoot], @"absolute isRoot");
+    EXPECTFALSE([[self referenceWithPath:@"relative"] isRoot], @"relative isRoot");
 }
 
 +(void)testIdentifyAbsolute
 {
-    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"/"] isAbsolute], @"isRoot");
-    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"/absolute"] isAbsolute], @"absolute isRoot");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative"] isAbsolute], @"relative isRoot");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative/path"] isAbsolute], @"relative/path isRoot");
+    EXPECTTRUE([[self referenceWithPath:@"/"] isAbsolute], @"isRoot");
+    EXPECTTRUE([[self referenceWithPath:@"/absolute"] isAbsolute], @"absolute isRoot");
+    EXPECTFALSE([[self referenceWithPath:@"relative"] isAbsolute], @"relative isRoot");
+    EXPECTFALSE([[self referenceWithPath:@"relative/path"] isAbsolute], @"relative/path isRoot");
 }
 
 +(void)testIdentifyTrailingSlash
 {
-    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"/"] hasTrailingSlash], @"/ hasTrailingSlash");
-    EXPECTTRUE([[MPWGenericReference referenceWithPath:@"trail/"] hasTrailingSlash], @"trail/ hasTrailingSlash");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"notrail"] hasTrailingSlash], @"notrail hasTrailingSlash");
-    EXPECTFALSE([[MPWGenericReference referenceWithPath:@"relative/path"] hasTrailingSlash], @"relative/path hasTrailingSlash");
+    EXPECTTRUE([[self referenceWithPath:@"/"] hasTrailingSlash], @"/ hasTrailingSlash");
+    EXPECTTRUE([[self referenceWithPath:@"trail/"] hasTrailingSlash], @"trail/ hasTrailingSlash");
+    EXPECTFALSE([[self referenceWithPath:@"notrail"] hasTrailingSlash], @"notrail hasTrailingSlash");
+    EXPECTFALSE([[self referenceWithPath:@"relative/path"] hasTrailingSlash], @"relative/path hasTrailingSlash");
 }
 
 +(void)testReturnsSamePath
 {
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"/"] path], @"/",@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"/absolute"] path], @"/absolute",@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative"] path], @"relative",@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"trail/"] path], @"trail/",@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative/path"] path], @"relative/path",@"path");
+    IDEXPECT([[self referenceWithPath:@"/"] path], @"/",@"path");
+    IDEXPECT([[self referenceWithPath:@"/absolute"] path], @"/absolute",@"path");
+    IDEXPECT([[self referenceWithPath:@"relative"] path], @"relative",@"path");
+    IDEXPECT([[self referenceWithPath:@"trail/"] path], @"trail/",@"path");
+    IDEXPECT([[self referenceWithPath:@"relative/path"] path], @"relative/path",@"path");
 }
 
 +(void)testCleanedPath
 {
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"/absolute"] relativePathComponents], @[ @"absolute"] ,@"cleanedPathComponents");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative"] relativePathComponents], @[@"relative"],@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"trail/"] relativePathComponents], @[@"trail"],@"path");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"relative/path"] relativePathComponents], (@[@"relative",@"path"]),@"relative");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@"/"] relativePathComponents], @[] ,@"cleanedPathComponents");
-    IDEXPECT([[MPWGenericReference referenceWithPath:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
+    IDEXPECT([[self referenceWithPath:@"/absolute"] relativePathComponents], @[ @"absolute"] ,@"cleanedPathComponents");
+    IDEXPECT([[self referenceWithPath:@"relative"] relativePathComponents], @[@"relative"],@"path");
+    IDEXPECT([[self referenceWithPath:@"trail/"] relativePathComponents], @[@"trail"],@"path");
+    IDEXPECT([[self referenceWithPath:@"relative/path"] relativePathComponents], (@[@"relative",@"path"]),@"relative");
+    IDEXPECT([[self referenceWithPath:@"/"] relativePathComponents], @[] ,@"cleanedPathComponents");
+    IDEXPECT([[self referenceWithPath:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
 }
 
 +(void)testAsURL
