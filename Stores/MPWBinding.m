@@ -28,5 +28,9 @@
     [self.store deleteObjectForReference:self.reference];
 }
 
+-(BOOL)hasChildren
+{
+    return ![self.store isLeafReference:self.reference];
+}
 
 @end

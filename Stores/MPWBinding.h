@@ -15,6 +15,11 @@
 -(void)setValue:newValue;
 -(void)delete;
 
+// hierarchy support
+
+-(BOOL)hasChildren;
+
+
 @end
 
 
