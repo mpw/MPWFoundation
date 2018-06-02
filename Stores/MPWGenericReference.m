@@ -67,10 +67,17 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [rawPathComponents subarrayWithRange:r];
 }
 
+-(instancetype)referenceByAppendingReference:(MPWGenericReference*)other
+{
+    NSArray *compinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];
+    return [[[[self class] alloc] initWithPathComponents:compinedPath scheme:self.schemeName] autorelease];
+}
+
 -(NSString*)stringValue
 {
     return [self path];
 }
+
 
 -(void)dealloc
 {
@@ -170,6 +177,15 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     IDEXPECT( [ref asURL], sourceURL, @"urls");
 }
 
++(void)testAppendPath
+{
+    MPWGenericReference *base=[self referenceWithPath:@"base"];
+    MPWGenericReference *relative=[self referenceWithPath:@"relative"];
+    MPWGenericReference *composite=[base referenceByAppendingReference:relative];
+    IDEXPECT([composite path], @"base/relative", @"simplest composition");
+}
+
+
 
 +testSelectors
 {
@@ -180,6 +196,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
              @"testAsURL",
              @"testReturnsSamePath",
              @"testCleanedPath",
+             @"testAppendPath",
              ];
 }
 

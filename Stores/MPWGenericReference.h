@@ -19,5 +19,7 @@
 @property (readonly) NSString *schemeName;
 @property (readonly) NSString *path;
 
+-(instancetype)referenceByAppendingReference:(MPWGenericReference*)other;
+
 
 @end
