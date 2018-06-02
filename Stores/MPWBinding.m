@@ -32,4 +32,10 @@
     return ![self.store isLeafReference:self.reference];
 }
 
+-(NSURL*)URL
+{
+    return [self.store URLForReference:self.reference];
+}
+
+
 @end

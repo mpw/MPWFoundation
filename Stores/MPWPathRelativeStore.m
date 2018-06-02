@@ -31,7 +31,7 @@
 -(MPWGenericReference *)mapReference:(MPWGenericReference *)aReference
 {
     NSArray *combinedComponents=[[self.baseReference pathComponents] arrayByAddingObjectsFromArray:[aReference relativePathComponents]];
-    return [[[MPWGenericReference alloc] initWithPathComponents:combinedComponents scheme:self.baseReference.schemeName] autorelease];
+    return [self.source referenceForPathComponents:combinedComponents schemeName:self.baseReference.schemeName];
 }
 
 @end

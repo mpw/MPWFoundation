@@ -66,6 +66,19 @@
     return [MPWGenericReference referenceWithPath:path];
 }
 
+-(MPWGenericReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName
+{
+    return [[[MPWGenericReference alloc] initWithPathComponents:path scheme:schemeName] autorelease];
+}
+
+-(NSURL*)URLForReference:(MPWGenericReference*)aReference
+{
+    NSURLComponents *components=[[[NSURLComponents alloc] init] autorelease];
+    components.scheme = aReference.schemeName;
+    components.path = aReference.path;
+    return [components URL];
+}
+
 
 @end
 
@@ -109,8 +122,21 @@
     EXPECTNIL( a, @"should not have a result");
 }
 
++(void)testConstructingReferences
+{
+    MPWAbstractStore<MPWGenericReference*,NSArray*> *store=[MPWAbstractStore new];
+    MPWGenericReference *r1=[store referenceForPath:@"somePath"];
+    IDEXPECT(r1.path, @"somePath", @"can construct a reference");
+}
+
++(void)testGettingURLs
+{
+}
+
 +(NSArray*)testSelectors {  return @[
                                      @"testGenericsWork",
+                                     @"testConstructingReferences",
+                                     @"testGettingURLs",
                                      ]; }
 
 @end

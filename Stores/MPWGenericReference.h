@@ -14,10 +14,10 @@
 +(instancetype)referenceWithPath:(NSString*)pathName;
 
 
--(NSArray*)relativePathComponents;
-
 @property (readonly) NSArray *pathComponents;
+@property (readonly) NSArray *relativePathComponents;
 @property (readonly) NSString *schemeName;
+@property (readonly) NSString *path;
 
 
 @end

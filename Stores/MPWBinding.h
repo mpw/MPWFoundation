@@ -18,6 +18,7 @@
 // hierarchy support
 
 -(BOOL)hasChildren;
+-(NSURL*)URL;
 
 
 @end

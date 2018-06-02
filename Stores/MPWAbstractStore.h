@@ -15,7 +15,10 @@
 -objectForReference:( MPWReference*)aReference;
 -(void)setObject:theObject forReference:(MPWReference*)aReference;
 -(void)deleteObjectForReference:(MPWReference*)aReference;
+
+
 -(MPWGenericReference*)referenceForPath:(NSString*)path;
+-(MPWGenericReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName;
 
 @end
 
@@ -35,9 +38,14 @@
 -(void)deleteObjectForReference:(ReferenceType)aReference;
 
 -(ReferenceType)referenceForPath:(NSString*)name;
+-(ReferenceType)referenceForPathComponents:(NSArray*)name schemeName:(NSString*)schemeName;
 
 -(ObjectType)objectForKeyedSubscript:key;
 -(void)setObject:(ObjectType)theObject forKeyedSubscript:(id<NSCopying>)key;
+
+
+
+-(NSURL*)URLForReference:(ReferenceType)aReference;
 
 @end
 
