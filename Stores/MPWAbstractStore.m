@@ -73,10 +73,11 @@
 
 -(NSURL*)URLForReference:(MPWGenericReference*)aReference
 {
-    NSURLComponents *components=[[[NSURLComponents alloc] init] autorelease];
-    components.scheme = aReference.schemeName;
-    components.path = aReference.path;
-    return [components URL];
+    return [aReference URL];
+//    NSURLComponents *components=[[[NSURLComponents alloc] init] autorelease];
+//    components.scheme = aReference.schemeName;
+//    components.path = aReference.path;
+//    return [components URL];
 }
 
 

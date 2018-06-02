@@ -11,7 +11,7 @@
 @interface MPWGenericReference()
 
 @property (nonatomic, strong) NSArray *pathComponents;
-@property (nonatomic, strong) NSString *schemeName;
+//@property (nonatomic, strong) NSString *schemeName;
 
 
 @end
@@ -98,7 +98,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     self.pathComponents = [self componentsOfPath:path];
 }
 
--(NSURL *)asURL
+-(NSURL *)URL
 {
     NSMutableString *s=[NSMutableString string];
     if ( [self schemeName]) {
@@ -168,13 +168,13 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     IDEXPECT([[self referenceWithPath:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
 }
 
-+(void)testAsURL
++(void)testURL
 {
     NSString *urlString=@"https://www.metaobject.com";
     NSURL *sourceURL=[NSURL URLWithString:urlString];
     MPWGenericReference *ref=[[self alloc] initWithPathComponents:[@"//www.metaobject.com" componentsSeparatedByString:@"/"] scheme:[sourceURL scheme]];
     IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
-    IDEXPECT( [ref asURL], sourceURL, @"urls");
+    IDEXPECT( [ref URL], sourceURL, @"urls");
 }
 
 +(void)testAppendPath
@@ -193,7 +193,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
              @"testIdentifyRoot",
              @"testIdentifyAbsolute",
              @"testIdentifyTrailingSlash",
-             @"testAsURL",
+             @"testURL",
              @"testReturnsSamePath",
              @"testCleanedPath",
              @"testAppendPath",

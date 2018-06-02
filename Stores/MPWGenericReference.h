@@ -16,7 +16,7 @@
 
 @property (readonly) NSArray *pathComponents;
 @property (readonly) NSArray *relativePathComponents;
-@property (readonly) NSString *schemeName;
+@property (nonatomic, strong) NSString *schemeName;
 @property (readonly) NSString *path;
 
 -(instancetype)referenceByAppendingReference:(MPWGenericReference*)other;

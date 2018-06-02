@@ -13,7 +13,7 @@
 
 -(NSURL*)referenceToFileURL:(MPWReference*)ref
 {
-    return [ref asURL];
+    return [ref URL];
 }
 
 -(NSData*)objectForReference:(MPWReference*)aReference

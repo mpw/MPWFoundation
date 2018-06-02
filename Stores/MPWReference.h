@@ -9,6 +9,6 @@
 
 @interface MPWReference : NSObject
 
--(NSURL*)asURL;
+-(NSURL*)URL;
 
 @end

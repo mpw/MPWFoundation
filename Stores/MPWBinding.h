@@ -11,6 +11,8 @@
 
 @protocol MPWBinding
 
++(instancetype)bindingWithReference:aReference inStore:aStore;
+
 -value;
 -(void)setValue:newValue;
 -(void)delete;

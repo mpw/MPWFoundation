@@ -9,7 +9,7 @@
 
 @implementation MPWReference
 
--(NSURL *)asURL
+-(NSURL *)URL
 {
     return nil;
 }

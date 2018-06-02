@@ -7,9 +7,19 @@
 
 #import "MPWBinding.h"
 #import "MPWAbstractStore.h"
-#import "MPWReference.h"
+#import "MPWGenericReference.h"
+#import "AccessorMacros.h"
 
 @implementation MPWBinding
+
+
+CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MPWAbstractStore*)aStore)
+{
+    self=[super init];
+    self.reference=ref;
+    self.store=aStore;
+    return self;
+}
 
 -value
 {
@@ -37,5 +47,9 @@
     return [self.store URLForReference:self.reference];
 }
 
+-(instancetype)div:(MPWBinding*)other
+{
+    return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other.reference] inStore:self.store];
+}
 
 @end
