@@ -1,5 +1,5 @@
 //
-//  MPWResolvedReference.m
+//  MPWBinding.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/21/18.
@@ -42,9 +42,19 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return ![self.store isLeafReference:self.reference];
 }
 
+-(NSArray*)children
+{
+    return [self.store childrenOfReference:self.reference];
+}
+
 -(NSURL*)URL
 {
     return [self.store URLForReference:self.reference];
+}
+
+-(NSString*)path
+{
+    return [self.reference path];
 }
 
 -(instancetype)div:(MPWBinding*)other

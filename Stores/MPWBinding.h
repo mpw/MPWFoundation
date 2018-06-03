@@ -1,5 +1,5 @@
 //
-//  MPWResolvedReference.h
+//  MPWBinding.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/21/18.

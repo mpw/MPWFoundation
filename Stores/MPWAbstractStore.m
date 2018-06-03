@@ -31,11 +31,6 @@
     return ;
 }
 
--(NSArray*)childrenForReference:(MPWReference*)aReference
-{
-    return nil;
-}
-
 -(BOOL)hasChildren:(MPWReference*)aReference
 {
     return NO;
@@ -132,6 +127,9 @@
 
 +(void)testGettingURLs
 {
+    MPWAbstractStore<MPWGenericReference*,NSArray*> *store=[MPWAbstractStore new];
+    MPWGenericReference *r1=[store referenceForPath:@"somePath"];
+    IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 
 +(NSArray*)testSelectors {  return @[
