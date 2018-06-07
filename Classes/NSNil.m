@@ -265,9 +265,15 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 @end
 
+@protocol Evaluable
+
+-value;
+
+@end
+
 @implementation NSObject(ifNotNil)
 
--ifNotNil:anArg
+-ifNotNil:(id <Evaluable>)anArg
 {
     return [anArg value];
 }

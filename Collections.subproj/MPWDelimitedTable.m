@@ -229,7 +229,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     int stringTableOffsets[ maxElements+10];
     int *keyIndexes=[indexes integers];
     
-    [keys getObjects:headerArray];
+    [keys getObjects:headerArray range:NSMakeRange(0, maxElements)];
     theDict=[MPWSmallStringTable dictionaryWithObjects:headerArray
                                                forKeys:headerArray
                                                  count:maxElements];
