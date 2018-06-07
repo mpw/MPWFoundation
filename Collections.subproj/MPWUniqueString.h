@@ -30,6 +30,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+#if !TARGET_OS_IPHONE
+
+
 #import <Foundation/NSString.h>
 #import "MPWObject.h"
 
@@ -59,4 +62,6 @@ MPWUniqueString *MPWUniqueStringWithString( id string );
 @interface NSString(unique)
 -uniqueString;
 @end
+
+#endif
 
