@@ -13,6 +13,13 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 #import <objc/runtime.h>
 #include <dlfcn.h>
 
+@protocol Evaluable
+
+-value;
+
+@end
+
+
 @implementation NSNil
 /*"
     Provides an object that is considered nil.
@@ -106,7 +113,7 @@ static id dummy(id arg) { return arg; }
 }
 
 
--ifNil:anArg
+-ifNil:(id <Evaluable>)anArg
 {
     return [anArg value];
 }
@@ -262,12 +269,6 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
             nil
  ];
 }
-
-@end
-
-@protocol Evaluable
-
--value;
 
 @end
 
