@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MPWFoundation"
-  s.version      = "3.0.1"
-  s.summary      = "HOM, Streams, etc."
+  s.version      = "3.1"
+  s.summary      = "HOM, Streams, Stores."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description  = <<-DESC
-                     HOM, Streams, Notification Protocols, etc.
+                     HOM, Streams, Stores, Notification Protocols, etc.
                    DESC
 
   s.homepage     = "http://github.com/mpw/MPWFoundation"
@@ -64,12 +64,12 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :macos, "10.12"
+  # s.platform     = :macos, "10.12"
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
-  # s.ios.deployment_target = "5.0"
-  # s.osx.deployment_target = "10.7"
+  s.ios.deployment_target = "11.0"
+  s.osx.deployment_target = "10.12"
   # s.watchos.deployment_target = "2.0"
   # s.tvos.deployment_target = "9.0"
 
