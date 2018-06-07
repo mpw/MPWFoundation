@@ -462,6 +462,8 @@ int _small_string_table_releaseIndex=0;
 
 @end
 
+#if !TARGET_OS_IPHONE
+
 #import "MPWUniqueString.h"
 
 
@@ -704,4 +706,6 @@ int _small_string_table_releaseIndex=0;
 }
 
 @end
+
+#endif
 
