@@ -32,6 +32,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
+#if !TARGET_OS_IPHONE
+
 #import <Foundation/NSMapTable.h>
 #import <Foundation/NSData.h>
 #import <ctype.h>
@@ -342,4 +344,6 @@ MPWUniqueString *MPWUniqueStringWithString( id string )
 
 
 @end
+
+#endif
 
