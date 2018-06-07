@@ -54,7 +54,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -(NSString*)path
 {
-    return [self.reference path];
+    return [(MPWGenericReference*)self.reference path];
 }
 
 -(instancetype)div:(MPWBinding*)other

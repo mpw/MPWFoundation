@@ -131,7 +131,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/NSObject+MPWNotificationProtocol.h"
 
 #import "MPWFoundation/MPWAbstractStore.h"
+#import "MPWFoundation/MPWReference.h"
 #import "MPWFoundation/MPWGenericReference.h"
+#import "MPWFoundation/MPWBinding.h"
 #import "MPWFoundation/MPWDictStore.h"
+#import "MPWFoundation/MPWDiskStore.h"
 #import "MPWFoundation/MPWMappingStore.h"
+#import "MPWFoundation/MPWPathRelativeStore.h"
+
 
