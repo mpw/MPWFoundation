@@ -1390,7 +1390,8 @@
 				1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */,
 				1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */,
 			);
-			path = Stores;
+			name = Stores;
+			path = Stores.subproj;
 			sourceTree = "<group>";
 		};
 		F51B7250013FDD5F01ABB64E /* Resources */ = {
