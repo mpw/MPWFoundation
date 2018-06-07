@@ -19,6 +19,7 @@
 
 -(void)setAction:(SEL)aSelector;
 -(void)setDelegate:delegate;
+-objectValue;
 
 @end
 

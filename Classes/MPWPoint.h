@@ -50,7 +50,9 @@ scalarAccessor_h( NSPoint, point, setPoint )
 -(NSSize)asSize;
 +pointWithNSPoint:(NSPoint)aPoint;
 +pointWithNSSize:(NSSize)aSize;
+#if ! TARGET_OS_IPHONE
 +pointWithNSString:(NSString*)string;
+#endif
 +pointWithX:(float)x y:(float)y;
 -(double)x;
 -(double)y;

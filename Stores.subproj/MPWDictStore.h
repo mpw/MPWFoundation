@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import <MPWFoundation/MPWAbstractStore.h>
+#import <MPWFoundation/MPWFoundation.h>
 
 @interface MPWDictStore : MPWAbstractStore
 

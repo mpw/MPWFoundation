@@ -46,7 +46,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 scalarAccessor_h( NSRect, rect, setRect )
 +rectWithNSRect:(NSRect)aRect;
+#if ! TARGET_OS_IPHONE
 +rectWithNSString:(NSString*)string;
+#endif
 -initWithRect:(NSRect)aRect;
 -origin;
 -mpwSize;

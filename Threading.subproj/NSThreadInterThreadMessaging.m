@@ -42,6 +42,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyAlreadyActiveException";
 
 
+#if ! TARGET_OS_IPHONE
 
 @implementation NSThread(InterThreadMessaging)
 
@@ -53,6 +54,8 @@ NSString *NSThreadedObjectProxyAlreadyActiveException = @"NSThreadedObjectProxyA
 }
 
 @end
+#endif
+
 
 @implementation NSInvocation(invokeWithTargetInPool)
 

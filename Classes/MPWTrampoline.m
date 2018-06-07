@@ -380,7 +380,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
     return exception;
 }
 
-#endif
 
 -trampolineWithSelector:(SEL)selector
 {
@@ -392,6 +391,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 {
     return [self trampolineWithSelector:@selector(exceptionPerformingInvocation:)];
 }
+#endif
 
 -(id)isKindOf:aClass
 {

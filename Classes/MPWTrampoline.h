@@ -57,11 +57,16 @@ idAccessor_h( xxxAdditionalArg, setXxxAdditionalArg )
 +(IMP)instanceMethodForSelector:(SEL)sel;
 @end
 
+
 @interface NSObject(safely)
 
--safely;
 -(NSMethodSignature*)methodSignatureForHOMSelector:(SEL)aSelector;
+
+#if ! TARGET_OS_IPHONE
 -exceptionPerformingInvocation:(NSInvocation*)invocation;
+-safely;
+#endif
 
 @end
+
 

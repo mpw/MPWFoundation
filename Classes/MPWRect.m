@@ -195,6 +195,8 @@ scalarAccessor( NSRect, rect, setRect )
 
 @end
 
+#if ! TARGET_OS_IPHONE
+
 @implementation NSString(rectCreation)
 
 -asRect
@@ -208,6 +210,7 @@ scalarAccessor( NSRect, rect, setRect )
 }
 
 @end
+#endif
 
 #import "DebugMacros.h"
 

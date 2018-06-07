@@ -214,6 +214,8 @@ pointArithmetic( reverseSubPoint, - )
 @end
 
 
+#if ! TARGET_OS_IPHONE
+
 @implementation NSString(pointCreation)
 
 -asPoint
@@ -232,6 +234,7 @@ pointArithmetic( reverseSubPoint, - )
 }
 
 @end
+#endif
 
 @implementation NSNumber(pointCreationAndArithmetic)
 
