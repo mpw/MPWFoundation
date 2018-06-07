@@ -6,6 +6,8 @@
 //
 //
 
+#if !TARGET_OS_IPHONE
+
 #import "MPWExternalFilter.h"
 #import "MPWFDStreamSource.h"
 #import "MPWByteStream.h"
@@ -159,3 +161,5 @@
 }
 
 @end
+
+#endif  
