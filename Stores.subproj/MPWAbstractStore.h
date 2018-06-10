@@ -17,8 +17,8 @@
 -(void)deleteObjectForReference:(MPWReference*)aReference;
 
 
--(MPWGenericReference*)referenceForPath:(NSString*)path;
--(MPWGenericReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName;
+-(MPWReference*)referenceForPath:(NSString*)path;
+-(MPWReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName;
 
 @end
 

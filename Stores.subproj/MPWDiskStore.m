@@ -6,30 +6,60 @@
 //
 
 #import "MPWDiskStore.h"
-#import "MPWReference.h"
-
+#import "MPWGenericReference.h"
+#import "NSObjectFiltering.h"
 
 @implementation MPWDiskStore
 
--(NSURL*)referenceToFileURL:(MPWReference*)ref
+-(NSURL*)referenceToFileURL:(MPWGenericReference*)ref
 {
-    return [ref URL];
+    return [NSURL fileURLWithPath:[ref path]];              //  [ref URL] doesn't work
 }
 
--(NSData*)objectForReference:(MPWReference*)aReference
+-(NSData*)dataWithURL:(NSURL*)url
 {
-    return [NSData dataWithContentsOfURL:[self referenceToFileURL:aReference]];
+    return [NSData dataWithContentsOfURL:url];
 }
 
--(void)setObject:(NSData*)theObject forReference:(MPWReference*)aReference
+-directoryForReference:(MPWGenericReference*)aReference
+{
+    return [self childrenOfReference:(MPWReference*)aReference];
+}
+
+
+-(NSData*)objectForReference:(MPWGenericReference*)aReference
+{
+    if ([self isLeafReference:(MPWReference*)aReference]) {
+        return [self dataWithURL:[self referenceToFileURL:aReference]];
+    } else {
+        return [self directoryForReference:aReference];
+    }
+}
+
+-(void)setObject:(NSData*)theObject forReference:(MPWGenericReference*)aReference
 {
     [theObject writeToURL:[self referenceToFileURL:aReference] atomically:YES];
 }
 
--(void)deleteObjectForReference:(MPWReference*)aReference
+-(void)deleteObjectForReference:(MPWGenericReference*)aReference
 {
     NSString *path = [[self referenceToFileURL:aReference] path];
     unlink([path fileSystemRepresentation]);
 }
+
+-(BOOL)isLeafReference:(MPWGenericReference *)aReference
+{
+    BOOL    isDirectory=NO;
+    BOOL    exists=NO;
+    exists=[[NSFileManager defaultManager] fileExistsAtPath:[aReference path] isDirectory:&isDirectory];
+    return !isDirectory;
+}
+
+-(NSArray*)childrenOfReference:(MPWGenericReference*)aReference
+{
+    NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:nil];
+    return (NSArray*)[[MPWGenericReference collect] referenceWithPath:[childNames each]];
+}
+
 
 @end

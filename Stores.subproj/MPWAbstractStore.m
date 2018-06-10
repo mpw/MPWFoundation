@@ -56,12 +56,12 @@
     return @[];
 }
 
--(MPWGenericReference*)referenceForPath:(NSString*)path
+-(MPWReference*)referenceForPath:(NSString*)path
 {
     return [MPWGenericReference referenceWithPath:path];
 }
 
--(MPWGenericReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName
+-(MPWReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName
 {
     return [[[MPWGenericReference alloc] initWithPathComponents:path scheme:schemeName] autorelease];
 }

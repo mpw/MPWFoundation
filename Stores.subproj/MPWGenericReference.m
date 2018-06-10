@@ -11,12 +11,13 @@
 @interface MPWGenericReference()
 
 @property (nonatomic, strong) NSArray *pathComponents;
-//@property (nonatomic, strong) NSString *schemeName;
 
 
 @end
 
 @implementation MPWGenericReference
+
+@synthesize schemeName;
 
 -(NSArray*)componentsOfPath:(NSString*)path
 {
@@ -82,7 +83,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 -(void)dealloc
 {
     [_pathComponents release];
-    [_schemeName release];
+    [schemeName release];
     [super dealloc];
 }
 

@@ -7,19 +7,8 @@
 
 #import "MPWReference.h"
 
-@interface MPWGenericReference : MPWReference
+@interface MPWGenericReference : MPWReference <MPWReferencing>
 
--(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
--(instancetype)initWithPath:(NSString*)pathName;
-+(instancetype)referenceWithPath:(NSString*)pathName;
-
-
-@property (readonly) NSArray *pathComponents;
-@property (readonly) NSArray *relativePathComponents;
-@property (nonatomic, strong) NSString *schemeName;
-@property (readonly) NSString *path;
-
--(instancetype)referenceByAppendingReference:(MPWGenericReference*)other;
 
 
 @end
