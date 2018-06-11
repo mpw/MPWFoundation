@@ -7,11 +7,11 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@class MPWGenericReference;
+@protocol MPWReferencing;
 
 @interface MPWPathRelativeStore : MPWMappingStore
 
-+(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef;
--(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef;
++(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef;
+-(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef;
 
 @end

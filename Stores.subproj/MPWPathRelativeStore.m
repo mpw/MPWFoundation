@@ -10,25 +10,25 @@
 
 @interface MPWPathRelativeStore()
 
-@property (nonatomic, strong) MPWGenericReference* baseReference;
+@property (nonatomic, strong) id <MPWReferencing> baseReference;
 
 @end
 
 @implementation MPWPathRelativeStore
 
-+(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef
++(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef
 {
     return [[[self alloc] initWithSource:newSource reference:newRef] autorelease];
 }
 
--(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:(MPWGenericReference*)newRef
+-(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef
 {
     self=[super initWithSource:newSource];
     self.baseReference=newRef;
     return self;
 }
 
--(MPWGenericReference *)mapReference:(MPWGenericReference *)aReference
+-(id <MPWReferencing>)mapReference:(MPWGenericReference *)aReference
 {
     return [self.baseReference referenceByAppendingReference:aReference];
 }
