@@ -21,7 +21,11 @@
 
 -(NSArray*)componentsOfPath:(NSString*)path
 {
-    return [path componentsSeparatedByString:@"/"];
+    NSArray *components = [path componentsSeparatedByString:@"/"];
+    if ( components.count == 1 && [components.firstObject length] == 0) {
+        components=@[];
+    }
+    return components;
 }
 
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme
@@ -54,24 +58,16 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self.pathComponents.lastObject length]==0;
 }
 
--(NSArray*)relativePathComponents
-{
-    NSArray *rawPathComponents=self.pathComponents;
-    NSRange r={0,rawPathComponents.count};
-    if ( [self isAbsolute] && r.length>0) {
-        r.location+=1;
-        r.length--;
-    }
-    if ( [self hasTrailingSlash]  && r.length>0) {
-        r.length--;
-    }
-    return [rawPathComponents subarrayWithRange:r];
-}
 
 -(instancetype)referenceByAppendingReference:(MPWGenericReference*)other
 {
     NSArray *compinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];
     return [[[[self class] alloc] initWithPathComponents:compinedPath scheme:self.schemeName] autorelease];
+}
+
+-(NSArray*)relativePathComponents
+{
+    return [super relativePathComponents];      // shut up the compiler
 }
 
 -(NSString*)stringValue
@@ -125,8 +121,6 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 #import "DebugMacros.h"
 
-@interface MPWReferenceTests : NSObject {}
-@end
 
 @implementation MPWReferenceTests
 
@@ -146,6 +140,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 +(void)testIdentifyAbsolute
 {
     EXPECTTRUE([[[self classUnderTest] referenceWithPath:@"/"] isAbsolute], @"isRoot");
+    EXPECTFALSE([[[self classUnderTest] referenceWithPath:@""] isAbsolute], @"isRoot");
     EXPECTTRUE([[[self classUnderTest] referenceWithPath:@"/absolute"] isAbsolute], @"absolute isRoot");
     EXPECTFALSE([[[self classUnderTest] referenceWithPath:@"relative"] isAbsolute], @"relative isRoot");
     EXPECTFALSE([[[self classUnderTest] referenceWithPath:@"relative/path"] isAbsolute], @"relative/path isRoot");
@@ -178,14 +173,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     IDEXPECT([[[self classUnderTest] referenceWithPath:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
 }
 
-+(void)testURL
-{
-    NSString *urlString=@"https://www.metaobject.com";
-    NSURL *sourceURL=[NSURL URLWithString:urlString];
-    MPWGenericReference *ref=[[[self classUnderTest] alloc] initWithPathComponents:[@"//www.metaobject.com" componentsSeparatedByString:@"/"] scheme:[sourceURL scheme]];
-    IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
-    IDEXPECT( [ref URL], sourceURL, @"urls");
-}
++(void)testURL {}
 
 +(void)testAppendPath
 {

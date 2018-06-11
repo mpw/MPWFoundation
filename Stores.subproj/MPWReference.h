@@ -26,6 +26,7 @@
 @interface MPWReference : NSObject
 
 -(NSURL*)URL;
+-(NSArray*)relativePathComponents;
 
 @end
 

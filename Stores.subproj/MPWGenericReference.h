@@ -10,5 +10,8 @@
 @interface MPWGenericReference : MPWReference <MPWReferencing>
 
 
+@end
 
+
+@interface MPWReferenceTests : NSObject {}
 @end

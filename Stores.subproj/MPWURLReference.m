@@ -9,23 +9,24 @@
 
 @interface MPWURLReference()
 
-@property (nonatomic, strong) NSURL *URL;
+@property (nonatomic, strong) NSURLComponents *components;
 
 @end
 
 
 @implementation MPWURLReference
 
-CONVENIENCEANDINIT( reference, WithURL:(NSURL*)url )
+CONVENIENCEANDINIT( reference, WithURLComponents:(NSURLComponents*)urlComponents )
 {
     self=[super init];
-    self.URL = url;
+    self.components = urlComponents;
     return self;
 }
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-    return [self initWithURL:[NSURL fileURLWithPath:pathName]];
+    NSURLComponents *comps=[NSURLComponents componentsWithString:pathName];
+    return [self initWithURLComponents:comps];
 }
 
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents scheme:(NSString *)scheme
@@ -33,29 +34,42 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     NSURLComponents *components=[[NSURLComponents new] autorelease];
     components.scheme = scheme;
     components.path = [pathComponents componentsJoinedByString:@"/"];
-    NSURL *url=[components URL];
-    return [self initWithURL:url];
+    return [self initWithURLComponents:components];
+}
+
+-(NSURL*)URL
+{
+    return self.components.URL;
 }
 
 -(NSString *)path
 {
-    return self.URL.path;
+    return self.components.path;
 }
 
 -(NSArray *)pathComponents
 {
     NSURLComponents *components = [NSURLComponents componentsWithURL:self.URL resolvingAgainstBaseURL:NO];
-    return [components.path componentsSeparatedByString:@"/"];
+    NSArray *pathComponents = [components.path componentsSeparatedByString:@"/"];
+    if ( pathComponents.count == 1 && [pathComponents.firstObject length]==0) {
+        pathComponents=@[];
+    }
+    return pathComponents;
 }
 
 -(NSArray*)relativePathComponents
 {
-    return self.pathComponents;
+    return [super relativePathComponents];
 }
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-   return  [[self class] referenceWithURL: [[[NSURL alloc] initWithString:[other path] relativeToURL:self.URL] autorelease]];
+    
+    
+    NSURLComponents *combined=[[self.components copy] autorelease];
+    combined.path = [[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]] componentsJoinedByString:@"/"];
+    
+   return  [[self class] referenceWithURLComponents:combined];
 }
             
 
@@ -69,4 +83,47 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     [NSException raise:@"invalidaccess" format:@"cannot set the scheme of a %@",[self className]];
 }
 
+-(BOOL)isRoot
+{
+    NSString *path=[self path];
+    return [path isEqualToString:@"/"];
+}
+
+-(BOOL)isAbsolute
+{
+    NSString *path=[self path];
+    return [path hasPrefix:@"/"];
+}
+
+-(BOOL)hasTrailingSlash
+{
+    return [[self path] hasSuffix:@"/"];
+}
+
 @end
+
+#import "MPWGenericReference.h"
+
+@interface MPWURLReferenceTests : MPWReferenceTests {}
+@end
+
+@implementation MPWURLReferenceTests
+
++classUnderTest
+{
+    return [MPWURLReference class];
+}
+
++(void)testURL
+{
+    NSString *urlString=@"http://www.metaobject.com";
+    NSURL *sourceURL=[NSURL URLWithString:urlString];
+    MPWGenericReference *ref=[[[self classUnderTest] alloc] initWithPath:urlString];
+//    IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
+    IDEXPECT( [ref URL], sourceURL, @"urls");
+}
+
+
+@end
+
+
