@@ -13,8 +13,8 @@
 
 +(instancetype)bindingWithReference:aReference inStore:aStore;
 
--value;
--(void)setValue:newValue;
+@property (nonatomic, retain) id value;
+
 -(void)delete;
 
 // hierarchy support
