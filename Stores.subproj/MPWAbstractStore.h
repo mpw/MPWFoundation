@@ -18,7 +18,6 @@
 
 
 -(MPWReference*)referenceForPath:(NSString*)path;
--(MPWReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName;
 
 @end
 
@@ -38,7 +37,6 @@
 -(void)deleteObjectForReference:(ReferenceType)aReference;
 
 -(ReferenceType)referenceForPath:(NSString*)name;
--(ReferenceType)referenceForPathComponents:(NSArray*)name schemeName:(NSString*)schemeName;
 
 -(ObjectType)objectForKeyedSubscript:key;
 -(void)setObject:(ObjectType)theObject forKeyedSubscript:(id<NSCopying>)key;

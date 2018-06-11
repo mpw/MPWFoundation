@@ -61,18 +61,9 @@
     return [MPWGenericReference referenceWithPath:path];
 }
 
--(MPWReference*)referenceForPathComponents:(NSArray*)path schemeName:(NSString*)schemeName
-{
-    return [[[MPWGenericReference alloc] initWithPathComponents:path scheme:schemeName] autorelease];
-}
-
 -(NSURL*)URLForReference:(MPWGenericReference*)aReference
 {
     return [aReference URL];
-//    NSURLComponents *components=[[[NSURLComponents alloc] init] autorelease];
-//    components.scheme = aReference.schemeName;
-//    components.path = aReference.path;
-//    return [components URL];
 }
 
 

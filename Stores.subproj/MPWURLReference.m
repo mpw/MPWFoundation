@@ -80,7 +80,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(void)setSchemeName:(NSString *)schemeName
 {
-    [NSException raise:@"invalidaccess" format:@"cannot set the scheme of a %@",[self className]];
+    self.components.scheme = schemeName;
 }
 
 -(BOOL)isRoot

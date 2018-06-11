@@ -5,8 +5,8 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import "MPWAbstractStore.h"
+#import <MPWFoundation/MPWURLBasedStore.h>
 
-@interface MPWDiskStore : MPWAbstractStore
+@interface MPWDiskStore : MPWURLBasedStore
 
 @end
