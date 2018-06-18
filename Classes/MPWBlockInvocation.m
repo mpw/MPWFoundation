@@ -21,7 +21,7 @@ idAccessor( block, _setBlock )
 	[self _setBlock:[[aBlock copy] autorelease]];
 }
 
--initWithBlock:aBlock
+-(instancetype)initWithBlock:aBlock
 {
 	self=[super init];
 	[self setBlock:aBlock];
@@ -30,7 +30,7 @@ idAccessor( block, _setBlock )
 
 +invocationWithBlock:aBlock 
 {
-	return [[[self alloc] initWithBlock:aBlock] autorelease];
+	return [[(MPWBlockInvocation*)[self alloc] initWithBlock:aBlock] autorelease];
 }
 
 -resultOfInvokingWithArgs:(id*)newArgs count:(int)count
