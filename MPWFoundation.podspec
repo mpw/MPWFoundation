@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MPWFoundation"
-  s.version      = "3.3"
+  s.version      = "3.2"
   s.summary      = "HOM, Streams, Stores."
 
   # This description is used to generate tags and improve search results.
@@ -63,13 +63,9 @@ Pod::Spec.new do |s|
   #  If this Pod runs only on iOS or OS X, then specify the platform and
   #  the deployment target. You can optionally include the target after the platform.
   #
-
-
-  s.platforms" =  {
-    "ios": "9.0",
-    "osx": "10.12",
-  }
-
+ 
+  s.ios.deployment_target = "9.0"
+  s.osx.deployment_target = "10.12"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
