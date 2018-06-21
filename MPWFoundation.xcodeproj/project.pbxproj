@@ -2386,7 +2386,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1F0CC1AD0F5B1A9500BB466F /* Release Tiger */ = {
+		1F0CC1AD0F5B1A9500BB466F /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -2428,9 +2428,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1F0CC1AE0F5B1A9500BB466F /* Release Tiger */ = {
+		1F0CC1AE0F5B1A9500BB466F /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2478,7 +2478,7 @@
 				);
 				WRAPPER_EXTENSION = framework;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
 		1F1412DA1CEC7EEA000E2802 /* Nightly */ = {
 			isa = XCBuildConfiguration;
@@ -2651,7 +2651,6 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2828,13 +2827,12 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Beta;
 		};
-		1F3AC608143EB3D9009B8504 /* Development */ = {
+		1F3AC608143EB3D9009B8504 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2863,7 +2861,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1F3AC609143EB3D9009B8504 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -2885,7 +2883,7 @@
 			};
 			name = Release;
 		};
-		1F3AC60A143EB3D9009B8504 /* Release Tiger */ = {
+		1F3AC60A143EB3D9009B8504 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2903,9 +2901,9 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1F4FC9921DF818AF00B35D27 /* Development */ = {
+		1F4FC9921DF818AF00B35D27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -2957,7 +2955,7 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Development;
+			name = Debug;
 		};
 		1F4FC9931DF818AF00B35D27 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3149,7 +3147,7 @@
 			};
 			name = Weekly;
 		};
-		1F4FC9981DF818AF00B35D27 /* Release Tiger */ = {
+		1F4FC9981DF818AF00B35D27 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3185,9 +3183,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1F4FC9991DF818AF00B35D27 /* Development */ = {
+		1F4FC9991DF818AF00B35D27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3238,7 +3236,7 @@
 				SDKROOT = iphoneos;
 				TEST_TARGET_NAME = TestMPWFoundation;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1F4FC99A1DF818AF00B35D27 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3425,7 +3423,7 @@
 			};
 			name = Weekly;
 		};
-		1F4FC99F1DF818AF00B35D27 /* Release Tiger */ = {
+		1F4FC99F1DF818AF00B35D27 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3460,9 +3458,9 @@
 				TEST_TARGET_NAME = TestMPWFoundation;
 				VALIDATE_PRODUCT = YES;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1F840DB8193F505700589595 /* Development */ = {
+		1F840DB8193F505700589595 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3519,11 +3517,10 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Development;
+			name = Debug;
 		};
 		1F840DB9193F505700589595 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3570,13 +3567,12 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = x86_64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
-		1F840DBA193F505700589595 /* Release Tiger */ = {
+		1F840DBA193F505700589595 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3621,13 +3617,12 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1FA5B7D61172CD28001628B6 /* Development */ = {
+		1FA5B7D61172CD28001628B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3636,7 +3631,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = libMPWFoundationTouchFat;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1FA5B7D71172CD28001628B6 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3649,16 +3644,16 @@
 			};
 			name = Release;
 		};
-		1FA5B7D81172CD28001628B6 /* Release Tiger */ = {
+		1FA5B7D81172CD28001628B6 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				GCC_VERSION = "";
 				PRODUCT_NAME = libMPWFoundationTouchFat;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1FCF25D91CF3983C00AC64CE /* Development */ = {
+		1FCF25D91CF3983C00AC64CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3724,7 +3719,7 @@
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1FCF25DA1CF3983C00AC64CE /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3930,7 +3925,7 @@
 			};
 			name = Beta;
 		};
-		1FCF25DE1CF3983C00AC64CE /* Release Tiger */ = {
+		1FCF25DE1CF3983C00AC64CE /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -3979,9 +3974,9 @@
 				VERSION_INFO_PREFIX = "";
 				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
-			name = "Release Tiger";
+			name = Core;
 		};
-		1FD75001085DDFC1001487D3 /* Development */ = {
+		1FD75001085DDFC1001487D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -4024,7 +4019,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1FD75002085DDFC1001487D3 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4070,7 +4065,7 @@
 			};
 			name = Release;
 		};
-		1FF8FE2A09B49D0200652476 /* Development */ = {
+		1FF8FE2A09B49D0200652476 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -4104,6 +4099,7 @@
 					"-fstack-protector-strong",
 				);
 				OTHER_LDFLAGS = "";
+				PRECOMPS_INCLUDE_HEADERS_FROM_BUILT_PRODUCTS_DIR = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.Foundation;
 				PRODUCT_NAME = MPWFoundation;
 				SDKROOT = macosx;
@@ -4117,7 +4113,7 @@
 				);
 				WRAPPER_EXTENSION = framework;
 			};
-			name = Development;
+			name = Debug;
 		};
 		1FF8FE2B09B49D0200652476 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -4340,7 +4336,6 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -4517,7 +4512,6 @@
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -4580,114 +4574,114 @@
 		1F3AC60B143EB3D9009B8504 /* Build configuration list for PBXLegacyTarget "show-build-dir" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1F3AC608143EB3D9009B8504 /* Development */,
+				1F3AC608143EB3D9009B8504 /* Debug */,
 				1F3AC609143EB3D9009B8504 /* Release */,
 				57180A441CEF080C002317C5 /* AppStore */,
 				1F1412DD1CEC7EEA000E2802 /* Nightly */,
 				1F1412E21CEC7EF0000E2802 /* Beta */,
 				57D466951D5D7D6D00513893 /* Weekly */,
-				1F3AC60A143EB3D9009B8504 /* Release Tiger */,
+				1F3AC60A143EB3D9009B8504 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1F4FC9A01DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1F4FC9921DF818AF00B35D27 /* Development */,
+				1F4FC9921DF818AF00B35D27 /* Debug */,
 				1F4FC9931DF818AF00B35D27 /* Release */,
 				1F4FC9941DF818AF00B35D27 /* AppStore */,
 				1F4FC9951DF818AF00B35D27 /* Nightly */,
 				1F4FC9961DF818AF00B35D27 /* Beta */,
 				1F4FC9971DF818AF00B35D27 /* Weekly */,
-				1F4FC9981DF818AF00B35D27 /* Release Tiger */,
+				1F4FC9981DF818AF00B35D27 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1F4FC9A11DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundationUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1F4FC9991DF818AF00B35D27 /* Development */,
+				1F4FC9991DF818AF00B35D27 /* Debug */,
 				1F4FC99A1DF818AF00B35D27 /* Release */,
 				1F4FC99B1DF818AF00B35D27 /* AppStore */,
 				1F4FC99C1DF818AF00B35D27 /* Nightly */,
 				1F4FC99D1DF818AF00B35D27 /* Beta */,
 				1F4FC99E1DF818AF00B35D27 /* Weekly */,
-				1F4FC99F1DF818AF00B35D27 /* Release Tiger */,
+				1F4FC99F1DF818AF00B35D27 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1F840DB8193F505700589595 /* Development */,
+				1F840DB8193F505700589595 /* Debug */,
 				1F840DB9193F505700589595 /* Release */,
 				57180A451CEF080C002317C5 /* AppStore */,
 				1F1412DE1CEC7EEA000E2802 /* Nightly */,
 				1F1412E31CEC7EF0000E2802 /* Beta */,
 				57D466961D5D7D6D00513893 /* Weekly */,
-				1F840DBA193F505700589595 /* Release Tiger */,
+				1F840DBA193F505700589595 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1FA5B7E11172CD3E001628B6 /* Build configuration list for PBXAggregateTarget "MPWFoundationTouchFat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1FA5B7D61172CD28001628B6 /* Development */,
+				1FA5B7D61172CD28001628B6 /* Debug */,
 				1FA5B7D71172CD28001628B6 /* Release */,
 				57180A431CEF080C002317C5 /* AppStore */,
 				1F1412DC1CEC7EEA000E2802 /* Nightly */,
 				1F1412E11CEC7EF0000E2802 /* Beta */,
 				57D466941D5D7D6D00513893 /* Weekly */,
-				1FA5B7D81172CD28001628B6 /* Release Tiger */,
+				1FA5B7D81172CD28001628B6 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1FCF25DF1CF3983C00AC64CE /* Build configuration list for PBXNativeTarget "MPWFoundationWatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1FCF25D91CF3983C00AC64CE /* Development */,
+				1FCF25D91CF3983C00AC64CE /* Debug */,
 				1FCF25DA1CF3983C00AC64CE /* Release */,
 				1FCF25DB1CF3983C00AC64CE /* AppStore */,
 				1FCF25DC1CF3983C00AC64CE /* Nightly */,
 				1FCF25DD1CF3983C00AC64CE /* Beta */,
 				57D466971D5D7D6D00513893 /* Weekly */,
-				1FCF25DE1CF3983C00AC64CE /* Release Tiger */,
+				1FCF25DE1CF3983C00AC64CE /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1FD75000085DDFC1001487D3 /* Build configuration list for PBXProject "MPWFoundation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1FD75001085DDFC1001487D3 /* Development */,
+				1FD75001085DDFC1001487D3 /* Debug */,
 				1FD75002085DDFC1001487D3 /* Release */,
 				57180A411CEF080C002317C5 /* AppStore */,
 				1F1412DA1CEC7EEA000E2802 /* Nightly */,
 				1F1412DF1CEC7EF0000E2802 /* Beta */,
 				57D466921D5D7D6D00513893 /* Weekly */,
-				1F0CC1AD0F5B1A9500BB466F /* Release Tiger */,
+				1F0CC1AD0F5B1A9500BB466F /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 		1FF8FE2909B49D0200652476 /* Build configuration list for PBXNativeTarget "MPWFoundationFramework" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1FF8FE2A09B49D0200652476 /* Development */,
+				1FF8FE2A09B49D0200652476 /* Debug */,
 				1FF8FE2B09B49D0200652476 /* Release */,
 				57180A421CEF080C002317C5 /* AppStore */,
 				1F1412DB1CEC7EEA000E2802 /* Nightly */,
 				1F1412E01CEC7EF0000E2802 /* Beta */,
 				57D466931D5D7D6D00513893 /* Weekly */,
-				1F0CC1AE0F5B1A9500BB466F /* Release Tiger */,
+				1F0CC1AE0F5B1A9500BB466F /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Development;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
