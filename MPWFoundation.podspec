@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MPWFoundation"
-  s.version      = "3.2"
+  s.version      = "3.3"
   s.summary      = "HOM, Streams, Stores."
 
   # This description is used to generate tags and improve search results.
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #
  
   s.ios.deployment_target = "9.0"
-  s.osx.deployment_target = "10.12"
+#  s.osx.deployment_target = "10.12"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -104,19 +104,6 @@ Pod::Spec.new do |s|
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
-
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
-
-
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
@@ -126,6 +113,5 @@ Pod::Spec.new do |s|
   s.requires_arc = false
 
   s.xcconfig = { "GCC_PREPROCESSOR_DEFINITIONS" => "FULL_MPWFOUNDATION=1 Darwin" }
-  # s.dependency "JSONKit", "~> 1.4"
 
 end
