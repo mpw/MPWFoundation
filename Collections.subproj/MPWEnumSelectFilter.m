@@ -31,6 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
+#import <Foundation/Foundation.h>
 #import "MPWEnumSelectFilter.h"
 #import "MPWObjectCache.h"
 

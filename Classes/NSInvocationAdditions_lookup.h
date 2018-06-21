@@ -62,11 +62,11 @@ static inline IMP objc_msg_lookup( id obj, SEL msg )
 //	return objc_msgSend;
 //	return [obj methodForSelector:msg];
 
-    if ( obj ) {
-       return class_getMethodImplementation(*(Class*)obj, msg );
-    } else {
-        return objc_msgSend;
-    }
+//    if ( obj ) {
+//       return class_getMethodImplementation(*(Class*)obj, msg );
+//    } else {
+    return objc_msgSend;
+//    }
 }
 #else
 

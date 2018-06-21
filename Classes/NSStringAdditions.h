@@ -45,7 +45,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 /*"
      This is generic protocol for converting to #NSString and #NSData objects.
 "*/
--(NSString*)stringValue;
+
+@property (readonly)  NSString *stringValue;
+
 -(NSData*)asData;
 
 @end

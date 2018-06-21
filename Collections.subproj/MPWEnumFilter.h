@@ -31,8 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "MPWObject.h"
-#import <Foundation/Foundation.h>
+#import "MPWFoundation/MPWObject.h"
 
 
 
