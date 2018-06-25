@@ -65,11 +65,11 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 }
 
 +(NSString*)makeString:anObject;
-+Stdout;
-+Stderr;
-+file:(FILE*)file;
-+fileName:(NSString*)fileName;
-+null;
++(instancetype)Stdout;
++(instancetype)Stderr;
++(instancetype)file:(FILE*)file;
++(instancetype)fileName:(NSString*)fileName;
++(instancetype)null;
 
 -(void)writeIndent;
 -(void)writeString:(NSString*)aString;

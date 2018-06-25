@@ -40,14 +40,14 @@
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>8</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>14</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
