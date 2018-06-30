@@ -31,19 +31,21 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <MPWFoundation/MPWObject.h>
-#import <MPWFoundation/AccessorMacros.h>
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/AccessorMacros.h>
+#import <MPWFoundation/MPWObject.h>
+
+typedef id (*IDIMP0)(id, SEL);
 
 
-@interface MPWScanner : MPWObject
+@interface MPWScanner : NSObject
 {
     NSData *data;
     id	dataSource;
     const char *start,*end,*pos,*probe;
     NSMutableDictionary		*handlers;
     id defaultHandler;
-    IMP0	  charSwitch[260];
+    IDIMP0	  charSwitch[260];
     id textCache;
     IMP0 getObject,initData,makeText;
     IMP0 setScanPosition;

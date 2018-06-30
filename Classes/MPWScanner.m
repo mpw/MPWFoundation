@@ -87,7 +87,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     unsigned int i;
     IMP scanText=[self methodForSelector:@selector(scanText)];
     for (i=0;i<256;i++) {
-        charSwitch[i]=(IMP0)scanText;
+        charSwitch[i]=(IDIMP0)scanText;
     }
 }
 
