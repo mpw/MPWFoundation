@@ -19,7 +19,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return self;
 }
 
--(MPWReference*)mapReference:(MPWReference*)aReference
+-(id <MPWReferencing>)mapReference:(id <MPWReferencing>)aReference
 {
     return aReference;
 }
@@ -34,27 +34,27 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return anObject;
 }
 
--objectForReference:(MPWReference*)aReference
+-objectForReference:(id <MPWReferencing>)aReference
 {
     return [self mapRetrievedObject:[self.source objectForReference:[self mapReference:aReference]]];
 }
 
--(void)setObject:theObject forReference:(MPWReference*)aReference
+-(void)setObject:theObject forReference:(id <MPWReferencing>)aReference
 {
     [self.source setObject:[self mapObjectToStore:theObject] forReference:[self mapReference:aReference]];
 }
 
--(void)deleteObjectForReference:(MPWReference*)aReference
+-(void)deleteObjectForReference:(id <MPWReferencing>)aReference
 {
     [self.source deleteObjectForReference:[self mapReference:aReference]];
 }
 
--(BOOL)isLeafReference:(MPWReference*)aReference
+-(BOOL)isLeafReference:(id <MPWReferencing>)aReference
 {
     return [self.source isLeafReference:[self mapReference:aReference]];
 }
 
--(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference
+-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     return [self.source childrenOfReference:[self mapReference:aReference]];
 }

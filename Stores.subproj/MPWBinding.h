@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @class MPWReference,MPWAbstractStore;
+@protocol MPWReferencing;
 
 @protocol MPWBinding
 
@@ -29,7 +30,7 @@
 
 @interface MPWBinding : NSObject<MPWBinding>
 
-@property (nonatomic, strong) MPWReference *reference;
+@property (nonatomic, strong) id <MPWReferencing> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;
 
 

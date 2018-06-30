@@ -25,13 +25,13 @@
 
 -directoryForReference:(MPWGenericReference*)aReference
 {
-    return [self childrenOfReference:(MPWReference*)aReference];
+    return [self childrenOfReference:aReference];
 }
 
 
 -(NSData*)objectForReference:(MPWGenericReference*)aReference
 {
-    if ([self isLeafReference:(MPWReference*)aReference]) {
+    if ([self isLeafReference:aReference]) {
         return [self dataWithURL:[self referenceToFileURL:aReference]];
     } else {
         return [self directoryForReference:aReference];

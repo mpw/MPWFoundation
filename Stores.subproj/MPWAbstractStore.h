@@ -7,14 +7,15 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol MPWReferencing;
 @class MPWReference,MPWGenericReference;
 
 
 @protocol MPWStorage
 
--objectForReference:( MPWReference*)aReference;
--(void)setObject:theObject forReference:(MPWReference*)aReference;
--(void)deleteObjectForReference:(MPWReference*)aReference;
+-objectForReference:( id <MPWReferencing>)aReference;
+-(void)setObject:theObject forReference:(id <MPWReferencing>)aReference;
+-(void)deleteObjectForReference:(id <MPWReferencing>)aReference;
 
 
 -(MPWReference*)referenceForPath:(NSString*)path;
@@ -23,8 +24,8 @@
 
 @protocol MPWHierarchicalStorage
 
--(BOOL)isLeafReference:(MPWReference*)aReference;
--(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference;
+-(BOOL)isLeafReference:(id <MPWReferencing>)aReference;
+-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference;
 
 @end
 
