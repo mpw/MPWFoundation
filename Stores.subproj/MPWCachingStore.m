@@ -9,6 +9,17 @@
 #import "MPWDictStore.h"
 #import "AccessorMacros.h"
 
+#import "DebugMacros.h"
+
+@interface MPWCachingStoreTests : NSObject
+
+@property (nonatomic, strong)  MPWGenericReference *key;
+@property (nonatomic, strong)  NSString *value;
+@property (nonatomic, strong)  MPWDictStore *cache,*source;
+@property (nonatomic, strong)  MPWCachingStore *store;
+
+@end
+
 @interface MPWCachingStore()
 
 @property (nonatomic, strong) id <MPWStorage> cache;
@@ -34,7 +45,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return result;
 }
 
--setObject:newObject forReference:(id <MPWReferencing>)aReference
+-(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
 {
     [self.cache setObject:newObject forReference:aReference];
     [self.source setObject:newObject forReference:aReference];
@@ -45,84 +56,74 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     [self.cache deleteObjectForReference:aRef];
 }
 
-@end
-
-#import "DebugMacros.h"
-
-@implementation MPWCachingStore(testing)
-
-+(instancetype)_testCache
++testFixture
 {
-    return [self storeWithSource:[MPWDictStore store] cache:[MPWDictStore store]];
+    return [[[MPWCachingStoreTests alloc] init] autorelease];
 }
 
-+(void)testReadingPopulatesCache
-{
-    MPWCachingStore *cache=[self _testCache];
-    NSString *key=@"aKey";
-    NSString *value=@"hi";
-    MPWDictStore* theCache = cache.cache;
-    id resultFromCache = theCache[key];
-    EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [cache.source setObject:value forReference:key];
-    id mainResult = cache[key];
-    IDEXPECT( mainResult, value, @"reading the cache");
-    resultFromCache = theCache[key];
-    IDEXPECT( resultFromCache, value, @"after accessing caching store, cache is populated");
-    
-}
-
-+(void)testCacheIsReadFirst
-{
-    MPWCachingStore *cache=[self _testCache];
-    NSString *key=@"aKey";
-    NSString *value=@"hi";
-    MPWDictStore* theCache = cache.cache;
-    id resultFromCache = theCache[key];
-    EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [cache.cache setObject:value forReference:key];
-    id resultFromSource = ((MPWDictStore*)cache.source)[key];
-    EXPECTNIL( resultFromSource , @"nothing in source");
-    id mainResult = cache[key];
-    IDEXPECT( mainResult, value, @"reading the cache");
-}
-
-+(void)testWritePopulatesCacheAndSource
-{
-    MPWCachingStore *cache=[self _testCache];
-    NSString *key=@"aKey";
-    NSString *value=@"hi";
-    
-    [cache setObject:value forReference:key];
-    IDEXPECT( [cache.source objectForReference:key], value, @"reading the source");
-    IDEXPECT( [cache.cache objectForReference:key], value, @"reading the cache");
-}
-
-+(void)testCanInvalidateCache
-{
-    MPWCachingStore *cache=[self _testCache];
-    NSString *key=@"aKey";
-    NSString *value=@"hi";
-    
-    [cache setObject:value forReference:key];
-    IDEXPECT( [cache.source objectForReference:key], value, @"reading the source");
-    IDEXPECT( [cache.cache objectForReference:key], value, @"reading the cache");
-    [cache invalidate:key];
-    MPWDictStore* theCache = cache.cache;
-    id resultFromCache = theCache[key];
-    EXPECTNIL( resultFromCache , @"cache should be invalidated");
-}
 
 +testSelectors
 {
     return @[
-         @"testMapperPassesThrough",   // superclass test
-         @"testReadingPopulatesCache",
-         @"testCacheIsReadFirst",
-         @"testWritePopulatesCacheAndSource",
-         @"testCanInvalidateCache",
-         
-      ];
+             @"testReadingPopulatesCache",
+             @"testCacheIsReadFirst",
+             @"testWritePopulatesCacheAndSource",
+             @"testCanInvalidateCache",
+             
+             ];
+}
+
+@end
+
+
+@implementation MPWCachingStoreTests
+
+-(instancetype)init
+{
+    self=[super init];
+    self.key = [MPWGenericReference referenceWithPath:@"aKey"];
+    self.value = @"Hello World";
+    self.cache = [MPWDictStore store];
+    self.source = [MPWDictStore store];
+    self.store = [MPWCachingStore storeWithSource:self.source cache:self.cache];
+    return self;
+}
+
+-(void)testReadingPopulatesCache
+{
+    id resultFromCache = self.cache[self.key];
+    EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
+    [self.source setObject:self.value forReference:self.key];
+    id mainResult = self.store[self.key];
+    IDEXPECT( mainResult, self.value, @"reading the cache");
+    resultFromCache = self.cache[self.key];
+    IDEXPECT( resultFromCache, self.value, @"after accessing caching store, cache is populated");
+    
+}
+
+-(void)testCacheIsReadFirst
+{
+    id resultFromCache = self.cache[self.key];
+    EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
+    [self.cache setObject:self.value forReference:self.key];
+    id resultFromSource = self.source[self.key];
+    EXPECTNIL( resultFromSource , @"nothing in source");
+    id mainResult = self.store[self.key];
+    IDEXPECT( mainResult, self.value, @"reading the cache");
+}
+
+-(void)testWritePopulatesCacheAndSource
+{
+    [self.store setObject:self.value forReference:self.key];
+    IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
+    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
+}
+
+-(void)testCanInvalidateCache
+{
+    [self.store setObject:self.value forReference:self.key];
+    [self.store invalidate:self.key];
+    EXPECTNIL( self.cache[self.key] , @"cache should be invalidated");
 }
 
 @end
