@@ -237,9 +237,9 @@
 		1FA296991CF74A6500F19039 /* MPWPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA296951CF74A6500F19039 /* MPWPipe.m */; };
 		1FA2969A1CF74A6500F19039 /* MPWPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA296951CF74A6500F19039 /* MPWPipe.m */; };
 		1FA2969B1CF74A6500F19039 /* MPWPipe.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA296951CF74A6500F19039 /* MPWPipe.m */; };
-		1FA869C620E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; };
-		1FA869C720E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; };
-		1FA869C820E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; };
+		1FA869C620E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869C720E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869C820E8E01200920279 /* MPWCachingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869C420E8E01200920279 /* MPWCachingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA869C920E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
 		1FA869CA20E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
 		1FA869CB20E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
