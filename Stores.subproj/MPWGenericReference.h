@@ -9,6 +9,9 @@
 
 @interface MPWGenericReference : MPWReference <MPWReferencing>
 
+-(void)setPath:(NSString*)path;         // legacy/compatibility
+-(NSString*)identifierName;
+-(BOOL)isRoot;
 
 @end
 

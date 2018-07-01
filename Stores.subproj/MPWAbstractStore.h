@@ -48,4 +48,11 @@
 
 @end
 
+@interface MPWAbstractStore(legacy)
+
+-evaluateIdentifier:anIdentifer withContext:aContext;
+-get:(NSString*)uriString parameters:uriParameters;
+-get:uri;
+
+@end
 

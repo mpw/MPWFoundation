@@ -33,5 +33,7 @@
 @property (nonatomic, strong) id <MPWReferencing> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;
 
+-(NSString*)path;
+
 
 @end

@@ -89,7 +89,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self.pathComponents componentsJoinedByString:@"/"];
 }
 
--(void)setIdentifierName:(NSString*)path
+-(void)setPath:(NSString*)path
 {
     self.pathComponents = [self componentsOfPath:path];
 }
