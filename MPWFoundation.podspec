@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MPWFoundation"
-  s.version      = "3.4"
+  s.version      = "3.5"
   s.summary      = "HOM, Streams, Stores."
 
   # This description is used to generate tags and improve search results.
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #
  
   s.ios.deployment_target = "9.0"
-#  s.osx.deployment_target = "10.12"
+  s.osx.deployment_target = "10.12"
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
