@@ -27,7 +27,7 @@
 {
     NSArray *target=[NSMutableArray array];
     MPWStream *combiner=[self combiner];
-    MPWPipe *pipe=[MPWPipe filters:@[ [MPWFlattenStream stream] ]];
+    MPWPipeline *pipe=[MPWPipeline filters:@[ [MPWFlattenStream stream] ]];
     [combiner.target setTarget:pipe];
     pipe.target=target;
     [combiner writeObject:@"hello"];

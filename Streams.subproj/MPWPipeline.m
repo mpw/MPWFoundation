@@ -6,14 +6,14 @@
 //
 //
 
-#import "MPWPipe.h"
+#import "MPWPipeline.h"
 #import "MPWMessageFilterStream.h"
 #import "MPWBlockFilterStream.h"
 #import "MPWScatterStream.h"
 #import "MPWExternalFilter.h"
 #import "MPWActionStreamAdapter.h"
 
-@interface MPWPipe()
+@interface MPWPipeline()
 
 @property (nonatomic, strong) NSArray *filters;
 
@@ -21,7 +21,7 @@
 @end
 
 
-@implementation MPWPipe
+@implementation MPWPipeline
 
 +(instancetype)filters:(NSArray *)filters
 {
@@ -246,7 +246,7 @@ typedef id (^ZeroArgBlock)(void);
 @end
 
 
-@implementation MPWPipe(testing)
+@implementation MPWPipeline(testing)
 
 +(void)testBasicPipe
 {
@@ -255,7 +255,7 @@ typedef id (^ZeroArgBlock)(void);
       [MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)],
       [MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"]; }],
       ];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
 }
@@ -271,7 +271,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
         first,third
       ];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
 }
@@ -280,7 +280,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyMessageFilter
 {
     NSArray *filters = @[ @"-uppercaseString"];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -288,7 +288,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyValueForKey
 {
     NSArray *filters = @[ @"uppercaseString"];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -296,7 +296,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyObjectForKey
 {
     NSArray *filters = @[ @"[key1]"];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@{ @"key1": @"Hello", @"key2": @"World"}];
     IDEXPECT([[pipe target] firstObject], @"Hello", @"hello, extracted");
 }
@@ -307,7 +307,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
       ^(NSString *s){ return [s stringByAppendingString:@" World!"]; },
        ];
-    MPWPipe *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
 }
@@ -316,7 +316,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseClassToSpecifyFilterOfThatClass
 {
     NSArray *filters = @[[MPWFlattenStream class] ];
-    MPWPipe *pipe=[self filters:filters];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@[ @"Hello", @"World"]];
     IDEXPECT([[pipe target] firstObject], @"Hello", @"Hello world, processed");
     IDEXPECT([[pipe target] lastObject], @"World", @"Hello world, processed");
@@ -325,7 +325,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseNestedArrayToSpecifyFanout
 {
     NSArray *filters = @[ @[ @"-uppercaseString", @"-lowercaseString"] ];
-    MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
     NSMutableArray *target=[NSMutableArray array];
     [pipe.filters.lastObject setTarget:target];
     [pipe writeObject: @"Hello"];
@@ -341,7 +341,7 @@ typedef id (^ZeroArgBlock)(void);
                             @[ @"-lowercaseString", ^(NSString *s){ return [s stringByAppendingString:@" World!"]; } ],
                             ],
                          ];
-    MPWPipe *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[[[self alloc]  initWithFilters:filters] autorelease];
     NSMutableArray *target=[NSMutableArray array];
     [pipe.filters.lastObject setTarget:target];
     [pipe writeObject: @"Hello"];
@@ -353,7 +353,7 @@ typedef id (^ZeroArgBlock)(void);
 
 +(void)testToUpperWithExternalFilter
 {
-    MPWPipe *pipe=[self filters:@[ @"!tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
+    MPWPipeline *pipe=[self filters:@[ @"!tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
     [pipe writeObjectAndClose:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
