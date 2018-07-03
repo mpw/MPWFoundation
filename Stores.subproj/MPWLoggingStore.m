@@ -8,6 +8,7 @@
 #import "MPWLoggingStore.h"
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
+#import "MPWRESTOperation.h"
 
 @interface MPWLoggingStore()
 
@@ -27,7 +28,13 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 -(void)setObject:anObject forReference:(id<MPWReferencing>)aReference
 {
     [super setObject:anObject forReference:aReference];
-    [self.log writeObject:aReference];
+    [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
+}
+
+-(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+{
+    [super deleteObjectForReference:aReference];
+    [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbDELETE]];
 }
 
 -(void)dealloc
@@ -48,10 +55,23 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 +(void)testWriteIsLogged
 {
     NSMutableArray *theLog=[NSMutableArray array];
+    MPWGenericReference *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
-    [store setObject:@"hi" forReference:[self ref]];
-    INTEXPECT(theLog.count,1,@"should have logged something");
-    
+    [store setObject:@"hi" forReference:ref];
+    INTEXPECT(theLog.count,1,@"should have logged write");
+    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject HTTPVerb],@"PUT",@"got the verb");
+}
+
++(void)testDeleteIsLogged
+{
+    NSMutableArray *theLog=[NSMutableArray array];
+    MPWGenericReference *ref=[self ref];
+    MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
+    [store deleteObjectForReference:ref];
+    INTEXPECT(theLog.count,1,@"should have logged delete");
+    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject HTTPVerb],@"DELETE",@"got the verb");
 }
 
 
@@ -60,6 +80,8 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 {
     return @[
              @"testWriteIsLogged",
+             @"testDeleteIsLogged",
+
              ];
 }
 
