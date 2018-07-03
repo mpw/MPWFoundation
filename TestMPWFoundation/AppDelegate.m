@@ -42,7 +42,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
     @[
       @"MPWPoint",
       @"MPWStream",
-      @"MPWPipe",
+      @"MPWPipeline",
       @"MPWDelayStream",
       @"MPWFastInvocation",
       @"MPWObjectCache",

@@ -1,5 +1,5 @@
 //
-//  MPWPipe.m
+//  MPWPipeline.m
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 26/05/16.
@@ -255,7 +255,7 @@ typedef id (^ZeroArgBlock)(void);
       [MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)],
       [MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"]; }],
       ];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
 }
@@ -271,7 +271,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
         first,third
       ];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
 }
@@ -280,7 +280,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyMessageFilter
 {
     NSArray *filters = @[ @"-uppercaseString"];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -288,7 +288,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyValueForKey
 {
     NSArray *filters = @[ @"uppercaseString"];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
 }
@@ -296,7 +296,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testCanUseStringsToSpecifyObjectForKey
 {
     NSArray *filters = @[ @"[key1]"];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@{ @"key1": @"Hello", @"key2": @"World"}];
     IDEXPECT([[pipe target] firstObject], @"Hello", @"hello, extracted");
 }
@@ -307,7 +307,7 @@ typedef id (^ZeroArgBlock)(void);
     @[
       ^(NSString *s){ return [s stringByAppendingString:@" World!"]; },
        ];
-    MPWPipeline *pipe=[[[self alloc] initWithFilters:filters] autorelease];
+    MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
     IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
 }

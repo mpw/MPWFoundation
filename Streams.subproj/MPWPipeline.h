@@ -1,5 +1,5 @@
 //
-//  MPWPipe.h
+//  MPWPipeline.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 26/05/16.

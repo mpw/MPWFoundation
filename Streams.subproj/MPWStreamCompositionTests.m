@@ -23,7 +23,7 @@
     return source1;
 }
 
-+(void)testCombinerWithPipe
++(void)testCombinerWithPipeline
 {
     NSArray *target=[NSMutableArray array];
     MPWStream *combiner=[self combiner];
@@ -51,7 +51,7 @@
 {
     return @[
              @"testCombinerWithBlockFilter",
-             @"testCombinerWithPipe",
+             @"testCombinerWithPipeline",
 
              ];
 }
