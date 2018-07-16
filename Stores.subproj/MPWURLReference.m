@@ -100,6 +100,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self path] hasSuffix:@"/"];
 }
 
+-(BOOL)isEqual:other
+{
+    return [[self components] isEqual:[other components]];
+}
+
 @end
 
 #import "MPWGenericReference.h"
@@ -125,5 +130,4 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 
 @end
-
 

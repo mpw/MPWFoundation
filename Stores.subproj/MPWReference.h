@@ -9,13 +9,8 @@
 
 @protocol MPWReferencing
 
--(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
--(instancetype)initWithPath:(NSString*)pathName;
-+(instancetype)referenceWithPath:(NSString*)pathName;
-
-
-@property (readonly) NSArray *pathComponents;
-@property (readonly) NSArray *relativePathComponents;
+@property (readonly) NSArray<NSString*> *pathComponents;
+@property (readonly) NSArray<NSString*> *relativePathComponents;
 @property (nonatomic, strong) NSString *schemeName;
 @property (readonly) NSString *path;
 
@@ -23,10 +18,19 @@
 
 @end
 
+@protocol MPWReferenceCreation
+
+-(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
+-(instancetype)initWithPath:(NSString*)pathName;
++(instancetype)referenceWithPath:(NSString*)pathName;
+
+@end
+
 @interface MPWReference : NSObject
 
 -(NSURL*)URL;
--(NSArray*)relativePathComponents;
+
+@property (readonly) NSArray<NSString*> *relativePathComponents;
 
 @end
 

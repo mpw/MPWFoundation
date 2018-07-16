@@ -394,3 +394,7 @@ typedef id (^ZeroArgBlock)(void);
 
 
 @end
+
+@implementation MPWPipe 
+@end
+

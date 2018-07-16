@@ -7,7 +7,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWURLReference : MPWReference <MPWReferencing>
+@interface MPWURLReference : MPWReference <MPWReferencing,MPWReferenceCreation>
 
 @property (nonatomic, readonly, strong) NSURL *URL;
 
