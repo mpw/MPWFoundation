@@ -100,31 +100,22 @@
 
 @implementation MPWAbstractStore(testing)
 
-+(void)testGenericsWork
-{
-    MPWAbstractStore<NSString*,NSArray*> *store=[MPWAbstractStore new];
-    [store setObject:@[] forReference:@""];
-    NSArray *a=[store objectForReference:@""];
-    EXPECTNOTNIL( store, @"should have a store");
-    EXPECTNIL( a, @"should not have a result");
-}
 
 +(void)testConstructingReferences
 {
-    MPWAbstractStore<MPWGenericReference*,NSArray*> *store=[MPWAbstractStore new];
+    MPWAbstractStore *store=[MPWAbstractStore store];
     MPWGenericReference *r1=[store referenceForPath:@"somePath"];
     IDEXPECT(r1.path, @"somePath", @"can construct a reference");
 }
 
 +(void)testGettingURLs
 {
-    MPWAbstractStore<MPWGenericReference*,NSArray*> *store=[MPWAbstractStore new];
+    MPWAbstractStore *store=[MPWAbstractStore store];
     MPWGenericReference *r1=[store referenceForPath:@"somePath"];
     IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 
 +(NSArray*)testSelectors {  return @[
-                                     @"testGenericsWork",
                                      @"testConstructingReferences",
                                      @"testGettingURLs",
                                      ]; }

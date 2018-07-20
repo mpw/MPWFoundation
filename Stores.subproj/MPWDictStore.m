@@ -45,6 +45,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
     self.dict[[self referenceToKey:aReference]]=theObject;
 }
+
 -(void)deleteObjectForReference:(MPWReference*)aReference
 {
     self.dict[[self referenceToKey:aReference]]=nil;
@@ -86,9 +87,12 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testDelete
 {
     MPWDictStore* store = [self store];
-    EXPECTNIL(store[@"World"], @"shouldn't be there before I store it");
-    store[@"World"]=@"Hello";
-    IDEXPECT(store[@"World"], @"Hello", @"should be there after I store it");
+    NSString *ref=@"World";
+    EXPECTNIL(store[ref], @"shouldn't be there before I store it");
+    store[ref]=@"Hello";
+    IDEXPECT(store[ref], @"Hello", @"should be there after I store it");
+    [store deleteObjectForReference:ref];
+    EXPECTNIL(store[ref], @"shouldn't be there after delete");
 }
 
 
@@ -98,6 +102,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
              @"testStoreAndRetrieve",
              @"testStoreAndRetrieveViaReference",
              @"testSubscripts",
+             @"testDelete",
              ];
 }
 

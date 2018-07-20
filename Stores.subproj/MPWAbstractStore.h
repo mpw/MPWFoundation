@@ -30,21 +30,21 @@
 @end
 
 
-@interface MPWAbstractStore<__covariant ReferenceType, __covariant ObjectType> : NSObject<MPWStorage,MPWHierarchicalStorage>
+@interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
 
 +(instancetype)store;
--(ObjectType)objectForReference:(ReferenceType)aReference;
--(void)setObject:(ObjectType)theObject forReference:(ReferenceType)aReference;
--(void)deleteObjectForReference:(ReferenceType)aReference;
+-objectForReference:aReference;
+-(void)setObject:theObject forReference:aReference;
+-(void)deleteObjectForReference:aReference;
 
--(ReferenceType)referenceForPath:(NSString*)name;
+-referenceForPath:(NSString*)name;
 
--(ObjectType)objectForKeyedSubscript:key;
--(void)setObject:(ObjectType)theObject forKeyedSubscript:(id<NSCopying>)key;
+-objectForKeyedSubscript:key;
+-(void)setObject:theObject forKeyedSubscript:(id<NSCopying>)key;
 
 
 
--(NSURL*)URLForReference:(ReferenceType)aReference;
+-(NSURL*)URLForReference:aReference;
 
 @end
 
