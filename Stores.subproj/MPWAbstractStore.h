@@ -40,7 +40,7 @@
 -referenceForPath:(NSString*)name;
 
 -objectForKeyedSubscript:key;
--(void)setObject:theObject forKeyedSubscript:(id<NSCopying>)key;
+-(void)setObject:theObject forKeyedSubscript:key;
 
 
 
