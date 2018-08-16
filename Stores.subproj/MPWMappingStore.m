@@ -34,14 +34,24 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return anObject;
 }
 
+-mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference
+{
+    return [self mapRetrievedObject:anObject];
+}
+
+-mapObjectToStore:anObject forReference:(id <MPWReferencing>)aReference
+{
+    return [self mapObjectToStore:anObject];
+}
+
 -objectForReference:(id <MPWReferencing>)aReference
 {
-    return [self mapRetrievedObject:[self.source objectForReference:[self mapReference:aReference]]];
+    return [self mapRetrievedObject:[self.source objectForReference:[self mapReference:aReference]] forReference:aReference];
 }
 
 -(void)setObject:theObject forReference:(id <MPWReferencing>)aReference
 {
-    [self.source setObject:[self mapObjectToStore:theObject] forReference:[self mapReference:aReference]];
+    [self.source setObject:[self mapObjectToStore:theObject forReference:aReference] forReference:[self mapReference:aReference]];
 }
 
 -(void)deleteObjectForReference:(id <MPWReferencing>)aReference
