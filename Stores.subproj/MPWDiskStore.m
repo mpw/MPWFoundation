@@ -13,7 +13,7 @@
 
 
 
--(NSURL*)referenceToFileURL:(MPWGenericReference*)ref
+-(NSURL*)fileURLForReference:(MPWGenericReference*)ref
 {
     return [NSURL fileURLWithPath:[ref path]];              //  [ref URL] doesn't work
 }
@@ -32,7 +32,7 @@
 -(NSData*)objectForReference:(MPWGenericReference*)aReference
 {
     if ([self isLeafReference:aReference]) {
-        return [self dataWithURL:[self referenceToFileURL:aReference]];
+        return [self dataWithURL:[self fileURLForReference:aReference]];
     } else {
         return [self directoryForReference:aReference];
     }
@@ -40,12 +40,12 @@
 
 -(void)setObject:(NSData*)theObject forReference:(MPWGenericReference*)aReference
 {
-    [theObject writeToURL:[self referenceToFileURL:aReference] atomically:YES];
+    [theObject writeToURL:[self fileURLForReference:aReference] atomically:YES];
 }
 
 -(void)deleteObjectForReference:(MPWGenericReference*)aReference
 {
-    NSString *path = [[self referenceToFileURL:aReference] path];
+    NSString *path = [[self fileURLForReference:aReference] path];
     unlink([path fileSystemRepresentation]);
 }
 
@@ -53,7 +53,8 @@
 {
     BOOL    isDirectory=NO;
     BOOL    exists=NO;
-    exists=[[NSFileManager defaultManager] fileExistsAtPath:[aReference path] isDirectory:&isDirectory];
+    NSURL   *url=[self URLForReference:aReference];
+    exists=[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDirectory];
     return !isDirectory;
 }
 
