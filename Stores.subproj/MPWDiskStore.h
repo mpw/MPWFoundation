@@ -10,7 +10,6 @@
 @interface MPWDiskStore : MPWURLBasedStore
 
 -(NSURL*)fileURLForReference:(MPWGenericReference*)ref;
--(BOOL)isLeafReference:(MPWGenericReference *)aReference;
 -(NSArray*)childrenOfReference:(MPWGenericReference*)aReference;
 
 @end
