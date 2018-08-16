@@ -43,7 +43,7 @@
 
 -(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
 {
-    [self setObject:theObject forReference:key];
+    [self setObject:theObject forReference:(id <MPWReferencing>)key];
 }
 
 -(BOOL)isLeafReference:(MPWReference*)aReference
@@ -104,14 +104,14 @@
 +(void)testConstructingReferences
 {
     MPWAbstractStore *store=[MPWAbstractStore store];
-    MPWGenericReference *r1=[store referenceForPath:@"somePath"];
+    id <MPWReferencing> r1=[store referenceForPath:@"somePath"];
     IDEXPECT(r1.path, @"somePath", @"can construct a reference");
 }
 
 +(void)testGettingURLs
 {
     MPWAbstractStore *store=[MPWAbstractStore store];
-    MPWGenericReference *r1=[store referenceForPath:@"somePath"];
+    id <MPWReferencing> r1=[store referenceForPath:@"somePath"];
     IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 

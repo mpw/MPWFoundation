@@ -18,7 +18,7 @@
 -(void)deleteObjectForReference:(id <MPWReferencing>)aReference;
 
 
--(MPWReference*)referenceForPath:(NSString*)path;
+-( id <MPWReferencing>)referenceForPath:(NSString*)path;
 
 @end
 
@@ -33,16 +33,9 @@
 @interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
 
 +(instancetype)store;
--objectForReference:aReference;
--(void)setObject:theObject forReference:aReference;
--(void)deleteObjectForReference:aReference;
-
--referenceForPath:(NSString*)name;
 
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;
-
-
 
 -(NSURL*)URLForReference:aReference;
 

@@ -18,7 +18,4 @@
 -mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference;
 -mapObjectToStore:anObject forReference:(id <MPWReferencing>)aReference;
 
--mapRetrievedObject:anObject;
--mapObjectToStore:anObject;
-
 @end

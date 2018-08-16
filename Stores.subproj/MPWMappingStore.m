@@ -24,24 +24,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return aReference;
 }
 
--mapRetrievedObject:anObject
-{
-    return anObject;
-}
-
--mapObjectToStore:anObject
-{
-    return anObject;
-}
-
 -mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference
 {
-    return [self mapRetrievedObject:anObject];
+    return anObject;
 }
 
 -mapObjectToStore:anObject forReference:(id <MPWReferencing>)aReference
 {
-    return [self mapObjectToStore:anObject];
+    return anObject;
 }
 
 -objectForReference:(id <MPWReferencing>)aReference
@@ -87,7 +77,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     IDEXPECT( mapper[@"hi"], @"there", @"read via mapper");
     mapper[@"hello"]=@"world";
     IDEXPECT( store[@"hello"], @"world", @"write via mapper");
-    [mapper deleteObjectForReference:@"hello"];
+    [mapper deleteObjectForReference:(id <MPWReferencing>)@"hello"];
     EXPECTNIL( store[@"hello"], @"original after delete via mapper");
 }
 
