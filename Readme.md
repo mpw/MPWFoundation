@@ -20,7 +20,7 @@ Stores
 
 Implementation of in-process REST.
 
-[HOM Documentation](Documentation/Stores.md) 
+[Stores Documentation](Documentation/Stores.md) 
 
 
 Object Filters
