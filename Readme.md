@@ -36,9 +36,21 @@ Higher Order Messaging
 
 Messages that can take messages as an argument.
 
-- collection processing with collect, select, do
-- threading with async, syncOnMainThread, asyncOnMainThread etc.
+An example, a common delegate pattern that checks if the delegate responds to the message we want to send:
 
+```
+if ( [self.delegate respondsToSelector:@selector(windowWillClose:)] ) {
+    [self.delegate windowWillClose:self];
+}
+```
+
+can instead be expressed as
+
+```
+[[self.delegate ifResponds] windowDidClose:self];
+```
+
+Note that the first example, apart from being verbose, also has a bug that gets hidden by the verbosity.
 
 [HOM Documentation](Documentation/HOM.md) 
 
