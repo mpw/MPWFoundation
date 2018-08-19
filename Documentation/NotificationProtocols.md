@@ -3,9 +3,15 @@ Notifcation Protocols
 =====================
 
 
-Notification Protocols are a convenience for making certain idiomatic `NSNotification` interactions dramatically more convenient.
+Notification Protocols let you declare `NSNotification` statically in yor class definition and take care of much of the subsequent mechanics automatically:
 
-You can declare a Notification Protocol as a protocol that conform to `MPWNotificationProtocol`:
+```
+@interface NotifiedView:NSView <ModelDidChange>
+
+@end
+```
+
+This declares that `NotifiedView` will be listening too the `ModelDidChange` notification.  The protocol defines the message that will be sent to `NotifiedView`, in this case the `-modelDidChange:` message:
 
 ```
 @protocol ModelDidChange <MPWNotificationProtocol>
@@ -15,7 +21,8 @@ You can declare a Notification Protocol as a protocol that conform to `MPWNotifi
 @end
 ```
 
-Once you have the protocol, you can declare that a class conforms to it:
+
+With that in-place, all you have to do is send `[self installProtocolNotifications]` somewhere in your initializer. 
 
 ```
 @interface NotifiedView:NSView <ModelDidChange>
@@ -23,13 +30,7 @@ Once you have the protocol, you can declare that a class conforms to it:
 @end
 ```
 
-With that in-place, all you have to do is send `[self installProtocolNotifications]` somewhere in your initializer.  
 
-You can then send a notification based on the name of the protocol, in this case `ModelDidChange` and it will be received by all the object that declared conformance to the protocol.
+### Details
 
-There's even a handy Macro to do that:
-
-```
-PROTOCOL_NOTIFY(ModelDidChange,changedUri);
-```
-
+In order to make this work, the object declaring conformance needs to send the -
