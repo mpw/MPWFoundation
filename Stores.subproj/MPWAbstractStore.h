@@ -15,6 +15,7 @@
 
 -objectForReference:(id <MPWReferencing>)aReference;
 -(void)setObject:theObject forReference:(id <MPWReferencing>)aReference;
+-(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference;
 -(void)deleteObjectForReference:(id <MPWReferencing>)aReference;
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;
 

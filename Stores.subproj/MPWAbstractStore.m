@@ -26,6 +26,11 @@
     return ;
 }
 
+-(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference
+{
+    [self setObject:theObject forReference:aReference];
+}
+
 -(void)deleteObjectForReference:(MPWReference*)aReference
 {
     return ;
