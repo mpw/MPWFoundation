@@ -13,4 +13,6 @@
 
 -(void)invalidate:(id <MPWReferencing>)aRef;
 
+@property (nonatomic) BOOL dontWrite;
+
 @end

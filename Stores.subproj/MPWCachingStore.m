@@ -11,14 +11,6 @@
 
 #import "DebugMacros.h"
 
-@interface MPWCachingStoreTests : NSObject
-
-@property (nonatomic, strong)  MPWGenericReference *key;
-@property (nonatomic, strong)  NSString *value;
-@property (nonatomic, strong)  MPWDictStore *cache,*source;
-@property (nonatomic, strong)  MPWCachingStore *store;
-
-@end
 
 @interface MPWCachingStore()
 
@@ -48,13 +40,31 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 -(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
 {
     [self.cache setObject:newObject forReference:aReference];
-    [self.source setObject:newObject forReference:aReference];
+    if (!self.dontWrite) {
+        [self.source setObject:newObject forReference:aReference];
+    }
 }
 
 -(void)invalidate:(id)aRef
 {
     [self.cache deleteObjectForReference:aRef];
 }
+
+@end
+
+
+@interface MPWCachingStoreTests : NSObject
+
+@property (nonatomic, strong)  MPWGenericReference *key;
+@property (nonatomic, strong)  NSString *value;
+@property (nonatomic, strong)  MPWDictStore *cache,*source;
+@property (nonatomic, strong)  MPWCachingStore *store;
+
+@end
+
+
+@implementation MPWCachingStore(testing)
+
 
 +testFixture
 {
@@ -68,6 +78,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
              @"testReadingPopulatesCache",
              @"testCacheIsReadFirst",
              @"testWritePopulatesCacheAndSource",
+             @"testWritePopulatesCacheAndSourceUnlessDontWriteIsSet",
              @"testCanInvalidateCache",
              
              ];
@@ -116,6 +127,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
     [self.store setObject:self.value forReference:self.key];
     IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
+    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
+}
+
+-(void)testWritePopulatesCacheAndSourceUnlessDontWriteIsSet
+{
+    self.store.dontWrite=YES;
+    [self.store setObject:self.value forReference:self.key];
+    EXPECTNIL( [self.source objectForReference:self.key], @"reading the source");
     IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
 }
 
