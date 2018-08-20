@@ -40,7 +40,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 -(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
 {
     [self.cache setObject:newObject forReference:aReference];
-    if (!self.dontWrite) {
+    if (!self.readOnlySource) {
         [self.source setObject:newObject forReference:aReference];
     }
 }
@@ -132,7 +132,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)testWritePopulatesCacheAndSourceUnlessDontWriteIsSet
 {
-    self.store.dontWrite=YES;
+    self.store.readOnlySource=YES;
     [self.store setObject:self.value forReference:self.key];
     EXPECTNIL( [self.source objectForReference:self.key], @"reading the source");
     IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
