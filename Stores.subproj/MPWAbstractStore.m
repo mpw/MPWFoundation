@@ -9,6 +9,7 @@
 #import "MPWGenericReference.h"
 #import "NSNil.h"
 
+
 @implementation MPWAbstractStore
 
 +(instancetype)store

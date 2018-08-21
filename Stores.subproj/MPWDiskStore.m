@@ -53,12 +53,12 @@
 {
     BOOL    isDirectory=NO;
     BOOL    exists=NO;
-    NSURL   *url=[self URLForReference:aReference];
+    NSURL   *url=[self fileURLForReference:aReference];
     exists=[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDirectory];
     return !isDirectory;
 }
 
--(NSArray*)childrenOfReference:(MPWGenericReference*)aReference
+-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:nil];
     return (NSArray*)[[MPWGenericReference collect] referenceWithPath:[childNames each]];
