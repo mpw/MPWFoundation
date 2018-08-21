@@ -45,6 +45,17 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     }
 }
 
+
+-(void)mergeObject:newObject forReference:(id <MPWReferencing>)aReference
+{
+    [self.cache mergeObject:newObject forReference:aReference];
+    if (!self.readOnlySource) {
+        [self.source setObject:[self.cache objectForReference:aReference] forReference:aReference];
+    }
+}
+
+
+
 -(void)invalidate:(id)aRef
 {
     [self.cache deleteObjectForReference:aRef];
@@ -80,7 +91,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
              @"testWritePopulatesCacheAndSource",
              @"testWritePopulatesCacheAndSourceUnlessDontWriteIsSet",
              @"testCanInvalidateCache",
-             
+             @"testMergeWorksLikeStore",
              ];
 }
 
@@ -109,7 +120,6 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     IDEXPECT( mainResult, self.value, @"reading the cache");
     resultFromCache = self.cache[self.key];
     IDEXPECT( resultFromCache, self.value, @"after accessing caching store, cache is populated");
-    
 }
 
 -(void)testCacheIsReadFirst
@@ -143,6 +153,13 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     [self.store setObject:self.value forReference:self.key];
     [self.store invalidate:self.key];
     EXPECTNIL( self.cache[self.key] , @"cache should be invalidated");
+}
+
+-(void)testMergeWorksLikeStore
+{
+    [self.store mergeObject:self.value forReference:self.key];
+    IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
+    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
 }
 
 @end
