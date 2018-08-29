@@ -7,6 +7,8 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+@protocol MPWStorage;
+
 @interface MPWURLCall2StoreStream : MPWStream
 
 @property (nonatomic, strong) NSObject <MPWStorage> *store;

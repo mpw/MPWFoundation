@@ -249,9 +249,9 @@
 		1FA869D120EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };
 		1FA869D220EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };
 		1FA869D320EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };
-		1FA869D620EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; };
-		1FA869D720EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; };
-		1FA869D820EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; };
+		1FA869D620EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869D720EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869D820EBC7FC00920279 /* MPWRESTOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA869D920EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA869DA20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA869DB20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
@@ -282,10 +282,11 @@
 		1FB7B5E51E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */; };
 		1FB93A951292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FBAABB91847651B00086047 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
-		1FC580862136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
-		1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
+		1FC580862136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC580882136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
 		1FC580892136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
+		1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
 		1FC70F7B20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC70F7C20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC70F7D20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1657,6 +1658,7 @@
 				1FCF26821CF39CE600AC64CE /* MPWFuture.h in Headers */,
 				1FCF266D1CF39BB700AC64CE /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
 				1FFE3AA220B3285C00E65B93 /* MPWReference.h in Headers */,
+				1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
 				1FCF267A1CF39BB700AC64CE /* MPWUniqueString.h in Headers */,
 				1FCF263A1CF3993C00AC64CE /* MPWDirectForwardingTrampoline.h in Headers */,
 				1FCF260E1CF3990400AC64CE /* MPWConvertFromJSONStream.h in Headers */,

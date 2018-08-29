@@ -29,10 +29,9 @@
     MPWDictStore *store=[MPWDictStore store];
     MPWURLCall2StoreStream *s=[self stream];
     s.store=store;
-    MPWURLCall *call=[[MPWURLCall new] autorelease];
+    MPWURLCall *call=[MPWURLCall callWithRESTOperation:[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET]];
     NSString *testpayload=@"Hello World";
     call.processedObject=testpayload;
-    call.reference=ref;
     EXPECTNIL( store[ref],@"before");
     [s writeObject:call];
     IDEXPECT( store[ref], testpayload, @"stored" );

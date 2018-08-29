@@ -10,18 +10,18 @@
 #import "NSStringAdditions.h"
 #import "MPWRESTOperation.h"
 #import "MPWURLReference.h"
+#import "AccessorMacros.h"
 
 @interface MPWURLCall()
 
 @property (nonatomic, strong)  MPWRESTOperation  *operation;
-@property (nonatomic, strong)  NSURL  *baseURL;
 
 @end
 
 
 @implementation MPWURLCall
 
--(instancetype)initWithRESTOperation:(MPWRESTOperation*)op
+CONVENIENCEANDINIT( call, WithRESTOperation:(MPWRESTOperation*)op)
 {
     self=[super init];
     self.operation=op;
@@ -29,6 +29,11 @@
         self.baseURL=[(MPWURLReference*)(op.reference) URL];
     }
     return self;
+}
+
+-reference
+{
+    return self.operation.reference;
 }
 
 -(NSString*)verb
@@ -67,7 +72,6 @@
 {
     [_operation release];
     [_baseURL release];
-    [(id)_reference release];
     [_data release];
     [_response release];
     [_error release];

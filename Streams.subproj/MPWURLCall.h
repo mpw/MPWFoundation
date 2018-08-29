@@ -15,10 +15,11 @@
 
 -(id)processed;
 -(instancetype)initWithRESTOperation:(MPWRESTOperation<T>*)op;
-
++(instancetype)callWithRESTOperation:(MPWRESTOperation<T>*)op;
 
 @property (readonly)  MPWRESTOperation  *operation;
-@property (nonatomic, strong)  T reference;
+@property (nonatomic, strong)  NSURL  *baseURL;
+@property (readonly)  T reference;
 @property (readonly) NSString *verb;
 
 @property (nonatomic, readonly)  NSURLRequest     *request;

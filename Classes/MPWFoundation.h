@@ -74,6 +74,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWURLPostStream.h"
 #import "MPWFoundation/MPWASCII85Stream.h"
 #import "MPWFoundation/MPWMessageFilterStream.h"
+#import "MPWFoundation/MPWURLCall2StoreStream.h"
 
 #import "MPWFoundation/MPWBlockFilterStream.h"
 #import "MPWFoundation/MPWBlockTargetStream.h"
@@ -134,6 +135,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWURLBasedStore.h"
 #import "MPWFoundation/MPWReference.h"
 #import "MPWFoundation/MPWGenericReference.h"
+#import "MPWFoundation/MPWURLReference.h"
 #import "MPWFoundation/MPWBinding.h"
 #import "MPWFoundation/MPWDictStore.h"
 #import "MPWFoundation/MPWDiskStore.h"
