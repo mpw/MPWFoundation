@@ -32,7 +32,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import <MPWFoundation/MPWFoundation.h>
+#import "MPWAssociation.h"
+#import "MPWObjectCache.h"
+#import "CodingAdditions.h"
+
 
 @implementation MPWAssociation
 

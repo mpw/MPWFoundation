@@ -286,7 +286,7 @@
 		1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC580882136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
 		1FC580892136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
-		1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
+		1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC70F7B20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC70F7C20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC70F7D20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
