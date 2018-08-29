@@ -19,18 +19,27 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb
     return self;
 }
 
--(NSString*)HTTPVerb
++(NSString*)HTTPVerb:(MPWRESTVerb)verb
 {
-    switch ( self.verb ) {
+    switch ( verb ) {
         case MPWRESTVerbGET:
             return @"GET";
         case MPWRESTVerbPUT:
             return @"PUT";
+        case MPWRESTVerbPATCH:
+            return @"PATH";
         case MPWRESTVerbDELETE:
             return @"DELETE";
+        case MPWRESTVerbPOST:
+            return @"POST";
         default:
             return nil;
     }
+}
+
+-(NSString*)HTTPVerb
+{
+    return [[self class] HTTPVerb:self.verb];
 }
 
 

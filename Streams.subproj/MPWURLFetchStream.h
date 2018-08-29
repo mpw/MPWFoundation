@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWStream.h>
 
-@class MPWURLRequest;
+@class MPWURLCall;
 
 @interface MPWURLFetchStream : MPWStream
 {
@@ -31,8 +31,8 @@
 
 -(void)setHeaderDict:(NSDictionary *)newHeaders;
 
--(NSURLRequest*)resolvedRequest:(MPWURLRequest*)request;
--(void)executeRequest:(MPWURLRequest*)request;
+-(NSURLRequest*)resolvedRequest:(MPWURLCall*)request;
+-(void)executeRequest:(MPWURLCall*)request;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
 -(NSURLSessionConfiguration *)config;
 

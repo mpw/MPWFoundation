@@ -8,7 +8,7 @@
 
 #import "MPWURLFetchStream.h"
 #import "MPWByteStream.h"
-#import "MPWURLRequest.h"
+#import "MPWURLCall.h"
 #import "NSThreadWaiting.h"
 #import "NSStringAdditions.h"
 
@@ -189,19 +189,19 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
--processResponse:(MPWURLRequest *)response
+-processResponse:(MPWURLCall *)response
 {
     return [response processed];
 }
 
--(void)removeFromInflight:(MPWURLRequest*)request
+-(void)removeFromInflight:(MPWURLCall*)request
 {
     @synchronized (self) {
         [self.inflight removeObject:request];
     }
 }
 
--(NSURLRequest*)resolvedRequest:(MPWURLRequest*)request
+-(NSURLRequest*)resolvedRequest:(MPWURLCall*)request
 {
     NSURLRequest *r=request.request;
     NSMutableURLRequest *resolvedRequest=[[r mutableCopy] autorelease];
@@ -210,7 +210,7 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
-- (NSURLSessionTask*)taskForExecutingRequest:(MPWURLRequest*)request
+- (NSURLSessionTask*)taskForExecutingRequest:(MPWURLCall*)request
 {
     NSParameterAssert( ![request isStreaming]);
     NSURLRequest *resolvedRequest=[self resolvedRequest:request];
@@ -256,7 +256,7 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
--(void)executeRequest:(MPWURLRequest*)request
+-(void)executeRequest:(MPWURLCall*)request
 {
     [request retain];
     request.task = [self taskForExecutingRequest:request];
@@ -280,7 +280,7 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
 {
-    MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:method data:body] autorelease];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithURL:theURL method:method data:body] autorelease];
     [self executeRequest:request];
 }
 
@@ -369,7 +369,7 @@ static NSURLSession *_defaultURLSession=nil;
 @end
 
 
-@implementation MPWURLRequest(streamPosting)
+@implementation MPWURLCall(streamPosting)
 
 -(void)writeOnURLFetchStream:aStream
 {

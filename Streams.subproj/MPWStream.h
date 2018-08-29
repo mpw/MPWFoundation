@@ -63,7 +63,6 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 
 idAccessor_h( target, setTarget )
 
-+(instancetype)streamWithObject:anObject;
 +process:anObject;
 +(void)processAndIgnore:anObject;
 -(void)insertStream:aStream;
@@ -76,6 +75,8 @@ idAccessor_h( target, setTarget )
 +(instancetype)streamWithTarget:aTarget;
 +(instancetype)stream;
 -(instancetype)initWithTarget:aTarget;
+-(instancetype)init;
+
 +defaultTarget;
 -(void)setFinalTarget:newTarget;
 

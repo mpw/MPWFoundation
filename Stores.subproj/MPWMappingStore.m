@@ -44,6 +44,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source setObject:[self mapObjectToStore:theObject forReference:aReference] forReference:[self mapReference:aReference]];
 }
 
+-(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference
+{
+    [self.source mergeObject:[self mapObjectToStore:theObject forReference:aReference] forReference:[self mapReference:aReference]];
+}
+
 -(void)deleteObjectForReference:(id <MPWReferencing>)aReference
 {
     [self.source deleteObjectForReference:[self mapReference:aReference]];

@@ -75,13 +75,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [stream autorelease];
 }
 
-+streamWithObject:anObject
-{
-    id stream=[self stream];
-    [stream writeObject:anObject];
-    return stream;
-}
-
 +streamWithTarget:aTarget
 {
     return [[[self alloc] initWithTarget:aTarget] autorelease];

@@ -8,7 +8,7 @@
 
 #import "MPWURLStreamingStream.h"
 #import "MPWByteStream.h"
-#import "MPWURLRequest.h"
+#import "MPWURLCall.h"
 
 @interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
 
@@ -39,7 +39,7 @@
 }
 
 
-- (NSURLSessionTask*)taskForExecutingRequest:(MPWURLRequest*)request
+- (NSURLSessionTask*)taskForExecutingRequest:(MPWURLCall*)request
 {
     NSParameterAssert( [request isStreaming]);
     return [[self downloader] dataTaskWithRequest: [self resolvedRequest:request]];
@@ -47,7 +47,7 @@
 
 -(void)streamingGet:(NSURL *)theURL body:(NSData *)body
 {
-    MPWURLRequest *request=[[[MPWURLRequest alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
     request.isStreaming=YES;
     [self executeRequest:request];
 }

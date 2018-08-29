@@ -79,7 +79,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWBlockTargetStream.h"
 #import "MPWFoundation/MPWCombinerStream.h"
 #import "MPWFoundation/MPWDelayStream.h"
-#import "MPWFoundation/MPWURLRequest.h"
+#import "MPWFoundation/MPWURLCall.h"
 #import "MPWFoundation/MPWSocketStream.h"
 #import "MPWFoundation/MPWScatterStream.h"
 #import "MPWFoundation/MPWActionStreamAdapter.h"
