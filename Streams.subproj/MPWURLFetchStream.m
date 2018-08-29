@@ -11,6 +11,8 @@
 #import "MPWURLCall.h"
 #import "NSThreadWaiting.h"
 #import "NSStringAdditions.h"
+#import "MPWRESTOperation.h"
+#import "MPWURLReference.h"
 
 @interface MPWURLFetchStream()
 
@@ -31,7 +33,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget session
     [self setDownloader:session] ;
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
-    [self setDefaultMethod:@"GET"];
+    [self setDefaultMethod:MPWRESTVerbGET];
     [self setInflight:[NSMutableSet set]];
     return self;
 }
@@ -278,31 +280,35 @@ static NSURLSession *_defaultURLSession=nil;
     }];
 }
 
--(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body
+-(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb body:(NSData *)body
 {
-    MPWURLCall *request=[[[MPWURLCall alloc] initWithURL:theURL method:method data:body] autorelease];
+    NSURLComponents *comps=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
+    MPWURLReference *ref=[MPWURLReference referenceWithURLComponents:comps];
+    MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
+    request.isStreaming=NO;
     [self executeRequest:request];
 }
 
 
 -(void)get:(NSURL*)theURL
 {
-    [self executeRequestWithURL:theURL method:@"GET" body:nil];
+    [self executeRequestWithURL:theURL method:MPWRESTVerbGET body:nil];
 }
 
 -(void)post:(NSData*)theData toURL:(NSURL *)theURL
 {
-    [self executeRequestWithURL:theURL method:@"POST" body:theData];
+    [self executeRequestWithURL:theURL method:MPWRESTVerbGET body:theData];
 }
 
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL
 {
-    [self executeRequestWithURL:theURL method:@"PATCH" body:theData];
+    [self executeRequestWithURL:theURL method:MPWRESTVerbPATCH body:theData];
 }
 
 -(void)delete:(NSURL*)theURL
 {
-    [self executeRequestWithURL:theURL method:@"DELETE" body:nil];
+    [self executeRequestWithURL:theURL method:MPWRESTVerbDELETE body:nil];
 }
 
 -(void)writeData:(NSData *)d
@@ -321,7 +327,6 @@ static NSURLSession *_defaultURLSession=nil;
 //    NSLog(@"deallocating MPWURLFetchStream %p",self);
     [_inflight release];
     [_theHeaderDict release];
-    [_defaultMethod release];
     [(NSObject *)_errorTarget release];
     [_baseURL release];
     [super dealloc];

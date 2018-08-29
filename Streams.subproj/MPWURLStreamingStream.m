@@ -9,6 +9,8 @@
 #import "MPWURLStreamingStream.h"
 #import "MPWByteStream.h"
 #import "MPWURLCall.h"
+#import "MPWURLReference.h"
+#import "MPWRESTOperation.h"
 
 @interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
 
@@ -45,9 +47,12 @@
     return [[self downloader] dataTaskWithRequest: [self resolvedRequest:request]];
 }
 
--(void)streamingGet:(NSURL *)theURL body:(NSData *)body
+-(void)streamingGet:(NSURL *)theURL
 {
-    MPWURLCall *request=[[[MPWURLCall alloc] initWithURL:theURL method:@"GET" data:body] autorelease];
+    NSURLComponents *comps=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
+    MPWURLReference *ref=[MPWURLReference referenceWithURLComponents:comps];
+    MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;
     [self executeRequest:request];
 }
@@ -109,7 +114,7 @@ didCompleteWithError:(nullable NSError *)error
     NSURL *testURL=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:nil];
     MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
     MPWURLStreamingStream* stream=[self streamWithTarget:target];
-    [stream streamingGet:testURL body:nil];
+    [stream streamingGet:testURL];
     [stream awaitResultForSeconds:0.5];
     IDEXPECT( testTarget, @"This is a simple resource",@"should have written");
     

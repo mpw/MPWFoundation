@@ -7,6 +7,7 @@
 //
 
 #import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWRESTOperation.h>
 
 @class MPWURLCall;
 
@@ -18,7 +19,7 @@
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) id <Streaming> errorTarget;
 @property (assign, readonly)  int inflightCount;
-@property (nonatomic,strong) NSString *defaultMethod;
+@property (nonatomic,assign) MPWRESTVerb defaultMethod;
 @property (assign) BOOL  formEncode;
 @property (nonatomic, readonly) NSMutableSet *inflight;
 @property (nonatomic, readonly) NSURLSession *downloader;
@@ -33,7 +34,7 @@
 
 -(NSURLRequest*)resolvedRequest:(MPWURLCall*)request;
 -(void)executeRequest:(MPWURLCall*)request;
--(void)executeRequestWithURL:(NSURL *)theURL method:(NSString *)method body:(NSData *)body;
+-(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb  body:(NSData *)body;
 -(NSURLSessionConfiguration *)config;
 
 

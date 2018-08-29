@@ -8,16 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class MPWRESTOperation;
 @protocol MPWReferencing;
+@class MPWRESTOperation<T: id <MPWReferencing>>;
 
-@interface MPWURLCall : NSObject
+@interface MPWURLCall<T: id <MPWReferencing>> : NSObject
 
--(instancetype)initWithURL:(NSURL *)requestURL method:(NSString *)method data:(NSData *)bodyData;
 -(id)processed;
+-(instancetype)initWithRESTOperation:(MPWRESTOperation<T>*)op;
 
-@property (nonatomic, readonly)  MPWRESTOperation  *operation;
-@property (nonatomic, strong)  NSObject <MPWReferencing> *reference;
+
+@property (readonly)  MPWRESTOperation  *operation;
+@property (nonatomic, strong)  T reference;
+@property (readonly) NSString *verb;
 
 @property (nonatomic, readonly)  NSURLRequest     *request;
 @property (nonatomic, strong)  NSData           *bodyData;

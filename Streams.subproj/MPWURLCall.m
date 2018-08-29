@@ -9,28 +9,31 @@
 #import "MPWURLCall.h"
 #import "NSStringAdditions.h"
 #import "MPWRESTOperation.h"
+#import "MPWURLReference.h"
 
 @interface MPWURLCall()
 
 @property (nonatomic, strong)  MPWRESTOperation  *operation;
 @property (nonatomic, strong)  NSURL  *baseURL;
-@property (nonatomic, strong)  NSString  *verb;
 
 @end
 
 
 @implementation MPWURLCall
 
-
-
--(instancetype)initWithURL:(NSURL *)requestURL method:(NSString *)method data:(NSData *)bodyData
+-(instancetype)initWithRESTOperation:(MPWRESTOperation*)op
 {
     self=[super init];
-    self.baseURL=requestURL;
-    self.verb=method;
-    self.bodyData=bodyData;
-    
+    self.operation=op;
+    if ( [op.reference isKindOfClass:[MPWURLReference class]]) {
+        self.baseURL=[(MPWURLReference*)(op.reference) URL];
+    }
     return self;
+}
+
+-(NSString*)verb
+{
+    return self.operation.HTTPVerb;
 }
 
 -(NSURL*)finalURL
@@ -44,6 +47,7 @@
     request.allHTTPHeaderFields=self.headerDict;
     request.HTTPBody=self.bodyData;
     request.URL=self.finalURL;
+    request.HTTPMethod=self.verb;
     return request;
 }
 
@@ -63,8 +67,7 @@
 {
     [_operation release];
     [_baseURL release];
-    [_verb release];
-    [_reference release];
+    [(id)_reference release];
     [_data release];
     [_response release];
     [_error release];

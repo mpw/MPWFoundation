@@ -10,7 +10,7 @@
 
 @protocol MPWReferencing;
 
-@interface MPWRESTOperation : NSObject
+@interface MPWRESTOperation<T: id <MPWReferencing>> : NSObject
 
 typedef NS_ENUM(int, MPWRESTVerb) {
     MPWRESTVerbGET,
@@ -21,11 +21,11 @@ typedef NS_ENUM(int, MPWRESTVerb) {
 };
 
 @property (nonatomic,assign) MPWRESTVerb verb;
-@property (nonatomic,strong) id <MPWReferencing> reference;
+@property (nonatomic,strong) T reference;
 @property (readonly) NSString *HTTPVerb;
 
-+(instancetype)operationWithReference:(id <MPWReferencing>)reference verb:(MPWRESTVerb)verb;
--(instancetype)initWithReference:(id <MPWReferencing>)reference verb:(MPWRESTVerb)verb;
++(instancetype)operationWithReference:(T)reference verb:(MPWRESTVerb)verb;
+-(instancetype)initWithReference:(T)reference verb:(MPWRESTVerb)verb;
 
 
 @end
