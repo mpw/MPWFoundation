@@ -282,6 +282,10 @@
 		1FB7B5E51E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */; };
 		1FB93A951292012200D9D630 /* PhoneGeometry.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB93A941292012200D9D630 /* PhoneGeometry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FBAABB91847651B00086047 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
+		1FC580862136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
+		1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */; };
+		1FC580882136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
+		1FC580892136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */; };
 		1FC70F7B20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; };
 		1FC70F7C20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; };
 		1FC70F7D20CD98B5008718B2 /* MPWURLReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC70F7920CD98B5008718B2 /* MPWURLReference.h */; };
@@ -910,6 +914,8 @@
 		1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWActionStreamAdapter.m; sourceTree = "<group>"; };
 		1FB93A941292012200D9D630 /* PhoneGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneGeometry.h; sourceTree = "<group>"; };
 		1FBAABB81847651B00086047 /* stops.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stops.txt; sourceTree = "<group>"; };
+		1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWURLCall2StoreStream.h; sourceTree = "<group>"; };
+		1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWURLCall2StoreStream.m; sourceTree = "<group>"; };
 		1FC70F7920CD98B5008718B2 /* MPWURLReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWURLReference.h; sourceTree = "<group>"; };
 		1FC70F7A20CD98B5008718B2 /* MPWURLReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWURLReference.m; sourceTree = "<group>"; };
 		1FC70F8120CE8770008718B2 /* MPWURLBasedStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWURLBasedStore.h; sourceTree = "<group>"; };
@@ -1274,6 +1280,8 @@
 				1FCCC5411CE6098B007DCDE9 /* MPWURLPostStream.m */,
 				1F9726A31D00397800D76F3A /* MPWURLCall.h */,
 				1F9726A41D00397800D76F3A /* MPWURLCall.m */,
+				1FC580842136F29D006E5FCC /* MPWURLCall2StoreStream.h */,
+				1FC580852136F29D006E5FCC /* MPWURLCall2StoreStream.m */,
 				1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */,
 				1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */,
 				1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */,
@@ -1530,6 +1538,7 @@
 				1F81BF9719698E940066DF43 /* MPWASCII85Stream.h in Headers */,
 				1FFE3AA120B3285C00E65B93 /* MPWReference.h in Headers */,
 				1FE37C4F196978CA00C9A378 /* MPWPListBuilder.h in Headers */,
+				1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
 				1FE37C2C196976C500C9A378 /* MPWSoftPointerProxy.h in Headers */,
 				1FCCC5431CE6098B007DCDE9 /* MPWURLPostStream.h in Headers */,
 				1FE37C431969773C00C9A378 /* MPWEnumeratorSource.h in Headers */,
@@ -1693,6 +1702,7 @@
 				1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */,
 				1F49BBB720BBCE6B00405432 /* MPWMappingStore.h in Headers */,
 				1FFE3AB020B32C6C00E65B93 /* MPWDictStore.h in Headers */,
+				1FC580862136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
 				1FFE3ABF20B34D2000E65B93 /* MPWDiskStore.h in Headers */,
 				1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */,
 				1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */,
@@ -2170,6 +2180,7 @@
 				1F2DCFDE1ACB50F3004A39FB /* MPWThreadSwitchStream.m in Sources */,
 				1F840DD9193F50AC00589595 /* MPWIgnoreUnknownTrampoline.m in Sources */,
 				1F840DDA193F50AC00589595 /* MPWNamedData.m in Sources */,
+				1FC580892136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */,
 				1F840DDB193F50AC00589595 /* MPWDirectForwardingTrampoline.m in Sources */,
 				1F840DDC193F50AC00589595 /* NSNumberArithmetic.m in Sources */,
 				1F840DDD193F50AC00589595 /* MPWNumber.m in Sources */,
@@ -2317,6 +2328,7 @@
 				1FF8FE0109B49D0100652476 /* NSObjectAdditions.m in Sources */,
 				1F22E0181A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */,
 				1FF8FE0509B49D0100652476 /* MPWTrampoline.m in Sources */,
+				1FC580882136F29D006E5FCC /* MPWURLCall2StoreStream.m in Sources */,
 				1FF8FE0609B49D0100652476 /* MPWMsgExpression.m in Sources */,
 				1FF8FE0709B49D0100652476 /* MPWIgnoreTrampoline.m in Sources */,
 				1FF8FE0809B49D0100652476 /* bytecoding.c in Sources */,

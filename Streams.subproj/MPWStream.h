@@ -75,7 +75,7 @@ idAccessor_h( target, setTarget )
 +(instancetype)streamWithTarget:aTarget;
 +(instancetype)stream;
 -(instancetype)initWithTarget:aTarget;
--(instancetype)init;
+//-(instancetype)init;
 
 +defaultTarget;
 -(void)setFinalTarget:newTarget;

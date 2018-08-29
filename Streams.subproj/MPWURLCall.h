@@ -17,7 +17,7 @@
 -(id)processed;
 
 @property (nonatomic, readonly)  MPWRESTOperation  *operation;
-@property (nonatomic, readonly)  NSObject <MPWReferencing> *ref;
+@property (nonatomic, strong)  NSObject <MPWReferencing> *reference;
 
 @property (nonatomic, readonly)  NSURLRequest     *request;
 @property (nonatomic, strong)  NSData           *bodyData;
@@ -26,8 +26,11 @@
 @property (nonatomic, strong)  NSURLResponse    *response;
 @property (nonatomic, strong)  NSError          *error;
 @property (nonatomic, strong)  NSData           *data;
+@property (nonatomic, strong)  id               processedObject;
 @property (nonatomic, strong)  NSURLSessionTask *task;
 @property (nonatomic, assign)  BOOL             isStreaming;
+
+@property (readonly) NSURL* finalURL;
 
 
 @end

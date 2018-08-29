@@ -64,7 +64,7 @@
     [_operation release];
     [_baseURL release];
     [_verb release];
-    [_ref release];
+    [_reference release];
     [_data release];
     [_response release];
     [_error release];
