@@ -68,15 +68,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +stream
 {
-    id pool=[[NSAutoreleasePool alloc] init];
-    id stream = [[self alloc] initWithTarget:[self defaultTarget]];
-    [pool release];
-    return [stream autorelease];
+    return [[self new] autorelease];
 }
+
 
 -result
 {
-    return [self finalTarget];
+    return nil;
 }
 
 
@@ -230,30 +228,6 @@ SEL visSel;
 @end
 
 
-@implementation MPWStream(testing)
-
-+(void)defaultStreamTarget
-{
-    MPWStream* stream=[MPWStream stream];
-    NSAssert1( [[stream target] isKindOfClass:[NSMutableArray class]] , @"stream target not NSArray but %@ instead",[[stream target] class]);
-    (void)stream;
-}
-
-+(void)testForwardingWorks
-{
-    
-}
-
-+testSelectors
-{
-    return @[
-            
-             @"defaultStreamTarget",
-             ];
-}
-
-
-@end
 
 @implementation NSData(MPWStreaming)
 

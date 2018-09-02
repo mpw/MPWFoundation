@@ -9,7 +9,7 @@
 
 @protocol MPWStorage;
 
-@interface MPWURLCall2StoreStream : MPWStream
+@interface MPWURLCall2StoreStream : MPWFilter
 
 @property (nonatomic, strong) NSObject <MPWStorage> *store;
 

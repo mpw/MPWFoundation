@@ -11,13 +11,18 @@
 
 @implementation MPWFilter
 
++(instancetype)stream
+{
+    return [self streamWithTarget:[self defaultTarget]];
+}
 
-+streamWithTarget:aTarget
+
++(instancetype)streamWithTarget:aTarget
 {
     return [[[self alloc] initWithTarget:aTarget] autorelease];
 }
 
--initWithTarget:aTarget
+-(instancetype)initWithTarget:aTarget
 {
     self = [super init];
     self.target = aTarget;
@@ -105,11 +110,42 @@ idAccessor( _target, _setTarget )
     return [_target finalTarget];
 }
 
+-result
+{
+    return [self finalTarget];
+}
+
 -(void)dealloc
 {
     [_target release];
     [super dealloc];
 }
 
+
+@end
+
+
+
+@implementation MPWFilter(testing)
+
++(void)testDefaultStreamTarget
+{
+    MPWFilter* stream=[self stream];
+    NSAssert1( [[stream target] isKindOfClass:[NSMutableArray class]] , @"stream target not NSArray but %@ instead",[[stream target] class]);
+    (void)stream;
+}
+
++(void)testForwardingWorks
+{
+    
+}
+
++testSelectors
+{
+    return @[
+             
+                         @"testDefaultStreamTarget",
+             ];
+}
 
 @end

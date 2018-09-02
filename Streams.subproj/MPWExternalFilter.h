@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWExternalFilter : MPWStream
+@interface MPWExternalFilter : MPWFilter
 +(instancetype)filterWithCommandString:(NSString *)command;
 
 -(void)run;
