@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWCombinerStream : MPWStream
+@interface MPWCombinerStream : MPWFilter
 
 -(void)setSources:(NSArray *)newSources;
 

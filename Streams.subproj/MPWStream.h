@@ -48,44 +48,29 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-typedef id (*IMP_2_id_args)(id, SEL, id,id);
-
-
-#define	FORWARD(object)	if (  targetWriteObject ) { targetWriteObject( _target, @selector(writeObject:sender:), object ,self); } else { [_target writeObject:object sender:self]; }
 
 @interface MPWStream : NSObject <Streaming>
 {
-    id _target;
-    SEL streamWriterMessage;
-    IMP_2_id_args	targetWriteObject;
-    id	pad[4];
+   SEL streamWriterMessage;
 }
 
-@property (nonatomic, strong)  IBOutlet MPWStream *target;
 
 +process:anObject;
 +(void)processAndIgnore:anObject;
--(void)insertStream:aStream;
 -(void)writeNSObject:anObject;
 -(void)writeObjectAndClose:anObject;
 -(void)writeObject:anObject sender:sourceStream;
 -(void)writeEnumerator:e spacer:spacer;
 -(void)writeEnumerator:e;
 -(void)writeData:(NSData*)d;
-+(instancetype)streamWithTarget:aTarget;
 +(instancetype)stream;
--(instancetype)initWithTarget:aTarget;
 //-(instancetype)init;
 
-+defaultTarget;
--(void)setFinalTarget:newTarget;
 
 -(SEL)streamWriterMessage;
 -(void)close;
 -(void)flush;
--(void)forward:anObject;
 -result;
--finalTarget;
 
 -(void)closeLocal;
 -(void)flushLocal;
@@ -94,7 +79,6 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 
 -(int)inflightCount;
 
--firstObject;       // dummy for testing
 
 @end
 

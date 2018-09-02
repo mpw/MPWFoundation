@@ -6,12 +6,12 @@
 //  Copyright (c) Copyright (c) 2015-2017 Marcel Weiher. All rights reserved.
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 #import <MPWFoundation/MPWRESTOperation.h>
 
 @class MPWURLCall;
 
-@interface MPWURLFetchStream : MPWStream
+@interface MPWURLFetchStream : MPWFilter
 {
     NSURLSession *downloader;
 }

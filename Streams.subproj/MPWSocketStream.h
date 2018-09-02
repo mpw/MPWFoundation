@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWByteStream.h>
 
-@interface MPWSocketStream : MPWStream<NSStreamDelegate>
+@interface MPWSocketStream : MPWFilter<NSStreamDelegate>
 
 -(instancetype)initWithURL:(NSURL*)socketURL;
 

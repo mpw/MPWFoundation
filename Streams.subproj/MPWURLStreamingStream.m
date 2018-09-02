@@ -12,7 +12,7 @@
 #import "MPWURLReference.h"
 #import "MPWRESTOperation.h"
 
-@interface MPWURLStreamingFetchHelper : MPWStream <NSURLSessionDelegate>
+@interface MPWURLStreamingFetchHelper : MPWFilter <NSURLSessionDelegate>
 
 @property (nonatomic, strong)  NSMutableSet *inflight;
 

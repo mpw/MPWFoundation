@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWThreadSwitchStream : MPWStream
+@interface MPWThreadSwitchStream : MPWFilter
 {
     NSThread *targetThread;
 }

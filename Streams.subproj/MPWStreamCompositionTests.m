@@ -13,10 +13,10 @@
 @implementation MPWStreamCompositionTests
 
 
-+(MPWStream *)combiner
++(MPWFilter *)combiner
 {
     MPWCombinerStream *combiner=[MPWCombinerStream stream];
-    MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
+    MPWFlattenStream *source1=[MPWFlattenStream streamWithTarget:combiner];
 //    MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1 ]];
 
@@ -26,9 +26,9 @@
 +(void)testCombinerWithPipeline
 {
     NSArray *target=[NSMutableArray array];
-    MPWStream *combiner=[self combiner];
+    MPWFilter *combiner=[self combiner];
     MPWPipeline *pipe=[MPWPipeline filters:@[ [MPWFlattenStream stream] ]];
-    [combiner.target setTarget:pipe];
+    [(MPWFilter*)combiner.target setTarget:pipe];
     pipe.target=(MPWStream*)target; // FIXME?
     [combiner writeObject:@"hello"];
     IDEXPECT(target.firstObject, @"hello", @"should have written");
@@ -37,11 +37,11 @@
 +(void)testCombinerWithBlockFilter
 {
     NSArray *target=[NSMutableArray array];
-    MPWStream *combiner=[self combiner];
+    MPWFilter *combiner=[self combiner];
     MPWBlockFilterStream *pipe=[MPWBlockFilterStream streamWithBlock:^(NSArray *array){
         return [array.firstObject uppercaseString];
     }];
-    [combiner.target setTarget:pipe];
+    [(MPWFilter*)combiner.target setTarget:pipe];
     pipe.target=(MPWStream*)target; // FIXME?
     [combiner writeObject:@"hello"];
     IDEXPECT(target.firstObject, @"HELLO", @"should have written");

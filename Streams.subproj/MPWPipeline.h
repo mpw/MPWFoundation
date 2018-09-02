@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWPipeline : MPWStream
+@interface MPWPipeline : MPWFilter
 
 @property (nonatomic, strong, readonly) NSArray *filters;
 

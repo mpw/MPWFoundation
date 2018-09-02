@@ -6,9 +6,9 @@
 //  Copyright © 2017 metaobject. All rights reserved.
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWActionStreamAdapter : MPWStream
+@interface MPWActionStreamAdapter : MPWFilter
 
 -initWithUIControl:aControl target:aTarget;
 -initWithTextField:aControl target:aTarget;

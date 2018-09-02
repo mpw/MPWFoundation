@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWMessageFilterStream : MPWStream
+@interface MPWMessageFilterStream : MPWFilter
 {
     SEL     selector;
 }

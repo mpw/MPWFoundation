@@ -154,13 +154,13 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +_testTarget
 {
-    return [MPWStream streamWithTarget:[MPWByteStream Stderr]];
+    return [MPWFilter streamWithTarget:[MPWByteStream Stderr]];
 }
 
 
 +_testCompoundTarget
 {
-    return [MPWStream streamWithTarget:[MPWStream streamWithTarget:[MPWByteStream Stderr]]];
+    return [MPWFilter streamWithTarget:[MPWFilter streamWithTarget:[MPWByteStream Stderr]]];
 }
 
 +(void)testBasicUnboundAccess
@@ -181,7 +181,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testBasicUnboundSetAccess
 {
-    MPWStream *t=[self _testTarget];
+    MPWFilter *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"target"];
     [accessor setValue:[MPWByteStream Stdout] forTarget:t];
     IDEXPECT([t target], [MPWByteStream Stdout], @"target");

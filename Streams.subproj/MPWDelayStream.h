@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWDelayStream : MPWStream
+@interface MPWDelayStream : MPWFilter
 
 @property (atomic, assign)  NSTimeInterval relativeDelay;
 @property (atomic, assign)  BOOL synchronous;

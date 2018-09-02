@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWScatterStream : MPWStream
+@interface MPWScatterStream : MPWFilter
 
 +(instancetype)filters:(NSArray *)filters;
 -(instancetype)initWithFilters:(NSArray *)filters;

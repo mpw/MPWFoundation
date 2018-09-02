@@ -32,7 +32,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 #import "MPWStream.h"
-#import "MPWRuntimeAdditions.h"
 #import "NSInvocationAdditions_lookup.h"
 #import "MPWConvertFromJSONStream.h"
 #import "MPWDict2ObjStream.h"
@@ -75,74 +74,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [stream autorelease];
 }
 
-+streamWithTarget:aTarget
-{
-    return [[[self alloc] initWithTarget:aTarget] autorelease];
-}
-
--initWithTarget:aTarget
-{
-    self = [super init];
-    self.target = aTarget;
-    streamWriterMessage = [self streamWriterMessage];
-    return self;
-}
-
--init
-{
-    return [self initWithTarget:[[self class] defaultTarget]];
-}
-
--(void)dealloc
-{
-    [_target release];
-    [super dealloc];
-}
-
-
--finalTarget
-{
-    return [_target finalTarget];
-}
-
--(void)setFinalTarget:newTarget
-{
-    if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
-        [[self target] setFinalTarget:newTarget];
-    } else {
-        [self setTarget:newTarget];
-    }
-}
-
 -result
 {
     return [self finalTarget];
 }
 
-idAccessor( _target, _setTarget )
-
--(MPWStream *)target
-{
-    return _target;
-}
-
--(void)setTarget:newTarget
-{
-    [self _setTarget:newTarget];
-    targetWriteObject = (IMP_2_id_args)[_target methodForSelector:@selector(writeObject:sender:)];
-#ifdef Darwin
-    if ( targetWriteObject == NULL ) {
-        targetWriteObject = (IMP_2_id_args)objc_msgSend;
-    }
-#endif
-}
-
-
--(void)insertStream:aStream
-{
-    [aStream setTarget:[self target]];
-    [self setTarget:aStream];
-}
 
 -(SEL)streamWriterMessage
 {
@@ -159,9 +95,7 @@ SEL visSel;
 #else
       [anObject performSelector:streamWriterMessage withObject:self];
 #endif
-    } else {
-        FORWARD(nil);
-    }
+     }
 }
 
 -(void)writeObject:anObject
@@ -193,16 +127,6 @@ SEL visSel;
     return result;
 }
 
--(void)writeNSObject:anObject
-{
-    FORWARD( anObject );
-}
-
--(void)forward:anObject
-{
-    FORWARD( anObject );
-}
-
 -(void)writeData:(NSData*)d
 {
     [self writeNSObject:d];
@@ -213,30 +137,14 @@ SEL visSel;
     ;
 }
 
--(void)flush:(int)n
-{    
-    [self flushLocal];
-    if ( n>0 ) {
-        [self.target flush:n-1];
-    }
-}
-
 -(void)flush
 {
-    [self flush:65535 * 16383];
+    [self flushLocal];
 }
 
 -(void)closeLocal
 {
     [self flushLocal];
-}
-
--(void)close:(int)n
-{
-    [self closeLocal];
-    if ( n>0 ) {
-        [self.target close:n-1];
-    }
 }
 
 -(int)inflightCount
@@ -252,7 +160,7 @@ SEL visSel;
 
 -(void)close
 {
-    [self close:65535 * 16383];
+    [self closeLocal];
 }
 
 -(void)writeEnumerator:e spacer:spacer

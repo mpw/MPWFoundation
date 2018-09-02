@@ -49,7 +49,7 @@
     while (  [self isOver] && counter++ < 10) {
         [NSThread sleepForTimeInterval:[self delay]];
     }
-    [self.target writeObject:anObject sender:self];
+    FORWARD(anObject);
 }
 
 @end

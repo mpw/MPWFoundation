@@ -7,7 +7,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWInflightThrottleStream : MPWStream
+@interface MPWInflightThrottleStream : MPWFilter
 
 @property (assign)  int maxInflight;
 

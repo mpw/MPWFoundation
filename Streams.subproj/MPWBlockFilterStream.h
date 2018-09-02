@@ -6,10 +6,10 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
 
-@interface MPWBlockFilterStream : MPWStream
+@interface MPWBlockFilterStream : MPWFilter
 {
     id block;
 }

@@ -6,9 +6,9 @@
 //  Copyright (c) Copyright (c) 2015-2017 Marcel Weiher. All rights reserved.
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWFilter.h>
 
-@interface MPWConvertFromJSONStream : MPWStream
+@interface MPWConvertFromJSONStream : MPWFilter
 {
     NSString *key;
 }
