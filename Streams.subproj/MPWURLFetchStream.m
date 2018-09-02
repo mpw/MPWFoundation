@@ -142,7 +142,7 @@ static NSURLSession *_defaultURLSession=nil;
         first=NO;
     }
     //    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
-    return [s target];
+    return (NSData*)[s target];
 }
 
 

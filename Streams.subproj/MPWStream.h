@@ -94,6 +94,7 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 
 -(int)inflightCount;
 
+-firstObject;       // dummy for testing
 
 @end
 

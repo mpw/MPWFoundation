@@ -84,7 +84,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     id source = [NSArray arrayWithObjects:[NSArray arrayWithObjects:@"a",@"b",nil]
         ,@"c",@"d",[NSArray arrayWithObjects:@"e",@"f",nil],nil];
     [stream writeObject:source];
-    id result =[[stream target] componentsJoinedByString:@""];
+    id result =[(NSArray*)[stream target] componentsJoinedByString:@""];
     IDEXPECT(result, @"abcdef", @"result not flattened");
 }
 

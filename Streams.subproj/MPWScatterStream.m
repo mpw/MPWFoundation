@@ -15,12 +15,12 @@
 
 -(NSArray *)filters
 {
-    return [super target];
+    return (NSArray*)[super target];
 }
 
 -(void)setFilters:(NSArray *)newFilters
 {
-    return [super setTarget:newFilters];
+    return [super setTarget:(id)newFilters];
 }
 
 -(id)target

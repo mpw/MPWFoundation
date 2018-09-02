@@ -123,8 +123,7 @@
         return arg;
     }];
     
-    NSMutableArray *testTarget=[NSMutableArray array];
-    nilChecker.target=testTarget;
+    NSMutableArray *testTarget=(id)nilChecker.target;
     combiner.target=nilChecker;
     MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
     MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];

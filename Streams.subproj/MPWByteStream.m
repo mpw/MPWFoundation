@@ -379,7 +379,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(long)targetLength
 {
-    return [self.target targetLength];
+    return [(MPWByteStream*)self.target targetLength];
 }
 
 -(void)writeObject:anObject forKey:aKey
@@ -777,7 +777,7 @@ intAccessor( fd, setFd )
 	MPWByteStream *stream=[self stream];
 	[stream print:@"Hello World"];
 	[stream close];
-	NSData *result=[stream target];
+	NSData *result=(NSData*)[stream target];  // FIXME
 //	INTEXPECT( [result length], 11 , @"hello world len");
 	IDEXPECT( [result stringValue], @"Hello World", @"hello world ");
 }
@@ -788,7 +788,7 @@ intAccessor( fd, setFd )
 	MPWByteStream *stream=[self streamWithTarget:[MPWForwardingTarget forwarderWithTarget:data selector:@selector(appendData:)]];
 	[stream print:@"Hello World"];
 	[stream close];
-	NSData *result=[[stream target] target];
+	NSData *result=(NSData*)[[stream target] target];  // FIXME
 //	INTEXPECT( [result length], 11 , @"hello world len");
 	IDEXPECT( [result stringValue], @"Hello World", @"hello world ");
 }
@@ -799,7 +799,7 @@ intAccessor( fd, setFd )
     unichar pichar=960;
     NSString *pistring=[NSString stringWithCharacters:&pichar length:1];
     [s outputString:pistring];
-    NSData *encodedResult=[s target];
+    NSData *encodedResult=(NSData*)[s target];   // FIXME
     const unsigned char *bytes=[encodedResult bytes];
     INTEXPECT([encodedResult length], 2, @"length of pi in utf-8");
     INTEXPECT(bytes[0], 0xcf, @"pi as utf-8 first byte");

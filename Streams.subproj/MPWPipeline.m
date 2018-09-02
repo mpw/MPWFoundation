@@ -257,7 +257,7 @@ typedef id (^ZeroArgBlock)(void);
       ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"HELLO World!", @"hello world, processed");
+    IDEXPECT([pipe.target firstObject], @"HELLO World!", @"hello world, processed");
 }
 
 +(void)testMultiElementStreamCanBeAddedToPipe
