@@ -122,13 +122,13 @@
 {
     NSMutableArray *normalized=[NSMutableArray array];
     for (int i=0;i<self.filters.count;i++) {
-        MPWStream *s=self.filters[i];
+        MPWFilter *s=self.filters[i];
         if ( [s target]==self.target || ((i<self.filters.count-1) && [s target]==self.filters[i+1])) {
             [s setTarget:nil];
         }
         while (s && [s respondsToSelector:@selector(target)] && s!=self.target) {
             [normalized addObject:s];
-            s=[s target];
+            s=(MPWFilter*)[s target];
         }
     }
     return normalized;
@@ -155,7 +155,7 @@
     [self.filters.lastObject setTarget:[self target]];
 }
 
--(void)setTarget:(id <Streaming>)newTarget
+-(void)setTarget:(MPWStream*)newTarget
 {
     [[[self filters] lastObject] setTarget:nil];
     [super setTarget:newTarget];
@@ -257,13 +257,13 @@ typedef id (^ZeroArgBlock)(void);
       ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([pipe.target firstObject], @"HELLO World!", @"hello world, processed");
+    IDEXPECT([pipe firstObject], @"HELLO World!", @"hello world, processed");
 }
 
 +(void)testMultiElementStreamCanBeAddedToPipe
 {
-    MPWStream *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
-    MPWStream *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
+    MPWFilter *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
+    MPWFilter *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
     MPWStream *third=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
     [first setTarget:second];
     
@@ -273,7 +273,7 @@ typedef id (^ZeroArgBlock)(void);
       ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"HELLO World! Moon!", @"hello world, processed");
+    IDEXPECT([pipe firstObject], @"HELLO World! Moon!", @"hello world, processed");
 }
 
 
@@ -282,7 +282,7 @@ typedef id (^ZeroArgBlock)(void);
     NSArray *filters = @[ @"-uppercaseString"];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+    IDEXPECT([pipe firstObject], @"HELLO", @"hello, processed");
 }
 
 +(void)testCanUseStringsToSpecifyValueForKey
@@ -290,7 +290,7 @@ typedef id (^ZeroArgBlock)(void);
     NSArray *filters = @[ @"uppercaseString"];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+    IDEXPECT([pipe firstObject], @"HELLO", @"hello, processed");
 }
 
 +(void)testCanUseStringsToSpecifyObjectForKey
@@ -298,7 +298,7 @@ typedef id (^ZeroArgBlock)(void);
     NSArray *filters = @[ @"[key1]"];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@{ @"key1": @"Hello", @"key2": @"World"}];
-    IDEXPECT([[pipe target] firstObject], @"Hello", @"hello, extracted");
+    IDEXPECT([pipe firstObject], @"Hello", @"hello, extracted");
 }
 
 +(void)testCanUseBlockToSpecifyBlockFilter
@@ -309,7 +309,7 @@ typedef id (^ZeroArgBlock)(void);
        ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"Hello World!", @"Hello world, processed");
+    IDEXPECT([pipe firstObject], @"Hello World!", @"Hello world, processed");
 }
 
 
@@ -318,8 +318,8 @@ typedef id (^ZeroArgBlock)(void);
     NSArray *filters = @[[MPWFlattenStream class] ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@[ @"Hello", @"World"]];
-    IDEXPECT([[pipe target] firstObject], @"Hello", @"Hello world, processed");
-    IDEXPECT([[pipe target] lastObject], @"World", @"Hello world, processed");
+    IDEXPECT([pipe firstObject], @"Hello", @"Hello world, processed");
+    IDEXPECT([pipe lastObject], @"World", @"Hello world, processed");
 }
 
 +(void)testCanUseNestedArrayToSpecifyFanout
@@ -355,7 +355,7 @@ typedef id (^ZeroArgBlock)(void);
 {
     MPWPipeline *pipe=[self filters:@[ @"!tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
     [pipe writeObjectAndClose:@"Hello"];
-    IDEXPECT([[pipe target] firstObject], @"HELLO", @"hello, processed");
+    IDEXPECT([pipe firstObject], @"HELLO", @"hello, processed");
 }
 
 +(void)testRaiseOnUnknownSelector

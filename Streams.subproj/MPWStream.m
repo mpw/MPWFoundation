@@ -223,7 +223,7 @@ SEL visSel;
     [self writeEnumerator:e spacer:[self defaultSpacer]];
 }
 
--firstObject { return [[self finalTarget] firstObject]; } 
+
 
 @end
 

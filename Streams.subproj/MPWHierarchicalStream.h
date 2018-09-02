@@ -31,9 +31,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "MPWStream.h"
+#import "MPWFilter.h"
 
-@interface MPWHierarchicalStream : MPWStream
+@interface MPWHierarchicalStream : MPWFilter
 {
     id targetStack;
 }

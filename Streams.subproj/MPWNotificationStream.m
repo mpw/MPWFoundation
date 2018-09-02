@@ -20,7 +20,7 @@
 
 -(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
 {
-    self=[super initWithTarget:nil];
+    self=[super init];
     self.notificationName=name;
     self.shouldPostOnMainThread=shouldPostOnMainThread;
     return self;

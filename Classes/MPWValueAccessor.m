@@ -190,7 +190,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testBoundGetSetAccess
 {
-    MPWStream *t=[self _testTarget];
+    MPWFilter *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"target"];
     [accessor bindToTarget:t];
     IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
@@ -200,7 +200,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testPathAccess
 {
-    MPWStream *t=[self _testCompoundTarget];
+    MPWFilter *t=[self _testCompoundTarget];
     MPWValueAccessor *accessor=[[[self alloc] initWithPath:@"target/target"] autorelease];
     [accessor bindToTarget:t];
     IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
@@ -213,7 +213,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 +(void)testPerformanceOfPathAccess
 {
     NSString *keyPath=@"target/target";
-    MPWStream *t=[self _testCompoundTarget];
+    MPWFilter *t=[self _testCompoundTarget];
     MPWRusage* accessorStart=[MPWRusage current];
     MPWValueAccessor *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
     for (int i=0;i<ACCESS_COUNT;i++) {

@@ -147,7 +147,7 @@
     MPWExternalFilter *filter=[self filterWithCommandString:@"tr '[a-z]' '[A-Z]'"];
     [filter writeObject:@"hello world!"];
     [filter close];
-    IDEXPECT( [[filter target] target], @"HELLO WORLD!",@"upcase");
+    IDEXPECT( [(MPWFilter*)[filter target] target], @"HELLO WORLD!",@"upcase"); // FIXME
     
 }
 

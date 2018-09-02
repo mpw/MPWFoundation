@@ -121,6 +121,8 @@ idAccessor( _target, _setTarget )
     [super dealloc];
 }
 
+-firstObject { return [[self finalTarget] firstObject]; }
+-lastObject { return [[self finalTarget] lastObject]; }
 
 @end
 

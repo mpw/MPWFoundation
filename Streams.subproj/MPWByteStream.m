@@ -788,7 +788,7 @@ intAccessor( fd, setFd )
 	MPWByteStream *stream=[self streamWithTarget:[MPWForwardingTarget forwarderWithTarget:data selector:@selector(appendData:)]];
 	[stream print:@"Hello World"];
 	[stream close];
-	NSData *result=(NSData*)[[stream target] target];  // FIXME
+	NSData *result=(NSData*)[(MPWFilter*)[stream target] target];  // FIXME
 //	INTEXPECT( [result length], 11 , @"hello world len");
 	IDEXPECT( [result stringValue], @"Hello World", @"hello world ");
 }

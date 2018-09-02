@@ -33,7 +33,7 @@
 
     for ( id  scatterTarget in self.filters) {
         if ( [scatterTarget respondsToSelector:@selector(setTarget:)] ) {
-            [(MPWStream*)scatterTarget setTarget:newTarget];
+            [(MPWFilter*)scatterTarget setTarget:newTarget];
         }
     }
 }

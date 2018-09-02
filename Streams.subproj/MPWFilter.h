@@ -37,5 +37,6 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 -(void)insertStream:aStream;
 
 -firstObject;       // dummy for testing
+-lastObject;        // dummy for testing
 
 @end
