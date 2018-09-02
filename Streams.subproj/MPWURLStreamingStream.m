@@ -80,7 +80,7 @@
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
-    [target writeObject:data];
+    FORWARD(data);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
@@ -92,7 +92,7 @@ didCompleteWithError:(nullable NSError *)error
     if ( error ){
         [self reportError:error];
     }
-    [target close];
+    [self.target close];
 }
 
 

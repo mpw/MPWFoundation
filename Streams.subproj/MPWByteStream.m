@@ -379,7 +379,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(long)targetLength
 {
-    return [target targetLength];
+    return [self.target targetLength];
 }
 
 -(void)writeObject:anObject forKey:aKey
@@ -411,7 +411,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(NSString*)description
 {
-	return [NSString stringWithFormat:@"<%@/%p: byteTarget %@/%p",[self class],self,[target class],byteTarget];
+	return [NSString stringWithFormat:@"<%@/%p: byteTarget %@/%p",[self class],self,[self.target class],byteTarget];
 }
 
 

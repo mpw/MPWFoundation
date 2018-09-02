@@ -32,7 +32,7 @@ CONVENIENCEANDINIT(stream, WithThread:(NSThread*)aThread target:aTarget)
 
 -(void)forwardObjectToTarget:anObject
 {
-    [target writeObject:[anObject autorelease]];
+    FORWARD([anObject autorelease]);
 }
 
 -(void)writeNSObject:(id)anObject
@@ -40,7 +40,7 @@ CONVENIENCEANDINIT(stream, WithThread:(NSThread*)aThread target:aTarget)
     if ( [NSThread currentThread] != [self targetThread]) {
         [[self onThread:[self targetThread]] forwardObjectToTarget:[anObject retain]];
     } else {
-        [target writeObject:anObject];
+        FORWARD(anObject);
     }
 }
 

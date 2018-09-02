@@ -83,7 +83,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -initWithTarget:aTarget
 {
     self = [super init];
-    [self setTarget:aTarget];
+    self.target = aTarget;
     streamWriterMessage = [self streamWriterMessage];
     return self;
 }
@@ -95,15 +95,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)dealloc
 {
-    [target release];
+    [_target release];
     [super dealloc];
 }
 
-idAccessor( target, _setTarget )
 
 -finalTarget
 {
-    return [target finalTarget];
+    return [_target finalTarget];
 }
 
 -(void)setFinalTarget:newTarget
@@ -120,11 +119,17 @@ idAccessor( target, _setTarget )
     return [self finalTarget];
 }
 
+idAccessor( _target, _setTarget )
+
+-(MPWStream *)target
+{
+    return _target;
+}
 
 -(void)setTarget:newTarget
 {
     [self _setTarget:newTarget];
-    targetWriteObject = (IMP_2_id_args)[target methodForSelector:@selector(writeObject:sender:)];
+    targetWriteObject = (IMP_2_id_args)[_target methodForSelector:@selector(writeObject:sender:)];
 #ifdef Darwin
     if ( targetWriteObject == NULL ) {
         targetWriteObject = (IMP_2_id_args)objc_msgSend;
@@ -155,7 +160,7 @@ SEL visSel;
       [anObject performSelector:streamWriterMessage withObject:self];
 #endif
     } else {
-        [target writeObject:nil sender:self];
+        FORWARD(nil);
     }
 }
 
@@ -212,7 +217,7 @@ SEL visSel;
 {    
     [self flushLocal];
     if ( n>0 ) {
-        [target flush:n-1];
+        [self.target flush:n-1];
     }
 }
 
@@ -230,7 +235,7 @@ SEL visSel;
 {
     [self closeLocal];
     if ( n>0 ) {
-        [(MPWStream*)target close:n-1];
+        [self.target close:n-1];
     }
 }
 

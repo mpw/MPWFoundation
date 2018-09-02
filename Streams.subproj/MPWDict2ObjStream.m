@@ -43,7 +43,7 @@ CONVENIENCEANDINIT(stream, WithClass:(Class)newTargetClass selector:(SEL)newTarg
         }
         anObject=[targetObject performSelector:objectCreationSelector withObject:anObject];
     }
-    [target writeObject:anObject];
+    FORWARD(anObject);
 }
 
 

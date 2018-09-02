@@ -28,7 +28,7 @@ CONVENIENCEANDINIT(stream, WithKey:(NSString*)newKey target:(id)aTarget)
         if (key ) {
             dict=dict[key];
         }
-        [target writeObject:dict];
+        FORWARD(dict)
     } else {
         [self reportError:jsonError];
     }

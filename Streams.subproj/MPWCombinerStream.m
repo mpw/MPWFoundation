@@ -92,8 +92,8 @@
 
 +(void)testBasicCombinationSemantics
 {
-    MPWCombinerStream *combiner=[self stream];
-    NSMutableArray *testTarget=combiner.target;
+    NSMutableArray *testTarget=[NSMutableArray array];
+    MPWCombinerStream *combiner=[self streamWithTarget:testTarget];
     MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
     MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1, source2]];

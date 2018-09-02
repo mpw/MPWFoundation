@@ -51,17 +51,17 @@ THE POSSIBILITY OF SUCH DAMAGE.
 typedef id (*IMP_2_id_args)(id, SEL, id,id);
 
 
-#define	FORWARD(object)	if (  targetWriteObject ) { targetWriteObject( target, @selector(writeObject:sender:), object ,self); } else { [target writeObject:object sender:self]; }
+#define	FORWARD(object)	if (  targetWriteObject ) { targetWriteObject( _target, @selector(writeObject:sender:), object ,self); } else { [_target writeObject:object sender:self]; }
 
 @interface MPWStream : NSObject <Streaming>
 {
-    id	target;
+    id _target;
     SEL streamWriterMessage;
     IMP_2_id_args	targetWriteObject;
     id	pad[4];
 }
 
-idAccessor_h( target, setTarget )
+@property (nonatomic, strong)  IBOutlet MPWStream *target;
 
 +process:anObject;
 +(void)processAndIgnore:anObject;

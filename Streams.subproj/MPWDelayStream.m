@@ -66,14 +66,15 @@
 +(void)testTimePassesWithDelayActive
 {
     NSTimeInterval toDelay=0.005;
-    MPWDelayStream *delayer=[self stream];
+    NSMutableArray *target=[NSMutableArray array];
+    MPWDelayStream *delayer=[self streamWithTarget:target];
     delayer.relativeDelay=toDelay;
     NSTimeInterval before=[NSDate timeIntervalSinceReferenceDate];
     [delayer writeObject:@"hello"];
     NSTimeInterval after=[NSDate timeIntervalSinceReferenceDate];
     EXPECTTRUE( after-before > toDelay, @"should have delayed at least 5ms");
     EXPECTTRUE( after-before < (toDelay*10), @"should have delayed at most 50ms");
-    IDEXPECT( [delayer.target firstObject], @"hello" , @"did write the object");
+    IDEXPECT( [target firstObject], @"hello" , @"did write the object");
     
 }
 

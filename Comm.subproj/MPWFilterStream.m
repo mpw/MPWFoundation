@@ -85,8 +85,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(NSString*)psDecoder
 {
     id base=@"";
-    if ( [target respondsToSelector:@selector(psDecoder)] ) {
-        base=[target psDecoder];
+    if ( [_target respondsToSelector:@selector(psDecoder)] ) {
+        base=[_target psDecoder];
     }
     return [NSString stringWithFormat:@" %@ %@ ",base,[self psDecode]];
 }

@@ -27,7 +27,7 @@ idAccessor( block, setBlock )
     if ( theFilter) {
         id processed =theFilter(anObject);
         if ( processed ) {
-            [target writeObject:processed sender:aSender];
+            FORWARD(processed);
         }
     }
 }

@@ -420,7 +420,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 
 +_plistForStream:(MPWBinaryPListWriter*)aStream
 {
-    return [self _plistForData:[aStream target]];
+    return [self _plistForData:(NSData*)[aStream target]];
 }
 
 +_plistViaStream:(id)aPlist
@@ -431,7 +431,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 +(void)testHeaderWrittenAutomaticallyAndIgnoredAfter
 {
     MPWBinaryPListWriter *writer=[self stream];
-    INTEXPECT( [[writer target] length],8,@"data written before");
+    INTEXPECT( [(NSData*)[writer target] length],8,@"data written before");
     INTEXPECT([writer length], 8, @"bytes written before");
     [writer writeHeader];
     INTEXPECT([writer length], 8, @"bytes written after header");

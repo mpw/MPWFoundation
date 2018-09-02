@@ -49,14 +49,14 @@
 -(void)writeDictionary:(NSDictionary *)aDictionary
 {
     id anObject=[[self.targetClass alloc] initWithDictionary:aDictionary];
-    [target writeObject:anObject];
+    FORWARD(anObject);
     [anObject release];
 }
 
 -(void)writeData:(NSData *)someData
 {
     id anObject=[[self.targetClass alloc] initWithData:someData];
-    [target writeObject:anObject];
+    FORWARD(anObject);
     [anObject release];
 }
 

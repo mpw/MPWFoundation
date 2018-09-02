@@ -240,7 +240,7 @@ static NSURLSession *_defaultURLSession=nil;
             if (data && !error   ){
                 id processed=[self processResponse:request];
 //                NSLog(@"will write processed: %@ to %@",processed,target);
-                [target writeObject:processed];
+                FORWARD(processed);
             } else {
 //                NSLog(@"Error: %p %@",request,request);
                 NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
