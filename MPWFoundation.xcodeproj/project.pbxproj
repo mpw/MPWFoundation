@@ -50,9 +50,9 @@
 		1F198E1715DB922C00640A43 /* MPWBlockFilterStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F198E1515DB922B00640A43 /* MPWBlockFilterStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F198E1B15DB922C00640A43 /* MPWBlockFilterStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F198E1615DB922B00640A43 /* MPWBlockFilterStream.m */; };
 		1F1A30DD154DAE0C00BAC8D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A30DC154DAE0C00BAC8D7 /* Accelerate.framework */; };
-		1F1BEDB0213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; };
-		1F1BEDB1213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; };
-		1F1BEDB2213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; };
+		1F1BEDB0213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1BEDB1213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1BEDB2213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1BEDB3213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
 		1F1BEDB4213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
 		1F1BEDB5213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
