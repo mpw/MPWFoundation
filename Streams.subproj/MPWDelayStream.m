@@ -11,7 +11,6 @@
 
 @interface MPWDelayStream()
 
-@property (assign) int inflightCount;
 
 @end
 
@@ -27,32 +26,19 @@
     return self;
 }
 
--(void)forwardAndReduceInflight:anObject
-{
-    self.inflightCount--;
-    [self forward:anObject];
-}
-
 -(void)writeObject:(id)anObject sender:sender
 {
     NSTimeInterval relativeDelay=self.relativeDelay;
     if ( relativeDelay > 0) {
-        self.inflightCount++;
         if ( self.synchronous) {
             [NSThread sleepForTimeInterval:relativeDelay];
-            [self forwardAndReduceInflight:anObject];
+            [self forward:anObject];
         } else {
-            [[self afterDelay:relativeDelay] forwardAndReduceInflight:anObject];
+            [[self afterDelay:relativeDelay] forward:anObject];
         }
     } else {
         [self.target writeObject:anObject sender:sender];
     }
-}
-
-
--(void)writeObject:(id)anObject
-{
-    [self writeObject:anObject sender:nil];
 }
 
 

@@ -81,14 +81,6 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
-
--(int)inflightCount
-{
-    return (int)self.inflight.count;
-}
-
-
-
 -(NSURLSessionConfiguration *)config
 {
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -219,9 +211,7 @@ static NSURLSession *_defaultURLSession=nil;
 //  NSLog(@"url: %@",resolvedRequest.URL);
     NSURLSessionTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
-//          NSLog(@"number of inflight requests at top of completion handler: %p %d ",request,[self inflightCount]);
             [self removeFromInflight:request];
-//          NSLog(@"number of inflight requests after remove: %p %d ",request,[self inflightCount]);
             request.response=response;
             request.data = data;
             long httpStatusCode=0;
@@ -272,6 +262,10 @@ static NSURLSession *_defaultURLSession=nil;
     [request.task resume];
 }
 
+-(int)inflightCount
+{
+    return (int)[self.inflight count];
+}
 
 -(void)awaitResultForSeconds:(NSTimeInterval)numSeconds
 {

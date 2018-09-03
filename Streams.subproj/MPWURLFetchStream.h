@@ -16,7 +16,6 @@
 
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) id <Streaming> errorTarget;
-@property (assign, readonly)  int inflightCount;
 @property (nonatomic,assign) MPWRESTVerb defaultMethod;
 @property (assign) BOOL  formEncode;
 @property (nonatomic, readonly) NSMutableSet *inflight;

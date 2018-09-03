@@ -133,11 +133,6 @@ SEL visSel;
     [self flushLocal];
 }
 
--(int)inflightCount
-{
-    return 0;
-}
-
 
 -(void)reportError:(NSError*)error
 {
@@ -290,11 +285,6 @@ SEL visSel;
 	if (anObject) {	
 		[self addObject:anObject];
 	}
-}
-
--(int)inflightCount
-{
-    return (int)self.count;
 }
 
 @end

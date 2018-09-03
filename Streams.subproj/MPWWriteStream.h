@@ -78,8 +78,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)reportError:(NSError*)error;
 
--(int)inflightCount;
-
 
 @end
 
