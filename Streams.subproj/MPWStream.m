@@ -61,11 +61,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [pool drain];
 }
 
-+defaultTarget
-{
-    return [NSMutableArray array];
-}
-
 +stream
 {
     return [[self new] autorelease];
@@ -96,6 +91,11 @@ SEL visSel;
      }
 }
 
+-(void)writeNSObject:anObject
+{
+    
+}
+
 -(void)writeObject:anObject
 {
     [self writeObject:anObject sender:nil];
@@ -111,18 +111,6 @@ SEL visSel;
 {
     [self writeObject:anObject];
     [self flush];
-}
-
--processObject:anObject
-{
-    [self writeObjectAndFlush:anObject];
-    id result=[self finalTarget];
-    if ( [result respondsToSelector:@selector(firstObject)] && [result count]==1) {
-        NSMutableArray *a=result;
-        result=[a firstObject];
-        [a removeObjectAtIndex:0];
-    }
-    return result;
 }
 
 -(void)writeData:(NSData*)d

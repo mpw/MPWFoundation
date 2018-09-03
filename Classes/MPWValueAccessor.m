@@ -205,7 +205,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     [accessor bindToTarget:t];
     IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
     [accessor setValue:[MPWByteStream Stdout]];
-    IDEXPECT([[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
+    IDEXPECT([(MPWFilter*)[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
 }
 
 #define ACCESS_COUNT  10000

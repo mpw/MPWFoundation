@@ -12,9 +12,7 @@
 @class MPWURLCall;
 
 @interface MPWURLFetchStream : MPWFilter
-{
-    NSURLSession *downloader;
-}
+
 
 @property (nonatomic, strong) NSURL *baseURL;
 @property (nonatomic, strong) id <Streaming> errorTarget;

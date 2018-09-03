@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSDictionary *theHeaderDict;
 @property (nonatomic, strong) NSMutableSet *inflight;
+@property (nonatomic, strong) NSURLSession *downloader;
 
 @end
 
@@ -25,7 +26,6 @@
 
 @implementation MPWURLFetchStream
 
-objectAccessor(NSURLSession, downloader, setDownloader)
 
 CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session)
 {
@@ -329,6 +329,7 @@ static NSURLSession *_defaultURLSession=nil;
     [_theHeaderDict release];
     [(NSObject *)_errorTarget release];
     [_baseURL release];
+    [_downloader release];
     [super dealloc];
 }
 

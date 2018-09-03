@@ -49,3 +49,11 @@ typedef void (^WriterBlock)(MPWStream* writer,id randomArgument);
 +_encode:anObject;
 
 @end
+
+
+@interface NSObject(PropertyListStreaming)
+
+-(void)writeOnPropertyList:(MPWByteStream*)aStream;
+
+@end
+

@@ -84,7 +84,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 
 #define  TARGET_APPEND( data, count)   { targetAppend( self->byteTarget, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
 
-#define FORWARDCHARSLEN( x,l )  [self->target appendBytes:(x) length:(l)]
+#define FORWARDCHARSLEN( x,l )  [self->byteTarget appendBytes:(x) length:(l)]
 #define FORWARDCHARS( x )       FORWARDCHARSLEN( x,strlen(x))
 
 @end

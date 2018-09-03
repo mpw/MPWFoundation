@@ -49,7 +49,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 
-@interface MPWStream : NSObject <Streaming>
+@interface MPWriteStream : NSObject <Streaming>
 {
    SEL streamWriterMessage;
 }
@@ -65,6 +65,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)writeData:(NSData*)d;
 +(instancetype)stream;
 //-(instancetype)init;
+-(void)writeObjectAndFlush:anObject;
 
 
 -(SEL)streamWriterMessage;
