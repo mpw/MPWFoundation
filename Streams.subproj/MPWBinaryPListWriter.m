@@ -169,7 +169,7 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(void)writeArray:(NSArray *)anArray
 {
-    [self writeArray:anArray usingElementBlock:^( MPWStream *w,id object){
+    [self writeArray:anArray usingElementBlock:^( MPWWriteStream *w,id object){
         [w writeObject:object];
     }];
 }
@@ -560,7 +560,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 {
     MPWBinaryPListWriter *localWriter=[self stream];
     NSArray *argument=@[ @1 , @5, @52 ];
-    [localWriter writeArray:argument usingElementBlock:^(MPWStream* writer,id randomArgument){
+    [localWriter writeArray:argument usingElementBlock:^(MPWWriteStream* writer,id randomArgument){
         [(MPWBinaryPListWriter*)writer writeInteger:[randomArgument intValue]];
     }];
     [localWriter flush];
@@ -578,7 +578,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     for (int i=0;i<15;i++) {
         [input addObject:@(i)];
     }
-    [writer writeArray:input usingElementBlock:^(MPWStream* aWriter,id randomArgument){
+    [writer writeArray:input usingElementBlock:^(MPWWriteStream* aWriter,id randomArgument){
         [(MPWBinaryPListWriter*)aWriter writeInteger:[randomArgument intValue]];
     }];
     [writer close];

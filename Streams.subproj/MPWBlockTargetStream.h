@@ -6,11 +6,11 @@
 //
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
 typedef void (^TargetBlock)( id );
 
-@interface MPWBlockTargetStream : MPWStream
+@interface MPWBlockTargetStream : MPWWriteStream
 
 -(instancetype)initWithBlock:(TargetBlock)newBlock;
 +(instancetype)streamWithBlock:(TargetBlock)newBlock;

@@ -165,7 +165,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testBasicUnboundAccess
 {
-    MPWStream *t=[self _testTarget];
+    MPWWriteStream *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"target"];
     IDEXPECT([accessor valueForTarget:t], [MPWByteStream Stderr], @"target");
 }

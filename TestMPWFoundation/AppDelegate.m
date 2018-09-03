@@ -41,7 +41,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
     NSArray *classNamesToTest=
     @[
       @"MPWPoint",
-      @"MPWStream",
+      @"MPWWriteStream",
       @"MPWPipeline",
       @"MPWDelayStream",
       @"MPWFastInvocation",

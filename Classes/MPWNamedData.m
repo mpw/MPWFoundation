@@ -41,7 +41,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "AccessorMacros.h"
 #import "CodingAdditions.h"
 #import "NSStringAdditions.h"
-#import "MPWStream.h"
+#import "MPWWriteStream.h"
 
 
 @interface NSCoder(namedDataCoding)

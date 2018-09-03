@@ -85,7 +85,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -(void)writeDictionary:(NSDictionary *)dict
 {
-    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWStream *writer, id aDict){
+    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWWriteStream *writer, id aDict){
         [aDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
             [self writeObject:obj forKey:key];
         }];

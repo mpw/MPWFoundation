@@ -59,7 +59,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 
 
-#import "MPWFoundation/MPWStream.h"
+#import "MPWFoundation/MPWWriteStream.h"
 #import "MPWFoundation/MPWFilter.h"
 #import "MPWFoundation/MPWArrayFlattenStream.h"
 #import "MPWFoundation/MPWFlattenStream.h"

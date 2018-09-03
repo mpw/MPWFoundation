@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 9/2/18.
 //
 
-#import <MPWFoundation/MPWStream.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
 
 typedef id (*IMP_2_id_args)(id, SEL, id,id);
@@ -14,13 +14,13 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 #define    FORWARD(object)    if (  targetWriteObject ) { targetWriteObject( _target, @selector(writeObject:sender:), object ,self); } else { [_target writeObject:object sender:self]; }
 
 
-@interface MPWFilter : MPWStream
+@interface MPWFilter : MPWWriteStream
 {
     id _target;
     IMP_2_id_args    targetWriteObject;
 }
 
-@property (nonatomic, strong)  IBOutlet MPWStream *target;
+@property (nonatomic, strong)  IBOutlet MPWWriteStream *target;
 
 +(instancetype)streamWithTarget:aTarget;
 -(instancetype)initWithTarget:aTarget;

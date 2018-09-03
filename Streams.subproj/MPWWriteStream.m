@@ -1,4 +1,4 @@
-/* MPWStream.m Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWWriteStream.m Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -31,21 +31,21 @@ THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 
-#import "MPWStream.h"
+#import "MPWWriteStream.h"
 #import "NSInvocationAdditions_lookup.h"
 #import "MPWConvertFromJSONStream.h"
 #import "MPWDict2ObjStream.h"
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
 
-@interface MPWStream(private)
+@interface MPWWriteStream(private)
 
 -(void)writeData:(NSData*)d;
 
 
 @end
 
-@implementation MPWStream
+@implementation MPWWriteStream
 
 +process:anObject
 {
@@ -219,7 +219,7 @@ SEL visSel;
 
 @implementation NSData(MPWStreaming)
 
--(void)writeOnMPWStream:(MPWStream*)aStream
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream
 {
     [aStream writeData:self];
 }
@@ -228,7 +228,7 @@ SEL visSel;
 
 @implementation NSEnumerator(MPWStreaming)
 
--(void)writeOnMPWStream:(MPWStream*)aStream
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream
 {
     [aStream writeEnumerator:self];
 }
@@ -256,7 +256,7 @@ SEL visSel;
 
 @implementation NSEnumerator(streaming)
 
--(void)writeOnStream:(MPWStream*)aStream
+-(void)writeOnStream:(MPWWriteStream*)aStream
 {
     [aStream writeEnumerator:self];
 }
@@ -264,7 +264,7 @@ SEL visSel;
 @end
 @implementation NSObject(BaseStreaming)
 
--(void)writeOnMPWStream:(MPWStream*)aStream
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream
 {
     [aStream writeNSObject:self];
 }

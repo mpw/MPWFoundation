@@ -8,6 +8,6 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWNotificationStream : MPWStream
+@interface MPWNotificationStream : MPWWriteStream
 
 @end

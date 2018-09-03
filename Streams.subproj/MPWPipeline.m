@@ -43,7 +43,7 @@
     [super dealloc];
 }
 
--(MPWStream *)processFilterSpec:filter
+-(MPWWriteStream *)processFilterSpec:filter
 {
     if ( [filter isKindOfClass:[NSString class]]) {
         if ( [(NSString*)filter hasPrefix:@"-"]) {
@@ -155,7 +155,7 @@
     [self.filters.lastObject setTarget:[self target]];
 }
 
--(void)setTarget:(MPWStream*)newTarget
+-(void)setTarget:(MPWWriteStream*)newTarget
 {
     [[[self filters] lastObject] setTarget:nil];
     [super setTarget:newTarget];
@@ -264,7 +264,7 @@ typedef id (^ZeroArgBlock)(void);
 {
     MPWFilter *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
     MPWFilter *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
-    MPWStream *third=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
+    MPWWriteStream *third=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
     [first setTarget:second];
     
         NSArray *filters =

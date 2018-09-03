@@ -94,8 +94,8 @@
 {
     NSMutableArray *testTarget=[NSMutableArray array];
     MPWCombinerStream *combiner=[self streamWithTarget:testTarget];
-    MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
-    MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
+    MPWWriteStream *source1=[MPWFlattenStream streamWithTarget:combiner];
+    MPWWriteStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1, source2]];
     INTEXPECT( testTarget.count, 0, @"haven't written anything yet");
     [source2 writeObject:@"test1 from source 2"];
@@ -125,8 +125,8 @@
     
     NSMutableArray *testTarget=(id)nilChecker.target;
     combiner.target=nilChecker;
-    MPWStream *source1=[MPWFlattenStream streamWithTarget:combiner];
-    MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
+    MPWWriteStream *source1=[MPWFlattenStream streamWithTarget:combiner];
+    MPWWriteStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1, source2]];
     INTEXPECT( testTarget.count, 0, @"haven't written anything yet");
     [source2 writeObject:@"test1 from source 2"];

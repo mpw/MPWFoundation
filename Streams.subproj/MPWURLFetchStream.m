@@ -392,7 +392,7 @@ static NSURLSession *_defaultURLSession=nil;
 {
     NSMutableString *testTarget=[NSMutableString string];
     NSURL *testURL=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:nil];
-    MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
+    MPWWriteStream *target=[MPWByteStream streamWithTarget:testTarget];
     MPWURLFetchStream* stream=[self streamWithTarget:target];
     [stream get:testURL];
     [stream awaitResultForSeconds:1];

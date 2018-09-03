@@ -17,7 +17,7 @@
 {
     MPWCombinerStream *combiner=[MPWCombinerStream stream];
     MPWFlattenStream *source1=[MPWFlattenStream streamWithTarget:combiner];
-//    MPWStream *source2=[MPWFlattenStream streamWithTarget:combiner];
+//    MPWWriteStream *source2=[MPWFlattenStream streamWithTarget:combiner];
     [combiner setSources:@[ source1 ]];
 
     return source1;
@@ -29,7 +29,7 @@
     MPWFilter *combiner=[self combiner];
     MPWPipeline *pipe=[MPWPipeline filters:@[ [MPWFlattenStream stream] ]];
     [(MPWFilter*)combiner.target setTarget:pipe];
-    pipe.target=(MPWStream*)target; // FIXME?
+    pipe.target=(MPWWriteStream*)target; // FIXME?
     [combiner writeObject:@"hello"];
     IDEXPECT(target.firstObject, @"hello", @"should have written");
 }
@@ -42,7 +42,7 @@
         return [array.firstObject uppercaseString];
     }];
     [(MPWFilter*)combiner.target setTarget:pipe];
-    pipe.target=(MPWStream*)target; // FIXME?
+    pipe.target=(MPWWriteStream*)target; // FIXME?
     [combiner writeObject:@"hello"];
     IDEXPECT(target.firstObject, @"HELLO", @"should have written");
 }

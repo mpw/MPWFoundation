@@ -83,7 +83,7 @@
 
 idAccessor( _target, _setTarget )
 
--(MPWStream *)target
+-(MPWWriteStream *)target
 {
     return _target;
 }

@@ -37,7 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWObjectCache.h"
 #import "NSObjectFiltering.h"
 #import "NSStringAdditions.h"
-#import "MPWStream.h"
+#import "MPWWriteStream.h"
 
 @implementation MPWScanner
 /*"

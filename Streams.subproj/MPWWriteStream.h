@@ -1,4 +1,4 @@
-/* MPWStream.h Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWWriteStream.h Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -49,7 +49,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 
-@interface MPWriteStream : NSObject <Streaming>
+@interface MPWWriteStream : NSObject <Streaming>
 {
    SEL streamWriterMessage;
 }
@@ -85,7 +85,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface NSObject(BaseStreaming)
 
--(void)writeOnMPWStream:(MPWStream*)aStream;
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream;
 @end
 
 

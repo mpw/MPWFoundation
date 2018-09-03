@@ -112,7 +112,7 @@ didCompleteWithError:(nullable NSError *)error
 {
     NSMutableString *testTarget=[NSMutableString string];
     NSURL *testURL=[[NSBundle bundleForClass:self] URLForResource:@"ResourceTest" withExtension:nil];
-    MPWStream *target=[MPWByteStream streamWithTarget:testTarget];
+    MPWWriteStream *target=[MPWByteStream streamWithTarget:testTarget];
     MPWURLStreamingStream* stream=[self streamWithTarget:target];
     [stream streamingGet:testURL];
     [stream awaitResultForSeconds:0.5];

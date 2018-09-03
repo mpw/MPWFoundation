@@ -438,9 +438,9 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)appendBytes:(const void*)bytes length:(long)len
 {
-    //---	method used by both MPWStream and NSDPSContext
+    //---	method used by both MPWWriteStream and NSDPSContext
     id newData = [[NSData alloc] initWithBytes:bytes length:len];
-    [(MPWStream*)self writeData:newData];
+    [(MPWWriteStream*)self writeData:newData];
     [newData release];
 }
 

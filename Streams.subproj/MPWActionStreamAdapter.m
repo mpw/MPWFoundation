@@ -10,7 +10,7 @@
 
 #import "MPWActionStreamAdapter.h"
 
-@interface MPWStream(sender)
+@interface MPWWriteStream(sender)
 -(void)writeObject:(id)anObject sender:aSender;
 @end
 

@@ -78,7 +78,7 @@
     NSMutableArray *receiver2=[NSMutableArray array];
     NSMutableArray *receiver3=[NSMutableArray array];
     
-    MPWStream *scatterer=[self filters:@[ receiver1, receiver2, receiver3 ] ];
+    MPWWriteStream *scatterer=[self filters:@[ receiver1, receiver2, receiver3 ] ];
     [scatterer writeObject:@"test object"];
     IDEXPECT(receiver1.firstObject, @"test object", @"first target");
     IDEXPECT(receiver2.firstObject, @"test object", @"second target");
