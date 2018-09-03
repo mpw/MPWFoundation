@@ -11,6 +11,8 @@
 
 @interface MPWURLCall2StoreStream : MPWFilter
 
+-(instancetype)initWithStore:(NSObject <MPWStorage>*)newStore;
+
 @property (nonatomic, strong) NSObject <MPWStorage> *store;
 
 @end

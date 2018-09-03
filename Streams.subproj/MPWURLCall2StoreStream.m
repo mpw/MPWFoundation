@@ -8,12 +8,26 @@
 #import "MPWURLCall2StoreStream.h"
 #import "MPWURLCall.h"
 #import "MPWDictStore.h"
+#import "AccessorMacros.h"
 
 @implementation MPWURLCall2StoreStream
+
+-(instancetype)initWithStore:(NSObject <MPWStorage>*)newStore
+{
+    self=[super init];
+    self.store=newStore;
+    return self;
+}
 
 -(void)writeObject:(MPWURLCall*)aCall
 {
     [self.store mergeObject:aCall.processedObject forReference:aCall.reference];
+}
+
+-(void)dealloc
+{
+    [_store release];
+    [super dealloc];
 }
 
 @end

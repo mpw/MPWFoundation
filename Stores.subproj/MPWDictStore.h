@@ -9,4 +9,8 @@
 
 @interface MPWDictStore : MPWAbstractStore
 
++(instancetype)storeWithDictionary:(NSMutableDictionary*)newDict;
+-(instancetype)initWithDictionary:(NSMutableDictionary*)newDict;
+
+
 @end
