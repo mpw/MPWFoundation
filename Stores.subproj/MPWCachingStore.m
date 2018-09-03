@@ -8,7 +8,7 @@
 #import "MPWCachingStore.h"
 #import "MPWDictStore.h"
 #import "AccessorMacros.h"
-
+#import "MPWGenericReference.h"
 #import "DebugMacros.h"
 
 

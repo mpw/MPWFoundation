@@ -56,9 +56,9 @@
 		1F1BEDB3213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
 		1F1BEDB4213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
 		1F1BEDB5213BE769004B4947 /* MPWFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDAF213BE769004B4947 /* MPWFilter.m */; };
-		1F1BEDB8213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; };
-		1F1BEDB9213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; };
-		1F1BEDBA213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; };
+		1F1BEDB8213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1BEDB9213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1BEDBA213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDB6213DCBC5004B4947 /* MPWSwitchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1BEDBB213DCBC5004B4947 /* MPWSwitchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDB7213DCBC5004B4947 /* MPWSwitchingStore.m */; };
 		1F1BEDBC213DCBC5004B4947 /* MPWSwitchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDB7213DCBC5004B4947 /* MPWSwitchingStore.m */; };
 		1F1BEDBD213DCBC5004B4947 /* MPWSwitchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDB7213DCBC5004B4947 /* MPWSwitchingStore.m */; };

@@ -143,5 +143,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWMappingStore.h"
 #import "MPWFoundation/MPWPathRelativeStore.h"
 #import "MPWFoundation/MPWCachingStore.h"
+#import "MPWFoundation/MPWSwitchingStore.h"
 
 
