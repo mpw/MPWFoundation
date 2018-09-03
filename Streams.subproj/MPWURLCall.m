@@ -61,6 +61,22 @@ CONVENIENCEANDINIT( call, WithRESTOperation:(MPWRESTOperation*)op)
     return [self data];
 }
 
+-(BOOL)isDone {
+    return self.error != nil || self.processedObject != nil;
+}
+
+-(BOOL)allDone {
+    if ( self.isDone ) {
+        if (self.nextCall) {
+            return self.nextCall.allDone;
+        } else {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+
 -(NSString *)description1
 {
     return [NSString stringWithFormat:@"<%@:%p: url=%@ method: %@ responseData='%@' error: %@>",

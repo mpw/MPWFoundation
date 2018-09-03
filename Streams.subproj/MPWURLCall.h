@@ -25,6 +25,7 @@
 @property (nonatomic, readonly)  NSURLRequest     *request;
 @property (nonatomic, strong)  NSData           *bodyData;
 @property (nonatomic, strong)  NSDictionary     *headerDict;
+@property (nonatomic, strong)  MPWURLCall<T>     *nextCall;
 
 @property (nonatomic, strong)  NSURLResponse    *response;
 @property (nonatomic, strong)  NSError          *error;
@@ -35,5 +36,6 @@
 
 @property (readonly) NSURL* finalURL;
 
+@property (readonly)   BOOL isDone,allDone;
 
 @end
