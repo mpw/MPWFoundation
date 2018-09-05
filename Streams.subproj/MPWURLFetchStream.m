@@ -228,12 +228,10 @@ static NSURLSession *_defaultURLSession=nil;
                 error = [NSError errorWithDomain:@"network" code:httpStatusCode userInfo:userInfo];
             }
             if (data && !error   ){
-                id processed=[self processResponse:request];
-//                NSLog(@"will write processed: %@ to %@",processed,target);
-                FORWARD(processed);
+                FORWARD([self processResponse:request]);
             } else {
 //                NSLog(@"Error: %p %@",request,request);
-                NSMutableDictionary *userInfoWithRequest = [error.userInfo mutableCopy];
+                NSMutableDictionary *userInfoWithRequest = [[error.userInfo mutableCopy] autorelease];
                 userInfoWithRequest[@"request"] = request;
                 NSError *errorWithRequest = [NSError errorWithDomain:error.domain
                                                                 code:error.code

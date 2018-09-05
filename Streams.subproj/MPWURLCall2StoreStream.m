@@ -19,7 +19,7 @@
     return self;
 }
 
--(void)writeObject:(MPWURLCall*)aCall
+-(void)writeObject:(MPWURLCall*)aCall sender:aSender
 {
     [self.store mergeObject:aCall.processedObject forReference:aCall.reference];
 }
