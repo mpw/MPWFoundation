@@ -90,6 +90,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWLZWStream.h"
 #import "MPWFoundation/MPWFDStreamSource.h"
 #import "MPWFoundation/MPWExternalFilter.h"
+#import "MPWFoundation/MPWRESTCopyStream.h"
 
 
 #import "MPWFoundation/NSThreadWaiting.h"

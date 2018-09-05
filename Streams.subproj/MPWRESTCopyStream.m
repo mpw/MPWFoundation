@@ -43,8 +43,8 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 -(void)dealloc
 {
-    [(NSObject*)_source release];
-    [(NSObject*)_target release];
+    [_source release];
+    [_target release];
     [super dealloc];
 }
 
