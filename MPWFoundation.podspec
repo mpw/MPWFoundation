@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "MPWFoundation"
-  s.version      = "3.6.1"
+  s.version      = "3.7"
   s.summary      = "HOM, Streams, Stores."
 
   # This description is used to generate tags and improve search results.
