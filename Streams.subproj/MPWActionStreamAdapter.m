@@ -42,12 +42,12 @@
 
 -(void)getString:sender
 {
-    [self.target writeObject:[sender stringValue]];
+    FORWARD([sender stringValue]);
 }
 
-- (void) controlTextDidChange: (NSNotification *)note {
-    
-    [self.target writeObject:[[note object] objectValue]];
+- (void) controlTextDidChange: (NSNotification *)note
+{
+    FORWARD([[note object] objectValue]);
 }
 
 

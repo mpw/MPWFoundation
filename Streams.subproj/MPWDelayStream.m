@@ -37,7 +37,7 @@
             [[self afterDelay:relativeDelay] forward:anObject];
         }
     } else {
-        [self.target writeObject:anObject sender:sender];
+        FORWARD(anObject)
     }
 }
 

@@ -71,7 +71,7 @@
     [self insertNewObject:anObject forSender:aSender];
     NSArray *combined=[self combinedResult];
     if ( combined) {
-        [self.target writeObject:combined sender:self];
+        FORWARD(combined);
     }
 }
 

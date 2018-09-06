@@ -236,6 +236,7 @@ static NSURLSession *_defaultURLSession=nil;
                 NSError *errorWithRequest = [NSError errorWithDomain:error.domain
                                                                 code:error.code
                                                             userInfo:userInfoWithRequest];
+                request.error = error;
                 [self reportError:errorWithRequest];
             }
         } @finally {

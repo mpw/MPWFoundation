@@ -67,15 +67,9 @@
         len=[self.inputStream read:buffer maxLength:8192];
         if ( len > 0) {
             NSData *bytesRead=[NSData dataWithBytes:buffer length:len];
-            [self.target writeObject:bytesRead sender:self];
+            FORWARD(bytesRead);
             return YES;
         }
-//        if ([self.inputStream getBuffer:&buffer length:&len] ) {
-//            if ( len>0) {
-//                NSData *bytesRead=[NSData dataWithBytes:buffer length:len];
-//                [self.target writeObject:bytesRead sender:self];
-//            }
-//        }
     }
     return NO;
 }
