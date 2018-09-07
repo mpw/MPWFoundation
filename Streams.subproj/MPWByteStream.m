@@ -34,6 +34,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWByteStream.h"
 #import "bytecoding.h"
 #import "DebugMacros.h"
+#import "MPWDictStore.h"
 
 @interface NSString(fastCString)
 
@@ -406,6 +407,38 @@ intAccessor( indentAmount , setIndentAmount )
 	[self outdent];
 	[self writeIndent];
     [self appendBytes:"}" length:2];
+}
+
+
+-(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env
+{
+    BOOL done=NO;
+    int curIndex=0;
+    long maxIndex=[s length];
+    while (!done) {
+    
+        NSRange leftBrace=[s rangeOfString:@"{"
+                                   options:0
+                                     range:NSMakeRange(curIndex,maxIndex-curIndex)];
+        if ( leftBrace.location == NSNotFound ) {
+            break;
+        }
+        NSLog(@"leftBrace: %@",NSStringFromRange(leftBrace));
+        NSRange rightBrace=[s rangeOfString:@"}"
+                                    options:0
+                                      range:NSMakeRange(curIndex,maxIndex-curIndex)];
+        if ( rightBrace.location == NSNotFound ) {
+            break;
+        }
+        NSLog(@"rightBrace: %@",NSStringFromRange(rightBrace));
+        NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
+        NSString *varName=[s substringWithRange:varRange];
+        NSLog(@"var: %@",varName);
+        [self writeString:[s substringWithRange:NSMakeRange(curIndex,leftBrace.location-curIndex)]];
+        id value=env[varName];
+        [self writeObject:value];
+        curIndex += rightBrace.location+1;
+    }
 }
 
 
@@ -806,6 +839,16 @@ intAccessor( fd, setFd )
     INTEXPECT(bytes[1], 0x80, @"pi as utf-8 second byte");
 }
 
++(void)testInterpolateStrings
+{
+    NSMutableString *result=[NSMutableString string];
+    MPWByteStream* stream=[self streamWithTarget:result];
+    MPWDictStore *store=[MPWDictStore store];
+    store[@"var"]=@"World!";
+    [stream writeInterpolatedString:@"Hello {var}" withEnvironment:store];
+    IDEXPECT(result,@"Hello World!",@"result of interpolating");
+}
+
 
 +testSelectors
 {
@@ -820,6 +863,7 @@ intAccessor( fd, setFd )
 			@"testIndent",
 			@"testBasicWritingToNSDataViaForwarder",
             @"testUnicodeUTF8",
+            @"testInterpolateStrings",
             ];
 }
 
