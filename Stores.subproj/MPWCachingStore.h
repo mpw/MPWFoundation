@@ -7,7 +7,7 @@
 
 #import <MPWFoundation/MPWMappingStore.h>
 
-@interface MPWCachingStore : MPWMappingStore
+@interface MPWWriteThroughCache : MPWMappingStore
 
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource cache:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newCache;
 
@@ -15,4 +15,9 @@
 
 @property (nonatomic) BOOL readOnlySource;
 
+-(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference;
+
+@end
+
+@interface MPWCachingStore : MPWWriteThroughCache
 @end

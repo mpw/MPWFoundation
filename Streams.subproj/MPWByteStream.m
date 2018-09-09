@@ -412,10 +412,9 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env
 {
-    BOOL done=NO;
-    int curIndex=0;
+    long curIndex=0;
     long maxIndex=[s length];
-    while (!done) {
+    while (curIndex < maxIndex) {
     
         NSRange leftBrace=[s rangeOfString:@"{"
                                    options:0
@@ -423,21 +422,25 @@ intAccessor( indentAmount , setIndentAmount )
         if ( leftBrace.location == NSNotFound ) {
             break;
         }
-        NSLog(@"leftBrace: %@",NSStringFromRange(leftBrace));
+        if ( !isascii([s characterAtIndex:leftBrace.location+1]) ) {
+            curIndex=leftBrace.location+1;
+            continue;
+        }
         NSRange rightBrace=[s rangeOfString:@"}"
                                     options:0
                                       range:NSMakeRange(curIndex,maxIndex-curIndex)];
         if ( rightBrace.location == NSNotFound ) {
             break;
         }
-        NSLog(@"rightBrace: %@",NSStringFromRange(rightBrace));
         NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
         NSString *varName=[s substringWithRange:varRange];
-        NSLog(@"var: %@",varName);
-        [self writeString:[s substringWithRange:NSMakeRange(curIndex,leftBrace.location-curIndex)]];
-        id value=env[varName];
+        [self outputString:[s substringWithRange:NSMakeRange(curIndex,leftBrace.location-curIndex)]];
+        id value=[env objectForReference:[env referenceForPath:varName]];
         [self writeObject:value];
-        curIndex += rightBrace.location+1;
+        curIndex = rightBrace.location+1;
+    }
+    if ( curIndex <= maxIndex ) {
+        [self outputString:[s substringFromIndex:curIndex]];
     }
 }
 
@@ -839,7 +842,7 @@ intAccessor( fd, setFd )
     INTEXPECT(bytes[1], 0x80, @"pi as utf-8 second byte");
 }
 
-+(void)testInterpolateStrings
++(void)testInterpolateSimpleString
 {
     NSMutableString *result=[NSMutableString string];
     MPWByteStream* stream=[self streamWithTarget:result];
@@ -847,6 +850,27 @@ intAccessor( fd, setFd )
     store[@"var"]=@"World!";
     [stream writeInterpolatedString:@"Hello {var}" withEnvironment:store];
     IDEXPECT(result,@"Hello World!",@"result of interpolating");
+}
+
++(void)testInterpolateStringInMiddle
+{
+    NSMutableString *result=[NSMutableString string];
+    MPWByteStream* stream=[self streamWithTarget:result];
+    MPWDictStore *store=[MPWDictStore store];
+    store[@"var"]=@"cruel";
+    [stream writeInterpolatedString:@"Hello {var} world!" withEnvironment:store];
+    IDEXPECT(result,@"Hello cruel world!",@"result of interpolating");
+}
+
++(void)testInterpolateStringWithTwoVars
+{
+    NSMutableString *result=[NSMutableString string];
+    MPWByteStream* stream=[self streamWithTarget:result];
+    MPWDictStore *store=[MPWDictStore store];
+    store[@"var"]=@"cruel";
+    store[@"var2"]=@"world";
+    [stream writeInterpolatedString:@"Hello {var} {var2}!" withEnvironment:store];
+    IDEXPECT(result,@"Hello cruel world!",@"result of interpolating");
 }
 
 
@@ -863,7 +887,9 @@ intAccessor( fd, setFd )
 			@"testIndent",
 			@"testBasicWritingToNSDataViaForwarder",
             @"testUnicodeUTF8",
-            @"testInterpolateStrings",
+            @"testInterpolateSimpleString",
+            @"testInterpolateStringInMiddle",
+            @"testInterpolateStringWithTwoVars",
             ];
 }
 

@@ -12,13 +12,13 @@
 #import "DebugMacros.h"
 
 
-@interface MPWCachingStore()
+@interface MPWWriteThroughCache()
 
 @property (nonatomic, strong) id <MPWStorage> cache;
 
 @end
 
-@implementation MPWCachingStore
+@implementation MPWWriteThroughCache
 
 CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
@@ -37,21 +37,24 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return result;
 }
 
--(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
+-(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference
 {
-    [self.cache setObject:newObject forReference:aReference];
     if (!self.readOnlySource) {
         [self.source setObject:newObject forReference:aReference];
     }
+}
+
+-(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
+{
+    [self.cache setObject:newObject forReference:aReference];
+    [self writeToSource:newObject forReference:aReference];
 }
 
 
 -(void)mergeObject:newObject forReference:(id <MPWReferencing>)aReference
 {
     [self.cache mergeObject:newObject forReference:aReference];
-    if (!self.readOnlySource) {
-        [self.source setObject:[self.cache objectForReference:aReference] forReference:aReference];
-    }
+    [self writeToSource:[self.cache objectForReference:aReference] forReference:aReference];
 }
 
 
@@ -74,12 +77,12 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 @end
 
 
-@implementation MPWCachingStore(testing)
+@implementation MPWWriteThroughCache(testing)
 
 
 +testFixture
 {
-    return [[[MPWCachingStoreTests alloc] init] autorelease];
+    return [[[MPWCachingStoreTests alloc] initWithTestClass:self] autorelease];
 }
 
 
@@ -100,14 +103,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 @implementation MPWCachingStoreTests
 
--(instancetype)init
+-(instancetype)initWithTestClass:(Class)testClass
 {
     self=[super init];
     self.key = [MPWGenericReference referenceWithPath:@"aKey"];
     self.value = @"Hello World";
     self.cache = [MPWDictStore store];
     self.source = [MPWDictStore store];
-    self.store = [MPWCachingStore storeWithSource:self.source cache:self.cache];
+    self.store = [testClass storeWithSource:self.source cache:self.cache];
     return self;
 }
 
@@ -163,3 +166,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 }
 
 @end
+
+@implementation MPWCachingStore
+@end
+

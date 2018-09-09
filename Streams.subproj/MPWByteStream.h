@@ -35,6 +35,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 // typedef id (*IMP0)(id, SEL, ...);
 
+@class MPWAbstractStore;
+
 @protocol ByteStreaming
 
 
@@ -81,6 +83,8 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 -(void)writeObject:anObject forKey:aKey;
 -(void)println:anObject;
 -(void)print:anObject;
+-(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env;
+
 
 #define  TARGET_APPEND( data, count)   { targetAppend( self->byteTarget, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }
 
