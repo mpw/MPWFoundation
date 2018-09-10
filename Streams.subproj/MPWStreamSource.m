@@ -7,8 +7,18 @@
 //
 
 #import "MPWStreamSource.h"
+#import "MPWWriteStream.h"
+
+@interface MPWStreamSource()
+
+//@property (nonatomic, strong) NSObject <Streaming> *target;
+
+@end
+
 
 @implementation MPWStreamSource
+
+@synthesize  target;
 
 -(void)run
 {
@@ -23,7 +33,7 @@
 
 -(void)dealloc
 {
-    [_target release];
+    [target release];
     [super dealloc];
 }
 

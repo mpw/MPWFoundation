@@ -14,13 +14,12 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 #define    FORWARD(object)    if (  targetWriteObject ) { targetWriteObject( _target, @selector(writeObject:sender:), object ,self); } else { [_target writeObject:object sender:self]; }
 
 
-@interface MPWFilter : MPWWriteStream
+@interface MPWFilter : MPWWriteStream <StreamSource>
 {
     id _target;
     IMP_2_id_args    targetWriteObject;
 }
 
-@property (nonatomic, strong)  IBOutlet MPWWriteStream *target;
 
 +(instancetype)streamWithTarget:aTarget;
 -(instancetype)initWithTarget:aTarget;

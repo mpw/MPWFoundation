@@ -74,6 +74,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 @property (nonatomic, strong)  MPWDictStore *cache,*source;
 @property (nonatomic, strong)  MPWCachingStore *store;
 
+-(instancetype)initWithTestClass:(Class)testClass;
+
 @end
 
 

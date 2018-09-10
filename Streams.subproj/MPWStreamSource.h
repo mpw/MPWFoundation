@@ -6,13 +6,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
-@protocol Streaming;
+@protocol Streaming,StreamSource;
 
-@interface MPWStreamSource : NSObject
+@interface MPWStreamSource : NSObject <StreamSource>
 
-@property (nonatomic, strong) NSObject <Streaming> *target;
 
 -(void)run;
 -(void)runInThread;

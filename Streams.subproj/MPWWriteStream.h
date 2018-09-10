@@ -42,6 +42,13 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+
+@protocol StreamSource
+
+@property (nonatomic, strong) IBOutlet NSObject <Streaming> *target;
+
+@end
+
 @interface NSObject(MPWStreaming)
 
 -(void)writeOnStream:(id <Streaming>)aStream;

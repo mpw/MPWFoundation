@@ -92,7 +92,7 @@ didCompleteWithError:(nullable NSError *)error
     if ( error ){
         [self reportError:error];
     }
-    [self.target close];
+    [(MPWFilter*)self.target close];
 }
 
 
