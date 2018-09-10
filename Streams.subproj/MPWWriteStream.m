@@ -34,7 +34,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWWriteStream.h"
 #import "NSInvocationAdditions_lookup.h"
 #import "MPWConvertFromJSONStream.h"
-#import "MPWDict2ObjStream.h"
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
 

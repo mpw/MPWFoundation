@@ -68,7 +68,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWHierarchicalStream.h"
 #import "MPWFoundation/MPWThreadSwitchStream.h"
 #import "MPWFoundation/MPWConvertFromJSONStream.h"
-#import "MPWFoundation/MPWDict2ObjStream.h"
 #import "MPWFoundation/MPWObjectCreatorStream.h"
 #import "MPWFoundation/MPWURLFetchStream.h"
 #import "MPWFoundation/MPWURLStreamingStream.h"
