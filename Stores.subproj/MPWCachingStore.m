@@ -27,12 +27,18 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return self;
 }
 
+-(id)copyFromSourceToCache:(id <MPWReferencing>)aReference
+{
+    result=[self.source objectForReference:aReference];
+    [self.cache setObject:result forReference:aReference];
+    return result;
+}
+
 -objectForReference:(id <MPWReferencing>)aReference
 {
     id result=[self.cache objectForReference:aReference];
     if (!result ) {
-        result=[self.source objectForReference:aReference];
-        [self.cache setObject:result forReference:aReference];
+        result = [self copyFromSourceToCache:aReference];
     }
     return result;
 }
@@ -53,6 +59,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)mergeObject:newObject forReference:(id <MPWReferencing>)aReference
 {
+    [self copyFromSourceToCache:aReference];
     [self.cache mergeObject:newObject forReference:aReference];
     [self writeToSource:[self.cache objectForReference:aReference] forReference:aReference];
 }
@@ -166,6 +173,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
     IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
 }
+
+// FIXME:  need good test for merge bug when cache is not loaded yet
 
 @end
 
