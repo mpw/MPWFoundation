@@ -32,14 +32,13 @@
                                                         object:anObject];
 }
 
--(void)writeObject:anObject
+-(void)writeObject:anObject sender:sender
 {
     if ( self.shouldPostOnMainThread) {
         [[self onMainThread] postNotificationObject:anObject];
     } else {
         [self postNotificationObject:anObject];
     }
-    [super writeObject:anObject];
 }
 
 

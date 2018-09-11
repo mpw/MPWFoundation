@@ -7,8 +7,8 @@
 //
 
 #import "MPWStreamCompositionTests.h"
-#import "MPWFoundation.h"
 #import "MPWCombinerStream.h"
+#import "MPWMapFilter.h"
 
 @implementation MPWStreamCompositionTests
 
@@ -38,7 +38,7 @@
 {
     NSArray *target=[NSMutableArray array];
     MPWFilter *combiner=[self combiner];
-    MPWBlockFilterStream *pipe=[MPWBlockFilterStream streamWithBlock:^(NSArray *array){
+    MPWMapFilter *pipe=[MPWMapFilter filterWithBlock:^(NSArray *array){
         return [array.firstObject uppercaseString];
     }];
     [(MPWFilter*)combiner.target setTarget:pipe];

@@ -5,21 +5,42 @@
 //  Created by Marcel Weiher on 9/10/18.
 //
 
-#import "MPWUniquingQueue.h"
+#import "MPWQueue.h"
 
-@interface MPWUniquingQueue()
+@protocol OrderedCollection<NSObject>
 
-@property (atomic, strong) NSMutableOrderedSet *queue;
+-(void)addObject:anObject;
+-(void)removeObjectAtIndex:(NSUInteger)anIndex;
+-firstObject;
+-(NSUInteger)count;
 
 @end
 
-@implementation MPWUniquingQueue
+@interface NSMutableArray(collecting)<OrderedCollection>
+@end
+
+@interface NSOrderedSet(collecting)<OrderedCollection>
+@end
+
+
+@interface MPWQueue()
+
+@property (atomic, strong) id <OrderedCollection> queue;
+
+@end
+
+@implementation MPWQueue
+
+-(instancetype)initWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique
+{
+    self=[super initWithTarget:aTarget];
+    self.queue = shouldUnique ? [NSMutableOrderedSet orderedSet] : [NSMutableArray array];
+    return self;
+}
 
 -(instancetype)initWithTarget:(id)aTarget
 {
-    self=[super initWithTarget:aTarget];
-    self.queue = [NSMutableOrderedSet orderedSet];
-    return self;
+    return [self initWithTarget:aTarget uniquing:NO];
 }
 
 -(void)writeObject:(id)anObject
@@ -69,12 +90,12 @@
 
 #import "DebugMacros.h"
 
-@implementation MPWUniquingQueue(testing)
+@implementation MPWQueue(testing)
 
 +(void)testForwardingWorks
 {
     NSMutableArray *a=[NSMutableArray array];
-    MPWUniquingQueue *q=[self streamWithTarget:a];
+    MPWQueue *q=[self streamWithTarget:a];
     INTEXPECT(q.count, 0, @"0 objects added");
     [q writeObject:@(1)];
     [q writeObject:@(2)];
@@ -86,10 +107,10 @@
     IDEXPECT(a, (@[ @(1), @(2), @(3)]), @"3 objects forwarded");
 }
 
-+(void)testDupsAreRejected
++(void)testDupsAreRejectedWhenUniquing
 {
     NSMutableArray *a=[NSMutableArray array];
-    MPWUniquingQueue *q=[self streamWithTarget:a];
+    MPWQueue *q=[[[self alloc] initWithTarget:a uniquing:YES] autorelease];
     [q writeObject:@(1)];
     [q writeObject:@(1)];
     [q writeObject:@(1)];
@@ -102,7 +123,7 @@
 {
     return @[
              @"testForwardingWorks",
-             @"testDupsAreRejected",
+             @"testDupsAreRejectedWhenUniquing",
              ];
 }
 

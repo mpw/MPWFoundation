@@ -10,7 +10,7 @@
 #import "AccessorMacros.h"
 #import "MPWGenericReference.h"
 #import "DebugMacros.h"
-
+#import "MPWMergingStore.h"
 
 @interface MPWWriteThroughCache()
 
@@ -104,6 +104,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
              @"testWritePopulatesCacheAndSourceUnlessDontWriteIsSet",
              @"testCanInvalidateCache",
              @"testMergeWorksLikeStore",
+             @"testMergingFetchesFirst",
              ];
 }
 
@@ -174,7 +175,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
 }
 
-// FIXME:  need good test for merge bug when cache is not loaded yet
+-(void)testMergingFetchesFirst
+{
+    self.cache = (id)[MPWMergingStore storeWithSource:self.cache];
+    self.store = [[self.store class] storeWithSource:self.source cache:self.cache];
+    self.source[self.key]=@"hi";
+    [self.store mergeObject:@" there" forReference:self.key];
+    IDEXPECT( self.store[self.key], @"hi there",@"merging with unitialized cache");
+}
 
 @end
 

@@ -6,14 +6,14 @@
 //
 //
 
-#import "MPWPropertyListStream.h"
+#import "MPWNeXTPListWriter.h"
 
 @class MPWIntArray;
 
 //  streamWriterMessage:  writeOnPlist:
 
 
-@interface MPWBinaryPListWriter : MPWPropertyListStream
+@interface MPWBinaryPListWriter : MPWNeXTPListWriter
 {
     MPWIntArray *offsets;
     long         offsetOfOffsetTable;

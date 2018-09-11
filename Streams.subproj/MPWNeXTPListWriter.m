@@ -1,4 +1,4 @@
-/* MPWPropertyListStream.m Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWNeXTPListWriter.m Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -32,7 +32,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import <objc/message.h>
 
-#import "MPWPropertyListStream.h"
+#import "MPWNeXTPListWriter.h"
 
 
 
@@ -45,7 +45,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
-@implementation MPWPropertyListStream
+@implementation MPWNeXTPListWriter
 
 
 -(void)beginArray
@@ -168,7 +168,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 @implementation NSString(PropertyListStreaming)
 
--(void)writeOnPropertyList:(MPWPropertyListStream*)aStream
+-(void)writeOnPropertyList:(MPWNeXTPListWriter*)aStream
 {
     [aStream writeString:self ];
 }
@@ -178,7 +178,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @implementation NSNumber(PropertyListStreaming)
 
 
--(void)writeOnPropertyList:(MPWPropertyListStream*)aStream
+-(void)writeOnPropertyList:(MPWNeXTPListWriter*)aStream
 {
     Class boolClass = nil;
     if ( boolClass == nil) {
@@ -202,7 +202,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "DebugMacros.h"
 
-@implementation MPWPropertyListStream(testing)
+@implementation MPWNeXTPListWriter(testing)
 
 
 +_testStream {
@@ -211,7 +211,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +_encode:anObject
 {
-	MPWPropertyListStream *writer=[self _testStream];
+	MPWNeXTPListWriter *writer=[self _testStream];
 	//	NSLog(@"stream: %@",writer);
 	[writer writeObject:anObject];
 	[writer close];

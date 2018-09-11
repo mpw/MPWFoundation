@@ -8,7 +8,7 @@
 
 #import "MPWCombinerStream.h"
 #import "MPWFlattenStream.h"
-#import "MPWBlockFilterStream.h"
+#import "MPWMapFilter.h"
 
 @interface MPWCombinerStream ()
 
@@ -116,7 +116,7 @@
     static BOOL gotNil=NO;
     static BOOL *gotNilPtr=&gotNil;
     MPWCombinerStream *combiner=[self stream];
-    MPWBlockFilterStream *nilChecker=[MPWBlockFilterStream streamWithBlock:^(id arg){
+    MPWMapFilter *nilChecker=[MPWMapFilter filterWithBlock:^(id arg){
         if ( arg==nil) {
                 *gotNilPtr=YES;
         }

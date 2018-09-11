@@ -7,7 +7,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface MPWUniquingQueue : MPWFilter
+@interface MPWQueue : MPWFilter
 
 @property (readonly)  NSUInteger count;
 

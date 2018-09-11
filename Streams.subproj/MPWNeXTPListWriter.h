@@ -1,4 +1,4 @@
-/* MPWPropertyListStream.h Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWNeXTPListWriter.h Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
 
 
 Redistribution and use in source and binary forms, with or without
@@ -33,7 +33,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 #import "MPWByteStream.h"
 
-@interface MPWPropertyListStream : MPWByteStream
+@interface MPWNeXTPListWriter : MPWByteStream
 {
 }
 
@@ -44,7 +44,7 @@ typedef void (^WriterBlock)(MPWWriteStream* writer,id randomArgument);
 
 
 
-@interface MPWPropertyListStream(testing)
+@interface MPWNeXTPListWriter(testing)
 
 +_encode:anObject;
 

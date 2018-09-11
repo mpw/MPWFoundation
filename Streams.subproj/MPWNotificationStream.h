@@ -10,4 +10,6 @@
 
 @interface MPWNotificationStream : MPWWriteStream
 
+-(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
+
 @end

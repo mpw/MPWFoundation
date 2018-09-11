@@ -19,7 +19,3 @@
 
 @end
 
-
-@interface MPWPipe : MPWPipeline {}   // compatibility, remove once clients have been updated to MPWPipeline
-@end
-

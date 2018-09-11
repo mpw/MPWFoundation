@@ -7,11 +7,11 @@
 //
 
 #import "MPWPipeline.h"
-#import "MPWMessageFilterStream.h"
-#import "MPWBlockFilterStream.h"
 #import "MPWScatterStream.h"
 #import "MPWExternalFilter.h"
 #import "MPWActionStreamAdapter.h"
+#import "MPWMapFilter.h"
+
 
 @interface MPWPipeline()
 
@@ -49,16 +49,16 @@
         if ( [(NSString*)filter hasPrefix:@"-"]) {
             SEL selector=NSSelectorFromString([filter substringFromIndex:1]);
             if (selector) {
-                filter=[MPWMessageFilterStream streamWithSelector:selector];
+                filter=[MPWMapFilter filterWithSelector:selector];
             } else {
                 [NSException raise:@"SelectorNotFound" format:@"%@ selector not found: %@",[self class],filter];
             }
         } else if ( [(NSString*)filter hasPrefix:@"["] && [(NSString*)filter hasSuffix:@"]"]) {
             NSString *key=[filter substringWithRange:NSMakeRange(1, [filter length]-2)];
-            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o objectForKey:key]; } copy] autorelease]];
+            filter=[MPWMapFilter filterWithBlock:[[^(id o){ return [o objectForKey:key]; } copy] autorelease]];
         } else if ( [(NSString*)filter hasPrefix:@"%"]) {
             NSString *formatString=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
-            filter=[MPWBlockFilterStream streamWithBlock:[[^(NSString *s){
+            filter=[MPWMapFilter filterWithBlock:[[^(NSString *s){
                 return [NSString stringWithFormat:formatString,s];
                         } copy] autorelease]];
             [filter setTarget:nil];
@@ -68,12 +68,12 @@
             [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];
-            filter=[MPWBlockFilterStream streamWithBlock:[[^(id o){ return [o valueForKey:key]; } copy] autorelease]];
+            filter=[MPWMapFilter filterWithBlock:[[^(id o){ return [o valueForKey:key]; } copy] autorelease]];
         }
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
     } else if ( [filter respondsToSelector:@selector(value:)] ) {
-        filter=[MPWBlockFilterStream streamWithBlock:filter];
+        filter=[MPWMapFilter filterWithBlock:filter];
     } else if ( [filter respondsToSelector:@selector(setTarget:)] &&
                 [filter respondsToSelector:@selector(setAction:)] &&
                 [filter respondsToSelector:@selector(objectValue)] ) {
@@ -240,8 +240,8 @@ typedef id (^ZeroArgBlock)(void);
 {
     NSArray *filters =
     @[
-      [MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)],
-      [MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"]; }],
+      [MPWMapFilter filterWithSelector:@selector(uppercaseString)],
+      [MPWMapFilter filterWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"]; }],
       ];
     MPWPipeline *pipe=[self filters:filters];
     [pipe writeObject:@"Hello"];
@@ -250,9 +250,9 @@ typedef id (^ZeroArgBlock)(void);
 
 +(void)testMultiElementStreamCanBeAddedToPipe
 {
-    MPWFilter *first=[MPWMessageFilterStream streamWithSelector:@selector(uppercaseString)];
-    MPWFilter *second=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
-    MPWWriteStream *third=[MPWBlockFilterStream streamWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
+    MPWFilter *first=[MPWMapFilter filterWithSelector:@selector(uppercaseString)];
+    MPWFilter *second=[MPWMapFilter filterWithBlock:^(NSString *s){ return [s stringByAppendingString:@" World!"];}];
+    MPWWriteStream *third=[MPWMapFilter filterWithBlock:^(NSString *s){ return [s stringByAppendingString:@" Moon!"];}];
     [first setTarget:second];
     
         NSArray *filters =
@@ -381,8 +381,5 @@ typedef id (^ZeroArgBlock)(void);
 
 
 
-@end
-
-@implementation MPWPipe 
 @end
 
