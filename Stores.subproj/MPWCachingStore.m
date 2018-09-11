@@ -29,7 +29,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(id)copyFromSourceToCache:(id <MPWReferencing>)aReference
 {
-    result=[self.source objectForReference:aReference];
+    id result=[self.source objectForReference:aReference];
     [self.cache setObject:result forReference:aReference];
     return result;
 }
