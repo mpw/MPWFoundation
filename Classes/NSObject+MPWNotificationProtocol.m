@@ -15,9 +15,14 @@ static BOOL isNotificationProtocol( Protocol* aProtocol )
     return protocol_conformsToProtocol(aProtocol,@protocol(MPWNotificationProtocol));
 }
 
+NSString *notificatioNameFromProtocol(Protocol *aProtocol )
+{
+    return @(protocol_getName(aProtocol));
+}
+
 void sendProtocolNotification( Protocol *aProtocol, id anObject )
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@(protocol_getName(aProtocol)) object:anObject];
+    [[NSNotificationCenter defaultCenter] postNotificationName:notificatioNameFromProtocol(aProtocol) object:anObject];
 }
 
 
@@ -40,7 +45,8 @@ void sendProtocolNotification( Protocol *aProtocol, id anObject )
     protocolMethods=protocol_copyMethodDescriptionList(aProtocol,YES,YES,&count);
     if (protocolMethods && count==1) {
         SEL message=protocolMethods[0].name;
-        [self registerMessage:message forNotificationName:@(protocol_getName(aProtocol))];
+        NSLog(@"found message: %@ notification name: %@",NSStringFromSelector(message),notificatioNameFromProtocol(aProtocol));
+        [self registerMessage:message forNotificationName:notificatioNameFromProtocol(aProtocol)];
     }
     free(protocolMethods);
 }
@@ -51,6 +57,7 @@ void sendProtocolNotification( Protocol *aProtocol, id anObject )
     Protocol** protocols=class_copyProtocolList([self class], &protocolCount);
     for (int i=0;i<protocolCount;i++ ) {
         if ( isNotificationProtocol( protocols[i]))  {
+            NSLog(@"install protocol: %@",protocols[i]);
             [self handleNotificationProtocol:protocols[i]];
         }
     }

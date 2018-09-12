@@ -7,6 +7,8 @@
 //
 
 #import "MPWNotificationStream.h"
+#import "NSObject+MPWNotificationProtocol.h"
+#import "NSThreadInterthreadMessaging.h"
 
 @interface MPWNotificationStream ()
 
@@ -26,6 +28,11 @@
     return self;
 }
 
+-(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
+{
+    return [self initWithNotificationName:notificatioNameFromProtocol(protocol) shouldPostOnMainThread:shouldPostOnMainThread];
+}
+
 -(void)postNotificationObject:anObject
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:self.notificationName
@@ -41,7 +48,65 @@
     }
 }
 
+@end
 
+#import "DebugMacros.h"
+#import "NSObject+MPWNotificationProtocol.h"
+
+@protocol MPWNotificationStreamTesterProtocol<MPWNotificationProtocol>
+
+-(void)hello:(NSNotification*)notification;
+
+@end
+
+@interface MPWNotificationStreamTester : NSObject<MPWNotificationStreamTesterProtocol>
+@property (nonatomic,strong) id result;
+@end
+
+@implementation MPWNotificationStream(testing)
+
++testFixture
+{
+    return [[[MPWNotificationStreamTester alloc] init] autorelease];
+}
+
++testSelectors
+{
+    return @[
+             @"testNotifyWhenSetupViaString",
+             @"testNotifyWhenSetupViaProtocol",
+             ];
+}
+
+@end
+
+
+
+@implementation MPWNotificationStreamTester
+
+-(void)hello:(NSNotification*)notification
+{
+    self.result = notification.object;
+}
+
+
+-(void)testNotifyWhenSetupViaString
+{
+    [self installProtocolNotifications];
+    MPWNotificationStream *s=[[[MPWNotificationStream alloc] initWithNotificationName:@"MPWNotificationStreamTesterProtocol"  shouldPostOnMainThread:NO] autorelease];
+    EXPECTNIL(self.result,@"nothing yet");
+    [s writeObject:@"hello"];
+    IDEXPECT(self.result,@"hello",@"notification was received");
+}
+
+-(void)testNotifyWhenSetupViaProtocol
+{
+    [self installProtocolNotifications];
+    MPWNotificationStream *s=[[[MPWNotificationStream alloc] initWithNotificationProtocol:@protocol(MPWNotificationStreamTesterProtocol)  shouldPostOnMainThread:NO] autorelease];
+    EXPECTNIL(self.result,@"nothing yet");
+    [s writeObject:@"protocol"];
+    IDEXPECT(self.result,@"protocol",@"notification was received");
+}
 
 
 @end

@@ -6,10 +6,11 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
 @interface MPWNotificationStream : MPWWriteStream
 
 -(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
+-(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
 
 @end

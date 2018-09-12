@@ -19,6 +19,7 @@
 @end
 
 void sendProtocolNotification( Protocol *aProtocol, id anObject );
+NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 
 
 #define PROTOCOL_NOTIFY(protocolName, object)   sendProtocolNotification(@protocol(protocolName),object )
