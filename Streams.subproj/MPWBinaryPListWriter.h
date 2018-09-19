@@ -38,7 +38,7 @@
 -(void)writeObject:anObject forKey:(NSString*)aKey;
 
 
--(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock;
+-(void)writeArray:(NSArray*)anArray usingElementBlock:(void (^)(MPWBinaryPListWriter* writer,id randomArgument))aBlock;
 -(void)writeInteger:(long)anInt;
 -(void)writeFloat:(float)aFloat;
 @end

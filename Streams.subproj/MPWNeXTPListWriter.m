@@ -73,20 +73,23 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self writeString:aKey];
 }
 
--(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock
 {
+    currentFirstElement++;
+    firstElementOfDict[currentFirstElement]=YES;
     [self beginDictionary];
     @try {
-        contentBlock(self,anObject);
+        contentBlock(self);
     } @finally {
+        currentFirstElement--;
         [self endDictionary];
     }
 }
 
 -(void)writeDictionary:(NSDictionary *)dict
 {
-    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWWriteStream *writer, id aDict){
-        [aDict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
+    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWWriteStream *writer){
+        [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
             [self writeObject:obj forKey:key];
         }];
     }];
@@ -132,7 +135,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     while (nil!=(nextObject=[e nextObject])) {
         [self writeIndent];
         if ( !first ) {
-			[self appendBytes:"," length:2];
+			[self appendBytes:"," length:1];
         }
         [self writeObject:nextObject];
 		first=NO;

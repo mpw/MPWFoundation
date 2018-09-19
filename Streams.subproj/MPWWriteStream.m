@@ -200,7 +200,7 @@ SEL visSel;
 
 -defaultSpacer
 {
-    return nil;
+    return @"";
 }
 
 -(void)writeEnumerator:e

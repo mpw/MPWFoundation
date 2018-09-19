@@ -143,7 +143,7 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
     //    NSLog(@"currentIndexes after beginArray: %@",currentIndexes);
 }
 
--(void)writeArray:(NSArray*)anArray usingElementBlock:(WriterBlock)aBlock
+-(void)writeArray:(NSArray*)anArray usingElementBlock:(void (^)(MPWBinaryPListWriter* writer,id randomArgument))aBlock
 {
     int offset=0;
     offset=(int)[objectTable objectForKey:anArray];

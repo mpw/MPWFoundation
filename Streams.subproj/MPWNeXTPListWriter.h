@@ -35,10 +35,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface MPWNeXTPListWriter : MPWByteStream
 {
+    BOOL firstElementOfDict[100];
+    int  currentFirstElement;
 }
 
-typedef void (^WriterBlock)(MPWWriteStream* writer,id randomArgument);
--(void)writeDictionaryLikeObject:anObject withContentBlock:(WriterBlock)contentBlock;
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock;
 
 @end
 
