@@ -11,6 +11,7 @@
 #import "MPWGenericReference.h"
 #import "DebugMacros.h"
 #import "MPWMergingStore.h"
+#import "MPWByteStream.h"
 
 @interface MPWWriteThroughCache()
 
@@ -70,6 +71,16 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
     [self.cache deleteObjectForReference:aRef];
 }
+
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [aStream printFormat:@"%@ -> ",[self displayName]];
+    [self.cache graphViz:aStream];
+    [aStream printFormat:@"%@ -> ",[self displayName]];
+    [self.source graphViz:aStream];
+}
+     
+
 
 @end
 

@@ -8,6 +8,7 @@
 #import "MPWAbstractStore.h"
 #import "MPWGenericReference.h"
 #import "NSNil.h"
+#import "MPWByteStream.h"
 
 
 @implementation MPWAbstractStore
@@ -72,6 +73,32 @@
     return [aReference URL];
 }
 
++(instancetype)stores:(NSArray*)stores
+{
+    return nil;
+}
+
+-(NSString*)displayName
+{
+    return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];
+}
+
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [aStream printFormat:@"%@\n",[self displayName]];
+}
+
+-(NSString*)graphViz
+{
+    MPWByteStream *s=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [self graphViz:s];
+    return (NSString*)s.target;
+}
+
+-(void)setSourceStores:(NSArray<MPWStorage> *)stores
+{
+   
+}
 
 @end
 

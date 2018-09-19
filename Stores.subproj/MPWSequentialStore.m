@@ -8,6 +8,7 @@
 #import "MPWSequentialStore.h"
 #import "AccessorMacros.h"
 #import "MPWGenericReference.h"
+#import "MPWByteStream.h"
 
 @implementation MPWSequentialStore
 
@@ -39,6 +40,15 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     [self setObject:[self objectForReference:aReference] forReference:aReference];
     [self.stores.firstObject mergeObject:theObject forReference:aReference];
 }
+
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    for ( MPWAbstractStore *s in self.stores) {
+        [aStream printFormat:@"%@ -> ",[self displayName]];
+        [s graphViz:aStream];
+    }
+}
+
 
 -(void)dealloc
 {

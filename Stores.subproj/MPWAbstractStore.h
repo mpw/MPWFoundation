@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWReferencing;
-@class MPWReference,MPWGenericReference;
+@class MPWReference,MPWGenericReference,MPWByteStream;
 
 
 @protocol MPWStorage
@@ -18,6 +18,11 @@
 -(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference;
 -(void)deleteObjectForReference:(id <MPWReferencing>)aReference;
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;
+
+@optional
+-(NSString*)displayName;
+-(void)graphViz:(MPWByteStream*)aStream;
+
 
 @end
 
@@ -31,12 +36,19 @@
 
 @interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
 
+
++(instancetype)stores:(NSArray*)stores;
 +(instancetype)store;
 
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;
 
 -(NSURL*)URLForReference:aReference;
+
+-(void)setSourceStores:(NSArray <MPWStorage>*)stores;
+
+-(void)graphViz:(MPWByteStream*)aStream;
+-(NSString*)graphViz;
 
 @end
 

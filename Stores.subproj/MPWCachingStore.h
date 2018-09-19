@@ -10,6 +10,7 @@
 @interface MPWWriteThroughCache : MPWMappingStore
 
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource cache:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newCache;
++(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource cache:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newCache;
 
 -(void)invalidate:(id <MPWReferencing>)aRef;
 

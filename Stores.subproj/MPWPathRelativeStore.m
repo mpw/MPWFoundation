@@ -33,6 +33,11 @@
     return [self.baseReference referenceByAppendingReference:aReference];
 }
 
+-(NSString*)displayName
+{
+    return [NSString stringWithFormat:@"\"Relative:\\n%@\"",[self.baseReference pathComponents].lastObject];
+}
+
 @end
 
 #import "DebugMacros.h"

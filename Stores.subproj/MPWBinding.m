@@ -9,6 +9,7 @@
 #import "MPWAbstractStore.h"
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
+#import "MPWPathRelativeStore.h"
 
 @implementation MPWBinding
 
@@ -60,6 +61,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 -(instancetype)div:(MPWBinding*)other
 {
     return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other.reference] inStore:self.store];
+}
+
+-asScheme
+{
+    return [MPWPathRelativeStore storeWithSource:self.store reference:self.reference];
 }
 
 @end

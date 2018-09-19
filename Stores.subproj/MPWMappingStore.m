@@ -8,6 +8,7 @@
 #import "MPWMappingStore.h"
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
+#import "MPWByteStream.h"
 
 @implementation MPWMappingStore
 
@@ -64,6 +65,12 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self.source childrenOfReference:[self mapReference:aReference]];
 }
 
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [super graphViz:aStream];
+    [aStream printFormat:@" -> "];
+    [self.source graphViz:aStream];
+}
 
 @end
 
