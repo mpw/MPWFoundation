@@ -41,6 +41,13 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     [self.stores.firstObject mergeObject:theObject forReference:aReference];
 }
 
+-(void)setSourceStores:(NSArray<MPWStorage> *)stores
+{
+    self.stores=stores;
+}
+
+
+
 -(void)graphViz:(MPWByteStream*)aStream
 {
     for ( MPWAbstractStore *s in self.stores) {

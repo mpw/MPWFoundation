@@ -65,12 +65,20 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self.source childrenOfReference:[self mapReference:aReference]];
 }
 
+-(void)setSourceStores:(NSArray<MPWStorage> *)stores
+{
+    NSAssert1(stores.count <= 1, @"number of source stores should be <= 1, is %d", (int)stores.count);
+    self.source=stores.firstObject;
+}
+
+
 -(void)graphViz:(MPWByteStream*)aStream
 {
     [super graphViz:aStream];
     [aStream printFormat:@" -> "];
     [self.source graphViz:aStream];
 }
+
 
 @end
 

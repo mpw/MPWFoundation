@@ -11,7 +11,7 @@
 @class MPWReference,MPWGenericReference,MPWByteStream;
 
 
-@protocol MPWStorage
+@protocol MPWStorage <NSObject>
 
 -objectForReference:(id <MPWReferencing>)aReference;
 -(void)setObject:theObject forReference:(id <MPWReferencing>)aReference;

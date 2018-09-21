@@ -75,7 +75,31 @@
 
 +(instancetype)stores:(NSArray*)stores
 {
-    return nil;
+    MPWAbstractStore *first=nil;
+    MPWAbstractStore *previous=nil;
+    for ( id storeDescription in stores) {
+        if ( [storeDescription isKindOfClass:[NSArray class]] ) {
+            NSMutableArray<MPWStorage> *substores=(id)[NSMutableArray array];
+            for ( NSArray *subdescription in storeDescription) {
+                MPWAbstractStore *substore=[self stores:subdescription];
+                [substores addObject:substore];
+            }
+            [previous setSourceStores:substores];
+        } else {
+            if ( [storeDescription respondsToSelector:@selector(store)]) {
+                storeDescription=[storeDescription store];
+            }
+            if ( previous && [storeDescription respondsToSelector:@selector(setSourceStores:)]) {
+                [previous setSourceStores:(NSArray<MPWStorage>*)@[ previous ]];
+            }
+            previous=storeDescription;
+            
+        }
+        if ( !first ) {
+            first=storeDescription;
+        }
+    }
+    return first;
 }
 
 -(NSString*)displayName
@@ -130,6 +154,10 @@
 
 
 #import "DebugMacros.h"
+#import "MPWMappingStore.h"
+#import "MPWCachingStore.h"
+#import "MPWDictStore.h"
+#import "MPWSequentialStore.h"
 
 @implementation MPWAbstractStore(testing)
 
@@ -148,9 +176,32 @@
     IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 
++(void)testConstructingAStoreHierarchy
+{
+    MPWAbstractStore *s1=[MPWAbstractStore stores:@[ [MPWAbstractStore store]]];
+    EXPECTTRUE([s1 isKindOfClass:[MPWAbstractStore class]], @"simple store");
+    MPWAbstractStore *s2=[MPWAbstractStore stores:@[ [MPWAbstractStore class]]];
+    EXPECTTRUE([s2 isKindOfClass:[MPWAbstractStore class]], @"classes get replaced by instances");
+    MPWMappingStore *s3=[MPWMappingStore stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
+    EXPECTTRUE([s3 isKindOfClass:[MPWMappingStore class]], @"first element of sequence is a mapping store");
+    EXPECTTRUE([[s3 source] isKindOfClass:[MPWAbstractStore class]], @"stores are connected");
+
+    MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
+    EXPECTTRUE([s4 isKindOfClass:[MPWCachingStore class]], @"first element of sequence is a caching store");
+    EXPECTTRUE([[s4 cache] isKindOfClass:[MPWDictStore class]], @"cache of caching store is connected");
+    EXPECTTRUE([[s4 source] isKindOfClass:[MPWAbstractStore class]], @"source of caching store is connected");
+
+    MPWSequentialStore *s5=[MPWSequentialStore stores:@[ [MPWSequentialStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]], @[ [MPWMappingStore class] ] ]]];
+    EXPECTTRUE([s5 isKindOfClass:[MPWSequentialStore class]], @"first element of sequence is a sequential store");
+    INTEXPECT(s5.stores.count, 3, @"number of stores");
+    EXPECTTRUE( [s5.stores.firstObject isKindOfClass:[MPWDictStore class]], @"first of caching store is connected");
+    EXPECTTRUE( [s5.stores.lastObject isKindOfClass:[MPWMappingStore class]], @"cache of caching store is connected");
+}
+
 +(NSArray*)testSelectors {  return @[
                                      @"testConstructingReferences",
                                      @"testGettingURLs",
+                                     @"testConstructingAStoreHierarchy",
                                      ]; }
 
 @end

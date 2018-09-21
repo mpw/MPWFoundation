@@ -14,6 +14,7 @@
 
 -(void)invalidate:(id <MPWReferencing>)aRef;
 
+@property (readonly) id <MPWStorage> cache;
 @property (nonatomic) BOOL readOnlySource;
 
 -(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference;
