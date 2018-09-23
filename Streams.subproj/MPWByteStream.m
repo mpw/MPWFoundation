@@ -35,6 +35,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "bytecoding.h"
 #import "DebugMacros.h"
 #import "MPWDictStore.h"
+#import "MPWIgnoreUnknownTrampoline.h"
+
 
 @interface NSString(fastCString)
 
@@ -47,29 +49,46 @@ THE POSSIBILITY OF SUCH DAMAGE.
 @end
 
 
-@interface MPWStdioTarget : NSObject
+@interface MPWAbstractFileTarget : NSObject
+{
+    BOOL doClose;
+    NSString*    tempFileName;
+    NSString*    finalFileName;
+}
++fileNameTarget:(NSString*)fileName mode:(NSString*)mode;
+
+@end
+
+@interface MPWStdioTarget : MPWAbstractFileTarget
 {
     FILE *outfile;
-    BOOL doClose;
-    NSString*	tempFileName;
-    NSString*	finalFileName;	
 }
 
 +Stdout;
 +Stderr;
 +fileTarget:(FILE*)newFile;
-+fileNameTarget:(NSString*)fileName mode:(NSString*)mode;
 -initWithFile:(FILE*)newFile;
 
 @end
 
-@interface MPWFileDescriptorTarget : NSObject
+@interface MPWFileDescriptorTarget : MPWAbstractFileTarget
 {
 	int	fd;
 }
 
 -initWithFd:(int)newFd;
 +fd:(int)newFd;
+
+@end
+
+#define LARGEBUFSIZE  (1024*1024)
+
+@interface MPWFileTarget : MPWFileDescriptorTarget
+{
+    char buffer[LARGEBUFSIZE];
+    int  written;
+}
+
 
 @end
 
@@ -185,7 +204,7 @@ idAccessor(byteTarget, _setByteTarget)
 
 +fileName:(NSString*)fileName mode:(NSString*)mode
 {
-    return [self streamWithTarget:[MPWStdioTarget fileNameTarget:fileName mode:mode]];
+    return [self streamWithTarget:[MPWFileTarget fileNameTarget:fileName mode:mode]];
 }
 
 +fileName:(NSString*)fileName
@@ -462,6 +481,12 @@ intAccessor( indentAmount , setIndentAmount )
     return [self byteTarget];
 }
 
+-(void)closeLocal
+{
+    [super closeLocal];
+    [[byteTarget ifResponds] closeLocal];
+}
+
 @end
 
 
@@ -576,13 +601,99 @@ scalarAccessor( SEL, selector, setSelector )
 
 @end
 
+@implementation MPWAbstractFileTarget
+
+idAccessor( tempFileName, setTempFileName )
+idAccessor( finalFileName, setFinalFileName )
+
++fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic
+{
+    id tempName = filename;
+    id target;
+    FILE *f;
+    if ( atomic ) {
+        tempName=[filename stringByAppendingString:@"~"];
+    }
+    f= fopen( [tempName fileSystemRepresentation] ,[mode fileSystemRepresentation] );
+    if ( !f ) {
+        [NSException raise:@"openfailure" format:@"%@ failed to open %@, error: %s",
+         [self class],tempName,strerror(errno)];
+    }
+    //  setbuffer( f, NULL, 128 * 1024 );
+    target = [self fileNameTarget:filename mode:mode];
+    if ( atomic ) {
+        [target setFinalFileName:filename];
+        [target setTempFileName:tempName];
+    }
+    return target;
+}
+
+-(void)closefile {}
+
+-(void)closeLocal
+{
+    [self closefile];
+    if ( finalFileName && tempFileName ) {
+        NSFileManager* fileManager=[NSFileManager defaultManager];
+        [fileManager removeItemAtPath:finalFileName error:nil];
+        [fileManager moveItemAtPath:tempFileName toPath:finalFileName error:nil];
+        [self setFinalFileName:nil];
+        [self setTempFileName:nil];
+    }
+}
+
+-(instancetype)initWithName:(NSString *)name mode:(NSString*)mode
+{
+    return nil;
+}
+
++(instancetype)fileNameTarget:(NSString*)name mode:(NSString*)mode
+{
+    return [[[self alloc] initWithName:name mode:mode] autorelease];
+}
+
+-(void)flushLocal {}
+
+-(void)flush
+{
+    [self flushLocal];
+}
+
+-(void)close
+{
+    [self closeLocal];
+}
+
+-(void)close:(int)n
+{
+    [self closeLocal];
+}
+
+-(void)dealloc
+{
+    if ( doClose ) {
+        [self close];
+    }
+    [tempFileName release];
+    [finalFileName release];
+    [super dealloc];
+}
+
+@end
+
 
 @implementation MPWStdioTarget
 
 static id Stdout=nil,Stderr=nil;
 
-idAccessor( tempFileName, setTempFileName )
-idAccessor( finalFileName, setFinalFileName )
+
+-(void)closefile
+{
+    if ( outfile ) {
+        fclose(outfile);
+        outfile=NULL;
+    }
+}
 
 -initWithFile:(FILE*)newFile close:(BOOL)shouldClose
 {
@@ -619,31 +730,9 @@ idAccessor( finalFileName, setFinalFileName )
     return [[[self alloc] initWithFile:newFile] autorelease];
 }
 
-+fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic
+-(instancetype)initWithName:(NSString*)name mode:(NSString*)mode
 {
-    id tempName = filename;
-    id target;
-	FILE *f;
-    if ( atomic ) {
-        tempName=[filename stringByAppendingString:@"~"];
-    }
-	f= fopen( [tempName fileSystemRepresentation] ,[mode fileSystemRepresentation] );
-	if ( !f ) {
-		[NSException raise:@"openfailure" format:@"%@ failed to open %@, error: %s",
-			[self class],tempName,strerror(errno)];
-	}
-//  setbuffer( f, NULL, 128 * 1024 );
-    target = [self fileTarget:f];
-    if ( atomic ) {
-        [target setFinalFileName:filename];
-        [target setTempFileName:tempName];
-    }
-    return target;
-}
-
-+fileNameTarget:(NSString*)filename mode:(NSString*)mode
-{
-    return [self fileNameTarget:filename mode:mode atomically:YES];
+    return [self initWithFile:fopen( [name fileSystemRepresentation], [mode fileSystemRepresentation])];
 }
 
 
@@ -663,35 +752,12 @@ idAccessor( finalFileName, setFinalFileName )
     return [self length];
 }
 
--(void)flush
+-(void)flushLocal
 {
     fflush( outfile );
 }
 char hi_crash;
--(void)closeLocal
-{
-    if ( outfile ) {
-        fclose(outfile);
-        if ( finalFileName && tempFileName ) {
-			NSFileManager* fileManager=[NSFileManager defaultManager];
-			[fileManager removeItemAtPath:finalFileName error:nil];
-			[fileManager moveItemAtPath:tempFileName toPath:finalFileName error:nil];
-            [self setFinalFileName:nil];
-            [self setTempFileName:nil];
-        }
-    }
-    outfile=NULL;
-}
 
--(void)close
-{
-    [self closeLocal];
-}
-
--(void)close:(int)n
-{
-    [self closeLocal];
-}
 
 -(void)dealloc
 {
@@ -716,6 +782,12 @@ intAccessor( fd, setFd )
 	return self;
 }
 
+-(instancetype)initWithName:(NSString*)name mode:(NSString*)mode // atomically:(BOOL)atomic
+{
+    return [self initWithFd:open( [name fileSystemRepresentation], O_WRONLY | O_CREAT )];
+}
+
+
 +fd:(int)newFd
 {
 	return [[[self alloc] initWithFd:newFd] autorelease];
@@ -726,9 +798,56 @@ intAccessor( fd, setFd )
 	write(fd, bytes, len );
 }
 
+-(void)closefile
+{
+    if ( fd >= 0) {
+        close(fd);
+        fd=-1;
+    }
+}
+
+
 @end
 
 
+
+@implementation MPWFileTarget
+
+-initWithFd:(int)newFd
+{
+    self=[super initWithFd:newFd];
+    return self;
+}
+
+-(void)flushLocal
+{
+    if ( written >0 ) {
+        [super appendBytes:buffer length:written];
+        written=0;
+    }
+}
+
+-(void)appendBytes:(const void *)bytes length:(unsigned long)len
+{
+    if ( len + written >= LARGEBUFSIZE) {
+        [self flushLocal];
+    }
+    if ( len > LARGEBUFSIZE) {
+        [super appendBytes:bytes length:len];
+    } else {
+        memcpy( buffer+written, bytes, len);
+        written+=len;
+    }
+}
+
+-(void)closeLocal {
+    [self flushLocal];
+    [super closeLocal];
+}
+    
+
+
+@end
 @implementation MPWNullTarget
 
 

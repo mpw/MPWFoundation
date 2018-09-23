@@ -90,7 +90,7 @@
                 storeDescription=[storeDescription store];
             }
             if ( previous && [storeDescription respondsToSelector:@selector(setSourceStores:)]) {
-                [previous setSourceStores:(NSArray<MPWStorage>*)@[ previous ]];
+                [previous setSourceStores:(NSArray<MPWStorage>*)@[ storeDescription ]];
             }
             previous=storeDescription;
             
@@ -158,6 +158,7 @@
 #import "MPWCachingStore.h"
 #import "MPWDictStore.h"
 #import "MPWSequentialStore.h"
+#import "MPWPathRelativeStore.h"
 
 @implementation MPWAbstractStore(testing)
 
@@ -196,6 +197,16 @@
     INTEXPECT(s5.stores.count, 3, @"number of stores");
     EXPECTTRUE( [s5.stores.firstObject isKindOfClass:[MPWDictStore class]], @"first of caching store is connected");
     EXPECTTRUE( [s5.stores.lastObject isKindOfClass:[MPWMappingStore class]], @"cache of caching store is connected");
+
+    MPWMappingStore *s6=[MPWMappingStore stores:@[ [MPWPathRelativeStore class], [MPWMappingStore class] , [MPWDictStore class] ]];
+    EXPECTTRUE([s6 isKindOfClass:[MPWPathRelativeStore class]], @"first element of sequence is a sequential store");
+    MPWMappingStore *s61 = (MPWMappingStore*)[s6 source];
+    EXPECTTRUE([s61 isKindOfClass:[MPWMappingStore class]], @"first element of sequence is a sequential store");
+    MPWDictStore *s62 = (MPWDictStore*)[s61 source];
+    NSLog(@"s61: %@",s61);
+    NSLog(@"s62: %@",s62);
+    EXPECTTRUE([s62 isKindOfClass:[MPWDictStore class]], @"last element is a dict store");
+
 }
 
 +(NSArray*)testSelectors {  return @[

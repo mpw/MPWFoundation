@@ -49,3 +49,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+@interface NSObject(ifResponds)
+
+-ifResponds;
+
+@end
