@@ -783,7 +783,7 @@ intAccessor( fd, setFd )
 
 -(instancetype)initWithName:(NSString*)name mode:(NSString*)mode // atomically:(BOOL)atomic
 {
-    return [self initWithFd:open( [name fileSystemRepresentation], O_WRONLY | O_CREAT )];
+    return [self initWithFd:open( [name fileSystemRepresentation], O_WRONLY | O_CREAT , S_IRUSR | S_IWUSR)];
 }
 
 
