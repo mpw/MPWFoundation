@@ -204,7 +204,7 @@ idAccessor(byteTarget, _setByteTarget)
 
 +fileName:(NSString*)fileName mode:(NSString*)mode
 {
-    return [self streamWithTarget:[MPWFileTarget fileNameTarget:fileName mode:mode]];
+    return [self streamWithTarget:[MPWFileTarget fileNameTarget:fileName mode:mode atomically:YES]];
 }
 
 +fileName:(NSString*)fileName
@@ -614,13 +614,12 @@ idAccessor( finalFileName, setFinalFileName )
     if ( atomic ) {
         tempName=[filename stringByAppendingString:@"~"];
     }
-    f= fopen( [tempName fileSystemRepresentation] ,[mode fileSystemRepresentation] );
-    if ( !f ) {
-        [NSException raise:@"openfailure" format:@"%@ failed to open %@, error: %s",
-         [self class],tempName,strerror(errno)];
-    }
+//    if ( !f ) {
+//        [NSException raise:@"openfailure" format:@"%@ failed to open %@, error: %s",
+//         [self class],tempName,strerror(errno)];
+//    }
     //  setbuffer( f, NULL, 128 * 1024 );
-    target = [self fileNameTarget:filename mode:mode];
+    target = [self fileNameTarget:tempName mode:mode];
     if ( atomic ) {
         [target setFinalFileName:filename];
         [target setTempFileName:tempName];
