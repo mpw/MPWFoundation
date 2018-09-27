@@ -44,7 +44,4 @@ CONVENIENCEANDINIT(stream, WithThread:(NSThread*)aThread target:aTarget)
     }
 }
 
-
-
-
 @end

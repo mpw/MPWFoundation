@@ -250,7 +250,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     }
 }
 
--(void)writeInt:(int)anInteger forKey:(NSString*)aKey
+-(void)writeInteger:(int)anInteger forKey:(NSString*)aKey
 {
     [self writeString:aKey];
     [self writeInteger:anInteger];
@@ -263,6 +263,12 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 }
 
 -(void)writeObject:(id)anObject forKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+    [self writeObject:anObject];
+}
+
+-(void)writeString:(id)anObject forKey:(NSString*)aKey
 {
     [self writeString:aKey];
     [self writeObject:anObject];
@@ -414,6 +420,8 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 
 +_plistForData:(NSData*)d
 {
+//    static int count=1;
+//    [d writeToFile:[NSString stringWithFormat:@"/tmp/test-bplist-%d.bplist",count++] atomically:YES];
     id plist=[NSPropertyListSerialization propertyListWithData:d options:0 format:NULL error:nil];
     return plist;
 }
@@ -544,7 +552,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 {
     MPWBinaryPListWriter *writer=[self stream];
     [writer beginDictionary];
-    [writer writeInt:42 forKey:@"theAnswer"];
+    [writer writeInteger:42 forKey:@"theAnswer"];
     [writer endDictionary];
     [writer flush];
     //    [[writer target] writeToFile:@"/tmp/nested-array.plist" atomically:YES];
