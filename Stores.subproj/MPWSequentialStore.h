@@ -11,4 +11,7 @@
 
 @property(nonatomic, strong) NSArray<MPWAbstractStore*> *stores;
 
+-(BOOL)isValidResult:result forReference:aReference;     // override for specific validity requirements
+
+
 @end

@@ -19,11 +19,16 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return self;
 }
 
+-(BOOL)isValidResult:result forReference:aReference
+{
+    return result != nil;
+}
+
 -(id)objectForReference:(id<MPWReferencing>)aReference
 {
     for ( MPWAbstractStore *s in self.stores) {
         id result=s[aReference];
-        if ( result ) {
+        if ( [self isValidResult:result forReference:aReference] ) {
             return result;
         }
     }
