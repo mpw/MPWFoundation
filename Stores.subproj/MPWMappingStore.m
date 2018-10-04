@@ -79,6 +79,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source graphViz:aStream];
 }
 
+-(void)dealloc
+{
+    [_source release];
+    [super dealloc];
+}
 
 @end
 

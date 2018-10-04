@@ -55,7 +55,7 @@
     BOOL    exists=NO;
     NSURL   *url=[self fileURLForReference:aReference];
     exists=[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDirectory];
-    return !isDirectory;
+    return exists && !isDirectory;
 }
 
 -(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference

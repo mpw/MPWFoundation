@@ -48,6 +48,14 @@
     }
 }
 
+-(void)dealloc
+{
+    [_notificationName release];
+    [super dealloc];
+}
+
+
+
 @end
 
 #import "DebugMacros.h"
@@ -106,6 +114,12 @@
     EXPECTNIL(self.result,@"nothing yet");
     [s writeObject:@"protocol"];
     IDEXPECT(self.result,@"protocol",@"notification was received");
+}
+
+-(void)dealloc
+{
+    [_result release];
+    [super dealloc];
 }
 
 

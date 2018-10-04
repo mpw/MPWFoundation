@@ -105,6 +105,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self components] isEqual:[other components]];
 }
 
+-(void)dealloc
+{
+    [_components release];
+    [super dealloc];
+}
+
 @end
 
 #import "MPWGenericReference.h"
@@ -123,7 +129,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSString *urlString=@"http://www.metaobject.com";
     NSURL *sourceURL=[NSURL URLWithString:urlString];
-    MPWGenericReference *ref=[[[self classUnderTest] alloc] initWithPath:urlString];
+    MPWGenericReference *ref=[[[[self classUnderTest] alloc] initWithPath:urlString] autorelease];
 //    IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
     IDEXPECT( [ref URL], sourceURL, @"urls");
 }

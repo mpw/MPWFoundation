@@ -34,7 +34,7 @@ CONVENIENCEANDINIT( stream, WithBlock:(TargetBlock)newBlock)
 
 -(void)dealloc
 {
-    [self.block release];
+    [_block release];
     [super dealloc];
 }
 

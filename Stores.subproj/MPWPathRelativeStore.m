@@ -38,6 +38,12 @@
     return [NSString stringWithFormat:@"\"Relative:\\n%@\"",[self.baseReference pathComponents].lastObject];
 }
 
+-(void)dealloc
+{
+    [(id)_baseReference release];
+    [super dealloc];
+}
+
 @end
 
 #import "DebugMacros.h"

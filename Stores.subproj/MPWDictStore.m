@@ -51,6 +51,12 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     self.dict[[self referenceToKey:aReference]]=nil;
 }
 
+-(void)dealloc
+{
+    [_dict release];
+    [super dealloc];
+}
+
 @end
 
 #import "DebugMacros.h"

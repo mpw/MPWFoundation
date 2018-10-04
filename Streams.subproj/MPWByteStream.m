@@ -56,6 +56,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     NSString*    finalFileName;
 }
 +fileNameTarget:(NSString*)fileName mode:(NSString*)mode;
++fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic;
 
 @end
 
@@ -610,7 +611,6 @@ idAccessor( finalFileName, setFinalFileName )
 {
     id tempName = filename;
     id target;
-    FILE *f;
     if ( atomic ) {
         tempName=[filename stringByAppendingString:@"~"];
     }
@@ -643,6 +643,7 @@ idAccessor( finalFileName, setFinalFileName )
 
 -(instancetype)initWithName:(NSString *)name mode:(NSString*)mode
 {
+    [self release];
     return nil;
 }
 

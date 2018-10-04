@@ -101,9 +101,9 @@
 
 -(void)dealloc
 {
-    [self.url release];
-    [self.inputStream release];
-    [self.outputStream release];
+    [_url release];
+    [_inputStream release];
+    [_outputStream release];
     [super dealloc];
 }
 

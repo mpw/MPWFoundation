@@ -127,7 +127,7 @@
 -(void)dealloc
 {
     [self closeLocal];
-    [self.source release];
+    [_source release];
     [super dealloc];
 }
 

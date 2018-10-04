@@ -28,7 +28,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return self;
 }
 
--(id)copyFromSourceToCache:(id <MPWReferencing>)aReference
+-(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
 {
     id result=[self.source objectForReference:aReference];
     [self.cache setObject:result forReference:aReference];
@@ -39,7 +39,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
     id result=[self.cache objectForReference:aReference];
     if (!result ) {
-        result = [self copyFromSourceToCache:aReference];
+        result = [self doCopyFromSourceToCache:aReference];
     }
     return result;
 }
@@ -60,7 +60,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)mergeObject:newObject forReference:(id <MPWReferencing>)aReference
 {
-    [self copyFromSourceToCache:aReference];
+    [self doCopyFromSourceToCache:aReference];
     [self.cache mergeObject:newObject forReference:aReference];
     [self writeToSource:[self.cache objectForReference:aReference] forReference:aReference];
 }
@@ -87,11 +87,15 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     [aStream printFormat:@"%@ -> ",[self displayName]];
     [self.source graphViz:aStream];
 }
-     
+
+-(void)dealloc
+{
+    [_cache release];
+    [super dealloc];
+}
 
 
 @end
-
 
 @interface MPWCachingStoreTests : NSObject
 
@@ -106,6 +110,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 
 @implementation MPWWriteThroughCache(testing)
+
 
 
 +testFixture
@@ -203,7 +208,19 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     IDEXPECT( self.store[self.key], @"hi there",@"merging with unitialized cache");
 }
 
+
+-(void)dealloc
+{
+    [_key release];
+    [_value release];
+    [_cache release];
+    [_source release];
+    [_store release];
+    [super dealloc];
+}
+
 @end
+
 
 @implementation MPWCachingStore
 @end

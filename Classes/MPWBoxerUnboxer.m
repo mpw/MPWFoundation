@@ -25,8 +25,6 @@
 
 @implementation MPWBoxerUnboxer
 
-
-
 static NSMutableDictionary *conversionDict;
 
 +(NSMutableDictionary*)createConversionDict
@@ -187,6 +185,14 @@ static NSMutableDictionary *conversionDict;
         return nil;
     }
         
+}
+
+-(void)dealloc
+{
+    [_unboxBlock release];
+    [_boxBlock release];
+    [_boxVarargBlock release];
+    [super dealloc];
 }
 
 

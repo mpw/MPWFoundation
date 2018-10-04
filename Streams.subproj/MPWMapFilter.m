@@ -43,6 +43,12 @@ CONVENIENCEANDINIT( filter, WithBlock:(id)aBlock)
     }
 }
 
+-(void)dealloc
+{
+    [_block release];
+    [super dealloc];
+}
+
 @end
 
 

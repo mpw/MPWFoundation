@@ -444,6 +444,12 @@ typedef id (^idBlock)(id arg );
     FLOATEXPECTTOLERANCE([pointArg y], 9991, 0.0001, @"y");
 }
 
+-(void)dealloc
+{
+    [_formalParameters release];
+    [super dealloc];
+}
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
@@ -459,5 +465,6 @@ typedef id (^idBlock)(id arg );
 }
 
 @end
+
 
 #endif

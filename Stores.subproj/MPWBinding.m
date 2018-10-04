@@ -68,4 +68,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [MPWPathRelativeStore storeWithSource:self.store reference:self.reference];
 }
 
+-(void)dealloc
+{
+    [(id)_reference release];
+    [_store release];
+    [super dealloc];
+}
+
 @end

@@ -92,7 +92,10 @@ CONVENIENCEANDINIT( call, WithRESTOperation:(MPWRESTOperation*)op)
     [_response release];
     [_error release];
     [_task release];
-    
+    [_processedObject release];
+    [_bodyData release];
+    [_headerDict release];
+    [_nextCall release];
     [super dealloc];
 }
 
