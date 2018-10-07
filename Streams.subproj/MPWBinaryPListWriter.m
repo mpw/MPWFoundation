@@ -67,7 +67,7 @@ From:  https://github.com/opensource-apple/CF/blob/master/CFBinaryPList.c
  
  */
 
-#if ! TARGET_OS_IPHONE
+//#if ! TARGET_OS_IPHONE
 
 @implementation MPWBinaryPListWriter
 
@@ -362,6 +362,17 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     }
 }
 
+-(void)writeData:(NSData*)data
+{
+    {
+        [self _recordByteOffset];
+        long l=[data length];
+        [self writeCompoundObjectHeader:0x40 length:l];
+        TARGET_APPEND((char*)[data bytes], l);
+        [objectTable setObject:(id)(long)[currentIndexes lastInteger] forKey:data];
+    }
+}
+
 -(int)offsetTableEntryByteSize
 {
     return 4;
@@ -521,6 +532,18 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     IDEXPECT(s , @"Hello World!", @"the string I wrote");
 }
 
++(void)testWriteData
+{
+    MPWBinaryPListWriter *writer=[self stream];
+    const unsigned char testbytes[]={ 0x42, 0x00, 0xa2, 0x03};
+    NSData *data=[NSData dataWithBytes:testbytes length:4];
+    [writer writeHeader];
+    [writer writeData:data];
+    [writer flush];
+    NSData *parsed=[self _plistForStream:writer];
+    IDEXPECT(parsed , data, @"the data I wrote");
+}
+
 
 
 +(void)testArrayWithStringsAndInts
@@ -629,6 +652,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
              @"testWriteArrayWithTwoElements",
              @"testWriteNestedArray",
              @"testWriteString",
+             @"testWriteData",
              @"testArrayWithStringsAndInts",
              @"testSimpleDict",
              @"testArrayWriter",
@@ -642,4 +666,4 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 @end
 
 
-#endif
+//#endif
