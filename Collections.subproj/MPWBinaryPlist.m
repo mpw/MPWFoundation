@@ -490,6 +490,16 @@ static inline double readRealAtIndex( long  anIndex, const unsigned char *bytes,
                         initWithBytes:bytes+offset  length:length encoding:NSASCIIStringEncoding]);
 }
 
+-(NSData*)readDataAtIndex:(long)anIndex
+{
+    long offset=offsets[anIndex];
+    int bottomNibble=bytes[offset] & 0x0f;
+    offset++;
+    long length = lengthForNibbleAtOffset(  bottomNibble, bytes,  &offset );
+    return AUTORELEASE([[NSData alloc]
+                        initWithBytes:bytes+offset  length:length]);
+}
+
 -(NSString*)readUTF16StringAtIndex:(long)anIndex
 {
     long offset=offsets[anIndex];
@@ -511,6 +521,9 @@ static inline double readRealAtIndex( long  anIndex, const unsigned char *bytes,
             break;
         case 0x2:
             result = [self readRealNumberAtIndex:anIndex];
+            break;
+        case 0x4:
+            result = [self readDataAtIndex:anIndex];
             break;
         case 0x5:
             result = [self readASCIIStringAtIndex:anIndex];
@@ -756,6 +769,20 @@ DEALLOC(
     IDEXPECT(result, tester,@"dict");
 }
 
++(void)testReadPlistWithDataContents
+{
+    unsigned const char testData[]={ 0x23, 0x45, 0x00, 0x81, };
+    NSMutableData *d=[NSMutableData dataWithBytes:testData length:4];
+    for (int i=0;i<6;i++) {
+        [d appendData:d];
+    }
+    INTEXPECT( [d length], 256, @"length");
+    MPWBinaryPlist *bplist=[self bplistWithData:[self _createBinaryPlist:d]];
+    NSData *parsed=[bplist rootObject];
+    IDEXPECT( d, parsed, @"got the same data");
+}
+
+
 +testSelectors
 {
     return @[ @"testRecognizesHeader",
@@ -772,6 +799,7 @@ DEALLOC(
               @"testReadDictActively",
               @"testReadLazyArray",
               @"testReadLazyArray",
+              @"testReadPlistWithDataContents",
               ];
 }
 
