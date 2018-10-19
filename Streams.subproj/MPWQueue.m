@@ -50,6 +50,13 @@
     }
 }
 
+-(void)removeFirstObject
+{
+    @synchronized(self) {
+        [self.queue removeObjectAtIndex:0];
+    }
+}
+
 -(void)forwardNext
 {
     id next=nil;
@@ -58,9 +65,7 @@
     }
     if (next) {
         FORWARD(next);
-        @synchronized(self) {
-            [self.queue removeObjectAtIndex:0];
-        }
+        [self removeFirstObject];
     }
 }
 
