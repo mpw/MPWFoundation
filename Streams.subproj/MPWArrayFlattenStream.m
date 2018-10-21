@@ -30,6 +30,11 @@
     [[anArray objectEnumerator] writeOnStream:self];
 }
 
+-defaultSpacer
+{
+    return nil;
+}
+
 @end
 
 
@@ -53,3 +58,23 @@
 
 @end
 
+#import "DebugMacros.h"
+
+
+@implementation MPWArrayFlattenStream(testing)
+
++(void)testNestedArraysGetFlatted
+{
+    NSArray *nested=@[ @"a", @[ @"b", @"c" , @[@"d",@"e"]],@"f"];
+    NSArray *flattened=[self process:nested];
+    IDEXPECT(flattened,(@[ @"a",@"b",@"c",@"d",@"e",@"f"]),@"flattened");
+}
+
++testSelectors
+{
+    return @[
+             @"testNestedArraysGetFlatted",
+            ];
+}
+
+@end

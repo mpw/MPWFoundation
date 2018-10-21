@@ -60,7 +60,7 @@ typedef struct {
 
 idAccessor_h( defaultValue, setDefaultValue )
 
-#define OBJECTFORSTRINGLENGTH( table, str, stlen )  (table->__stringTableLookupFun( table, @selector(objectForCString:length:) , str, stlen ))
+#define OBJECTFORSTRINGLENGTH( table, str, stlen )  (table->__stringTableLookupFun( table, @selector(objectForCString:length:) , (char*)str, (int)stlen ))
 #define OBJECTFORCONSTANTSTRING( table, str )  OBJECTFORSTRINGLENGTH( table, str, (sizeof str) -1 )
 
 
