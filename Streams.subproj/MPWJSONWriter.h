@@ -14,7 +14,7 @@
 
 -(void)writeNull;
 -(void)writeInteger:(int)number;
--(void)writeFloat:(double)number;
+-(void)writeFloat:(float)number;
 -(void)writeInteger:(int)number forKey:(NSString*)aKey;
 -(void)writeString:(NSString*)string forKey:(NSString*)aKey;
 

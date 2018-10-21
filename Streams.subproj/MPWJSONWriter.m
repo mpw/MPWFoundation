@@ -228,7 +228,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 }
 
 
--(void)writeFloat:(double)number
+-(void)writeFloat:(float)number
 {
 	[self printf:@"%g",number];
 }
