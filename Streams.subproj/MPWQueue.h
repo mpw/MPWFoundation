@@ -10,7 +10,7 @@
 @interface MPWQueue : MPWFilter
 
 @property (readonly)  NSUInteger count;
-
+@property (assign)    BOOL       removeInflight;
 -(void)forwardNext;
 -(void)drain;
 

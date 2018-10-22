@@ -40,6 +40,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 -(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock;
+-(void)writeArrayContent:(NSArray*)array;
 
 @end
 

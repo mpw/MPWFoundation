@@ -156,7 +156,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
     }
     const char *endptr=buffer+len;
     const char *rest=buffer;
-    char *cur=rest;
+    const char *cur=rest;
 //	NSLog(@"length of UTF8: %d",strlen(buffer));
 	while ( (curchar = *cur) && cur < endptr ) {
         

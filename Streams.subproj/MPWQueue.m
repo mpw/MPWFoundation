@@ -26,6 +26,7 @@
 @interface MPWQueue()
 
 @property (atomic, strong) id <OrderedCollection> queue;
+@property (atomic, strong) NSObject* inflight;
 
 @end
 
@@ -59,13 +60,21 @@
 
 -(void)forwardNext
 {
+    BOOL removeInflight=self.removeInflight;
     id next=nil;
     @synchronized(self) {
         next=self.queue.firstObject;
     }
+    self.inflight=next;
     if (next) {
-        FORWARD(next);
-        [self removeFirstObject];
+        if ( removeInflight ) {
+            [self removeFirstObject];
+            FORWARD(next);
+        } else {
+            FORWARD(next);
+            [self removeFirstObject];
+        }
+        self.inflight=nil;
     }
 }
 
