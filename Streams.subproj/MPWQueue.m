@@ -27,6 +27,9 @@
 
 @property (atomic, strong) id <OrderedCollection> queue;
 @property (atomic, strong) NSObject* inflight;
+@property (atomic, strong) NSString* name;
+@property (atomic, strong) NSThread* flusherThread;
+
 
 @end
 
@@ -49,6 +52,22 @@
     @synchronized(self) {
         [self.queue addObject:anObject];
     }
+    if ( self.autoFlush ) {
+        [self triggerFlush];
+    }
+}
+
+-(void)triggerFlush
+{
+    if ( (self.flusherThread == nil) || ([NSThread currentThread] == self.flusherThread) ) {
+        [self drain];
+    } else {
+        [self performSelector:@selector(drain)
+                     onThread:self.flusherThread
+                   withObject:nil
+                waitUntilDone:NO
+                        modes:@[ NSDefaultRunLoopMode ]];
+    }
 }
 
 -(void)removeFirstObject
@@ -58,7 +77,7 @@
     }
 }
 
--(void)forwardNext
+-(void)forwardSingleObject
 {
     BOOL removeInflight=self.removeInflight;
     id next=nil;
@@ -81,7 +100,30 @@
 -(void)drain
 {
     while (self.count) {
-        [self forwardNext];
+        [self forwardSingleObject];
+    }
+}
+
+-(void)flusherThreadRunLoop
+{
+    @autoreleasepool {
+        NSRunLoop *loop = [NSRunLoop currentRunLoop];
+        [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [loop run];
+    }
+}
+
+-(void)setFlusherThreadName
+{
+    [self.flusherThread setName:[NSString stringWithFormat:@"Queue Processing Thread %@ %p", self.name, self]];
+}
+
+-(void)createFlusherThreadIfNecessary
+{
+    if ( !self.flusherThread) {
+        self.flusherThread = [[[NSThread alloc] initWithTarget:self selector:@selector(flusherThreadRunLoop) object:nil] autorelease];
+        [self setFlusherThreadName];
+        [self.flusherThread start];
     }
 }
 
