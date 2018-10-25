@@ -22,7 +22,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     return self;
 }
 
--(void)writeObject:(MPWRESTOperation*)anObject
+-(void)writeObject:(MPWRESTOperation*)anObject sender:aSender
 {
     id <MPWReferencing> ref=anObject.reference;
     switch (anObject.verb) {

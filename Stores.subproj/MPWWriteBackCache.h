@@ -11,6 +11,5 @@
 
 @interface MPWWriteBackCache : MPWWriteThroughCache
 
-@property (nonatomic, retain)  id <Streaming> streamCopier;
 
 @end

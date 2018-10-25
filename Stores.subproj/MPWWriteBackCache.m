@@ -8,6 +8,16 @@
 #import "MPWWriteBackCache.h"
 #import "MPWRESTCopyStream.h"
 #import "MPWRESTOperation.h"
+#import "MPWQueue.h"
+
+@interface MPWWriteBackCache()
+
+@property (nonatomic, retain)  id <Streaming> streamCopier;
+@property (nonatomic, retain)  MPWQueue *queue;
+
+
+@end
+
 
 @implementation MPWWriteBackCache
 
@@ -15,15 +25,17 @@
 {
     self=[super initWithSource:newSource cache:newCache];
     MPWRESTCopyStream *s=[[[MPWRESTCopyStream alloc] initWithSource:(MPWAbstractStore*)newCache target:(MPWAbstractStore*)newSource] autorelease];
-    
+    MPWQueue *q=[MPWQueue queueWithTarget:s uniquing:YES];
+    q.autoFlush=YES;
     self.streamCopier=s;
+    self.queue=q;
     return self;
 }
 
 -(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference
 {
     if (!self.readOnlySource) {
-        [self.streamCopier writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
+        [self.queue writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
     }
 }
 
@@ -31,6 +43,7 @@
 -(void)dealloc
 {
     [(NSObject*)_streamCopier release];
+    [self.queue release];
     [super dealloc];
 }
 

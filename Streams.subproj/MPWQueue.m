@@ -6,6 +6,7 @@
 //
 
 #import "MPWQueue.h"
+#import "AccessorMacros.h"
 
 @protocol OrderedCollection<NSObject>
 
@@ -35,7 +36,7 @@
 
 @implementation MPWQueue
 
--(instancetype)initWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique
+CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 {
     self=[super initWithTarget:aTarget];
     self.queue = shouldUnique ? [NSMutableOrderedSet orderedSet] : [NSMutableArray array];
@@ -47,17 +48,17 @@
     return [self initWithTarget:aTarget uniquing:NO];
 }
 
--(void)writeObject:(id)anObject
+-(void)writeObject:(id)anObject sender:aSender
 {
     @synchronized(self) {
         [self.queue addObject:anObject];
     }
     if ( self.autoFlush ) {
-        [self triggerFlush];
+        [self triggerDrain];
     }
 }
 
--(void)triggerFlush
+-(void)triggerDrain
 {
     if ( (self.flusherThread == nil) || ([NSThread currentThread] == self.flusherThread) ) {
         [self drain];
@@ -84,16 +85,19 @@
     @synchronized(self) {
         next=self.queue.firstObject;
     }
-    self.inflight=next;
     if (next) {
+        self.inflight=next;
         if ( removeInflight ) {
             [self removeFirstObject];
-            FORWARD(next);
-        } else {
-            FORWARD(next);
-            [self removeFirstObject];
         }
-        self.inflight=nil;
+        @try {
+            [self forward:next];
+        } @finally {
+            if ( !removeInflight)  {
+                [self removeFirstObject];
+            }
+            self.inflight=nil;
+        }
     }
 }
 
@@ -148,17 +152,36 @@
 
 @implementation MPWQueue(testing)
 
-+(void)testForwardingWorks
-{
-    NSMutableArray *a=[NSMutableArray array];
-    MPWQueue *q=[self streamWithTarget:a];
++aTestQueue {
+    return [self streamWithTarget:[NSMutableArray array]];
+}
+
+
++filledTestQueue {
+    MPWQueue *q=[self aTestQueue];
     INTEXPECT(q.count, 0, @"0 objects added");
     [q writeObject:@(1)];
     [q writeObject:@(2)];
     [q writeObject:@(3)];
     INTEXPECT(q.count, 3, @"3 objects added");
+    return q;
+}
+
++(void)testDrainForwardsAllToTarget
+{
+    MPWQueue *q=[self filledTestQueue];
+    NSArray *a=(NSArray*)[q target];
     INTEXPECT(a.count, 0, @"0 objects forwarded");
     [q drain];
+    INTEXPECT(a.count, 3, @"3 objects forwarded");
+    IDEXPECT(a, (@[ @(1), @(2), @(3)]), @"3 objects forwarded");
+}
+
++(void)testTriggeringWorksSameAsDrain
+{
+    MPWQueue *q=[self filledTestQueue];
+    NSArray *a=(NSArray*)[q target];
+    [q triggerDrain];
     INTEXPECT(a.count, 3, @"3 objects forwarded");
     IDEXPECT(a, (@[ @(1), @(2), @(3)]), @"3 objects forwarded");
 }
@@ -174,11 +197,27 @@
 
 }
 
++(void)testAutoflushDrainsImmediately
+{
+    MPWQueue *q=[self aTestQueue];
+    [q setAutoFlush:YES];
+    NSArray *a=(NSArray*)[q target];
+    [q writeObject:@(1)];
+    INTEXPECT( q.count, 0 ,@"should have flushed immediately");
+    IDEXPECT(a, (@[@(1)]),@"target");
+    
+    [q writeObject:@(2)];
+    INTEXPECT( q.count, 0 ,@"should have flushed immediately");
+    IDEXPECT(a, (@[@(1),@(2)]),@"target");
+}
+
 
 +testSelectors
 {
     return @[
-             @"testForwardingWorks",
+             @"testDrainForwardsAllToTarget",
+             @"testTriggeringWorksSameAsDrain",
+             @"testAutoflushDrainsImmediately",
              @"testDupsAreRejectedWhenUniquing",
              ];
 }

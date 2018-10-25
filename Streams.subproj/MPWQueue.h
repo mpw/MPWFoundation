@@ -13,9 +13,12 @@
 @property (atomic, assign) BOOL removeInflight;
 @property (atomic, assign) BOOL autoFlush;
 
++(instancetype)queueWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique;
+-(instancetype)initWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique;
+
 
 -(void)forwardSingleObject;
--(void)drain;
+-(void)triggerDrain;
 
 
 
