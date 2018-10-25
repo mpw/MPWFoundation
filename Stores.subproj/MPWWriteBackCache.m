@@ -39,6 +39,15 @@
     }
 }
 
+-(void)makeAsynchronous
+{
+    [self.queue makeAsynchronous];
+}
+
+-(BOOL)isAsynchronous
+{
+    return self.queue.isAsynchronous;
+}
 
 -(void)dealloc
 {

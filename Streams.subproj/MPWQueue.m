@@ -112,6 +112,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
         [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
         [loop run];
     }
+    self.flusherThread=nil;
 }
 
 -(void)_stopFlusherThreadRunLoop
@@ -130,7 +131,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     [self.flusherThread setName:[NSString stringWithFormat:@"Queue Processing Thread %@ %p", self.name, self]];
 }
 
--(void)createFlusherThreadIfNecessary
+-(void)makeAsynchronous
 {
     if ( !self.flusherThread) {
         self.flusherThread = [[[NSThread alloc] initWithTarget:self selector:@selector(_flusherThreadRunLoop) object:nil] autorelease];
@@ -146,6 +147,11 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
         count=self.queue.count;
     }
     return count;
+}
+
+-(BOOL)isAsynchronous
+{
+    return self.flusherThread != nil;
 }
 
 -(void)dealloc
@@ -226,7 +232,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 {
     MPWQueue *q=[self filledTestQueue];
     NSArray *a=(NSArray*)[q target];
-    [q createFlusherThreadIfNecessary];
+    [q makeAsynchronous];
     [q triggerDrain];
     [NSThread sleepForTimeInterval:0.00001 orUntilConditionIsMet:^{
         return @( a.count == 3 );
@@ -238,7 +244,9 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 {
     MPWQueue *q=[self aTestQueue];
     NSArray *a=(NSArray*)[q target];
-    [q createFlusherThreadIfNecessary];
+    EXPECTFALSE(q.isAsynchronous,@"is async");
+    [q makeAsynchronous];
+    EXPECTTRUE(q.isAsynchronous,@"is async");
     q.autoFlush=YES;
     INTEXPECT(a.count,0,@"before");
     [q writeObject:@"first"];

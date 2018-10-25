@@ -11,5 +11,8 @@
 
 @interface MPWWriteBackCache : MPWWriteThroughCache
 
+-(void)makeAsynchronous;
+@property (readonly) BOOL isAsynchronous;
+
 
 @end

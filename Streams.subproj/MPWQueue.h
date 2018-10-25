@@ -12,6 +12,7 @@
 @property (readonly)  NSUInteger count;
 @property (atomic, assign) BOOL removeInflight;
 @property (atomic, assign) BOOL autoFlush;
+@property (readonly) BOOL isAsynchronous;
 
 +(instancetype)queueWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique;
 -(instancetype)initWithTarget:(id)aTarget uniquing:(BOOL)shouldUnique;
@@ -19,7 +20,7 @@
 
 -(void)forwardSingleObject;
 -(void)triggerDrain;
-
+-(void)makeAsynchronous;
 
 
 @end
