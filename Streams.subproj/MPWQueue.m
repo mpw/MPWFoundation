@@ -63,12 +63,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     if ( (self.flusherThread == nil) || ([NSThread currentThread] == self.flusherThread) ) {
         [self drain];
     } else {
-        [self performSelector:@selector(drain)
-                     onThread:self.flusherThread
-                   withObject:nil
-                waitUntilDone:NO
-                        modes:@[ NSDefaultRunLoopMode ]];
-    }
+        [[self onThread:self.flusherThread] drain];
+     }
 }
 
 -(void)removeFirstObject
@@ -108,14 +104,26 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     }
 }
 
--(void)flusherThreadRunLoop
+-(void)_flusherThreadRunLoop
 {
     @autoreleasepool {
         NSRunLoop *loop = [NSRunLoop currentRunLoop];
+        
         [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
         [loop run];
     }
 }
+
+-(void)_stopFlusherThreadRunLoop
+{
+    CFRunLoopStop( CFRunLoopGetCurrent() );
+}
+
+-(void)_exitFlusherThread
+{
+    [[self onThread:self.flusherThread] _stopFlusherThreadRunLoop];
+}
+
 
 -(void)setFlusherThreadName
 {
@@ -125,7 +133,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 -(void)createFlusherThreadIfNecessary
 {
     if ( !self.flusherThread) {
-        self.flusherThread = [[[NSThread alloc] initWithTarget:self selector:@selector(flusherThreadRunLoop) object:nil] autorelease];
+        self.flusherThread = [[[NSThread alloc] initWithTarget:self selector:@selector(_flusherThreadRunLoop) object:nil] autorelease];
         [self setFlusherThreadName];
         [self.flusherThread start];
     }
@@ -142,6 +150,9 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 -(void)dealloc
 {
+    [_name release];
+    [self _exitFlusherThread];
+    [_flusherThread release];
     [_queue release];
     [super dealloc];
 }
@@ -211,6 +222,33 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     IDEXPECT(a, (@[@(1),@(2)]),@"target");
 }
 
++(void)testAsyncFlushing
+{
+    MPWQueue *q=[self filledTestQueue];
+    NSArray *a=(NSArray*)[q target];
+    [q createFlusherThreadIfNecessary];
+    [q triggerDrain];
+    [NSThread sleepForTimeInterval:0.00001 orUntilConditionIsMet:^{
+        return @( a.count == 3 );
+    }];
+    IDEXPECT(a, (@[ @(1), @(2), @(3)]), @"3 objects forwarded");
+}
+
++(void)testAsyncAutoFlushing
+{
+    MPWQueue *q=[self aTestQueue];
+    NSArray *a=(NSArray*)[q target];
+    [q createFlusherThreadIfNecessary];
+    q.autoFlush=YES;
+    INTEXPECT(a.count,0,@"before");
+    [q writeObject:@"first"];
+    INTEXPECT(a.count,0,@"directly after write, async drain shouldn't really have executed yet");
+    [NSThread sleepForTimeInterval:0.00001 orUntilConditionIsMet:^{
+        return @( a.count == 1 );
+    }];
+    IDEXPECT(a, (@[ @"first" ]), @"1 object auto-forwarded");
+}
+
 
 +testSelectors
 {
@@ -219,6 +257,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
              @"testTriggeringWorksSameAsDrain",
              @"testAutoflushDrainsImmediately",
              @"testDupsAreRejectedWhenUniquing",
+             @"testAsyncFlushing",
+             @"testAsyncAutoFlushing",
              ];
 }
 
