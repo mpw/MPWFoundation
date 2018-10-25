@@ -108,9 +108,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 {
     @autoreleasepool {
         NSRunLoop *loop = [NSRunLoop currentRunLoop];
-        
         [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
-        [loop run];
+        CFRunLoopRun();
     }
     self.flusherThread=nil;
 }
@@ -257,6 +256,20 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     IDEXPECT(a, (@[ @"first" ]), @"1 object auto-forwarded");
 }
 
++(void)testStopAsync
+{
+    MPWQueue *q=[self aTestQueue];
+    EXPECTFALSE(q.isAsynchronous,@"is async");
+    [q makeAsynchronous];
+    EXPECTTRUE(q.isAsynchronous,@"is async");
+    [q _exitFlusherThread];
+    [NSThread sleepForTimeInterval:10 orUntilConditionIsMet:^{
+        return @( q.isAsynchronous == false );
+    }];
+    EXPECTFALSE(q.isAsynchronous,@"is async");
+
+}
+
 
 +testSelectors
 {
@@ -267,6 +280,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
              @"testDupsAreRejectedWhenUniquing",
              @"testAsyncFlushing",
              @"testAsyncAutoFlushing",
+             @"testStopAsync",
              ];
 }
 
