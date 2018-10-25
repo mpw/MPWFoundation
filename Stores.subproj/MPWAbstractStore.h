@@ -46,6 +46,8 @@
 -(NSURL*)URLForReference:aReference;
 
 -(void)setSourceStores:(NSArray <MPWStorage>*)stores;
+-(void)setStoreDict:(NSDictionary*)storeDict;
+
 
 -(void)graphViz:(MPWByteStream*)aStream;
 -(NSString*)graphViz;

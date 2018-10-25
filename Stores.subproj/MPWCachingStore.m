@@ -79,6 +79,12 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     self.source=stores.lastObject;
 }
 
+-(void)setStoreDict:(NSDictionary*)storeDict
+{
+    self.cache=storeDict[@"cache"];
+    self.source=storeDict[@"source"];
+}
+
 
 -(void)graphViz:(MPWByteStream*)aStream
 {

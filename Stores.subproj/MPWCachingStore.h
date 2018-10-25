@@ -19,6 +19,8 @@
 
 -(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference;
 
+-(void)setStoreDict:(NSDictionary*)storeDict;
+
 @end
 
 @interface MPWCachingStore : MPWWriteThroughCache

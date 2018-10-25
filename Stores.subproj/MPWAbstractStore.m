@@ -73,6 +73,16 @@
     return [aReference URL];
 }
 
++(instancetype)mapStore:(id)storeDescription
+{
+    if ( [storeDescription respondsToSelector:@selector(store)]) {
+        storeDescription=[storeDescription store];
+    } else if ( [storeDescription isKindOfClass:[NSArray class]]) {
+        storeDescription=[self stores:storeDescription];
+    }
+    return storeDescription;
+}
+
 +(instancetype)stores:(NSArray*)stores
 {
     MPWAbstractStore *first=nil;
@@ -85,6 +95,14 @@
                 [substores addObject:substore];
             }
             [previous setSourceStores:substores];
+        } else if ( [storeDescription isKindOfClass:[NSDictionary class]] ) {
+            NSDictionary *descriptionDict=(NSDictionary*)storeDescription;
+            NSMutableDictionary *storeDict=[NSMutableDictionary dictionary];
+            for  (NSString *key in descriptionDict.allKeys ) {
+                id subDescription=descriptionDict[key];
+                storeDict[key]=[self mapStore:subDescription];
+            }
+            [previous setStoreDict:storeDict];
         } else {
             if ( [storeDescription respondsToSelector:@selector(store)]) {
                 storeDescription=[storeDescription store];
@@ -123,6 +141,11 @@
 {
    
 }
+
+-(void)setStoreDict:(NSDictionary*)storeDict
+{
+}
+
 
 @end
 
@@ -177,7 +200,7 @@
     IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 
-+(void)testConstructingAStoreHierarchy
++(void)testConstructingDifferentStoreHierarchiesWithArrays
 {
     MPWAbstractStore *s1=[MPWAbstractStore stores:@[ [MPWAbstractStore store]]];
     EXPECTTRUE([s1 isKindOfClass:[MPWAbstractStore class]], @"simple store");
@@ -209,10 +232,31 @@
 
 }
 
++(void)testConstructingAStoreHierarchyWithDictionary
+{
+    MPWCachingStore *s1=[MPWCachingStore stores:@[ [MPWCachingStore class],
+                                                   @{ @"cache":  [MPWDictStore class] ,
+                                                      @"source": [MPWAbstractStore class] }]];
+    EXPECTTRUE( [s1 isKindOfClass:[MPWCachingStore class]], @"should be a caching store");
+    EXPECTNOTNIL( s1.cache ,@"has cache");
+
+    MPWCachingStore *s2=[MPWCachingStore stores:@[ [MPWCachingStore class],
+                                                   @{ @"cache": @[ [MPWMappingStore class], [MPWDictStore class] ],
+                                                      @"source": [MPWAbstractStore class] }]];
+    EXPECTTRUE( [s2 isKindOfClass:[MPWCachingStore class]], @"should be a caching store");
+    EXPECTNOTNIL( s2.cache ,@"has cache");
+    MPWMappingStore *cache=(MPWMappingStore*)s2.cache;
+    EXPECTTRUE( [cache isKindOfClass:[MPWMappingStore class]], @"should be a mapping store");
+    MPWDictStore *cacheSource=(MPWDictStore*)cache.source;
+    EXPECTTRUE( [cacheSource isKindOfClass:[MPWDictStore class]], @"should be a dict store");
+
+}
+
 +(NSArray*)testSelectors {  return @[
                                      @"testConstructingReferences",
                                      @"testGettingURLs",
-                                     @"testConstructingAStoreHierarchy",
+                                     @"testConstructingDifferentStoreHierarchiesWithArrays",
+                                     @"testConstructingAStoreHierarchyWithDictionary",
                                      ]; }
 
 @end
