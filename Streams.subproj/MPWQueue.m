@@ -263,7 +263,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     [q makeAsynchronous];
     EXPECTTRUE(q.isAsynchronous,@"is async");
     [q _exitFlusherThread];
-    [NSThread sleepForTimeInterval:10 orUntilConditionIsMet:^{
+    [NSThread sleepForTimeInterval:0.1 orUntilConditionIsMet:^{
         return @( q.isAsynchronous == false );
     }];
     EXPECTFALSE(q.isAsynchronous,@"is async");
