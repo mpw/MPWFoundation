@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <objc/Protocol.h>
+
+@interface Protocol:NSObject {} @end
 
 @protocol MPWNotificationProtocol
 //  empty, this is a marker protocol
@@ -21,5 +24,11 @@
 void sendProtocolNotification( Protocol *aProtocol, id anObject );
 NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 
+@interface Protocol(notifications)
 
-#define PROTOCOL_NOTIFY(protocolName, object)   sendProtocolNotification(@protocol(protocolName),object )
+-(void)notify:anObject;
+-(void)notify;
+-(BOOL)isNotificationProtocol;
+
+@end
+
