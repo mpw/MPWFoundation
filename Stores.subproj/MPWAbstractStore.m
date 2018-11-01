@@ -91,7 +91,7 @@
         if ( [storeDescription isKindOfClass:[NSArray class]] ) {
             NSMutableArray<MPWStorage> *substores=(id)[NSMutableArray array];
             for ( NSArray *subdescription in storeDescription) {
-                MPWAbstractStore *substore=[self stores:subdescription];
+                MPWAbstractStore *substore=[self mapStore:subdescription];
                 [substores addObject:substore];
             }
             [previous setSourceStores:substores];
@@ -252,11 +252,23 @@
 
 }
 
++(void)testCanPutStoresDirectlyInSquentialStoreConstructionDescription
+{
+    MPWSequentialStore *s1=[MPWSequentialStore stores:@[ [MPWSequentialStore class],@[ [MPWDictStore store], [MPWAbstractStore class]] ]];
+    EXPECTTRUE( [s1 isKindOfClass:[MPWSequentialStore class]],@"constructed a sequential store");
+    NSArray *substores=[s1 stores];
+    INTEXPECT( [substores count],2,@"number of substores");
+    EXPECTTRUE( [substores.firstObject isKindOfClass:[MPWDictStore class]],@"first is a dict store");
+    EXPECTTRUE( [substores.lastObject isKindOfClass:[MPWAbstractStore class]],@"last is an abstract store");
+}
+
+
 +(NSArray*)testSelectors {  return @[
                                      @"testConstructingReferences",
                                      @"testGettingURLs",
                                      @"testConstructingDifferentStoreHierarchiesWithArrays",
                                      @"testConstructingAStoreHierarchyWithDictionary",
+                                     @"testCanPutStoresDirectlyInSquentialStoreConstructionDescription",
                                      ]; }
 
 @end
