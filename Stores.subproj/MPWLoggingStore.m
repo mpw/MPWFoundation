@@ -10,12 +10,6 @@
 #import "AccessorMacros.h"
 #import "MPWRESTOperation.h"
 
-@interface MPWLoggingStore()
-
-@property (nonatomic, strong) NSObject <Streaming>* log;
-
-@end
-
 @implementation MPWLoggingStore
 
 CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStorage>*)aSource loggingTo:(id <Streaming>)log )
@@ -44,6 +38,8 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 }
 
 @end
+
+#import "DebugMacros.h"
 
 @implementation MPWLoggingStore(tests)
 

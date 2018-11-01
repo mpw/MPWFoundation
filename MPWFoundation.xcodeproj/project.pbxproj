@@ -273,9 +273,9 @@
 		1FA869C920E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
 		1FA869CA20E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
 		1FA869CB20E8E01200920279 /* MPWCachingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869C520E8E01200920279 /* MPWCachingStore.m */; };
-		1FA869CE20EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; };
-		1FA869CF20EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; };
-		1FA869D020EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; };
+		1FA869CE20EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869CF20EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FA869D020EBC01500920279 /* MPWLoggingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA869CC20EBC01500920279 /* MPWLoggingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA869D120EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };
 		1FA869D220EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };
 		1FA869D320EBC01500920279 /* MPWLoggingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869CD20EBC01500920279 /* MPWLoggingStore.m */; };

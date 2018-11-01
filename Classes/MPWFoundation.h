@@ -144,5 +144,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWCachingStore.h"
 #import "MPWFoundation/MPWSwitchingStore.h"
 #import "MPWFoundation/MPWSequentialStore.h"
+#import "MPWFoundation/MPWLoggingStore.h"
 
 
