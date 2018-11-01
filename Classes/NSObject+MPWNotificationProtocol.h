@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/Protocol.h>
+#import <objc/runtime.h>
 
 @interface Protocol:NSObject {} @end
 
 @protocol MPWNotificationProtocol
-//  empty, this is a marker protocol
+//  empty, this is a marker protocol, adopt this to signify that your protocol is a notification protocol
 @end
 
 @interface NSObject (MPWNotificationProtocol)
