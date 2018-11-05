@@ -103,16 +103,6 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 @end
 
-@interface MPWCachingStoreTests : NSObject
-
-@property (nonatomic, strong)  MPWGenericReference *key;
-@property (nonatomic, strong)  NSString *value;
-@property (nonatomic, strong)  MPWDictStore *cache,*source;
-@property (nonatomic, strong)  MPWCachingStore *store;
-
--(instancetype)initWithTestClass:(Class)testClass;
-
-@end
 
 
 @implementation MPWWriteThroughCache(testing)

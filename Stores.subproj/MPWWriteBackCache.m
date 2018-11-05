@@ -56,5 +56,41 @@
     [super dealloc];
 }
 
++testSelectors
+{
+    return @[
+             @"testReadingPopulatesCache",
+             @"testCacheIsReadFirst",
+             @"testWritePopulatesCacheAndSource",
+             @"testWritePopulatesCacheAndSourceUnlessDontWriteIsSet",
+             @"testCanInvalidateCache",
+             @"testMergeWorksLikeStore",
+             @"testMergingFetchesFirst",
+
+             //
+
+             @"testAsyncWrite",
+             ];
+}
+
+
+@end
+
+@implementation MPWCachingStoreTests(writeBackTests)
+
+-(void)testAsyncWrite
+{
+    
+    EXPECTTRUE( [self.store isKindOfClass:[MPWWriteBackCache class]], @"expected class");
+    [(MPWWriteBackCache*)self.store makeAsynchronous];
+    [self.store setObject:self.value forReference:self.key];
+    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"writing cache is synchronous");
+    EXPECTNIL( [self.source objectForReference:self.key], @"writing source is not synchronous");
+    [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{
+        return @([self.source objectForReference:self.key] != nil);
+    }];
+    IDEXPECT( [self.source objectForReference:self.key], self.value, @"did write async");
+
+}
 
 @end
