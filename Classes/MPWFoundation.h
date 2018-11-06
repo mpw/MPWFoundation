@@ -142,6 +142,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFoundation/MPWMergingStore.h"
 #import "MPWFoundation/MPWPathRelativeStore.h"
 #import "MPWFoundation/MPWCachingStore.h"
+#import "MPWFoundation/MPWWriteBackCache.h"
 #import "MPWFoundation/MPWSwitchingStore.h"
 #import "MPWFoundation/MPWSequentialStore.h"
 #import "MPWFoundation/MPWLoggingStore.h"
