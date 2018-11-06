@@ -33,9 +33,11 @@
 
 @end
 
+@protocol Streaming;
 
 @interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
 
+@property (nonatomic, retain)  NSObject <Streaming> *errors;
 
 +(instancetype)stores:(NSArray*)stores;
 +(instancetype)store;
@@ -51,6 +53,7 @@
 
 -(void)graphViz:(MPWByteStream*)aStream;
 -(NSString*)graphViz;
+-(void)reportError:(NSError*)error;
 
 @end
 

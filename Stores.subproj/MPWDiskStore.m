@@ -20,7 +20,12 @@
 
 -(NSData*)dataWithURL:(NSURL*)url
 {
-    return [NSData dataWithContentsOfURL:url];
+    NSError *error=nil;
+    NSData *data=[NSData dataWithContentsOfURL:url options:NSDataReadingMapped error:&error];
+    if ( error ) {
+        [self reportError:error];
+    }
+    return data;
 }
 
 -directoryForReference:(MPWGenericReference*)aReference
@@ -45,7 +50,9 @@
 
 -(void)setObject:(NSData*)theObject forReference:(MPWGenericReference*)aReference
 {
-    [theObject writeToURL:[self fileURLForReference:aReference] atomically:YES];
+    NSError *error=nil;
+    [theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
+    [self reportError:error];
 }
 
 -(void)deleteObjectForReference:(MPWGenericReference*)aReference
@@ -72,7 +79,9 @@
 
 -(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
 {
-    NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:nil];
+    NSError *error=nil;
+    NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:&error];
+    [self reportError:error];
     return (NSArray*)[[MPWGenericReference collect] referenceWithPath:[childNames each]];
 }
 

@@ -9,7 +9,7 @@
 #import "MPWGenericReference.h"
 #import "NSNil.h"
 #import "MPWByteStream.h"
-
+#import "MPWWriteStream.h"
 
 @implementation MPWAbstractStore
 
@@ -128,6 +128,13 @@
 -(void)graphViz:(MPWByteStream*)aStream
 {
     [aStream printFormat:@"%@\n",[self displayName]];
+}
+
+-(void)reportError:(NSError *)error
+{
+    if (error) {
+        [self.errors writeObject:error];
+    }
 }
 
 -(NSString*)graphViz
