@@ -56,6 +56,14 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+@interface NSObject(graphViz)
+
+-(void)graphViz:(MPWByteStream*)aStream;
+-(NSString*)graphViz;
+-(NSString*)displayName;
+
+@end
+
 
 @interface MPWWriteStream : NSObject <Streaming>
 {
@@ -88,8 +96,6 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)reportError:(NSError*)error;
 
 
--(void)graphViz:(MPWByteStream*)aStream;
--(NSString*)graphViz;
 
 
 @end
