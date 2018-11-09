@@ -27,7 +27,7 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb
         case MPWRESTVerbPUT:
             return @"PUT";
         case MPWRESTVerbPATCH:
-            return @"PATH";
+            return @"PATCH";
         case MPWRESTVerbDELETE:
             return @"DELETE";
         case MPWRESTVerbPOST:
@@ -60,6 +60,7 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb
     IDEXPECT( [[self operationWithReference:nil verb:MPWRESTVerbGET] HTTPVerb], @"GET", @"GET");
     IDEXPECT( [[self operationWithReference:nil verb:MPWRESTVerbPUT] HTTPVerb], @"PUT", @"PUT");
     IDEXPECT( [[self operationWithReference:nil verb:MPWRESTVerbDELETE] HTTPVerb], @"DELETE", @"DELETE");
+    IDEXPECT( [[self operationWithReference:nil verb:MPWRESTVerbPATCH] HTTPVerb], @"PATCH", @"PATCH");
 }
 
 +testSelectors

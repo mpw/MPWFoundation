@@ -25,6 +25,12 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
 }
 
+-(void)mergeObject:anObject forReference:(id<MPWReferencing>)aReference
+{
+    [super mergeObject:anObject forReference:aReference];
+    [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPATCH]];
+}
+
 -(void)deleteObjectForReference:(id<MPWReferencing>)aReference
 {
     [super deleteObjectForReference:aReference];
@@ -70,6 +76,17 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     IDEXPECT([theLog.firstObject HTTPVerb],@"DELETE",@"got the verb");
 }
 
++(void)testMergeIsLogged
+{
+    NSMutableArray *theLog=[NSMutableArray array];
+    MPWGenericReference *ref=[self ref];
+    MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
+    [store mergeObject:@"hi" forReference:ref];
+    INTEXPECT(theLog.count,1,@"should have logged merge");
+    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject HTTPVerb],@"PATCH",@"got the verb");
+}
+
 
 
 +testSelectors
@@ -77,7 +94,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     return @[
              @"testWriteIsLogged",
              @"testDeleteIsLogged",
-
+             @"testMergeIsLogged",
              ];
 }
 
