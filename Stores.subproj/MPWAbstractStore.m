@@ -274,6 +274,15 @@
     EXPECTTRUE( [substores.lastObject isKindOfClass:[MPWAbstractStore class]],@"last is an abstract store");
 }
 
++(void)testGraphVizOutput
+{
+    MPWMappingStore *s3=[MPWMappingStore stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
+    IDEXPECT( [s3 graphViz], @"\"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
+
+    MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
+    IDEXPECT( [s4 graphViz], @"\"MPWCachingStore\" -> \"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\"\n", @"");
+
+}
 
 +(NSArray*)testSelectors {  return @[
                                      @"testConstructingReferences",
@@ -281,6 +290,7 @@
                                      @"testConstructingDifferentStoreHierarchiesWithArrays",
                                      @"testConstructingAStoreHierarchyWithDictionary",
                                      @"testCanPutStoresDirectlyInSquentialStoreConstructionDescription",
+                                     @"testGraphVizOutput",
                                      ]; }
 
 @end

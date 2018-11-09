@@ -230,6 +230,10 @@ typedef id (^ZeroArgBlock)(void);
     [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
 }
 
+-(void)graphViz:(MPWByteStream*)output
+{
+    [self.filters.firstObject graphViz:output];
+}
 
 @end
 
@@ -358,6 +362,14 @@ typedef id (^ZeroArgBlock)(void);
 
 }
 
++(void)testGraphVizOutput
+{
+    MPWPipeline *p1=[MPWPipeline filters:@[ [MPWFilter class], [MPWFilter class]]];
+    IDEXPECT( [p1 graphViz], @"\"MPWFilter\"\n -> \"MPWFilter\"\n -> \"__NSArrayM\"\n", @"");
+
+
+}
+
 
 +(NSArray *)testSelectors
 {
@@ -371,6 +383,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testCanUseClassToSpecifyFilterOfThatClass",
              @"testCanUseNestedArrayToSpecifyFanout",
              @"testFanoutCanContainPipes",
+             @"testGraphVizOutput",
 #if !TARGET_OS_IOS
              @"testToUpperWithExternalFilter",
 #endif

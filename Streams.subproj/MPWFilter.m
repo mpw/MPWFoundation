@@ -142,6 +142,12 @@ idAccessor( _target, _setTarget )
     return [NSMutableArray array];
 }
 
+-(void)graphViz:(MPWByteStream*)output
+{
+    [super graphViz:output];
+    [output writeObject:@" -> "];
+    [self.target graphViz:output];
+}
 
 @end
 
@@ -156,15 +162,10 @@ idAccessor( _target, _setTarget )
     (void)stream;
 }
 
-+(void)testForwardingWorks
-{
-    
-}
 
 +testSelectors
 {
     return @[
-             
                          @"testDefaultStreamTarget",
              ];
 }
