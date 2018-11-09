@@ -120,9 +120,14 @@
     return first;
 }
 
--(NSString*)displayName
+-(NSString*)generatedName
 {
     return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];
+}
+
+-(NSString*)displayName
+{
+    return self.name ?: self.generatedName;
 }
 
 -(void)graphViz:(MPWByteStream*)aStream

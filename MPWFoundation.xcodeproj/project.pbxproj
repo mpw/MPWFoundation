@@ -92,7 +92,7 @@
 		1F313D641CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */; };
 		1F313D651CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */; };
 		1F32EC8421456B800074C15A /* MPWWriteBackCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F32EC8221456B800074C15A /* MPWWriteBackCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F32EC8521456B800074C15A /* MPWWriteBackCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F32EC8221456B800074C15A /* MPWWriteBackCache.h */; };
+		1F32EC8521456B800074C15A /* MPWWriteBackCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F32EC8221456B800074C15A /* MPWWriteBackCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F32EC8621456B800074C15A /* MPWWriteBackCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F32EC8221456B800074C15A /* MPWWriteBackCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F32EC8721456B800074C15A /* MPWWriteBackCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F32EC8321456B800074C15A /* MPWWriteBackCache.m */; };
 		1F32EC8821456B800074C15A /* MPWWriteBackCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F32EC8321456B800074C15A /* MPWWriteBackCache.m */; };

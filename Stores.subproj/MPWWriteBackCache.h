@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 9/9/18.
 //
 
-#import <MPWFoundation/MPWCachingStore.h>
+#import "MPWCachingStore.h"
 
 @protocol Streaming;
 

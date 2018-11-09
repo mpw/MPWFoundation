@@ -12,12 +12,10 @@
 @interface Protocol:NSObject {} @end
 
 @protocol MPWNotificationProtocol
-//  empty, this is a marker protocol, adopt this to signify that your protocol is a notification protocol
+-(void)installProtocolNotifications;        // compiler requires >= 1 messages in protocol, so put this here
 @end
 
-@interface NSObject (MPWNotificationProtocol)
-
--(void)installProtocolNotifications;
+@interface NSObject (MPWNotificationProtocol) <MPWNotificationProtocol>
 
 @end
 

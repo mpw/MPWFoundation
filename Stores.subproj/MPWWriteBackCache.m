@@ -80,7 +80,6 @@
 
 -(void)testAsyncWrite
 {
-    
     EXPECTTRUE( [self.store isKindOfClass:[MPWWriteBackCache class]], @"expected class");
     [(MPWWriteBackCache*)self.store makeAsynchronous];
     [self.store setObject:self.value forReference:self.key];
