@@ -40,7 +40,6 @@
 @property (nonatomic, retain)  NSObject <Streaming> *errors;
 @property (nonatomic, retain)  NSString *name;
 
-+(instancetype)stores:(NSArray*)stores;
 +(instancetype)store;
 
 -objectForKeyedSubscript:key;

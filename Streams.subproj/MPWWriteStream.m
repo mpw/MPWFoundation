@@ -263,6 +263,7 @@ SEL visSel;
 @end
 
 @implementation NSObject(graphViz)
+
 -(NSString*)generatedName
 {
     return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];

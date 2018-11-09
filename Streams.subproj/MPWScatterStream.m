@@ -64,6 +64,14 @@
     return [NSString stringWithFormat:@"<%@:%p filters: %@>",[self class],self,self.filters];
 }
 
+-(void)graphViz:(MPWByteStream*)output
+{
+    for ( id filter in self.filters ) {
+        [output writeObject:[self displayName]];
+        [output writeObject:@" -> "];
+        [filter graphViz:filter];
+    }
+}
 
 @end
 
