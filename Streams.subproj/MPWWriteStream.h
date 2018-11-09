@@ -42,6 +42,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @end
 
+@class MPWByteStream;
 
 @protocol StreamSource
 
@@ -58,9 +59,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @interface MPWWriteStream : NSObject <Streaming>
 {
-   SEL streamWriterMessage;
+    SEL streamWriterMessage;
 }
 
+@property (nonatomic, strong) NSString *name;
 
 +process:anObject;
 +(void)processAndIgnore:anObject;
@@ -84,6 +86,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -(void)flushLocal;
 
 -(void)reportError:(NSError*)error;
+
+
+-(void)graphViz:(MPWByteStream*)aStream;
+-(NSString*)graphViz;
 
 
 @end

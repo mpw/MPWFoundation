@@ -130,16 +130,16 @@
     return self.name ?: self.generatedName;
 }
 
--(void)graphViz:(MPWByteStream*)aStream
-{
-    [aStream printFormat:@"%@\n",[self displayName]];
-}
-
 -(void)reportError:(NSError *)error
 {
     if (error) {
         [self.errors writeObject:error];
     }
+}
+
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [aStream printFormat:@"%@\n",[self displayName]];
 }
 
 -(NSString*)graphViz

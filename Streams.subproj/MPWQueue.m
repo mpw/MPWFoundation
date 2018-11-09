@@ -28,7 +28,6 @@
 
 @property (atomic, strong) id <OrderedCollection> queue;
 @property (atomic, strong) NSObject* inflight;
-@property (atomic, strong) NSString* name;
 @property (atomic, strong) NSThread* flusherThread;
 
 
@@ -155,7 +154,6 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 -(void)dealloc
 {
-    [_name release];
     [self _exitFlusherThread];
     [_flusherThread release];
     [_queue release];

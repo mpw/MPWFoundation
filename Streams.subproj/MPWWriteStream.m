@@ -37,6 +37,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
 
+
 @interface MPWWriteStream(private)
 
 -(void)writeData:(NSData*)d;
@@ -208,7 +209,33 @@ SEL visSel;
     [self writeEnumerator:e spacer:[self defaultSpacer]];
 }
 
+-(NSString*)generatedName
+{
+    return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];
+}
 
+-(NSString*)displayName
+{
+    return self.name ?: self.generatedName;
+}
+
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [aStream printFormat:@"%@\n",[self displayName]];
+}
+
+-(NSString*)graphViz
+{
+    MPWByteStream *s=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [self graphViz:s];
+    return (NSString*)s.target;
+}
+
+-(void)dealloc
+{
+    [_name release];
+    [super dealloc];
+}
 
 @end
 
