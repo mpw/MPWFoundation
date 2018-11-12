@@ -491,7 +491,7 @@
 		1FCF26881CF39CF900AC64CE /* MPWFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07CDA007F8E1EA00C389FA /* MPWFuture.m */; };
 		1FCF26891CF39D0100AC64CE /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FD64E5D158A181800D96811 /* MPWObject_fastrc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FD7B37C2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; };
+		1FD7B37C2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD7B37D2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; };
 		1FD7B37E2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; };
 		1FD7B37F2195C9A100046BBE /* MPWCompositeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */; };

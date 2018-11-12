@@ -6,54 +6,42 @@
 //
 
 #import "MPWCompositeStore.h"
+#import "MPWByteStream.h"
 
 @implementation MPWCompositeStore
 
-+(instancetype)mapStore:(id)storeDescription
++(instancetype)stores:(NSArray *)storeDescriptions
 {
-    if ( [storeDescription respondsToSelector:@selector(store)]) {
-        storeDescription=[storeDescription store];
-    } else if ( [storeDescription isKindOfClass:[NSArray class]]) {
-        storeDescription=[self stores:storeDescription];
-    }
-    return storeDescription;
+    MPWCompositeStore *store=[super store];
+    store.stores=[self mapStores:storeDescriptions];
+    return store;
 }
 
-+(instancetype)stores:(NSArray*)stores
+-(id)objectForReference:(id<MPWReferencing>)aReference
 {
-    id first=nil;
-    MPWAbstractStore *previous=nil;
-    for ( id storeDescription in stores) {
-        if ( [storeDescription isKindOfClass:[NSArray class]] ) {
-            NSMutableArray<MPWStorage> *substores=(id)[NSMutableArray array];
-            for ( NSArray *subdescription in storeDescription) {
-                MPWAbstractStore *substore=[self mapStore:subdescription];
-                [substores addObject:substore];
-            }
-            [previous setSourceStores:substores];
-        } else if ( [storeDescription isKindOfClass:[NSDictionary class]] ) {
-            NSDictionary *descriptionDict=(NSDictionary*)storeDescription;
-            NSMutableDictionary *storeDict=[NSMutableDictionary dictionary];
-            for  (NSString *key in descriptionDict.allKeys ) {
-                id subDescription=descriptionDict[key];
-                storeDict[key]=[self mapStore:subDescription];
-            }
-            [previous setStoreDict:storeDict];
-        } else {
-            if ( [storeDescription respondsToSelector:@selector(store)]) {
-                storeDescription=[storeDescription store];
-            }
-            if ( previous && [storeDescription respondsToSelector:@selector(setSourceStores:)]) {
-                [previous setSourceStores:(NSArray<MPWStorage>*)@[ storeDescription ]];
-            }
-            previous=storeDescription;
+    return [self.stores.firstObject objectForReference:aReference];
+}
 
-        }
-        if ( !first ) {
-            first=storeDescription;
-        }
-    }
-    return first;
+-(void)setObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+{
+    [self.stores.firstObject setObject:(id)theObject forReference:aReference];
+}
+
+-(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+{
+    [self.stores.firstObject deleteObjectForReference:aReference];
+}
+
+-(void)mergeObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+{
+    [self.stores.firstObject mergeObject:(id)theObject forReference:aReference];
+}
+
+-(void)graphViz:(MPWByteStream *)aStream
+{
+    [aStream printFormat:@"%@\n",[self displayName]];
+    [aStream writeObject:@" -> "];
+    [self.stores.firstObject graphViz:aStream];
 }
 
 @end
@@ -67,30 +55,28 @@
 
 @implementation MPWCompositeStore(testing)
 
-
-
 +(void)testConstructingDifferentStoreHierarchiesWithArrays
 {
-    MPWCompositeStore *s1=[self stores:@[ [MPWAbstractStore store]]];
+    MPWAbstractStore *s1=[self stores:@[ [MPWAbstractStore store]]];
     EXPECTTRUE([s1 isKindOfClass:[MPWAbstractStore class]], @"simple store");
-    MPWCompositeStore *s2=[self stores:@[ [MPWAbstractStore class]]];
+    MPWAbstractStore *s2=[self stores:@[ [MPWAbstractStore class]]];
     EXPECTTRUE([s2 isKindOfClass:[MPWAbstractStore class]], @"classes get replaced by instances");
-    MPWMappingStore *s3=(MPWMappingStore*)[self stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
+    MPWCachingStore *s3=[MPWCachingStore stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
     EXPECTTRUE([s3 isKindOfClass:[MPWMappingStore class]], @"first element of sequence is a mapping store");
     EXPECTTRUE([[s3 source] isKindOfClass:[MPWAbstractStore class]], @"stores are connected");
 
-    MPWCachingStore *s4=(MPWCachingStore*)[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
+    MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
     EXPECTTRUE([s4 isKindOfClass:[MPWCachingStore class]], @"first element of sequence is a caching store");
     EXPECTTRUE([[s4 cache] isKindOfClass:[MPWDictStore class]], @"cache of caching store is connected");
     EXPECTTRUE([[s4 source] isKindOfClass:[MPWAbstractStore class]], @"source of caching store is connected");
 
-    MPWSequentialStore *s5=(MPWSequentialStore*)[self stores:@[ [MPWSequentialStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]], @[ [MPWMappingStore class] ] ]]];
+    MPWSequentialStore *s5=[MPWSequentialStore stores:@[ [MPWSequentialStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]], @[ [MPWMappingStore class] ] ]]];
     EXPECTTRUE([s5 isKindOfClass:[MPWSequentialStore class]], @"first element of sequence is a sequential store");
     INTEXPECT(s5.stores.count, 3, @"number of stores");
     EXPECTTRUE( [s5.stores.firstObject isKindOfClass:[MPWDictStore class]], @"first of caching store is connected");
     EXPECTTRUE( [s5.stores.lastObject isKindOfClass:[MPWMappingStore class]], @"cache of caching store is connected");
 
-    MPWMappingStore *s6=(MPWMappingStore*)[self stores:@[ [MPWPathRelativeStore class], [MPWMappingStore class] , [MPWDictStore class] ]];
+    MPWMappingStore *s6=[MPWMappingStore stores:@[ [MPWPathRelativeStore class], [MPWMappingStore class] , [MPWDictStore class] ]];
     EXPECTTRUE([s6 isKindOfClass:[MPWPathRelativeStore class]], @"first element of sequence is a sequential store");
     MPWMappingStore *s61 = (MPWMappingStore*)[s6 source];
     EXPECTTRUE([s61 isKindOfClass:[MPWMappingStore class]], @"first element of sequence is a sequential store");
@@ -103,13 +89,13 @@
 
 +(void)testConstructingAStoreHierarchyWithDictionary
 {
-    MPWCachingStore *s1=[self stores:@[ [MPWCachingStore class],
+    MPWCachingStore *s1=[MPWCachingStore stores:@[ [MPWCachingStore class],
                                                    @{ @"cache":  [MPWDictStore class] ,
                                                       @"source": [MPWAbstractStore class] }]];
     EXPECTTRUE( [s1 isKindOfClass:[MPWCachingStore class]], @"should be a caching store");
     EXPECTNOTNIL( s1.cache ,@"has cache");
 
-    MPWCachingStore *s2=[self stores:@[ [MPWCachingStore class],
+    MPWCachingStore *s2=[MPWCachingStore stores:@[ [MPWCachingStore class],
                                                    @{ @"cache": @[ [MPWMappingStore class], [MPWDictStore class] ],
                                                       @"source": [MPWAbstractStore class] }]];
     EXPECTTRUE( [s2 isKindOfClass:[MPWCachingStore class]], @"should be a caching store");
@@ -123,7 +109,7 @@
 
 +(void)testCanPutStoresDirectlyInSquentialStoreConstructionDescription
 {
-    MPWSequentialStore *s1=[self stores:@[ [MPWSequentialStore class],@[ [MPWDictStore store], [MPWAbstractStore class]] ]];
+    MPWSequentialStore *s1=[MPWSequentialStore stores:@[ [MPWSequentialStore class],@[ [MPWDictStore store], [MPWAbstractStore class]] ]];
     EXPECTTRUE( [s1 isKindOfClass:[MPWSequentialStore class]],@"constructed a sequential store");
     NSArray *substores=[s1 stores];
     INTEXPECT( [substores count],2,@"number of substores");
@@ -133,19 +119,57 @@
 
 +(void)testGraphVizOutput
 {
-    MPWMappingStore *s3=[self stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
+    MPWMappingStore *s3=[MPWMappingStore stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
     IDEXPECT( [s3 graphViz], @"\"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
 
-    MPWCachingStore *s4=[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
+    MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
     IDEXPECT( [s4 graphViz], @"\"MPWCachingStore\" -> \"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\"\n", @"");
 
 }
 
-+(NSArray*)testSelectors {  return @[
-                                     @"testConstructingDifferentStoreHierarchiesWithArrays",
-                                     @"testConstructingAStoreHierarchyWithDictionary",
-                                     @"testCanPutStoresDirectlyInSquentialStoreConstructionDescription",
-                                     @"testGraphVizOutput",
-                                     ]; }
++(void)testGraphVizOutputForCompositeStore
+{
+    MPWCompositeStore *s3=[self stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
+    IDEXPECT( [s3 graphViz], @"\"MPWCompositeStore\"\n -> \"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
+
+    MPWCompositeStore *s4=[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
+    INTEXPECT( s4.stores.count , 1, @"only 1 top level store");
+    NSString *gv=[s4 graphViz];
+    IDEXPECT( gv, @"\"MPWCompositeStore\"\n -> \"MPWCachingStore\" -> \"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\"\n", @"");
+
+}
+
++(void)testCompositePassesThrough
+{
+    MPWCompositeStore *store=[self stores:@[ [MPWDictStore class] ]];
+    store[@"hi"]=@"there";
+    IDEXPECT( store[@"hi"], @"there", @"set and get")
+    [store deleteObjectForReference:(id <MPWReferencing>)@"hi"];
+    EXPECTNIL( store[@"hi"], @"delete works");
+    [store mergeObject:@"world" forReference:(id <MPWReferencing>)@"hi"];
+    IDEXPECT( store[@"hi"], @"world", @"merge works like set")
+}
+
++(void)testCompositeConstruction
+{
+    MPWCompositeStore *s4=[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWDiskStore class]]] ]];
+    INTEXPECT( s4.stores.count , 1, @"only 1 top level store");
+    MPWCachingStore *cs = s4.stores.firstObject;
+    EXPECTTRUE( [cs.cache isKindOfClass:[MPWDictStore class]],@"should have a dict store as cache");
+    EXPECTTRUE( [cs.source isKindOfClass:[MPWDiskStore class]],@"should have aa disk store as source");
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+             @"testConstructingDifferentStoreHierarchiesWithArrays",
+             @"testConstructingAStoreHierarchyWithDictionary",
+             @"testCanPutStoresDirectlyInSquentialStoreConstructionDescription",
+             @"testGraphVizOutput",
+             @"testGraphVizOutputForCompositeStore",
+             @"testCompositeConstruction",
+             @"testCompositePassesThrough",
+             ];
+}
 
 @end

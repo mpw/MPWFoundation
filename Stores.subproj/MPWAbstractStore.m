@@ -18,6 +18,62 @@
     return [[[self alloc] init] autorelease];
 }
 
++(instancetype)mapStore:(id)storeDescription
+{
+    if ( [storeDescription respondsToSelector:@selector(store)]) {
+        storeDescription=[storeDescription store];
+    } else if ( [storeDescription isKindOfClass:[NSArray class]]) {
+        storeDescription=[self mapStores:storeDescription].firstObject;
+    }
+    return storeDescription;
+}
+
++(NSArray*)mapStores:(NSArray*)storeDescriptions
+{
+    NSMutableOrderedSet *stores=[NSMutableOrderedSet orderedSetWithCapacity:storeDescriptions.count];
+    id previous=nil;
+    for ( id storeDescription in storeDescriptions) {
+        if ( previous ) {
+            [stores addObject:previous];
+        }
+        if ( [storeDescription isKindOfClass:[NSArray class]] ) {
+            NSMutableArray<MPWStorage> *substores=(id)[NSMutableArray array];
+            for ( NSArray *subdescription in storeDescription) {
+                MPWAbstractStore *substore=[self mapStore:subdescription];
+                [substores addObject:substore];
+            }
+            [previous setSourceStores:substores];
+        } else if ( [storeDescription isKindOfClass:[NSDictionary class]] ) {
+            NSDictionary *descriptionDict=(NSDictionary*)storeDescription;
+            NSMutableDictionary *storeDict=[NSMutableDictionary dictionary];
+            for  (NSString *key in descriptionDict.allKeys ) {
+                id subDescription=descriptionDict[key];
+                storeDict[key]=[self mapStore:subDescription];
+            }
+            [previous setStoreDict:storeDict];
+        } else {
+            if ( [storeDescription respondsToSelector:@selector(store)]) {
+                storeDescription=[storeDescription store];
+            }
+            if ( previous && [storeDescription respondsToSelector:@selector(setSourceStores:)]) {
+                [previous setSourceStores:(NSArray<MPWStorage>*)@[ storeDescription ]];
+            }
+            previous=storeDescription;
+
+        }
+    }
+    if ( previous ) {
+        [stores addObject:previous];
+    }
+    return stores.array;
+}
+
++(instancetype)stores:(NSArray*)storeDescriptions
+{
+    return [self mapStores:storeDescriptions].firstObject;
+}
+
+
 -objectForReference:(MPWReference*)aReference
 {
     return nil;
@@ -136,7 +192,6 @@
 {
     return [self get:uri parameters:nil];
 }
-
 
 
 @end

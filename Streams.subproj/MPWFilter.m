@@ -145,8 +145,10 @@ idAccessor( _target, _setTarget )
 -(void)graphViz:(MPWByteStream*)output
 {
     [super graphViz:output];
-    [output writeObject:@" -> "];
-    [self.target graphViz:output];
+    if ( self.target ) {
+        [output writeObject:@" -> "];
+        [self.target graphViz:output];
+    }
 }
 
 @end

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWCompositeStore : MPWAbstractStore
 
-+(instancetype)stores:(NSArray*)stores;
+@property (nonatomic, strong) NSArray *stores;
 
 @end
 
