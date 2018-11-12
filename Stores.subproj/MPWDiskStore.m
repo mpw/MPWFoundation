@@ -8,6 +8,7 @@
 #import "MPWDiskStore.h"
 #import "MPWGenericReference.h"
 #import "NSObjectFiltering.h"
+#import "NSStringAdditions.h"
 
 @implementation MPWDiskStore
 
@@ -22,6 +23,7 @@
 {
     NSError *error=nil;
     NSData *data=[NSData dataWithContentsOfURL:url options:NSDataReadingMapped error:&error];
+    NSLog(@"url: %@ error: %@",url,error);
     if ( error ) {
         [self reportError:error];
     }
@@ -38,12 +40,10 @@
 {
     BOOL isDirectory=NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
-    if ( exists){
-        if (isDirectory) {
-            return [self directoryForReference:aReference];
-        } else {
-            return [self dataWithURL:[self fileURLForReference:aReference]];
-        }
+    if ( exists && isDirectory){
+        return [self directoryForReference:aReference];
+    } else {
+        return [self dataWithURL:[self fileURLForReference:aReference]];
     }
     return nil;
 }
@@ -85,5 +85,44 @@
     return (NSArray*)[[MPWGenericReference collect] referenceWithPath:[childNames each]];
 }
 
+
+@end
+
+#import "DebugMacros.h"
+
+@implementation MPWDiskStore(testing)
+
++(void)testGetErrorWhenTryingToWriteToNonExistentDirectory
+{
+    MPWDiskStore *d=[self store];
+    NSArray *errors=[NSMutableArray array];
+    d.errors = (NSObject<Streaming>*)errors;
+    INTEXPECT(errors.count, 0, @"no errors before write attempt");
+    d[[MPWGenericReference referenceWithPath:@"/tmp_doesnt_exist/hi"]] = [@"there" asData];
+    INTEXPECT(errors.count, 1, @"should have gotten an error");
+    NSError *error=errors.firstObject;
+    INTEXPECT(error.code,NSFileNoSuchFileError,@"code should be file not found");
+}
+
++(void)testGetErrorWhenTryingToReadToNonExistentFile
+{
+    MPWDiskStore *d=[self store];
+    NSArray *errors=[NSMutableArray array];
+    d.errors = (NSObject<Streaming>*)errors;
+    INTEXPECT(errors.count, 0, @"no errors before write attempt");
+    id result = d[[MPWGenericReference referenceWithPath:@"/tmp_doesnt_exist/doesnotexisteither"]];
+    EXPECTNIL(result,@"should not get a result reading");
+    INTEXPECT(errors.count, 1, @"should have gotten an error");
+    NSError *error=errors.firstObject;
+    INTEXPECT(error.code,NSFileReadNoSuchFileError,@"code should be no such file");
+}
+
++testSelectors
+{
+    return @[
+             @"testGetErrorWhenTryingToWriteToNonExistentDirectory",
+             @"testGetErrorWhenTryingToReadToNonExistentFile",
+             ];
+}
 
 @end
