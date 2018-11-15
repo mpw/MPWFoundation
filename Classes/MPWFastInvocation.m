@@ -160,7 +160,7 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 
 -(void)retainArguments
 {
-    
+//    NSLog(@"MPWFastInvocation retainArguments");
 }
 
 -(NSString *)description

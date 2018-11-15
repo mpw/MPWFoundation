@@ -29,7 +29,8 @@
 @property (atomic, strong) id <OrderedCollection> queue;
 @property (atomic, strong) NSObject* inflight;
 @property (atomic, strong) NSThread* flusherThread;
-
+@property (nonatomic, assign) id flusherRunLoop;
+@property (nonatomic, assign) BOOL stopAsync;
 
 @end
 
@@ -62,6 +63,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     if ( (self.flusherThread == nil) || ([NSThread currentThread] == self.flusherThread) ) {
         [self drain];
     } else {
+//        [self performSelector:@selector(drain) onThread:self.flusherThread withObject:nil waitUntilDone:NO];
         [[self onThread:self.flusherThread] drain];
      }
 }
@@ -105,22 +107,24 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 -(void)_flusherThreadRunLoop
 {
-    @autoreleasepool {
-        NSRunLoop *loop = [NSRunLoop currentRunLoop];
-        [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
-        CFRunLoopRun();
+    if (!self.stopAsync) {
+        @autoreleasepool {
+            self.flusherRunLoop=(id)CFRunLoopGetCurrent();
+            NSRunLoop *loop = [NSRunLoop currentRunLoop];
+            [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+            CFRunLoopRun();
+        }
     }
     self.flusherThread=nil;
 }
 
--(void)_stopFlusherThreadRunLoop
-{
-    CFRunLoopStop( CFRunLoopGetCurrent() );
-}
-
 -(void)_exitFlusherThread
 {
-    [[self onThread:self.flusherThread] _stopFlusherThreadRunLoop];
+    self.stopAsync=YES;
+    if ( self.flusherRunLoop ) {
+        CFRunLoopStop( (CFRunLoopRef)self.flusherRunLoop );
+        self.flusherRunLoop=nil;
+    }
 }
 
 
@@ -260,6 +264,23 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     EXPECTFALSE(q.isAsynchronous,@"is async");
     [q makeAsynchronous];
     EXPECTTRUE(q.isAsynchronous,@"is async");
+    [NSThread sleepForTimeInterval:0.01];
+    [q _exitFlusherThread];
+    [NSThread sleepForTimeInterval:0.1 orUntilConditionIsMet:^{
+        return @( q.isAsynchronous == false );
+    }];
+    EXPECTFALSE(q.isAsynchronous,@"is async");
+
+}
+
++(void)testStopAsyncBeforeItStarted
+{
+    MPWQueue *q=[self aTestQueue];
+    EXPECTFALSE(q.isAsynchronous,@"is async");
+    [q makeAsynchronous];
+    EXPECTTRUE(q.isAsynchronous,@"is async");
+    //    [NSThread sleepForTimeInterval:0.01];
+    //    NSLog(@"will exit");
     [q _exitFlusherThread];
     [NSThread sleepForTimeInterval:0.1 orUntilConditionIsMet:^{
         return @( q.isAsynchronous == false );
@@ -279,6 +300,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
              @"testAsyncFlushing",
              @"testAsyncAutoFlushing",
              @"testStopAsync",
+             @"testStopAsyncBeforeItStarted",
 //             @"testPersistQueue",
              ];
 }

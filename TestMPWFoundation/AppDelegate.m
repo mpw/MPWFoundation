@@ -47,7 +47,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
       @"MPWFastInvocation",
       @"MPWObjectCache",
       @"MPWSmallStringTable",
-//      @"MPWQueue",
+      @"MPWQueue",
       @"MPWNotificationProtocolTests",
       ];
     NSMutableArray *mirrors=[NSMutableArray array];
