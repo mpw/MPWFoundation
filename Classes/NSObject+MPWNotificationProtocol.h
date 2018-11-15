@@ -17,11 +17,17 @@
 
 @interface NSObject (MPWNotificationProtocol) <MPWNotificationProtocol>
 
+-(void)registerMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName;
+-(void)registerNotificationMessage:(SEL)aMessage;
+
+
+
 @end
 
 void sendProtocolNotification( Protocol *aProtocol, id anObject );
 NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 
+#if !TARGET_OS_IPHONE
 @interface Protocol(notifications)
 
 -(void)notify:anObject;
@@ -29,4 +35,4 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 -(BOOL)isNotificationProtocol;
 
 @end
-
+#endif

@@ -59,7 +59,7 @@
 		<key>TestMPWFoundation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<false/>
+			<true/>
 			<key>orderHint</key>
 			<integer>15</integer>
 		</dict>

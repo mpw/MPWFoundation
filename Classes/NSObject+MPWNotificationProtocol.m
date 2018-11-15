@@ -10,21 +10,53 @@
 #import "DebugMacros.h"
 #import <objc/runtime.h>
 
+#if !TARGET_OS_IPHONE
 @interface Protocol(notificationInstallation)
 
 -(void)installAsNotificationHandler:aHandler;
 
 @end
+#endif
 
 
+NSString *notificatioNameFromProtocol(Protocol *aProtocol )
+{
+    return @(protocol_getName(aProtocol));
+}
+
+static BOOL isNotificationProtocol(Protocol *aProtocol ) {
+    return protocol_conformsToProtocol(aProtocol,@protocol(MPWNotificationProtocol));
+}
 
 void sendProtocolNotification( Protocol *aProtocol, id anObject )
 {
-    [aProtocol notify:anObject];
+    if ( isNotificationProtocol( aProtocol) ) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificatioNameFromProtocol(aProtocol) object:anObject];
+
+    } else {
+        [NSException raise:@"invalidprotocol" format:@"Trying to notify via protocol '%s' that's not a notification protocol",protocol_getName(aProtocol)];
+    }
 }
 
+static void installNotificationProtocol( Protocol *self , id aHandler)
+{
+    if ( isNotificationProtocol( self ) ) {
+        struct objc_method_description *protocolMethods=NULL;
+        unsigned int count=0;
+        protocolMethods=protocol_copyMethodDescriptionList(self,YES,YES,&count);
+        if (protocolMethods && count==1) {
+            SEL message=protocolMethods[0].name;
+            [aHandler registerMessage:message forNotificationName:notificatioNameFromProtocol(self)];
+        } else {
+            [NSException raise:@"invalidprotocol" format:@"Notification protocol '%s' needs to have exactly 1 message defined, has %d",protocol_getName(self),count];
+        }
+        free(protocolMethods);
+    } else {
+        [NSException raise:@"invalidprotocol" format:@"Trying to install notification handler for protocol '%s' that's not a notification protocol",protocol_getName(self)];
+    }
+}
 
-@implementation NSObject (MPWNotificationProtocol)
+@implementation NSObject(MPWNotificationProtocol)
 
 -(void)registerMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName
 {
@@ -41,32 +73,29 @@ void sendProtocolNotification( Protocol *aProtocol, id anObject )
     unsigned int protocolCount=0;
     Protocol** protocols=class_copyProtocolList([self class], &protocolCount);
     for (int i=0;i<protocolCount;i++ ) {
-        if ( [protocols[i]  isNotificationProtocol]) {
-            [protocols[i] installAsNotificationHandler:self];
+        if (  isNotificationProtocol( protocols[i] )) {
+            installNotificationProtocol(protocols[i], self);
         }
     }
     free(protocols);
 }
 
-
-
 @end
 
+
+
+#if !TARGET_OS_IPHONE
 @implementation Protocol(notifications)
 
 -(BOOL)isNotificationProtocol
 {
-    return protocol_conformsToProtocol(self,@protocol(MPWNotificationProtocol));
+    return isNotificationProtocol( self );
 }
 
 -(void)notify:anObject
 {
-    if ( [self isNotificationProtocol]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificatioNameFromProtocol(self) object:anObject];
+    sendProtocolNotification(self, anObject);
 
-    } else {
-        [NSException raise:@"invalidprotocol" format:@"Trying to notify via protocol '%s' that's not a notification protocol",protocol_getName(self)];
-    }
 }
 
 -(void)notify
@@ -76,12 +105,8 @@ void sendProtocolNotification( Protocol *aProtocol, id anObject )
 
 @end
 
-@implementation Protocol(notificationInstallation)
 
-NSString *notificatioNameFromProtocol(Protocol *aProtocol )
-{
-    return @(protocol_getName(aProtocol));
-}
+@implementation Protocol(notificationInstallation)
 
 
 -(void)installAsNotificationHandler:aHandler
@@ -102,8 +127,8 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     }
 }
 
-
 @end
+#endif
 
 @protocol MPWTestNotificationProtocol<MPWNotificationProtocol>
 
@@ -138,10 +163,20 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
 
 +(void)testCanIdentifyProtocolIsANotificationProtocol
 {
+    isNotificationProtocol( @protocol(MPWTestNotificationProtocol));
+
+    EXPECTTRUE(isNotificationProtocol( @protocol(MPWTestNotificationProtocol)), @"should be");
+    EXPECTFALSE( isNotificationProtocol( @protocol(NSObject) ), @"should not be");
+
+}
+#if !TARGET_OS_IPHONE
++(void)testCanIdentifyProtocolIsANotificationProtocolMessages
+{
     EXPECTTRUE( [@protocol(MPWTestNotificationProtocol) isNotificationProtocol], @"should be");
     EXPECTFALSE( [@protocol(NSObject) isNotificationProtocol], @"should not be");
 
 }
+#endif
 
 +(void)testInstallNotificationHandler
 {
@@ -157,7 +192,8 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
 {
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
-    [@protocol(MPWTestNotificationProtocol) installAsNotificationHandler:tester];
+    installNotificationProtocol( @protocol(MPWTestNotificationProtocol) , tester);
+//    [@protocol(MPWTestNotificationProtocol) installAsNotificationHandler:tester];
     [[NSNotificationCenter defaultCenter] postNotificationName:@(protocol_getName(@protocol(MPWTestNotificationProtocol))) object:nil];
     EXPECTTRUE(tester.messageReceived, @"message received");
     
@@ -167,8 +203,8 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
 {
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
-    [@protocol(MPWTestNotificationProtocol) installAsNotificationHandler:tester];
-    [@protocol(MPWTestNotificationProtocol) notify];
+    installNotificationProtocol( @protocol(MPWTestNotificationProtocol) , tester);
+    sendProtocolNotification( @protocol(MPWTestNotificationProtocol), nil);
     EXPECTTRUE(tester.messageReceived, @"message received");
 
 }
@@ -177,8 +213,8 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
 {
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
-    [@protocol(MPWTestNotificationProtocol) installAsNotificationHandler:tester];
-    [@protocol(MPWTestNotificationProtocol) notify];
+    installNotificationProtocol( @protocol(MPWTestNotificationProtocol) , tester);
+    sendProtocolNotification( @protocol(MPWTestNotificationProtocol), nil);
     EXPECTTRUE(tester.messageReceived, @"message received");
 
 }
@@ -188,9 +224,9 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     BOOL didRaise=NO;
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
-    [@protocol(MPWTestNotificationProtocol) installAsNotificationHandler:tester];
+    installNotificationProtocol(@protocol(MPWTestNotificationProtocol), tester);
     @try {
-        [@protocol(NSObject) notify];
+        sendProtocolNotification(@protocol(NSObject), nil);
         EXPECTTRUE(false,@"should have raised");
     } @catch (id exception) {
         didRaise=YES;
@@ -205,7 +241,7 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     NSString *exceptionMessage=nil;
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     @try {
-        [@protocol(NSObject) installAsNotificationHandler:tester];
+        installNotificationProtocol(@protocol(NSObject), tester);
     } @catch (NSException* exception) {
         exceptionMessage=exception.description;
     }
@@ -217,7 +253,7 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     NSString *exceptionMessage=nil;
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     @try {
-        [@protocol(InvalidMPWTestNotificationProtocolWithNoMessages) installAsNotificationHandler:tester];
+        installNotificationProtocol(@protocol(InvalidMPWTestNotificationProtocolWithNoMessages), tester);
     } @catch (NSException* exception) {
         exceptionMessage=exception.description;
     }
@@ -229,7 +265,7 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     NSString *exceptionMessage=nil;
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     @try {
-        [@protocol(InvalidMPWTestNotificationProtocolWithTwoMessages) installAsNotificationHandler:tester];
+        installNotificationProtocol(@protocol(InvalidMPWTestNotificationProtocolWithTwoMessages), tester);
     } @catch (NSException* exception) {
         exceptionMessage=exception.description;
     }
@@ -242,7 +278,7 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
     MPWNotificationProtocolTests* tester = [[self new] autorelease];
     EXPECTFALSE(tester.messageReceived, @"not yet");
     [tester installProtocolNotifications];
-    [@protocol(MPWTestNotificationProtocol) notify];
+    sendProtocolNotification( @protocol(MPWTestNotificationProtocol), nil);
     EXPECTTRUE(tester.messageReceived, @"message received");
     
 }
@@ -261,6 +297,9 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol )
              @"testTryingToInstallNonNotificationProtocolRaises",
              @"testTryingToInstallNotificationProtocolWithoutMessagesRaises",
              @"testTryingToInstallNotificationProtocolWithTooManyMessagesRaises",
+#if !TARGET_OS_IPHONE
+             @"testCanIdentifyProtocolIsANotificationProtocolMessages",
+#endif
              ];
 }
 

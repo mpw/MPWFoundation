@@ -279,6 +279,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
              @"testAsyncFlushing",
              @"testAsyncAutoFlushing",
              @"testStopAsync",
+//             @"testPersistQueue",
              ];
 }
 

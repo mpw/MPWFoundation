@@ -41,6 +41,7 @@
 		1F080E5C1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5D1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5E1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
+		1F0984A7219DC6A6006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
 		1F11C44B15567F6300E597D9 /* MPWValueAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C44915567F6300E597D9 /* MPWValueAccessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F11C44F15567F6300E597D9 /* MPWValueAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */; };
 		1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; };
@@ -251,8 +252,6 @@
 		1F9726A91D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9726AA1D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
-		1F9D63CD1F601F1500DA9514 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F9D63CC1F601F1500DA9514 /* MPWTest.framework */; };
-		1F9D63CF1F60202C00DA9514 /* MPWTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F9D63CC1F601F1500DA9514 /* MPWTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
@@ -492,8 +491,8 @@
 		1FCF26891CF39D0100AC64CE /* NSThreadInterThreadMessaging.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF19A6006686DDC35ADD82 /* NSThreadInterThreadMessaging.m */; };
 		1FD64E5D158A181800D96811 /* MPWObject_fastrc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD7B37C2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FD7B37D2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; };
-		1FD7B37E2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; };
+		1FD7B37D2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD7B37E2195C9A100046BBE /* MPWCompositeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD7B37F2195C9A100046BBE /* MPWCompositeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */; };
 		1FD7B3802195C9A100046BBE /* MPWCompositeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */; };
 		1FD7B3812195C9A100046BBE /* MPWCompositeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */; };
@@ -722,7 +721,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */,
-				1F9D63CF1F60202C00DA9514 /* MPWTest.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -817,6 +815,7 @@
 		1F080E501E4F13F600B78EF3 /* MPWFDStreamSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWFDStreamSource.m; sourceTree = "<group>"; };
 		1F080E571E50515700B78EF3 /* MPWStreamSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWStreamSource.h; sourceTree = "<group>"; };
 		1F080E581E50515700B78EF3 /* MPWStreamSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWStreamSource.m; sourceTree = "<group>"; };
+		1F0984A6219DC6A6006D10D9 /* MPWTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MPWTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F11C44915567F6300E597D9 /* MPWValueAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWValueAccessor.h; sourceTree = "<group>"; };
 		1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWValueAccessor.m; sourceTree = "<group>"; };
 		1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWStackSaverInvocation.h; sourceTree = "<group>"; };
@@ -1002,7 +1001,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F9D63CD1F601F1500DA9514 /* MPWTest.framework in Frameworks */,
+				1F0984A7219DC6A6006D10D9 /* MPWTest.framework in Frameworks */,
 				1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1419,6 +1418,7 @@
 		1F9D63C91F601E1800DA9514 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F0984A6219DC6A6006D10D9 /* MPWTest.framework */,
 				1F9D63CC1F601F1500DA9514 /* MPWTest.framework */,
 				1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */,
 			);
@@ -2746,7 +2746,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -2763,6 +2763,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2923,7 +2924,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -2940,6 +2941,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3060,10 +3062,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3098,9 +3101,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3136,9 +3140,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3174,9 +3179,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3212,9 +3218,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3250,9 +3257,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3288,9 +3296,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = TestMPWFoundation/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-lobjc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -3614,7 +3623,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = YES;
@@ -3631,6 +3640,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3663,7 +3673,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -3680,6 +3690,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3713,7 +3724,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -3730,6 +3741,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4436,7 +4448,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -4453,6 +4465,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4613,7 +4626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = MPWFoundation/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
@@ -4630,6 +4643,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

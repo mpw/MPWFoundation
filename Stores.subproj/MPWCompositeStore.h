@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 09.11.18.
 //
 
-#import <MPWFoundation/MPWAbstractStore.h>
+#import "MPWAbstractStore.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
