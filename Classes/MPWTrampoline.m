@@ -260,12 +260,13 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
 {
     return [[self sendTarget] isKindOfClass:aClass];
 }
+typedef id (*IDSELIMP)(id, SEL,SEL);
 
 +(IMP)instanceMethodForSelector:(SEL)sel
 {
-    static IMP0 ims=(IMP0)nil;
+    static IDSELIMP ims=(IDSELIMP)nil;
     if (!ims) {
-        ims = (IMP0)[NSObject methodForSelector:_cmd];
+        ims = (IDSELIMP)[NSObject methodForSelector:_cmd];
     }
     return (IMP)ims( self, _cmd, sel );
 }
