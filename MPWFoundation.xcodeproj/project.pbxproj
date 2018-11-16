@@ -41,7 +41,8 @@
 		1F080E5C1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5D1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5E1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
-		1F0984A7219DC6A6006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
+		1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
+		1F0984AB219EC8E3006D10D9 /* MPWTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F11C44B15567F6300E597D9 /* MPWValueAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C44915567F6300E597D9 /* MPWValueAccessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F11C44F15567F6300E597D9 /* MPWValueAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */; };
 		1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; };
@@ -721,6 +722,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */,
+				1F0984AB219EC8E3006D10D9 /* MPWTest.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,8 +1003,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F0984A7219DC6A6006D10D9 /* MPWTest.framework in Frameworks */,
 				1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */,
+				1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

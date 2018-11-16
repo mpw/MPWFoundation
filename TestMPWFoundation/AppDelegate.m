@@ -20,6 +20,9 @@
 
 int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL verbose ,BOOL veryVerbose ) {
     NSMutableArray *testsuites=[NSMutableArray array];
+    NSLog(@"hi");
+    [NSThread sleepForTimeInterval:1];
+    NSLog(@"hi again, will run tests");
     MPWTestSuite* test;
     MPWLoggingTester* results;
     int exitCode=0;
@@ -48,6 +51,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
       @"MPWObjectCache",
       @"MPWSmallStringTable",
       @"MPWQueue",
+      @"MPWByteStream",
       @"MPWNotificationProtocolTests",
       ];
     NSMutableArray *mirrors=[NSMutableArray array];

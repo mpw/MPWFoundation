@@ -63,8 +63,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     if ( (self.flusherThread == nil) || ([NSThread currentThread] == self.flusherThread) ) {
         [self drain];
     } else {
-//        [self performSelector:@selector(drain) onThread:self.flusherThread withObject:nil waitUntilDone:NO];
-        [[self onThread:self.flusherThread] drain];
+        [self performSelector:@selector(drain) onThread:self.flusherThread withObject:nil waitUntilDone:NO];
+//        [[self onThread:self.flusherThread] drain];
      }
 }
 
