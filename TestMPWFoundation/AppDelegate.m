@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <Foundation/Foundation.h>
 #import <MPWTest/MPWTestSuite.h>
 #import <MPWTest/MPWLoggingTester.h>
 #import <MPWTest/MPWClassMirror.h>
@@ -41,19 +42,13 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
 //        }
 //        
 //    }
-    NSArray *classNamesToTest=
-    @[
-      @"MPWPoint",
-      @"MPWWriteStream",
-      @"MPWPipeline",
-      @"MPWDelayStream",
-      @"MPWFastInvocation",
-      @"MPWObjectCache",
-      @"MPWSmallStringTable",
-      @"MPWQueue",
-      @"MPWByteStream",
-      @"MPWNotificationProtocolTests",
-      ];
+    NSString *testListPath=[[NSBundle mainBundle] pathForResource:@"ClassesToTest"
+                                                           ofType:@"plist"];
+    NSData *namePlist=[NSData dataWithContentsOfFile:testListPath];
+
+    NSArray *classNamesToTest=[NSPropertyListSerialization propertyListWithData:namePlist options:0 format:0 error:nil];
+
+
     NSMutableArray *mirrors=[NSMutableArray array];
     for ( NSString *className in classNamesToTest ) {
         [mirrors addObject:[MPWClassMirror mirrorWithClass:NSClassFromString( className)]];

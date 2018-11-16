@@ -319,7 +319,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
         @"testAutorelease",@"testJump", nil];
 }
 
-#if ! TARGET_OS_IPHONE   // zero cost exception errors (10.5 required)
 
 +(void)testAutorelease
 {
@@ -340,7 +339,6 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
        [NSException raise:release_name format:release_msg,localException];
     NS_ENDHANDLER
 }
-#endif 
 
 +(void)testJump
 {

@@ -450,7 +450,6 @@ boolAccessor( mustUnique, setMustUnique )
 	return subData;
 }
 
-#if ! TARGET_OS_IPHONE
 
 +(void)testSubDataProtectsAgainstNilOriginalData
 {
@@ -461,7 +460,6 @@ boolAccessor( mustUnique, setMustUnique )
 	NS_ENDHANDLER
 	NSAssert1( subData == nil ,@"subData should not have initialized",nil);
 }
-#endif
 
 +(void)testSubDataIntValue
 {

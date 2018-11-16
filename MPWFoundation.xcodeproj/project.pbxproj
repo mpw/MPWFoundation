@@ -43,6 +43,11 @@
 		1F080E5E1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
 		1F0984AB219EC8E3006D10D9 /* MPWTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F0984AD219F20D9006D10D9 /* ClassesToTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F0984AC219F20D9006D10D9 /* ClassesToTest.plist */; };
+		1F0984AF219F238A006D10D9 /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
+		1F0984B0219F23F4006D10D9 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
+		1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */; };
+		1F0984B2219F23F4006D10D9 /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
 		1F11C44B15567F6300E597D9 /* MPWValueAccessor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C44915567F6300E597D9 /* MPWValueAccessor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F11C44F15567F6300E597D9 /* MPWValueAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */; };
 		1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; };
@@ -818,6 +823,7 @@
 		1F080E571E50515700B78EF3 /* MPWStreamSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWStreamSource.h; sourceTree = "<group>"; };
 		1F080E581E50515700B78EF3 /* MPWStreamSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWStreamSource.m; sourceTree = "<group>"; };
 		1F0984A6219DC6A6006D10D9 /* MPWTest.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MPWTest.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F0984AC219F20D9006D10D9 /* ClassesToTest.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = ClassesToTest.plist; sourceTree = "<group>"; };
 		1F11C44915567F6300E597D9 /* MPWValueAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWValueAccessor.h; sourceTree = "<group>"; };
 		1F11C44A15567F6300E597D9 /* MPWValueAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWValueAccessor.m; sourceTree = "<group>"; };
 		1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWStackSaverInvocation.h; sourceTree = "<group>"; };
@@ -1363,6 +1369,7 @@
 				1F4FC9831DF818AF00B35D27 /* LaunchScreen.storyboard */,
 				1F4FC9861DF818AF00B35D27 /* Info.plist */,
 				1F4FC9751DF818AE00B35D27 /* Supporting Files */,
+				1F0984AC219F20D9006D10D9 /* ClassesToTest.plist */,
 			);
 			path = TestMPWFoundation;
 			sourceTree = "<group>";
@@ -2037,6 +2044,7 @@
 			files = (
 				1F4FC9851DF818AF00B35D27 /* LaunchScreen.storyboard in Resources */,
 				1F4FC9821DF818AF00B35D27 /* Assets.xcassets in Resources */,
+				1F0984AD219F20D9006D10D9 /* ClassesToTest.plist in Resources */,
 				1F4FC9801DF818AF00B35D27 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2052,6 +2060,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F0984B0219F23F4006D10D9 /* stops.txt in Resources */,
+				1F0984AF219F238A006D10D9 /* ResourceTest in Resources */,
+				1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */,
+				1F0984B2219F23F4006D10D9 /* first4.tabdelim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
