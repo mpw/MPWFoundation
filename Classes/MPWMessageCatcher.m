@@ -158,8 +158,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #else
     return [NSArray arrayWithObjects:
         @"testShouldNotRespondToSelectorNotPartOfClass",
-        @"testBasicCatch",
-        @"testMessageArgument",
+//        @"testBasicCatch",
+//        @"testMessageArgument",
         nil];
 #endif
 }

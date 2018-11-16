@@ -470,9 +470,9 @@ static id returnNil() {  return nil; }
         @"testSelectFirst",
 #if 0		
 		@"testExpressionSelect",
+            @"testWhereValueForKey",@"testLotsOfValueForKey",
 #endif		
 #ifdef Darwin
-        @"testWhereValueForKey",@"testLotsOfValueForKey",
 #endif
 		nil];
 }

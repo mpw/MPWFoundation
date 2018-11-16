@@ -129,14 +129,14 @@ CACHING_ALLOC( quickTrampoline, 5, YES )
 	[self setXxxTarget:nil];
 }
 
-
+typedef id (*IDIMP2)(id, SEL,id,id);
 
 static void __forwardStart0( MPWTrampoline* target, SEL selector )
 {
     MPWFastInvocation *invocationToForward=[MPWFastInvocation quickInvocation];
     [invocationToForward setSelector:selector];
     [invocationToForward setTarget:target->xxxTarget];
-    ((IMP0)objc_msgSend)(target->xxxTarget,target->xxxSelector, invocationToForward, target->xxxAdditionalArg);
+    ((IDIMP2)objc_msgSend)(target->xxxTarget,target->xxxSelector, invocationToForward, target->xxxAdditionalArg);
 //    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:target->xxxAdditionalArg];
 }
 
@@ -347,7 +347,7 @@ scalarAccessor( SEL, xxxSelector, setXxxSelector )
     [obj setXxxTarget:@"dummy_target"];
     [obj setXxxSelector:@selector(dummy_return:)];
     result=[obj stringByAppendingString:@"hi"];
-    NSAssert2( [result isEqual:@"bozo"],@"return '%@' unexpected, expected %@ ",result,@"bozo");
+    IDEXPECT( result, @"bozo", @"result");
 }
 
 @end
