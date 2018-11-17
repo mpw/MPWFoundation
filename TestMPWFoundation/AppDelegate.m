@@ -19,11 +19,8 @@
 @implementation AppDelegate
 
 
-int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL verbose ,BOOL veryVerbose ) {
-    NSMutableArray *testsuites=[NSMutableArray array];
-    NSLog(@"hi");
-    [NSThread sleepForTimeInterval:1];
-    NSLog(@"hi again, will run tests");
+int runTests( NSArray *testSuiteNames , NSArray *testTypeNames,  BOOL verbose ,BOOL veryVerbose ) {
+    NSLog(@"will run tests");
     MPWTestSuite* test;
     MPWLoggingTester* results;
     int exitCode=0;
@@ -76,7 +73,9 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
     if ( [results failureCount] >0 ) {
         exitCode=1;
     }
+    exit(0);
     return exitCode;
+
 }
 
 

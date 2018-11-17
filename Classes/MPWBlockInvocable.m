@@ -298,7 +298,7 @@ static NSString *extractStructType( char *s )
 #ifdef __x86_64__
 		returnVal=(id)[returnVal longValue];
 #else
-		returnVal=(id)[returnVal intValue];
+		returnVal=(id)[returnVal longValue];
 #endif
 	}
 	return returnVal;
