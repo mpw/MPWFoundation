@@ -79,13 +79,13 @@ static id forwardAMessage( MPWDirectForwardingTrampoline* target, SEL _cmd,  ...
 }
 
 
--(long long)forward:(SEL)selector :(id*)args
-{
-//	NSLog(@"forward::");
-	((IMP0)objc_msgSend)( xxxTarget, xxxSelector ,selector ,args ,0 );
-	return 0LL;
-}
-
+//-(long long)forward:(SEL)selector :(id*)args
+//{
+////    NSLog(@"forward::");
+//    ((IMP0)objc_msgSend)( xxxTarget, xxxSelector ,selector ,args ,0 );
+//    return 0LL;
+//}
+//
 
 @end
 

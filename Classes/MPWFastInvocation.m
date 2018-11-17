@@ -119,7 +119,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	[self setResult:*(id*)retval];
 }
 
-typedef id (*IMP4)(id, SEL, id,id,id,id);
+//typedef id (*IMP4)(id, SEL, id,id,id,id);
 
 
 -resultOfInvoking
@@ -333,13 +333,15 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 {
 	MPWFastInvocation *invocation = [self invocation];
 	
-	long three=3;
-	NSInteger charAtThree;
+	long positionArg=3;
 	[invocation setSelector:@selector(characterAtIndex:)];
 	[invocation setTarget:@"Hello World!"];
-	[invocation setArgument:&three atIndex:2];
-	charAtThree=(NSInteger)[invocation resultOfInvoking];
-	INTEXPECT( charAtThree, 'l', @"character at three");
+	[invocation setArgument:&positionArg atIndex:2];
+//	charAtThree=(NSInteger)[invocation resultOfInvoking];
+    INTEXPECT( (NSInteger)[invocation resultOfInvoking], 'l', @"character at three");
+    positionArg=4;
+    [invocation setArgument:&positionArg atIndex:2];
+    INTEXPECT( (NSInteger)[invocation resultOfInvoking], 'o', @"character at four");
 }
 
 +testSelectors
@@ -347,12 +349,10 @@ typedef id (*IMP4)(id, SEL, id,id,id,id);
 	return [NSArray arrayWithObjects:
 				@"testBasicSendNSInvocation",
 				@"testBasicSend",
-#if 1 // FULL_MPWFOUNDATION
 				@"testFasterThanNSInvocationWithoutCaching",
 				@"testFasterThanNSInvocationWitCaching",
 //				@"testCachingFasterThanNonCaching",
 				@"testCachedInvocationFasterThanMessaging",
-#endif				
 				@"testIntArgAndReturnValue",
 				nil];
 }

@@ -48,6 +48,7 @@ int runTests( NSArray *testSuiteNames , NSMutableArray *testTypeNames,  BOOL ver
 
     NSArray *classNamesToTest=[NSPropertyListSerialization propertyListWithData:namePlist options:0 format:0 error:nil];
 
+//    NSArray *classNamesToTest = @[ @"MPWFastInvocation" ];
 
     NSMutableArray *mirrors=[NSMutableArray array];
     for ( NSString *className in classNamesToTest ) {

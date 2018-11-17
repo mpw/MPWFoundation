@@ -34,7 +34,12 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <Foundation/NSObject.h>
 //#import <glib.h>
 
-typedef id (*IMP0)(id, SEL, ...);
+typedef id (*IMP0)(id, SEL);
+typedef id (*IMP1)(id, SEL, void*);
+typedef id (*IMPINT1)(id, SEL, long);
+typedef id (*IMP2)(id, SEL, void*,void*);
+typedef id (*IMP3)(id, SEL, void*,void*,void*);
+typedef id (*IMP4)(id, SEL, void*,void*,void*,void*);
 
 @interface MPWObject : NSObject
 {

@@ -47,8 +47,10 @@ typedef id (*IDIMP0)(id, SEL);
     id defaultHandler;
     IDIMP0	  charSwitch[260];
     id textCache;
-    IMP0 getObject,initData,makeText;
-    IMP0 setScanPosition;
+    IMP0 getObject;
+    IMP0 initData;
+    IMPINT1 makeText;
+    IMP1 setScanPosition;
     long	headRoom;
     id bufferCache;
 }
@@ -77,7 +79,7 @@ idAccessor_h( dataSource, setDataSource )
 -(BOOL)reserve:(long)roomNeeded;
 -(long)offset;
 
-#define UPDATEPOSITION(newPos)		setScanPosition(self, @selector(setScanPosition:), newPos )
+#define UPDATEPOSITION(newPos)		setScanPosition(self, @selector(setScanPosition:), (void*)newPos )
 #define MAKE_PROBE_CURRENT		UPDATEPOSITION(probe)
 #define SCANINBOUNDS(ptr)		((ptr)<end)
 #define RESERVE(room)			((pos+(room)<end) ? YES : [self reserve:(room)])

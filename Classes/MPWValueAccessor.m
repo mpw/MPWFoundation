@@ -17,7 +17,8 @@ typedef struct {
     Class       targetClass;
     int         targetOffset;
     SEL         getSelector,putSelector;
-    IMP0         getIMP,putIMP;
+    IMP0         getIMP;
+    IMP1         putIMP;
     id          additionalArg;
 } AccessPathComponent;
 
@@ -44,7 +45,7 @@ idAccessor(target, _setTarget)
     component->getSelector= NSSelectorFromString(newName);
     component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"]);
     component->getIMP=(IMP0)objc_msgSend;
-    component->putIMP=(IMP0)objc_msgSend;
+    component->putIMP=(IMP1)objc_msgSend;
     component->targetOffset=-1;
     component->additionalArg=[newName retain];
 }
@@ -59,7 +60,7 @@ idAccessor(target, _setTarget)
     if ( ![aTarget respondsToSelector:component->putSelector] ) {
         component->putSelector = @selector(setObject:forKey:);
     }
-    component->putIMP=(IMP0)[aTarget methodForSelector:component->putSelector];
+    component->putIMP=(IMP1)[aTarget methodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
     }
@@ -98,7 +99,7 @@ static inline id getValueForComponents( id currentTarget, AccessPathComponent *c
 //        if ( c[i].targetOffset>= 0 ) {
 //            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
 //        } else {
-            currentTarget=c[i].getIMP( currentTarget, c[i].getSelector, c[i].additionalArg );
+            currentTarget=((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg );
 //        }
     }
     return currentTarget;
@@ -107,7 +108,7 @@ static inline id getValueForComponents( id currentTarget, AccessPathComponent *c
 static inline void setValueForComponents( id currentTarget, AccessPathComponent *c , int count, id value) {
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
-    c[final].putIMP( currentTarget, c[final].putSelector, value, c[final].additionalArg );
+    ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, value, c[final].additionalArg );
 }
 
 -(void)_setOffset:(int)offset

@@ -214,7 +214,7 @@ static id returnNil() {  return nil; }
 #else
 //#warning slow path!
         targetFilterImp = (IMP0)[tempTarget methodForSelector:targetSelector];
-        arguments[0] = targetFilterImp( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
+        arguments[0] = ((IMP4)targetFilterImp)( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
 #endif
         result = processResult( self, NULL );
     } while ( result == nil );
@@ -226,7 +226,8 @@ static id returnNil() {  return nil; }
 -runFilter:(NSInvocation*)newInvocation processingSelector:(SEL)processingSelector
 {
     NSMutableArray *result;
-    IMP0 arrayAddObject,selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
+    IMP1 arrayAddObject;
+    IMP0 selfNextObject=(IMP0)[self methodForSelector:@selector(nextObject)];
     id next;
 #if VERBOSEDEBUG
     if ( localDebug ) {
@@ -236,7 +237,7 @@ static id returnNil() {  return nil; }
 //	NSLog(@"key: %x",key);
 //	NSLog(@"key: %@",key);
     result=[NSMutableArray array];
-    arrayAddObject=(IMP0)[result methodForSelector:@selector(addObject:)];
+    arrayAddObject=(IMP1)[result methodForSelector:@selector(addObject:)];
     [self setInvocation:newInvocation];
     processResult = (IMP0)[self methodForSelector:processingSelector];
 #if VERBOSEDEBUG

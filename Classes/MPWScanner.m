@@ -170,8 +170,8 @@ idAccessor( dataSource, setDataSource )
     [bufferCache setUnsafeFastAlloc:YES];
     getObject = (IMP0)[textCache methodForSelector:@selector(getObject)];
     initData=(IMP0)[[MPWSubData class] instanceMethodForSelector:@selector(reInitWithData:bytes:length:)];
-    makeText=(IMP0)[self methodForSelector:@selector(makeText:)];
-    setScanPosition=(IMP0)[self methodForSelector:@selector(setScanPosition:)];
+    makeText=(IMPINT1)[self methodForSelector:@selector(makeText:)];
+    setScanPosition=(IMP1)[self methodForSelector:@selector(setScanPosition:)];
     [self _initCharSwitch];
     [self reInitWithSource:aDataSource];
 
@@ -243,12 +243,13 @@ idAccessor( dataSource, setDataSource )
     the original data, no copying of data is performed.
 "*/
 {
-    id text = GETOBJECT( (MPWObjectCache*)textCache );
+    MPWSubData* text = GETOBJECT( (MPWObjectCache*)textCache );
     RESERVE(length);
     if ( pos+length > end ) {
         length=end-pos;
     }
-    initData(text , @selector(reInitWithData:bytes:length:), data, pos, length );
+    [text reInitWithData:data bytes:pos length:length];
+//    initData(text , @selector(reInitWithData:bytes:length:), data, pos, length );
     pos=pos+length;
     return text;
 }
@@ -294,7 +295,7 @@ idAccessor( dataSource, setDataSource )
     if ( SCANINBOUNDS(cur) && *cur=='\n' ) {
         cur++;
     }
-	UPDATEPOSITION(cur);
+	UPDATEPOSITION((char*)cur);
 }
 
 -(void)updateBufferFromSource

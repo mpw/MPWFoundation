@@ -273,9 +273,9 @@ typedef id (*IDSELIMP)(id, SEL,SEL);
 
 +(IMP)methodForSelector:(SEL)sel
 {
-    static IMP0 mfs=(IMP0)nil;
+    static IMP1 mfs=(IMP1)nil;
     if (!mfs) {
-        mfs = (IMP0)[NSObject methodForSelector:_cmd];
+        mfs = (IMP1)[NSObject methodForSelector:_cmd];
     }
     return (IMP)mfs( self, _cmd, sel );
 }

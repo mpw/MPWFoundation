@@ -61,7 +61,7 @@
 			<key>isShown</key>
 			<true/>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>2</integer>
 		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>

@@ -177,11 +177,11 @@ SEL visSel;
     id nextObject;
     IMP0 getNextObject = (IMP0)[e methodForSelector:@selector(nextObject)];
     Class lastClass = nil;
-    IMP0 writeOnStream = (void*)0;
-    IMP0 writeSpacer = (IMP0)[spacer methodForSelector:streamWriterMessage];
+    IMP1 writeOnStream = (void*)0;
+    IMP1 writeSpacer = (IMP1)[spacer methodForSelector:streamWriterMessage];
 
     if (nil!=(nextObject=getNextObject( e, @selector(nextObject)))) {
-        writeOnStream =(IMP0)[nextObject methodForSelector: streamWriterMessage];
+        writeOnStream =(IMP1)[nextObject methodForSelector: streamWriterMessage];
         lastClass = *(Class*)nextObject;
         writeOnStream( nextObject, streamWriterMessage, self );
     }
@@ -190,7 +190,7 @@ SEL visSel;
             writeSpacer( spacer, streamWriterMessage, self );
         }
         if ( lastClass != *(Class*)nextObject) {
-            writeOnStream = (IMP0)[nextObject methodForSelector: streamWriterMessage];
+            writeOnStream = (IMP1)[nextObject methodForSelector: streamWriterMessage];
             lastClass = *(Class*)nextObject;
         }
         if (writeOnStream) {
