@@ -485,10 +485,7 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)closeLocal
 {
     [super closeLocal];
-    if ( [byteTarget respondsToSelector:@selector(closeLocal)]) {
-        [byteTarget closeLocal];
-    }
-//    [[byteTarget ifResponds] closeLocal];
+    [[byteTarget ifResponds] closeLocal];
 }
 
 @end
