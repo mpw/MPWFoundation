@@ -1,0 +1,6 @@
+#!/bin/bash
+mv ~/programming/Build ~/programming/Build-1
+pod trunk push
+mv ~/programming/Build ~/programming/Build-pod
+mv ~/programming/Build-1 ~/programming/Build
+
