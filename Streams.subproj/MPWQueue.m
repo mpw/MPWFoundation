@@ -169,13 +169,13 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 @implementation MPWQueue(testing)
 
-+aTestQueue {
++(instancetype)aTestQueue {
     return [self streamWithTarget:[NSMutableArray array]];
 }
 
 
-+filledTestQueue {
-    MPWQueue *q=[self aTestQueue];
++(instancetype)filledTestQueue {
+    let q=[MPWQueue aTestQueue];
     INTEXPECT(q.count, 0, @"0 objects added");
     [q writeObject:@(1)];
     [q writeObject:@(2)];
@@ -186,8 +186,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testDrainForwardsAllToTarget
 {
-    MPWQueue *q=[self filledTestQueue];
-    NSArray *a=(NSArray*)[q target];
+    let q=[MPWQueue filledTestQueue];
+    let a=(NSArray*)[q target];
     INTEXPECT(a.count, 0, @"0 objects forwarded");
     [q drain];
     INTEXPECT(a.count, 3, @"3 objects forwarded");
@@ -196,8 +196,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testTriggeringWorksSameAsDrain
 {
-    MPWQueue *q=[self filledTestQueue];
-    NSArray *a=(NSArray*)[q target];
+    let q=[MPWQueue filledTestQueue];
+    let a=(NSArray*)[q target];
     [q triggerDrain];
     INTEXPECT(a.count, 3, @"3 objects forwarded");
     IDEXPECT(a, (@[ @(1), @(2), @(3)]), @"3 objects forwarded");
@@ -205,8 +205,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testDupsAreRejectedWhenUniquing
 {
-    NSMutableArray *a=[NSMutableArray array];
-    MPWQueue *q=[[[self alloc] initWithTarget:a uniquing:YES] autorelease];
+    let a=[NSMutableArray array];
+    let q=[MPWQueue queueWithTarget:a uniquing:YES];
     [q writeObject:@(1)];
     [q writeObject:@(1)];
     [q writeObject:@(1)];
@@ -216,7 +216,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testAutoflushDrainsImmediately
 {
-    MPWQueue *q=[self aTestQueue];
+    let q=[MPWQueue aTestQueue];
     [q setAutoFlush:YES];
     NSArray *a=(NSArray*)[q target];
     [q writeObject:@(1)];
@@ -230,8 +230,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testAsyncFlushing
 {
-    MPWQueue *q=[self filledTestQueue];
-    NSArray *a=(NSArray*)[q target];
+    let q=[MPWQueue filledTestQueue];
+    let a=(NSArray*)[q target];
     [q makeAsynchronous];
     [q triggerDrain];
     [NSThread sleepForTimeInterval:0.00001 orUntilConditionIsMet:^{
@@ -242,8 +242,8 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 
 +(void)testAsyncAutoFlushing
 {
-    MPWQueue *q=[self aTestQueue];
-    NSArray *a=(NSArray*)[q target];
+    let q=[MPWQueue aTestQueue];
+    let a=(NSArray*)[q target];
     EXPECTFALSE(q.isAsynchronous,@"is async");
     [q makeAsynchronous];
     EXPECTTRUE(q.isAsynchronous,@"is async");
