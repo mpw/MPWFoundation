@@ -501,7 +501,7 @@ static id returnNil() {  return nil; }
 {
     id array = [NSArray arrayWithObjects:@"fondationBozo",@"foundation",@"foundationHI",@"foundationHI",@"foundation",nil];
 
-    id result =(id)(NSUInteger)[[@"foundationHI" select:1] __isEqualToString:[array each]];
+    id result =(id)(NSUInteger)[[@"foundationHI" selectArg:1] __isEqualToString:[array each]];
     INTEXPECT([result count], 2, @"select number of instances found");
 }
 

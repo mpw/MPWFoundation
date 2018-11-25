@@ -101,7 +101,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     return [self _filterWithSelector:@selector(doInvocation:)];
 }
 
--select:(int)n
+-selectArg:(int)n
 {
     id trampoline = [self _filterWithSelector:@selector(selectInvocation:) class:[MPWEnumSelectFilter class]];
     [[trampoline xxxTarget] setResultSelector:n];
@@ -110,7 +110,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 -select
 {
-    return [self select:1];
+    return [self selectArg:1];
 }
 
 -reject:(int)n

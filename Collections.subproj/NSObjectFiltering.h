@@ -57,7 +57,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 -each;
 -filter;
 -collect;
--select:(int)n;
+-selectArg:(int)n;
 -select;
 -reject:(int)n;
 -reject;

@@ -185,10 +185,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
     }
 }
 
--select:(int)n
+-selectArg:(int)n
 {
     if ( [self count] > 0 ) {
-        return [super select:n];
+        return [super selectArg:n];
     } else {
         return [self emptyIgnoreTrampoline];
     }
