@@ -145,6 +145,19 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 }
 
 
++(void)testCanDelete
+{
+    let first = [MPWDictStore store];
+    let second = [MPWDictStore store];
+    let store = [MPWSequentialStore storeWithStores:@[first,second]];
+    store[@"key"] = @"value";
+    IDEXPECT( first[@"key"], @"value", @"did store");
+    EXPECTNIL( second[@"key"],@"second");
+
+    [store deleteObjectForReference:(id<MPWReferencing>)@"key"];
+    EXPECTNIL(store[@"key"],@"after delete" );
+
+}
 
 
 +testSelectors
@@ -152,6 +165,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return @[
              @"testBasicAccessCombinations",
              @"testStoreOnlyAffectsFirst",
+             @"testCanDelete",
              ];
 }
 
