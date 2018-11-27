@@ -39,6 +39,16 @@
     }
 }
 
+-(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+{
+    [self.cache deleteObjectForReference:aReference];
+    if (!self.readOnlySource) {
+        [self.queue writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbDELETE]];
+    }
+}
+
+
+
 -(void)makeAsynchronous
 {
     [self.queue makeAsynchronous];
@@ -66,10 +76,12 @@
              @"testCanInvalidateCache",
              @"testMergeWorksLikeStore",
              @"testMergingFetchesFirst",
+             @"testCanDelete",
 
              //
 
              @"testAsyncWrite",
+             @"testAsyncDelete",
              ];
 }
 
@@ -82,14 +94,27 @@
 {
     EXPECTTRUE( [self.store isKindOfClass:[MPWWriteBackCache class]], @"expected class");
     [(MPWWriteBackCache*)self.store makeAsynchronous];
-    [self.store setObject:self.value forReference:self.key];
-    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"writing cache is synchronous");
-    EXPECTNIL( [self.source objectForReference:self.key], @"writing source is not synchronous");
+    self.store[self.key] = self.value;
+    IDEXPECT( self.cache[self.key], self.value, @"writing cache is synchronous");
+    EXPECTNIL( self.source[self.key], @"writing source is not synchronous");
     [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{
-        return @([self.source objectForReference:self.key] != nil);
+        return @(self.source[self.key] != nil);
     }];
-    IDEXPECT( [self.source objectForReference:self.key], self.value, @"did write async");
+    IDEXPECT( self.source[self.key], self.value, @"did write async");
 
+}
+
+-(void)testAsyncDelete
+{
+    self.store[self.key] = self.value;
+    [(MPWWriteBackCache*)self.store makeAsynchronous];
+    [self.store deleteObjectForReference:self.key];
+    EXPECTNIL( self.cache[self.key], @"deleteing cache is synchronous");
+    IDEXPECT( self.source[self.key], self.value, @"deleteing source is not synchronous");
+    [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{
+        return @(self.source[self.key] == nil);
+    }];
+    EXPECTNIL( self.source[self.key], @"deleteing source happens eventually");
 }
 
 @end

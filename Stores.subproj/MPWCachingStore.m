@@ -65,7 +65,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     [self writeToSource:[self.cache objectForReference:aReference] forReference:aReference];
 }
 
-
+-(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+{
+    [self.cache deleteObjectForReference:aReference];
+    [self.source deleteObjectForReference:aReference];
+}
 
 -(void)invalidate:(id)aRef
 {
@@ -125,6 +129,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
              @"testCanInvalidateCache",
              @"testMergeWorksLikeStore",
              @"testMergingFetchesFirst",
+             @"testCanDelete",
              ];
 }
 
@@ -185,7 +190,16 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
     [self.store setObject:self.value forReference:self.key];
     [self.store invalidate:self.key];
-    EXPECTNIL( self.cache[self.key] , @"cache should be invalidated");
+    EXPECTNIL( self.cache[self.key] , @"cache should be gone");
+    IDEXPECT( self.source[self.key] ,self.value, @"source should still be there");
+}
+
+-(void)testCanDelete
+{
+    [self.store setObject:self.value forReference:self.key];
+    [self.store deleteObjectForReference:self.key];
+    EXPECTNIL( self.cache[self.key] , @"cache should be gone");
+    EXPECTNIL( self.source[self.key] , @"source should be gone");
 }
 
 -(void)testMergeWorksLikeStore
