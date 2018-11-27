@@ -40,6 +40,11 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     self.stores.firstObject[aReference]=theObject;
 }
 
+-(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+{
+    [self.stores.firstObject deleteObjectForReference:aReference];
+}
+
 -(void)mergeObject:(id)theObject forReference:(id<MPWReferencing>)aReference
 {
     [self setObject:[self objectForReference:aReference] forReference:aReference];
