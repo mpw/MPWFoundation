@@ -72,18 +72,34 @@
 	[self setObject:anObject forKey:[NSNumber numberWithInt:intKey]];
 }
 
--(id)at:anObject
+-(id)at:aKey
 {
-    return [self objectForKey:anObject];
+    return [self objectForKey:aKey];
+}
+
+-at:aKey put:anObject
+{
+    [self setObject:anObject forKey:aKey];
+    return anObject;
 }
 
 @end
 
 @implementation NSArray(at)
 
--(id)at:anObject
+-(id)at:anIndex
 {
-    return [self objectAtIndex:[anObject intValue]];
+    return [self objectAtIndex:[anIndex intValue]];
+}
+
+@end
+
+@implementation NSMutableArray(atput)
+
+-at:anIndex put:anObject
+{
+    [self replaceObjectAtIndex:[anIndex longValue] withObject:anObject];
+    return anObject;
 }
 
 @end
@@ -94,6 +110,11 @@
 -(id)at:anObject
 {
     return [self valueForKey:anObject];
+}
+
+-yourself
+{
+    return self;
 }
 
 @end

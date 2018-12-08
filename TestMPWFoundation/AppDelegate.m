@@ -25,20 +25,6 @@ int runTests( NSArray *testSuiteNames , NSArray *testTypeNames,  BOOL verbose ,B
     MPWLoggingTester* results;
     int exitCode=0;
     
-//    if ( [testTypeNames count] == 0 ) {
-//        testTypeNames=[testTypeNames arrayByAddingObject:@"testSelectors"];
-//    }
-//    for ( id suitename in testSuiteNames ) {
-//        id suite = [MPWTestSuite testSuiteForLocalFramework:suitename testTypes:testTypeNames];
-//        //			NSLog(@"suite name= %@",suitename);
-//        //			NSLog(@"suite = %@",suite);
-//        if ( suite ) {
-//            [testsuites addObject:suite];
-//        } else {
-//            NSLog(@"couldn't load framework: %@",suitename);
-//        }
-//        
-//    }
     NSString *testListPath=[[NSBundle mainBundle] pathForResource:@"ClassesToTest"
                                                            ofType:@"plist"];
     NSData *namePlist=[NSData dataWithContentsOfFile:testListPath];

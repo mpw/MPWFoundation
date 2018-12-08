@@ -3,7 +3,7 @@
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/4/11.
-//  Copyright 2012 metaobject ltd. All rights reserved.
+//  Copyright 2012 Marcel Weiher. All rights reserved.
 //
 
 #import "MPWBlockInvocable.h"
