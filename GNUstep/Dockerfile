@@ -14,8 +14,8 @@ RUN apt-get update && apt-get install -y \
     inetutils-ping \
 	vim
 
-COPY .bashrc /
-COPY .profile /
+COPY .bashrc /root/
+COPY .profile /root/
 
 CMD ["bash"]
 
