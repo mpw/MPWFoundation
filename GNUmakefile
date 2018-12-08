@@ -2,14 +2,19 @@
 
 #include $(GNUSTEP_MAKEFILES)/common.make
 
-LIBRARY_NAME = libMPWFoundation
+FRAMEWORK_NAME = MPWFoundation
 
 GNUSTEP_LOCAL_ADDITIONAL_MAKEFILES=base.make
+GNUSTEP_BUILD_DIR = ~/Build/MPWFoundation
+
 include $(GNUSTEP_MAKEFILES)/common.make
 
 libMPWFoundation_DLL_DEF = MPWFoundation.def
 
-disabled_libMPWFoundation_HEADER_FILES = \
+LIBRARY_NAME = libMPWFoundation
+
+
+MPWFoundation_HEADER_FILES = \
 	AccessorMacros.h		\
 	CodingAdditions.h		\
 	DebugMacros.h			\
@@ -67,12 +72,12 @@ disabled_libMPWFoundation_HEADER_FILES = \
 	NSSelectEnumerator.h		\
 	NSStringAdditions.h		\
 	NSThreadInterThreadMessaging.h	\
-	bytecoding.h			\
 
-disabled_libMPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
+MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
+
 
 libMPWFoundation_OBJC_FILES = \
-	MPWObject.m NSNil.m NSInvocationAdditions.m \
+	Classes/MPWObject.m NSNil.m NSInvocationAdditions.m \
 	NSStringAdditions.m CodingAdditions.m MPWObjectCache.m \
 	NSRectAdditions.m MPWScanner.m NSDictAdditions.m\
 	MPWRuntimeAdditions.m NSObjectAdditions.m MPWPoint.m\
@@ -80,15 +85,14 @@ libMPWFoundation_OBJC_FILES = \
 	MPWMsgExpression.m MPWAssociation.m MPWIgnoreTrampoline.m \
 	NSBundleConveniences.m MPWObjectReference.m \
 
-libMPWFoundation_C_FILES =  bytecoding.c
 
-libMPWFoundation_SUBPROJECTS = \
+MPWFoundation_SUBPROJECTS = \
 	Collections.subproj	\
 	Streams.subproj		\
 	Comm.subproj		\
 
 
-libMPWFoundation_LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc-gnu.1
+LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc-gnu.1
 
 # LDFLAGS += -L /C/GNUstep/System/Libraries/ix86/mingw32/gnu-gnu-gnu/ 
 OBJCFLAGS += -Wno-import
