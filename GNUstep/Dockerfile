@@ -11,8 +11,11 @@ RUN apt-get update && apt-get install -y \
     git \
     make \
     ssh \
-    inetutils-ping
+    inetutils-ping \
+	vim
 
+COPY .bashrc /
+COPY .profile /
 
 CMD ["bash"]
 
