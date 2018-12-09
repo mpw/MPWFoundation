@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y \
     make \
     ssh \
     inetutils-ping \
+    llvm \
     clang \
-	gobjc \
 	vim
 
 RUN useradd -ms /bin/bash gnustep

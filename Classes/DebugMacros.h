@@ -22,16 +22,28 @@ static inline BOOL _idsAreEqual( id a, id b ) {
 }
 #define ROUNDTOINTFORTEST( aValue )   ((int)round(aValue))
 
+//#if !defined(MPWTESTASSERT)
+//#define MPWTESTASSERT(condition, desc, ...)    \
+//do {                \
+//__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
+//if (!(condition)) {        \
+//[[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
+//object:self file:[NSString stringWithUTF8String:__FILE__] \
+//lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+//}                \
+//__PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
+//} while(0)
+//#endif
+
+
 #if !defined(MPWTESTASSERT)
-#define MPWTESTASSERT(condition, desc, ...)	\
-do {				\
-    __PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-    if (!(condition)) {		\
-        [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
-              object:self file:[NSString stringWithUTF8String:__FILE__] \
-          lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
-    }				\
-__PRAGMA_POP_NO_EXTRA_ARG_WARNINGS \
+#define MPWTESTASSERT(condition, desc, ...)    \
+do {                \
+if (!(condition)) {        \
+[[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
+object:self file:[NSString stringWithUTF8String:__FILE__] \
+lineNumber:__LINE__ description:(desc), ##__VA_ARGS__]; \
+}                \
 } while(0)
 #endif
 

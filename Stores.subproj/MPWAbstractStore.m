@@ -30,7 +30,8 @@
 
 +(NSArray*)mapStores:(NSArray*)storeDescriptions
 {
-    NSMutableOrderedSet *stores=[NSMutableOrderedSet orderedSetWithCapacity:storeDescriptions.count];
+ //   NSMutableOrderedSet *stores=[NSMutableOrderedSet orderedSetWithCapacity:storeDescriptions.count];
+    NSMutableArray *stores=[NSMutableArray arrayWithCapacity:storeDescriptions.count];
     id previous=nil;
     for ( id storeDescription in storeDescriptions) {
         if ( previous ) {
@@ -47,8 +48,8 @@
             NSDictionary *descriptionDict=(NSDictionary*)storeDescription;
             NSMutableDictionary *storeDict=[NSMutableDictionary dictionary];
             for  (NSString *key in descriptionDict.allKeys ) {
-                id subDescription=descriptionDict[key];
-                storeDict[key]=[self mapStore:subDescription];
+                id subDescription=[descriptionDict objectForKey:key];
+                [storeDict setObject:[self mapStore:subDescription] forKey:key];
             }
             [previous setStoreDict:storeDict];
         } else {
@@ -65,7 +66,8 @@
     if ( previous ) {
         [stores addObject:previous];
     }
-    return stores.array;
+
+    return stores;
 }
 
 +(instancetype)stores:(NSArray*)storeDescriptions

@@ -80,13 +80,6 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 
 libMPWFoundation_OBJC_FILES = \
 	Stores.subproj/MPWAbstractStore.m \
-	Classes/MPWObject.m NSNil.m NSInvocationAdditions.m \
-	NSStringAdditions.m CodingAdditions.m MPWObjectCache.m \
-	NSRectAdditions.m MPWScanner.m NSDictAdditions.m\
-	MPWRuntimeAdditions.m NSObjectAdditions.m MPWPoint.m\
-	MPWRect.m NSDataPrivateMemoryMapping.m MPWTrampoline.m\
-	MPWMsgExpression.m MPWAssociation.m MPWIgnoreTrampoline.m \
-	NSBundleConveniences.m MPWObjectReference.m \
 
 
 MPWFoundation_SUBPROJECTS = \
@@ -95,10 +88,10 @@ MPWFoundation_SUBPROJECTS = \
 	Comm.subproj		\
 
 
-LIBRARIES_DEPEND_UPON += -lgnustep-base -lobjc-gnu.1
+LIBRARIES_DEPEND_UPON += -lgnustep-base 
 
 # LDFLAGS += -L /C/GNUstep/System/Libraries/ix86/mingw32/gnu-gnu-gnu/ 
-OBJCFLAGS += -Wno-import
+OBJCFLAGS += -Wno-import -I Classes/ 
 
 
 libMPWFoundation_INCLUDE_DIRS += -I.headers -I. -I..
