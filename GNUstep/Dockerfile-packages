@@ -5,19 +5,16 @@ ENV LANG en_US.UTF-8
 ENV TZ 'Europe/Berlin'
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-COPY install-gnustep-clang /
-RUN chmod u+x install-gnustep-clang
 
 RUN apt-get update && apt-get install -y \
+    gnustep-devel \
     git \
     make \
     ssh \
-    sudo \
-    curl \
     inetutils-ping \
+    clang \
+	gobjc \
 	vim
-
-RUN /install-gnustep-clang  
 
 RUN useradd -ms /bin/bash gnustep
 

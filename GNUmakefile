@@ -12,6 +12,8 @@ include $(GNUSTEP_MAKEFILES)/common.make
 libMPWFoundation_DLL_DEF = MPWFoundation.def
 
 LIBRARY_NAME = libMPWFoundation
+CC = clang
+
 
 
 MPWFoundation_HEADER_FILES = \
@@ -77,6 +79,7 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 
 
 libMPWFoundation_OBJC_FILES = \
+	Stores.subproj/MPWAbstractStore.m \
 	Classes/MPWObject.m NSNil.m NSInvocationAdditions.m \
 	NSStringAdditions.m CodingAdditions.m MPWObjectCache.m \
 	NSRectAdditions.m MPWScanner.m NSDictAdditions.m\

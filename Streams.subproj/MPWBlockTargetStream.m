@@ -21,10 +21,12 @@ CONVENIENCEANDINIT( stream, WithBlock:(TargetBlock)newBlock)
 {
     self=[super init];
     [self setBlock:newBlock];
+    streamWriterMessage=[self streamWriterMessage];
     return self;
 }
 
--(void)writeObject:(id)anObject
+
+-(void)writeObject:(id)anObject sender:aSender
 {
     TargetBlock targetBlock = [self block];
     if ( targetBlock) {

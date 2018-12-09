@@ -45,6 +45,7 @@
 #import "MPWFoundation/MPWURLCall2StoreStream.h"
 #import "MPWFoundation/MPWNotificationStream.h"
 #import "MPWFoundation/MPWMapFilter.h"
+#import "MPWFoundation/MPWQueue.h"
 
 #import "MPWFoundation/MPWBlockTargetStream.h"
 #import "MPWFoundation/MPWCombinerStream.h"
