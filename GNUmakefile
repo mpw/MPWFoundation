@@ -14,6 +14,7 @@ libMPWFoundation_DLL_DEF = MPWFoundation.def
 LIBRARY_NAME = libMPWFoundation
 CC = clang
 
+OBJCFLAGS += -Wno-import 
 
 
 MPWFoundation_HEADER_FILES = \
@@ -91,7 +92,6 @@ MPWFoundation_SUBPROJECTS = \
 LIBRARIES_DEPEND_UPON += -lgnustep-base 
 
 # LDFLAGS += -L /C/GNUstep/System/Libraries/ix86/mingw32/gnu-gnu-gnu/ 
-OBJCFLAGS += -Wno-import -I Classes/ 
 
 
 libMPWFoundation_INCLUDE_DIRS += -I.headers -I. -I..

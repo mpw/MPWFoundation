@@ -11,7 +11,16 @@
 #import "MPWByteStream.h"
 #import "MPWWriteStream.h"
 
+@interface NSArray(unique)
+
+-(NSArray*)uniqueObjects;
+
+@end
+
+
 @implementation MPWAbstractStore
+
+@synthesize errors,name;
 
 +(instancetype)store
 {
@@ -67,7 +76,7 @@
         [stores addObject:previous];
     }
 
-    return stores;
+    return [stores uniqueObjects];
 }
 
 +(instancetype)stores:(NSArray*)storeDescriptions
@@ -170,6 +179,12 @@
 {
 }
 
+-(void)dealloc
+{
+    [name release];
+    [errors release];
+    [super dealloc];
+}
 
 @end
 
@@ -225,3 +240,25 @@
                                      ]; }
 
 @end
+
+
+
+@implementation NSArray(unique)
+
+-(NSArray*)uniqueObjects
+{
+    NSMutableArray *unique=[NSMutableArray array];
+    @autoreleasepool {
+        NSMutableSet *seen=[NSMutableSet set];
+        for ( id obj in self ) {
+            if ( ![seen containsObject:obj]) {
+                [unique addObject:obj];
+                [seen addObject:obj];
+            }
+        }
+    }
+    return unique;
+}
+
+@end
+
