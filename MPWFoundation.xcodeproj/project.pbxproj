@@ -786,7 +786,6 @@
 		07DF19B3006686DDC35ADD82 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		07DF19B4006686DDC35ADD82 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCTests-Info.plist"; sourceTree = "<group>"; };
-		1F008FEF10BDAC18001F05D5 /* Info-MPWFoundation__Framework___Upgraded_ copy.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-MPWFoundation__Framework___Upgraded_ copy.plist"; sourceTree = "<group>"; };
 		1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCombinerStream.h; sourceTree = "<group>"; };
 		1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCombinerStream.m; sourceTree = "<group>"; };
 		1F05F69B0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDirectForwardingTrampoline.h; sourceTree = "<group>"; };
@@ -938,7 +937,6 @@
 		1FC97D000BB0AB8B00F8CB51 /* MPWFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWFloat.m; sourceTree = "<group>"; };
 		1FCBEDDB1CFC2DA800F2EE0E /* NSThreadWaiting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSThreadWaiting.h; sourceTree = "<group>"; };
 		1FCBEDDC1CFC2DA800F2EE0E /* NSThreadWaiting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSThreadWaiting.m; sourceTree = "<group>"; };
-		1FCDE1B21253A9640002D17A /* Info-MPWFoundation__Framework___Upgraded_ copy 2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-MPWFoundation__Framework___Upgraded_ copy 2.plist"; sourceTree = "<group>"; };
 		1FCE1E131371BB250035A429 /* MPWBlockInvocable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBlockInvocable.h; sourceTree = "<group>"; };
 		1FCE1E141371BB250035A429 /* MPWBlockInvocable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocable.m; sourceTree = "<group>"; };
 		1FCF25D41CF3983B00AC64CE /* MPWFoundationWatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundationWatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1035,8 +1033,6 @@
 				1F4FC98E1DF818AF00B35D27 /* TestMPWFoundationUITests */,
 				07DF19B6006686DDC35ADD82 /* Products */,
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
-				1F008FEF10BDAC18001F05D5 /* Info-MPWFoundation__Framework___Upgraded_ copy.plist */,
-				1FCDE1B21253A9640002D17A /* Info-MPWFoundation__Framework___Upgraded_ copy 2.plist */,
 				1F9D63C91F601E1800DA9514 /* Frameworks */,
 			);
 			name = MPWFoundation;
