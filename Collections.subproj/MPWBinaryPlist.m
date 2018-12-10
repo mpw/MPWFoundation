@@ -56,7 +56,7 @@
 }
 
 
-DEALLOC(
+ARCDEALLOC(
     for (int i=0;i<count;i++) {
         RELEASE(objs[i]);
     }
@@ -613,7 +613,7 @@ static inline id objectAtIndex( MPWBinaryPlist *self, NSUInteger anIndex )
     return NO;
 }
 
-DEALLOC(
+ARCDEALLOC(
         RELEASE(data);
         for (long i=0;i<numObjects;i++) {
             RELEASE( objects[i]);
