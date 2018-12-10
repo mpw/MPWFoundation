@@ -6,20 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		1FA5B7D51172CD28001628B6 /* MPWFoundationTouchFat */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 1FA5B7E11172CD3E001628B6 /* Build configuration list for PBXAggregateTarget "MPWFoundationTouchFat" */;
-			buildPhases = (
-				1FA5B7D41172CD28001628B6 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = MPWFoundationTouchFat;
-			productName = libMPWFoundationTouchFat;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -134,7 +120,6 @@
 		1F4FC9801DF818AF00B35D27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC97E1DF818AF00B35D27 /* Main.storyboard */; };
 		1F4FC9821DF818AF00B35D27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC9811DF818AF00B35D27 /* Assets.xcassets */; };
 		1F4FC9851DF818AF00B35D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC9831DF818AF00B35D27 /* LaunchScreen.storyboard */; };
-		1F4FC9901DF818AF00B35D27 /* TestMPWFoundationUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC98F1DF818AF00B35D27 /* TestMPWFoundationUITests.m */; };
 		1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */; };
 		1F54A15B209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F54A15C209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -709,16 +694,6 @@
 		43AE45B11F55C6A50048A79E /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		1F4FC98C1DF818AF00B35D27 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 07DF1931006686DDC35ADD82 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1F4FC9721DF818AE00B35D27;
-			remoteInfo = TestMPWFoundation;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		1F9D63CE1F60200C00DA9514 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -875,7 +850,6 @@
 		1F4FC9811DF818AF00B35D27 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1F4FC9841DF818AF00B35D27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1F4FC9861DF818AF00B35D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1F4FC98B1DF818AF00B35D27 /* TestMPWFoundationUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestMPWFoundationUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4FC98F1DF818AF00B35D27 /* TestMPWFoundationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMPWFoundationUITests.m; sourceTree = "<group>"; };
 		1F4FC9911DF818AF00B35D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "archiving-times-and-sizes.csv"; sourceTree = "<group>"; };
@@ -1011,13 +985,6 @@
 			files = (
 				1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */,
 				1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F4FC9881DF818AF00B35D27 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1352,7 +1319,6 @@
 				1F840DA5193F505700589595 /* MPWFoundation.framework */,
 				1FCF25D41CF3983B00AC64CE /* MPWFoundationWatch.framework */,
 				1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */,
-				1F4FC98B1DF818AF00B35D27 /* TestMPWFoundationUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1903,24 +1869,6 @@
 			productReference = 1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1F4FC98A1DF818AF00B35D27 /* TestMPWFoundationUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1F4FC9A11DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundationUITests" */;
-			buildPhases = (
-				1F4FC9871DF818AF00B35D27 /* Sources */,
-				1F4FC9881DF818AF00B35D27 /* Frameworks */,
-				1F4FC9891DF818AF00B35D27 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1F4FC98D1DF818AF00B35D27 /* PBXTargetDependency */,
-			);
-			name = TestMPWFoundationUITests;
-			productName = TestMPWFoundationUITests;
-			productReference = 1F4FC98B1DF818AF00B35D27 /* TestMPWFoundationUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 		1F840DA4193F505700589595 /* MPWFoundationTouch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */;
@@ -1991,12 +1939,6 @@
 						DevelopmentTeam = PE4436LT5M;
 						ProvisioningStyle = Automatic;
 					};
-					1F4FC98A1DF818AF00B35D27 = {
-						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = PE4436LT5M;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1F4FC9721DF818AE00B35D27;
-					};
 					1F840DA4193F505700589595 = {
 						CreatedOnToolsVersion = 6.0;
 						LastSwiftMigration = 0940;
@@ -2027,12 +1969,10 @@
 			projectRoot = "";
 			targets = (
 				1FF8FDB309B49D0100652476 /* MPWFoundationFramework */,
-				1FA5B7D51172CD28001628B6 /* MPWFoundationTouchFat */,
-				1F3AC607143EB3D9009B8504 /* show-build-dir */,
 				1F840DA4193F505700589595 /* MPWFoundationTouch */,
 				1FCF25D31CF3983B00AC64CE /* MPWFoundationWatch */,
 				1F4FC9721DF818AE00B35D27 /* TestMPWFoundation */,
-				1F4FC98A1DF818AF00B35D27 /* TestMPWFoundationUITests */,
+				1F3AC607143EB3D9009B8504 /* show-build-dir */,
 			);
 		};
 /* End PBXProject section */
@@ -2046,13 +1986,6 @@
 				1F4FC9821DF818AF00B35D27 /* Assets.xcassets in Resources */,
 				1F0984AD219F20D9006D10D9 /* ClassesToTest.plist in Resources */,
 				1F4FC9801DF818AF00B35D27 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F4FC9891DF818AF00B35D27 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2101,19 +2034,6 @@
 /* End PBXRezBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1FA5B7D41172CD28001628B6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# shell script goes here\npwd\nexport VER=5.0\necho --- build for simulator\nxcodebuild -configuration Release -target MPWFoundationTouch -sdk \"iphonesimulator$VER\" ARCHS=i386 DSTROOT=$CONFIGURATION_BUILD_DIR/../Release-iphonesimulator\necho --- build for device\nxcodebuild -configuration Release  -target MPWFoundationTouch -sdk \"iphoneos$VER\" ARCHS=\"armv6 armv7\"  DSTROOT=$CONFIGURATION_BUILD_DIR/../Release-iphoneos\ncd  $CONFIGURATION_BUILD_DIR\ncd ..\npwd\necho --- combine libraries\nlipo -create $CONFIGURATION_BUILD_DIR/../Release-iphoneos/libMPWFoundationTouch.a $CONFIGURATION_BUILD_DIR/../Release-iphonesimulator/libMPWFoundationTouch.a -output  $CONFIGURATION_BUILD_DIR/../Release/libMPWFoundationTouch.a\n#rm Release-iphoneos/libiXmlKit.a Release-iphonesimulator/libiXmlKit.a";
-		};
 		1FF8FE2809B49D0200652476 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -2133,14 +2053,6 @@
 				1F4FC97D1DF818AF00B35D27 /* ViewController.m in Sources */,
 				1F4FC97A1DF818AF00B35D27 /* AppDelegate.m in Sources */,
 				1F4FC9771DF818AE00B35D27 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		1F4FC9871DF818AF00B35D27 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F4FC9901DF818AF00B35D27 /* TestMPWFoundationUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2482,14 +2394,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		1F4FC98D1DF818AF00B35D27 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1F4FC9721DF818AE00B35D27 /* TestMPWFoundation */;
-			targetProxy = 1F4FC98C1DF818AF00B35D27 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		1F4FC97E1DF818AF00B35D27 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -2702,17 +2606,6 @@
 			};
 			name = Nightly;
 		};
-		1F1412DC1CEC7EEA000E2802 /* Nightly */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-				ZERO_LINK = NO;
-			};
-			name = Nightly;
-		};
 		1F1412DD1CEC7EEA000E2802 /* Nightly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2877,17 +2770,6 @@
 					"-Wno-unknown-pragmas",
 				);
 				WRAPPER_EXTENSION = framework;
-			};
-			name = Beta;
-		};
-		1F1412E11CEC7EF0000E2802 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-				ZERO_LINK = NO;
 			};
 			name = Beta;
 		};
@@ -3322,281 +3204,6 @@
 			};
 			name = Core;
 		};
-		1F4FC9991DF818AF00B35D27 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-			};
-			name = Debug;
-		};
-		1F4FC99A1DF818AF00B35D27 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		1F4FC99B1DF818AF00B35D27 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = AppStore;
-		};
-		1F4FC99C1DF818AF00B35D27 /* Nightly */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Nightly;
-		};
-		1F4FC99D1DF818AF00B35D27 /* Beta */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Beta;
-		};
-		1F4FC99E1DF818AF00B35D27 /* Weekly */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Weekly;
-		};
-		1F4FC99F1DF818AF00B35D27 /* Core */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = PE4436LT5M;
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				INFOPLIST_FILE = TestMPWFoundationUITests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.TestMPWFoundationUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				TEST_TARGET_NAME = TestMPWFoundation;
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Core;
-		};
 		1F840DB8193F505700589595 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3759,37 +3366,6 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Core;
-		};
-		1FA5B7D61172CD28001628B6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-			};
-			name = Debug;
-		};
-		1FA5B7D71172CD28001628B6 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
-		1FA5B7D81172CD28001628B6 /* Core */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				GCC_VERSION = "";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
 			};
 			name = Core;
 		};
@@ -4404,17 +3980,6 @@
 			};
 			name = AppStore;
 		};
-		57180A431CEF080C002317C5 /* AppStore */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-				ZERO_LINK = NO;
-			};
-			name = AppStore;
-		};
 		57180A441CEF080C002317C5 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4582,17 +4147,6 @@
 			};
 			name = Weekly;
 		};
-		57D466941D5D7D6D00513893 /* Weekly */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = libMPWFoundationTouchFat;
-				ZERO_LINK = NO;
-			};
-			name = Weekly;
-		};
 		57D466951D5D7D6D00513893 /* Weekly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4746,20 +4300,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		1F4FC9A11DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundationUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1F4FC9991DF818AF00B35D27 /* Debug */,
-				1F4FC99A1DF818AF00B35D27 /* Release */,
-				1F4FC99B1DF818AF00B35D27 /* AppStore */,
-				1F4FC99C1DF818AF00B35D27 /* Nightly */,
-				1F4FC99D1DF818AF00B35D27 /* Beta */,
-				1F4FC99E1DF818AF00B35D27 /* Weekly */,
-				1F4FC99F1DF818AF00B35D27 /* Core */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
 		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -4770,20 +4310,6 @@
 				1F1412E31CEC7EF0000E2802 /* Beta */,
 				57D466961D5D7D6D00513893 /* Weekly */,
 				1F840DBA193F505700589595 /* Core */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		1FA5B7E11172CD3E001628B6 /* Build configuration list for PBXAggregateTarget "MPWFoundationTouchFat" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1FA5B7D61172CD28001628B6 /* Debug */,
-				1FA5B7D71172CD28001628B6 /* Release */,
-				57180A431CEF080C002317C5 /* AppStore */,
-				1F1412DC1CEC7EEA000E2802 /* Nightly */,
-				1F1412E11CEC7EF0000E2802 /* Beta */,
-				57D466941D5D7D6D00513893 /* Weekly */,
-				1FA5B7D81172CD28001628B6 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
