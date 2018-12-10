@@ -162,12 +162,12 @@ CONVENIENCE( name##initsel , init##initsel ) \
 //---- RETAIN/RELEASE Macros for GNUStep compatibility
 
 #if __has_feature(objc_arc)
-#define DEALLOC( x) \
+#define ARCDEALLOC( x) \
 -(void)dealloc { \
     x; \
 }
 #else
-#define DEALLOC( x) \
+#define ARCDEALLOC( x) \
 -(oneway void)dealloc { \
     x; \
     [super dealloc]; \
