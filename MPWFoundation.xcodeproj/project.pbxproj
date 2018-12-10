@@ -2482,7 +2482,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -2579,7 +2579,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -2746,7 +2746,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -3807,7 +3807,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -3857,7 +3857,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -3953,7 +3953,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
@@ -4120,7 +4120,7 @@
 				);
 				GCC_VERSION = "";
 				HEADER_SEARCH_PATHS = "";
-				INFOPLIST_FILE = "Info-MPWFoundation__Framework___Upgraded_.plist";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "@rpath";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
