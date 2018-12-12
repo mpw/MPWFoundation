@@ -66,8 +66,8 @@ static id blockFunVar( id self, ... ) {
     return result;
 }
 
-static id blockFun( id self ) {
-    return blockFunVar( self, nil);
+static id blockFun( id self, SEL sel, id arg1, id arg2, id arg3 ) {
+    return blockFunVar( self, sel, arg1,arg2,arg3);
 }
 
 
