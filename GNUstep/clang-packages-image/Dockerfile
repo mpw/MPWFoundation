@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y \
     inetutils-ping \
     llvm \
     clang \
+    curl \
+    cmake \
 	vim
 
 RUN useradd -ms /bin/bash gnustep

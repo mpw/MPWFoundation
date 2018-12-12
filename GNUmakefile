@@ -1,5 +1,8 @@
 # $Id: GNUmakefile,v 1.11 2004/12/08 21:20:43 marcel Exp $
 
+
+OBJC_RUNTIME_LIB=ng
+
 #include $(GNUSTEP_MAKEFILES)/common.make
 
 FRAMEWORK_NAME = MPWFoundation
@@ -14,7 +17,8 @@ libMPWFoundation_DLL_DEF = MPWFoundation.def
 LIBRARY_NAME = libMPWFoundation
 CC = clang
 
-OBJCFLAGS += -Wno-import 
+
+OBJCFLAGS += -Wno-import -fobjc-runtime=gnustep
 
 
 MPWFoundation_HEADER_FILES = \
