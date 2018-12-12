@@ -56,7 +56,22 @@ static struct Block_descriptor sdescriptor= {
     const char *ctypes=[self ctypes];
     return ctypes ? [NSString stringWithCString:ctypes encoding:NSASCIIStringEncoding] : nil;
 }
+#if TARGET_OS_IPHONE
 
+static id blockFunVar( id self, ... ) {
+    va_list args;
+    va_start( args, self );
+    id result=[self invokeWithArgs:args];
+    va_end( args );
+    return result;
+}
+
+static id blockFun( id self ) {
+    return blockFunVar( self, nil);
+}
+
+
+#else
 static id blockFun( id self, ... ) {
 	va_list args;
 	va_start( args, self );
@@ -64,6 +79,7 @@ static id blockFun( id self, ... ) {
 	va_end( args );
 	return result;
 }
+#endif
 
 -(IMP)invokeMapper
 {
