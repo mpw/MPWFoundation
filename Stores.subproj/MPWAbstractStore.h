@@ -37,8 +37,6 @@
 
 @interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
 {
-    NSObject <Streaming> *errors;
-    NSString *name;
 }
 
 @property (nonatomic, retain)  NSObject <Streaming> *errors;

@@ -20,8 +20,6 @@
 
 @implementation MPWAbstractStore
 
-@synthesize errors,name;
-
 +(instancetype)store
 {
     return [[[self alloc] init] autorelease];
@@ -181,8 +179,8 @@
 
 -(void)dealloc
 {
-    [name release];
-    [errors release];
+    [_name release];
+    [_errors release];
     [super dealloc];
 }
 
