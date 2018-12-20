@@ -7,10 +7,10 @@ RUN /install-gnustep-clang
 
 RUN useradd -ms /bin/bash gnustep
 
-COPY .bashrc /home/gnustep/
-COPY .profile /home/gnustep/
-COPY .bashrc /root/
-COPY .profile /root/
+COPY bashrc /home/gnustep/.bashrc
+COPY profile /home/gnustep/.profile
+COPY bashrc /root/.bashrc
+COPY profile /root/.profile
 
 CMD ["bash"]
 
