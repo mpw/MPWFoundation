@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+
+
+echo Installing libobjc2
+export CC=clang
+
+cd gnustep-make-2.7.0
+./configure
+make install
+cd ..
+
+cd libobjc2-1.8.1
+mkdir Build
+cd Build
+cmake ..
+make install
+cd ../..
+
+
+cd gnustep-make-2.7.0
+make clean
+./configure --with-library-combo=ng-gnu-gnu
+make install
+cd ..
+
+
+cd gnustep-base-1.25.1
+#./configure
+make install
+cd ..
+
+apt-get install libdispatch-dev
+
+echo Installation script finished successfully

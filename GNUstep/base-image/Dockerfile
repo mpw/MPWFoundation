@@ -13,7 +13,10 @@ RUN apt-get update && apt-get install -y \
     sudo \
     curl \
     inetutils-ping \
-	vim build-essential clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev gobjc libxml2-dev cmake 
+	vim build-essential  \
+	clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev libxml2-dev cmake \
+	libffi-dev \
+	gnutls-dev  \
 
 
 
