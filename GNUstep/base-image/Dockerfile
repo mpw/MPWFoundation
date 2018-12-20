@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 	vim build-essential  \
 	clang libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev libxml2-dev cmake \
 	libffi-dev \
-	gnutls-dev  \
+	gnutls-dev 
 
 
 

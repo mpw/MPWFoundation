@@ -1,6 +1,7 @@
 FROM gnustep-base
 
 
+COPY install-gnustep-clang /
 RUN chmod u+x install-gnustep-clang
 RUN /install-gnustep-clang  
 
