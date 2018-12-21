@@ -90,6 +90,9 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWGenericReference.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
+    Streams.subproj/MPWArrayFlattenStream.m \
+    Streams.subproj/MPWFilter.m \
+    Streams.subproj/MPWWriteStream.m \
 
 
 

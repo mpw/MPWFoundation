@@ -7,7 +7,7 @@
 #import "MPWConvertFromJSONStream.h"
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
-
+#import "MPWByteStream.h"
 
 @interface MPWWriteStream(private)
 
