@@ -1,0 +1,1 @@
+clang -fobjc-runtime=gnustep-1.9 -I../.headers -o testmpwfoundation testmpwfoundation.m -L/home/gnustep/Build/MPWFoundation/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc  

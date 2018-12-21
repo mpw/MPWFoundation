@@ -84,7 +84,14 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 
 
 libMPWFoundation_OBJC_FILES = \
-	Stores.subproj/MPWAbstractStore.m \
+    Stores.subproj/MPWAbstractStore.m \
+    Stores.subproj/MPWDictStore.m \
+    Stores.subproj/MPWReference.m \
+    Stores.subproj/MPWGenericReference.m \
+    Streams.subproj/MPWByteStream.m \
+    Streams.subproj/MPWFlattenStream.m \
+
+
 
 
 MPWFoundation_SUBPROJECTS = \

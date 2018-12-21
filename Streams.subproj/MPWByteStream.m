@@ -7,6 +7,8 @@
 #import "DebugMacros.h"
 #import "MPWDictStore.h"
 #import "MPWIgnoreUnknownTrampoline.h"
+#include <fcntl.h>
+#include <unistd.h>
 
 
 @interface NSString(fastCString)

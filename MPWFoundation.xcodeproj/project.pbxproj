@@ -882,6 +882,7 @@
 		1F840DB6193F505700589595 /* MPWFoundationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFoundationTests.m; sourceTree = "<group>"; };
 		1F84750F084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIgnoreUnknownTrampoline.h; sourceTree = "<group>"; };
 		1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIgnoreUnknownTrampoline.m; sourceTree = "<group>"; };
+		1F8A18AE21CCEAD9000A0884 /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
@@ -1134,6 +1135,7 @@
 		07DF195F006686DDC35ADD82 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1F8A18AE21CCEAD9000A0884 /* GNUmakefile */,
 				07DF1963006686DDC35ADD82 /* m.template */,
 				07DF1964006686DDC35ADD82 /* h.template */,
 				66DC61AE01398925005ADD88 /* Concepts.rtf */,

@@ -11,6 +11,9 @@ COPY bashrc /home/gnustep/.bashrc
 COPY profile /home/gnustep/.profile
 COPY bashrc /root/.bashrc
 COPY profile /root/.profile
+COPY bashrc /.bashrc
+COPY profile /.profile
+
 
 CMD ["bash"]
 
