@@ -2,18 +2,29 @@
 #
 
 
-echo Installing libobjc2
+echo Installing gnustep-make
 export CC=clang
+echo compiler is $CC
 
+tar zxf gnustep-make-2.7.0.tar.gz
 cd gnustep-make-2.7.0
 ./configure
 make install
 cd ..
 
+echo 
+echo 
+echo ======================
+echo Installing libobjc2
+
+
+tar zxf libobjc2-1.8.1.tar.gz
+cp patches/libobjc2-1.8.1/* libobjc2-1.8.1/
 cd libobjc2-1.8.1
 mkdir Build
 cd Build
-cmake ..
+# cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang -DTESTS=OFF -DLLVM_OPTS=OFF  ..
+cmake -DTESTS=OFF .. 
 make install
 cd ../..
 
@@ -24,12 +35,11 @@ make clean
 make install
 cd ..
 
-
+source /usr/local/share/GNUstep/Makefiles/GNUstep.sh
+tar zxf gnustep-base-1.25.1.tar.gz 
 cd gnustep-base-1.25.1
-#./configure
+./configure
 make install
 cd ..
-
-apt-get install libdispatch-dev
 
 echo Installation script finished successfully

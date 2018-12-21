@@ -93,7 +93,11 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWArrayFlattenStream.m \
     Streams.subproj/MPWFilter.m \
     Streams.subproj/MPWWriteStream.m \
+    Classes/NSStringAdditions.m \
 
+
+libMPWFoundation_C_FILES = \
+    bytecoding.c \
 
 
 
