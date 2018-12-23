@@ -1,5 +1,9 @@
 #import <MPWFoundation/MPWDictStore.h>
 
+@interface NSObject(testSelectors)
+-(NSArray*)testSelectors;
+@end
+
 static void runTests()
 {
 	int tests=0;
@@ -9,6 +13,10 @@ static void runTests()
 		@"MPWDictStore",
 		@"MPWReferenceTests",
 		@"MPWFastInvocation",
+		@"MPWFilter",
+		@"MPWArrayFlattenStream",
+		@"MPWFlattenStream",
+		@"MPWByteStream",
 
 	];
 

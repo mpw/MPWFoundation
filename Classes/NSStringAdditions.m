@@ -96,6 +96,30 @@
     return result;
 }
 
+#ifdef GS_API_LATEST
+- (BOOL)getBytes:(nullable void *)buffer maxLength:(NSUInteger)maxBufferCount usedLength:(nullable NSUInteger *)usedBufferCount encoding:(NSStringEncoding)encoding options:(NSStringEncodingConversionOptions)options range:(NSRange)range remainingRange:(nullable NSRangePointer)leftover
+{
+    BOOL result = [self getCString:buffer maxLength:maxBufferCount encoding:encoding];
+    if (result) {
+        int len=strlen( buffer);
+        if ( usedBufferCount ) {
+            *usedBufferCount=len;
+        }
+        if ( leftover ) {
+            *leftover=NSMakeRange(0,0);
+        }
+    } else {
+        if ( usedBufferCount ) {
+            *usedBufferCount=0;
+        }
+        if ( leftover ) {
+            *leftover=NSMakeRange(0,0);
+        }
+    }
+    return result;
+}
+#endif
+
 #if WINDOWS
 
 -(char*)_fastCStringContents:(BOOL)blah
@@ -148,12 +172,14 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 @end
 
+
+
 @implementation NSData(asPropertyList)
 
 -propertyList
 {
     return [NSPropertyListSerialization propertyListWithData:self options:0
-                                                      format:NULL error:nil];
+                                                      format:NULL error:NULL];
 }
 
 @end

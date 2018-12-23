@@ -98,7 +98,8 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWObject.m \
     Classes/MPWObjectCache.m \
     Classes/MPWFastInvocation.m \
-    Classes/MPWFastInvocation.m \
+    Classes/MPWTrampoline.m \
+    Classes/MPWIgnoreUnknownTrampoline.m \
 
 
 libMPWFoundation_C_FILES = \

@@ -607,8 +607,8 @@ idAccessor( finalFileName, setFinalFileName )
     [self closefile];
     if ( finalFileName && tempFileName ) {
         NSFileManager* fileManager=[NSFileManager defaultManager];
-        [fileManager removeItemAtPath:finalFileName error:nil];
-        [fileManager moveItemAtPath:tempFileName toPath:finalFileName error:nil];
+        [fileManager removeItemAtPath:finalFileName error:NULL];
+        [fileManager moveItemAtPath:tempFileName toPath:finalFileName error:NULL];
         [self setFinalFileName:nil];
         [self setTempFileName:nil];
     }
