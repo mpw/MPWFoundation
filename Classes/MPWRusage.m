@@ -15,19 +15,31 @@
 @implementation MPWRusage
 
 scalarAccessor(long long, absolute , setAbsolute)
+scalarAccessor(long long, cpu , setCpu)
 
-static long long getNanoseconds() {
+static long long getNanoseconds(int which) {
     struct timespec ts;
-    clock_gettime(CLOCK_REALTIME,&ts );
+    clock_gettime(which,&ts );
+
     return ts.tv_sec * 1000000000 + ts.tv_nsec;
 }
+static long long getRealNanoseconds() {
+    return getNanoseconds(CLOCK_REALTIME);
+}
+
+static long long getCPUNanoseconds() {
+    return getNanoseconds(CLOCK_PROCESS_CPUTIME_ID);
+}
+
+
 
 
 -initWithCurrent
 {
         if (nil != (self=[super init])) {
-                getrusage( RUSAGE_SELF, &usage );
-                absolute=getNanoseconds();
+            getrusage( RUSAGE_SELF, &usage );
+            absolute=getRealNanoseconds();
+            cpu=getCPUNanoseconds();
         }
         return self;
 }
@@ -80,30 +92,31 @@ static long long getNanoseconds() {
 
 -subtractStartTime:(MPWRusage*)start
 {
-        struct rusage start_usage;
-//      NSAssert( start != nil );
-        start_usage=*[start usage];
-        usage.ru_utime = [self timevalFrom:start_usage.ru_utime to: usage.ru_utime];
-        usage.ru_stime = [self timevalFrom:start_usage.ru_stime to: usage.ru_stime];
-        absolute -= [start absolute];
+    struct rusage start_usage;
+    //      NSAssert( start != nil );
+    start_usage=*[start usage];
+    usage.ru_utime = [self timevalFrom:start_usage.ru_utime to: usage.ru_utime];
+    usage.ru_stime = [self timevalFrom:start_usage.ru_stime to: usage.ru_stime];
+    absolute -= [start absolute];
+    cpu -= [start cpu];
 #define USAGE_SUBTRACT( member )  usage.member -= start_usage.member
 
-         USAGE_SUBTRACT(  ru_maxrss);          /* integral max resident set size */
-         USAGE_SUBTRACT(  ru_ixrss);           /* integral shared text memory size */
-         USAGE_SUBTRACT(  ru_idrss);           /* integral unshared data size */
-         USAGE_SUBTRACT(  ru_isrss);           /* integral unshared stack size */
-         USAGE_SUBTRACT(  ru_minflt);          /* page reclaims */
-         USAGE_SUBTRACT(  ru_majflt);          /* page faults */
-         USAGE_SUBTRACT(  ru_nswap);           /* swaps */
-         USAGE_SUBTRACT(  ru_inblock);         /* block input operations */
-         USAGE_SUBTRACT(  ru_oublock);         /* block output operations */
-         USAGE_SUBTRACT(  ru_msgsnd);          /* messages sent */
-         USAGE_SUBTRACT(  ru_msgrcv);          /* messages received */
-         USAGE_SUBTRACT(  ru_nsignals);        /* signals received */
-         USAGE_SUBTRACT(  ru_nvcsw);           /* voluntary context switches */
-         USAGE_SUBTRACT(  ru_nivcsw);          /* involuntary context switches */
+    USAGE_SUBTRACT(  ru_maxrss);          /* integral max resident set size */
+    USAGE_SUBTRACT(  ru_ixrss);           /* integral shared text memory size */
+    USAGE_SUBTRACT(  ru_idrss);           /* integral unshared data size */
+    USAGE_SUBTRACT(  ru_isrss);           /* integral unshared stack size */
+    USAGE_SUBTRACT(  ru_minflt);          /* page reclaims */
+    USAGE_SUBTRACT(  ru_majflt);          /* page faults */
+    USAGE_SUBTRACT(  ru_nswap);           /* swaps */
+    USAGE_SUBTRACT(  ru_inblock);         /* block input operations */
+    USAGE_SUBTRACT(  ru_oublock);         /* block output operations */
+    USAGE_SUBTRACT(  ru_msgsnd);          /* messages sent */
+    USAGE_SUBTRACT(  ru_msgrcv);          /* messages received */
+    USAGE_SUBTRACT(  ru_nsignals);        /* signals received */
+    USAGE_SUBTRACT(  ru_nvcsw);           /* voluntary context switches */
+    USAGE_SUBTRACT(  ru_nivcsw);          /* involuntary context switches */
 
-        return self;
+    return self;
 }
 
 +timeRelativeTo:(MPWRusage*)start
@@ -119,25 +132,3 @@ static long long getNanoseconds() {
 
 @end
 
-//@implementation NSObject(userTimeToRun)
-//
-//-userMicrosecondsToRun:anInvocation
-//{
-//    NSNumber* usertime;
-//    id pool=[NSAutoreleasePool new];
-//    id start=[MPWRusage current];
-//    [anInvocation invokeWithTarget:self];
-//    usertime=[[NSNumber numberWithLong:[[MPWRusage timeRelativeTo:start] userMicroseconds]] retain];
-//    [anInvocation setReturnValue:&usertime];
-//    [pool drain];
-//    [usertime autorelease];
-//    return usertime;
-//}
-//
-//-userMicrosecondsToRun
-//{
-//    return [MPWTrampoline trampolineWithTarget:self selector:@selector(userMicrosecondsToRun:)];
-//}
-//
-//
-//@end

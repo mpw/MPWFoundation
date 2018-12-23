@@ -13,8 +13,9 @@
 
 @interface MPWRusage : NSObject
 {
-        struct rusage usage;
-        long long absolute;
+    struct rusage usage;
+    long long absolute;
+    long long cpu;
 }
 
 +current;
@@ -24,6 +25,7 @@
 -(int)absoluteMicroseconds;
 
 -(long long)absolute;
+-(long long)cpu;
 
 
 @end

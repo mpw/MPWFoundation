@@ -179,11 +179,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 
 @end
 
-@interface MPWConvenientInvocation : NSInvocation {}
--resultOfInvoking;
-@end
-
-@implementation MPWConvenientInvocation
+@implementation NSInvocation(convenience)
 
 -resultOfInvoking
 {
@@ -233,7 +229,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 
 +(void)testBasicSendNSInvocation
 {
-	IDEXPECT( [self testBasicSend:[MPWConvenientInvocation class]], @"Hello World!", @"concating via NSInvocation");
+	IDEXPECT( [self testBasicSend:[NSInvocation class]], @"Hello World!", @"concating via NSInvocation");
 }
 
 +(void)testBasicSend
@@ -242,16 +238,16 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 }
 
 
-#if FULL_MPWFOUNDATION && !WINDOWS && !LINUX
+//#if FULL_MPWFOUNDATION && !WINDOWS && !LINUX
 
 +(double)ratioOfNSInvocationToMPWFastInvocationSpeed:(BOOL)caching
 {
 	int i;
 	MPWFastInvocation* fast=[self simpleSendWithInvocationOfClass:[MPWFastInvocation class]];
-	id slow=[self simpleSendWithInvocationOfClass:[MPWConvenientInvocation class]];
+	id slow=[self simpleSendWithInvocationOfClass:[NSInvocation class]];
 	IMP0 invoke = (IMP0)[slow methodForSelector:@selector(resultOfInvoking)];
 	MPWRusage* slowStart=[MPWRusage current];
-#define SEND_COUNT 1000000
+#define SEND_COUNT 10000
 
 	for (i=0;i<SEND_COUNT;i++) {
 		invoke( slow, @selector(resultOfInvoking));
@@ -267,7 +263,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
 //    NSLog(@"fastTime: %@",fastTime);
 //    NSLog(@"fastTime: %g",(double)[fastTime userMicroseconds]);
-	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
+	double ratio = (double)[slowTime cpu] / (double)[fastTime cpu];
 	NSLog(@"ratio of %@cached MPWFastInvocation compared to NSInvocation: %g",caching?@"":@"un",ratio);
 	return ratio;
 }
@@ -302,7 +298,7 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 }
 
 #undef SEND_COUNT
-#define SEND_COUNT 1000000
+#define SEND_COUNT 10000
 
 +(void)testCachedInvocationFasterThanMessaging
 {
@@ -320,14 +316,17 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	for (i=0;i<SEND_COUNT;i++) {
 		INVOKE(fast);
 	}
+    MPWRusage *fastStop=[MPWRusage current];
+    NSLog(@"user cpu nano start: %lld stop: %lld",[fastStart cpu],[fastStop cpu]);
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
-	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
-	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",(int)[fastTime userMicroseconds],(int)[slowTime userMicroseconds],ratio);
+    NSLog(@"fast diff %lld",[fastTime cpu]);
+	double ratio = (double)[slowTime cpu] / (double)[fastTime cpu];
+	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",(int)[fastTime cpu],(int)[slowTime cpu],ratio);
 	NSAssert2( ratio > 0.2 ,@"ratio of cached fast invocation to normal message send %g < %g",
 				ratio,0.2);
 }
 
-#endif
+//#endif
 
 +(void)testIntArgAndReturnValue
 {

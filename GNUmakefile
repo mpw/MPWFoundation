@@ -95,6 +95,10 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWWriteStream.m \
     Classes/NSStringAdditions.m \
     Classes/MPWRusage.m \
+    Classes/MPWObject.m \
+    Classes/MPWObjectCache.m \
+    Classes/MPWFastInvocation.m \
+    Classes/MPWFastInvocation.m \
 
 
 libMPWFoundation_C_FILES = \

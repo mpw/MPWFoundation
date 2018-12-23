@@ -48,7 +48,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -(void)deleteObjectForReference:(MPWReference*)aReference
 {
-    self.dict[[self referenceToKey:aReference]]=nil;
+    [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
 
 -(void)dealloc
