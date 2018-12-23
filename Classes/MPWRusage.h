@@ -11,7 +11,7 @@
 #include <sys/resource.h>               // Linux
 
 
-@interface MPWRusage : MPWObject
+@interface MPWRusage : NSObject
 {
         struct rusage usage;
         long long absolute;

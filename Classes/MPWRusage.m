@@ -119,25 +119,25 @@ static long long getNanoseconds() {
 
 @end
 
-@implementation NSObject(userTimeToRun)
-
--userMicrosecondsToRun:anInvocation
-{
-	NSNumber* usertime;
-	id pool=[NSAutoreleasePool new];
-	id start=[MPWRusage current];
-	[anInvocation invokeWithTarget:self];
-	usertime=[[NSNumber numberWithLong:[[MPWRusage timeRelativeTo:start] userMicroseconds]] retain];
-	[anInvocation setReturnValue:&usertime];
-	[pool drain];
-	[usertime autorelease];
-	return usertime;
-}
-
--userMicrosecondsToRun
-{
-	return [MPWTrampoline trampolineWithTarget:self selector:@selector(userMicrosecondsToRun:)];
-}
-
-
-@end
+//@implementation NSObject(userTimeToRun)
+//
+//-userMicrosecondsToRun:anInvocation
+//{
+//    NSNumber* usertime;
+//    id pool=[NSAutoreleasePool new];
+//    id start=[MPWRusage current];
+//    [anInvocation invokeWithTarget:self];
+//    usertime=[[NSNumber numberWithLong:[[MPWRusage timeRelativeTo:start] userMicroseconds]] retain];
+//    [anInvocation setReturnValue:&usertime];
+//    [pool drain];
+//    [usertime autorelease];
+//    return usertime;
+//}
+//
+//-userMicrosecondsToRun
+//{
+//    return [MPWTrampoline trampolineWithTarget:self selector:@selector(userMicrosecondsToRun:)];
+//}
+//
+//
+//@end
