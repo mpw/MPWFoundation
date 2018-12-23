@@ -41,15 +41,20 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     return self.dict[[self referenceToKey:aReference]];
 }
 
--(void)setObject:theObject forReference:(MPWReference*)aReference
-{
-    self.dict[[self referenceToKey:aReference]]=theObject;
-}
-
 -(void)deleteObjectForReference:(MPWReference*)aReference
 {
     [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
+
+-(void)setObject:theObject forReference:(id <MPWReferencing>)aReference
+{
+    if ( theObject != nil ) {
+        self.dict[[self referenceToKey:(MPWReference*)aReference]]=theObject;
+    } else {
+        [self deleteObjectForReference:aReference];
+    }
+}
+
 
 -(void)dealloc
 {

@@ -88,6 +88,9 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWReference.m \
     Stores.subproj/MPWGenericReference.m \
+    Stores.subproj/MPWMappingStore.m \
+    Stores.subproj/MPWCachingStore.m \
+    Stores.subproj/MPWMergingStore.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWArrayFlattenStream.m \

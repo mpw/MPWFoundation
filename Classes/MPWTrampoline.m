@@ -291,8 +291,10 @@ typedef id (*IDSELIMP)(id, SEL,SEL);
 
 +testSelectors
 {
-    return [NSArray arrayWithObjects:
-        @"testAutorelease",@"testJump", nil];
+    return @[
+//        @"testAutorelease",
+//            @"testJump"
+        ];
 }
 
 
