@@ -9,17 +9,25 @@
 #import "MPWRusage.h"
 #import <Foundation/Foundation.h>
 #import "MPWTrampoline.h"
-#import <mach/mach_time.h>
+#include <time.h>
+
 
 @implementation MPWRusage
 
 scalarAccessor(long long, absolute , setAbsolute)
 
+static long long getNanoseconds() {
+    struct timespec ts;
+    clock_gettime(CLOCK_REALTIME,&ts );
+    return ts.tv_sec * 1000000000 + ts.tv_nsec;
+}
+
+
 -initWithCurrent
 {
         if (nil != (self=[super init])) {
                 getrusage( RUSAGE_SELF, &usage );
-                absolute=mach_absolute_time();
+                absolute=getNanoseconds();
         }
         return self;
 }
@@ -60,9 +68,7 @@ scalarAccessor(long long, absolute , setAbsolute)
 
 -(double)absoluteNS
 {
-    struct mach_timebase_info base;
-    mach_timebase_info( &base );
-    return (double)absolute * (double)base.numer / (double)base.denom;
+    return absolute;
 }
 
 -(int)absoluteMicroseconds

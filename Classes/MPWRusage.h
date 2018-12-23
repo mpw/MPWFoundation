@@ -8,9 +8,7 @@
 
 #import "MPWObject.h"
 #include <stdlib.h>
-#ifdef LINUX
-#include <linux/resource.h>
-#endif
+#include <sys/resource.h>               // Linux
 
 
 @interface MPWRusage : MPWObject

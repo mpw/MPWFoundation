@@ -94,6 +94,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWFilter.m \
     Streams.subproj/MPWWriteStream.m \
     Classes/NSStringAdditions.m \
+    Classes/MPWRusage.m \
 
 
 libMPWFoundation_C_FILES = \
