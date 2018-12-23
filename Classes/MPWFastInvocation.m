@@ -316,12 +316,10 @@ lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignat
 	for (i=0;i<SEND_COUNT;i++) {
 		INVOKE(fast);
 	}
-    MPWRusage *fastStop=[MPWRusage current];
-    NSLog(@"user cpu nano start: %lld stop: %lld",[fastStart cpu],[fastStop cpu]);
 	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
     NSLog(@"fast diff %lld",[fastTime cpu]);
 	double ratio = (double)[slowTime cpu] / (double)[fastTime cpu];
-	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x faster than normal message send",(int)[fastTime cpu],(int)[slowTime cpu],ratio);
+	NSLog(@"cached invocation (%d) vs. plain message send (%d): %g x speed of normal message send",(int)[fastTime cpu],(int)[slowTime cpu],ratio);
 	NSAssert2( ratio > 0.2 ,@"ratio of cached fast invocation to normal message send %g < %g",
 				ratio,0.2);
 }
