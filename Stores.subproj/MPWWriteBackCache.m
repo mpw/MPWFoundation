@@ -9,6 +9,9 @@
 #import "MPWRESTCopyStream.h"
 #import "MPWRESTOperation.h"
 #import "MPWQueue.h"
+#import "MPWDictStore.h"
+#import "NSThreadWaiting.h"
+
 
 @interface MPWWriteBackCache()
 
@@ -87,6 +90,8 @@
 
 
 @end
+
+#import "DebugMacros.h"
 
 @implementation MPWCachingStoreTests(writeBackTests)
 

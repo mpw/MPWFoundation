@@ -22,6 +22,8 @@ static void runTests()
 		@"MPWByteStream",
 //		@"MPWTrampoline",
 		@"MPWIgnoreUnknownTrampoline",
+		@"MPWRESTOperation",
+		@"MPWRESTCopyStream",
 
 	];
 

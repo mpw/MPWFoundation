@@ -7,6 +7,8 @@
 
 #import "MPWQueue.h"
 #import "AccessorMacros.h"
+#import "NSThreadInterThreadMessaging.h"
+#import "NSThreadWaiting.h"
 
 @protocol OrderedCollection<NSObject>
 

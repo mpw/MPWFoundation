@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 9/10/18.
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWFilter.h>
 
 @interface MPWQueue : MPWFilter
 
