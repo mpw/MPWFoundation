@@ -24,6 +24,8 @@ static void runTests()
 		@"MPWIgnoreUnknownTrampoline",
 		@"MPWRESTOperation",
 		@"MPWRESTCopyStream",
+		@"MPWPoint",
+		@"MPWRect",
 
 	];
 

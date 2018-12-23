@@ -105,6 +105,11 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWFastInvocation.m \
     Classes/MPWTrampoline.m \
     Classes/MPWIgnoreUnknownTrampoline.m \
+    Classes/MPWNumber.m \
+    Classes/MPWInteger.m \
+    Classes/MPWFloat.m \
+    Classes/MPWPoint.m \
+    Classes/MPWRect.m \
 
 
 libMPWFoundation_C_FILES = \

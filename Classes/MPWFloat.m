@@ -7,7 +7,7 @@
 //
 
 #import "MPWFloat.h"
-#import <MPWFoundation/MPWFoundation.h>
+#import "CodingAdditions.h"
 #include <objc/runtime.h>
 
 @implementation MPWFloat

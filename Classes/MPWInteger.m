@@ -7,7 +7,7 @@
 //
 
 #import "MPWInteger.h"
-#import <MPWFoundation/MPWFoundation.h>
+#import "CodingAdditions.h"
 #import <objc/runtime.h>
 
 @implementation MPWInteger
@@ -109,7 +109,7 @@ defineArithOp( div, divInt, / )
 
 #endif
 
--(int)compare:other
+-(NSComparisonResult)compare:other
 {
 	return intValue - [other intValue];
 }
