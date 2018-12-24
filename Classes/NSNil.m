@@ -54,6 +54,7 @@ static id2id nil_handler=nil;
 
 static id dummy(id arg) { return arg; }
 
+#ifdef RTLD_DEFAULT
 +(id2id)nilHandlerSetter
 {
 //    extern id _objc_setNilReceiver(id );
@@ -64,7 +65,7 @@ static id dummy(id arg) { return arg; }
         strcat(buffer, "set");
         strcat(buffer, "Nil");
         strcat(buffer, "Receiver");
-        
+
         nil_handler=dlsym(RTLD_DEFAULT, buffer);
         if (!nil_handler) {
             nil_handler=dummy;
@@ -84,6 +85,7 @@ static id dummy(id arg) { return arg; }
     installed=NO;
     [self nilHandlerSetter](nil);
 }
+#endif
 
 
 -init

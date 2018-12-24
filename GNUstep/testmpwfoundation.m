@@ -26,6 +26,7 @@ static void runTests()
 		@"MPWRESTCopyStream",
 		@"MPWPoint",
 		@"MPWRect",
+		@"MPWBlockInvocableTest",
 
 	];
 

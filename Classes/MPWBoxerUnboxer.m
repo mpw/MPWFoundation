@@ -7,8 +7,9 @@
 //
 
 #import "MPWBoxerUnboxer.h"
-#import  <MPWFoundation/MPWFoundation.h>
-#import  <MPWFoundation/AccessorMacros.h>
+#import "MPWPoint.h"
+#import "MPWRect.h"
+#import "AccessorMacros.h"
 
 @interface MPWNSPointBoxer : MPWBoxerUnboxer  @end
 @interface MPWNSRectBoxer : MPWBoxerUnboxer  @end
@@ -31,11 +32,13 @@ static NSMutableDictionary *conversionDict;
 {
     return [[@{
                @(@encode(NSPoint)): [MPWBoxerUnboxer nspointBoxer],
-               @(@encode(CGPoint)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(NSSize)): [MPWBoxerUnboxer nspointBoxer],
+               @(@encode(NSRect)): [MPWBoxerUnboxer nsrectBoxer],
+#ifdef CGPoint
+               @(@encode(CGPoint)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(CGSize)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(CGRect)): [MPWBoxerUnboxer nsrectBoxer],
-               @(@encode(NSRect)): [MPWBoxerUnboxer nsrectBoxer],
+#endif
                } mutableCopy] autorelease];
 }
 

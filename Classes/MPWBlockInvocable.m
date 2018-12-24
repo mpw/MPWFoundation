@@ -324,7 +324,7 @@ static NSString *extractStructType( char *s )
 
 @end
 
-#if NS_BLOCKS_AVAILABLE
+// #if NS_BLOCKS_AVAILABLE
 
 #import "DebugMacros.h"
 
@@ -421,8 +421,9 @@ typedef id (^idBlock)(id arg );
 +(void)testRectArg
 {
     MPWBlockInvocableTest *invocable=[[self new] autorelease];
-    
-    [invocable installInClass:self withSignature:"v@:{CGRect={CGPoint=dd}{CGSize=dd}}" selector:@selector(doWithRect:)];
+    char encodeString[130]="v@:";
+    strcat(encodeString,@encode(NSRect));
+    [invocable installInClass:self withSignature:encodeString selector:@selector(doWithRect:)];
     [invocable setFormalParameters:@[ @"aRect" ] ];
     NSArray* args=[invocable invokeWithTarget:invocable,NSMakeRect(2,12, 42, 52)];
     INTEXPECT([args count], 1, @"number of args");
@@ -437,8 +438,9 @@ typedef id (^idBlock)(id arg );
 +(void)testPointArg
 {
     MPWBlockInvocableTest *invocable=[[self new] autorelease];
-    
-    [invocable installInClass:self withSignature:"v@:{CGPoint=dd}" selector:@selector(doWithPoint:)];
+    char encodeString[130]="v@:";
+    strcat(encodeString,@encode(NSPoint));
+    [invocable installInClass:self withSignature:encodeString selector:@selector(doWithPoint:)];
     [invocable setFormalParameters:@[ @"aPoint" ] ];
     NSArray* args=[invocable invokeWithTarget:invocable,NSMakePoint(203,120)];
     INTEXPECT([args count], 1, @"number of args");
@@ -451,7 +453,9 @@ typedef id (^idBlock)(id arg );
 {
     MPWBlockInvocableTest *invocable=[[self new] autorelease];
     
-    [invocable installInClass:self withSignature:"v@:{CGSize=dd}" selector:@selector(doWithSize:)];
+    char encodeString[130]="v@:";
+    strcat(encodeString,@encode(NSPoint));
+    [invocable installInClass:self withSignature:encodeString selector:@selector(doWithSize:)];
     [invocable setFormalParameters:@[ @"aPoint" ] ];
     NSArray* args=[invocable invokeWithTarget:invocable,NSMakeSize(283,9991)];
     INTEXPECT([args count], 1, @"number of args");
@@ -483,4 +487,4 @@ typedef id (^idBlock)(id arg );
 @end
 
 
-#endif
+//#endif
