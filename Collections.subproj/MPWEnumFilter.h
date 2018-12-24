@@ -49,7 +49,7 @@
 -__isEqualToString:otherObject;
 -__hasPrefix:otherObject;
 -__containsObject:otherObject;
--__characterIsMember:(unichar)theChar;
+//-__characterIsMember:(unichar)theChar;
 -__isOneWay;
 -__isNotNil;
 -__isMemberOfClass:(Class)aClass;

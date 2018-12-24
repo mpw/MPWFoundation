@@ -102,6 +102,12 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWNeXTPListWriter.m \
     Streams.subproj/MPWCombinerStream.m \
     Streams.subproj/MPWMapFilter.m \
+    Streams.subproj/MPWPipeline.m \
+    Streams.subproj/MPWScatterStream.m \
+    Streams.subproj/MPWActionStreamAdapter.m \
+    Streams.subproj/MPWExternalFilter.m \
+    Streams.subproj/MPWFDStreamSource.m \
+    Streams.subproj/MPWStreamSource.m \
     Classes/NSStringAdditions.m \
     Classes/MPWRusage.m \
     Classes/MPWObject.m \
@@ -124,6 +130,9 @@ libMPWFoundation_OBJC_FILES = \
     Collections.subproj/MPWIntArray.m \
     Collections.subproj/MPWRealArray.m \
     Collections.subproj/MPWSubData.m \
+    Collections.subproj/NSObjectFiltering.m \
+    Collections.subproj/MPWEnumFilter.m \
+    Collections.subproj/MPWEnumSelectFilter.m \
 
 
 

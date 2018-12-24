@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWFilter.h>
 
 @interface MPWScatterStream : MPWFilter
 

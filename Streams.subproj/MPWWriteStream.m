@@ -298,6 +298,14 @@ SEL visSel;
 	}
 }
 
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [aStream printFormat:@"\"NSMutableArray\"\n"];
+}
+
+-(void)close {}
+-(void)closeLocal {}
+
 @end
 
 

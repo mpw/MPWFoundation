@@ -8,7 +8,8 @@
 
 #import "MPWFDStreamSource.h"
 #import "MPWWriteStream.h"
-
+#include <unistd.h>
+#include <fcntl.h>
 
 
 @implementation MPWFDStreamSource

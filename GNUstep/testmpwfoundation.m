@@ -37,7 +37,11 @@ static void runTests()
 		@"MPWSubData",
 		@"MPWScanner",
 		@"MPWCombinerStream",
-		@"MPWMapFilter",
+        @"MPWMapFilter",
+        @"MPWScatterStream",
+        @"MPWActionStreamAdapter",
+//      @"MPWFDStreamSource",
+//      @"MPWPipeline",
 //		@"MPWDelimitedTable",
 
 	];

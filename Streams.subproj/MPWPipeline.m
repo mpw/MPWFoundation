@@ -11,7 +11,8 @@
 #import "MPWExternalFilter.h"
 #import "MPWActionStreamAdapter.h"
 #import "MPWMapFilter.h"
-
+#import "NSObjectFiltering.h"
+#import <objc/runtime.h>
 
 @interface MPWPipeline()
 
@@ -237,6 +238,8 @@ typedef id (^ZeroArgBlock)(void);
 
 @end
 
+#import "DebugMacros.h"
+#import "MPWFlattenStream.h"
 
 @implementation MPWPipeline(testing)
 
@@ -365,7 +368,7 @@ typedef id (^ZeroArgBlock)(void);
 +(void)testGraphVizOutput
 {
     MPWPipeline *p1=[MPWPipeline filters:@[ [MPWFilter class], [MPWFilter class]]];
-    IDEXPECT( [p1 graphViz], @"\"MPWFilter\"\n -> \"MPWFilter\"\n -> \"__NSArrayM\"\n", @"");
+    IDEXPECT( [p1 graphViz], @"\"MPWFilter\"\n -> \"MPWFilter\"\n -> \"NSMutableArray\"\n", @"");
 
 
 }

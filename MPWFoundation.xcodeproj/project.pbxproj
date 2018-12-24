@@ -788,6 +788,7 @@
 		1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCTests-Info.plist"; sourceTree = "<group>"; };
 		1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCombinerStream.h; sourceTree = "<group>"; };
 		1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCombinerStream.m; sourceTree = "<group>"; };
+		1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = testmpwfoundation.m; path = GNUstep/testmpwfoundation.m; sourceTree = "<group>"; };
 		1F05F69B0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDirectForwardingTrampoline.h; sourceTree = "<group>"; };
 		1F05F69C0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWDirectForwardingTrampoline.m; sourceTree = "<group>"; };
 		1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFuture.h; sourceTree = "<group>"; };
@@ -1126,6 +1127,7 @@
 		07DF195D006686DDC35ADD82 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */,
 				07DF195E006686DDC35ADD82 /* bytecoding.c */,
 				1FB4363710BDF6EF00490AA6 /* dllmain.m */,
 			);

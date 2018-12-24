@@ -12,6 +12,8 @@
 #import "MPWFDStreamSource.h"
 #import "MPWByteStream.h"
 #import "NSStringAdditions.h"
+#include <unistd.h>
+#include <sys/wait.h>
 
 @interface MPWExternalFilter ()
 
