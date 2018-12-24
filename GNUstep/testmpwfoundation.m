@@ -28,6 +28,7 @@ static void runTests()
 		@"MPWRect",
 		@"MPWBlockInvocableTest",
 		@"MPWBlockInvocation",
+		@"MPWSmallStringTable",
 
 	];
 
