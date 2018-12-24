@@ -11,9 +11,9 @@
 #import "MPWIntArray.h"
 #import <Foundation/Foundation.h>
 #import "DebugMacros.h"
-#if !TARGET_OS_WATCH
-#import <Accelerate/Accelerate.h>
-#endif
+//#if !TARGET_OS_WATCH
+//#import <Accelerate/Accelerate.h>
+//#endif
 
 @implementation MPWIntArray
 
@@ -401,13 +401,13 @@ static void doSort(int a[], int left, int right) {
 }
 
 
--(void)systemQuicksortBlocks
-{
-    qsort_b(data, count, sizeof(int), ^int(const void *va , const void *vb ) {
-        const int *a=va,*b=vb;
-        return *a  - *b;
-    });
-}
+//-(void)systemQuicksortBlocks
+//{
+//    qsort_b(data, count, sizeof(int), ^int(const void *va , const void *vb ) {
+//        const int *a=va,*b=vb;
+//        return *a  - *b;
+//    });
+//}
 
 static int compareIntegerPointers(const void *va , const void *vb )
 {
@@ -422,7 +422,7 @@ static int compareIntegerPointers(const void *va , const void *vb )
 
 -(void)sort
 {
-    [self systemQuicksortBlocks];
+    [self systemQuicksortFunction];
 }
 
 -(MPWIntArray *)sorted

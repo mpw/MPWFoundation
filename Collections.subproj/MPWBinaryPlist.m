@@ -632,14 +632,14 @@ ARCDEALLOC(
 
 +(NSData*)_createBinaryPlist:plistObjects
 {
-    return [NSPropertyListSerialization dataWithPropertyList:plistObjects format:NSPropertyListBinaryFormat_v1_0 options:0 error:nil];
+    return [NSPropertyListSerialization dataWithPropertyList:plistObjects format:NSPropertyListBinaryFormat_v1_0 options:0 error:NULL];
 }
 
 +(void)testRecognizesHeader
 {
     EXPECTFALSE([self isValidBPlist:[NSData data]], @"empty plist valid");
     EXPECTTRUE([self isValidBPlist:[self _createBinaryPlist:@"hello world"]], @"string plist");
-    EXPECTFALSE([self isValidBPlist:[NSPropertyListSerialization dataWithPropertyList:@"hello world" format:NSPropertyListXMLFormat_v1_0 options:0 error:nil]], @"XML string plist");
+    EXPECTFALSE([self isValidBPlist:[NSPropertyListSerialization dataWithPropertyList:@"hello world" format:NSPropertyListXMLFormat_v1_0 options:0 error:NULL]], @"XML string plist");
 }
 
 +(void)testReadTrailerAndOffsets

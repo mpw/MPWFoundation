@@ -29,6 +29,8 @@ static void runTests()
 		@"MPWBlockInvocableTest",
 		@"MPWBlockInvocation",
 		@"MPWSmallStringTable",
+		@"MPWBinaryPlist",
+		@"MPWIntArray",
 
 	];
 

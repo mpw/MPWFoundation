@@ -115,6 +115,9 @@ libMPWFoundation_OBJC_FILES = \
     Classes/NSNil.m \
     Classes/MPWBlockInvocation.m \
     Collections.subproj/MPWSmallStringTable.m \
+    Collections.subproj/MPWBinaryPlist.m \
+    Collections.subproj/MPWIntArray.m \
+
 
 
 libMPWFoundation_C_FILES = \
