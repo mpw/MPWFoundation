@@ -9,7 +9,7 @@
 #import "MPWBlockInvocation.h"
 #import "AccessorMacros.h"
 
-#if NS_BLOCKS_AVAILABLE
+//#if NS_BLOCKS_AVAILABLE
 
 
 @implementation MPWBlockInvocation
@@ -66,7 +66,7 @@ idAccessor( block, _setBlock )
 {
 	MPWBlockInvocation *invocation = [MPWBlockInvocation invocationWithBlock:^{ return 42; } ];
 	EXPECTNOTNIL( invocation, @"should have gotten a block");
-	INTEXPECT( (int)[invocation resultOfInvokingWithArgs:nil count:0] ,42, @"result of block");
+	INTEXPECT( (int)[invocation resultOfInvokingWithArgs:NULL count:0] ,42, @"result of block");
 	
 }
 
@@ -89,4 +89,4 @@ idAccessor( block, _setBlock )
 @end
 
 
-#endif
+//#endif

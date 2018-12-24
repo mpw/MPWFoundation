@@ -113,6 +113,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWBlockInvocable.m \
     Classes/MPWBoxerUnboxer.m \
     Classes/NSNil.m \
+    Classes/MPWBlockInvocation.m \
 
 
 libMPWFoundation_C_FILES = \

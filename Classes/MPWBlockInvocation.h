@@ -7,7 +7,6 @@
 //
 
 #import <MPWFoundation/MPWFastInvocation.h>
-#if NS_BLOCKS_AVAILABLE
 
 
 @interface MPWBlockInvocation : MPWFastInvocation {
@@ -19,4 +18,3 @@
 @end
 
 
-#endif

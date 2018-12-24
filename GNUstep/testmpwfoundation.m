@@ -27,6 +27,7 @@ static void runTests()
 		@"MPWPoint",
 		@"MPWRect",
 		@"MPWBlockInvocableTest",
+		@"MPWBlockInvocation",
 
 	];
 
