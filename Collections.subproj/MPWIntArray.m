@@ -401,13 +401,6 @@ static void doSort(int a[], int left, int right) {
 }
 
 
-//-(void)systemQuicksortBlocks
-//{
-//    qsort_b(data, count, sizeof(int), ^int(const void *va , const void *vb ) {
-//        const int *a=va,*b=vb;
-//        return *a  - *b;
-//    });
-//}
 
 static int compareIntegerPointers(const void *va , const void *vb )
 {

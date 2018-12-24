@@ -24,9 +24,9 @@ R
 #import <Foundation/NSArray.h>
 #import <Foundation/NSData.h>
 #import <Foundation/NSCoder.h>
-#if !TARGET_OS_WATCH
-#import <Accelerate/Accelerate.h>
-#endif
+//#if !TARGET_OS_WATCH
+//#import <Accelerate/Accelerate.h>
+//#endif
 
 #import "MPWByteStream.h"
 
@@ -149,7 +149,7 @@ R
     return self;
 }
 
-#if !TARGET_OS_IPHONE
+#if 0
 
 -(id)initWithVecStart:(float)start end:(float)end step:(float)step
 {
@@ -601,9 +601,6 @@ REDUCE_LOOP_OPERATION( max, c=(a>b ? a:b) , YES)
 
 
 
-#ifdef PPC
-LOOP_FUNCTION( log1p, a>=-1 )
-#endif
 
 
 #endif
@@ -612,7 +609,7 @@ LOOP_FUNCTION( log1p, a>=-1 )
 
 -(float)vec_reduce_sum
 {
-#if !TARGET_OS_IPHONE
+#if 0
     float theSum=0;
     vDSP_sve ( floatStart, 1, &theSum, count );
     return theSum;

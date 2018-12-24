@@ -43,12 +43,12 @@ boolAccessor( mustUnique, setMustUnique )
 
 #ifdef GNUSTEP
 
-#warning have to redefine class for MPWSubData
+//#warning have to redefine class for MPWSubData
 
 
 -(Class)class
 {
-	return isa;
+	return object_getClass(self);
 }
 
 +allocFromZone:(NSZone*)zone
@@ -126,6 +126,8 @@ boolAccessor( mustUnique, setMustUnique )
     return self;   
 }
 
+#ifndef GNUSTEP
+
 -(CFStringEncoding)cfStringEncoding
 {
 	return  kCFStringEncodingUTF8;
@@ -134,8 +136,17 @@ boolAccessor( mustUnique, setMustUnique )
 
 -copyWithZone:(NSZone*)aZone
 {
-	return (id)CFMakeCollectable( CFStringCreateWithBytes( NULL, myBytes , myLength, [self cfStringEncoding], NO) );
+    return (id)CFStringCreateWithBytes( NULL, myBytes , myLength, [self cfStringEncoding], NO);
 }
+
+#else
+
+-copyWithZone:(NSZone*)aZone
+{
+    return [[NSString alloc] initWithString:self];
+}
+
+#endif
 
 -reInitWithData:(NSData*)data bytes:(const char*)bytes length:(long)len
 {

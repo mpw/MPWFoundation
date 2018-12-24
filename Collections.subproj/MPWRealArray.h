@@ -45,7 +45,7 @@ R
 -initWithCount:(NSUInteger)newCount;
 -initWithReals:(float*)realNums count:(NSUInteger)newCount;
 -(id)initWithStart:(float)start end:(float)end step:(float)step;
-#if !TARGET_OS_IPHONE
+#if 0
 -(id)initWithVecStart:(float)start end:(float)end step:(float)step;
 #endif
 
