@@ -62,7 +62,9 @@
             filter=[MPWMapFilter filterWithBlock:[[^(NSString *s){
                 return [NSString stringWithFormat:formatString,s];
                         } copy] autorelease]];
+            NSLog(@"got block filter %@ setTarget",filter);
             [filter setTarget:nil];
+            NSLog(@"did setTarget on block filter");
         } else if ( [(NSString*)filter hasPrefix:@"!"]) {
             NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
             filter=[NSClassFromString(@"MPWExternalFilter") filterWithCommandString:command];
@@ -211,6 +213,11 @@ typedef id (^ZeroArgBlock)(void);
     static int initialized=NO;
     if  ( !initialized) {
         Class blockClass=NSClassFromString(@"NSBlock");
+        if (!blockClass) {
+            blockClass=NSClassFromString(@"_NSBlock");
+        }
+        NSLog(@"blockClass: %@",blockClass);
+
         IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id argument){ ((OneArgBlock)blockSelf)(argument); } );
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
@@ -398,4 +405,5 @@ typedef id (^ZeroArgBlock)(void);
 
 
 @end
+
 

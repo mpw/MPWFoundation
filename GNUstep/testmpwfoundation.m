@@ -40,8 +40,9 @@ static void runTests()
         @"MPWMapFilter",
         @"MPWScatterStream",
         @"MPWActionStreamAdapter",
+//        @"MPWEnumFilters",
 //      @"MPWFDStreamSource",
-//      @"MPWPipeline",
+        @"MPWPipeline",
 //		@"MPWDelimitedTable",
 
 	];
