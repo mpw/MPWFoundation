@@ -354,8 +354,8 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     } else {
         [self _recordByteOffset];
         long l=[aString length];
-        char buffer[ l + 1];
-        [aString getBytes:buffer maxLength:l usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
+        char buffer[ l + 2];
+        [aString getBytes:buffer maxLength:l+1 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, l) remainingRange:NULL];
         [self writeCompoundObjectHeader:0x50 length:[aString length]];
         TARGET_APPEND(buffer, l);
         [objectTable setObject:(id)(long)[currentIndexes lastInteger] forKey:aString];
@@ -528,6 +528,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     [writer writeHeader];
     [writer writeString:@"Hello World!"];
     [writer flush];
+    [(NSData*)[writer target] writeToFile:@"/tmp/testWriteString.plist" atomically:YES];
     NSString *s=[self _plistForStream:writer];
     IDEXPECT(s , @"Hello World!", @"the string I wrote");
 }

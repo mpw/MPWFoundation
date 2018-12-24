@@ -31,7 +31,7 @@ static void runTests()
 		@"MPWSmallStringTable",
 		@"MPWBinaryPlist",
 		@"MPWNeXTPListWriter",
-//		@"MPWBinaryPListWriter",
+		@"MPWBinaryPListWriter",
 		@"MPWIntArray",
 		@"MPWRealArray",
 		@"MPWSubData",
