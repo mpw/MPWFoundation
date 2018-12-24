@@ -433,7 +433,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 {
 //    static int count=1;
 //    [d writeToFile:[NSString stringWithFormat:@"/tmp/test-bplist-%d.bplist",count++] atomically:YES];
-    id plist=[NSPropertyListSerialization propertyListWithData:d options:0 format:NULL error:nil];
+    id plist=[NSPropertyListSerialization propertyListWithData:d options:0 format:NULL error:NULL];
     return plist;
 }
 

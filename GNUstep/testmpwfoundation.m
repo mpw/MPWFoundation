@@ -30,6 +30,8 @@ static void runTests()
 		@"MPWBlockInvocation",
 		@"MPWSmallStringTable",
 		@"MPWBinaryPlist",
+		@"MPWNeXTPListWriter",
+//		@"MPWBinaryPListWriter",
 		@"MPWIntArray",
 		@"MPWRealArray",
 		@"MPWSubData",

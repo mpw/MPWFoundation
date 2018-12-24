@@ -90,12 +90,18 @@
 {
     // FIXME:  not really allowed to access this
     static SEL strRep=NULL;
+    static BOOL avail=NO;
     if (!strRep) {
         strRep=NSSelectorFromString(@"quotedStringRepresentation");
+        avail=[anObject respondsToSelector:strRep];
     }
-    if ( strRep) {
-        id temp=((IMP0)objc_msgSend)( anObject, strRep);
-        [self outputString:temp];
+    if ( strRep && avail) {
+        anObject=((IMP0)objc_msgSend)( anObject, strRep);
+        [self outputString:anObject];
+    } else {
+        [self outputString:@"\""];
+        [self outputString:anObject];
+        [self outputString:@"\""];
     }
 }
 
@@ -159,13 +165,15 @@
         boolClass=[@YES class];
     }
     
-//	if ( [NSStringFromClass([self class]) rangeOfString:@"Boolean"].length > 0)  {
     if ( [self class] == boolClass)  {
 		[aStream writeBoolean:[self boolValue]];
-	} else if ( CFNumberIsFloatType( (CFNumberRef)self ) ) {
-		[aStream writeFloat:[self doubleValue]];
-	} else {
-		[aStream writeInteger:[self intValue]];
+    } else {
+        const char *type=[self objCType];
+        if ( type && (type[0]=='f' || type[0]=='d') ) {
+            [aStream writeFloat:[self doubleValue]];
+        } else {
+            [aStream writeInteger:[self intValue]];
+        }
 	}
 	
 }
