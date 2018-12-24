@@ -18,9 +18,13 @@
 	NSString *path = [self pathForResource:aName ofType:aType];
 	NSData *data=nil;
     if ( path ) {
-        data =  [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil];
+#ifdef GS_API_LATEST
+        data =  [NSData dataWithContentsOfFile:path];
+#else
+        data =  [NSData dataWithContentsOfFile:path options:NSDataReadingMappedIfSafe error:NULL];
+#endif
     } else {
-        NSLog(@"couldn't find resource %@.%@",aName,aType);
+        NSLog(@"couldn't find resource %@.%@ at '%@' bundlePath: '%@' resourcePath: '%@' bundle: %@",aName,aType,path,[self bundlePath],[self resourcePath],self);
     }
     return data;
 }
@@ -28,6 +32,10 @@
 +(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType forClass:(Class)class
 {
 	NSBundle *classBundle = [self bundleForClass:class];
+    NSLog(@"bundle for class %@ is %@",class,classBundle);
+    NSLog(@"bundle for class %@ is %@",[NSString class],classBundle);
+
+
     return [classBundle resourceWithName:aName type:aType];
 }
 

@@ -439,7 +439,7 @@ static inline void copybuf( char *target,const char *source, long len ) {
         id resultfilename = [NSString stringWithFormat:@"%@.%@-result",filename,self];
 
         result = [[result collect] descr];
-        result1check=[[NSString stringWithContentsOfFile:resultfilename encoding:NSISOLatin1StringEncoding error:nil] propertyList];
+        result1check=[[NSString stringWithContentsOfFile:resultfilename encoding:NSISOLatin1StringEncoding error:NULL] propertyList];
         if ( ![result isEqual:result1check] ) {
             [NSException raise:@"testFile failed" format:@"test %@ = result1:  '%@' expected:'%@' from: %@",filename,result,result1check,resultfilename];
         }

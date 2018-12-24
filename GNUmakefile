@@ -113,6 +113,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWBlockInvocable.m \
     Classes/MPWBoxerUnboxer.m \
     Classes/NSNil.m \
+    Classes/MPWScanner.m \
     Classes/MPWBlockInvocation.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWBinaryPlist.m \

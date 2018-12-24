@@ -33,6 +33,8 @@ static void runTests()
 		@"MPWIntArray",
 		@"MPWRealArray",
 		@"MPWSubData",
+		@"MPWScanner",
+//		@"MPWDelimitedTable",
 
 	];
 
