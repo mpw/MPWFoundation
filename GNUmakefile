@@ -100,6 +100,8 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWRESTCopyStream.m \
     Streams.subproj/MPWBinaryPListWriter.m \
     Streams.subproj/MPWNeXTPListWriter.m \
+    Streams.subproj/MPWCombinerStream.m \
+    Streams.subproj/MPWMapFilter.m \
     Classes/NSStringAdditions.m \
     Classes/MPWRusage.m \
     Classes/MPWObject.m \

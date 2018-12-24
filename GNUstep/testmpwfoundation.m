@@ -36,6 +36,8 @@ static void runTests()
 		@"MPWRealArray",
 		@"MPWSubData",
 		@"MPWScanner",
+		@"MPWCombinerStream",
+		@"MPWMapFilter",
 //		@"MPWDelimitedTable",
 
 	];

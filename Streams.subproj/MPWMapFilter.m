@@ -36,10 +36,14 @@ CONVENIENCEANDINIT( filter, WithBlock:(id)aBlock)
     return self;
 }
 
+
+typedef id (^filterBlock)(id);
+
 -(void)writeObject:(id)anObject sender:(id)sourceStream
 {
-    if ( _block){
-        FORWARD( [self.block value:anObject] );
+    filterBlock localBlock=_block;
+    if ( localBlock){
+        FORWARD(  localBlock(anObject) );
     }
 }
 
