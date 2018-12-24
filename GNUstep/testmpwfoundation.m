@@ -41,6 +41,7 @@ static void runTests()
         @"MPWScatterStream",
         @"MPWActionStreamAdapter",
         @"MPWExternalFilter",
+        @"MPWSequentialStore",
 //      @"MPWFDStreamSource",
 //        @"MPWPipeline",
 //		@"MPWDelimitedTable",

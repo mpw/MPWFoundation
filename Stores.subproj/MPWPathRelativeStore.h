@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 5/28/18.
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWMappingStore.h>
 
 @protocol MPWReferencing;
 
