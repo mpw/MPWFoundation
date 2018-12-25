@@ -115,10 +115,10 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 //    [target->xxxTarget performSelector:target->xxxSelector withObject:invocationToForward withObject:target->xxxAdditionalArg];
 }
 
+#ifndef GS_API_LATEST
 
 +(BOOL)resolveInstanceMethod:(SEL)selector
 {
-
     if ( !strchr(sel_getName(selector), ':')) {
         class_addMethod(self, selector, (IMP)__forwardStart0, "@@:");
         return YES;
@@ -126,7 +126,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
     return NO;
 }
 
-
+#endif
 
 #if LIB_FOUNDATION_LIBRARY
 

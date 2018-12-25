@@ -117,13 +117,13 @@
 
 -(void)flushLocal
 {
-//    NSLog(@"will close");
+//    NSLog(@"MPWExternalFilter flushLocal");
     close(self.fdout);
     int stat_loc=0;
     waitpid( self.pid,&stat_loc, 0 );
     self.fdout=-1;
     self.running=NO;
-//    NSLog(@"did waitpid()");
+//    NSLog(@"MPWExternalFilter did flushLocal (waitpid returned)");
 }
 
 -(void)dealloc

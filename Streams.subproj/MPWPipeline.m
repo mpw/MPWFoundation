@@ -139,7 +139,9 @@
 
 -(void)close
 {
-    [[[self filters] do] close];
+    // FIXME: workaround for HOM not working as desired on GNUstep
+    [[self filters] makeObjectsPerformSelector:@selector(close)];
+//    [[[self filters] do] close];
 }
 
 -(void)flush
