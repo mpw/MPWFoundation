@@ -95,6 +95,8 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWSequentialStore.m \
     Stores.subproj/MPWBinding.m \
     Stores.subproj/MPWPathRelativeStore.m \
+    Stores.subproj/MPWURLBasedStore.m \
+    Stores.subproj/MPWURLReference.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWArrayFlattenStream.m \

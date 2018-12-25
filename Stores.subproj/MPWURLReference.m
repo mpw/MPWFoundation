@@ -9,53 +9,57 @@
 
 @interface MPWURLReference()
 
-@property (nonatomic, strong) NSURLComponents *components;
+@property (nonatomic, strong) NSURL *URL;
 
 @end
 
 
 @implementation MPWURLReference
 
-CONVENIENCEANDINIT( reference, WithURLComponents:(NSURLComponents*)urlComponents )
+static NSURL *url( NSString *scheme, NSString *path1, NSString *path2 ) {
+    NSMutableString *s=[NSMutableString string];
+    if ( scheme ) {
+        [s appendFormat:@"%@://",scheme];
+    }
+    if ( path1 ) {
+        [s appendString:path1];
+    }
+    if ( path2 ) {
+        if ( !([s hasSuffix:@"/"] || [path2 hasPrefix:@"/"])) {
+            [s appendString:@"/"];
+        }
+        [s appendString:path2];
+    }
+    return [NSURL URLWithString:s];
+}
+
+
+CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 {
     self=[super init];
-    self.components = urlComponents;
+    self.URL = newURL;
     return self;
 }
 
-+referenceWithURL:(NSURL*)url
-{
-    return [self referenceWithURLComponents:[NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:YES]];
-}
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-    NSURLComponents *comps=[NSURLComponents componentsWithString:pathName];
-    return [self initWithURLComponents:comps];
+    return [self initWithURL:url( nil,pathName,nil )];
 }
 
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents scheme:(NSString *)scheme
 {
-    NSURLComponents *components=[[NSURLComponents new] autorelease];
-    components.scheme = scheme;
-    components.path = [pathComponents componentsJoinedByString:@"/"];
-    return [self initWithURLComponents:components];
-}
-
--(NSURL*)URL
-{
-    return self.components.URL;
+    return [self initWithURL:url( scheme,[pathComponents componentsJoinedByString:@"/"],nil )];
 }
 
 -(NSString *)path
 {
-    return self.components.path;
+    return self.URL.relativeString;
 }
 
 -(NSArray *)pathComponents
 {
-    NSURLComponents *components = [NSURLComponents componentsWithURL:self.URL resolvingAgainstBaseURL:NO];
-    NSArray *pathComponents = [components.path componentsSeparatedByString:@"/"];
+    NSArray *pathComponents = [self.path componentsSeparatedByString:@"/"];
     if ( pathComponents.count == 1 && [pathComponents.firstObject length]==0) {
         pathComponents=@[];
     }
@@ -69,12 +73,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-    
-    
-    NSURLComponents *combined=[[self.components copy] autorelease];
-    combined.path = [[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]] componentsJoinedByString:@"/"];
-    
-   return  [[self class] referenceWithURLComponents:combined];
+    return  [[self class] referenceWithURL:url( [self schemeName], [self path], [other path])];
 }
             
 
@@ -83,9 +82,9 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return self.URL.scheme;
 }
 
--(void)setSchemeName:(NSString *)schemeName
+-(void)setSchemeName:(NSString *)scheme
 {
-    self.components.scheme = schemeName;
+    self.URL = url( scheme, [self path],nil);
 }
 
 -(BOOL)isRoot
@@ -107,12 +106,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(BOOL)isEqual:other
 {
-    return [[self components] isEqual:[other components]];
+    return [[self URL] isEqual:[other URL]];
 }
 
 -(void)dealloc
 {
-    [_components release];
+    [_URL release];
     [super dealloc];
 }
 
