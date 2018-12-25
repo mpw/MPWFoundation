@@ -44,6 +44,7 @@ static void runTests()
         @"MPWSequentialStore",
 //      @"MPWFDStreamSource",
         @"MPWPipeline",
+      @"MPWEnumFilters",
 //		@"MPWDelimitedTable",
 
 	];

@@ -116,6 +116,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWFastInvocation.m \
     Classes/MPWTrampoline.m \
     Classes/MPWIgnoreUnknownTrampoline.m \
+    Classes/MPWIgnoreTrampoline.m \
     Classes/MPWNumber.m \
     Classes/MPWInteger.m \
     Classes/MPWFloat.m \
@@ -134,6 +135,7 @@ libMPWFoundation_OBJC_FILES = \
     Collections.subproj/NSObjectFiltering.m \
     Collections.subproj/MPWEnumFilter.m \
     Collections.subproj/MPWEnumSelectFilter.m \
+    Collections.subproj/NSArrayFiltering.m \
 
 
 
@@ -176,4 +178,4 @@ test    : libMPWFoundation tester
 	LD_LIBRARY_PATH=/home/gnustep/GNUstep/Library/Libraries:/usr/local/lib:/home/gnustep/Build/MPWFoundation/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	clang -fobjc-runtime=gnustep-1.9 -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/home/gnustep/Build/MPWFoundation/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc 
+	clang -fobjc-runtime=gnustep-1.9 -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/home/gnustep/Build/MPWFoundation/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc

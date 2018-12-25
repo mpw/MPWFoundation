@@ -36,7 +36,10 @@ scalarAccessor( id, key , setKey )
 {
 	[aSource retain];
 	[source release];
-	source=aSource;
+    source=aSource;
+#if VERBOSEDEBUG
+    NSLog(@"source: %@",[source class]);
+#endif
     if ( [source respondsToSelector:@selector(nextObject)] ) {
         argumentNextObject[0]=(IMP0)[source methodForSelector:@selector(nextObject)];
         variableArgumentIndex[0]=1;
@@ -85,10 +88,10 @@ static id returnNil() {  return nil; }
 #endif        
 #if VERBOSEDEBUG
         if ( localDebug ) {
-            NSLog(@"selector = %d",targetSelector);
+            NSLog(@"selector = %p",targetSelector);
             NSLog(@"selector = %@",NSStringFromSelector(targetSelector));
 			NSLog(@"invocation: %@",invocationToForward);
-			NSLog(@"argcount: %d",[sig numberOfArguments]);
+			NSLog(@"argcount: %d",(int)[sig numberOfArguments]);
         }
 #endif
         argumentCount = (int)[sig numberOfArguments];
@@ -98,7 +101,7 @@ static id returnNil() {  return nil; }
                         char argType;
             [invocation getArgument:arguments+i atIndex:i];
 #ifdef VERBOSEDEBUG
-			NSLog(@"argument %d: %x",i,arguments[i]);
+			NSLog(@"argument %d: %p",i,arguments[i]);
 #endif
 			argTypePtr = [sig getArgumentTypeAtIndex:i];
 			argType = *argTypePtr;
@@ -213,7 +216,7 @@ static id returnNil() {  return nil; }
     processResult = (IMP0)[self methodForSelector:processingSelector];
 #if VERBOSEDEBUG
     if ( localDebug ) {
-        NSLog(@"got process-result %x",processResult);
+        NSLog(@"got process-result %p",processResult);
     }
 #endif
     while (nil!=(next=selfNextObject(self ,@selector(nextObject)) )) {
@@ -335,6 +338,7 @@ static id returnNil() {  return nil; }
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
+    NSLog(@"-[%@ respondsToSelector:%@]",[self class],NSStringFromSelector(aSelector));
     BOOL doesRespond;
     doesRespond = arguments[1] ? ([arguments[1] respondsToSelector:aSelector] ||
                            [arguments[1] respondsToSelector:[self mapSelector:aSelector]]):
@@ -356,11 +360,11 @@ static id returnNil() {  return nil; }
     id sig;
 #if VERBOSEDEBUG
     if ( localDebug ) {
-        NSLog(@"getting sig for %@",NSStringFromSelector(aSelector));
+        NSLog(@"%@ getting sig for %@",[self class],NSStringFromSelector(aSelector));
     }
+    NSLog(@"arguments[1]=%p",arguments[1]);
+    NSLog(@"arguments[1]=%@",[arguments[1] class]);
 #endif
-//	NSLog(@"arguments[1]=%x",arguments[1]);
-//	NSLog(@"arguments[1]=%@",arguments[1]);
     if ( arguments[1] ) {
         sig = [arguments[1] methodSignatureForSelector:aSelector];
 //		NSLog(@"sig=%x",sig);
@@ -439,8 +443,8 @@ static id returnNil() {  return nil; }
        @"testSelect",@"testEmptySelect",
 		@"testSelectArg",@"testSelectCollect",
 		@"testReject",
-        @"testSelectFirst",
-#if 0		
+#if 0
+            @"testSelectFirst",
 		@"testExpressionSelect",
             @"testWhereValueForKey",@"testLotsOfValueForKey",
 #endif		

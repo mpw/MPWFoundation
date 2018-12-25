@@ -32,9 +32,6 @@
 +(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType forClass:(Class)class
 {
 	NSBundle *classBundle = [self bundleForClass:class];
-    NSLog(@"bundle for class %@ is %@",class,classBundle);
-    NSLog(@"bundle for class %@ is %@",[NSString class],classBundle);
-
 
     return [classBundle resourceWithName:aName type:aType];
 }

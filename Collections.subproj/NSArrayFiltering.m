@@ -207,6 +207,7 @@
 
 -methodSignatureForHOMSelector:(SEL)selector
 {
+    NSLog(@"-[NSArray methodSignatureForHOMSelector:%@]",NSStringFromSelector(selector) );
     if ( [self count] > 0){
         return [[self objectAtIndex:0] methodSignatureForHOMSelector:selector];
     } else {

@@ -180,9 +180,9 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 - (NSMethodSignature *)methodSignatureForSelector:(SEL)aSelector
 {
     NSMethodSignature *sig;
-//	NSLog(@"[%x/%@ -methodSignatureForSelector: %@",[self sendTarget],[self sendTarget],NSStringFromSelector(aSelector));
+//	NSLog(@"[%p/%@ -methodSignatureForSelector: %@",[self sendTarget],[[self sendTarget] class],NSStringFromSelector(aSelector));
     sig = [[self sendTarget] methodSignatureForHOMSelector:aSelector];
-//	NSLog(@"sig= %x",sig);
+//	NSLog(@"sig= %p",sig);
     return sig;
 }
 
@@ -194,7 +194,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 
 -(BOOL)respondsToSelector:(SEL)aSelector
 {
-	NSLog(@"trampoline respondsToSelector:%@ with target: %@",NSStringFromSelector(aSelector),[self sendTarget]);
+//	NSLog(@"trampoline respondsToSelector:%@ with target: %@",NSStringFromSelector(aSelector),[self sendTarget]);
     return [[self sendTarget] respondsToSelector:aSelector];
 }
 
