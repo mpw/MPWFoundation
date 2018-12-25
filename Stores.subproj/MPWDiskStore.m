@@ -9,6 +9,7 @@
 #import "MPWGenericReference.h"
 #import "NSObjectFiltering.h"
 #import "NSStringAdditions.h"
+#include <unistd.h>
 
 @implementation MPWDiskStore
 
@@ -22,8 +23,14 @@
 -(NSData*)dataWithURL:(NSURL*)url
 {
     NSError *error=nil;
+#ifdef GS_API_LATEST
+    NSData *data=[NSData dataWithContentsOfURL:url];
+    if (!data) {
+        error=[NSError errorWithDomain:NSCocoaErrorDomain code:260 userInfo:@{}];
+    }
+#else
     NSData *data=[NSData dataWithContentsOfURL:url options:NSDataReadingMapped error:&error];
-    NSLog(@"url: %@ error: %@",url,error);
+#endif
     if ( error ) {
         [self reportError:error];
     }
@@ -51,8 +58,13 @@
 -(void)setObject:(NSData*)theObject forReference:(MPWGenericReference*)aReference
 {
     NSError *error=nil;
-    [theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
-    [self reportError:error];
+    BOOL success=[theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
+    if ( !success) {
+        if (!error) {
+            error=[NSError errorWithDomain:NSCocoaErrorDomain code:4 userInfo:@{}];
+        }
+        [self reportError:error];
+    }
 }
 
 -(void)deleteObjectForReference:(MPWGenericReference*)aReference

@@ -51,6 +51,7 @@ static void runTests()
         @"NSNumberArithmeticTests",
         @"MPWValueAccessor",
         @"MPWURLReferenceTests",
+        @"MPWDiskStore",
 //		@"MPWDelimitedTable",
 
 	];
