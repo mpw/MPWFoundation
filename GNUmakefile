@@ -170,3 +170,10 @@ before-all ::
 
 after-clean ::
 	rm -rf .headers
+
+
+test    : libMPWFoundation tester
+	LD_LIBRARY_PATH=/home/gnustep/GNUstep/Library/Libraries:/usr/local/lib:/home/gnustep/Build/MPWFoundation/obj/ ./GNUstep/testmpwfoundation
+
+tester  :
+	clang -fobjc-runtime=gnustep-1.9 -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/home/gnustep/Build/MPWFoundation/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc 
