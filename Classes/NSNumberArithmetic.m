@@ -260,15 +260,21 @@ id _dummyGetNumtest( int value ) {
 
 +(void)testNot
 {
-    EXPECTTRUE( [[[NSNumber numberWithBool:false] not] boolValue],@"negated false");
-    EXPECTFALSE( [[[NSNumber numberWithBool:true] not] boolValue],@"negated true");
+    EXPECTTRUE( [[[NSNumber numberWithBool:false] not] boolValue],@"not false");
+    EXPECTFALSE( [[[NSNumber numberWithBool:true] not] boolValue],@"not true");
+}
+
++(void)testNegated
+{
+    INTEXPECT( [[[NSNumber numberWithInt:3] negated] intValue],-3,@"negated 3");
+    INTEXPECT( [[[NSNumber numberWithInt:-42] negated] intValue],42,@"negated -42");
 }
 
 +(NSArray*)testSelectors
 {
     return @[
              @"testNot",
-
+             @"testNegated",
              ];
 }
 

@@ -49,6 +49,7 @@ static void runTests()
 //        @"MPWBinding",
         @"MPWPathRelativeStore",
         @"NSNumberArithmeticTests",
+        @"MPWValueAccessor",
 //		@"MPWDelimitedTable",
 
 	];

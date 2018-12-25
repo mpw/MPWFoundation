@@ -174,7 +174,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testBoundDictAccess
 {
-    NSDictionary *dict=@{ @"hello": @"world" };
+    NSDictionary *dict=[[@{ @"hello": @"world" } mutableCopy] autorelease];
     MPWValueAccessor *accessor=[self valueForName:@"hello"];
     [accessor bindToTarget:dict];
     IDEXPECT([accessor value], @"world", @"hello -> world");
