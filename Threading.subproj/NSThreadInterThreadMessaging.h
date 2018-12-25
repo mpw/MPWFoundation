@@ -12,7 +12,7 @@
 -async;
 -asyncPrio;
 -asyncBackground;
--asyncOn:(dispatch_queue_t)queue;
+//-asyncOn:(dispatch_queue_t)queue;
 -asyncOnOperationQueue:(NSOperationQueue*)aQueue;
 -onThread:(NSThread*)targetThread;
 -asyncOnMainThread;

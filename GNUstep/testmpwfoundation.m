@@ -30,7 +30,8 @@ static void runTests()
 		@"MPWBlockInvocation",
 		@"MPWSmallStringTable",
 		@"MPWBinaryPlist",
-		@"MPWNeXTPListWriter",
+        @"MPWNeXTPListWriter",
+//        @"MPWJSONWriter",
 		@"MPWBinaryPListWriter",
 		@"MPWIntArray",
 		@"MPWRealArray",
@@ -44,7 +45,9 @@ static void runTests()
         @"MPWSequentialStore",
 //      @"MPWFDStreamSource",
         @"MPWPipeline",
-      @"MPWEnumFilters",
+        @"MPWEnumFilters",
+//        @"MPWBinding",
+        @"MPWPathRelativeStore",
 //		@"MPWDelimitedTable",
 
 	];

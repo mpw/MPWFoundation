@@ -49,8 +49,7 @@
 
 -(void)streamingGet:(NSURL *)theURL
 {
-    NSURLComponents *comps=[NSURLComponents componentsWithURL:theURL resolvingAgainstBaseURL:YES];
-    MPWURLReference *ref=[MPWURLReference referenceWithURLComponents:comps];
+    MPWURLReference *ref=[MPWURLReference referenceWithURL:theURL];
     MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;

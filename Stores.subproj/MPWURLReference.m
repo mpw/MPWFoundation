@@ -23,6 +23,11 @@ CONVENIENCEANDINIT( reference, WithURLComponents:(NSURLComponents*)urlComponents
     return self;
 }
 
++referenceWithURL:(NSURL*)url
+{
+    return [self referenceWithURLComponents:[NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:YES]];
+}
+
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSURLComponents *comps=[NSURLComponents componentsWithString:pathName];
