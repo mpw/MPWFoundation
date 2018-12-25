@@ -93,9 +93,9 @@ defineArithOp( div, / )
 -not
 {
     if ( [self boolValue]  ) {
-        return (id)kCFBooleanFalse;
+        return [NSNumber numberWithBool:false];
     } else {
-        return (id)kCFBooleanTrue;
+        return [NSNumber numberWithBool:true];
     }
 }
 
@@ -110,10 +110,14 @@ defineArithOp( div, / )
     }
 }
 
+#ifndef GS_API_LATEST
+
 -(NSNumber*)random
 {
     return [NSNumber numberWithInteger:arc4random_uniform( [self intValue])];
 }
+
+#endif
 
 -(double)sin
 {
@@ -247,3 +251,25 @@ id _dummyGetNumtest( int value ) {
 }
 #endif 
 
+#import "DebugMacros.h"
+
+@interface NSNumberArithmeticTests:NSObject
+@end
+
+@implementation NSNumberArithmeticTests
+
++(void)testNot
+{
+    EXPECTTRUE( [[[NSNumber numberWithBool:false] not] boolValue],@"negated false");
+    EXPECTFALSE( [[[NSNumber numberWithBool:true] not] boolValue],@"negated true");
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+             @"testNot",
+
+             ];
+}
+
+@end

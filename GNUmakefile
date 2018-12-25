@@ -113,6 +113,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWStreamSource.m \
     Classes/NSStringAdditions.m \
     Classes/MPWRusage.m \
+    Classes/NSNumberArithmetic.m \
     Classes/MPWObject.m \
     Classes/MPWObjectCache.m \
     Classes/MPWFastInvocation.m \

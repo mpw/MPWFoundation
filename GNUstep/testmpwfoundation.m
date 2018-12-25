@@ -48,6 +48,7 @@ static void runTests()
         @"MPWEnumFilters",
 //        @"MPWBinding",
         @"MPWPathRelativeStore",
+        @"NSNumberArithmeticTests",
 //		@"MPWDelimitedTable",
 
 	];
