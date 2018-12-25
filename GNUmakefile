@@ -118,6 +118,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/NSDictAdditions.m \
     Classes/MPWRusage.m \
     Classes/NSNumberArithmetic.m \
+    Classes/MPWInterval.m \
     Classes/MPWObject.m \
     Classes/MPWObjectCache.m \
     Classes/MPWFastInvocation.m \

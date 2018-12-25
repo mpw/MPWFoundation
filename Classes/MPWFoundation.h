@@ -19,6 +19,7 @@
 #import "MPWFoundation/NSStringAdditions.h"
 #import "MPWFoundation/NSObjectAdditions.h"
 #import "MPWFoundation/MPWNumber.h"
+#import "MPWFoundation/MPWInterval.h"
 #import "MPWFoundation/MPWFloat.h"
 #import "MPWFoundation/MPWInteger.h"
 #import "MPWFoundation/MPWValueAccessor.h"

@@ -9,10 +9,12 @@
 #import "MPWBoxerUnboxer.h"
 #import "MPWPoint.h"
 #import "MPWRect.h"
+#import "MPWInterval.h"
 #import "AccessorMacros.h"
 
 @interface MPWNSPointBoxer : MPWBoxerUnboxer  @end
 @interface MPWNSRectBoxer : MPWBoxerUnboxer  @end
+@interface MPWNSRangeBoxer : MPWBoxerUnboxer  @end
 @interface MPWBlockBoxer : MPWBoxerUnboxer
 
 -initWithBoxer:(BoxBlock)newBoxer unboxer:(UnboxBlock)newUnboxer;
@@ -34,6 +36,7 @@ static NSMutableDictionary *conversionDict;
                @(@encode(NSPoint)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(NSSize)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(NSRect)): [MPWBoxerUnboxer nsrectBoxer],
+               @(@encode(NSRange)): [MPWBoxerUnboxer nsrangeBoxer],
 #ifdef CGPoint
                @(@encode(CGPoint)): [MPWBoxerUnboxer nspointBoxer],
                @(@encode(CGSize)): [MPWBoxerUnboxer nspointBoxer],
@@ -78,6 +81,11 @@ static NSMutableDictionary *conversionDict;
 +nsrectBoxer
 {
     return [[MPWNSRectBoxer new] autorelease];
+}
+
++nsrangeBoxer
+{
+    return [[MPWNSRangeBoxer new] autorelease];
 }
 
 
@@ -198,6 +206,30 @@ static NSMutableDictionary *conversionDict;
     [super dealloc];
 }
 
+
+
+@end
+
+
+@implementation MPWNSRangeBoxer
+
+-(void)unboxObject:anObject intoBuffer:(void*)buffer maxBytes:(int)maxBytes
+{
+    *(NSRange*)buffer = [anObject rangeValue];
+}
+
+-boxedObjectForBuffer:(void*)buffer maxBytes:(int)maxBytes
+{
+    NSRange *r=(NSRange*)buffer;
+    id retval= [MPWInterval intervalFromInt:r->location  toInt:r->location + r->length-1];
+    return retval;
+}
+
+-(id)boxedObjectForVararg:(va_list)ap
+{
+    NSRange r=va_arg(ap, NSRange);
+    return [MPWInterval intervalFromInt:r.location  toInt:r.location + r.length-1];
+}
 
 
 @end

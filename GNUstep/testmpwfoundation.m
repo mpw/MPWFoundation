@@ -52,6 +52,7 @@ static void runTests()
         @"MPWValueAccessor",
         @"MPWURLReferenceTests",
         @"MPWDiskStore",
+        @"MPWInterval",
 //		@"MPWDelimitedTable",
 
 	];
