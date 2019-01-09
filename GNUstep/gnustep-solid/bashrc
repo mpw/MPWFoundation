@@ -33,7 +33,7 @@
        PS1="\u@\h[\W]"
        set autolist=beepnone           # tcsh lists filename-completions
        
-       . /usr/share/GNUstep/Makefiles/GNUstep.sh
+       . /usr/local/share/GNUstep/Makefiles/GNUstep.sh
 
        function  trless {
                LANG=''  tr \\15 \\12 < "$1" | less 
