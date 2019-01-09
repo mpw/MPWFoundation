@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
 	libffi-dev \
 	libreadline6-dev \
 	libedit-dev \
+	libmicrohttpd-dev \
 	gnutls-dev 
 
 
