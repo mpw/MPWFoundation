@@ -7,9 +7,11 @@
 //
 
 #import "MPWInterval.h"
-#import <MPWFoundation/MPWFoundation.h>
-#import <MPWFoundation/MPWWriteStream.h>
-#import <MPWFoundation/NSNumberArithmetic.h>
+//#import <MPWFoundation/MPWFoundation.h>
+#import "MPWWriteStream.h"
+#import "NSNumberArithmetic.h"
+#import "MPWIntArray.h"
+#import "CodingAdditions.h"
 
 @interface NSObject(value)
 -value:arg;
@@ -81,6 +83,11 @@ scalarAccessor( Class, numberClass ,setNumberClass )
 +intervalFromInt:(long)newFrom toInt:(long)newTo step:(long)newStep
 {
 	return [[[self alloc] initFromInt:newFrom toInt:newTo step:newStep numberClass:[NSNumber class]] autorelease];
+}
+
+-asArray
+{
+    return [[[MPWIntArray alloc] initFrom:range.location to:range.location+range.length step:step] autorelease];
 }
 
 +intervalFromInt:(long)newFrom toInt:(long)newTo
@@ -248,6 +255,43 @@ defineArithOp( div )
 }
 
 @end
+
+@implementation NSNumber(intervals)
+
+
+-to:otherNumber
+{
+    return [MPWInterval intervalFrom:self to:otherNumber];
+}
+
+
+-to:otherNumber by:stepNumber
+{
+    return [MPWInterval intervalFrom:self to:otherNumber step:stepNumber];
+}
+
+-max:otherNumber
+{
+    if ( [self doubleValue] < [otherNumber doubleValue] ) {
+        return otherNumber;
+    } else {
+        return self;
+    }
+}
+
+
+-min:otherNumber
+{
+    if ( [self doubleValue] > [otherNumber doubleValue] ) {
+        return otherNumber;
+    } else {
+        return self;
+    }
+}
+
+@end
+
+#import "DebugMacros.h"
 
 @implementation MPWInterval(testing)
 

@@ -138,7 +138,7 @@ R
     }
 }
 
--(id)initWithStart:(float)start end:(float)end step:(float)step
+-(instancetype)initWithStart:(float)start end:(float)end step:(float)step
 {
     int numElements=floor((end-start)/step)+1;
     float element=start;

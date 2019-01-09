@@ -17,12 +17,12 @@
 
 @implementation MPWIntArray
 
-+array
++(instancetype)array
 {
 	return [[[self alloc] init] autorelease];
 }
 
--initWithCapacity:(unsigned long)newCapacity
+-(instancetype)initWithCapacity:(unsigned long)newCapacity
 {
     if ( self = [super init] ) {
 		capacity=newCapacity;
@@ -32,9 +32,20 @@
     return self;
 }
 
--init
+-(instancetype)init
 {
 	return [self initWithCapacity:10];
+}
+
+-(instancetype)initFrom:(int)start to:(int)stop step:(int)step
+{
+    int theCount=(stop-start)/step + 2;
+    self=[self initWithCapacity:theCount];
+    for (int i=0;i<theCount;i++) {
+        data[i]=start+i*step;
+    }
+    count=theCount;
+    return self;
 }
 
 -(int)integerAtIndex:(unsigned)index
@@ -423,6 +434,25 @@ static int compareIntegerPointers(const void *va , const void *vb )
     MPWIntArray *sorted=[[self copy] autorelease];
     [sorted sort];
     return sorted;
+}
+
+-(void)do:(void(^)(int))block
+{
+    for (int i=0;i<count;i++) {
+        block(data[i]);
+    }
+}
+
+
+-(instancetype)select:(BOOL(^)(int))block
+{
+    MPWIntArray *result=[MPWIntArray array];
+    for (int i=0;i<count;i++) {
+        if ( block(data[i]) ) {
+            [result addInteger:data[i]];
+        }
+    }
+    return result;
 }
 
 @end

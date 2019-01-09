@@ -19,6 +19,7 @@
 
 +array;
 -(int)integerAtIndex:(unsigned)index;
+-(instancetype)initFrom:(int)start to:(int)stop step:(int)step;
 -(void)addIntegers:(int*)intArray count:(unsigned long)numIntsToAdd;
 -(void)addInteger:(int)anInt;
 -(void)addObject:anObject;
@@ -28,5 +29,7 @@
 -(int*)integers;
 -(int)lastInteger;
 -(void)removeLastObject;
+-(void)do:(void(^)(int))block;
+-(instancetype)select:(BOOL(^)(int))block;
 
 @end
