@@ -2,6 +2,8 @@
 #
 
 
+cd /home/gnustep/
+
 echo Installing gnustep-make
 export CC=clang
 echo compiler is $CC
