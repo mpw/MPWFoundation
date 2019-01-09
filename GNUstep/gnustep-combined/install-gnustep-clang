@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+#
+
+
+cd /home/gnustep
+
+echo Downloading libobjc2
+curl -O ftp://ftp.gnustep.org/pub/gnustep/libs/libobjc2-1.8.1.tar.gz
+
+echo Downloading GNUstep Make
+curl -O ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-make-2.7.0.tar.gz
+
+echo Downloading GNUstep Base
+curl -O ftp://ftp.gnustep.org/pub/gnustep/core/gnustep-base-1.25.1.tar.gz
+
