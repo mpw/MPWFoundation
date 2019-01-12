@@ -134,7 +134,7 @@ scalarAccessor( Class, numberClass ,setNumberClass )
 	id value=nil;
 	id pool=[NSAutoreleasePool new];
 	for (long i=FROM;i<=TO;i+=step ) {
-		value = [aBlock value:[NSNumber numberWithLong:i]];
+		value = [aBlock value:@(i)];
 		if ( i % 100 == 0 ) {
 			[pool release];
 			pool=[NSAutoreleasePool new];
@@ -288,6 +288,22 @@ defineArithOp( div )
         return self;
     }
 }
+
+-(void)do:aBlock
+{
+    [[@(0) to:[self sub:@(1)]] do:aBlock];
+}
+
+-collect:aBlock
+{
+    return [[@(0) to:[self sub:@(1)]] collect:aBlock];
+}
+
+-(void)repeat:aBlock
+{
+    [self do:aBlock];
+}
+
 
 @end
 
