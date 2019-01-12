@@ -352,6 +352,13 @@ defineArithOp( div )
     INTEXPECT( [[five_to_ten sub:@3] to], 7, @"sub 3 from interval -> to");
 }
 
++(void)testNumberIntervalConveniences
+{
+    IDEXPECT( ([@(1) to:@(10)]), [MPWInterval intervalFromInt:1 toInt:10], @"to: on number");
+    IDEXPECT( ([@(3) collect:^id (id i){ return i;} ]), (@[@(0),@(1),@(2)]), @"collect: on number" );
+
+}
+
 +testSelectors
 {
     return [NSArray arrayWithObjects:
@@ -359,6 +366,7 @@ defineArithOp( div )
 			@"testIntervalRespectsRange",
             @"testIntervalWithStep",
             @"testIntervalArithmetic",
+            @"testNumberIntervalConveniences",
         nil];
 }
 
