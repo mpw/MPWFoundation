@@ -55,6 +55,7 @@ static void runTests()
         @"MPWDiskStore",
         @"MPWInterval",
 //		@"MPWDelimitedTable",
+        @"MPWMessageCatcherTesting",
 
 	];
 

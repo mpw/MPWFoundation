@@ -136,6 +136,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWScanner.m \
     Classes/MPWBlockInvocation.m \
     Classes/MPWValueAccessor.m \
+    Classes/MPWMessageCatcher.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \
     Collections.subproj/MPWBinaryPlist.m \

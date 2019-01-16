@@ -95,6 +95,19 @@
 
 @end
 
+#if GS_API_LATEST
+
+@implementation NSInvocation(copy)
+
+-copyWithZone:(NSZone*)zone
+{
+    return [self retain];
+}
+
+@end
+#endif
+
+
 @interface MPWMessageCatcherTesting:NSObject {}
 @end
 
@@ -129,8 +142,8 @@
 #else
     return [NSArray arrayWithObjects:
         @"testShouldNotRespondToSelectorNotPartOfClass",
-//        @"testBasicCatch",
-//        @"testMessageArgument",
+        @"testBasicCatch",
+        @"testMessageArgument",
         nil];
 #endif
 }
