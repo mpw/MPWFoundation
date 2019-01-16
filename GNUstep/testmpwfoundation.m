@@ -29,6 +29,7 @@ static void runTests()
 		@"MPWBlockInvocableTest",
 		@"MPWBlockInvocation",
 		@"MPWSmallStringTable",
+		@"MPWCaseInsensitiveSmallStringTable",
 		@"MPWBinaryPlist",
         @"MPWNeXTPListWriter",
 //        @"MPWJSONWriter",
