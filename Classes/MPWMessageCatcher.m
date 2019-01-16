@@ -75,17 +75,17 @@
     return [[self xxxMesssages] count];
 }
 
--(NSInvocation*)xxxMessageAtIndex:(unsigned)anIndex
+-(NSInvocation*)xxxMessageAtIndex:(int)anIndex
 {
     return [[self xxxMesssages] objectAtIndex:anIndex];
 }
 
--(NSString*)xxxMessageNameAtIndex:(unsigned)anIndex
+-(NSString*)xxxMessageNameAtIndex:(int)anIndex
 {
     return NSStringFromSelector([[self xxxMessageAtIndex:anIndex] selector]);
 }
 
--xxxMessageArgumentNumber:(unsigned)argIndex atIndex:(unsigned)messageIndex
+-xxxMessageArgumentNumber:(int)argIndex atIndex:(int)messageIndex
 {
     NSInvocation* message=[self xxxMessageAtIndex:messageIndex];
     id result;

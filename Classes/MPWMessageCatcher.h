@@ -17,9 +17,9 @@
 
 -initWithClass:(Class)newClass;
 -(NSArray*)xxxMesssages;
--(NSInvocation*)xxxMessageAtIndex:(unsigned)anIndex;
--(NSString*)xxxMessageNameAtIndex:(unsigned)anIndex;
--xxxMessageArgumentNumber:(unsigned)argIndex atIndex:(unsigned)messageIndex;
+-(NSInvocation*)xxxMessageAtIndex:(int)anIndex;
+-(NSString*)xxxMessageNameAtIndex:(int)anIndex;
+-xxxMessageArgumentNumber:(int)argIndex atIndex:(int)messageIndex;
 -(long)xxxMessageCount;
 
 
