@@ -19,7 +19,7 @@
 
 +array;
 -(int)integerAtIndex:(unsigned)index;
--(instancetype)initFrom:(int)start to:(int)stop step:(int)step;
+-(instancetype)initFromInt:(long)start toInt:(long)stop step:(long)step;
 -(void)addIntegers:(int*)intArray count:(unsigned long)numIntsToAdd;
 -(void)addInteger:(int)anInt;
 -(void)addObject:anObject;

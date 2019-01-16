@@ -106,14 +106,13 @@
         return @(self.source[self.key] != nil);
     }];
     IDEXPECT( self.source[self.key], self.value, @"did write async");
-
 }
 
 -(void)testAsyncDelete
 {
     self.store[self.key] = self.value;
     [(MPWWriteBackCache*)self.store makeAsynchronous];
-    [self.store deleteObjectForReference:self.key];
+    [self.store deleteObjectForReference:(id <MPWReferencing>)self.key];
     EXPECTNIL( self.cache[self.key], @"deleteing cache is synchronous");
     IDEXPECT( self.source[self.key], self.value, @"deleteing source is not synchronous");
     [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{

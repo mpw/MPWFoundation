@@ -12,6 +12,7 @@
 #import "NSNumberArithmetic.h"
 #import "MPWIntArray.h"
 #import "CodingAdditions.h"
+#import "NSObjectFiltering.h"
 
 @interface NSObject(value)
 -value:arg;
@@ -87,7 +88,7 @@ scalarAccessor( Class, numberClass ,setNumberClass )
 
 -asArray
 {
-    return [[[MPWIntArray alloc] initFrom:range.location to:range.location+range.length step:step] autorelease];
+    return [[[MPWIntArray alloc] initFromInt:range.location toInt:range.location+range.length step:step] autorelease];
 }
 
 +intervalFromInt:(long)newFrom toInt:(long)newTo

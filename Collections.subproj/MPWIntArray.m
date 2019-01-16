@@ -37,12 +37,12 @@
 	return [self initWithCapacity:10];
 }
 
--(instancetype)initFrom:(int)start to:(int)stop step:(int)step
+-(instancetype)initFromInt:(long)start toInt:(long)stop step:(long)step
 {
-    int theCount=(stop-start)/step + 2;
+    long theCount=(stop-start)/step + 2;
     self=[self initWithCapacity:theCount];
     for (int i=0;i<theCount;i++) {
-        data[i]=start+i*step;
+        data[i]=(int)(start+i*step);
     }
     count=theCount;
     return self;
