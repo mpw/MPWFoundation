@@ -140,6 +140,16 @@ static id dummy(id arg) { return arg; }
     ;
 }
 
+-(id)autorelease1
+{
+    return self;
+}
+
+-(void)dealloc1
+{
+
+}
+
 -copyWithZone:(NSZone*)aZone
 {
     return self;

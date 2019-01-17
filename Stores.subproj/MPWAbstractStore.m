@@ -200,7 +200,14 @@
 
 -get:(NSString*)uriString parameters:uriParameters
 {
-    return [self objectForReference:[self referenceForPath:uriString]];
+    id retval;
+    @autoreleasepool {
+//        NSLog(@"will %@ get: %@",self,uriString);
+        retval = [[self objectForReference:[self referenceForPath:uriString]] retain];
+//        NSLog(@"will pop pool for %@ get: %@",self,uriString);
+    }
+//    NSLog(@"did pop pool");
+    return retval;
 }
 
 -get:uri
