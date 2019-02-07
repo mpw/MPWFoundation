@@ -9,17 +9,23 @@
 
 @interface MPWURLReference()
 
-@property (nonatomic, strong) NSURL *URL;
+@property (nonatomic,strong) NSString *scheme,*host;
+@property (nonatomic,strong) NSArray *pathComponents;
+
+
 
 @end
 
 
 @implementation MPWURLReference
 
-static NSURL *url( NSString *scheme, NSString *path1, NSString *path2 ) {
+static NSURL *url( NSString *scheme, NSString* host1, NSString *path1, NSString *path2 ) {
     NSMutableString *s=[NSMutableString string];
     if ( scheme ) {
-        [s appendFormat:@"%@://",scheme];
+        [s appendFormat:@"%@:",scheme];
+    }
+    if ( host1 ) {
+        [s appendFormat:@"//%@",host1];
     }
     if ( path1 ) {
         [s appendString:path1];
@@ -30,50 +36,54 @@ static NSURL *url( NSString *scheme, NSString *path1, NSString *path2 ) {
         }
         [s appendString:path2];
     }
+    NSLog(@"string to feed URL with: %@",s);
     return [NSURL URLWithString:s];
 }
 
 
 CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 {
-    self=[super init];
-    self.URL = newURL;
-    return self;
+    return [self initWithPathComponents:[newURL.path componentsSeparatedByString:@"/"] host:newURL.host scheme:newURL.scheme];
 }
 
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-    return [self initWithURL:url( nil,pathName,nil )];
+    return [self initWithPathComponents:[pathName componentsSeparatedByString:@"/"] host:nil scheme:nil];
 }
 
--(instancetype)initWithPathComponents:(NSArray *)pathComponents scheme:(NSString *)scheme
+-(instancetype)initWithPathComponents:(NSArray *)pathComponents host:(NSString*)host scheme:(NSString *)scheme
 {
-    return [self initWithURL:url( scheme,[pathComponents componentsJoinedByString:@"/"],nil )];
+    self=[super init];
+    self.pathComponents=pathComponents;
+    self.scheme=scheme;
+    self.host=host;
+    return self;
 }
 
 -(NSString *)path
 {
-    return self.URL.relativeString;
+    return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
+
 }
 
--(NSArray *)pathComponents
+-(NSURL *)URL
 {
-    NSArray *pathComponents = [self.path componentsSeparatedByString:@"/"];
-    if ( pathComponents.count == 1 && [pathComponents.firstObject length]==0) {
-        pathComponents=@[];
-    }
-    return pathComponents;
+    return url(self.scheme, self.host, self.path , nil);
 }
 
 -(NSArray*)relativePathComponents
 {
-    return [super relativePathComponents];
+    NSArray *components = [super relativePathComponents];
+    if ( components.count==1 && [components.firstObject isEqualToString:@""]) {
+        components=@[];
+    }
+    return components;
 }
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-    return  [[self class] referenceWithURL:url( [self schemeName], [self path], [other path])];
+    return  [[self class] referenceWithURL:url( [self schemeName], [self host],[self path], [other path])];
 }
             
 
@@ -84,7 +94,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(void)setSchemeName:(NSString *)scheme
 {
-    self.URL = url( scheme, [self path],nil);
+    self.scheme = scheme;
 }
 
 -(BOOL)isRoot
@@ -104,14 +114,19 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self path] hasSuffix:@"/"];
 }
 
--(BOOL)isEqual:other
+-(BOOL)isEqual:(MPWURLReference*)other
 {
-    return [[self URL] isEqual:[other URL]];
+    return
+    _idsAreEqual(self.pathComponents , other.pathComponents) &&
+    _idsAreEqual(self.scheme , other.scheme) &&
+    _idsAreEqual(self.host , other.host);
 }
 
 -(void)dealloc
 {
-    [_URL release];
+    [_scheme release];
+    [_host release];
+    [_pathComponents release];
     [super dealloc];
 }
 
@@ -131,11 +146,18 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 +(void)testURL
 {
-    NSString *urlString=@"http://www.metaobject.com";
+    NSString *urlString=@"http://www.metaobject.com/";
     NSURL *sourceURL=[NSURL URLWithString:urlString];
-    MPWGenericReference *ref=[[[[self classUnderTest] alloc] initWithPath:urlString] autorelease];
-//    IDEXPECT( [ref path], @"//www.metaobject.com", @"path");
+    MPWURLReference *ref=[[[[self classUnderTest] alloc] initWithURL:sourceURL] autorelease];
+    IDEXPECT( [[ref URL] host], @"www.metaobject.com", @"host ");
     IDEXPECT( [ref URL], sourceURL, @"urls");
+
+    NSString *fileURLString=@"file:/hi";
+    NSURL *fileURL=[NSURL URLWithString:fileURLString];
+    MPWURLReference *fileRef=[[[[self classUnderTest] alloc] initWithURL:fileURL] autorelease];
+    IDEXPECT( [fileRef path], @"/hi", @"path");
+    IDEXPECT( [fileRef URL], fileURL, @"urls");
+
 }
 
 

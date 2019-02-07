@@ -210,6 +210,39 @@
     return retval;
 }
 
+-post:(NSString*)uriString parameters:uriParameters
+{
+    fprintf(stderr,"POST %s %s\n",[uriString UTF8String],[[uriParameters description] UTF8String]);
+    return nil;
+}
+
+-propfind:(NSString*)uriString data:(NSData*)data parameters:uriParameters
+{
+    fprintf(stderr,"PROPFIND %s data: %ld bytes %s\n",[uriString UTF8String],(long)[data length],[[uriParameters description] UTF8String]);
+    return nil;
+}
+
+-options:(NSString*)uriString parameters:uriParameters
+{
+    fprintf(stderr,"OPTIONS %s %s\n",[uriString UTF8String],[[uriParameters description] UTF8String]);
+    return nil;
+}
+
+-put:(NSString*)uriString data:(NSData*)data parameters:uriParameters
+{
+    fprintf(stderr,"PUT %s data: %ld bytes %s\n",[uriString UTF8String],(long)[data length],[[uriParameters description] UTF8String]);
+    return nil;
+}
+
+
+-patch:(NSString*)uriString data:(NSData*)data parameters:uriParameters
+{
+    NSLog(@"not handled -[%@ patch: %@ data: %ld bytes parameters: %@]",self,uriString,(long)[data length],uriParameters);
+    return nil;
+}
+
+
+
 -get:uri
 {
     return [self get:uri parameters:nil];
