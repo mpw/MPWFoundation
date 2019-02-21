@@ -151,7 +151,7 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
 @interface MPWNotificationProtocolTests : NSObject<MPWTestNotificationProtocol,NSObject>
 
 @property BOOL messageReceived;
--(void)theTestNotificationMessage:(NSNotification*)notification;
+
 @end
 
 @implementation MPWNotificationProtocolTests
@@ -174,6 +174,16 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
 {
     EXPECTTRUE( [@protocol(MPWTestNotificationProtocol) isNotificationProtocol], @"should be");
     EXPECTFALSE( [@protocol(NSObject) isNotificationProtocol], @"should not be");
+
+}
+
++(void)testSendNotificationViaMessageToProtocol
+{
+    MPWNotificationProtocolTests* tester = [[self new] autorelease];
+    EXPECTFALSE(tester.messageReceived, @"not yet");
+    [tester installProtocolNotifications];
+    [@protocol(MPWTestNotificationProtocol) notify];
+    EXPECTTRUE(tester.messageReceived, @"message received");
 
 }
 #endif
@@ -299,6 +309,7 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
              @"testTryingToInstallNotificationProtocolWithTooManyMessagesRaises",
 #if !TARGET_OS_IPHONE
              @"testCanIdentifyProtocolIsANotificationProtocolMessages",
+             @"testSendNotificationViaMessageToProtocol",
 #endif
              ];
 }

@@ -405,6 +405,7 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env
 {
+//    NSLog(@"writeInterpolatedString: %@ withEnvironment: %@",s,env);
     long curIndex=0;
     long maxIndex=[s length];
     while (curIndex < maxIndex) {
@@ -428,7 +429,12 @@ intAccessor( indentAmount , setIndentAmount )
         NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
         NSString *varName=[s substringWithRange:varRange];
         [self outputString:[s substringWithRange:NSMakeRange(curIndex,leftBrace.location-curIndex)]];
-        id value=[env objectForReference:[env referenceForPath:varName]];
+//        NSLog(@"environment: %@",env);
+//        NSLog(@"varName: %@",varName);
+        id reference = [env referenceForPath:varName];
+//        NSLog(@"reference: %@ - %@",[reference schemeName],[reference path]);
+        id value=[env objectForReference:reference];
+//        NSLog(@"value: %@",value);
         [self writeObject:value];
         curIndex = rightBrace.location+1;
     }
