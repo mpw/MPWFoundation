@@ -79,6 +79,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source graphViz:aStream];
 }
 
+-(BOOL)hasChildren:aReference
+{
+    return [self.source hasChildren:[self mapReference:aReference]];
+}
+
 -(void)dealloc
 {
     [_source release];

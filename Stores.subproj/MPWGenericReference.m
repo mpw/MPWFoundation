@@ -79,6 +79,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [[self pathComponents] isEqual:[other pathComponents]];
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: %@>",[self class],self,[self path]];
+}
+
 -(void)dealloc
 {
     [_pathComponents release];

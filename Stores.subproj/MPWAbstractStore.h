@@ -22,6 +22,9 @@
 @optional
 -(NSString*)displayName;
 -(void)graphViz:(MPWByteStream*)aStream;
+-objectForKeyedSubscript:key;
+-(void)setObject:theObject forKeyedSubscript:key;
+-(BOOL)hasChildren:(MPWReference*)aReference;
 
 
 @end
