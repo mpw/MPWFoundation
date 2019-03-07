@@ -56,6 +56,16 @@
 			<key>orderHint</key>
 			<integer>24</integer>
 		</dict>
+		<key>MPWFoundationUI.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>113</integer>
+		</dict>
+		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>114</integer>
+		</dict>
 		<key>TestMPWFoundation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -99,6 +109,11 @@
 			<true/>
 		</dict>
 		<key>1F4FC98A1DF818AF00B35D27</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F7045AE22313082005ED7FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
