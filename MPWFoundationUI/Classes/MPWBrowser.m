@@ -42,6 +42,11 @@
     [super setDelegate:newDelegate];
 }
 
+-(id<MPWReferencing>)defaultRootReference
+{
+    return [self.store referenceForPath:@"."];
+}
+
 -(id<MPWReferencing>)currentReference
 {
     return [self itemAtIndexPath:[self selectionIndexPath]];
@@ -60,29 +65,20 @@
 }
 
 
+
 -(NSArray*)listForItem:(id<MPWReferencing>)anItem
 {
     BOOL root=NO;
-//    NSLog(@"base reference: %@",anItem);
     if ( !anItem ) {
-        anItem = [self.store referenceForPath:@"."];
+        anItem = self.rootReference;
+        if ( !anItem ) {
+            anItem=self.defaultRootReference;
+        }
         root=YES;
-//    } else {
-//        NSLog(@"non null base reference: %@",anItem);
     }
-//    NSLog(@"base reference after normalizing: %@",anItem);
     NSArray *nameList = [self.store childrenOfReference:anItem];
-//    NSLog(@"name list: %@",nameList);
     NSArray *refs= [[nameList collect] asReference];
-//    NSLog(@"refs: %@",refs);
-//    NSArray *refs= [[MPWGenericReference collect] referenceWithPath:[nameList each]];
-    if (!root) {
-//        anItem=[anItem referenceByAppendingReference:[MPWGenericReference referenceWithPath:[self showClassMethods] ? @"classMethods" : @"instanceMethods"]];
-        refs= [[(NSObject*)anItem collect] referenceByAppendingReference:[refs each]];
-    }
-//    if ( !root) {
-//        NSLog(@"refs after processing: %@",refs);
-//    }
+    refs= [[(NSObject*)anItem collect] referenceByAppendingReference:[refs each]];
     return refs;
 
 }
@@ -103,14 +99,17 @@
     return ![self.store hasChildren:item];
 }
 
+-(NSString*)objectValueForReference:(id <MPWReferencing>)item
+{
+    return [[item relativePathComponents] lastObject];
+}
+
 - (id)browser:(NSBrowser *)browser objectValueForItem:(id)item
 {
-//    return [[item pathComponents] lastObject];
     if ( [self.browserDelegate respondsToSelector:_cmd] ) {
         return [self.browserDelegate browser:self objectValueForItem:(id)item];
     } else {
-//        NSLog(@"path: %@ name: %@",item,[[item relativePathComponents] lastObject]);
-        return [[item relativePathComponents] lastObject];
+        return [self objectValueForReference:item];
     }
 }
 

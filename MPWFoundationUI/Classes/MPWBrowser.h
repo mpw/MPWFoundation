@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) id <MPWStorage> store;
 @property (readonly)          id <MPWReferencing> currentReference;
+@property (nonatomic, strong) id <MPWReferencing> rootReference;
+@property (readonly)          id <MPWReferencing> defaultRootReference;
 @property (nonatomic, weak)   IBOutlet id browserDelegate;
 
 @end
