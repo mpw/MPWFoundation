@@ -79,6 +79,8 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [[self pathComponents] isEqual:[other pathComponents]];
 }
 
+
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"<%@:%p: %@>",[self class],self,[self path]];
@@ -218,3 +220,14 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 }
 
 @end
+
+
+@implementation  NSString(referencing)
+
+-asReference
+{
+    return [MPWGenericReference referenceWithPath:self];
+}
+
+@end
+

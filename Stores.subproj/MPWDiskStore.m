@@ -98,6 +98,11 @@
 }
 
 
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference
+{
+    return ![self isLeafReference:aReference];
+}
+
 @end
 
 #import "DebugMacros.h"

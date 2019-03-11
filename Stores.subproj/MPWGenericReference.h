@@ -18,3 +18,10 @@
 
 @interface MPWReferenceTests : NSObject {}
 @end
+
+@interface NSString(referencing)
+
+-asReference;
+
+@end
+

@@ -125,7 +125,7 @@
 
 -(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference
 {
-    return @[];
+    return [self objectForReference:aReference];
 }
 
 -(MPWReference*)referenceForPath:(NSString*)path

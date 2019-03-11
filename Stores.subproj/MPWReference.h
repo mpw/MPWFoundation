@@ -23,6 +23,7 @@
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
 -(instancetype)initWithPath:(NSString*)pathName;
 +(instancetype)referenceWithPath:(NSString*)pathName;
+-asReference;
 
 @end
 
@@ -33,5 +34,8 @@
 @property (readonly) NSArray<NSString*> *relativePathComponents;
 
 @end
+
+
+
 
 

@@ -28,6 +28,10 @@
     return [rawPathComponents subarrayWithRange:r];
 }
 
-
+-asReference
+{
+    return self;
+}
 
 @end
+
