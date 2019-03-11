@@ -11,6 +11,6 @@
 
 @property (nonatomic, readonly, strong) NSURL *URL;
 
-//+(instancetype)referenceWithURL:(NSURL*)components;
++(instancetype)referenceWithURL:(NSURL*)components;
 
 @end

@@ -63,16 +63,26 @@
 -(NSArray*)listForItem:(id<MPWReferencing>)anItem
 {
     BOOL root=NO;
+//    NSLog(@"base reference: %@",anItem);
     if ( !anItem ) {
-        anItem = [MPWGenericReference referenceWithPath:@"."];
+        anItem = [self.store referenceForPath:@"."];
         root=YES;
+//    } else {
+//        NSLog(@"non null base reference: %@",anItem);
     }
-    NSArray *nameList = self.store[anItem];
-    NSArray *refs= [[MPWGenericReference collect] referenceWithPath:[nameList each]];
+//    NSLog(@"base reference after normalizing: %@",anItem);
+    NSArray *nameList = [self.store childrenOfReference:anItem];
+//    NSLog(@"name list: %@",nameList);
+    NSArray *refs= [[nameList collect] asReference];
+//    NSLog(@"refs: %@",refs);
+//    NSArray *refs= [[MPWGenericReference collect] referenceWithPath:[nameList each]];
     if (!root) {
 //        anItem=[anItem referenceByAppendingReference:[MPWGenericReference referenceWithPath:[self showClassMethods] ? @"classMethods" : @"instanceMethods"]];
         refs= [[(NSObject*)anItem collect] referenceByAppendingReference:[refs each]];
     }
+//    if ( !root) {
+//        NSLog(@"refs after processing: %@",refs);
+//    }
     return refs;
 
 }
@@ -96,7 +106,12 @@
 - (id)browser:(NSBrowser *)browser objectValueForItem:(id)item
 {
 //    return [[item pathComponents] lastObject];
-    return [self.browserDelegate browser:self objectValueForItem:(id)item];
+    if ( [self.browserDelegate respondsToSelector:_cmd] ) {
+        return [self.browserDelegate browser:self objectValueForItem:(id)item];
+    } else {
+//        NSLog(@"path: %@ name: %@",item,[[item relativePathComponents] lastObject]);
+        return [[item relativePathComponents] lastObject];
+    }
 }
 
 

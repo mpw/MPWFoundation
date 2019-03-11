@@ -125,7 +125,12 @@
 
 -(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference
 {
-    return [self objectForReference:aReference];
+    id maybeChildren = [self objectForReference:aReference];
+    if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
+        return maybeChildren;
+    } else {
+        return nil;
+    }
 }
 
 -(MPWReference*)referenceForPath:(NSString*)path

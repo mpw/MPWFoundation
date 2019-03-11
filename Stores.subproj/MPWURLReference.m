@@ -36,7 +36,7 @@ static NSURL *url( NSString *scheme, NSString* host1, NSString *path1, NSString 
         }
         [s appendString:path2];
     }
-    NSLog(@"string to feed URL with: %@",s);
+//    NSLog(@"string to feed URL with: %@",s);
     return [NSURL URLWithString:s];
 }
 
@@ -121,6 +121,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     _idsAreEqual(self.scheme , other.scheme) &&
     _idsAreEqual(self.host , other.host);
 }
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: URL: %@>",[self class],self,[[self URL] description]];
+}
+
 
 -(void)dealloc
 {

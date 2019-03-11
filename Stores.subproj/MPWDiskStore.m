@@ -89,18 +89,33 @@
     return exists && !isDirectory;
 }
 
--(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
+-(NSArray*)childNamesOfReference:(id <MPWReferencing>)aReference
 {
     NSError *error=nil;
     NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:&error];
-    [self reportError:error];
-    return (NSArray*)[[MPWGenericReference collect] referenceWithPath:[childNames each]];
+    if (error) {
+        [self reportError:error];
+    }
+    if ( childNames ) {
+        childNames=[childNames sorted];
+    } else {
+        NSLog(@"no children for %@, error: %@",aReference,error);
+    }
+   return childNames;
+}
+
+-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
+{
+    NSArray *childNames = [self childNamesOfReference:aReference];;
+    return (NSArray*)[[self collect] referenceForPath:[childNames each]];
 }
 
 
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference
 {
-    return ![self isLeafReference:aReference];
+    BOOL isDirectory = NO;
+    BOOL exists=[self exists:aReference isDirectory:&isDirectory];
+    return exists && isDirectory;
 }
 
 @end
