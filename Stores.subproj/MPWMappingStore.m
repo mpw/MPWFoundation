@@ -65,6 +65,17 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self.source childrenOfReference:[self mapReference:aReference]];
 }
 
+-(MPWReference*)referenceForPath:(NSString*)path
+{
+//    NSLog(@"referenceForPath: %@ source store: %@",path,self.source);
+    id result = self.source ? [self.source referenceForPath:path] : [super referenceForPath:path];
+//    NSLog(@"resulting reference: %@",result);
+    return result;
+
+}
+
+
+
 -(void)setSourceStores:(NSArray<MPWStorage> *)stores
 {
     NSAssert1(stores.count <= 1, @"number of source stores should be <= 1, is %d", (int)stores.count);

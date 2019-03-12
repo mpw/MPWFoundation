@@ -13,7 +13,7 @@
 
 -(MPWReference*)referenceForPath:(NSString*)path
 {
-    return [MPWURLReference referenceWithPath:[path stringByAddingPercentEscapes]];
+    return [MPWURLReference referenceWithPath:path];
 }
 
 @end

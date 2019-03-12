@@ -49,27 +49,35 @@ CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-    return [self initWithPathComponents:[pathName componentsSeparatedByString:@"/"] host:nil scheme:nil];
+    return [self initWithPathComponents:[[pathName stringByAddingPercentEscapes] componentsSeparatedByString:@"/"] host:nil scheme:nil];
 }
 
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents host:(NSString*)host scheme:(NSString *)scheme
 {
     self=[super init];
-    self.pathComponents=pathComponents;
+    self.pathComponents=pathComponents ;
     self.scheme=scheme;
     self.host=host;
     return self;
 }
 
--(NSString *)path
+-(NSString*)urlPath
 {
     return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
+}
 
+-(NSString *)path
+{
+    return [[self urlPath] stringByRemovingPercentEscapes];
 }
 
 -(NSURL *)URL
 {
-    return url(self.scheme, self.host, self.path , nil);
+    NSURL *resultURL =  url(self.scheme, self.host, self.urlPath, nil);
+    if ( ! resultURL || [resultURL.path length]==0) {
+        NSLog(@"Trouble converting components: scheme: %@ host: %@ urlPath: %@",self.scheme,self.host,self.urlPath);
+    }
+    return resultURL;
 }
 
 -(NSArray*)relativePathComponents
@@ -83,7 +91,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-    return  [[self class] referenceWithURL:url( [self schemeName], [self host],[self path], [other path])];
+    return  [[self class] referenceWithURL:url( [self schemeName], [self host],[self urlPath], [other urlPath])];
 }
             
 

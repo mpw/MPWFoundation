@@ -189,6 +189,17 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     IDEXPECT([[self ref:@""] relativePathComponents], @[] ,@"cleanedPathComponents");
 }
 
++(void)testPathWithSpaces
+{
+    id ref = [self ref:@"single space"];
+    NSArray* components = [ref relativePathComponents];
+    id expected = @"single space";
+
+    INTEXPECT( components.count, 1,@"on path element");
+
+//    IDEXPECT(components.firstObject, expected ,@"single space");
+}
+
 +(void)testURL {}
 
 +(void)testAppendPath
@@ -197,6 +208,14 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     MPWGenericReference *relative=[self ref:@"relative"];
     MPWGenericReference *composite=[base referenceByAppendingReference:relative];
     IDEXPECT([composite path], @"base/relative", @"simplest composition");
+}
+
++(void)testAppendPathWithSpaces
+{
+    MPWGenericReference *base=[self ref:@"base with space"];
+    MPWGenericReference *relative=[self ref:@"relative with space"];
+    MPWGenericReference *composite=[base referenceByAppendingReference:relative];
+    IDEXPECT([composite path], @"base with space/relative with space", @"simplest composition");
 }
 
 +(void)testEquality
@@ -214,7 +233,9 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
              @"testURL",
              @"testReturnsSamePath",
              @"testCleanedPath",
+             @"testPathWithSpaces",
              @"testAppendPath",
+             @"testAppendPathWithSpaces",
              @"testEquality",
              ];
 }
