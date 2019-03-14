@@ -49,7 +49,7 @@ CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-    return [self initWithPathComponents:[[pathName stringByAddingPercentEscapes] componentsSeparatedByString:@"/"] host:nil scheme:nil];
+    return [self initWithPathComponents:[[pathName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]] componentsSeparatedByString:@"/"] host:nil scheme:nil];
 }
 
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents host:(NSString*)host scheme:(NSString *)scheme
@@ -68,7 +68,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(NSString *)path
 {
-    return [[self urlPath] stringByRemovingPercentEscapes];
+    return [[self urlPath] stringByRemovingPercentEncoding];
 }
 
 -(NSURL *)URL

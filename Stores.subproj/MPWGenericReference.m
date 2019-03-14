@@ -193,11 +193,15 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 {
     id ref = [self ref:@"single space"];
     NSArray* components = [ref relativePathComponents];
-    id expected = @"single space";
-
+    NSString *expected = @"single space";
+//    NSString *result = [NSString stringWithString:components.firstObject];
+    NSString* result = [[expected stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]] stringByRemovingPercentEncoding];
+    NSLog(@"string escaping and unescaping result: '%@' class: %@",result,[result class]);
+    BOOL same = [expected isEqualToString:result];
     INTEXPECT( components.count, 1,@"on path element");
-
-//    IDEXPECT(components.firstObject, expected ,@"single space");
+    EXPECTTRUE(same, @"string are the same");
+    
+    IDEXPECT(result , expected ,@"single space");
 }
 
 +(void)testURL {}

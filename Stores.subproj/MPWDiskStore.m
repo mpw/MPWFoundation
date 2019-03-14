@@ -7,7 +7,8 @@
 
 #import "MPWDiskStore.h"
 #import "MPWGenericReference.h"
-#import "NSObjectFiltering.h"
+#import "MPWGenericReference.h"
+#import "MPWDirectoryBinding.h"
 #import "NSStringAdditions.h"
 #include <unistd.h>
 
@@ -39,7 +40,8 @@
 
 -directoryForReference:(MPWGenericReference*)aReference
 {
-    return [self childrenOfReference:aReference];
+    NSArray *bindings = [[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:bindings] autorelease];
 }
 
 
@@ -104,11 +106,11 @@
    return childNames;
 }
 
--(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
-{
-    NSArray *childNames = [self childNamesOfReference:aReference];;
-    return (NSArray*)[[self collect] referenceForPath:[childNames each]];
-}
+//-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
+//{
+//    NSArray *childNames = [self childNamesOfReference:aReference];;
+//    return (NSArray*)[[self collect] referenceForPath:[childNames each]];
+//}
 
 
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference

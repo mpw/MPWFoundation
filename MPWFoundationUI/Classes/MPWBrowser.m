@@ -77,7 +77,7 @@
         root=YES;
     }
     NSArray *nameList = [self.store childrenOfReference:anItem];
-    NSArray *refs= [[nameList collect] asReference];
+    NSArray *refs= nameList.count ? [[nameList collect] asReference] : @[] ;
     refs= [[(NSObject*)anItem collect] referenceByAppendingReference:[refs each]];
     return refs;
 

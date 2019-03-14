@@ -10,6 +10,8 @@
 #import "NSNil.h"
 #import "MPWByteStream.h"
 #import "MPWWriteStream.h"
+#import "MPWDirectoryBinding.h"
+
 
 @interface NSArray(unique)
 
@@ -123,11 +125,13 @@
     return YES;
 }
 
--(NSArray<MPWReference*>*)childrenOfReference:(MPWReference*)aReference
+-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     id maybeChildren = [self objectForReference:aReference];
     if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
         return maybeChildren;
+    } else if ( [maybeChildren respondsToSelector:@selector(contents)]) {
+        return [maybeChildren contents];
     } else {
         return nil;
     }
