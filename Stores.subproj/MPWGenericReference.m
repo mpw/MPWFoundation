@@ -69,6 +69,21 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [[[[self class] alloc] initWithPathComponents:compinedPath scheme:self.schemeName] autorelease];
 }
 
+-(instancetype)referenceByAppendingPath:(NSString*)path
+{
+    MPWGenericReference *otherRef=[[[[self class] alloc] initWithPath:path] autorelease];
+    return [self referenceByAppendingReference:otherRef];
+}
+
+-(instancetype)referencesByAppendingPaths:(NSArray*)paths
+{
+    NSMutableArray *refs=[NSMutableArray array];
+    for ( NSString *path in paths ) {
+        [refs addObject:[self referenceByAppendingPath:path]];
+    }
+    return refs;
+}
+
 -(NSArray*)relativePathComponents
 {
     return [super relativePathComponents];      // shut up the compiler
