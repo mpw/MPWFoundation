@@ -6,7 +6,16 @@
 //
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import "MPWBinding.h"
+
+@protocol DirectoryPrinting
+
+-(void)writeDirectory:aDirectory;
+-(void)writeFancyDirectory:aDirectory;
+
+
+@end
+
 
 @interface MPWDirectoryBinding : MPWBinding
 {

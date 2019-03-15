@@ -24,12 +24,12 @@
 -(void)graphViz:(MPWByteStream*)aStream;
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;
--(BOOL)hasChildren:(MPWReference*)aReference;
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference;
 
 
 @end
 
-@protocol MPWHierarchicalStorage
+@protocol MPWHierarchicalStorage <MPWStorage>
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference;
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference;

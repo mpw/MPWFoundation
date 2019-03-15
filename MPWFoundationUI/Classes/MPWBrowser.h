@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MPWStorage,MPWReferencing;
+@protocol MPWStorage,MPWHierarchicalStorage,MPWReferencing;
 
 @interface MPWBrowser : NSBrowser
 
-@property (nonatomic, strong) id <MPWStorage> store;
+@property (nonatomic, strong) id <MPWHierarchicalStorage> store;
 @property (readonly)          id <MPWReferencing> currentReference;
 @property (nonatomic, strong) id <MPWReferencing> rootReference;
 @property (readonly)          id <MPWReferencing> defaultRootReference;

@@ -52,6 +52,16 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [self initWithPathComponents:[[pathName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]] componentsSeparatedByString:@"/"] host:nil scheme:nil];
 }
 
+- (id)asReference {
+    return self;
+}
+
+
+- (instancetype)initWithPathComponents:(NSArray *)pathComponents scheme:(NSString *)scheme {
+    return [self initWithPathComponents:pathComponents host:nil scheme:scheme];
+}
+
+
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents host:(NSString*)host scheme:(NSString *)scheme
 {
     self=[super init];
@@ -91,7 +101,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-    return  [[self class] referenceWithURL:url( [self schemeName], [self host],[self urlPath], [other urlPath])];
+    return  [[self class] referenceWithURL:url( [self schemeName], [self host],[self urlPath], [(MPWURLReference*)other urlPath])];
 }
             
 
@@ -122,12 +132,24 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self path] hasSuffix:@"/"];
 }
 
+-copyWithZone:aZone
+{
+    return [self retain];
+}
+
+-(NSString*)stringValue
+{
+    return [self.URL stringValue];
+}
+
+-(NSUInteger)hash
+{
+    return [self.URL hash];
+}
+
 -(BOOL)isEqual:(MPWURLReference*)other
 {
-    return
-    _idsAreEqual(self.pathComponents , other.pathComponents) &&
-    _idsAreEqual(self.scheme , other.scheme) &&
-    _idsAreEqual(self.host , other.host);
+    return [other.URL isEqual:self.URL];
 }
 
 -(NSString *)description

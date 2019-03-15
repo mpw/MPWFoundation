@@ -34,9 +34,9 @@
 -(void)commonInit
 {
     self.dataSource = self;
-    [self subscribeToModelDidChangeNotification];
+    [self installProtocolNotifications];
     self.context = [MPWCGDrawingContext currentContext];
-    [self.context setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]]];
+    [self.context setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeRegular]]];
 }
 
 

@@ -10,6 +10,8 @@
 #import "MPWGenericReference.h"
 #import "MPWDirectoryBinding.h"
 #import "NSStringAdditions.h"
+#import "NSObjectFiltering.h"
+
 #include <unistd.h>
 
 @implementation MPWDiskStore
@@ -40,7 +42,7 @@
 
 -directoryForReference:(MPWGenericReference*)aReference
 {
-    NSArray *bindings = [[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    NSArray *bindings = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     return [[[MPWDirectoryBinding alloc] initWithContents:bindings] autorelease];
 }
 
@@ -75,7 +77,7 @@
     unlink([path fileSystemRepresentation]);
 }
 
--(BOOL)exists:(MPWGenericReference *)aReference isDirectory:(BOOL*)isDirectory
+-(BOOL)exists:(id <MPWReferencing>)aReference isDirectory:(BOOL*)isDirectory
 {
     BOOL    exists=NO;
     NSURL   *url=[self fileURLForReference:aReference];
@@ -99,7 +101,7 @@
         [self reportError:error];
     }
     if ( childNames ) {
-        childNames=[childNames sorted];
+        childNames=[childNames sortedArrayUsingSelector:@selector(compare:)];  // FIXME: could use -sorted, but needs to be exposed in proper header
     } else {
         NSLog(@"no children for %@, error: %@",aReference,error);
     }

@@ -105,7 +105,7 @@
     return ;
 }
 
--(BOOL)hasChildren:(MPWReference*)aReference
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference
 {
     return NO;
 }

@@ -120,5 +120,6 @@
 #import "MPWFoundation/MPWURLBasedStore.h"
 #import "MPWFoundation/MPWURLReference.h"
 #import "MPWFoundation/MPWWriteBackCache.h"
+#import "MPWFoundation/MPWDirectoryBinding.h"
 
 

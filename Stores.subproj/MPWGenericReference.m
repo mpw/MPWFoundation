@@ -41,6 +41,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self initWithPathComponents:[self componentsOfPath:path] scheme:nil];
 }
 
+- (id)asReference {
+    return self;
+}
+
+
 -(BOOL)isRoot
 {
     NSArray *components=self.pathComponents;
