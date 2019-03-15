@@ -76,11 +76,9 @@
         }
         root=YES;
     }
-    NSArray *nameList = [self.store childrenOfReference:anItem];
-    NSArray *refs= nameList.count ? [[nameList collect] asReference] : @[] ;
-    refs= [[(NSObject*)anItem collect] referenceByAppendingReference:[refs each]];
+    NSArray *refs = [self.store childrenOfReference:anItem];
+//    NSLog(@"for %@ refs: %@",anItem,refs);
     return refs;
-
 }
 
 - (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(id)item

@@ -92,7 +92,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(BOOL)hasChildren:aReference
 {
-    return [self.source hasChildren:[self mapReference:aReference]];
+//    return [self.source hasChildren:[self mapReference:aReference]];
+    return [self.source hasChildren:aReference];
 }
 
 -(void)dealloc

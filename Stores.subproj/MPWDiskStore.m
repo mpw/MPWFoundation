@@ -42,8 +42,9 @@
 
 -directoryForReference:(MPWGenericReference*)aReference
 {
-    NSArray *bindings = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:bindings] autorelease];
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:combinedRefs] autorelease];
 }
 
 
