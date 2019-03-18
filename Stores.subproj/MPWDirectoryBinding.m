@@ -22,6 +22,10 @@ boolAccessor(fancy, setFancy)
     return self;
 }
 
+-children
+{
+    return contents;
+}
 
 -(void)dealloc
 {

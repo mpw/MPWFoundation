@@ -92,6 +92,13 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other] inStore:self.store];
 }
 
+-(void)traverse:(id <Streaming>)target
+{
+    [target writeObject:self];
+    if ( [self hasChildren]) {
+        [[[self children] do] traverse:target];
+    }
+}
 
 -(void)dealloc
 {
