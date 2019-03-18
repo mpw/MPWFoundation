@@ -66,8 +66,10 @@
             [filter setTarget:nil];
             NSLog(@"did setTarget on block filter");
         } else if ( [(NSString*)filter hasPrefix:@"!"]) {
-            NSString *command=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
-            filter=[NSClassFromString(@"MPWExternalFilter") filterWithCommandString:command];
+            NSString *commandString=[filter substringWithRange:NSMakeRange(1, [filter length]-1)];
+            NSArray *commands=[commandString componentsSeparatedByString:@" "];
+            NSLog(@"commands: %@",commands);
+            filter=[NSClassFromString(@"MPWExternalFilter") filterWithCommand:commands.firstObject args:[commands subarrayWithRange:NSMakeRange(1, commands.count-1)]];
             [filter setTarget:nil];
         } else {
             NSString *key=[filter copy];
@@ -357,7 +359,7 @@ typedef id (^ZeroArgBlock)(void);
 
 +(void)testToUpperWithExternalFilter
 {
-    MPWPipeline *pipe=[self filters:@[ @"!tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
+    MPWPipeline *pipe=[self filters:@[ @"!/usr/bin/tr '[a-z]' '[A-Z]'" , @"-stringValue"]];
     [pipe writeObjectAndClose:@"Hello"];
     IDEXPECT([pipe firstObject], @"HELLO", @"hello, processed");
 }
@@ -397,7 +399,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testFanoutCanContainPipes",
              @"testGraphVizOutput",
 #if !TARGET_OS_IOS
-//             @"testToUpperWithExternalFilter",
+             @"testToUpperWithExternalFilter",
 #endif
 //             @"testRaiseOnUnknownSelector",
              ];

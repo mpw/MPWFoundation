@@ -72,13 +72,9 @@
             close( pipeFDsOut[0]);
             close( pipeFDsIn[0]);
             close( pipeFDsOut[1]);
-            fprintf(stderr,"command: %s\n",s);
-            for (int i=0;i<numCommands;i++) {
-                fprintf(stderr,"arg[%d]: %s\n",i,commandStrings[i]);
-            }
             int retval = execve( s, (char**)commandStrings, environ );
-            fprintf(stderr,"did execute %s retval: %d\n",s,retval);
-            exit(0);
+            fprintf(stderr,"failed to execve %s retval: %d\n",s,retval);
+            exit(retval);
         default:
             success=YES;
             break;
