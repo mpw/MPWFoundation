@@ -122,7 +122,7 @@
 
 -(BOOL)isLeafReference:(MPWReference*)aReference
 {
-    return YES;
+    return ![self hasChildren:aReference];
 }
 
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
@@ -184,6 +184,21 @@
 
 -(void)setStoreDict:(NSDictionary*)storeDict
 {
+}
+
+-(MPWBinding*)bindingForReference:aReference inContext:aContext
+{
+    return [MPWBinding bindingWithReference:aReference inStore:self];
+}
+
+-(MPWBinding*)bindingForReference:aReference
+{
+    return [self bindingForReference:aReference inContext:nil];
+}
+
+-(MPWBinding*)bindingForPath:(NSString*)path
+{
+    return [self bindingForReference:[self referenceForPath:path]];
 }
 
 -(void)dealloc
