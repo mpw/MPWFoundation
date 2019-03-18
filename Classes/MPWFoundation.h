@@ -121,5 +121,6 @@
 #import "MPWFoundation/MPWURLReference.h"
 #import "MPWFoundation/MPWWriteBackCache.h"
 #import "MPWFoundation/MPWDirectoryBinding.h"
+#import "MPWFoundation/MPWFileBinding.h"
 
 

@@ -120,7 +120,7 @@
     [self setObject:theObject forReference:(id <MPWReferencing>)key];
 }
 
--(BOOL)isLeafReference:(MPWReference*)aReference
+-(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
 {
     return ![self hasChildren:aReference];
 }
