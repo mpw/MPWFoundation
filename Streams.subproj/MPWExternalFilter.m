@@ -18,6 +18,7 @@
 @interface MPWExternalFilter ()
 
 @property (nonatomic, strong) NSString *commandString;
+@property (nonatomic, strong) NSArray *commandArgs;
 @property (nonatomic, assign) int fdout,fdin,pid;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, strong) MPWFDStreamSource *source;
@@ -33,15 +34,30 @@
     return [[[self alloc] initWithCommandString:command] autorelease];
 }
 
++(instancetype)filterWithCommand:(NSString *)command args:(NSArray*)newArgs
+{
+    MPWExternalFilter *f = [[[self alloc] initWithCommandString:command] autorelease];
+    f.commandArgs = newArgs;
+    return f;
+}
+
 -(BOOL)runCommand:(NSString *)theCommand
 {
+    extern char *environ[];
     const char *s=[theCommand fileSystemRepresentation];
+    long numCommands=self.commandArgs.count;
+    const char *commandStrings[numCommands+2];
+    commandStrings[numCommands+1]=NULL;
+    commandStrings[0]=s;
+    for (int i=0;i<numCommands;i++) {
+        commandStrings[i+1]=[self.commandArgs[i] UTF8String];
+    }
     BOOL success=NO;
     int pipeFDsOut[2];
     int pipeFDsIn[2];
     pipe( pipeFDsOut);
     pipe( pipeFDsIn);
-    
+
     self.fdout=pipeFDsOut[1];
     self.fdin=pipeFDsIn[0];
     switch (self.pid=fork())
@@ -56,8 +72,12 @@
             close( pipeFDsOut[0]);
             close( pipeFDsIn[0]);
             close( pipeFDsOut[1]);
-            system( s);
-//            fprintf(stderr,"did execute %s\n",s);
+            fprintf(stderr,"command: %s\n",s);
+            for (int i=0;i<numCommands;i++) {
+                fprintf(stderr,"arg[%d]: %s\n",i,commandStrings[i]);
+            }
+            int retval = execve( s, (char**)commandStrings, environ );
+            fprintf(stderr,"did execute %s retval: %d\n",s,retval);
             exit(0);
         default:
             success=YES;
@@ -146,7 +166,8 @@
 
 +(void)testUpcaseViaUnixTR
 {
-    MPWExternalFilter *filter=[self filterWithCommandString:@"tr '[a-z]' '[A-Z]'"];
+//    MPWExternalFilter *filter=[self filterWithCommandString:@"tr '[a-z]' '[A-Z]'"];
+    MPWExternalFilter *filter=[self filterWithCommand:@"/usr/bin/tr" args:@[@"'[a-z]'",@"'[A-Z]'"]];
     [filter writeObject:@"hello world!"];
     [filter close];
     IDEXPECT( [(MPWFilter*)[filter target] target], @"HELLO WORLD!",@"upcase"); // FIXME

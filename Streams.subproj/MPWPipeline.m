@@ -397,7 +397,7 @@ typedef id (^ZeroArgBlock)(void);
              @"testFanoutCanContainPipes",
              @"testGraphVizOutput",
 #if !TARGET_OS_IOS
-             @"testToUpperWithExternalFilter",
+//             @"testToUpperWithExternalFilter",
 #endif
 //             @"testRaiseOnUnknownSelector",
              ];
