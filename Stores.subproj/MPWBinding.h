@@ -5,7 +5,7 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWReference.h>
 
 @class MPWReference,MPWAbstractStore;
 @protocol MPWReferencing;
@@ -21,6 +21,7 @@
 // hierarchy support
 
 -(BOOL)hasChildren;
+-(NSArray*)children;
 -(NSURL*)URL;
 
 
@@ -28,7 +29,7 @@
 
 
 
-@interface MPWBinding : NSObject<MPWBinding>
+@interface MPWBinding : NSObject<MPWBinding,MPWReferencing>
 
 @property (nonatomic, strong) id <MPWReferencing> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;

@@ -33,5 +33,10 @@
     return self;
 }
 
+-reference
+{
+    return self;
+}
+
 @end
 

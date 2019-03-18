@@ -75,7 +75,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self referenceByAppendingReference:otherRef];
 }
 
--(instancetype)referencesByAppendingPaths:(NSArray*)paths
+-(NSArray*)referencesByAppendingPaths:(NSArray*)paths
 {
     NSMutableArray *refs=[NSMutableArray array];
     for ( NSString *path in paths ) {

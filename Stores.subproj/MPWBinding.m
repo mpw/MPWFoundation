@@ -68,11 +68,37 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [MPWPathRelativeStore storeWithSource:self.store reference:self.reference];
 }
 
+-(NSArray*)pathComponents
+{
+    return self.reference.pathComponents;
+}
+
+-(NSArray*)relativePathComponents
+{
+    return self.reference.pathComponents;
+}
+
+-(NSString*)schemeName
+{
+    return self.reference.schemeName;
+}
+
+-(void)setSchemeName:(NSString*)newName
+{
+    self.reference.schemeName=newName;
+}
+
+- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
+    return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other] inStore:self.store];
+}
+
+
 -(void)dealloc
 {
     [(id)_reference release];
     [_store release];
     [super dealloc];
 }
+
 
 @end
