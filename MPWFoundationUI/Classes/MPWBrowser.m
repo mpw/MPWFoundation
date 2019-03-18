@@ -64,21 +64,21 @@
     return [[ref relativePathComponents] count] > 2;
 }
 
-
-
--(NSArray*)listForItem:(id<MPWReferencing>)anItem
+-(MPWBinding*)rootBinding
 {
-    BOOL root=NO;
-    if ( !anItem ) {
-        anItem = self.rootReference;
-        if ( !anItem ) {
-            anItem=self.defaultRootReference;
-        }
-        root=YES;
+    id <MPWReferencing> ref = self.rootReference;
+    if ( !ref ) {
+        ref=self.defaultRootReference;
     }
-    NSArray *refs = [self.store childrenOfReference:anItem];
-//    NSLog(@"for %@ refs: %@",anItem,refs);
-    return refs;
+    return [self.store bindingForReference:ref inContext:nil];
+}
+
+-(NSArray*)listForItem:(MPWBinding*)binding
+{
+    if ( !binding ) {
+        binding = [self rootBinding];
+    }
+    return [binding children];
 }
 
 - (NSInteger)browser:(NSBrowser *)browser numberOfChildrenOfItem:(id)item
@@ -92,9 +92,9 @@
     return [[self listForItem:item] objectAtIndex:index];
 }
 
-- (BOOL)browser:(NSBrowser *)browser isLeafItem:(id)item
+- (BOOL)browser:(NSBrowser *)browser isLeafItem:(MPWBinding*)item
 {
-    return ![self.store hasChildren:item];
+    return ![item hasChildren];
 }
 
 -(NSString*)objectValueForReference:(id <MPWReferencing>)item
