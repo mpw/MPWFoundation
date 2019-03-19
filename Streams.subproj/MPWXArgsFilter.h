@@ -9,9 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWXArgsFilter : MPWFlattenStream
+@interface MPWXArgsFilter : MPWExternalFilter
 
-@property (nonatomic, strong)  NSString *command;
 
 @end
 

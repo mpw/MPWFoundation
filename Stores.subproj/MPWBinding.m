@@ -10,6 +10,8 @@
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
 #import "MPWPathRelativeStore.h"
+#import "MPWWriteStream.h"
+#import "NSObjectFiltering.h"
 
 @implementation MPWBinding
 

@@ -10,7 +10,9 @@
 
 @interface MPWExternalFilter : MPWFilter
 +(instancetype)filterWithCommandString:(NSString *)command;
++(instancetype)filterWithCommand:(NSString *)command args:(NSArray*)newArgs;
 
 -(void)run;
+-(NSArray*)allArgs;
 
 @end

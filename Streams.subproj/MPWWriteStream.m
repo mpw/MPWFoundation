@@ -216,6 +216,7 @@ SEL visSel;
 
 @implementation NSObject(MPWStreaming)
 
+
 -(void)writeOnStream:(id <Streaming>)aStream
 {
     [aStream writeObject:self];

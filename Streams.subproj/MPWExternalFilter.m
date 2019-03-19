@@ -41,16 +41,29 @@
     return f;
 }
 
+-(instancetype)initWithTarget:(id)aTarget
+{
+    self=[super initWithTarget:aTarget];
+    self.commandArgs=@[];
+    return self;
+}
+
+-(NSArray*)allArgs
+{
+    return [self commandArgs];
+}
+
 -(BOOL)runCommand:(NSString *)theCommand
 {
     extern char *environ[];
     const char *s=[theCommand fileSystemRepresentation];
-    long numCommands=self.commandArgs.count;
+    NSArray *myArrags=[self allArgs];
+    long numCommands=[myArrags count];
     const char *commandStrings[numCommands+2];
     commandStrings[numCommands+1]=NULL;
     commandStrings[0]=s;
     for (int i=0;i<numCommands;i++) {
-        commandStrings[i+1]=[self.commandArgs[i] UTF8String];
+        commandStrings[i+1]=[myArrags[i] UTF8String];
     }
     BOOL success=NO;
     int pipeFDsOut[2];
@@ -114,21 +127,29 @@
     return [self.source target];
 }
 
--(void)writeObject:anObject sender:aSender
+-(void)writeString:(NSString*)aString
+{
+    [self writeData:[aString asData]];
+}
+
+-(void)writeNSObject:(id)anObject
+{
+    [self writeData:[anObject asData]];
+}
+
+-(void)writeData:(NSData*)dataToWrite
 {
     if ( !self.running)  {
         [self run];
     }
 //    NSLog(@"will write: %@",anObject);
     @autoreleasepool {
-        NSData *dataToWrite=[anObject asData];
         if ( [dataToWrite length]) {
             write( self.fdout, [dataToWrite bytes], [dataToWrite length] );
         }
     }
 //    NSLog(@"did write: %@",anObject);
 }
-
 
 
 -(void)flushLocal
@@ -164,10 +185,9 @@
 {
 //    MPWExternalFilter *filter=[self filterWithCommandString:@"tr '[a-z]' '[A-Z]'"];
     MPWExternalFilter *filter=[self filterWithCommand:@"/usr/bin/tr" args:@[@"'[a-z]'",@"'[A-Z]'"]];
-    [filter writeObject:@"hello world!"];
+    [filter writeString:@"hello world!"];
     [filter close];
     IDEXPECT( [(MPWFilter*)[filter target] target], @"HELLO WORLD!",@"upcase"); // FIXME
-    
 }
 
 

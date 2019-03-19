@@ -81,13 +81,13 @@
 
 @implementation NSDictionary(MPWFlattening)
 
--(void)flattenStructureOntoStream:(MPWFlattenStream*)aStream
+-(void)flattenOntoStream:(MPWFlattenStream*)aStream
 {
+    NSLog(@"dictionary flattenOntoStream: %@",aStream);
     [aStream writeDictionary:self];
 }
 
 @end
-
 
 
 
