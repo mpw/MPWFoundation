@@ -13,11 +13,24 @@
 
 @implementation MPWBrowser
 
+-(float)defaultMinimumColumnWidth
+{
+    return 200;
+}
+
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
     self=[super initWithFrame:frameRect];
     [self setInternalDelegate:self];
+    [self setMinColumnWidth:[self defaultMinimumColumnWidth]];
     return self;
+}
+
+-(void)setBinding:(MPWBinding*)aBinding
+{
+    self.store = aBinding.store;
+    self.rootReference = aBinding.reference;
+    [self loadColumnZero];
 }
 
 - (void)drawRect:(NSRect)dirtyRect {

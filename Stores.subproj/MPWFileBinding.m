@@ -155,6 +155,10 @@
 //    }
 //}
 
+-(NSString*)urlPath
+{
+    return [[self reference] urlPath];
+}
 
 -(MPWFDStreamSource*)source
 {

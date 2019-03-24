@@ -47,7 +47,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -(NSArray*)children
 {
-    return [self.store childrenOfReference:self.reference];
+    return [[[self class] collect] bindingWithReference:[[self.store childrenOfReference:self.reference] each] inStore:self.store];
 }
 
 -(NSURL*)URL

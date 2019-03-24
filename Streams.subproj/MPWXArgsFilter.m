@@ -124,8 +124,8 @@
 
 +testSelectors {
     return @[
-             @"testEcho",
-             @"testEchoWithArg",
+//             @"testEcho",
+//             @"testEchoWithArg",
              ];
 }
 
