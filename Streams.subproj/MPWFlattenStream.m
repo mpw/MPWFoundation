@@ -83,7 +83,7 @@
 
 -(void)flattenOntoStream:(MPWFlattenStream*)aStream
 {
-    NSLog(@"dictionary flattenOntoStream: %@",aStream);
+//    NSLog(@"dictionary flattenOntoStream: %@",aStream);
     [aStream writeDictionary:self];
 }
 

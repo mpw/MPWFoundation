@@ -124,6 +124,10 @@
     }
 }
 
+-(IBAction)dumpGraphivViz:sender
+{
+    [self.store graphViz:[MPWByteStream Stderr]];
+}
 
 @end
 

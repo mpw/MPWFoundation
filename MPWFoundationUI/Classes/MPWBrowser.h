@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly)          id <MPWReferencing> defaultRootReference;
 @property (nonatomic, weak)   IBOutlet id browserDelegate;
 
+-(IBAction)dumpGraphivViz:sender;
+
 @end
 
 NS_ASSUME_NONNULL_END
