@@ -10,5 +10,6 @@
 @interface MPWDiskStore : MPWURLBasedStore
 
 -(NSURL*)fileURLForReference:(id <MPWReferencing>)ref;
+-directoryForReference:(MPWGenericReference*)aReference;
 
 @end

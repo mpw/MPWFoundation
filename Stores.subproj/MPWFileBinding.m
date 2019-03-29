@@ -157,7 +157,7 @@
 
 -(NSString*)urlPath
 {
-    return [[self reference] urlPath];
+    return [(id)[self reference] urlPath];
 }
 
 -(MPWFDStreamSource*)source
