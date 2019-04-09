@@ -123,7 +123,7 @@
 		1F49BBBB20BBCE6B00405432 /* MPWMappingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */; };
 		1F49BBBC20BBCE6B00405432 /* MPWMappingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */; };
 		1F4FC9771DF818AE00B35D27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9761DF818AE00B35D27 /* main.m */; };
-		1F4FC97A1DF818AF00B35D27 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9791DF818AE00B35D27 /* AppDelegate.m */; };
+		1F4FC97A1DF818AF00B35D27 /* STAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9791DF818AE00B35D27 /* STAppDelegate.m */; };
 		1F4FC97D1DF818AF00B35D27 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC97C1DF818AF00B35D27 /* ViewController.m */; };
 		1F4FC9801DF818AF00B35D27 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC97E1DF818AF00B35D27 /* Main.storyboard */; };
 		1F4FC9821DF818AF00B35D27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC9811DF818AF00B35D27 /* Assets.xcassets */; };
@@ -887,8 +887,8 @@
 		1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWMappingStore.m; sourceTree = "<group>"; };
 		1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestMPWFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4FC9761DF818AE00B35D27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		1F4FC9781DF818AE00B35D27 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		1F4FC9791DF818AE00B35D27 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1F4FC9781DF818AE00B35D27 /* STAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAppDelegate.h; sourceTree = "<group>"; };
+		1F4FC9791DF818AE00B35D27 /* STAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAppDelegate.m; sourceTree = "<group>"; };
 		1F4FC97B1DF818AF00B35D27 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		1F4FC97C1DF818AF00B35D27 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		1F4FC97F1DF818AF00B35D27 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -1413,8 +1413,8 @@
 		1F4FC9741DF818AE00B35D27 /* TestMPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
-				1F4FC9781DF818AE00B35D27 /* AppDelegate.h */,
-				1F4FC9791DF818AE00B35D27 /* AppDelegate.m */,
+				1F4FC9781DF818AE00B35D27 /* STAppDelegate.h */,
+				1F4FC9791DF818AE00B35D27 /* STAppDelegate.m */,
 				1F4FC97B1DF818AF00B35D27 /* ViewController.h */,
 				1F4FC97C1DF818AF00B35D27 /* ViewController.m */,
 				1F4FC97E1DF818AF00B35D27 /* Main.storyboard */,
@@ -2287,7 +2287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F4FC97D1DF818AF00B35D27 /* ViewController.m in Sources */,
-				1F4FC97A1DF818AF00B35D27 /* AppDelegate.m in Sources */,
+				1F4FC97A1DF818AF00B35D27 /* STAppDelegate.m in Sources */,
 				1F4FC9771DF818AE00B35D27 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

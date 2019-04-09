@@ -18,7 +18,7 @@
     [theWindow setTitle:windowName];
     [theWindow setContentView:self];
     [theWindow makeKeyAndOrderFront:nil];
-    return self;
+    return theWindow;
 }
 
 +openInWindow:(NSString*)name

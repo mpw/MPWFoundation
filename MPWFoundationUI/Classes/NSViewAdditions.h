@@ -10,7 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSView(Additions)
--(void)openInWindow:(NSString*)windowName;
+-(NSWindow*)openInWindow:(NSString*)windowName;
 
 @end
 
