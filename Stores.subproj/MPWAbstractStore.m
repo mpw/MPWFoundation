@@ -84,6 +84,10 @@
     return [self mapStores:storeDescriptions].firstObject;
 }
 
+-(instancetype)initWithArray:(NSArray *)stores
+{
+    return [[self class] stores:stores];
+}
 
 -objectForReference:(MPWReference*)aReference
 {
@@ -271,6 +275,27 @@
 {
     return [self get:uri parameters:nil];
 }
+
+-at:ref
+{
+    return [self objectForReference:ref];
+}
+
+-(void)at:ref put:object
+{
+    [self setObject:object forReference:ref];
+}
+
+-(void)at:ref merge:object
+{
+    [self mergeObject:object forReference:ref];
+}
+
+-(void)deleteAt:ref
+{
+    [self deleteObjectForReference:ref];
+}
+
 
 
 @end
