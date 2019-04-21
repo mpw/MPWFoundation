@@ -92,10 +92,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)graphViz:(MPWByteStream*)aStream
 {
-    [aStream printFormat:@"%@ -> ",[self displayName]];
+    [aStream printFormat:@"%@ -> %@ [label=cache]\n",[self displayName],[self.cache displayName]];
     [self.cache graphViz:aStream];
-    [aStream printFormat:@"%@ -> ",[self displayName]];
+    [aStream printFormat:@"%@ -> %@ [label=source]\n",[self displayName],[self.source displayName]];
     [self.source graphViz:aStream];
+    [aStream printFormat:@"\n"];
 }
 
 -(void)dealloc

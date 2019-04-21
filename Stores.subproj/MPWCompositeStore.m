@@ -124,7 +124,7 @@
     IDEXPECT( [s3 graphViz], @"\"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
 
     MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
-    IDEXPECT( [s4 graphViz], @"\"MPWCachingStore\" -> \"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\"\n", @"");
+    IDEXPECT( [s4 graphViz], @"\"MPWCachingStore\" -> \"MPWDictStore\" [label=cache]\n\"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\" [label=source]\n\"MPWAbstractStore\"\n\n", @"");
 
 }
 
@@ -136,7 +136,7 @@
     MPWCompositeStore *s4=[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
     INTEXPECT( s4.stores.count , 1, @"only 1 top level store");
     NSString *gv=[s4 graphViz];
-    IDEXPECT( gv, @"\"MPWCompositeStore\"\n -> \"MPWCachingStore\" -> \"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\"\n", @"");
+    IDEXPECT( gv, @"\"MPWCompositeStore\"\n -> \"MPWCachingStore\" -> \"MPWDictStore\" [label=cache]\n\"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\" [label=source]\n\"MPWAbstractStore\"\n\n", @"");
 
 }
 
