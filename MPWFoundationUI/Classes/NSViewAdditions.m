@@ -42,7 +42,7 @@
 -openInWindow:(NSString*)windowName
 {
     NSWindow *theWindow=[[NSWindow alloc] initWithContentRect:NSMakeRect(100, 100, 500, 500)
-                                                    styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable
+                                                    styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable|NSWindowStyleMaskMiniaturizable
                                                       backing:NSBackingStoreBuffered defer:NO];
     [theWindow setTitle:windowName];
     [theWindow setContentView:self];
