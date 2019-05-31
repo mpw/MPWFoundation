@@ -42,6 +42,7 @@
 -(void)writeKey:(NSString*)aKey
 {
     [self writeString:aKey];
+    [self appendBytes:" = " length:3];
 }
 
 -(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock

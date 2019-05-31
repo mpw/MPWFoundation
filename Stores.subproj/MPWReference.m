@@ -13,6 +13,7 @@
 -(BOOL)hasTrailingSlash  {     return NO; }
 -(BOOL)isAbsolute  {     return NO; }
 -(NSArray*)pathComponents { return nil; }
+-(NSString*)name { return self.relativePathComponents.lastObject; }
 
 -(NSArray*)relativePathComponents
 {

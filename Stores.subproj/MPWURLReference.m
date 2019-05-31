@@ -49,7 +49,11 @@ CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
+#if GS_API_LATEST
+    return [self initWithPathComponents:[pathName componentsSeparatedByString:@"/"] host:nil scheme:nil];
+#else
     return [self initWithPathComponents:[[pathName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]] componentsSeparatedByString:@"/"] host:nil scheme:nil];
+#endif
 }
 
 - (id)asReference {
@@ -78,7 +82,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(NSString *)path
 {
+#if GS_API_LATEST
+    return [self urlPath];
+#else
     return [[self urlPath] stringByRemovingPercentEncoding];
+#endif
 }
 
 -(NSURL *)URL
