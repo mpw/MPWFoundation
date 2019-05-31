@@ -28,6 +28,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return self;
 }
 
+-(instancetype)init
+{
+    return [self initWithSource:nil cache:[MPWDictStore store]];
+}
+
 -(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
 {
     id result=[self.source objectForReference:aReference];
