@@ -86,6 +86,8 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWAbstractStore.m \
     Stores.subproj/MPWDictStore.m \
+    Stores.subproj/MPWDirectoryBinding.m \
+    Stores.subproj/MPWFileBinding.m \
     Stores.subproj/MPWReference.m \
     Stores.subproj/MPWGenericReference.m \
     Stores.subproj/MPWMappingStore.m \
