@@ -41,6 +41,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 +(instancetype)Stdout;
 +(instancetype)Stderr;
 +(instancetype)file:(FILE*)file;
++fd:(int)fd;
 +(instancetype)fileName:(NSString*)fileName;
 +(instancetype)null;
 
@@ -55,6 +56,8 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 -(void)println:anObject;
 -(void)print:anObject;
 -(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env;
+-(void)beginObject:anObject;
+-(void)endObject:anObject;
 
 
 #define  TARGET_APPEND( data, count)   { targetAppend( self->byteTarget, @selector(appendBytes:length:), data , count ); self->totalBytes+=count; }

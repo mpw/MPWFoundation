@@ -141,7 +141,8 @@ idAccessor(byteTarget, _setByteTarget)
 {
 	static id Stdout=nil;
 	if ( !Stdout ) {
-		Stdout = [[self streamWithTarget:[MPWStdioTarget Stdout]] retain];
+		Stdout = [[self fd:1] retain];
+        atexit_b( ^{ [Stdout close]; });
 	}
 	return Stdout;
 }
@@ -150,14 +151,15 @@ idAccessor(byteTarget, _setByteTarget)
 {
 	static id Stderr=nil;
 	if ( !Stderr ) {
-		Stderr = [[self streamWithTarget:[MPWStdioTarget Stderr]] retain];
+        Stderr = [[self fd:2] retain];
+        atexit_b( ^{ [Stderr close]; });
 	}
 	return Stderr;
 }
 
 +fd:(int)fd
 {
-	return [self streamWithTarget:[MPWFileDescriptorTarget fd:fd]];
+    return [self streamWithTarget:isatty(fd) ? [MPWFileDescriptorTarget fd:fd] : [MPWFileTarget fd:fd]];
 }
 
 +file:(FILE*)file
@@ -240,6 +242,7 @@ intAccessor( indentAmount , setIndentAmount )
 {
     [self appendBytes:"" length:1];
 }
+
 
 -(SEL)streamWriterMessage
 {
@@ -376,12 +379,29 @@ intAccessor( indentAmount , setIndentAmount )
     return [(MPWByteStream*)self.target targetLength];
 }
 
+-(void)writeKey:(NSString*)aKey
+{
+    [self writeString:aKey];
+    [self appendBytes:": " length:2];
+}
+
+
+-(void)beginObject:anObject
+{
+    [self printFormat:@"<%@:%p ",[anObject class],anObject];
+}
+
+-(void)endObject:anObject
+{
+    [self printFormat:@">"];
+}
+
+
 -(void)writeObject:anObject forKey:aKey
 {
     [self writeIndent];
-    [self writeObject:aKey];
-    [self appendBytes:" = " length:3];
-    [self writeObject:anObject];
+    [self writeKey:aKey];
+    [self writeObject:anObject ?: @"(null)"];
     [self appendBytes:";\n" length:2];
 }
 
