@@ -45,11 +45,11 @@
 
 +process:anObject;
 +(void)processAndIgnore:anObject;
--(void)writeNSObject:anObject;
 -(void)writeObjectAndClose:anObject;
 -(void)writeObject:anObject sender:sourceStream;
 -(void)writeEnumerator:e spacer:spacer;
 -(void)writeEnumerator:e;
+-(void)writeNSObject:anObject;
 -(void)writeData:(NSData*)d;
 +(instancetype)stream;
 //-(instancetype)init;

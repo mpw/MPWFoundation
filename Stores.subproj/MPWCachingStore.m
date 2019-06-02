@@ -83,8 +83,10 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)setSourceStores:(NSArray<MPWStorage> *)stores
 {
-    NSAssert1(stores.count == 2, @"number of source stores should be == 2, is %d", (int)stores.count);
-    self.cache=stores.firstObject;
+    if ( !self.cache ) {
+        NSAssert1(stores.count == 2, @"number of source stores should be == 2, is %d", (int)stores.count);
+        self.cache=stores.firstObject;
+    }
     self.source=stores.lastObject;
 }
 
