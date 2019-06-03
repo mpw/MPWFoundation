@@ -85,8 +85,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 {
     if ( !self.cache ) {
         NSAssert1(stores.count == 2, @"number of source stores should be == 2, is %d", (int)stores.count);
-        self.cache=stores.firstObject;
     }
+    self.cache=stores.firstObject;
     self.source=stores.lastObject;
 }
 
@@ -99,9 +99,9 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 -(void)graphViz:(MPWByteStream*)aStream
 {
-    [aStream printFormat:@"%@ -> %@ [label=cache]\n",[self displayName],[self.cache displayName]];
+    [aStream printFormat:@"%@ -> %@ [label=cache]\n",[self graphVizName],[self.cache graphVizName]];
     [self.cache graphViz:aStream];
-    [aStream printFormat:@"%@ -> %@ [label=source]\n",[self displayName],[self.source displayName]];
+    [aStream printFormat:@"%@ -> %@ [label=source]\n",[self graphVizName],[self.source graphVizName]];
     [self.source graphViz:aStream];
     [aStream printFormat:@"\n"];
 }

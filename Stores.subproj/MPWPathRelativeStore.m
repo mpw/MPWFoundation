@@ -33,7 +33,7 @@
     return [self.baseReference referenceByAppendingReference:aReference];
 }
 
--(NSString*)displayName
+-(NSString*)graphVizName
 {
     return [NSString stringWithFormat:@"\"Relative:\\n%@\"",[self.baseReference pathComponents].lastObject];
 }

@@ -86,7 +86,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(void)graphViz:(MPWByteStream*)aStream
 {
     [super graphViz:aStream];
-    [aStream printFormat:@" -> "];
+    [aStream printFormat:@" -> %@ [label=\" source \"]\n",[self.source graphVizName]];
     [self.source graphViz:aStream];
 }
 

@@ -67,7 +67,7 @@
 -(void)graphViz:(MPWByteStream*)output
 {
     for ( id filter in self.filters ) {
-        [output writeObject:[self displayName]];
+        [output writeObject:[self graphVizName]];
         [output writeObject:@" -> "];
         [filter graphViz:filter];
     }

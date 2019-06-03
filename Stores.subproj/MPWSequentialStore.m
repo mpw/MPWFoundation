@@ -61,7 +61,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 -(void)graphViz:(MPWByteStream*)aStream
 {
     for ( MPWAbstractStore *s in self.stores) {
-        [aStream printFormat:@"%@ -> ",[self displayName]];
+        [aStream printFormat:@"%@ -> ",[self graphVizName]];
         [s graphViz:aStream];
     }
 }

@@ -40,7 +40,7 @@
 
 -(void)graphViz:(MPWByteStream *)aStream
 {
-    [aStream printFormat:@"%@\n",[self displayName]];
+    [aStream printFormat:@"%@\n",[self graphVizName]];
     [aStream writeObject:@" -> "];
     [self.stores.firstObject graphViz:aStream];
 }
@@ -121,7 +121,7 @@
 +(void)testGraphVizOutput
 {
     MPWMappingStore *s3=[MPWMappingStore stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
-    IDEXPECT( [s3 graphViz], @"\"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
+    IDEXPECT( [s3 graphViz], @"\"MPWMappingStore\"\n -> \"MPWAbstractStore\" [label=\" source \"]\n\"MPWAbstractStore\"\n", @"");
 
     MPWCachingStore *s4=[MPWCachingStore stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
     IDEXPECT( [s4 graphViz], @"\"MPWCachingStore\" -> \"MPWDictStore\" [label=cache]\n\"MPWDictStore\"\n\"MPWCachingStore\" -> \"MPWAbstractStore\" [label=source]\n\"MPWAbstractStore\"\n\n", @"");
@@ -131,7 +131,7 @@
 +(void)testGraphVizOutputForCompositeStore
 {
     MPWCompositeStore *s3=[self stores:@[ [MPWMappingStore class], [MPWAbstractStore class]]];
-    IDEXPECT( [s3 graphViz], @"\"MPWCompositeStore\"\n -> \"MPWMappingStore\"\n -> \"MPWAbstractStore\"\n", @"");
+    IDEXPECT( [s3 graphViz], @"\"MPWCompositeStore\"\n -> \"MPWMappingStore\"\n -> \"MPWAbstractStore\" [label=\" source \"]\n\"MPWAbstractStore\"\n", @"");
 
     MPWCompositeStore *s4=[self stores:@[ [MPWCachingStore class], @[ @[ [MPWDictStore class]] , @[ [MPWAbstractStore class]]] ]];
     INTEXPECT( s4.stores.count , 1, @"only 1 top level store");

@@ -194,7 +194,7 @@
 +testSelectors
 {
     return @[
-             @"testUpcaseViaUnixTR",
+//             @"testUpcaseViaUnixTR",
              ];
     
 }

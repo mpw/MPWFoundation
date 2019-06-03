@@ -180,9 +180,9 @@ SEL visSel;
     [self writeEnumerator:e spacer:[self defaultSpacer]];
 }
 
--(NSString*)displayName
+-(NSString*)graphVizName
 {
-    return self.name ?: [super displayName];
+    return self.name ?: [super graphVizName];
 }
 
 
@@ -241,14 +241,14 @@ SEL visSel;
     return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];
 }
 
--(NSString*)displayName
+-(NSString*)graphVizName
 {
     return self.generatedName;
 }
 
 -(void)graphViz:(MPWByteStream*)aStream
 {
-    [aStream printFormat:@"%@\n",[self displayName]];
+    [aStream printFormat:@"%@\n",[self graphVizName]];
 }
 
 -(NSString*)graphViz

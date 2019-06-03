@@ -20,7 +20,7 @@
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;
 
 @optional
--(NSString*)displayName;
+-(NSString*)graphVizName;
 -(void)graphViz:(MPWByteStream*)aStream;
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;

@@ -31,7 +31,7 @@
 
 -(void)graphViz:(MPWByteStream*)aStream;
 -(NSString*)graphViz;
--(NSString*)displayName;
+-(NSString*)graphVizName;
 
 @end
 

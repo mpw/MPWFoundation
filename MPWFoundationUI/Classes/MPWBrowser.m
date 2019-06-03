@@ -129,6 +129,17 @@
     [self.store graphViz:[MPWByteStream Stderr]];
 }
 
+
+-(IBAction)showArchitecture:sender
+{
+    NSString *s=[self.store graphViz];
+    NSString *full=[NSString stringWithFormat:@"digraph {   node [shape=rect style=rounded] %@ } ",s];
+    id view = [NSClassFromString(@"MPWGraphVizView") new];
+    [view openInWindow:@"Architecture"];
+    [view setDot:full];
+}
+
+
 @end
 
 @implementation MPWBrowser(testing)

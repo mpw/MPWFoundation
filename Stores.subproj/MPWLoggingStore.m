@@ -37,6 +37,15 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbDELETE]];
 }
 
+-(void)graphViz:(MPWByteStream*)aStream
+{
+    [super graphViz:aStream];
+    [aStream printFormat:@"%@\n",[self graphVizName]];
+    [aStream printFormat:@" -> %@ [label=log] ",[self.log graphVizName]];
+    [self.log graphViz:aStream];
+}
+
+
 -(void)dealloc
 {
     [_log release];

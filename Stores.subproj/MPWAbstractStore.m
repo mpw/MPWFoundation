@@ -157,7 +157,7 @@
     return [NSString stringWithFormat:@"\"%@\"",[[NSStringFromClass(self.class) componentsSeparatedByString:@"."] lastObject]];
 }
 
--(NSString*)displayName
+-(NSString*)graphVizName
 {
     return self.name ?: self.generatedName;
 }
@@ -171,7 +171,7 @@
 
 -(void)graphViz:(MPWByteStream*)aStream
 {
-    [aStream printFormat:@"%@\n",[self displayName]];
+    [aStream printFormat:@"%@\n",[self graphVizName]];
 }
 
 -(NSString*)graphViz
