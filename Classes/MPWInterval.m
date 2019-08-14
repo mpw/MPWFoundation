@@ -66,7 +66,22 @@ longAccessor( step, _setStep )
 	[self _setStep:newVar];
 }
 
-scalarAccessor( Class, numberClass ,setNumberClass )
+
+scalarAccessor( Class, numberClass ,_setNumberClass )
+
+-(void)setNumberClass:(Class)newClass
+{
+    static id avoid=nil;
+    static id replace=nil;
+    if (!avoid) {
+        avoid=NSClassFromString(@"__NSCFNumber");
+        replace=[NSNumber class];
+    }
+    if (newClass==avoid) {
+        newClass=replace;
+    }
+    [self _setNumberClass:newClass];
+}
 
 +intervalFrom:newFrom to:newTo 
 {
@@ -135,7 +150,7 @@ scalarAccessor( Class, numberClass ,setNumberClass )
 	id value=nil;
 	id pool=[NSAutoreleasePool new];
 	for (long i=FROM;i<=TO;i+=step ) {
-		value = [aBlock value:@(i)];
+        value = [aBlock value:[numberClass numberWithLong:i]];
 		if ( i % 100 == 0 ) {
 			[pool release];
 			pool=[NSAutoreleasePool new];
@@ -196,7 +211,7 @@ scalarAccessor( Class, numberClass ,setNumberClass )
 
 -objectAtIndex:(NSUInteger)anIndex
 {
-	return [NSNumber numberWithLong:[self integerAtIndex:anIndex]];
+	return [numberClass numberWithLong:[self integerAtIndex:anIndex]];
 }
 
 -description 
@@ -391,6 +406,7 @@ longAccessor( current, setCurrent )
     [self setTo:[interval to]];
     [self setStep:[interval step]];
     [self setCurrent:[self from]];
+    [self setNumberClass:[interval numberClass]];
     return self;
 }
 +enumeratorWithInterval:(MPWInterval*)interval
@@ -406,7 +422,7 @@ longAccessor( current, setCurrent )
 {
     id retval=nil;
     if ( ![self isAtEnd] ) {
-        retval=[NSNumber numberWithLong:current];
+        retval=[numberClass numberWithLong:current];
         current+=step;
     }
     return retval;
