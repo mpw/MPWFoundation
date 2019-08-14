@@ -32,6 +32,10 @@
     return [self dataUsingEncoding:NSUTF8StringEncoding];
 }
 
+-(BOOL)writeToURL:(NSURL*)url options:(long)option error:(NSError**)error
+{
+    return [[self asData] writeToURL:url options:option error:error];
+}
 
 -(NSString*)uniquedByNumberingInPool:(NSSet*)otherStrings
 {
