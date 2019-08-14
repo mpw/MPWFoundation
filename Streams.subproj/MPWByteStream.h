@@ -16,12 +16,12 @@
 -(void)printf:(NSString*)format,...;
 -(void)printLine:(NSString*)format,...;
 -(void)printFormat:(NSString*)format,...;
--(NSUInteger)length;
 -(void)writeNewline;
 -(void)writeSpace;
 -(void)writeTab;
 -(void)writeNull;
 -(void)writeCString:(const char*)cString;
+-(NSUInteger)length;
 
 @end
 
@@ -35,6 +35,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
     int indent;
 	int indentAmount;
     id  byteTarget;
+    NSMutableSet *alreadySeen;
 }
 
 +(NSString*)makeString:anObject;

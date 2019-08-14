@@ -9,7 +9,8 @@
 #import "MPWIgnoreUnknownTrampoline.h"
 #include <fcntl.h>
 #include <unistd.h>
-
+#import <objc/message.h>
+#import <objc/runtime.h>
 
 @interface NSString(fastCString)
 
@@ -89,6 +90,7 @@ idAccessor(byteTarget, _setByteTarget)
     self=[super initWithTarget:nil];
     [self setByteTarget:aTarget];
     [self setIndentAmount:4];
+    alreadySeen = [[NSMutableSet alloc] init];
 
     return self;
 }
@@ -279,23 +281,29 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)outputString:(NSString*)aString
 {
 #define MAXLEN 8192
+    const char *keyptr=CFStringGetCStringPtr( (CFStringRef)aString, kCFStringEncodingUTF8);
+    if ( keyptr) {
+        NSUInteger keylen=CFStringGetLength( (CFStringRef)aString);
+        TARGET_APPEND( (char*)keyptr, keylen);
+    } else {
+        char buffer[MAXLEN];
+        long length=[aString length];
+        NSRange range={0,length};
+        NSRange remainingRange;
 
-    char buffer[MAXLEN];
-    long length=[aString length];
-    NSRange range={0,length};
-    NSRange remainingRange;
-
-    while (range.length > 0) {
-        NSUInteger usedBufferCount;
-        [aString getBytes:buffer maxLength:MAXLEN
-               usedLength:&usedBufferCount
-                 encoding:[self outputEncoding]
-                  options:0
-                    range:range
-           remainingRange:&remainingRange];
-        TARGET_APPEND(buffer, usedBufferCount);
-        range=remainingRange;
+        while (range.length > 0) {
+            NSUInteger usedBufferCount;
+            [aString getBytes:buffer maxLength:MAXLEN
+                   usedLength:&usedBufferCount
+                     encoding:[self outputEncoding]
+                      options:0
+                        range:range
+               remainingRange:&remainingRange];
+            TARGET_APPEND(buffer, usedBufferCount);
+            range=remainingRange;
+        }
     }
+
 }
 
 -(void)writeString:(NSString*)string
@@ -388,13 +396,34 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)beginObject:anObject
 {
-    [self printFormat:@"<%@:%p ",[anObject class],anObject];
+    FORWARDCHARS("<");
+    const char *className=object_getClassName(anObject);
+    TARGET_APPEND( className, strlen(className) );
+    FORWARDCHARS(":");
+//    [self printFormat:@"<%@:%p ",[anObject class],anObject];
 }
 
 -(void)endObject:anObject
 {
-    [self printFormat:@">"];
+    FORWARDCHARS(">");
 }
+
+#if 0
+-(void)writeObject:anObject sender:sender
+{
+    @autoreleasepool {
+        NSValue *p=[NSValue valueWithPointer:anObject];
+        if ( ![alreadySeen containsObject:p]) {
+            [alreadySeen addObject:p];
+            [super writeObject:anObject sender:sender];
+            [alreadySeen removeObject:p];
+        } else {
+            [self printFormat:@"<Already seen: %@:%p>",[anObject class],anObject];
+        }
+    }
+
+}
+#endif
 
 
 -(void)writeObject:anObject forKey:aKey
@@ -473,6 +502,7 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)dealloc
 {
     [byteTarget release];
+    [alreadySeen release];
     [super dealloc];
 }
 
@@ -487,15 +517,30 @@ intAccessor( indentAmount , setIndentAmount )
     [[byteTarget ifResponds] closeLocal];
 }
 
+typedef void (*IMPVID1)(id, SEL, id);
+
++(void)initialize
+{
+    SEL superSelector = @selector(flattenStructureOntoStream:);
+    SEL mySelector = @selector(writeOnByteStream:);
+
+    if ( ![self instancesRespondToSelector:mySelector]) {
+        IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id stream ){
+            ((IMPVID1)objc_msgSend)(blockSelf, superSelector , stream); }
+                                               );
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+        class_addMethod([NSObject class], mySelector, theImp, "v@:@");
+#pragma clang diagnostic pop
+    }
+
+}
+
 @end
 
 
-@implementation NSObject(ByteStreaming)
+@implementation NSObject(ByteAppending)
 
--(void)writeOnByteStream:(MPWByteStream*)aStream
-{
-    [self flattenStructureOntoStream:aStream];
-}
 
 -(void)appendBytes:(const void*)bytes length:(long)len
 {
@@ -965,7 +1010,8 @@ intAccessor( fd, setFd )
     NSMutableString *result=[NSMutableString string];
     MPWByteStream* stream=[self streamWithTarget:result];
     MPWDictStore *store=[MPWDictStore store];
-    store[@"var"]=@"World!";
+    id ref=[store referenceForPath:@"var"];
+    store[ref]=@"World!";
     [stream writeInterpolatedString:@"Hello {var}" withEnvironment:store];
     IDEXPECT(result,@"Hello World!",@"result of interpolating");
 }
@@ -975,7 +1021,8 @@ intAccessor( fd, setFd )
     NSMutableString *result=[NSMutableString string];
     MPWByteStream* stream=[self streamWithTarget:result];
     MPWDictStore *store=[MPWDictStore store];
-    store[@"var"]=@"cruel";
+    id ref=[store referenceForPath:@"var"];
+    store[ref]=@"cruel";
     [stream writeInterpolatedString:@"Hello {var} world!" withEnvironment:store];
     IDEXPECT(result,@"Hello cruel world!",@"result of interpolating");
 }
@@ -985,8 +1032,10 @@ intAccessor( fd, setFd )
     NSMutableString *result=[NSMutableString string];
     MPWByteStream* stream=[self streamWithTarget:result];
     MPWDictStore *store=[MPWDictStore store];
-    store[@"var"]=@"cruel";
-    store[@"var2"]=@"world";
+    id ref1=[store referenceForPath:@"var"];
+    id ref2=[store referenceForPath:@"var2"];
+    store[ref1]=@"cruel";
+    store[ref2]=@"world";
     [stream writeInterpolatedString:@"Hello {var} {var2}!" withEnvironment:store];
     IDEXPECT(result,@"Hello cruel world!",@"result of interpolating");
 }

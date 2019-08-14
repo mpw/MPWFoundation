@@ -10,12 +10,7 @@
 #import "AccessorMacros.h"
 
 @implementation MPWPListBuilder
-{
-    id	plist;
-    id  containerStack[1000];
-    id  *tos;
-    id	key;
-}
+
 
 idAccessor( key , setKey )
 idAccessor( plist , setPlist )
