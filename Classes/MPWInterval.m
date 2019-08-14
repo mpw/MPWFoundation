@@ -231,19 +231,23 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 	return &range;
 }
 
-#define defineArithOp( opName  ) \
+#define defineArithOp( opName , adjustStep ) \
 -(id)opName:other {\
    NSNumber *from1=[@(FROM) opName: other];\
    NSNumber *to1=[@(TO) opName: other];\
-   MPWInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:@([self step])];\
+   NSNumber *step1=@([self step]);\
+   if ( adjustStep ) { \
+      step1 = [step1 opName: other]; \
+    } \
+   MPWInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:step1];\
    return newInterval;\
 }\
 
 
-defineArithOp( add )
-defineArithOp( mul)
-defineArithOp( sub)
-defineArithOp( div )
+defineArithOp( add, false )
+defineArithOp( mul, true)
+defineArithOp( sub, false)
+defineArithOp( div, true )
 
 
 
