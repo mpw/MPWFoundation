@@ -19,6 +19,11 @@
 
 @synthesize schemeName;
 
+-copyWithZone:(NSZone*)azone
+{
+    return [self retain];
+}
+
 -(NSArray*)componentsOfPath:(NSString*)path
 {
     NSArray *components = [path componentsSeparatedByString:@"/"];
@@ -97,6 +102,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 -(BOOL)isEqual:other
 {
     return [[self pathComponents] isEqual:[other pathComponents]];
+}
+
+-(NSUInteger)hash
+{
+    return [[self pathComponents] hash];
 }
 
 

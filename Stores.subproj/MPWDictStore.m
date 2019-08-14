@@ -33,7 +33,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -referenceToKey:(MPWReference*)ref
 {
-    return [ref stringValue];
+    return ref;
 }
 
 -objectForReference:(MPWReference*)aReference
@@ -85,7 +85,6 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     EXPECTNIL([store objectForReference:ref], @"shouldn't be there before I store it");
     [store setObject:@"Hello" forReference:ref];
     IDEXPECT([store objectForReference:ref], @"Hello", @"should be there after I store it");
-    IDEXPECT([store objectForReference:(id <MPWReferencing>)path], @"Hello", @"should be there after I store it");
 }
 
 +(void)testSubscripts

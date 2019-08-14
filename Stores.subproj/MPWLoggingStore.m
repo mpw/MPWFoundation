@@ -9,6 +9,7 @@
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
 #import "MPWRESTOperation.h"
+#import "MPWByteStream.h"
 
 @implementation MPWLoggingStore
 

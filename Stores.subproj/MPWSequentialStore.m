@@ -83,24 +83,25 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 
 +(void)testBasicAccessCombinations
 {
-    MPWDictStore *d1=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
-                      @{
-                        @"key1": @"value11",
-                        @"key2": @"value21",
-                        @"key3": @"value3",
-
-                        }];
-    MPWDictStore *d2=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
-                      @{
-                        @"key1": @"value12",
-                        @"key2": @"value22",
-                        @"key4": @"value4",
-
-                        }];
     MPWGenericReference *r1=[MPWGenericReference referenceWithPath:@"key1"];
     MPWGenericReference *r2=[MPWGenericReference referenceWithPath:@"key2"];
     MPWGenericReference *r3=[MPWGenericReference referenceWithPath:@"key3"];
     MPWGenericReference *r4=[MPWGenericReference referenceWithPath:@"key4"];
+
+    MPWDictStore *d1=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
+                      @{
+                        r1: @"value11",
+                        r2: @"value21",
+                        r3: @"value3",
+
+                        }];
+    MPWDictStore *d2=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
+                      @{
+                        r1: @"value12",
+                        r2: @"value22",
+                        r4: @"value4",
+
+                        }];
 
     MPWSequentialStore *onlyFirst=[self storeWithStores:@[d1]];
     IDEXPECT( onlyFirst[r1], @"value11", @"" );
@@ -125,14 +126,15 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 
 +(void)testStoreOnlyAffectsFirst
 {
+    MPWGenericReference *r1=[MPWGenericReference referenceWithPath:@"key1"];
+    MPWGenericReference *r2=[MPWGenericReference referenceWithPath:@"key2"];
+
     MPWDictStore *d1=[MPWDictStore store];
     MPWDictStore *d2=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
                       @{
-                        @"key1": @"value1",
+                        r1: @"value1",
                         
                         }];
-    MPWGenericReference *r1=[MPWGenericReference referenceWithPath:@"key1"];
-    MPWGenericReference *r2=[MPWGenericReference referenceWithPath:@"key2"];
 
     MPWSequentialStore *s=[self storeWithStores:@[d1,d2]];
     IDEXPECT( s[r1], @"value1", @"read");

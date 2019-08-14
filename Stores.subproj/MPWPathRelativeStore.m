@@ -56,11 +56,12 @@
 {
     MPWGenericReference *prefix=[MPWGenericReference referenceWithPath:@"base"];
     MPWGenericReference *relative=[MPWGenericReference referenceWithPath:@"relative"];
+    MPWGenericReference *combined=[MPWGenericReference referenceWithPath:@"base/relative"];
     MPWDictStore *store=[MPWDictStore store];
     MPWMappingStore *mapper=[self storeWithSource:store reference:prefix];
     mapper[(id)relative]=@"world!";
-    IDEXPECT( store[@"base/relative"], @"world!", @"store write mapper")
-    store[@"base/relative"]=@"new world!";
+    IDEXPECT( store[combined], @"world!", @"store write mapper")
+    store[combined]=@"new world!";
     IDEXPECT( mapper[(id)relative], @"new world!", @"store read mapper")
 }
 

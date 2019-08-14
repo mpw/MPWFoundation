@@ -7,7 +7,7 @@
 
 #import "MPWReference.h"
 
-@interface MPWGenericReference : MPWReference <MPWReferencing,MPWReferenceCreation>
+@interface MPWGenericReference : MPWReference <MPWReferencing,MPWReferenceCreation,NSCopying>
 
 -(void)setPath:(NSString*)path;         // legacy/compatibility
 -(NSString*)identifierName;
