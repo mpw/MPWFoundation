@@ -398,7 +398,7 @@ intAccessor( indentAmount , setIndentAmount )
 {
     FORWARDCHARS("<");
     const char *className=object_getClassName(anObject);
-    TARGET_APPEND( className, strlen(className) );
+    TARGET_APPEND( (char*)className, strlen(className) );
     FORWARDCHARS(":");
 //    [self printFormat:@"<%@:%p ",[anObject class],anObject];
 }

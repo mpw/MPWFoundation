@@ -117,7 +117,7 @@ static void __forwardStart0( MPWTrampoline* target, SEL selector )
 
 #ifndef GS_API_LATEST
 
-+(BOOL)resolveInstanceMethod:(SEL)selector
++(BOOL)resolveInstanceMethod_disabled:(SEL)selector
 {
     if ( !strchr(sel_getName(selector), ':')) {
         class_addMethod(self, selector, (IMP)__forwardStart0, "@@:");

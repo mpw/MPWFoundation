@@ -24,6 +24,11 @@
     return [self retain];
 }
 
+-(BOOL)hasChildren
+{
+    return NO;
+}
+
 -(NSArray*)componentsOfPath:(NSString*)path
 {
     NSArray *components = [path componentsSeparatedByString:@"/"];

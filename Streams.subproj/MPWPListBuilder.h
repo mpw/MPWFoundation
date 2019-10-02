@@ -19,7 +19,6 @@
 -(void)writeNumber:aNumber;
 -(void)writeObject:anObject forKey:aKey;
 
-
 @end
 
 

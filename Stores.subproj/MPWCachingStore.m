@@ -28,6 +28,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
     return self;
 }
 
+CONVENIENCEANDINIT(store, WithSource:newSource )
+{
+    return [self initWithSource:newSource cache:[MPWDictStore store]];
+}
+
 -(instancetype)init
 {
     return [self initWithSource:nil cache:[MPWDictStore store]];

@@ -39,9 +39,14 @@
 
 @implementation NSView(Additions)
 
+-(NSRect)defaultWindowRect
+{
+    return NSMakeRect(50, 50, 1200, 800);
+}
+
 -openInWindow:(NSString*)windowName
 {
-    NSWindow *theWindow=[[NSWindow alloc] initWithContentRect:NSMakeRect(100, 100, 500, 500)
+    NSWindow *theWindow=[[NSWindow alloc] initWithContentRect:[self defaultWindowRect]
                                                     styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable|NSWindowStyleMaskMiniaturizable
                                                       backing:NSBackingStoreBuffered defer:NO];
     [theWindow setTitle:windowName];
