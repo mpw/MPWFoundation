@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWBrowser : NSBrowser
 
++(instancetype)on:aStore;
+
 @property (nonatomic, strong) id <MPWHierarchicalStorage> store;
 @property (readonly)          id <MPWReferencing> currentReference;
 @property (nonatomic, strong) id <MPWReferencing> rootReference;

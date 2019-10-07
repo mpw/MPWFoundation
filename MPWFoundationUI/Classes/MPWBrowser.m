@@ -26,6 +26,13 @@
     return self;
 }
 
++(instancetype)on:aStore
+{
+    MPWBrowser *browser=[[self new] autorelease];
+    [browser setStore:aStore];
+    return browser;
+}
+
 -(void)setBinding:(MPWBinding*)aBinding
 {
     self.store = aBinding.store;
