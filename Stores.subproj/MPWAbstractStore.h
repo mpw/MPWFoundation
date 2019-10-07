@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWReferencing;
-@class MPWReference,MPWGenericReference,MPWByteStream;
+@class MPWReference,MPWGenericReference,MPWByteStream,MPWDirectoryBinding;
 
 
 @protocol MPWStorage <NSObject>
@@ -56,6 +56,7 @@
 
 -(void)setSourceStores:(NSArray <MPWStorage>*)stores;
 -(void)setStoreDict:(NSDictionary*)storeDict;
+-(MPWDirectoryBinding*)listForNames:(NSArray*)nameList;
 
 
 -(void)graphViz:(MPWByteStream*)aStream;

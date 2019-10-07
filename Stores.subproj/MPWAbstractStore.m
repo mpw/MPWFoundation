@@ -129,6 +129,8 @@
     return ![self hasChildren:aReference];
 }
 
+
+
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     id maybeChildren = [self objectForReference:aReference];
@@ -151,6 +153,10 @@
     return [aReference URL];
 }
 
+-(MPWDirectoryBinding*)listForNames:(NSArray*)nameList
+{
+    return [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericReference collect] referenceWithPath:[nameList each]]] autorelease];
+}
 
 -(NSString*)generatedName
 {
