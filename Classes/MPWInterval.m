@@ -444,12 +444,30 @@ longAccessor( current, setCurrent )
 
 -do:aBlock with:target
 {
-	id value=nil;
-	for (long i=0,max=[self count];i<max;i++ ) {
-		value = [aBlock value:[self objectAtIndex:i]];
-		[target addObject:value];
-	}
-	return target ? target : value;
+    id value=nil;
+    for (long i=0,max=[self count];i<max;i++ ) {
+        value = [aBlock value:[self objectAtIndex:i]];
+        [target addObject:value];
+    }
+    return target ? target : value;
+}
+
+-select:aBlock with:target
+{
+    id value=nil;
+    for (long i=0,max=[self count];i<max;i++ ) {
+        id obj=[self objectAtIndex:i];
+        value = [aBlock value:obj];
+        if ([value intValue]) {
+            [target addObject:obj];
+        }
+    }
+    return target;
+}
+
+-select:aBlock
+{
+    return [self select:aBlock with:[NSMutableArray array]];
 }
 
 -collect:aBlock
