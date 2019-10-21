@@ -27,7 +27,7 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
     return [super at:aReference];
 }
 
--objectForReference:(MPWGenericReference*)aReference
+-at:(MPWGenericReference*)aReference
 {
     return [[self storeForReference:aReference] at:aReference];
 }
@@ -37,12 +37,12 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
     [[self storeForReference:aReference] put:theObject at:aReference];
 }
 
--(void)mergeObject:theObject forReference:(MPWGenericReference*)aReference
+-(void)merge:theObject at:(MPWGenericReference*)aReference
 {
     [[self storeForReference:aReference] merge:theObject at:aReference];
 }
 
--(void)deleteObjectAt:(MPWGenericReference*)aReference
+-(void)deleteAt:(MPWGenericReference*)aReference
 {
     [[self storeForReference:aReference] deleteAt:aReference];
 }

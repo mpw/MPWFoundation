@@ -243,9 +243,6 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 @implementation NSData(asData)
 
 -(NSData*)asData
-/*"
-        Return #self.
-"*/
 {
     return self;
 }
