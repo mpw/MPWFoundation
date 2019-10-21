@@ -9,6 +9,7 @@
 #import "MPWGenericReference.h"
 #import "AccessorMacros.h"
 #import "MPWByteStream.h"
+#import "MPWDirectoryBinding.h"
 
 @implementation MPWMappingStore
 
@@ -35,24 +36,24 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return anObject;
 }
 
--objectForReference:(id <MPWReferencing>)aReference
+-at:(id <MPWReferencing>)aReference
 {
-    return [self mapRetrievedObject:[self.source objectForReference:[self mapReference:aReference]] forReference:aReference];
+    return [self mapRetrievedObject:[self.source at:[self mapReference:aReference]] forReference:aReference];
 }
 
--(void)setObject:theObject forReference:(id <MPWReferencing>)aReference
+-(void)put:theObject at:(id <MPWReferencing>)aReference
 {
-    [self.source setObject:[self mapObjectToStore:theObject forReference:aReference] forReference:[self mapReference:aReference]];
+    [self.source put:[self mapObjectToStore:theObject forReference:aReference] at:[self mapReference:aReference]];
 }
 
--(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference
+-(void)merge:theObject at:(id <MPWReferencing>)aReference
 {
-    [self.source mergeObject:[self mapObjectToStore:theObject forReference:aReference] forReference:[self mapReference:aReference]];
+    [self.source merge:[self mapObjectToStore:theObject forReference:aReference] at:[self mapReference:aReference]];
 }
 
--(void)deleteObjectForReference:(id <MPWReferencing>)aReference
+-(void)deleteAt:(id <MPWReferencing>)aReference
 {
-    [self.source deleteObjectForReference:[self mapReference:aReference]];
+    [self.source deleteAt:[self mapReference:aReference]];
 }
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference
@@ -119,7 +120,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     IDEXPECT( mapper[@"hi"], @"there", @"read via mapper");
     mapper[@"hello"]=@"world";
     IDEXPECT( store[@"hello"], @"world", @"write via mapper");
-    [mapper deleteObjectForReference:(id <MPWReferencing>)@"hello"];
+    [mapper deleteAt:(id <MPWReferencing>)@"hello"];
     EXPECTNIL( store[@"hello"], @"original after delete via mapper");
 }
 

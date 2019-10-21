@@ -26,18 +26,18 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -value
 {
-    return [self.store objectForReference:self.reference];
+    return [self.store at:self.reference];
 }
 
 -(void)setValue:newValue
 {
-    [self.store setObject:newValue forReference:self.reference];
+    [self.store put:newValue at:self.reference];
 }
 
 
 -(void)delete
 {
-    [self.store deleteObjectForReference:self.reference];
+    [self.store deleteAt:self.reference];
 }
 
 -(BOOL)hasChildren

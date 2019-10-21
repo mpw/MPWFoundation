@@ -482,7 +482,7 @@ intAccessor( indentAmount , setIndentAmount )
 //        NSLog(@"varName: %@",varName);
         id reference = [env referenceForPath:varName];
 //        NSLog(@"reference: %@ - %@",[reference schemeName],[reference path]);
-        id value=[env objectForReference:reference];
+        id value=[env at:reference];
 //        NSLog(@"value: %@",value);
         [self writeObject:value];
         curIndex = rightBrace.location+1;

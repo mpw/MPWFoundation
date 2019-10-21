@@ -18,24 +18,24 @@
     return store;
 }
 
--(id)objectForReference:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWReferencing>)aReference
 {
-    return [self.stores.firstObject objectForReference:aReference];
+    return [self.stores.firstObject at:aReference];
 }
 
--(void)setObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+-(void)put:(id)theObject at:(id<MPWReferencing>)aReference
 {
-    [self.stores.firstObject setObject:(id)theObject forReference:aReference];
+    [self.stores.firstObject put:(id)theObject at:aReference];
 }
 
--(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWReferencing>)aReference
 {
-    [self.stores.firstObject deleteObjectForReference:aReference];
+    [self.stores.firstObject deleteAt:aReference];
 }
 
--(void)mergeObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+-(void)merge:(id)theObject at:(id<MPWReferencing>)aReference
 {
-    [self.stores.firstObject mergeObject:(id)theObject forReference:aReference];
+    [self.stores.firstObject merge:(id)theObject at:aReference];
 }
 
 -(void)graphViz:(MPWByteStream *)aStream
@@ -145,9 +145,9 @@
     MPWCompositeStore *store=[self stores:@[ [MPWDictStore class] ]];
     store[@"hi"]=@"there";
     IDEXPECT( store[@"hi"], @"there", @"set and get")
-    [store deleteObjectForReference:(id <MPWReferencing>)@"hi"];
+    [store deleteAt:(id <MPWReferencing>)@"hi"];
     EXPECTNIL( store[@"hi"], @"delete works");
-    [store mergeObject:@"world" forReference:(id <MPWReferencing>)@"hi"];
+    [store merge:@"world" at:(id <MPWReferencing>)@"hi"];
     IDEXPECT( store[@"hi"], @"world", @"merge works like set")
 }
 

@@ -13,10 +13,10 @@
 
 @protocol MPWStorage <NSObject>
 
--objectForReference:(id <MPWReferencing>)aReference;
--(void)setObject:theObject forReference:(id <MPWReferencing>)aReference;
--(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference;
--(void)deleteObjectForReference:(id <MPWReferencing>)aReference;
+-at:(id <MPWReferencing>)aReference;
+-(void)put:theObject at:(id <MPWReferencing>)aReference;
+-(void)merge:theObject at:(id <MPWReferencing>)aReference;
+-(void)deleteAt:(id <MPWReferencing>)aReference;
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;
 
 @optional

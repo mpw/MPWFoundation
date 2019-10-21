@@ -40,50 +40,50 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
 {
-    id result=[self.source objectForReference:aReference];
-    [self.cache setObject:result forReference:aReference];
+    id result=[self.source at:aReference];
+    [self.cache put:result at:aReference];
     return result;
 }
 
--objectForReference:(id <MPWReferencing>)aReference
+-at:(id <MPWReferencing>)aReference
 {
-    id result=[self.cache objectForReference:aReference];
+    id result=[self.cache at:aReference];
     if (!result ) {
         result = [self doCopyFromSourceToCache:aReference];
     }
     return result;
 }
 
--(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference
+-(void)writeToSource:newObject at:(id <MPWReferencing>)aReference
 {
     if (!self.readOnlySource) {
-        [self.source setObject:newObject forReference:aReference];
+        [self.source put:newObject at:aReference];
     }
 }
 
--(void)setObject:newObject forReference:(id <MPWReferencing>)aReference
+-(void)put:newObject at:(id <MPWReferencing>)aReference
 {
-    [self.cache setObject:newObject forReference:aReference];
-    [self writeToSource:newObject forReference:aReference];
+    [self.cache put:newObject at:aReference];
+    [self writeToSource:newObject at:aReference];
 }
 
 
--(void)mergeObject:newObject forReference:(id <MPWReferencing>)aReference
+-(void)merge:newObject at:(id <MPWReferencing>)aReference
 {
     [self doCopyFromSourceToCache:aReference];
-    [self.cache mergeObject:newObject forReference:aReference];
-    [self writeToSource:[self.cache objectForReference:aReference] forReference:aReference];
+    [self.cache merge:newObject at:aReference];
+    [self writeToSource:[self.cache at:aReference] at:aReference];
 }
 
--(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWReferencing>)aReference
 {
-    [self.cache deleteObjectForReference:aReference];
-    [self.source deleteObjectForReference:aReference];
+    [self.cache deleteAt:aReference];
+    [self.source deleteAt:aReference];
 }
 
 -(void)invalidate:(id)aRef
 {
-    [self.cache deleteObjectForReference:aRef];
+    [self.cache deleteAt:aRef];
 }
 
 -(void)setSourceStores:(NSArray<MPWStorage> *)stores
@@ -166,7 +166,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 {
     id resultFromCache = self.cache[self.key];
     EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [self.source setObject:self.value forReference:self.key];
+    [self.source put:self.value at:self.key];
     id mainResult = self.store[self.key];
     IDEXPECT( mainResult, self.value, @"reading the cache");
     resultFromCache = self.cache[self.key];
@@ -177,7 +177,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 {
     id resultFromCache = self.cache[self.key];
     EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [self.cache setObject:self.value forReference:self.key];
+    [self.cache put:self.value at:self.key];
     id resultFromSource = self.source[self.key];
     EXPECTNIL( resultFromSource , @"nothing in source");
     id mainResult = self.store[self.key];
@@ -186,22 +186,22 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(void)testWritePopulatesCacheAndSource
 {
-    [self.store setObject:self.value forReference:self.key];
-    IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
-    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
+    [self.store put:self.value at:self.key];
+    IDEXPECT( [self.source at:self.key], self.value, @"reading the source");
+    IDEXPECT( [self.cache at:self.key], self.value, @"reading the cache");
 }
 
 -(void)testWritePopulatesCacheAndSourceUnlessDontWriteIsSet
 {
     self.store.readOnlySource=YES;
-    [self.store setObject:self.value forReference:self.key];
-    EXPECTNIL( [self.source objectForReference:self.key], @"reading the source");
-    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
+    [self.store put:self.value at:self.key];
+    EXPECTNIL( [self.source at:self.key], @"reading the source");
+    IDEXPECT( [self.cache at:self.key], self.value, @"reading the cache");
 }
 
 -(void)testCanInvalidateCache
 {
-    [self.store setObject:self.value forReference:self.key];
+    [self.store put:self.value at:self.key];
     [self.store invalidate:self.key];
     EXPECTNIL( self.cache[self.key] , @"cache should be gone");
     IDEXPECT( self.source[self.key] ,self.value, @"source should still be there");
@@ -209,17 +209,17 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(void)testCanDelete
 {
-    [self.store setObject:self.value forReference:self.key];
-    [self.store deleteObjectForReference:self.key];
+    [self.store put:self.value at:self.key];
+    [self.store deleteAt:self.key];
     EXPECTNIL( self.cache[self.key] , @"cache should be gone");
     EXPECTNIL( self.source[self.key] , @"source should be gone");
 }
 
 -(void)testMergeWorksLikeStore
 {
-    [self.store mergeObject:self.value forReference:self.key];
-    IDEXPECT( [self.source objectForReference:self.key], self.value, @"reading the source");
-    IDEXPECT( [self.cache objectForReference:self.key], self.value, @"reading the cache");
+    [self.store merge:self.value at:self.key];
+    IDEXPECT( [self.source at:self.key], self.value, @"reading the source");
+    IDEXPECT( [self.cache at:self.key], self.value, @"reading the cache");
 }
 
 -(void)testMergingFetchesFirst
@@ -227,7 +227,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     self.cache = (id)[MPWMergingStore storeWithSource:self.cache];
     self.store = [[self.store class] storeWithSource:self.source cache:self.cache];
     self.source[self.key]=@"hi";
-    [self.store mergeObject:@" there" forReference:self.key];
+    [self.store merge:@" there" at:self.key];
     IDEXPECT( self.store[self.key], @"hi there",@"merging with unitialized cache");
 }
 

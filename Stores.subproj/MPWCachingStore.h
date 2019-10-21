@@ -20,7 +20,7 @@
 @property (readonly) id <MPWStorage> cache;
 @property (nonatomic) BOOL readOnlySource;
 
--(void)writeToSource:newObject forReference:(id <MPWReferencing>)aReference;
+-(void)writeToSource:newObject at:(id <MPWReferencing>)aReference;
 
 -(void)setStoreDict:(NSDictionary*)storeDict;
 

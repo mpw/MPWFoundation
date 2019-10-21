@@ -36,22 +36,22 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     return ref;
 }
 
--objectForReference:(MPWReference*)aReference
+-at:(MPWReference*)aReference
 {
     return self.dict[[self referenceToKey:aReference]];
 }
 
--(void)deleteObjectForReference:(MPWReference*)aReference
+-(void)deleteAt:(MPWReference*)aReference
 {
     [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
 
--(void)setObject:theObject forReference:(id <MPWReferencing>)aReference
+-(void)put:theObject at:(id <MPWReferencing>)aReference
 {
     if ( theObject != nil ) {
         self.dict[[self referenceToKey:(MPWReference*)aReference]]=theObject;
     } else {
-        [self deleteObjectForReference:aReference];
+        [self deleteAt:aReference];
     }
 }
 
@@ -72,9 +72,9 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
     MPWDictStore* store = [self store];
     id ref=[store referenceForPath:@"World"];
-    EXPECTNIL([store objectForReference:ref], @"shouldn't be there before I store it");
-    [store setObject:@"Hello" forReference:ref];
-    IDEXPECT([store objectForReference:ref], @"Hello", @"should be there after I store it");
+    EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
+    [store put:@"Hello" at:ref];
+    IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
 }
 
 +(void)testStoreAndRetrieveViaReference
@@ -82,9 +82,9 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     NSString *path=@"World";
     MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
     MPWDictStore* store = [self store];
-    EXPECTNIL([store objectForReference:ref], @"shouldn't be there before I store it");
-    [store setObject:@"Hello" forReference:ref];
-    IDEXPECT([store objectForReference:ref], @"Hello", @"should be there after I store it");
+    EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
+    [store put:@"Hello" at:ref];
+    IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
 }
 
 +(void)testSubscripts
@@ -102,7 +102,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     EXPECTNIL(store[ref], @"shouldn't be there before I store it");
     store[ref]=@"Hello";
     IDEXPECT(store[ref], @"Hello", @"should be there after I store it");
-    [store deleteObjectForReference:ref];
+    [store deleteAt:ref];
     EXPECTNIL(store[ref], @"shouldn't be there after delete");
 }
 

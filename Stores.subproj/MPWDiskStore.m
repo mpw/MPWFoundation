@@ -48,7 +48,7 @@
 }
 
 
--(NSData*)objectForReference:(MPWGenericReference*)aReference
+-(NSData*)at:(MPWGenericReference*)aReference
 {
     BOOL isDirectory=NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
@@ -60,7 +60,7 @@
     return nil;
 }
 
--(void)setObject:(NSData*)theObject forReference:(MPWGenericReference*)aReference
+-(void)put:(NSData*)theObject at:(MPWGenericReference*)aReference
 {
     NSError *error=nil;
     BOOL success=[theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
@@ -72,7 +72,7 @@
     }
 }
 
--(void)deleteObjectForReference:(MPWGenericReference*)aReference
+-(void)deleteAt:(MPWGenericReference*)aReference
 {
     NSString *path = [[self fileURLForReference:aReference] path];
     unlink([path fileSystemRepresentation]);

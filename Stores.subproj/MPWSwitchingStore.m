@@ -24,27 +24,27 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
 
 -(MPWAbstractStore*)storeForReference:(MPWGenericReference*)aReference
 {
-    return [super objectForReference:aReference];
+    return [super at:aReference];
 }
 
 -objectForReference:(MPWGenericReference*)aReference
 {
-    return [[self storeForReference:aReference] objectForReference:aReference];
+    return [[self storeForReference:aReference] at:aReference];
 }
 
--(void)setObject:theObject forReference:(MPWGenericReference*)aReference
+-(void)put:theObject at:(MPWGenericReference*)aReference
 {
-    [[self storeForReference:aReference] setObject:theObject forReference:aReference];
+    [[self storeForReference:aReference] put:theObject at:aReference];
 }
 
 -(void)mergeObject:theObject forReference:(MPWGenericReference*)aReference
 {
-    [[self storeForReference:aReference] mergeObject:theObject forReference:aReference];
+    [[self storeForReference:aReference] merge:theObject at:aReference];
 }
 
--(void)deleteObjectForReference:(MPWGenericReference*)aReference
+-(void)deleteObjectAt:(MPWGenericReference*)aReference
 {
-    [[self storeForReference:aReference] deleteObjectForReference:aReference];
+    [[self storeForReference:aReference] deleteAt:aReference];
 }
 
 

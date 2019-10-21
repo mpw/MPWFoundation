@@ -24,7 +24,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return result != nil;
 }
 
--(id)objectForReference:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWReferencing>)aReference
 {
     for ( MPWAbstractStore *s in self.stores) {
         id result=s[aReference];
@@ -35,20 +35,20 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return nil;
 }
 
--(void)setObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+-(void)put:(id)theObject at:(id<MPWReferencing>)aReference
 {
     self.stores.firstObject[aReference]=theObject;
 }
 
--(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWReferencing>)aReference
 {
-    [self.stores.firstObject deleteObjectForReference:aReference];
+    [self.stores.firstObject deleteAt:aReference];
 }
 
--(void)mergeObject:(id)theObject forReference:(id<MPWReferencing>)aReference
+-(void)merge:(id)theObject at:(id<MPWReferencing>)aReference
 {
-    [self setObject:[self objectForReference:aReference] forReference:aReference];
-    [self.stores.firstObject mergeObject:theObject forReference:aReference];
+    [self put:[self at:aReference] at:aReference];
+    [self.stores.firstObject merge:theObject at:aReference];
 }
 
 -(void)setSourceStores:(NSArray<MPWStorage> *)stores
@@ -161,7 +161,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     IDEXPECT( first[@"key"], @"value", @"did store");
     EXPECTNIL( second[@"key"],@"second");
 
-    [store deleteObjectForReference:(id<MPWReferencing>)@"key"];
+    [store deleteAt:(id<MPWReferencing>)@"key"];
     EXPECTNIL(store[@"key"],@"after delete" );
 
 }

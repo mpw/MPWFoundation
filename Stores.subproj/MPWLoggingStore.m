@@ -22,19 +22,19 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 
 -(void)setObject:anObject forReference:(id<MPWReferencing>)aReference
 {
-    [super setObject:anObject forReference:aReference];
+    [super put:anObject at:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
 }
 
--(void)mergeObject:anObject forReference:(id<MPWReferencing>)aReference
+-(void)merge:anObject at:(id<MPWReferencing>)aReference
 {
-    [super mergeObject:anObject forReference:aReference];
+    [super merge:anObject at:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPATCH]];
 }
 
--(void)deleteObjectForReference:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWReferencing>)aReference
 {
-    [super deleteObjectForReference:aReference];
+    [super deleteAt:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbDELETE]];
 }
 
@@ -80,7 +80,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     NSMutableArray *theLog=[NSMutableArray array];
     MPWGenericReference *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
-    [store deleteObjectForReference:ref];
+    [store deleteAt:ref];
     INTEXPECT(theLog.count,1,@"should have logged delete");
     IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"DELETE",@"got the verb");
@@ -91,7 +91,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     NSMutableArray *theLog=[NSMutableArray array];
     MPWGenericReference *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
-    [store mergeObject:@"hi" forReference:ref];
+    [store merge:@"hi" at:ref];
     INTEXPECT(theLog.count,1,@"should have logged merge");
     IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"PATCH",@"got the verb");

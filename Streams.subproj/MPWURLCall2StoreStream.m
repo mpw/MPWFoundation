@@ -23,7 +23,7 @@
 
 -(void)writeObject:(MPWURLCall*)aCall sender:aSender
 {
-    [self.store mergeObject:aCall.processedObject forReference:aCall.reference];
+    [self.store merge:aCall.processedObject at:aCall.reference];
 }
 
 -(void)dealloc

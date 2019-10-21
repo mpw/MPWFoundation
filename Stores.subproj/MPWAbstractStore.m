@@ -11,7 +11,7 @@
 #import "MPWByteStream.h"
 #import "MPWWriteStream.h"
 #import "MPWDirectoryBinding.h"
-
+#import "NSObjectFiltering.h"
 
 @interface NSArray(unique)
 
@@ -89,22 +89,22 @@
     return [[self class] stores:stores];
 }
 
--objectForReference:(MPWReference*)aReference
+-at:(MPWReference*)aReference
 {
     return nil;
 }
 
--(void)setObject:theObject forReference:(MPWReference*)aReference
+-(void)put:theObject at:(MPWReference*)aReference
 {
     return ;
 }
 
--(void)mergeObject:theObject forReference:(id <MPWReferencing>)aReference
+-(void)merge:theObject at:(id <MPWReferencing>)aReference
 {
-    [self setObject:theObject forReference:aReference];
+    [self put:theObject at:aReference];
 }
 
--(void)deleteObjectForReference:(MPWReference*)aReference
+-(void)deleteAt:(MPWReference*)aReference
 {
     return ;
 }
@@ -116,12 +116,12 @@
 
 -objectForKeyedSubscript:key
 {
-    return [self objectForReference:key];
+    return [self at:key];
 }
 
 -(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
 {
-    [self setObject:theObject forReference:(id <MPWReferencing>)key];
+    [self put:theObject at:(id <MPWReferencing>)key];
 }
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
@@ -133,7 +133,7 @@
 
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
-    id maybeChildren = [self objectForReference:aReference];
+    id maybeChildren = [self at:aReference];
     if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
         return maybeChildren;
     } else if ( [maybeChildren respondsToSelector:@selector(contents)]) {
@@ -226,7 +226,7 @@
 
 -evaluateIdentifier:anIdentifer withContext:aContext
 {
-    id value = [self objectForReference:anIdentifer];
+    id value = [self at:anIdentifer];
     
     if ( [value respondsToSelector:@selector(isNotNil)]  && ![value isNotNil] ) {
         value=nil;
@@ -239,7 +239,7 @@
     id retval;
     @autoreleasepool {
 //        NSLog(@"will %@ get: %@",self,uriString);
-        retval = [[self objectForReference:[self referenceForPath:uriString]] retain];
+        retval = [[self at:[self referenceForPath:uriString]] retain];
 //        NSLog(@"will pop pool for %@ get: %@",self,uriString);
     }
 //    NSLog(@"did pop pool");
@@ -284,26 +284,26 @@
     return [self get:uri parameters:nil];
 }
 
--at:ref
-{
-    return [self objectForReference:ref];
-}
+//-objectForReference:ref
+//{
+//    return [self at:ref];
+//}
 
 -(void)at:ref put:object
 {
-    [self setObject:object forReference:ref];
+    [self put:object at:ref];
 }
 
--(void)at:ref merge:object
-{
-    [self mergeObject:object forReference:ref];
-}
-
--(void)deleteAt:ref
-{
-    [self deleteObjectForReference:ref];
-}
-
+//-(void)setObject:object forReference:ref
+//{
+//    [self put:object at:ref];
+//}
+//
+//-(void)mergeObject:object forReference:ref
+//{
+//    [self merge:object at:ref];
+//}
+//
 
 
 @end
