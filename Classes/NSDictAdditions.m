@@ -72,10 +72,11 @@
 	[self setObject:anObject forKey:[NSNumber numberWithInt:intKey]];
 }
 
--(id)at:aKey
-{
-    return [self objectForKey:aKey];
-}
+//-(id)at:aKey      // FIXME (maybe:  having at: as a synonym for objectForKey: interferes with at: for stores eval.)
+//{
+//    return [self objectForKey:aKey];
+//}
+
 
 -at:aKey put:anObject
 {
