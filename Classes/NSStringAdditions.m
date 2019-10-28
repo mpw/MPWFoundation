@@ -247,14 +247,6 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
     return self;
 }
 
--stringValue
-/*"
-    Returns my bytes wrapped in a #NSString.
-"*/
-{
-    return [[[NSString alloc] initWithData:self encoding:NSISOLatin1StringEncoding] autorelease];
-}
-
 @end
 @interface MPWStringExtensionTesting:NSObject
 @end
