@@ -27,7 +27,7 @@
 {
     id    plist;
     id    containerStack[1000];
-    id    *tos;
+    __unsafe_unretained id    *tos;
     id    key;
 }
 

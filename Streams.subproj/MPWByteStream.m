@@ -493,6 +493,33 @@ intAccessor( indentAmount , setIndentAmount )
 }
 
 
+typedef void (^FileBlock)(FILE *f);
+//TypeName blockName = ^returnType(parameters) {...};
+
+-(void)withFile:(FileBlock)fileBlock size:(long)size
+{
+    if ( fileBlock) {
+        char *buffer=malloc(size);
+        if (@available(macOS 10.13, *)) {
+            FILE *f=fmemopen( buffer , 8192*1024, "w+b");
+            if ( f ) {
+                fileBlock(f);
+                long length=ftell(f);
+                if (length>0) {
+                    [self appendBytes:buffer length:length];
+                }
+                fclose(f);
+            } else {
+                @throw [NSException exceptionWithName:@"internal inconsistency" reason:@"fmemopen() returned NULL" userInfo:nil];
+            }
+        } else {
+            @throw [NSException exceptionWithName:@"unsupperteed" reason:@"fmemopen() requires 10.13" userInfo:nil];
+        }
+        free(buffer);
+    }
+}
+
+
 -(NSString*)description
 {
 	return [NSString stringWithFormat:@"<%@/%p: byteTarget %@/%p",[self class],self,[self.target class],byteTarget];
@@ -518,6 +545,7 @@ intAccessor( indentAmount , setIndentAmount )
 }
 
 typedef void (*IMPVID1)(id, SEL, id);
+
 
 +(void)initialize
 {
@@ -1040,6 +1068,14 @@ intAccessor( fd, setFd )
     IDEXPECT(result,@"Hello cruel world!",@"result of interpolating");
 }
 
++(void)testAccessViaFILE
+{
+    MPWByteStream *s=[MPWByteStream stream];
+    [s withFile:^(FILE *file){
+        fprintf(file,"Hello %d",43);
+    } size:100];
+    IDEXPECT([[s target] stringValue],@"Hello 43" , @"result of fprintf-ing into the MPWByteStream");
+};
 
 +testSelectors
 {
@@ -1057,6 +1093,7 @@ intAccessor( fd, setFd )
             @"testInterpolateSimpleString",
             @"testInterpolateStringInMiddle",
             @"testInterpolateStringWithTwoVars",
+            @"testAccessViaFILE",
             ];
 }
 
