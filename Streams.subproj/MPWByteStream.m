@@ -144,7 +144,10 @@ idAccessor(byteTarget, _setByteTarget)
 	static id Stdout=nil;
 	if ( !Stdout ) {
 		Stdout = [[self fd:1] retain];
+#if GS_API_LATEST
+#else
         atexit_b( ^{ [Stdout close]; });
+#endif
 	}
 	return Stdout;
 }
@@ -154,7 +157,10 @@ idAccessor(byteTarget, _setByteTarget)
 	static id Stderr=nil;
 	if ( !Stderr ) {
         Stderr = [[self fd:2] retain];
+#if GS_API_LATEST
+#else
         atexit_b( ^{ [Stderr close]; });
+#endif
 	}
 	return Stderr;
 }
@@ -278,6 +284,15 @@ intAccessor( indentAmount , setIndentAmount )
     return NSUTF8StringEncoding;
 }
 
+#if GS_API_LATEST
+-(void)outputString:(NSString*)aString
+{
+    @autoreleasepool {
+        NSData *d=[aString asData];
+        TARGET_APPEND( [d bytes],[d length] );
+    }
+}
+#else
 -(void)outputString:(NSString*)aString
 {
 #define MAXLEN 8192
@@ -305,7 +320,7 @@ intAccessor( indentAmount , setIndentAmount )
     }
 
 }
-
+#endif
 -(void)writeString:(NSString*)string
 {
 //	NSLog(@"-[MPWByteStream writeString:%@]",string);

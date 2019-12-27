@@ -20,7 +20,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     return self;
 }
 
--(void)setObject:anObject forReference:(id<MPWReferencing>)aReference
+-(void)put:anObject at:(id<MPWReferencing>)aReference
 {
     [super put:anObject at:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
@@ -69,7 +69,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     NSMutableArray *theLog=[NSMutableArray array];
     MPWGenericReference *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
-    [store setObject:@"hi" forReference:ref];
+    [store put:@"hi" at:ref];
     INTEXPECT(theLog.count,1,@"should have logged write");
     IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"PUT",@"got the verb");
