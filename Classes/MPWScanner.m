@@ -481,7 +481,7 @@ static inline void copybuf( char *target,const char *source, long len ) {
 {
     return [NSArray arrayWithObjects:
         @"testScannerWithDefaultFile",
-        @"testLineOfTextScanning",
+            @"testLineOfTextScanning",
 		nil];
 }
 

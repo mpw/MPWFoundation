@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWReferencing;
-@class MPWReference,MPWGenericReference,MPWByteStream,MPWDirectoryBinding;
+@class MPWReference,MPWGenericReference,MPWByteStream,MPWDirectoryBinding,MPWBinding;
 
 
 @protocol MPWStorage <NSObject>
@@ -21,10 +21,13 @@
 
 @optional
 -(NSString*)graphVizName;
+-(NSString*)graphViz;
 -(void)graphViz:(MPWByteStream*)aStream;
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference;
+
+-(MPWBinding*)bindingForReference:aReference inContext:aContext;
 
 
 @end

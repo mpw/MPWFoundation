@@ -8,7 +8,7 @@
 
 #import "MPWBrowser.h"
 #import <MPWFoundation/MPWFoundation.h>
-
+#import "NSViewAdditions.h"
 
 
 @implementation MPWBrowser
@@ -143,7 +143,7 @@
     NSString *full=[NSString stringWithFormat:@"digraph {   node [shape=rect style=rounded] %@ } ",s];
     id view = [NSClassFromString(@"MPWGraphVizView") new];
     [view openInWindow:@"Architecture"];
-    [view setDot:full];
+    [view performSelector:NSSelectorFromString(@"setDot:") withObject:full];
 }
 
 
