@@ -636,6 +636,48 @@
 		1FED48E5242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
 		1FED48E6242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
 		1FED48E7242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
+		1FED48EA242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
+		1FED48EB242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
+		1FED48EC242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
+		1FED48F32426392300AF2FAD /* numericEntities.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48ED2426392300AF2FAD /* numericEntities.xml */; };
+		1FED48F42426392300AF2FAD /* numericEntities.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48ED2426392300AF2FAD /* numericEntities.xml */; };
+		1FED48F52426392300AF2FAD /* numericEntities.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48ED2426392300AF2FAD /* numericEntities.xml */; };
+		1FED48F62426392300AF2FAD /* test3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EE2426392300AF2FAD /* test3.xml */; };
+		1FED48F72426392300AF2FAD /* test3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EE2426392300AF2FAD /* test3.xml */; };
+		1FED48F82426392300AF2FAD /* test3.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EE2426392300AF2FAD /* test3.xml */; };
+		1FED48F92426392300AF2FAD /* windows-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EF2426392300AF2FAD /* windows-encoded.xml */; };
+		1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EF2426392300AF2FAD /* windows-encoded.xml */; };
+		1FED48FB2426392300AF2FAD /* windows-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48EF2426392300AF2FAD /* windows-encoded.xml */; };
+		1FED48FC2426392300AF2FAD /* iso-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F02426392300AF2FAD /* iso-encoded.xml */; };
+		1FED48FD2426392300AF2FAD /* iso-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F02426392300AF2FAD /* iso-encoded.xml */; };
+		1FED48FE2426392300AF2FAD /* iso-encoded.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F02426392300AF2FAD /* iso-encoded.xml */; };
+		1FED48FF2426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F12426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc */; };
+		1FED49002426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F12426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc */; };
+		1FED49012426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F12426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc */; };
+		1FED49022426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F22426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml */; };
+		1FED49032426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F22426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml */; };
+		1FED49042426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48F22426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml */; };
+		1FED490C2426397200AF2FAD /* nested.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49052426397200AF2FAD /* nested.xml */; };
+		1FED490D2426397200AF2FAD /* nested.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49052426397200AF2FAD /* nested.xml */; };
+		1FED490E2426397200AF2FAD /* nested.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49052426397200AF2FAD /* nested.xml */; };
+		1FED490F2426397200AF2FAD /* archiversample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49062426397200AF2FAD /* archiversample.xml */; };
+		1FED49102426397200AF2FAD /* archiversample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49062426397200AF2FAD /* archiversample.xml */; };
+		1FED49112426397200AF2FAD /* archiversample.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49062426397200AF2FAD /* archiversample.xml */; };
+		1FED49122426397200AF2FAD /* Faehre.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49072426397200AF2FAD /* Faehre.xml */; };
+		1FED49132426397200AF2FAD /* Faehre.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49072426397200AF2FAD /* Faehre.xml */; };
+		1FED49142426397200AF2FAD /* Faehre.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49072426397200AF2FAD /* Faehre.xml */; };
+		1FED49152426397200AF2FAD /* Faehre-iso.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49082426397200AF2FAD /* Faehre-iso.xml */; };
+		1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49082426397200AF2FAD /* Faehre-iso.xml */; };
+		1FED49172426397200AF2FAD /* Faehre-iso.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49082426397200AF2FAD /* Faehre-iso.xml */; };
+		1FED49182426397200AF2FAD /* test3_16bit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49092426397200AF2FAD /* test3_16bit.xml */; };
+		1FED49192426397200AF2FAD /* test3_16bit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49092426397200AF2FAD /* test3_16bit.xml */; };
+		1FED491A2426397200AF2FAD /* test3_16bit.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED49092426397200AF2FAD /* test3_16bit.xml */; };
+		1FED491B2426397200AF2FAD /* session.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490A2426397200AF2FAD /* session.xml */; };
+		1FED491C2426397200AF2FAD /* session.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490A2426397200AF2FAD /* session.xml */; };
+		1FED491D2426397200AF2FAD /* session.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490A2426397200AF2FAD /* session.xml */; };
+		1FED491E2426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
+		1FED491F2426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
+		1FED49202426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
 		1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1087,6 +1129,20 @@
 		1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlCommonMacros.h; sourceTree = "<group>"; };
 		1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlGeneratorStream.h; sourceTree = "<group>"; };
 		1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlGeneratorStream.m; sourceTree = "<group>"; };
+		1FED48E9242638D300AF2FAD /* test1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test1.xml; sourceTree = "<group>"; };
+		1FED48ED2426392300AF2FAD /* numericEntities.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = numericEntities.xml; sourceTree = "<group>"; };
+		1FED48EE2426392300AF2FAD /* test3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test3.xml; sourceTree = "<group>"; };
+		1FED48EF2426392300AF2FAD /* windows-encoded.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "windows-encoded.xml"; sourceTree = "<group>"; };
+		1FED48F02426392300AF2FAD /* iso-encoded.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "iso-encoded.xml"; sourceTree = "<group>"; };
+		1FED48F12426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc; sourceTree = "<group>"; };
+		1FED48F22426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tagconflict_disambiguated_by_namespace.xml; sourceTree = "<group>"; };
+		1FED49052426397200AF2FAD /* nested.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nested.xml; sourceTree = "<group>"; };
+		1FED49062426397200AF2FAD /* archiversample.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = archiversample.xml; sourceTree = "<group>"; };
+		1FED49072426397200AF2FAD /* Faehre.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Faehre.xml; sourceTree = "<group>"; };
+		1FED49082426397200AF2FAD /* Faehre-iso.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Faehre-iso.xml"; sourceTree = "<group>"; };
+		1FED49092426397200AF2FAD /* test3_16bit.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test3_16bit.xml; sourceTree = "<group>"; };
+		1FED490A2426397200AF2FAD /* session.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = session.xml; sourceTree = "<group>"; };
+		1FED490B2426397200AF2FAD /* states.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = states.xml; sourceTree = "<group>"; };
 		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
 		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1609,6 +1665,7 @@
 		1FED489B242633F500AF2FAD /* XML */ = {
 			isa = PBXGroup;
 			children = (
+				1FED48E82426386A00AF2FAD /* XML Test Resources */,
 				1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */,
 				1FED489D242634AD00AF2FAD /* MPWMAXParser.h */,
 				1FED489C242634AD00AF2FAD /* MPWXmlParser.h */,
@@ -1630,6 +1687,27 @@
 				1FED48AC242634CC00AF2FAD /* MPWTagAction.m */,
 			);
 			path = XML;
+			sourceTree = "<group>";
+		};
+		1FED48E82426386A00AF2FAD /* XML Test Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1FED49062426397200AF2FAD /* archiversample.xml */,
+				1FED49082426397200AF2FAD /* Faehre-iso.xml */,
+				1FED49072426397200AF2FAD /* Faehre.xml */,
+				1FED49052426397200AF2FAD /* nested.xml */,
+				1FED490A2426397200AF2FAD /* session.xml */,
+				1FED490B2426397200AF2FAD /* states.xml */,
+				1FED49092426397200AF2FAD /* test3_16bit.xml */,
+				1FED48F12426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc */,
+				1FED48F02426392300AF2FAD /* iso-encoded.xml */,
+				1FED48ED2426392300AF2FAD /* numericEntities.xml */,
+				1FED48F22426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml */,
+				1FED48EE2426392300AF2FAD /* test3.xml */,
+				1FED48EF2426392300AF2FAD /* windows-encoded.xml */,
+				1FED48E9242638D300AF2FAD /* test1.xml */,
+			);
+			path = "XML Test Resources";
 			sourceTree = "<group>";
 		};
 		1FFE3A8D20B309F200E65B93 /* Stores */ = {
@@ -2346,10 +2424,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FED490D2426397200AF2FAD /* nested.xml in Resources */,
+				1FED48F72426392300AF2FAD /* test3.xml in Resources */,
+				1FED48F42426392300AF2FAD /* numericEntities.xml in Resources */,
 				1F0984B0219F23F4006D10D9 /* stops.txt in Resources */,
 				1F0984AF219F238A006D10D9 /* ResourceTest in Resources */,
+				1FED49102426397200AF2FAD /* archiversample.xml in Resources */,
+				1FED49192426397200AF2FAD /* test3_16bit.xml in Resources */,
+				1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FED48FD2426392300AF2FAD /* iso-encoded.xml in Resources */,
 				1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */,
+				1FED491F2426397200AF2FAD /* states.xml in Resources */,
+				1FED49032426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
+				1FED49132426397200AF2FAD /* Faehre.xml in Resources */,
+				1FED48EB242638D400AF2FAD /* test1.xml in Resources */,
+				1FED491C2426397200AF2FAD /* session.xml in Resources */,
 				1F0984B2219F23F4006D10D9 /* first4.tabdelim in Resources */,
+				1FED49002426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2357,6 +2449,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FED48FE2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FED49042426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
+				1FED49172426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FED49142426397200AF2FAD /* Faehre.xml in Resources */,
+				1FED49012426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
+				1FED48FB2426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED491A2426397200AF2FAD /* test3_16bit.xml in Resources */,
+				1FED490E2426397200AF2FAD /* nested.xml in Resources */,
+				1FED48F52426392300AF2FAD /* numericEntities.xml in Resources */,
+				1FED49202426397200AF2FAD /* states.xml in Resources */,
+				1FED49112426397200AF2FAD /* archiversample.xml in Resources */,
+				1FED491D2426397200AF2FAD /* session.xml in Resources */,
+				1FED48EC242638D400AF2FAD /* test1.xml in Resources */,
+				1FED48F82426392300AF2FAD /* test3.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2364,13 +2470,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FED490C2426397200AF2FAD /* nested.xml in Resources */,
+				1FED48F92426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED491E2426397200AF2FAD /* states.xml in Resources */,
+				1FED491B2426397200AF2FAD /* session.xml in Resources */,
+				1FED49022426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
+				1FED49152426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FED48EA242638D400AF2FAD /* test1.xml in Resources */,
+				1FED48FF2426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
+				1FED49122426397200AF2FAD /* Faehre.xml in Resources */,
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
+				1FED490F2426397200AF2FAD /* archiversample.xml in Resources */,
+				1FED48F32426392300AF2FAD /* numericEntities.xml in Resources */,
 				1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
 				1FBAABB91847651B00086047 /* stops.txt in Resources */,
+				1FED48FC2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FED49182426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
+				1FED48F62426392300AF2FAD /* test3.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

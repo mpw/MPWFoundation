@@ -1,0 +1,19 @@
+<stateMachine start = "idle"> 
+    <event name="doorClosed" code="D1CL"/>  
+    <event name="drawOpened" code="D2OP"/> 
+    <event name="lightOn" code="L1ON"/> 
+
+    <command name="lockPanel" code="PNLK"/> 
+    <command name="unlockDoor" code="D1UL"/> 
+
+  <state name="idle"> 
+    <transition event="doorClosed" target="active"/> 
+    <action command="unlockDoor"/> 
+    <action command="lockPanel"/> 
+  </state> 
+
+  <state name="active"> 
+    <transition event="drawOpened" target="waitingForLight"/> 
+    <transition event="lightOn" target="waitingForDraw"/> 
+  </state>
+</stateMachine> 

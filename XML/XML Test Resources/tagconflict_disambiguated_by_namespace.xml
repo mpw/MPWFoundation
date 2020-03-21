@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toplevel xmlns:ns1="http://metaobject.com/ns1"
+	xmlns:ns2="http://metaobject.com/ns2">
+<ns2:title>First Title</ns2:title>
+<ns1:title>Second Title</ns1:title>
+</toplevel>

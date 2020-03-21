@@ -1,0 +1,24 @@
+<SessionInfo version="3" ID="10948027285">
+  <Name>09.03.2008 02:46:44 PM</Name>
+  <Duration>2556834</Duration>
+  <StartTime>10948027285</StartTime>
+  <EndTime>10950584119</EndTime>
+  <CreationTime>1220449604362</CreationTime>
+  <AudioList>
+    <AudioClip name="audio-0.aac">
+      <StartTime>10948027575</StartTime>
+      <EndTime>10950584119</EndTime>
+    </AudioClip>
+  </AudioList>
+  <StrokeList>
+    <StrokeData>
+      <SessionTimeOffset>10948027285</SessionTimeOffset>
+      <StrokeStartTime>10948027285</StrokeStartTime>
+      <StrokeEndTime>10950584119</StrokeEndTime>
+      <PageTemplateNumber>16</PageTemplateNumber>
+      <NotebookName>0xc2d51549935cbe60</NotebookName>
+      <NotebookCopy>0</NotebookCopy>
+      <NotebookArchiveRevision>0</NotebookArchiveRevision>
+    </StrokeData>
+  </StrokeList>
+</SessionInfo>
