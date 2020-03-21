@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type='text/css' href='cvslog.css'?><!DOCTYPE cvslog SYSTEM "cvslog.dtd">
+<cvslog xmlns="http://xml.apple.com/cvslog">
+	<rd:radar xmlns:rd="http://xml.apple.com/radar">
+     <rd:bugID>2920186</rd:bugID>
+     <rd:title>API/NSXMLParser: there ought to be an NSXMLParser</rd:title>
+   </rd:radar>
+</cvslog>

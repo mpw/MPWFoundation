@@ -1,0 +1,3 @@
+XHTML/UTF-8 Test PageXHTML/UTF-8 Test Page
+You can use this page to check if your browser correctly supports UTF-8 and XHTML. The web server delivers this page with the content type application/xhtml+xml.
+Umlauts and accented characters: ÄËÏÖÜäëïöü ß áéíóú âêîôû àèìòù“The quick brown fox jumps over the ‘lazy’ dog.”„Falsches Üben von ‚Xylophonmusik‘ quält jeden größeren Zwerg.“»Angle ›quotation‹ marks«n–dash em—dashEllipsis…Euro € sign中文日本語русский языкRené Puls

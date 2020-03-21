@@ -1,0 +1,1 @@
+Àccent Grave  ÄÖOpen movies in new players:  Select to open movies in a new player window; deselect to replace the movie in the current player window with the new movie.
