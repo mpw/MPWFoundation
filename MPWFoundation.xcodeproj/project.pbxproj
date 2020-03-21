@@ -678,6 +678,69 @@
 		1FED491E2426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
 		1FED491F2426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
 		1FED49202426397200AF2FAD /* states.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED490B2426397200AF2FAD /* states.xml */; };
+		1FED492224263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */; };
+		1FED492324263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */; };
+		1FED492424263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */; };
+		1FED492624263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */; };
+		1FED492724263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */; };
+		1FED492824263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */; };
+		1FED492C24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492924263CFD00AF2FAD /* simple-xml-with-namespaces.xml */; };
+		1FED492D24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492924263CFD00AF2FAD /* simple-xml-with-namespaces.xml */; };
+		1FED492E24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492924263CFD00AF2FAD /* simple-xml-with-namespaces.xml */; };
+		1FED492F24263CFE00AF2FAD /* test2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492A24263CFD00AF2FAD /* test2.xml */; };
+		1FED493024263CFE00AF2FAD /* test2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492A24263CFD00AF2FAD /* test2.xml */; };
+		1FED493124263CFE00AF2FAD /* test2.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492A24263CFD00AF2FAD /* test2.xml */; };
+		1FED493224263CFE00AF2FAD /* emptyelement.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492B24263CFE00AF2FAD /* emptyelement.xml */; };
+		1FED493324263CFE00AF2FAD /* emptyelement.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492B24263CFE00AF2FAD /* emptyelement.xml */; };
+		1FED493424263CFE00AF2FAD /* emptyelement.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED492B24263CFE00AF2FAD /* emptyelement.xml */; };
+		1FED493624263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493524263D2B00AF2FAD /* emptyElementWithAttribute.xml */; };
+		1FED493724263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493524263D2B00AF2FAD /* emptyElementWithAttribute.xml */; };
+		1FED493824263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493524263D2B00AF2FAD /* emptyElementWithAttribute.xml */; };
+		1FED493E24263D6800AF2FAD /* cdatatest1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493924263D6700AF2FAD /* cdatatest1.xml */; };
+		1FED493F24263D6800AF2FAD /* cdatatest1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493924263D6700AF2FAD /* cdatatest1.xml */; };
+		1FED494024263D6800AF2FAD /* cdatatest1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493924263D6700AF2FAD /* cdatatest1.xml */; };
+		1FED494124263D6800AF2FAD /* utf8xhtml_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493A24263D6700AF2FAD /* utf8xhtml_test.html */; };
+		1FED494224263D6800AF2FAD /* utf8xhtml_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493A24263D6700AF2FAD /* utf8xhtml_test.html */; };
+		1FED494324263D6800AF2FAD /* utf8xhtml_test.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493A24263D6700AF2FAD /* utf8xhtml_test.html */; };
+		1FED494424263D6800AF2FAD /* mojibake_utf16.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493B24263D6800AF2FAD /* mojibake_utf16.txt */; };
+		1FED494524263D6800AF2FAD /* mojibake_utf16.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493B24263D6800AF2FAD /* mojibake_utf16.txt */; };
+		1FED494624263D6800AF2FAD /* mojibake_utf16.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493B24263D6800AF2FAD /* mojibake_utf16.txt */; };
+		1FED494724263D6800AF2FAD /* c1qt12.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493C24263D6800AF2FAD /* c1qt12.html */; };
+		1FED494824263D6800AF2FAD /* c1qt12.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493C24263D6800AF2FAD /* c1qt12.html */; };
+		1FED494924263D6800AF2FAD /* c1qt12.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493C24263D6800AF2FAD /* c1qt12.html */; };
+		1FED494A24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493D24263D6800AF2FAD /* mojibake_utf8.xhtml */; };
+		1FED494B24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493D24263D6800AF2FAD /* mojibake_utf8.xhtml */; };
+		1FED494C24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED493D24263D6800AF2FAD /* mojibake_utf8.xhtml */; };
+		1FED495124263D9B00AF2FAD /* Dg-duplex.htm in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494D24263D9B00AF2FAD /* Dg-duplex.htm */; };
+		1FED495224263D9B00AF2FAD /* Dg-duplex.htm in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494D24263D9B00AF2FAD /* Dg-duplex.htm */; };
+		1FED495324263D9C00AF2FAD /* Dg-duplex.htm in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494D24263D9B00AF2FAD /* Dg-duplex.htm */; };
+		1FED495424263D9C00AF2FAD /* accent_grave.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494E24263D9B00AF2FAD /* accent_grave.html */; };
+		1FED495524263D9C00AF2FAD /* accent_grave.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494E24263D9B00AF2FAD /* accent_grave.html */; };
+		1FED495624263D9C00AF2FAD /* accent_grave.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494E24263D9B00AF2FAD /* accent_grave.html */; };
+		1FED495724263D9C00AF2FAD /* accent_grave.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494F24263D9B00AF2FAD /* accent_grave.txt */; };
+		1FED495824263D9C00AF2FAD /* accent_grave.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494F24263D9B00AF2FAD /* accent_grave.txt */; };
+		1FED495924263D9C00AF2FAD /* accent_grave.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED494F24263D9B00AF2FAD /* accent_grave.txt */; };
+		1FED495A24263D9C00AF2FAD /* c1qt12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495024263D9B00AF2FAD /* c1qt12.txt */; };
+		1FED495B24263D9C00AF2FAD /* c1qt12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495024263D9B00AF2FAD /* c1qt12.txt */; };
+		1FED495C24263D9C00AF2FAD /* c1qt12.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495024263D9B00AF2FAD /* c1qt12.txt */; };
+		1FED495E24263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495D24263DEE00AF2FAD /* utf8xhtml_test.txt */; };
+		1FED495F24263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495D24263DEE00AF2FAD /* utf8xhtml_test.txt */; };
+		1FED496024263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FED495D24263DEE00AF2FAD /* utf8xhtml_test.txt */; };
+		1FED496624263E4F00AF2FAD /* htmlfragment_entities.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */; };
+		1FED496724263E4F00AF2FAD /* htmlfragment_entities.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */; };
+		1FED496824263E4F00AF2FAD /* htmlfragment_entities.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */; };
+		1FED496924263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496224263E4E00AF2FAD /* htmlfragment_unquoted_attr_values.html */; };
+		1FED496A24263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496224263E4E00AF2FAD /* htmlfragment_unquoted_attr_values.html */; };
+		1FED496B24263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496224263E4E00AF2FAD /* htmlfragment_unquoted_attr_values.html */; };
+		1FED496C24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */; };
+		1FED496D24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */; };
+		1FED496E24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */; };
+		1FED496F24263E4F00AF2FAD /* attrparserunonbug.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496424263E4F00AF2FAD /* attrparserunonbug.html */; };
+		1FED497024263E4F00AF2FAD /* attrparserunonbug.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496424263E4F00AF2FAD /* attrparserunonbug.html */; };
+		1FED497124263E4F00AF2FAD /* attrparserunonbug.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496424263E4F00AF2FAD /* attrparserunonbug.html */; };
+		1FED497224263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
+		1FED497324263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
+		1FED497424263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
 		1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1143,6 +1206,27 @@
 		1FED49092426397200AF2FAD /* test3_16bit.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test3_16bit.xml; sourceTree = "<group>"; };
 		1FED490A2426397200AF2FAD /* session.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = session.xml; sourceTree = "<group>"; };
 		1FED490B2426397200AF2FAD /* states.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = states.xml; sourceTree = "<group>"; };
+		1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlParserTesting.m; sourceTree = "<group>"; };
+		1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlParserTesting.h; sourceTree = "<group>"; };
+		1FED492924263CFD00AF2FAD /* simple-xml-with-namespaces.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "simple-xml-with-namespaces.xml"; sourceTree = "<group>"; };
+		1FED492A24263CFD00AF2FAD /* test2.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test2.xml; sourceTree = "<group>"; };
+		1FED492B24263CFE00AF2FAD /* emptyelement.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptyelement.xml; sourceTree = "<group>"; };
+		1FED493524263D2B00AF2FAD /* emptyElementWithAttribute.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = emptyElementWithAttribute.xml; sourceTree = "<group>"; };
+		1FED493924263D6700AF2FAD /* cdatatest1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cdatatest1.xml; sourceTree = "<group>"; };
+		1FED493A24263D6700AF2FAD /* utf8xhtml_test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = utf8xhtml_test.html; sourceTree = "<group>"; };
+		1FED493B24263D6800AF2FAD /* mojibake_utf16.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mojibake_utf16.txt; sourceTree = "<group>"; };
+		1FED493C24263D6800AF2FAD /* c1qt12.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = c1qt12.html; sourceTree = "<group>"; };
+		1FED493D24263D6800AF2FAD /* mojibake_utf8.xhtml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mojibake_utf8.xhtml; sourceTree = "<group>"; };
+		1FED494D24263D9B00AF2FAD /* Dg-duplex.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "Dg-duplex.htm"; sourceTree = "<group>"; };
+		1FED494E24263D9B00AF2FAD /* accent_grave.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = accent_grave.html; sourceTree = "<group>"; };
+		1FED494F24263D9B00AF2FAD /* accent_grave.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = accent_grave.txt; sourceTree = "<group>"; };
+		1FED495024263D9B00AF2FAD /* c1qt12.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = c1qt12.txt; sourceTree = "<group>"; };
+		1FED495D24263DEE00AF2FAD /* utf8xhtml_test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = utf8xhtml_test.txt; sourceTree = "<group>"; };
+		1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = htmlfragment_entities.html; sourceTree = "<group>"; };
+		1FED496224263E4E00AF2FAD /* htmlfragment_unquoted_attr_values.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = htmlfragment_unquoted_attr_values.html; sourceTree = "<group>"; };
+		1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = xml_comment_with_dash.xml; sourceTree = "<group>"; };
+		1FED496424263E4F00AF2FAD /* attrparserunonbug.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attrparserunonbug.html; sourceTree = "<group>"; };
+		1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = htmlfragment_attribute_no_value.html; sourceTree = "<group>"; };
 		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
 		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1685,6 +1769,8 @@
 				1FED48AB242634CC00AF2FAD /* MPWXmlElement.m */,
 				1FED48AE242634CC00AF2FAD /* MPWTagAction.h */,
 				1FED48AC242634CC00AF2FAD /* MPWTagAction.m */,
+				1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */,
+				1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */,
 			);
 			path = XML;
 			sourceTree = "<group>";
@@ -1692,6 +1778,25 @@
 		1FED48E82426386A00AF2FAD /* XML Test Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1FED496424263E4F00AF2FAD /* attrparserunonbug.html */,
+				1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */,
+				1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */,
+				1FED496224263E4E00AF2FAD /* htmlfragment_unquoted_attr_values.html */,
+				1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */,
+				1FED495D24263DEE00AF2FAD /* utf8xhtml_test.txt */,
+				1FED494E24263D9B00AF2FAD /* accent_grave.html */,
+				1FED494F24263D9B00AF2FAD /* accent_grave.txt */,
+				1FED495024263D9B00AF2FAD /* c1qt12.txt */,
+				1FED494D24263D9B00AF2FAD /* Dg-duplex.htm */,
+				1FED493C24263D6800AF2FAD /* c1qt12.html */,
+				1FED493924263D6700AF2FAD /* cdatatest1.xml */,
+				1FED493D24263D6800AF2FAD /* mojibake_utf8.xhtml */,
+				1FED493B24263D6800AF2FAD /* mojibake_utf16.txt */,
+				1FED493A24263D6700AF2FAD /* utf8xhtml_test.html */,
+				1FED493524263D2B00AF2FAD /* emptyElementWithAttribute.xml */,
+				1FED492B24263CFE00AF2FAD /* emptyelement.xml */,
+				1FED492924263CFD00AF2FAD /* simple-xml-with-namespaces.xml */,
+				1FED492A24263CFD00AF2FAD /* test2.xml */,
 				1FED49062426397200AF2FAD /* archiversample.xml */,
 				1FED49082426397200AF2FAD /* Faehre-iso.xml */,
 				1FED49072426397200AF2FAD /* Faehre.xml */,
@@ -1863,6 +1968,7 @@
 				1FFE3AD020B4310C00E65B93 /* MPWGenericReference.h in Headers */,
 				1FE37C29196976C500C9A378 /* bytecoding.h in Headers */,
 				1FFE3AB120B32C6C00E65B93 /* MPWDictStore.h in Headers */,
+				1FED492724263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */,
 				1F04A53921D2E01500E19C3F /* MPWInterval.h in Headers */,
 				1FE37C14196976C500C9A378 /* MPWObjectReference.h in Headers */,
 				1FE37C1E196976C500C9A378 /* NSRectAdditions.h in Headers */,
@@ -1999,6 +2105,7 @@
 				1FCF260C1CF3990400AC64CE /* MPWBlockTargetStream.h in Headers */,
 				1FFE3AB220B32C6C00E65B93 /* MPWDictStore.h in Headers */,
 				1FA869D020EBC01500920279 /* MPWLoggingStore.h in Headers */,
+				1FED492824263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */,
 				1F04A53A21D2E01500E19C3F /* MPWInterval.h in Headers */,
 				1FCF26461CF3993C00AC64CE /* NSInvocationAdditions_lookup.h in Headers */,
 				1FB6EB6D1DDA31CD002B82A5 /* MPWStreamCompositionTests.h in Headers */,
@@ -2159,6 +2266,7 @@
 				1F32EC932146AB710074C15A /* MPWQueue.h in Headers */,
 				1FF8FDED09B49D0100652476 /* MPWFuture.h in Headers */,
 				1FCBEDDD1CFC2DA800F2EE0E /* NSThreadWaiting.h in Headers */,
+				1FED492624263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */,
 				1FC70F7B20CD98B5008718B2 /* MPWURLReference.h in Headers */,
 				1FF8FDEE09B49D0100652476 /* MPWIgnoreUnknownTrampoline.h in Headers */,
 				1FB6EB591DDA28B1002B82A5 /* MPWDelayStream.h in Headers */,
@@ -2424,22 +2532,41 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FED494824263D6800AF2FAD /* c1qt12.html in Resources */,
 				1FED490D2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F72426392300AF2FAD /* test3.xml in Resources */,
+				1FED492D24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
+				1FED493324263CFE00AF2FAD /* emptyelement.xml in Resources */,
+				1FED496D24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,
+				1FED494524263D6800AF2FAD /* mojibake_utf16.txt in Resources */,
+				1FED497024263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
+				1FED495824263D9C00AF2FAD /* accent_grave.txt in Resources */,
+				1FED496A24263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */,
 				1FED48F42426392300AF2FAD /* numericEntities.xml in Resources */,
 				1F0984B0219F23F4006D10D9 /* stops.txt in Resources */,
 				1F0984AF219F238A006D10D9 /* ResourceTest in Resources */,
+				1FED493024263CFE00AF2FAD /* test2.xml in Resources */,
+				1FED497324263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,
 				1FED49102426397200AF2FAD /* archiversample.xml in Resources */,
+				1FED494224263D6800AF2FAD /* utf8xhtml_test.html in Resources */,
 				1FED49192426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED495524263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FED496724263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
 				1FED48FD2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FED493724263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
+				1FED495F24263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */,
+				1FED494B24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
+				1FED495B24263D9C00AF2FAD /* c1qt12.txt in Resources */,
+				1FED495224263D9B00AF2FAD /* Dg-duplex.htm in Resources */,
 				1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */,
 				1FED491F2426397200AF2FAD /* states.xml in Resources */,
 				1FED49032426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
 				1FED49132426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED48EB242638D400AF2FAD /* test1.xml in Resources */,
 				1FED491C2426397200AF2FAD /* session.xml in Resources */,
+				1FED493F24263D6800AF2FAD /* cdatatest1.xml in Resources */,
 				1F0984B2219F23F4006D10D9 /* first4.tabdelim in Resources */,
 				1FED49002426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
 			);
@@ -2450,19 +2577,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FED48FE2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FED497424263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,
+				1FED496B24263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */,
+				1FED493824263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
 				1FED49042426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
+				1FED496024263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */,
 				1FED49172426397200AF2FAD /* Faehre-iso.xml in Resources */,
 				1FED49142426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED49012426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
 				1FED48FB2426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED496E24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,
+				1FED492E24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
 				1FED491A2426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FED490E2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F52426392300AF2FAD /* numericEntities.xml in Resources */,
+				1FED494624263D6800AF2FAD /* mojibake_utf16.txt in Resources */,
+				1FED494924263D6800AF2FAD /* c1qt12.html in Resources */,
+				1FED493124263CFE00AF2FAD /* test2.xml in Resources */,
+				1FED495324263D9C00AF2FAD /* Dg-duplex.htm in Resources */,
 				1FED49202426397200AF2FAD /* states.xml in Resources */,
+				1FED495624263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FED49112426397200AF2FAD /* archiversample.xml in Resources */,
+				1FED493424263CFE00AF2FAD /* emptyelement.xml in Resources */,
+				1FED494C24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
+				1FED495C24263D9C00AF2FAD /* c1qt12.txt in Resources */,
+				1FED495924263D9C00AF2FAD /* accent_grave.txt in Resources */,
 				1FED491D2426397200AF2FAD /* session.xml in Resources */,
 				1FED48EC242638D400AF2FAD /* test1.xml in Resources */,
+				1FED494324263D6800AF2FAD /* utf8xhtml_test.html in Resources */,
+				1FED496824263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
+				1FED494024263D6800AF2FAD /* cdatatest1.xml in Resources */,
 				1FED48F82426392300AF2FAD /* test3.xml in Resources */,
+				1FED497124263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2470,23 +2616,42 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FED494124263D6800AF2FAD /* utf8xhtml_test.html in Resources */,
+				1FED493224263CFE00AF2FAD /* emptyelement.xml in Resources */,
+				1FED496924263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */,
+				1FED493624263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
 				1FED490C2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F92426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FED492F24263CFE00AF2FAD /* test2.xml in Resources */,
+				1FED495A24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED491E2426397200AF2FAD /* states.xml in Resources */,
+				1FED494724263D6800AF2FAD /* c1qt12.html in Resources */,
+				1FED494A24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
+				1FED497224263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,
 				1FED491B2426397200AF2FAD /* session.xml in Resources */,
 				1FED49022426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
 				1FED49152426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FED496624263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
+				1FED494424263D6800AF2FAD /* mojibake_utf16.txt in Resources */,
 				1FED48EA242638D400AF2FAD /* test1.xml in Resources */,
 				1FED48FF2426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
+				1FED495124263D9B00AF2FAD /* Dg-duplex.htm in Resources */,
 				1FED49122426397200AF2FAD /* Faehre.xml in Resources */,
+				1FED495724263D9C00AF2FAD /* accent_grave.txt in Resources */,
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
+				1FED496C24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,
 				1FED490F2426397200AF2FAD /* archiversample.xml in Resources */,
 				1FED48F32426392300AF2FAD /* numericEntities.xml in Resources */,
 				1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */,
+				1FED495E24263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */,
+				1FED496F24263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
+				1FED495424263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FF8FDF209B49D0100652476 /* Log.rtf in Resources */,
 				1FBAABB91847651B00086047 /* stops.txt in Resources */,
+				1FED493E24263D6800AF2FAD /* cdatatest1.xml in Resources */,
 				1FED48FC2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FED492C24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
 				1FED49182426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
@@ -2671,6 +2836,7 @@
 				1F840DDC193F50AC00589595 /* NSNumberArithmetic.m in Sources */,
 				1FED48D6242634CC00AF2FAD /* MPWXmlParser.m in Sources */,
 				1F840DDD193F50AC00589595 /* MPWNumber.m in Sources */,
+				1FED492324263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */,
 				1F840DDE193F50AC00589595 /* MPWFloat.m in Sources */,
 				1F840DDF193F50AC00589595 /* MPWInteger.m in Sources */,
 				1F840DE0193F50AC00589595 /* MPWFastInvocation.m in Sources */,
@@ -2698,6 +2864,7 @@
 				1F3D02031D702902001A9732 /* MPWScatterStream.m in Sources */,
 				1FCF25EC1CF398F400AC64CE /* CodingAdditions.m in Sources */,
 				1FCF26071CF398F400AC64CE /* MPWValueAccessor.m in Sources */,
+				1FED492424263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */,
 				1F7078A71F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
 				1F49BBBC20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FCF25EF1CF398F400AC64CE /* MPWScanner.m in Sources */,
@@ -2882,6 +3049,7 @@
 				1FF8FE1E09B49D0200652476 /* MPWIdentityDictionary.m in Sources */,
 				1FB0A8071E520FB600E552A0 /* MPWSocketStream.m in Sources */,
 				1FF8FE1F09B49D0200652476 /* MPWMessageCatcher.m in Sources */,
+				1FED492224263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */,
 				1F7078A51F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
 				1F7A22861B786F9000FF6C03 /* MPWRect.m in Sources */,
 				1FF8FE2109B49D0200652476 /* MPWFuture.m in Sources */,
