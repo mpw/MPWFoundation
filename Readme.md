@@ -15,7 +15,7 @@ and Objective-C development in general.
  - Efficient numbers and number arrays
  - Resource-loading conveniences for NSBundle
 
-Stores
+Storage Combinators
 ------
 
 Implementation of in-process REST.
@@ -69,6 +69,8 @@ Serialization
 
 
 - Fast and memory-efficient implementation of binary proprerty lists
+- JSON generator
+- XML parser and generator
 - Fast CSV parser
 - Macro-based conveniences for `NSArchiver` and `NSKeyedArchiver`
 
