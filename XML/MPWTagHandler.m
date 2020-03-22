@@ -11,6 +11,7 @@
 #import <objc/objc.h>
 #import "AccessorMacros.h"
 #import "MPWCaseInsensitiveSmallStringTable.h"
+#import "MPWFastInvocation.h"
 
 @implementation MPWTagHandler
 

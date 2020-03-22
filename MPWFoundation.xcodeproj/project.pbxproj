@@ -1319,6 +1319,7 @@
 				1FFE3A8D20B309F200E65B93 /* Stores */,
 				07DF1990006686DDC35ADD82 /* Streams */,
 				1FED489B242633F500AF2FAD /* XML */,
+				1F8856CD2427B27E008950E8 /* JSON */,
 				07DF19A1006686DDC35ADD82 /* Threading */,
 				07DF195D006686DDC35ADD82 /* Other Sources */,
 				F51B7250013FDD5F01ABB64E /* Resources */,
@@ -1543,8 +1544,6 @@
 				1F1BEDAF213BE769004B4947 /* MPWFilter.m */,
 				07DF199C006686DDC35ADD82 /* MPWFlattenStream.h */,
 				07DF1996006686DDC35ADD82 /* MPWFlattenStream.m */,
-				1FB2C88A217760DF0061C3F9 /* MPWJSONWriter.h */,
-				1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */,
 				1F6244B5214835EF00BB00C4 /* MPWMapFilter.h */,
 				1F6244B6214835EF00BB00C4 /* MPWMapFilter.m */,
 				07DF199B006686DDC35ADD82 /* MPWNeXTPListWriter.h */,
@@ -1724,6 +1723,15 @@
 				1F840DB5193F505700589595 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1F8856CD2427B27E008950E8 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				1FB2C88A217760DF0061C3F9 /* MPWJSONWriter.h */,
+				1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */,
+			);
+			path = JSON;
 			sourceTree = "<group>";
 		};
 		1F9D63C91F601E1800DA9514 /* Frameworks */ = {
@@ -2446,7 +2454,7 @@
 			isa = PBXProject;
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Original;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					1F4FC9721DF818AE00B35D27 = {
 						CreatedOnToolsVersion = 8.1;

@@ -17,6 +17,8 @@
 #import <MPWFoundation/MPWSubData.h>
 #import <MPWFoundation/MPWBlockInvocation.h>
 #import "MPWObjectCache.h"
+#import "MPWSmallStringTable.h"
+#import "NSObjectAdditions.h"
 
 #if TARGET_OS_IPHONE
 #define CFMakeCollectable(x)   (x)
@@ -115,7 +117,7 @@ boolAccessor( enforceTagNesting, setEnforceTagNesting )
     @autoreleasepool {
 
 //	NSLog(@"scanner");
-	[[self scanner] setDelegate:self];
+	[[self scanner] setDelegate:(id)self];
 	
  //	NSLog(@"before dataCache");
    dataCache=[[MPWObjectCache alloc] initWithCapacity:90 class:[MPWSubData class]];
@@ -1833,7 +1835,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	MPWMAXParser* parser = [self parser];
 	NSString *tagToHandle=@"AudioList";
 	[parser setHandler:parser forElements:[NSArray arrayWithObject:tagToHandle] inNamespace:nil prefix:@"" map:nil];
-	[parser handleElement:tagToHandle withBlock:^(id elements,id attributes ,id parser){ 
+	[parser handleElement:tagToHandle withBlock:^(id elements,id attributes ,id theParser){ 
 		return [@"Parse result" retain];
 	}];
 	NSDictionary* result = [parser parsedData:xmlData];

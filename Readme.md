@@ -40,7 +40,7 @@ An example, a common delegate pattern that checks if the delegate responds to th
 
 ```
 if ( [self.delegate respondsToSelector:@selector(windowWillClose:)] ) {
-    [self.delegate windowWillClose:self];
+    [self.delegate windowDidClose:self];
 }
 ```
 
@@ -50,7 +50,7 @@ can instead be expressed as
 [[self.delegate ifResponds] windowDidClose:self];
 ```
 
-Note that the first example, apart from being verbose, also has a bug that gets hidden by the verbosity.
+Note that the first example, apart from being verbose, also has a bug that is enabled by the duplication and hidden by the verbosity.
 
 [HOM Documentation](Documentation/HOM.md) 
 

@@ -12,6 +12,8 @@
 #import "MPWMessageCatcher.h"
 #import "MPWSubData.h"
 #import "DebugMacros.h"
+#import "NSBundleConveniences.h"
+#import "NSObjectAdditions.h"
 
 @interface EmptySAXClient : NSObject
 
@@ -360,7 +362,7 @@ idAccessor( nonWSCharSet, setNonWSCharSet )
     NSData *xmlData = [self xmlResourceWithName:@"simple-xml-with-namespaces"];
     MPWMessageCatcher* catcher=[[[MPWMessageCatcher alloc] initWithClass:self] autorelease];
 	id nsxmlparser = [[[NSXMLParser alloc] initWithData:xmlData] autorelease];
-	[nsxmlparser setDelegate:catcher];
+	[nsxmlparser setDelegate:(id)catcher];
 	[nsxmlparser setShouldProcessNamespaces:YES];
 //	[nsxmlparser setShouldReportNamespacePrefixes:YES];
 	[nsxmlparser parse];
@@ -427,7 +429,7 @@ idAccessor( nonWSCharSet, setNonWSCharSet )
     NSData *xmlData = [self resourceWithName:@"htmlfragment_entities" type:@"html"];
     MPWMessageCatcher* catcher=[[[MPWMessageCatcher alloc] initWithClass:self] autorelease];
 	id nsxmlparser = [[[NSXMLParser alloc] initWithData:xmlData] autorelease];
-	[nsxmlparser setDelegate:catcher];
+	[nsxmlparser setDelegate:(id)catcher];
 	if ( ![nsxmlparser parse] ) {
 		NSLog(@"error: %@",[nsxmlparser parserError]);
 	}
@@ -444,7 +446,7 @@ idAccessor( nonWSCharSet, setNonWSCharSet )
     NSData *xmlData = [self resourceWithName:@"xml_comment_with_dash" type:@"xml"];
     MPWMessageCatcher* catcher=[[[MPWMessageCatcher alloc] initWithClass:self] autorelease];
 	id nsxmlparser = [[[NSXMLParser alloc] initWithData:xmlData] autorelease];
-	[nsxmlparser setDelegate:catcher];
+	[nsxmlparser setDelegate:(id)catcher];
 	[nsxmlparser parse];
 //	NSLog(@"messages: %@",[catcher xxxMesssages]);
   	EXPECTSTARTELEMENTAT( catcher, 1, @"xml" );
