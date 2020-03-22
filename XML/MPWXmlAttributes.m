@@ -469,12 +469,3 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 @end
-
-@implementation NSData(propertyList)
-
--propertyList
-{
-    return [NSPropertyListSerialization propertyListWithData:self options:0  format:nil error:nil];
-}
-
-@end
