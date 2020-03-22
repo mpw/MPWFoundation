@@ -630,9 +630,9 @@
 		1FED48DD2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
 		1FED48DE2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
 		1FED48DF2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
-		1FED48E12426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; };
-		1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; };
-		1FED48E32426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; };
+		1FED48E12426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FED48E32426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FED48E5242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
 		1FED48E6242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
 		1FED48E7242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
