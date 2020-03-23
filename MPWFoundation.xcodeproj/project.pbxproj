@@ -741,6 +741,60 @@
 		1FED497224263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
 		1FED497324263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
 		1FED497424263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */ = {isa = PBXBuildFile; fileRef = 1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */; };
+		1FEFBD242427F88E001E44B2 /* MPWObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD202427F88D001E44B2 /* MPWObjectBuilder.m */; };
+		1FEFBD252427F88E001E44B2 /* MPWObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD202427F88D001E44B2 /* MPWObjectBuilder.m */; };
+		1FEFBD262427F88E001E44B2 /* MPWObjectBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD202427F88D001E44B2 /* MPWObjectBuilder.m */; };
+		1FEFBD272427F88E001E44B2 /* MPWMASONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */; };
+		1FEFBD282427F88E001E44B2 /* MPWMASONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */; };
+		1FEFBD292427F88E001E44B2 /* MPWMASONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */; };
+		1FEFBD2A2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */; };
+		1FEFBD2B2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */; };
+		1FEFBD2C2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */; };
+		1FEFBD2D2427F88E001E44B2 /* MPWMASONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */; };
+		1FEFBD2E2427F88E001E44B2 /* MPWMASONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */; };
+		1FEFBD2F2427F88E001E44B2 /* MPWMASONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */; };
+		1FEFBD322427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD302427F8C2001E44B2 /* MPWXmlAppleProplistReader.h */; };
+		1FEFBD332427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD302427F8C2001E44B2 /* MPWXmlAppleProplistReader.h */; };
+		1FEFBD342427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEFBD302427F8C2001E44B2 /* MPWXmlAppleProplistReader.h */; };
+		1FEFBD352427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD312427F8C2001E44B2 /* MPWXmlAppleProplistReader.m */; };
+		1FEFBD362427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD312427F8C2001E44B2 /* MPWXmlAppleProplistReader.m */; };
+		1FEFBD372427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEFBD312427F8C2001E44B2 /* MPWXmlAppleProplistReader.m */; };
+		1FEFBD412428C841001E44B2 /* literals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3B2428C841001E44B2 /* literals.json */; };
+		1FEFBD422428C841001E44B2 /* literals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3B2428C841001E44B2 /* literals.json */; };
+		1FEFBD432428C841001E44B2 /* literals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3B2428C841001E44B2 /* literals.json */; };
+		1FEFBD442428C841001E44B2 /* string.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3C2428C841001E44B2 /* string.json */; };
+		1FEFBD452428C841001E44B2 /* string.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3C2428C841001E44B2 /* string.json */; };
+		1FEFBD462428C841001E44B2 /* string.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3C2428C841001E44B2 /* string.json */; };
+		1FEFBD472428C841001E44B2 /* glossary.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3D2428C841001E44B2 /* glossary.json */; };
+		1FEFBD482428C841001E44B2 /* glossary.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3D2428C841001E44B2 /* glossary.json */; };
+		1FEFBD492428C841001E44B2 /* glossary.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3D2428C841001E44B2 /* glossary.json */; };
+		1FEFBD4A2428C841001E44B2 /* dict.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3E2428C841001E44B2 /* dict.json */; };
+		1FEFBD4B2428C841001E44B2 /* dict.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3E2428C841001E44B2 /* dict.json */; };
+		1FEFBD4C2428C841001E44B2 /* dict.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3E2428C841001E44B2 /* dict.json */; };
+		1FEFBD4D2428C841001E44B2 /* numbers.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3F2428C841001E44B2 /* numbers.json */; };
+		1FEFBD4E2428C841001E44B2 /* numbers.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3F2428C841001E44B2 /* numbers.json */; };
+		1FEFBD4F2428C841001E44B2 /* numbers.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD3F2428C841001E44B2 /* numbers.json */; };
+		1FEFBD502428C841001E44B2 /* array.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD402428C841001E44B2 /* array.json */; };
+		1FEFBD512428C841001E44B2 /* array.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD402428C841001E44B2 /* array.json */; };
+		1FEFBD522428C841001E44B2 /* array.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD402428C841001E44B2 /* array.json */; };
+		1FEFBD572428C85E001E44B2 /* stringescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD532428C85E001E44B2 /* stringescapes.json */; };
+		1FEFBD582428C85E001E44B2 /* stringescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD532428C85E001E44B2 /* stringescapes.json */; };
+		1FEFBD592428C85E001E44B2 /* stringescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD532428C85E001E44B2 /* stringescapes.json */; };
+		1FEFBD5A2428C85E001E44B2 /* emptyelements.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD542428C85E001E44B2 /* emptyelements.json */; };
+		1FEFBD5B2428C85E001E44B2 /* emptyelements.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD542428C85E001E44B2 /* emptyelements.json */; };
+		1FEFBD5C2428C85E001E44B2 /* emptyelements.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD542428C85E001E44B2 /* emptyelements.json */; };
+		1FEFBD5D2428C85E001E44B2 /* unicodeescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD552428C85E001E44B2 /* unicodeescapes.json */; };
+		1FEFBD5E2428C85E001E44B2 /* unicodeescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD552428C85E001E44B2 /* unicodeescapes.json */; };
+		1FEFBD5F2428C85E001E44B2 /* unicodeescapes.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD552428C85E001E44B2 /* unicodeescapes.json */; };
+		1FEFBD602428C85E001E44B2 /* dictAfterNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */; };
+		1FEFBD612428C85E001E44B2 /* dictAfterNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */; };
+		1FEFBD622428C85E001E44B2 /* dictAfterNumber.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */; };
+		1FEFBD642428C887001E44B2 /* Itunes_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD632428C887001E44B2 /* Itunes_info.plist */; };
+		1FEFBD652428C888001E44B2 /* Itunes_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD632428C887001E44B2 /* Itunes_info.plist */; };
+		1FEFBD662428C888001E44B2 /* Itunes_info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD632428C887001E44B2 /* Itunes_info.plist */; };
+		1FEFBD682428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
+		1FEFBD692428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
+		1FEFBD6A2428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
 		1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1227,6 +1281,24 @@
 		1FED496324263E4F00AF2FAD /* xml_comment_with_dash.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = xml_comment_with_dash.xml; sourceTree = "<group>"; };
 		1FED496424263E4F00AF2FAD /* attrparserunonbug.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = attrparserunonbug.html; sourceTree = "<group>"; };
 		1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = htmlfragment_attribute_no_value.html; sourceTree = "<group>"; };
+		1FEFBD202427F88D001E44B2 /* MPWObjectBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWObjectBuilder.m; sourceTree = "<group>"; };
+		1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWMASONParser.h; sourceTree = "<group>"; };
+		1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWObjectBuilder.h; sourceTree = "<group>"; };
+		1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWMASONParser.m; sourceTree = "<group>"; };
+		1FEFBD302427F8C2001E44B2 /* MPWXmlAppleProplistReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlAppleProplistReader.h; sourceTree = "<group>"; };
+		1FEFBD312427F8C2001E44B2 /* MPWXmlAppleProplistReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlAppleProplistReader.m; sourceTree = "<group>"; };
+		1FEFBD3B2428C841001E44B2 /* literals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = literals.json; sourceTree = "<group>"; };
+		1FEFBD3C2428C841001E44B2 /* string.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = string.json; sourceTree = "<group>"; };
+		1FEFBD3D2428C841001E44B2 /* glossary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = glossary.json; sourceTree = "<group>"; };
+		1FEFBD3E2428C841001E44B2 /* dict.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dict.json; sourceTree = "<group>"; };
+		1FEFBD3F2428C841001E44B2 /* numbers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = numbers.json; sourceTree = "<group>"; };
+		1FEFBD402428C841001E44B2 /* array.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = array.json; sourceTree = "<group>"; };
+		1FEFBD532428C85E001E44B2 /* stringescapes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = stringescapes.json; sourceTree = "<group>"; };
+		1FEFBD542428C85E001E44B2 /* emptyelements.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emptyelements.json; sourceTree = "<group>"; };
+		1FEFBD552428C85E001E44B2 /* unicodeescapes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = unicodeescapes.json; sourceTree = "<group>"; };
+		1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictAfterNumber.json; sourceTree = "<group>"; };
+		1FEFBD632428C887001E44B2 /* Itunes_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Itunes_info.plist; sourceTree = "<group>"; };
+		1FEFBD672428C8AA001E44B2 /* empty_elements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = empty_elements.plist; sourceTree = "<group>"; };
 		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
 		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1318,6 +1390,7 @@
 				07DF1973006686DDC35ADD82 /* Collections */,
 				1FFE3A8D20B309F200E65B93 /* Stores */,
 				07DF1990006686DDC35ADD82 /* Streams */,
+				1FEFBD392428C784001E44B2 /* Plist */,
 				1FED489B242633F500AF2FAD /* XML */,
 				1F8856CD2427B27E008950E8 /* JSON */,
 				07DF19A1006686DDC35ADD82 /* Threading */,
@@ -1465,8 +1538,6 @@
 		07DF1973006686DDC35ADD82 /* Collections */ = {
 			isa = PBXGroup;
 			children = (
-				1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */,
-				1F273F3A17F554F600F5FF9E /* MPWBinaryPlist.m */,
 				1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */,
 				1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */,
 				1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */,
@@ -1524,8 +1595,6 @@
 				1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */,
 				1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */,
 				1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */,
-				1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */,
-				1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */,
 				1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */,
 				1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */,
 				07DF1999006686DDC35ADD82 /* MPWByteStream.h */,
@@ -1546,16 +1615,12 @@
 				07DF1996006686DDC35ADD82 /* MPWFlattenStream.m */,
 				1F6244B5214835EF00BB00C4 /* MPWMapFilter.h */,
 				1F6244B6214835EF00BB00C4 /* MPWMapFilter.m */,
-				07DF199B006686DDC35ADD82 /* MPWNeXTPListWriter.h */,
-				07DF1995006686DDC35ADD82 /* MPWNeXTPListWriter.m */,
 				1FF08F631D7061C400C6273F /* MPWNotificationStream.h */,
 				1FF08F641D7061C400C6273F /* MPWNotificationStream.m */,
 				1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */,
 				1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */,
 				1FA296941CF74A6500F19039 /* MPWPipeline.h */,
 				1FA296951CF74A6500F19039 /* MPWPipeline.m */,
-				1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */,
-				1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */,
 				1F32EC912146AB710074C15A /* MPWQueue.h */,
 				1F32EC922146AB710074C15A /* MPWQueue.m */,
 				1F1BEDC6213FC8E4004B4947 /* MPWRESTCopyStream.h */,
@@ -1728,8 +1793,13 @@
 		1F8856CD2427B27E008950E8 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */,
+				1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */,
+				1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */,
+				1FEFBD202427F88D001E44B2 /* MPWObjectBuilder.m */,
 				1FB2C88A217760DF0061C3F9 /* MPWJSONWriter.h */,
 				1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */,
+				1FEFBD382428C756001E44B2 /* JSON Test Files */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -1757,7 +1827,8 @@
 		1FED489B242633F500AF2FAD /* XML */ = {
 			isa = PBXGroup;
 			children = (
-				1FED48E82426386A00AF2FAD /* XML Test Resources */,
+				1FEFBD312427F8C2001E44B2 /* MPWXmlAppleProplistReader.m */,
+				1FEFBD302427F8C2001E44B2 /* MPWXmlAppleProplistReader.h */,
 				1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */,
 				1FED489D242634AD00AF2FAD /* MPWMAXParser.h */,
 				1FED489C242634AD00AF2FAD /* MPWXmlParser.h */,
@@ -1779,6 +1850,7 @@
 				1FED48AC242634CC00AF2FAD /* MPWTagAction.m */,
 				1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */,
 				1FED492124263BC600AF2FAD /* MPWXmlParserTesting.m */,
+				1FED48E82426386A00AF2FAD /* XML Test Resources */,
 			);
 			path = XML;
 			sourceTree = "<group>";
@@ -1821,6 +1893,48 @@
 				1FED48E9242638D300AF2FAD /* test1.xml */,
 			);
 			path = "XML Test Resources";
+			sourceTree = "<group>";
+		};
+		1FEFBD382428C756001E44B2 /* JSON Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				1FEFBD402428C841001E44B2 /* array.json */,
+				1FEFBD3E2428C841001E44B2 /* dict.json */,
+				1FEFBD3D2428C841001E44B2 /* glossary.json */,
+				1FEFBD3B2428C841001E44B2 /* literals.json */,
+				1FEFBD3F2428C841001E44B2 /* numbers.json */,
+				1FEFBD3C2428C841001E44B2 /* string.json */,
+				1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */,
+				1FEFBD542428C85E001E44B2 /* emptyelements.json */,
+				1FEFBD532428C85E001E44B2 /* stringescapes.json */,
+				1FEFBD552428C85E001E44B2 /* unicodeescapes.json */,
+			);
+			path = "JSON Test Files";
+			sourceTree = "<group>";
+		};
+		1FEFBD392428C784001E44B2 /* Plist */ = {
+			isa = PBXGroup;
+			children = (
+				1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */,
+				1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */,
+				1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */,
+				1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */,
+				07DF199B006686DDC35ADD82 /* MPWNeXTPListWriter.h */,
+				07DF1995006686DDC35ADD82 /* MPWNeXTPListWriter.m */,
+				1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */,
+				1F273F3A17F554F600F5FF9E /* MPWBinaryPlist.m */,
+				1FEFBD3A2428C7E2001E44B2 /* Plist Test Files */,
+			);
+			path = Plist;
+			sourceTree = "<group>";
+		};
+		1FEFBD3A2428C7E2001E44B2 /* Plist Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				1FEFBD632428C887001E44B2 /* Itunes_info.plist */,
+				1FEFBD672428C8AA001E44B2 /* empty_elements.plist */,
+			);
+			path = "Plist Test Files";
 			sourceTree = "<group>";
 		};
 		1FFE3A8D20B309F200E65B93 /* Stores */ = {
@@ -1907,6 +2021,7 @@
 			files = (
 				1FD7B37D2195C9A100046BBE /* MPWCompositeStore.h in Headers */,
 				1FE37C22196976C500C9A378 /* NSObjectAdditions.h in Headers */,
+				1FEFBD2B2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */,
 				1FE37C481969773C00C9A378 /* NSObjectFiltering.h in Headers */,
 				1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */,
 				1F8671FD22397C14006510FB /* MPWDirectoryBinding.h in Headers */,
@@ -1916,6 +2031,7 @@
 				1FA869C720E8E01200920279 /* MPWCachingStore.h in Headers */,
 				1F81BF9C19698F3A0066DF43 /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
 				1FA869D720EBC7FC00920279 /* MPWRESTOperation.h in Headers */,
+				1FEFBD332427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */,
 				1F313D631CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */,
 				1FE37C491969773C00C9A378 /* NSArrayFiltering.h in Headers */,
 				1FB6EB6C1DDA31CD002B82A5 /* MPWStreamCompositionTests.h in Headers */,
@@ -2034,6 +2150,7 @@
 				1FFE3A9120B30A2400E65B93 /* MPWAbstractStore.h in Headers */,
 				1F54A15C209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */,
 				1FED48D0242634CC00AF2FAD /* MPWTagAction.h in Headers */,
+				1FEFBD282427F88E001E44B2 /* MPWMASONParser.h in Headers */,
 				1FE37C3A1969773C00C9A378 /* MPWSmallStringTable.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2044,6 +2161,7 @@
 			files = (
 				1FD7B37E2195C9A100046BBE /* MPWCompositeStore.h in Headers */,
 				1FCF26341CF3993C00AC64CE /* MPWRusage.h in Headers */,
+				1FEFBD2C2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */,
 				1FA296981CF74A6500F19039 /* MPWPipeline.h in Headers */,
 				1FCF264D1CF3993C00AC64CE /* NSObjectAdditions.h in Headers */,
 				1F8671FE22397C14006510FB /* MPWDirectoryBinding.h in Headers */,
@@ -2053,6 +2171,7 @@
 				1FA869C820E8E01200920279 /* MPWCachingStore.h in Headers */,
 				1FCF263E1CF3993C00AC64CE /* MPWObjectReference.h in Headers */,
 				1FA869D820EBC7FC00920279 /* MPWRESTOperation.h in Headers */,
+				1FEFBD342427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */,
 				1FCF264B1CF3993C00AC64CE /* NSDictAdditions.h in Headers */,
 				1FB7B5E21E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */,
 				1FCF26241CF3990A00AC64CE /* MPWByteStream.h in Headers */,
@@ -2171,6 +2290,7 @@
 				1FFE3A9220B30A2400E65B93 /* MPWAbstractStore.h in Headers */,
 				1FCF26221CF3990A00AC64CE /* MPWBinaryPListWriter.h in Headers */,
 				1FED48D1242634CC00AF2FAD /* MPWTagAction.h in Headers */,
+				1FEFBD292427F88E001E44B2 /* MPWMASONParser.h in Headers */,
 				1FCF266A1CF39B5600AC64CE /* MPWLZWStream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2198,6 +2318,7 @@
 				1FB7B5E01E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */,
 				1FF8FDBD09B49D0100652476 /* CodingAdditions.h in Headers */,
 				1FED48CF242634CC00AF2FAD /* MPWTagAction.h in Headers */,
+				1FEFBD272427F88E001E44B2 /* MPWMASONParser.h in Headers */,
 				1FA869CE20EBC01500920279 /* MPWLoggingStore.h in Headers */,
 				1FF8FDBE09B49D0100652476 /* MPWObjectCache.h in Headers */,
 				1FF8FDBF09B49D0100652476 /* NSRectAdditions.h in Headers */,
@@ -2206,6 +2327,7 @@
 				1FF8FDC109B49D0100652476 /* NSDictAdditions.h in Headers */,
 				1FF8FDC209B49D0100652476 /* MPWRuntimeAdditions.h in Headers */,
 				1FED48B1242634CC00AF2FAD /* SaxDocumentHandler.h in Headers */,
+				1FEFBD2A2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */,
 				1FED48E12426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
 				1FF8FDC309B49D0100652476 /* NSObjectAdditions.h in Headers */,
 				1FF8FDC409B49D0100652476 /* MPWPoint.h in Headers */,
@@ -2252,6 +2374,7 @@
 				1FED48CC242634CC00AF2FAD /* MPWTagHandler.h in Headers */,
 				1FF8FDDC09B49D0100652476 /* MPWNeXTPListWriter.h in Headers */,
 				1FF8FDDD09B49D0100652476 /* MPWFlattenStream.h in Headers */,
+				1FEFBD322427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */,
 				1F6244C72148557D00BB00C4 /* MPWMergingStore.h in Headers */,
 				1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1F2DCFDF1ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */,
@@ -2541,6 +2664,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FED494824263D6800AF2FAD /* c1qt12.html in Resources */,
+				1FEFBD582428C85E001E44B2 /* stringescapes.json in Resources */,
+				1FEFBD482428C841001E44B2 /* glossary.json in Resources */,
 				1FED490D2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F72426392300AF2FAD /* test3.xml in Resources */,
 				1FED492D24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
@@ -2550,26 +2675,36 @@
 				1FED497024263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
 				1FED495824263D9C00AF2FAD /* accent_grave.txt in Resources */,
 				1FED496A24263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */,
+				1FEFBD5E2428C85E001E44B2 /* unicodeescapes.json in Resources */,
+				1FEFBD692428C8AB001E44B2 /* empty_elements.plist in Resources */,
 				1FED48F42426392300AF2FAD /* numericEntities.xml in Resources */,
 				1F0984B0219F23F4006D10D9 /* stops.txt in Resources */,
 				1F0984AF219F238A006D10D9 /* ResourceTest in Resources */,
 				1FED493024263CFE00AF2FAD /* test2.xml in Resources */,
+				1FEFBD452428C841001E44B2 /* string.json in Resources */,
 				1FED497324263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,
+				1FEFBD5B2428C85E001E44B2 /* emptyelements.json in Resources */,
+				1FEFBD422428C841001E44B2 /* literals.json in Resources */,
 				1FED49102426397200AF2FAD /* archiversample.xml in Resources */,
 				1FED494224263D6800AF2FAD /* utf8xhtml_test.html in Resources */,
 				1FED49192426397200AF2FAD /* test3_16bit.xml in Resources */,
+				1FEFBD512428C841001E44B2 /* array.json in Resources */,
 				1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */,
 				1FED495524263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */,
 				1FED496724263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
 				1FED48FD2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FEFBD652428C888001E44B2 /* Itunes_info.plist in Resources */,
 				1FED493724263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
 				1FED495F24263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */,
 				1FED494B24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
+				1FEFBD4B2428C841001E44B2 /* dict.json in Resources */,
 				1FED495B24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED495224263D9B00AF2FAD /* Dg-duplex.htm in Resources */,
 				1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */,
 				1FED491F2426397200AF2FAD /* states.xml in Resources */,
+				1FEFBD4E2428C841001E44B2 /* numbers.json in Resources */,
+				1FEFBD612428C85E001E44B2 /* dictAfterNumber.json in Resources */,
 				1FED49032426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
 				1FED49132426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED48EB242638D400AF2FAD /* test1.xml in Resources */,
@@ -2591,15 +2726,20 @@
 				1FED49042426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
 				1FED496024263DEE00AF2FAD /* utf8xhtml_test.txt in Resources */,
 				1FED49172426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FEFBD432428C841001E44B2 /* literals.json in Resources */,
 				1FED49142426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED49012426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
 				1FED48FB2426392300AF2FAD /* windows-encoded.xml in Resources */,
 				1FED496E24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,
+				1FEFBD4F2428C841001E44B2 /* numbers.json in Resources */,
 				1FED492E24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
+				1FEFBD5C2428C85E001E44B2 /* emptyelements.json in Resources */,
 				1FED491A2426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FED490E2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F52426392300AF2FAD /* numericEntities.xml in Resources */,
+				1FEFBD6A2428C8AB001E44B2 /* empty_elements.plist in Resources */,
 				1FED494624263D6800AF2FAD /* mojibake_utf16.txt in Resources */,
+				1FEFBD622428C85E001E44B2 /* dictAfterNumber.json in Resources */,
 				1FED494924263D6800AF2FAD /* c1qt12.html in Resources */,
 				1FED493124263CFE00AF2FAD /* test2.xml in Resources */,
 				1FED495324263D9C00AF2FAD /* Dg-duplex.htm in Resources */,
@@ -2610,11 +2750,18 @@
 				1FED494C24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
 				1FED495C24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED495924263D9C00AF2FAD /* accent_grave.txt in Resources */,
+				1FEFBD662428C888001E44B2 /* Itunes_info.plist in Resources */,
+				1FEFBD4C2428C841001E44B2 /* dict.json in Resources */,
+				1FEFBD592428C85E001E44B2 /* stringescapes.json in Resources */,
 				1FED491D2426397200AF2FAD /* session.xml in Resources */,
+				1FEFBD462428C841001E44B2 /* string.json in Resources */,
 				1FED48EC242638D400AF2FAD /* test1.xml in Resources */,
+				1FEFBD5F2428C85E001E44B2 /* unicodeescapes.json in Resources */,
 				1FED494324263D6800AF2FAD /* utf8xhtml_test.html in Resources */,
 				1FED496824263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
+				1FEFBD522428C841001E44B2 /* array.json in Resources */,
 				1FED494024263D6800AF2FAD /* cdatatest1.xml in Resources */,
+				1FEFBD492428C841001E44B2 /* glossary.json in Resources */,
 				1FED48F82426392300AF2FAD /* test3.xml in Resources */,
 				1FED497124263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
 			);
@@ -2630,24 +2777,34 @@
 				1FED493624263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
 				1FED490C2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F92426392300AF2FAD /* windows-encoded.xml in Resources */,
+				1FEFBD5A2428C85E001E44B2 /* emptyelements.json in Resources */,
 				1FED492F24263CFE00AF2FAD /* test2.xml in Resources */,
+				1FEFBD4D2428C841001E44B2 /* numbers.json in Resources */,
 				1FED495A24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED491E2426397200AF2FAD /* states.xml in Resources */,
 				1FED494724263D6800AF2FAD /* c1qt12.html in Resources */,
 				1FED494A24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
+				1FEFBD5D2428C85E001E44B2 /* unicodeescapes.json in Resources */,
 				1FED497224263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,
+				1FEFBD642428C887001E44B2 /* Itunes_info.plist in Resources */,
 				1FED491B2426397200AF2FAD /* session.xml in Resources */,
 				1FED49022426392300AF2FAD /* tagconflict_disambiguated_by_namespace.xml in Resources */,
+				1FEFBD442428C841001E44B2 /* string.json in Resources */,
 				1FF8FDF109B49D0100652476 /* Concepts.rtf in Resources */,
+				1FEFBD502428C841001E44B2 /* array.json in Resources */,
 				1FED49152426397200AF2FAD /* Faehre-iso.xml in Resources */,
 				1FED496624263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
 				1FED494424263D6800AF2FAD /* mojibake_utf16.txt in Resources */,
 				1FED48EA242638D400AF2FAD /* test1.xml in Resources */,
 				1FED48FF2426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
+				1FEFBD4A2428C841001E44B2 /* dict.json in Resources */,
 				1FED495124263D9B00AF2FAD /* Dg-duplex.htm in Resources */,
+				1FEFBD602428C85E001E44B2 /* dictAfterNumber.json in Resources */,
+				1FEFBD472428C841001E44B2 /* glossary.json in Resources */,
 				1FED49122426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED495724263D9C00AF2FAD /* accent_grave.txt in Resources */,
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
+				1FEFBD572428C85E001E44B2 /* stringescapes.json in Resources */,
 				1FED496C24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,
 				1FED490F2426397200AF2FAD /* archiversample.xml in Resources */,
 				1FED48F32426392300AF2FAD /* numericEntities.xml in Resources */,
@@ -2659,9 +2816,11 @@
 				1FBAABB91847651B00086047 /* stops.txt in Resources */,
 				1FED493E24263D6800AF2FAD /* cdatatest1.xml in Resources */,
 				1FED48FC2426392300AF2FAD /* iso-encoded.xml in Resources */,
+				1FEFBD412428C841001E44B2 /* literals.json in Resources */,
 				1FED492C24263CFE00AF2FAD /* simple-xml-with-namespaces.xml in Resources */,
 				1FED49182426397200AF2FAD /* test3_16bit.xml in Resources */,
 				1FF8FDF309B49D0100652476 /* Notes.rtf in Resources */,
+				1FEFBD682428C8AB001E44B2 /* empty_elements.plist in Resources */,
 				1FF8FDF509B49D0100652476 /* ResourceTest in Resources */,
 				1FED48F62426392300AF2FAD /* test3.xml in Resources */,
 			);
@@ -2788,6 +2947,7 @@
 				1F840E02193F50E400589595 /* MPWPListBuilder.m in Sources */,
 				1F04A53C21D2E01500E19C3F /* MPWInterval.m in Sources */,
 				1F54A15F209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */,
+				1FEFBD362427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */,
 				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
 				1F575D8920BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */,
 				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
@@ -2805,6 +2965,7 @@
 				1FED48C7242634CC00AF2FAD /* MPWXmlElement.m in Sources */,
 				1F32EC972146AB710074C15A /* MPWQueue.m in Sources */,
 				1F840DC6193F50AC00589595 /* NSNil.m in Sources */,
+				1FEFBD2E2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1F840DC7193F50AC00589595 /* NSInvocationAdditions.m in Sources */,
 				1FFE3AD320B4310C00E65B93 /* MPWGenericReference.m in Sources */,
 				1F7078A61F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
@@ -2820,6 +2981,7 @@
 				1F840DCD193F50AC00589595 /* NSDictAdditions.m in Sources */,
 				1F840DCE193F50AC00589595 /* MPWRuntimeAdditions.m in Sources */,
 				1F840DCF193F50AC00589595 /* NSObjectAdditions.m in Sources */,
+				1FEFBD252427F88E001E44B2 /* MPWObjectBuilder.m in Sources */,
 				1F840DD2193F50AC00589595 /* MPWTrampoline.m in Sources */,
 				1FFE3A9420B30A2400E65B93 /* MPWAbstractStore.m in Sources */,
 				1F8671FA22397C14006510FB /* MPWDirectoryBinding.m in Sources */,
@@ -2877,11 +3039,13 @@
 				1F49BBBC20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FCF25EF1CF398F400AC64CE /* MPWScanner.m in Sources */,
 				1FED48E7242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
+				1FEFBD2F2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1FC70F8820CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
 				1FB6EB5E1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
 				1FCF265A1CF39ABD00AC64CE /* MPWCaseInsensitiveSmallStringTable.m in Sources */,
 				1FCF265B1CF39ABD00AC64CE /* MPWEnumSelectFilter.m in Sources */,
 				1F04A53D21D2E01500E19C3F /* MPWInterval.m in Sources */,
+				1FEFBD262427F88E001E44B2 /* MPWObjectBuilder.m in Sources */,
 				1F32EC8921456B800074C15A /* MPWWriteBackCache.m in Sources */,
 				1FCF265C1CF39ABD00AC64CE /* MPWIdentityDictionary.m in Sources */,
 				1FCF25F21CF398F400AC64CE /* NSObjectAdditions.m in Sources */,
@@ -2934,6 +3098,7 @@
 				1FCF265D1CF39ABD00AC64CE /* MPWRealArray.m in Sources */,
 				1FA869D320EBC01500920279 /* MPWLoggingStore.m in Sources */,
 				1FCF26021CF398F400AC64CE /* MPWInteger.m in Sources */,
+				1FEFBD372427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */,
 				1FCF25F81CF398F400AC64CE /* MPWIgnoreTrampoline.m in Sources */,
 				1FCF26661CF39AD400AC64CE /* MPWSmallStringTable.m in Sources */,
 				1FED48C8242634CC00AF2FAD /* MPWXmlElement.m in Sources */,
@@ -3060,6 +3225,7 @@
 				1FED492224263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */,
 				1F7078A51F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
 				1F7A22861B786F9000FF6C03 /* MPWRect.m in Sources */,
+				1FEFBD352427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */,
 				1FF8FE2109B49D0200652476 /* MPWFuture.m in Sources */,
 				1FF8FE2209B49D0200652476 /* MPWIgnoreUnknownTrampoline.m in Sources */,
 				1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */,
@@ -3083,6 +3249,7 @@
 				1F3D02011D702902001A9732 /* MPWScatterStream.m in Sources */,
 				1F6244BA214835EF00BB00C4 /* MPWMapFilter.m in Sources */,
 				1FA1D3EA0BB9DACA0097A924 /* MPWFastInvocation.m in Sources */,
+				1FEFBD2D2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1FB7B5E31E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */,
 				1FA1D4590BBAAD520097A924 /* MPWRusage.m in Sources */,
 				1F6244CA2148557D00BB00C4 /* MPWMergingStore.m in Sources */,
@@ -3099,6 +3266,7 @@
 				1F1BEDCB213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */,
 				1F1BEDBB213DCBC5004B4947 /* MPWSwitchingStore.m in Sources */,
 				1F78214912D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */,
+				1FEFBD242427F88E001E44B2 /* MPWObjectBuilder.m in Sources */,
 				1FD7B37F2195C9A100046BBE /* MPWCompositeStore.m in Sources */,
 				1FCE1E1C1371BB250035A429 /* MPWBlockInvocable.m in Sources */,
 				1F2DCFE21ACB50F3004A39FB /* MPWURLFetchStream.m in Sources */,
