@@ -52,7 +52,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	id fullyQualified=nil;
 	id namespaceURI=nil;
     const char *namespaceLocation=NULL;
-	const char *namespacePrefix=NULL;
+//	const char *namespacePrefix=NULL;
 //	const char *namespace;
 
 	RECORDSCANPOSITION( start, len );
@@ -61,6 +61,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #if 1
     id openTag=CURRENTTAG;
     const char *b=[openTag bytes];
+    NSAssert(b, @"opentag no bytes");
     for (int i=0;i<len;i++) {
         if ( start[i]!=b[i]) {
             endName=TAGFORCSTRING( start, len); //  MPWUniqueStringWithCString( start, len );
@@ -77,7 +78,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     if ( shouldProcessNamespaces &&  (namespaceLen>1)) {
         namespaceLocation=start+namespaceLen-2;
 		fullyQualified=endName;
-		namespacePrefix=start;
+//		namespacePrefix=start;
 		namespaceLen=len-(namespaceLocation-start)-1; //   namespaceLocation-namespacePrefix-1;
 		endName=TAGFORCSTRING( namespaceLocation+1, namespaceLen);
         long prefixLen=namespaceLocation-start;
@@ -189,11 +190,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
     //--- remove brackets from name
     fullyQualifedPtr++;
     fullyQualifiedLen--;
-    len-=2;
+//    len-=2;
     
     //--- support for partial parsing to a specified depth (for lazy DOM parser...)
 
-    
+    NSAssert(currentElement, @"must have currentElement");
 	currentElement->isIncomplete=NO;
     if ( fullyQualifiedLen > 0 ) {
 		id attrs=_attributes;

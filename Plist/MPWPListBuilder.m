@@ -80,8 +80,9 @@ idAccessor( plist , setPlist )
 
 -(void)beginArray
 {
+#ifndef __clang_analyzer__
 	[self pushContainer:[[NSMutableArray alloc] init]];
-
+#endif
 }
 
 -(void)endArray
@@ -91,7 +92,9 @@ idAccessor( plist , setPlist )
 
 -(void)beginDictionary
 {
+#ifndef __clang_analyzer__
 	[self pushContainer:[[NSMutableDictionary alloc] init]];
+#endif
 }
 
 -(void)endDictionary

@@ -63,7 +63,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
-    return [[self mapRetrievedObject:[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] forReference:aReference] contents];
+    return [[self mapRetrievedObject:[[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
 }
 
 -(MPWReference*)referenceForPath:(NSString*)path

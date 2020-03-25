@@ -508,11 +508,12 @@ idAccessor( prefix2HandlerMap, setPrefix2HandlerMap )
     //--- remove brackets from name
     fullyQualifedPtr++;
     fullyQualifiedLen--;
-    len-=2;
+//    len-=2;
 
     //--- support for partial parsing to a specified depth (for lazy DOM parser...)
 	if ( tagStackLen > maxDepthAllowed ) {
 		NSXMLElementInfo* previous=(((NSXMLElementInfo*)_elementStack)+tagStackLen-1 );
+        NSAssert(currentElement, @"must have currentElement");
 		previous->isIncomplete=YES;
 
 		if (!isEmpty) {
@@ -522,6 +523,7 @@ idAccessor( prefix2HandlerMap, setPrefix2HandlerMap )
 		}
 		return YES;
 	}
+    NSAssert(currentElement, @"must have currentElement");
 	currentElement->isIncomplete=NO;
     currentElement->action=nil;
     MPWTagAction *action=nil;
@@ -678,15 +680,15 @@ idAccessor( prefix2HandlerMap, setPrefix2HandlerMap )
 		lastTagWasOpen=NO;
 		return YES;
 	}
-    if ( namespaceLen > 0) {
-        tagLen-=namespaceLen-1;
-        startPtr=fullyQualifedPtr+namespaceLen-1;
-        namespaceLen-=2;
+//    if ( namespaceLen > 0) {
+//        tagLen-=namespaceLen-1;
+//        startPtr=fullyQualifedPtr+namespaceLen-1;
+//        namespaceLen-=2;
 //        NSLog(@"startPtr: %.*s namespace: '%.*s'",tagLen,startPtr,namespaceLen,fullyQualifedPtr);
-    } else {
-        startPtr=fullyQualifedPtr;
-        tagLen=fullyQualifiedLen;
-    }
+//    } else {
+//        startPtr=fullyQualifedPtr;
+//        tagLen=fullyQualifiedLen;
+//    }
     
 	if ( !endName  && action ) {
 		endName=action->tagName;
@@ -1218,15 +1220,15 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 "*/
 {
     id tag;
-    const xmlchar *attrStart;
-    int attrLen;
+//    const xmlchar *attrStart;
+//    int attrLen;
 	id encoding;
 	RECORDSCANPOSITION( start, len );
     start+=2;
     nameLen-=2;
-    len-=3;
-    attrStart=start+nameLen+1;
-    attrLen=len-nameLen-1;
+//    len-=3;
+//    attrStart=start+nameLen+1;
+//    attrLen=len-nameLen-1;
 	id localVersion;
 	tag = TAGFORCSTRING( start, nameLen);
 	encoding = [_attributes objectForKey:@"encoding"];
@@ -1349,7 +1351,8 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 -buildDOMWithChildren:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
 {
-    MPWXmlElement *element;
+#ifndef __clang_analyzer__
+   MPWXmlElement *element;
 	NSArray *sub=nil;
 	int count = (int)[children count];
 	id *objs=[children _pointerToObjects];
@@ -1374,10 +1377,12 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 		}
     }
     return element;
+#endif
 }
 
 -buildChildren:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
 {
+#ifndef __clang_analyzer__
 	id result=nil;
 	if ( [children isLeaf] ) {
 		result=[[children combinedText] retain];
@@ -1390,6 +1395,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	}
 //	NSLog(@"tag %@ buildDOMWithChildren: %@ from children: %@ ",[self currentTag], result,children);
 	return result;
+#endif
 }
 
 
@@ -1409,11 +1415,14 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 -defaultElement:(MPWXMLAttributes*)children attributes:(MPWXMLAttributes*)attrs parser:(MPWMAXParser*)parser
 {
+#ifndef __clang_analyzer__
 	return [self undeclaredElement:children attributes:attrs parser:parser];
+#endif
 }
 
 -buildPlistWithChildren:(MPWXMLAttributes*)children attributes:(MPWXMLAttributes*)attributes parser:(MPWMAXParser*)parser
 {
+#ifndef __clang_analyzer__
 	id result = nil;
 	if ( [children count] > 0 ) {
 		if ( [children isLeaf] ) {
@@ -1433,6 +1442,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
         result = @"";
     }
 	return [result retain];
+#endif
 }
 
 

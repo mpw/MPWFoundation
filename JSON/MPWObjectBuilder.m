@@ -6,6 +6,7 @@
 //
 
 #import "MPWObjectBuilder.h"
+#import "MPWWriteStream.h"
 
 #define ARRAYTOS        (NSMutableArray*)(*tos)
 #define DICTTOS         (NSMutableDictionary*)(*tos)
@@ -42,7 +43,7 @@
 {
     tos--;
     if ( _arrayDepth <= _streamingThreshold) {
-        [self.target writeObject:[ARRAYTOS lastObject] sender:self];
+        [self.target writeObject:[ARRAYTOS lastObject]];
         [ARRAYTOS removeLastObject];
     }
     _objectCount++;
@@ -53,6 +54,12 @@
     [*tos setValue:anObject forKey:aKey];
 }
 
+-(void)dealloc
+{
+    [_cache release];
+    [(id)_target release];
+    [super dealloc];
+}
 
 
 @end

@@ -170,5 +170,11 @@
     return [MPWByteStream fileName:[self path]];
 }
 
+-(void)dealloc
+{
+    [_parentPath release];
+    [super dealloc];
+}
+
 @end
 

@@ -162,6 +162,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     [self _exitFlusherThread];
     [_flusherThread release];
     [_queue release];
+    [_inflight release];
     [super dealloc];
 }
 

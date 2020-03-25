@@ -47,6 +47,9 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	return self;
 }
 
+#ifndef __clang_analyzer__
+
+
 -arrayElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
 {
 	
@@ -209,12 +212,13 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	[super dealloc];
 }
 
-
+#endif
 
 
 @end
 
 #import "DebugMacros.h"
+#import "NSObjectAdditions.h"
 
 @implementation MPWXmlAppleProplistReader(testing)
 

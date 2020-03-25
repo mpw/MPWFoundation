@@ -65,7 +65,7 @@
 -(void)dealloc
 {
     [(NSObject*)_streamCopier release];
-    [self.queue release];
+    [_queue release];
     [super dealloc];
 }
 

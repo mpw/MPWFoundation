@@ -123,8 +123,10 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 		}
 	}
 	
+#ifndef __clang_analyzer__
 	curstr=[[NSString alloc] initWithBytes:buf length:dest-buf encoding:NSUTF8StringEncoding];
-	return curstr;
+    return curstr;
+#endif
 }
 
 
@@ -324,7 +326,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 		}
 	}
 #if USE_BUILDER
-	return [_builder result];
+    return [_builder result];
 #else
 	return [self parseResult];
 #endif
@@ -342,6 +344,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 
 #if !TARGET_OS_IPHONE
 #import "DebugMacros.h"
+#import "NSObjectAdditions.h"
 
 @implementation MPWMASONParser(testing)
 

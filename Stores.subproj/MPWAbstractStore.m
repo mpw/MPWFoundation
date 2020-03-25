@@ -86,7 +86,7 @@
 
 -(instancetype)initWithArray:(NSArray *)stores
 {
-    return [[self class] stores:stores];
+    return [[[self class] stores:stores] retain];
 }
 
 -at:(MPWReference*)aReference

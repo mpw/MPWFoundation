@@ -1601,8 +1601,6 @@
 				07DF1993006686DDC35ADD82 /* MPWByteStream.m */,
 				1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */,
 				1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */,
-				1F2DCFC51ACB50F3004A39FB /* MPWConvertFromJSONStream.h */,
-				1F2DCFC61ACB50F3004A39FB /* MPWConvertFromJSONStream.m */,
 				1FB6EB571DDA28B1002B82A5 /* MPWDelayStream.h */,
 				1FB6EB581DDA28B1002B82A5 /* MPWDelayStream.m */,
 				1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */,
@@ -1793,6 +1791,8 @@
 		1F8856CD2427B27E008950E8 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
+				1F2DCFC51ACB50F3004A39FB /* MPWConvertFromJSONStream.h */,
+				1F2DCFC61ACB50F3004A39FB /* MPWConvertFromJSONStream.m */,
 				1FEFBD212427F88D001E44B2 /* MPWMASONParser.h */,
 				1FEFBD232427F88D001E44B2 /* MPWMASONParser.m */,
 				1FEFBD222427F88D001E44B2 /* MPWObjectBuilder.h */,
@@ -2577,7 +2577,7 @@
 			isa = PBXProject;
 			attributes = {
 				DefaultBuildSystemTypeForWorkspace = Original;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				TargetAttributes = {
 					1F4FC9721DF818AE00B35D27 = {
 						CreatedOnToolsVersion = 8.1;

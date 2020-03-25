@@ -60,6 +60,12 @@
     [self.additionalArgs removeAllObjects];
 }
 
+-(void)dealloc
+{
+    [_additionalArgs release];
+    [super dealloc];
+}
+
 
 @end
 

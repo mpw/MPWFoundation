@@ -45,6 +45,13 @@
     [self.stores.firstObject graphViz:aStream];
 }
 
+-(void)dealloc
+{
+    [_stores release];
+    [super dealloc];
+}
+
+
 @end
 
 #import "DebugMacros.h"

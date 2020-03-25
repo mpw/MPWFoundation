@@ -18,6 +18,10 @@
 -(void)writeString:aString;
 -(void)writeNumber:aNumber;
 -(void)writeObject:anObject forKey:aKey;
+-(void)pushContainer:anObject;
+-(void)pushObject:anObject;
+
+-result;
 
 @end
 
@@ -32,5 +36,6 @@
 }
 
 -result;
++(instancetype)builder;
 
 @end

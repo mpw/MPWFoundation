@@ -363,7 +363,7 @@ static int scanXml(
             } else if ( INRANGE && *currentPtr == '!' ) {
                 currentPtr++;
                 if ( *currentPtr=='[' && ( CHARSLEFT(CDATALENGTH) &&
-                                          !CHARCOMP( currentPtr,CDATATAG+2,CDATALENGTH-2 ))) {
+                                          !CHARCOMP( currentPtr,&CDATATAG[2],CDATALENGTH-2 ))) {
                     currentPtr+=CDATALENGTH;
                     scanState = inCData;
                     //---	searching for CDataEnd "]]>" via hard-coded Boyer-Moore variant
@@ -389,7 +389,7 @@ static int scanXml(
                         break;
                     }
                 } else if ( *currentPtr=='-' && currentPtr[1]=='-' ) {
-                    currentCallback=declarationCallback;
+//                    currentCallback=declarationCallback;
                     currentPtr+=2;
                     scanState = inComment;
                     do {
@@ -498,7 +498,7 @@ static int scanXml(
                 }
                 
                 attValStart=currentPtr;
-                scanState=inAttributeValue;
+//                scanState=inAttributeValue;
                 while ( INRANGE && *currentPtr != attValDelim && !ISCLOSETAG(*currentPtr)) {
                     valueMask |= *currentPtr;
                     currentPtr++;

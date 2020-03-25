@@ -348,7 +348,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 		id valueCopy=[values[i] copy];
 		[copy setValueAndRelease:valueCopy forAttribute:keyCopy namespace:[namespaces[i] retain]];
 		[keyCopy release];
-		//		[valueCopy release];
+		//		[valueCopy release];           
 	}
 }
 
