@@ -47,7 +47,6 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	return self;
 }
 
-#ifndef __clang_analyzer__
 
 
 -arrayElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
@@ -56,7 +55,8 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	return [[children allValues] retain];
 }
 
--defaultElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+
+-defaultElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [[children lastObject] retain];
 }
@@ -127,7 +127,7 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	return [self integerElementAtPtr:[subdata bytes] length:[subdata length]];
 }
 
--stringElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-stringElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	id result=nil;
 	long count=[children count];
@@ -144,13 +144,13 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	return result;
 }
 
--dataElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-dataElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [self stringElement:children attributes:attrs parser:parser];
 }
 
 
--realElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-realElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [self integerElement:children attributes:attrs parser:parser];
 }
@@ -175,12 +175,12 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
     return nil;
 }
 
--keyElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-keyElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
     if ( [children count]==1) {
         MPWSubData *d=[children lastObject];
 #if 1
-        return [[[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding] autorelease];
+        return [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
 #else
         return [MPWUniqueStringWithCString([d bytes],[d length]) retain];
 #endif
@@ -189,18 +189,18 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
     }
 }
 
--falseElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-falseElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [false_value retain];
 }
 
--trueElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-trueElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [true_value retain];
 }
 
 
--plistElement:(MPWXMLAttributes*) children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
+-plistElement:(MPWXMLAttributes*) children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser  __attribute((ns_returns_retained))
 {
 	return [[children lastObject] retain];
 }
@@ -212,7 +212,6 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 	[super dealloc];
 }
 
-#endif
 
 
 @end

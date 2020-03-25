@@ -37,10 +37,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 }
 
 
--realElement:(const char*)start length:(long)len;
--integerElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser;
--dictElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser;
--arrayElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser;
--integerElementAtPtr:(const char*)start length:(long)len;
+-realElement:(const char*)start length:(long)len __attribute((ns_returns_retained));
+-integerElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser __attribute((ns_returns_retained));
+-dictElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser __attribute((ns_returns_retained));
+-arrayElement:(MPWXMLAttributes*)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser __attribute((ns_returns_retained));
+-integerElementAtPtr:(const char*)start length:(long)len __attribute((ns_returns_retained));
 
 @end

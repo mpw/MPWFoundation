@@ -38,12 +38,16 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 
 -(void)endDictionary
 {
-	[self pushResult:[self dictElement:CURRENTELEMENT.children attributes:nil parser:self ] withTag:@"dict"];
+    NSDictionary *dict=[self dictElement:CURRENTELEMENT.children attributes:nil parser:self ];
+	[self pushResult:dict withTag:@"dict"];
+    [dict release];
 }
 
 -(void)endArray
 {
-	[self pushResult:[self arrayElement:CURRENTELEMENT.children attributes:nil parser:self ] withTag:@"array"];
+    NSArray *array=[self arrayElement:CURRENTELEMENT.children attributes:nil parser:self ];
+	[self pushResult:array withTag:@"array"];
+    [array release];
 }
 
 -(void)pushTag:(id)aTag
