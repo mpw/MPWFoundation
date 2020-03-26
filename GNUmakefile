@@ -117,10 +117,12 @@ libMPWFoundation_OBJC_FILES = \
     Plist/MPWBinaryPListWriter.m \
     Plist/MPWNeXTPListWriter.m \
     Plist/MPWBinaryPlist.m \
+    Plist/MPWPListBuilder.m \
     JSON/MPWMASONParser.m \
     JSON/MPWObjectBuilder.m \
     JSON/MPWConvertFromJSONStream.m \
     XML/MPWXmlScanner.m \
+    XML/MPWXmlAppleProplistReader.m \
     XML/MPWMAXParser.m \
     XML/MPWXmlParser.m \
     XML/MPWXmlAttributes.m \

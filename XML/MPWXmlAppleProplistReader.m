@@ -38,7 +38,9 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 -init
 {
     self = [super init];
+#ifndef GNUSTEP
 	allocator = kCFAllocatorSystemDefault; // CFAllocatorGetDefault();
+#endif
 	true_value = [[NSNumber numberWithBool:YES] retain];
 	false_value = [[NSNumber numberWithBool:NO] retain];
 	[self setHandler:self forElements:[NSArray arrayWithObjects:@"key",@"string",@"date",@"data",@"dict",@"array",@"integer",@"real",@"true",@"false",@"plist",nil]];
@@ -90,7 +92,11 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 		start++;
 	}
 	val*=sign;
+#ifndef GNUSTEP
 	return (id)CFNumberCreate( allocator, kCFNumberSInt32Type, &val );
+#else
+    return [[NSNumber numberWithInt:val] retain];
+#endif
 }
 
 -realElement:(const char*)start length:(long)len
@@ -118,7 +124,11 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 		}
 	}
 	val*=sign;
-	return (id)CFNumberCreate( allocator, kCFNumberDoubleType, &val );
+#ifndef GNUSTEP
+    return (id)CFNumberCreate( allocator, kCFNumberDoubleType, &val );
+#else
+    return [[NSNumber numberWithDouble:val] retain];
+#endif
 }
 
 -integerElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser
