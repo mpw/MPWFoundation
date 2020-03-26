@@ -106,8 +106,6 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWFilter.m \
     Streams.subproj/MPWWriteStream.m \
     Streams.subproj/MPWRESTCopyStream.m \
-    Streams.subproj/MPWBinaryPListWriter.m \
-    Streams.subproj/MPWNeXTPListWriter.m \
     Streams.subproj/MPWCombinerStream.m \
     Streams.subproj/MPWMapFilter.m \
     Streams.subproj/MPWPipeline.m \
@@ -116,6 +114,20 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWExternalFilter.m \
     Streams.subproj/MPWFDStreamSource.m \
     Streams.subproj/MPWStreamSource.m \
+    Plist/MPWBinaryPListWriter.m \
+    Plist/MPWNeXTPListWriter.m \
+    Plist/MPWBinaryPlist.m \
+    JSON/MPWMASONParser.m \
+    JSON/MPWObjectBuilder.m \
+    JSON/MPWConvertFromJSONStream.m \
+    XML/MPWXmlScanner.m \
+    XML/MPWMAXParser.m \
+    XML/MPWXmlParser.m \
+    XML/MPWXmlAttributes.m \
+    XML/MPWXmlElement.m \
+    XML/MPWXmlGeneratorStream.m \
+    XML/MPWTagHandler.m \
+    XML/MPWTagAction.m \
     Classes/NSStringAdditions.m \
     Classes/NSDictAdditions.m \
     Classes/MPWRusage.m \
@@ -141,7 +153,6 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWMessageCatcher.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \
-    Collections.subproj/MPWBinaryPlist.m \
     Collections.subproj/MPWIntArray.m \
     Collections.subproj/MPWRealArray.m \
     Collections.subproj/MPWSubData.m \
