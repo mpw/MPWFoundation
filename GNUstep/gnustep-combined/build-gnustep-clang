@@ -38,8 +38,9 @@ make install
 cd ..
 
 source /usr/local/share/GNUstep/Makefiles/GNUstep.sh
-tar zxf gnustep-base-1.25.1.tar.gz 
-cd gnustep-base-1.25.1
+cd libs-base
+#tar zxf gnustep-base-1.26.0.tar.gz 
+#cd gnustep-base-1.26.0
 ./configure
 make install
 cd ..
