@@ -139,15 +139,16 @@ idAccessor(byteTarget, _setByteTarget)
     return [NSMutableData data];
 }
 
+#if GS_API_LATEST
+static void atexit_b( void *a ) {}
+#endif
+
 +Stdout
 {
 	static id Stdout=nil;
 	if ( !Stdout ) {
 		Stdout = [[self fd:1] retain];
-#if GS_API_LATEST
-#else
         atexit_b( ^{ [Stdout close]; });
-#endif
 	}
 	return Stdout;
 }
@@ -157,10 +158,7 @@ idAccessor(byteTarget, _setByteTarget)
 	static id Stderr=nil;
 	if ( !Stderr ) {
         Stderr = [[self fd:2] retain];
-#if GS_API_LATEST
-#else
         atexit_b( ^{ [Stderr close]; });
-#endif
 	}
 	return Stderr;
 }
