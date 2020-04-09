@@ -14,12 +14,10 @@
 
 idAccessor( key , setKey )
 idAccessor( plist , setPlist )
-//objectAccessor( NSMutableArray, containerStack, setContainerStack )
 
 -init
 {
 	self=[super init];
-//	[self setContainerStack:[NSMutableArray array]];
 	tos = containerStack;
 	return self;
 }

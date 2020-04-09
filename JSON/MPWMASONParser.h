@@ -19,4 +19,6 @@
 
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
 
+-(void)setFrequentStrings:(NSArray*)strings;
+
 @end

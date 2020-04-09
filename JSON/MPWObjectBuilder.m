@@ -18,7 +18,8 @@
 {
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
-    self.streamingThreshold=1;
+    self.streamingThreshold=0
+    ;
     return self;
 }
 

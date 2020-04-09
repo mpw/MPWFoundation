@@ -124,3 +124,6 @@
 #import "MPWFoundation/MPWFileBinding.h"
 
 
+#import "MPWFoundation/MPWXmlGeneratorStream.h"
+#import "MPWFoundation/MPWMasonParser.h"
+#import "MPWFoundation/MPWObjectBuilder.h"

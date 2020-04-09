@@ -11,6 +11,8 @@
 #import <MPWFoundation/MPWPListBuilder.h>
 #import <MPWFoundation/MPWSmallStringTable.h>
 
+#define USE_BUILDER 1
+
 @implementation MPWMASONParser
 
 objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
@@ -18,7 +20,9 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 -init
 {
 	self=[super init];
-//	[self setBuilder:[MPWPListBuilder builder]];
+#if USE_BUILDER
+    [self setBuilder:[MPWPListBuilder builder]];
+#endif
 	return self;
 }
 
@@ -149,16 +153,10 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     *stringend=curptr;
 }
 
-#define USE_BUILDER 1
 
 
 -parsedData:(NSData*)jsonData
 {
-#if USE_BUILDER
-    if (!self.builder) {
-        [self setBuilder:[MPWPListBuilder builder]];
-    }
-#endif	
 	[self setData:jsonData];
 	const char *curptr=[jsonData bytes];
 	const char *endptr=curptr+[jsonData length];

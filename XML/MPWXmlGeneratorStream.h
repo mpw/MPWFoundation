@@ -32,7 +32,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWFlattenStream.h"
 
 
-@interface MPWXmlGeneratorStream : MPWFlattenStream //<SaxDocumentHandler>
+@interface MPWXmlGeneratorStream : MPWFlattenStream 
 {
     BOOL		atBOL;
     int         indent;
