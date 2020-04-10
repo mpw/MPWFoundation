@@ -73,7 +73,7 @@ idAccessor( plist , setPlist )
 	[self pushObject:anObject];
 	tos++;
 	*tos=anObject;
-	[anObject release];
+//	[anObject release];
 }
 
 -(void)beginArray

@@ -18,6 +18,7 @@
 {
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
+    [self.cache setUnsafeFastAlloc:YES];
     self.streamingThreshold=0
     ;
     return self;
