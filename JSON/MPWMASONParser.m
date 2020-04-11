@@ -11,7 +11,6 @@
 #import <MPWFoundation/MPWPListBuilder.h>
 #import <MPWFoundation/MPWSmallStringTable.h>
 
-#define USE_BUILDER 1
 
 @implementation MPWMASONParser
 
@@ -20,9 +19,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 -init
 {
 	self=[super init];
-#if USE_BUILDER
     [self setBuilder:[MPWPListBuilder builder]];
-#endif
 	return self;
 }
 
@@ -69,10 +66,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 {
 	NSString *curstr;
 	if ( commonStrings  ) {
-//        NSLog(@"will attempt to fetch cstring '%.*s' from common strings",len,start);
-//        NSLog(@"common strings: %@",commonStrings);
 		NSString *res=OBJECTFORSTRINGLENGTH( commonStrings, start, len );
-//        NSLog(@"did fetch: %@",res);
 		if ( res ) {
 			return [res retain];
 		}
@@ -165,66 +159,39 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 	while (curptr < endptr ) {
 		switch (*curptr) {
 			case '{':
-#if USE_BUILDER				
 				[_builder beginDictionary];
-#else				
-				[self pushTag:@"dict"];
-#endif				
 				inDict=YES;
 				inArray=NO;
 //                NSLog(@"{ -- start dict");
 				curptr++;
 				break;
 			case '}':
-#if USE_BUILDER				
 				[_builder endDictionary];
-#else				
-				[self endDictionary];
-#endif				
 //				NSLog(@"} -- end dict");
 				curptr++;
 				break;
 			case '[':
 //				NSLog(@"[ -- start array");
-#if USE_BUILDER				
 				[_builder beginArray];
-#else				
-				[self pushTag:@"array"];
-#endif				
 				inDict=NO;
 				inArray=YES;
 				curptr++;
 				break;
 			case ']':
 //				NSLog(@"] -- end array");
-#if	USE_BUILDER
 				[_builder endArray];
-#else				
-				[self endArray];
-#endif				
 				curptr++;
 				break;
 			case '"':
                 parsestring( curptr , endptr, &stringstart, &curptr  );
                 curstr = [self makeRetainedJSONStringStart:stringstart length:curptr-stringstart];
-//				NSLog(@"found string: '%@'  curptr: %c",curstr,*curptr);
 				curptr++;
-//				NSLog(@"curptr after end of string skip: %c",*curptr);
 				if ( *curptr == ':' ) {
-//					NSLog(@"writeKey: %@",curstr);
-#if USE_BUILDER					
 					[_builder writeKey:curstr];
-#else					
-					[self pushObject:curstr forKey:@"key" withNamespace:nil];
-#endif					
 					curptr++;
 					
 				} else {
-#if USE_BUILDER					
 					[_builder writeString:curstr];
-#else					
-					[self pushObject:curstr forKey:@"string" withNamespace:nil];
-#endif					
 				}
 				break;
 			case ',':
@@ -265,61 +232,38 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 					}
 					isReal=YES;
 				}
-					number = isReal ? [self realElement:numstart length:curptr-numstart] :
-					[self integerElementAtPtr:numstart length:curptr-numstart];
+                number = isReal ?
+                            [self realElement:numstart length:curptr-numstart] :
+                            [self integerElementAtPtr:numstart length:curptr-numstart];
 
-//				NSLog(@"write number: %@",number);
-#if USE_BUILDER					
 				[_builder writeString:number];
-#else
-				[self pushObject:number forKey:@"number" withNamespace:nil];
-#endif				
 				break;
 			}
 			case 't':
 				if ( (endptr-curptr) >=4  && !strncmp(curptr, "true", 4)) {
-					// return true;
 					curptr+=4;
-//					NSLog(@"true");
-#if USE_BUILDER					
 					[_builder pushObject:true_value];
-#else
-					[self pushObject:[true_value retain] forKey:@"true" withNamespace:nil];
-#endif
 				}
 				break;
 			case 'f':
 				if ( (endptr-curptr) >=5  && !strncmp(curptr, "false", 5)) {
 					// return false;
 					curptr+=5;
-//					NSLog(@"false");
-#if USE_BUILDER					
 					[_builder pushObject:false_value];
-#else
-					[self pushObject:[false_value retain] forKey:@"false" withNamespace:nil];
-#endif
 
 				}
 				break;
 			case 'n':
 				if ( (endptr-curptr) >=4  && !strncmp(curptr, "null", 4)) {
-					// return null;
-//					NSLog(@"null");
-#if USE_BUILDER					
 					[_builder pushObject:[NSNull null]];
-#else
-					[self pushObject:[[NSNull null] retain] forKey:@"null" withNamespace:nil];
-#endif
 					curptr+=4;
 				}
 				break;
 			case ' ':
 			case '\n':
-//				NSLog(@"whitespace");
 				while (curptr < endptr && isspace(*curptr)) {
 					curptr++;
 				}
-//				NSLog(@"curptr after whitespace: %c",*curptr);
 				break;
 
 			default:
@@ -327,11 +271,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 				break;
 		}
 	}
-#if USE_BUILDER
     return [_builder result];
-#else
-	return [self parseResult];
-#endif
 
 }
 
@@ -449,9 +389,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 {
     @autoreleasepool {
         MPWMASONParser *parser=nil;
-        @autoreleasepool {
-            parser=[[MPWMASONParser alloc] init];
-        }
+        parser=[[MPWMASONParser alloc] init];
 
         NSData *json=[self frameworkResource:@"array" category:@"json"];
         NSString *string1=@"first";
@@ -459,24 +397,19 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 //        NSLog(@"will parse");
         NSArray *array=[parser parsedData:json];
 //        NSLog(@"did parse");
-        EXPECTFALSE( [array objectAtIndex:0] == string1 ,@"did not expect the same string for string1");
-        EXPECTFALSE( [array objectAtIndex:1] == string2 ,@"did not expect the same string for string2");
-        @autoreleasepool {
-            [parser setFrequentStrings:[NSArray arrayWithObjects:string1,string2,nil]];
-        }
-//        NSLog(@"before parse with frequent strings");
-        @autoreleasepool {
-            array=[[parser parsedData:json] retain];
-        }
-        
-//        NSLog(@"after parse with frequent strings");
-//        NSLog(@"parser retainCount: %d",[parser retainCount]);
+        EXPECTFALSE( array[0] == string1 ,@"did not expect the same string for string1");
+        EXPECTFALSE( array[1]   == string2 ,@"did not expect the same string for string2");
+        IDEXPECT( array[0] , string1 ,@"string1");
+        IDEXPECT( array[1]  , string2 ,@" string2");
         [parser release];
-//        NSLog(@"result array: %@",array);
-#if !USE_BUILDER
-        EXPECTTRUE( [array objectAtIndex:0] == string1 ,@"expected the same string for string1");
-        EXPECTTRUE( [array objectAtIndex:1] == string2 ,@"expected the same string for string2");
-#endif
+        parser=[[MPWMASONParser alloc] init];
+        [parser setFrequentStrings:@[string1,string2]];
+        array=[parser parsedData:json];
+        [parser release];
+        IDEXPECT( array[0] , string1 ,@"string1");
+        IDEXPECT( array[1], string2 ,@" string2");
+        EXPECTTRUE( array[0]  == string1 ,@"expected the same string for string1");
+        EXPECTTRUE( array[1]  == string2 ,@"expected the same string for string2");
         [array release];
     }
 //    NSLog(@"after test pool");
