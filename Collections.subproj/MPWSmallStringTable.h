@@ -22,24 +22,20 @@ typedef struct {
 } StringTableIndex;
 
 @interface MPWSmallStringTable : NSDictionary {
-	int     __retainCount;
-	int     flags;
-	int     tableLength;
-	unsigned char *table;
-#if WINDOWS || LINUX
-	id      *tableValues;
-#else
-	__strong  id *tableValues;
-#endif
+    int     __retainCount;
+    int     flags;
+    int     tableLength;
+    unsigned char *table;
+    __strong  id *tableValues;
     StringTableIndex *tableIndex;
     int     *chainStarts;
     int     *tableOffsetsPerLength;
     int     maxLen;
-	id      defaultValue;
-	BOOL    caseInsensitive;
+    id      defaultValue;
+    BOOL    caseInsensitive;
     
-	@public
-	LOOKUPIMP    __stringTableLookupFun;
+    @public
+    LOOKUPIMP    __stringTableLookupFun;
 }
 
 //extern IMP __stringTableLookupFun;

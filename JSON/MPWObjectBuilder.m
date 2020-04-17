@@ -19,8 +19,7 @@
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
     [self.cache setUnsafeFastAlloc:YES];
-    self.streamingThreshold=0
-    ;
+    self.streamingThreshold=0;
     return self;
 }
 
@@ -48,7 +47,6 @@
         [self.target writeObject:[ARRAYTOS lastObject]];
         [ARRAYTOS removeLastObject];
     }
-    _objectCount++;
 }
 
 -(void)writeObject:anObject forKey:aKey
