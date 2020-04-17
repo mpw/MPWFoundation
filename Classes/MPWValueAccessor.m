@@ -52,6 +52,7 @@ idAccessor(target, _setTarget)
     component->putSelector=NSSelectorFromString([self putSelectorStringForName:newName]);
     component->getIMP=(IMP0)objc_msgSend;
     component->putIMP=(IMP1)objc_msgSend;
+    component->objcType='@';
     component->targetOffset=-1;
     component->additionalArg=[newName retain];
 }
@@ -70,20 +71,17 @@ idAccessor(target, _setTarget)
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
     }
-    const char *cName=[[self name] UTF8String];
-    NSLog(@"ivar for name: '%s' class: %@",cName,targetClass);
+    const char *cName=sel_getName(component->getSelector);
     Ivar v = class_getInstanceVariable(targetClass, cName);
     if ( !v ) {
-        cName=[[@"_" stringByAppendingString:[self name]] UTF8String];
+        cName=[[@"_" stringByAppendingString:@(cName)] UTF8String];
         v = class_getInstanceVariable(targetClass, cName);
     }
-    NSLog(@"ivar: %p",v);
     const char *typeString = ivar_getTypeEncoding(v);
     if ( typeString) {
-        NSLog(@"type: %s",typeString);
         component->objcType=typeString[0];
     } else {
-        NSLog(@"no type info for '%@' of %@",[self name],NSStringFromClass(targetClass));
+        component->objcType='@';
     }
 }
 
@@ -122,13 +120,33 @@ idAccessor(name, setName)
 
 static inline id getValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
     for (int i=0;i<count;i++) {
-//        if ( c[i].targetOffset>= 0 ) {
-//            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
-//        } else {
+        //        if ( c[i].targetOffset>= 0 ) {
+        //            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
+        //        } else {
+        if ( c[i].objcType == '@' ) {
             currentTarget=((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg );
-//        }
+        } else if  ( c[i].objcType == 'q' ) {
+            currentTarget=@((long)((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg ));
+
+        }
+        //        }
     }
     return currentTarget;
+}
+
+static inline long getIntValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
+    long result = 0;
+        //        if ( c[i].targetOffset>= 0 ) {
+        //            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
+        //        } else {
+        if ( c[0].objcType == '@' ) {
+            currentTarget=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) longValue];
+        } else if  ( c[0].objcType == 'q' ) {
+            result=((long)((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ));
+
+        }
+        //        }
+    return result;
 }
 
 static inline void setValueForComponents( id currentTarget, AccessPathComponent *c , int count, id value) {
@@ -155,6 +173,16 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 -valueForTarget:aTarget
 {
     return getValueForComponents( aTarget, components, count);
+}
+
+-(long)intValueForTarget:aTarget
+{
+    return getIntValueForComponents( aTarget, components, count);
+}
+
+-(long)intValue
+{
+    return getIntValueForComponents( self->target, components, count);
 }
 
 -(void)setValue:newValue forTarget:aTarget
@@ -299,7 +327,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     }
     MPWRusage* kvcTime=[MPWRusage timeRelativeTo:kvcStart];
     double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
-#define EXPECTEDUNBOUNDRATIO 15
+#define EXPECTEDUNBOUNDRATIO 10
     
     EXPECTTRUE(unboundRatio > EXPECTEDUNBOUNDRATIO, ([NSString stringWithFormat:@"ratio of value accessor to kvc path %g < %g",
                                                       unboundRatio,(double)EXPECTEDUNBOUNDRATIO]));
@@ -317,12 +345,21 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 }
 
 
-+(void)testReadAccessToIntegerIvar
++(void)testReadAccessOfIntegerIvar
 {
     MPWValueAccessorTestingClass *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     IDEXPECT( [accessor value], @(34), @"integer value");
+}
+
+
++(void)testIntReadAccessOfIntegerIvar
+{
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"number"];
+    [accessor bindToTarget:t];
+    INTEXPECT( [accessor intValue], 34, @"integer value");
 }
 
 +(void)testTypeOfIntVar
@@ -343,7 +380,8 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
             @"testPathAccess",
             @"testPerformanceOfPathAccess",
             @"testBoundDictAccess",
-//            @"testReadAccessToIntegerIvar",
+            @"testReadAccessOfIntegerIvar",
+            @"testIntReadAccessOfIntegerIvar",
             @"testTypeOfIntVar",
             nil];
 }
