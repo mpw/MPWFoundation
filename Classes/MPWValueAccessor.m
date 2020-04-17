@@ -14,12 +14,13 @@
 #import <objc/message.h>
 
 typedef struct {
-    Class       targetClass;
-    int         targetOffset;
-    SEL         getSelector,putSelector;
-    IMP0         getIMP;
-    IMP1         putIMP;
-    id          additionalArg;
+    Class   targetClass;
+    int     targetOffset;
+    SEL     getSelector,putSelector;
+    IMP0    getIMP;
+    IMP1    putIMP;
+    id      additionalArg;
+    char    objcType;
 } AccessPathComponent;
 
 
@@ -40,30 +41,55 @@ idAccessor(target, _setTarget)
     return [[[self alloc] initWithName:name] autorelease];
 }
 
+-(NSString*)putSelectorStringForName:(NSString*)newName
+{
+    return [[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"];
+}
+
 -(void)setName:(NSString*)newName forComponent:(AccessPathComponent*)component
 {
     component->getSelector= NSSelectorFromString(newName);
-    component->putSelector=NSSelectorFromString([[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"]);
+    component->putSelector=NSSelectorFromString([self putSelectorStringForName:newName]);
     component->getIMP=(IMP0)objc_msgSend;
     component->putIMP=(IMP1)objc_msgSend;
     component->targetOffset=-1;
     component->additionalArg=[newName retain];
 }
 
--(void)bindComponent:(AccessPathComponent*)component toTarget:aTarget
+-(void)bindComponent:(AccessPathComponent*)component toTargetClass:(Class)targetClass
 {
-    component->targetClass=object_getClass( aTarget);
-    if ( ![aTarget respondsToSelector:component->getSelector] ) {
+    component->targetClass=targetClass;
+    if ( ![targetClass instancesRespondToSelector:component->getSelector] ) {
         component->getSelector = @selector(objectForKey:);
     }
-    component->getIMP=(IMP0)[aTarget methodForSelector:component->getSelector];
-    if ( ![aTarget respondsToSelector:component->putSelector] ) {
+    component->getIMP=(IMP0)[targetClass instanceMethodForSelector:component->getSelector];
+    if ( ![targetClass instancesRespondToSelector:component->putSelector] ) {
         component->putSelector = @selector(setObject:forKey:);
     }
-    component->putIMP=(IMP1)[aTarget methodForSelector:component->putSelector];
+    component->putIMP=(IMP1)[targetClass instanceMethodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
     }
+    const char *cName=[[self name] UTF8String];
+    NSLog(@"ivar for name: '%s' class: %@",cName,targetClass);
+    Ivar v = class_getInstanceVariable(targetClass, cName);
+    if ( !v ) {
+        cName=[[@"_" stringByAppendingString:[self name]] UTF8String];
+        v = class_getInstanceVariable(targetClass, cName);
+    }
+    NSLog(@"ivar: %p",v);
+    const char *typeString = ivar_getTypeEncoding(v);
+    if ( typeString) {
+        NSLog(@"type: %s",typeString);
+        component->objcType=typeString[0];
+    } else {
+        NSLog(@"no type info for '%@' of %@",[self name],NSStringFromClass(targetClass));
+    }
+}
+
+-(void)bindComponent:(AccessPathComponent*)component toTarget:aTarget
+{
+    [self bindComponent:component toTargetClass: object_getClass( aTarget)];
 }
 
 -(void)setComponentsForPath:(NSArray*)pathComponents
@@ -144,6 +170,10 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     setValueForComponents( target, components, count,newValue);
 }
 
+-(char)typeCode
+{
+    return components[0].objcType;
+}
 
 @end
 
@@ -151,24 +181,59 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 #import "MPWByteStream.h"
 #import "MPWRusage.h"
 
+@interface MPWValueAccessorTestingClass:NSObject
+
+@property (nonatomic,assign) long number;
+@property (nonatomic,strong) NSString* string;
+@property (nonatomic,strong) id target;
+
+@end
+
+@implementation MPWValueAccessorTestingClass
+
+-(void)dealloc {
+    [_string release];
+    [_target release];
+    [super dealloc];
+}
+
+-(BOOL)isEqual:(MPWValueAccessorTestingClass*)other
+{
+    return self.number == other.number &&
+          (self.string == other.string  ||
+           [self.string isEqual: other.string]) &&
+          (self.target == other.target  ||
+           [self.target isEqual: other.target]);
+}
+
+@end
+
+
+
+
 @implementation MPWValueAccessor(testing)
 
-+_testTarget
++(MPWValueAccessorTestingClass*)_testTarget
 {
-    return [MPWFilter streamWithTarget:[MPWByteStream Stderr]];
+    MPWValueAccessorTestingClass *t=[[MPWValueAccessorTestingClass new] autorelease];
+    t.string=@"hello";
+    t.number=34;
+    return t;
 }
 
 
-+_testCompoundTarget
++(MPWValueAccessorTestingClass*)_testCompoundTarget
 {
-    return [MPWFilter streamWithTarget:[MPWFilter streamWithTarget:[MPWByteStream Stderr]]];
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    t.target=[self _testTarget];
+    return t;
 }
 
 +(void)testBasicUnboundAccess
 {
-    MPWWriteStream *t=[self _testTarget];
-    MPWValueAccessor *accessor=[self valueForName:@"target"];
-    IDEXPECT([accessor valueForTarget:t], [MPWByteStream Stderr], @"target");
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"string"];
+    IDEXPECT([accessor valueForTarget:t], @"hello", @"objectValue");
 }
 
 
@@ -182,39 +247,39 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 
 +(void)testBasicUnboundSetAccess
 {
-    MPWFilter *t=[self _testTarget];
-    MPWValueAccessor *accessor=[self valueForName:@"target"];
-    [accessor setValue:[MPWByteStream Stdout] forTarget:t];
-    IDEXPECT([t target], [MPWByteStream Stdout], @"target");
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"string"];
+    [accessor setValue:@"newString" forTarget:t];
+    IDEXPECT(t.string, @"newString", @"objectValue");
 }
 
 
 +(void)testBoundGetSetAccess
 {
-    MPWFilter *t=[self _testTarget];
-    MPWValueAccessor *accessor=[self valueForName:@"target"];
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"string"];
     [accessor bindToTarget:t];
-    IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
-    [accessor setValue:[MPWByteStream Stdout]];
-    IDEXPECT([t target], [MPWByteStream Stdout], @"newly set target after bind");
+    IDEXPECT([accessor value], @"hello", @"target after bind");
+    [accessor setValue:@"world"];
+    IDEXPECT(t.string, @"world", @"newly set target after bind");
 }
 
 +(void)testPathAccess
 {
-    MPWFilter *t=[self _testCompoundTarget];
-    MPWValueAccessor *accessor=[[[self alloc] initWithPath:@"target/target"] autorelease];
+    MPWValueAccessorTestingClass *t=[self _testCompoundTarget];
+    MPWValueAccessor *accessor=[[[self alloc] initWithPath:@"target/string"] autorelease];
     [accessor bindToTarget:t];
-    IDEXPECT([accessor value], [MPWByteStream Stderr], @"target after bind");
-    [accessor setValue:[MPWByteStream Stdout]];
-    IDEXPECT([(MPWFilter*)[t target] target], [MPWByteStream Stdout], @"newly set target after bind");
+    IDEXPECT([accessor value], @"hello", @"target after bind");
+    [accessor setValue:@"pathString"];
+    IDEXPECT([[t target] string], @"pathString", @"newly set target after bind");
 }
 
 #define ACCESS_COUNT  10000
 
 +(void)testPerformanceOfPathAccess
 {
-    NSString *keyPath=@"target/target";
-    MPWFilter *t=[self _testCompoundTarget];
+    NSString *keyPath=@"target/string";
+    MPWValueAccessorTestingClass *t=[self _testCompoundTarget];
     MPWRusage* accessorStart=[MPWRusage current];
     MPWValueAccessor *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
     for (int i=0;i<ACCESS_COUNT;i++) {
@@ -234,7 +299,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     }
     MPWRusage* kvcTime=[MPWRusage timeRelativeTo:kvcStart];
     double unboundRatio = (double)[kvcTime userMicroseconds] / (double)[accessorTime userMicroseconds];
-#define EXPECTEDUNBOUNDRATIO 10
+#define EXPECTEDUNBOUNDRATIO 15
     
     EXPECTTRUE(unboundRatio > EXPECTEDUNBOUNDRATIO, ([NSString stringWithFormat:@"ratio of value accessor to kvc path %g < %g",
                                                       unboundRatio,(double)EXPECTEDUNBOUNDRATIO]));
@@ -252,6 +317,23 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 }
 
 
++(void)testReadAccessToIntegerIvar
+{
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"number"];
+    [accessor bindToTarget:t];
+    IDEXPECT( [accessor value], @(34), @"integer value");
+}
+
++(void)testTypeOfIntVar
+{
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"number"];
+    [accessor bindToTarget:t];
+    char typeCode=[accessor typeCode];
+    INTEXPECT(typeCode, 'q', @"type");
+}
+
 +testSelectors
 {
     return [NSArray arrayWithObjects:
@@ -261,6 +343,8 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
             @"testPathAccess",
             @"testPerformanceOfPathAccess",
             @"testBoundDictAccess",
+//            @"testReadAccessToIntegerIvar",
+            @"testTypeOfIntVar",
             nil];
 }
 

@@ -22,6 +22,10 @@
 -(void)setValue:newValue forTarget:aTarget;
 -(NSString*)name;
 -value;
+-(void)setValue:newValue;
+-(long)intValue;
+-(void)setIntValue:(long)newValue;
+
 -target;
 -(void)bindToTarget:aTarget;
 
