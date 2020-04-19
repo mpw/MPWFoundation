@@ -140,7 +140,7 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
         //            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
         //        } else {
         if ( c[0].objcType == '@' ) {
-            currentTarget=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) longValue];
+            currentTarget=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) integerValue];
         } else if  ( c[0].objcType == 'q' ) {
             result=((long)((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ));
 
@@ -152,7 +152,21 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
 static inline void setValueForComponents( id currentTarget, AccessPathComponent *c , int count, id value) {
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
-    ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, value, c[final].additionalArg );
+    if ( c[final].objcType == 'q') {
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, [value integerValue], c[final].additionalArg );
+    } else {
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector,value , c[final].additionalArg );
+    }
+}
+
+static inline void setIntValueForComponents( id currentTarget, AccessPathComponent *c , int count, long value) {
+    currentTarget = getValueForComponents( currentTarget, c, count-1);
+    int final=count-1;
+    if ( c[final].objcType == 'q') {
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, value, c[final].additionalArg );
+    } else {
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, @(value), c[final].additionalArg );
+    }
 }
 
 -(void)_setOffset:(int)offset
@@ -168,6 +182,11 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
         [self bindComponent:components+i toTarget:currentTarget];
         currentTarget=getValueForComponents(currentTarget, components+i, 1);
     }
+}
+
+-(void)bindToClass:(Class)aClass
+{
+    [self bindComponent:components toTargetClass:aClass];
 }
 
 -valueForTarget:aTarget
@@ -196,6 +215,11 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 -(void)setValue:newValue
 {
     setValueForComponents( target, components, count,newValue);
+}
+
+-(void)setIntValue:(long)newValue
+{
+    setIntValueForComponents( target, components, count,newValue);
 }
 
 -(char)typeCode
@@ -362,6 +386,19 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     INTEXPECT( [accessor intValue], 34, @"integer value");
 }
 
++(void)testIntWriteAccessOfIntegerIvar
+{
+    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWValueAccessor *accessor=[self valueForName:@"number"];
+    [accessor bindToTarget:t];
+    [accessor setIntValue:45];
+    INTEXPECT( [t number], 45, @"integer value");
+    [accessor setValue:@"200"];
+    INTEXPECT( [t number], 200, @"integer value set as string");
+    [accessor setValue:@(100)];
+    INTEXPECT( [t number], 100, @"integer value set as NSNumber");
+}
+
 +(void)testTypeOfIntVar
 {
     MPWValueAccessorTestingClass *t=[self _testTarget];
@@ -382,6 +419,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
             @"testBoundDictAccess",
             @"testReadAccessOfIntegerIvar",
             @"testIntReadAccessOfIntegerIvar",
+            @"testIntWriteAccessOfIntegerIvar",
             @"testTypeOfIntVar",
             nil];
 }
