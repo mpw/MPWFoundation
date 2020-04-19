@@ -13,6 +13,7 @@
 -(instancetype)initWithClass:(Class)theClass;
 
 @property (nonatomic, strong) MPWObjectCache *cache;
+@property (nonatomic, strong) MPWSmallStringTable *accessorTable;
 @property (nonatomic, assign) long objectCount;
 @property (nonatomic, assign) long arrayDepth;
 @property (nonatomic, assign) long objectDepth;

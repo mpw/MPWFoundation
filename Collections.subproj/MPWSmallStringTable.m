@@ -342,11 +342,15 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 #if WINDOWS
     encoding=NSISOLatin1StringEncoding;
 #endif
-    int len=(int)[key lengthOfBytesUsingEncoding:encoding];
+//    int len=(int)[key lengthOfBytesUsingEncoding:encoding];
+    int len=(int)[key length];
     char buffer[len+20];
-    [key getCString:buffer maxLength:len+10 encoding:encoding];
-    buffer[len]=0;
-    int offset= [self offsetForCString:buffer];
+    const char *cstr=CFStringGetCStringPtr((CFStringRef)key, kCFStringEncodingUTF8);
+    if (!cstr) {
+        [key getCString:buffer maxLength:len+10 encoding:encoding];
+        cstr=buffer;
+    }
+    int offset= [self offsetForCString:cstr length:len];
 //    NSLog(@"key: '%@' buffer: '%s' len:%d offset=%d",key,buffer,len,offset);
     return offset;
 }

@@ -12,12 +12,29 @@
 #define DICTTOS         (NSMutableDictionary*)(*tos)
 
 
+
 @implementation MPWObjectBuilder
+
+-(void)setupAcceessors:(Class)theClass
+{
+    NSArray *ivars=[theClass ivarNames];
+    ivars=[[ivars collect] substringFromIndex:1];
+    NSMutableArray *accessors=[NSMutableArray arrayWithCapacity:ivars.count];
+    for (NSString *ivar in ivars) {
+        MPWValueAccessor *accessor=[MPWValueAccessor valueForName:ivar];
+        [accessor bindToClass:theClass];
+        [accessors addObject:accessor];
+    }
+    MPWSmallStringTable *table=[[[MPWSmallStringTable alloc] initWithKeys:ivars values:accessors] autorelease];
+    self.accessorTable=table;
+}
+
 
 -(instancetype)initWithClass:(Class)theClass
 {
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
+    [self setupAcceessors:theClass];
     [self.cache setUnsafeFastAlloc:YES];
     self.streamingThreshold=0;
     return self;
@@ -51,7 +68,8 @@
 
 -(void)writeObject:anObject forKey:aKey
 {
-    [*tos setValue:anObject forKey:aKey];
+    MPWValueAccessor *accesssor=[self.accessorTable objectForKey:aKey];
+    [accesssor setValue:anObject forTarget:*tos];
 }
 
 -(void)dealloc
