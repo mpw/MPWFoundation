@@ -12,6 +12,7 @@
 @implementation MPWPListBuilder
 
 
+
 idAccessor( key , setKey )
 idAccessor( plist , setPlist )
 
@@ -102,7 +103,15 @@ idAccessor( plist , setPlist )
 
 -(void)writeKey:aKey
 {
-	[self setKey:aKey];
+    [self setKey:aKey];
+}
+
+
+
+-(void)writeKeyString:(const char*)aKey length:(long)len
+{
+    keyStr=aKey;
+    keyLen=len;
 }
 
 

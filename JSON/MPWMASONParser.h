@@ -20,5 +20,7 @@
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
 
 -(void)setFrequentStrings:(NSArray*)strings;
+-(instancetype)initWithClass:(Class)classToDecode;
+-(instancetype)initWithBuilder:aBuilder;
 
 @end

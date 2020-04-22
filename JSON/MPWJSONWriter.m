@@ -37,6 +37,10 @@ static inline char *itoa( int value, intbuf *buf )
     return buffer+offset;
 }
 
+
+//static inline long writeCStringKey( char *buffer, char *key, BOOL *firstPtr)
+
+
 static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 {
     char *ptr=buffer;

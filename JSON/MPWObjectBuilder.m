@@ -18,7 +18,7 @@
 -(void)setupAcceessors:(Class)theClass
 {
     NSArray *ivars=[theClass ivarNames];
-    ivars=[[ivars collect] substringFromIndex:1];
+    ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
     NSMutableArray *accessors=[NSMutableArray arrayWithCapacity:ivars.count];
     for (NSString *ivar in ivars) {
         MPWValueAccessor *accessor=[MPWValueAccessor valueForName:ivar];
@@ -65,6 +65,33 @@
         [ARRAYTOS removeLastObject];
     }
 }
+
+
+-(void)writeString:(NSString*)aString
+{
+    if ( keyStr ) {
+        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
+        [accesssor setValue:aString forTarget:*tos];
+        keyStr=NULL;
+        key=nil;
+    } else {
+        [self pushObject:aString];
+    }
+}
+
+
+-(void)writeNumber:(NSString*)number
+{
+    if ( keyStr ) {
+        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
+        [accesssor setValue:number forTarget:*tos];
+        keyStr=NULL;
+        key=nil;
+    } else {
+        [self pushObject:number];
+    }
+}
+
 
 -(void)writeObject:anObject forKey:aKey
 {

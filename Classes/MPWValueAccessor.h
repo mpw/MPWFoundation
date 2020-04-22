@@ -23,11 +23,12 @@
 -(NSString*)name;
 -value;
 -(void)setValue:newValue;
--(long)intValue;
+-(long)integerValue;
 -(void)setIntValue:(long)newValue;
 
 -target;
 -(void)bindToTarget:aTarget;
+-(void)bindToClass:aClass;
 
 #define GETVALUE(accessor) (accessor->value( accessor, @selector(value)))
 

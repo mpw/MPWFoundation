@@ -43,6 +43,7 @@ idAccessor(target, _setTarget)
 
 -(NSString*)putSelectorStringForName:(NSString*)newName
 {
+    // FIXME: capitalizedString is wrong for CamelCase identifiers
     return [[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"];
 }
 
@@ -140,7 +141,7 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
         //            currentTarget=(id)((unsigned char*)currentTarget + c[i].targetOffset);
         //        } else {
         if ( c[0].objcType == '@' ) {
-            currentTarget=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) integerValue];
+            result=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) integerValue];
         } else if  ( c[0].objcType == 'q' ) {
             result=((long)((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ));
 
@@ -153,7 +154,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
     if ( c[final].objcType == 'q') {
-        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, [value integerValue], c[final].additionalArg );
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, (id)[value integerValue], c[final].additionalArg );
     } else {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector,value , c[final].additionalArg );
     }
@@ -163,7 +164,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
     if ( c[final].objcType == 'q') {
-        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, value, c[final].additionalArg );
+        ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, (void*)value, c[final].additionalArg );
     } else {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, @(value), c[final].additionalArg );
     }
@@ -194,12 +195,12 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     return getValueForComponents( aTarget, components, count);
 }
 
--(long)intValueForTarget:aTarget
+-(long)integerValueForTarget:aTarget
 {
     return getIntValueForComponents( aTarget, components, count);
 }
 
--(long)intValue
+-(long)integerValue
 {
     return getIntValueForComponents( self->target, components, count);
 }
@@ -383,7 +384,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     MPWValueAccessorTestingClass *t=[self _testTarget];
     MPWValueAccessor *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
-    INTEXPECT( [accessor intValue], 34, @"integer value");
+    INTEXPECT( [accessor integerValue], 34, @"integer value");
 }
 
 +(void)testIntWriteAccessOfIntegerIvar

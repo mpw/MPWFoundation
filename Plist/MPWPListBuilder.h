@@ -21,6 +21,9 @@
 -(void)pushContainer:anObject;
 -(void)pushObject:anObject;
 
+
+-(void)writeKeyString:(const char*)aKey length:(long)len;
+
 -result;
 
 @end
@@ -29,10 +32,12 @@
 
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming>
 {
-    id    plist;
-    id    containerStack[1000];
+    id          plist;
+    id          containerStack[1000];
+    id          key;
+    const char  *keyStr;
+    long        keyLen;
     __unsafe_unretained id    *tos;
-    id    key;
 }
 
 -result;
