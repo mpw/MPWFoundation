@@ -14,7 +14,7 @@
 -(void)endArray;
 -(void)beginDictionary;
 -(void)endDictionary;
--(void)writeKey:aKey;
+//-(void)writeKey:aKey;
 -(void)writeString:aString;
 -(void)writeNumber:aNumber;
 -(void)writeObject:anObject forKey:aKey;
@@ -28,17 +28,19 @@
 
 @end
 
-
+@class MPWSmallStringTable;
 
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming>
 {
     id          plist;
     id          containerStack[1000];
-    id          key;
     const char  *keyStr;
     long        keyLen;
     __unsafe_unretained id    *tos;
 }
+
+@property (nonatomic, strong)  MPWSmallStringTable  *commonStrings;
+
 
 -result;
 +(instancetype)builder;

@@ -8,12 +8,12 @@
 
 #import "MPWPListBuilder.h"
 #import "AccessorMacros.h"
+#import "MPWSmallStringTable.h"
 
 @implementation MPWPListBuilder
 
 
 
-idAccessor( key , setKey )
 idAccessor( plist , setPlist )
 
 -init
@@ -33,7 +33,7 @@ idAccessor( plist , setPlist )
 
 -(void)writeObject:anObject forKey:aKey
 {
-	[DICTTOS setObject:anObject forKey:key];
+	[DICTTOS setObject:anObject forKey:[self key]];
 }
 
 
@@ -42,9 +42,9 @@ idAccessor( plist , setPlist )
 	if (!plist ) {
 		[self setPlist:anObject];
 	} else {
-		if  (key ) {
-			[self writeObject:anObject forKey:key];
-			[self setKey:nil];
+		if  (keyStr ) {
+			[self writeObject:anObject forKey:[self key]];
+			keyStr=NULL;
 		} else {
 			[ARRAYTOS addObject:anObject];
 		}
@@ -101,12 +101,19 @@ idAccessor( plist , setPlist )
 	tos--;
 }
 
--(void)writeKey:aKey
+-(NSString*)key
 {
-    [self setKey:aKey];
+    NSString *key=nil;
+    if ( keyStr) {
+        if ( _commonStrings ) {
+            key=OBJECTFORSTRINGLENGTH(_commonStrings, keyStr, keyLen);
+        }
+        if ( !key ) {
+            key=[[[NSString alloc] initWithBytes:keyStr length:keyLen encoding:NSUTF8StringEncoding] autorelease];
+        }
+    }
+    return key;
 }
-
-
 
 -(void)writeKeyString:(const char*)aKey length:(long)len
 {
@@ -119,7 +126,6 @@ idAccessor( plist , setPlist )
 {
 	[plist release];
 //	[containerStack release];
-	[key release];
 	[super dealloc];
 }
 	 
@@ -149,7 +155,7 @@ idAccessor( plist , setPlist )
 {
 	MPWPListBuilder *builder=[self builder];
 	[builder beginDictionary];
-	[builder writeKey:@"key"];
+    [builder writeKeyString:"key" length:3];
 	[builder writeString:@"Hello World"];
 	[builder endDictionary];
 	IDEXPECT([[builder result] objectForKey:@"key"],@"Hello World", @"simple string in dict");
@@ -159,17 +165,17 @@ idAccessor( plist , setPlist )
 {
 	MPWPListBuilder *builder=[self builder];
 	[builder beginDictionary];
-	[builder writeKey:@"key1"];
+    [builder writeKeyString:"key1" length:4];
 	[builder beginArray];
 	[builder beginDictionary];
-	[builder writeKey:@"key2"];
+    [builder writeKeyString:"key2" length:4];
 	[builder writeString:@"hello world"];
 	[builder endDictionary];
 	[builder writeString:@"array string"];
 	[builder endArray];
-	[builder writeKey:@"key3"];
+    [builder writeKeyString:"key3" length:4];
 	[builder beginDictionary];
-	[builder writeKey:@"key34"];
+    [builder writeKeyString:"key34" length:5];
 	[builder writeString:@"nested dict"];
 	[builder endDictionary];
 	[builder endDictionary];

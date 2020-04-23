@@ -199,7 +199,6 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                 parsestring( curptr , endptr, &stringstart, &curptr  );
 				if ( curptr[1] == ':' ) {
                     [_builder writeKeyString:stringstart length:curptr-stringstart];
-					[_builder writeKey:@""];
 					curptr++;
 					
 				} else {
@@ -446,12 +445,12 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 {
 	return @[
 			@"testParseJSONString",
-//			@"testParseSimpleJSONDict",
+			@"testParseSimpleJSONDict",
 			@"testParseSimpleJSONArray",
 			@"testParseLiterals",
 			@"testParseNumbers",
-//			@"testParseGlossaryToDict",
-//			@"testDictAfterNumber",
+			@"testParseGlossaryToDict",
+			@"testDictAfterNumber",
 			@"testEmptyElements",
 			@"testStringEscapes",
 			@"testUnicodeEscapes",

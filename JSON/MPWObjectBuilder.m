@@ -73,7 +73,6 @@
         MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
         [accesssor setValue:aString forTarget:*tos];
         keyStr=NULL;
-        key=nil;
     } else {
         [self pushObject:aString];
     }
@@ -86,7 +85,6 @@
         MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
         [accesssor setValue:number forTarget:*tos];
         keyStr=NULL;
-        key=nil;
     } else {
         [self pushObject:number];
     }
