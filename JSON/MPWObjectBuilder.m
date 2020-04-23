@@ -82,11 +82,22 @@
 -(void)writeNumber:(NSString*)number
 {
     if ( keyStr ) {
-        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
+        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
         [accesssor setValue:number forTarget:*tos];
         keyStr=NULL;
     } else {
         [self pushObject:number];
+    }
+}
+
+-(void)writeInteger:(long)number
+{
+    if ( keyStr ) {
+        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+        [accesssor setIntValue:number forTarget:*tos];
+        keyStr=NULL;
+    } else {
+        [self pushObject:@(number)];
     }
 }
 

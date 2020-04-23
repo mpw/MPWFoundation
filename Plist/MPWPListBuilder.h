@@ -20,6 +20,7 @@
 -(void)writeObject:anObject forKey:aKey;
 -(void)pushContainer:anObject;
 -(void)pushObject:anObject;
+-(void)writeInteger:(long)number;
 
 
 -(void)writeKeyString:(const char*)aKey length:(long)len;

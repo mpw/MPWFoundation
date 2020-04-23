@@ -39,6 +39,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 -(void)setFrequentStrings:(NSArray*)strings
 {
 	[self setCommonStrings:[[[MPWSmallStringTable alloc] initWithKeys:strings values:strings] autorelease]];
+    [[self builder] setCommonStrings:[self commonStrings]];
 }
 
 -(void)pushResult:result withTag:(NSString*)tag
@@ -160,6 +161,24 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     *stringend=curptr;
 }
 
+-(long)longElementAtPtr:(const char*)start length:(long)len
+{
+    long val=0;
+    int sign=1;
+    const char *end=start+len;
+    if ( start[0] =='-' ) {
+        sign=-1;
+        start++;
+    } else if ( start[0]=='+' ) {
+        start++;
+    }
+    while ( start < end && isdigit(*start)) {
+        val=val*10+ (*start)-'0';
+        start++;
+    }
+    val*=sign;
+    return val;
+}
 
 
 -parsedData:(NSData*)jsonData
@@ -245,11 +264,15 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 					}
 					isReal=YES;
 				}
-                number = isReal ?
-                            [self realElement:numstart length:curptr-numstart] :
-                            [self integerElementAtPtr:numstart length:curptr-numstart];
+                if ( isReal) {
+                    number = [self realElement:numstart length:curptr-numstart];
 
-				[_builder writeString:number];
+                    [_builder writeString:number];
+                } else {
+                    long n=[self longElementAtPtr:numstart length:curptr-numstart];
+                    [_builder writeInteger:n];
+                }
+
 				break;
 			}
 			case 't':

@@ -25,6 +25,7 @@
 -(void)setValue:newValue;
 -(long)integerValue;
 -(void)setIntValue:(long)newValue;
+-(void)setIntValue:(long)newValue forTarget:aTarget;
 
 -target;
 -(void)bindToTarget:aTarget;

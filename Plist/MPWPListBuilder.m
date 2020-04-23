@@ -61,7 +61,12 @@ idAccessor( plist , setPlist )
 
 -(void)writeNumber:(NSString*)aString
 {
-	[self pushObject:aString];
+    [self pushObject:aString];
+}
+
+-(void)writeInteger:(long)anInteger
+{
+    [self pushObject:@(anInteger)];
 }
 
 -result

@@ -223,6 +223,11 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     setIntValueForComponents( target, components, count,newValue);
 }
 
+-(void)setIntValue:(long)newValue forTarget:(id)aTarget
+{
+    setIntValueForComponents( aTarget, components, count,newValue);
+}
+
 -(char)typeCode
 {
     return components[0].objcType;
