@@ -11,9 +11,7 @@
 #import "MPWIntArray.h"
 #import <Foundation/Foundation.h>
 #import "DebugMacros.h"
-//#if !TARGET_OS_WATCH
-//#import <Accelerate/Accelerate.h>
-//#endif
+
 
 @implementation MPWIntArray
 
@@ -166,6 +164,7 @@
 		return @"( )";
 	}
 }
+
 
 static void doSort(int a[], int left, int right);
 
