@@ -18,8 +18,9 @@
     long long cpu;
 }
 
-+current;
-+timeRelativeTo:(MPWRusage*)start;
++(instancetype)current;
++(instancetype)timeRelativeTo:(MPWRusage*)start;
+-(instancetype)subtractStartTime:(MPWRusage*)start;
 -(long)systemMicroseconds;
 -(long)userMicroseconds;
 -(int)absoluteMicroseconds;
