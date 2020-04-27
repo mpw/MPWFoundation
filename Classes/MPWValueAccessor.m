@@ -72,13 +72,8 @@ idAccessor(target, _setTarget)
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
         [NSException raise:@"bind failed" format:@"bind failed"];
     }
-    const char *cName=sel_getName(component->getSelector);
-    Ivar v = class_getInstanceVariable(targetClass, cName);
-    if ( !v ) {
-        cName=[[@"_" stringByAppendingString:@(cName)] UTF8String];
-        v = class_getInstanceVariable(targetClass, cName);
-    }
-    const char *typeString = ivar_getTypeEncoding(v);
+    NSMethodSignature *sig=[targetClass instanceMethodSignatureForSelector:component->getSelector];
+    const char *typeString=[sig methodReturnType];
     if ( typeString) {
         component->objcType=typeString[0];
     } else {
