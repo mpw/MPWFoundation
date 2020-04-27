@@ -18,7 +18,9 @@
 -(void)setupAcceessors:(Class)theClass
 {
     NSArray *ivars=[theClass ivarNames];
-    ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
+    if ( [[ivars lastObject] hasPrefix:@"_"]) {
+        ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
+    }
     NSMutableArray *accessors=[NSMutableArray arrayWithCapacity:ivars.count];
     for (NSString *ivar in ivars) {
         MPWValueAccessor *accessor=[MPWValueAccessor valueForName:ivar];
@@ -70,7 +72,7 @@
 -(void)writeString:(NSString*)aString
 {
     if ( keyStr ) {
-        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(self.accessorTable, keyStr, keyLen);
+        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
         [accesssor setValue:aString forTarget:*tos];
         keyStr=NULL;
     } else {
