@@ -51,7 +51,8 @@ typedef struct {
 -(int)offsetForCString:(const char*)cstr;
 -keyAtIndex:(NSUInteger)anIndex;
 -(void)setObject:anObject forKey:aKey;
-- (void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:(id)anObject;
+-(void)setObject:anObject forCString:(const char*)aKey length:(int)len;
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:(id)anObject;
 -(int)offsetForKey:(NSString*)key;
 
 idAccessor_h( defaultValue, setDefaultValue )

@@ -367,6 +367,16 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
     return defaultValue;
 }
 
+-(void)setObject:anObject forCString:(const char*)cstr length:(int)len
+{
+    int offset = offsetOfCStringWithLengthInTableOfLength( table , tableOffsetsPerLength, cstr, len, chainStarts, tableIndex );
+    if ( offset >= 0 ) {
+        [self replaceObjectAtIndex:offset  withObject:anObject];
+    } else {
+        [NSException raise:@"setObjectForKey-nokey" format:@"key %.*s not already present in dict",len,cstr];
+    }
+}
+
 -(void)setObject:anObject forKey:aKey
 {
 	int offset=[self offsetForKey:aKey];
@@ -641,6 +651,18 @@ int _small_string_table_releaseIndex=0;
 	IDEXPECT([table objectForKey:@"me"], @"second object", @"after replacing");
 }
 
++(void)testSetObjectForCStr
+{
+    MPWSmallStringTable *table=[self _testCreateTestTable];
+    IDEXPECT([table objectForKey:@"Help"], @"Value for Help", @"before replacing");
+    [table setObject:@"other object" forCString:"Help" length:4];
+    IDEXPECT([table objectForKey:@"Help"], @"other object", @"first after replacing");
+    [table setObject:@"second object" forCString:"me" length:2];
+    IDEXPECT([table objectForKey:@"me"], @"second object", @"second after replacing");
+}
+
+
+
 +(void)testLongerKeys
 {
 	NSArray *keys=[NSArray arrayWithObject:@"AudioList"];
@@ -700,7 +722,8 @@ int _small_string_table_releaseIndex=0;
 			@"testFailedLookupGetsDefaultValue",
 			@"testKeyAtIndex",
 			@"testOffsetLookup",
-			@"testReplaceObject",
+            @"testReplaceObject",
+            @"testSetObjectForCStr",
 			@"testLongerKeys",
 			@"testActuallyCheckingFullString",
             @"testMaxStringLengthEnforced",
