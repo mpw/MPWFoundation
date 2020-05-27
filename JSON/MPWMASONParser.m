@@ -76,8 +76,13 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 	
 }
 
+static long nsstrings=0;
+static long subdatas=0;
+
+
 -(NSString*)makeRetainedJSONStringStart:(const char*)start length:(long)len
 {
+    const char* realstart=start;
 	NSString *curstr;
 	if ( commonStrings  ) {
 		NSString *res=OBJECTFORSTRINGLENGTH( commonStrings, start, len );
@@ -85,18 +90,25 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 			return [res retain];
 		}
 	}
-//	return MAKEDATA( start , len );
-	char buf[ len+1 ];
-	char *dest=buf;
+
+
+    
+	unichar buf[ len*2 ];
+	unichar *dest=buf;
 	const char *end=start+len;
-	while ( start < end ) {
-		if ( *start == '\\' ) {
-			start++;
-			switch (*start) {
+    BOOL hasEscape=NO;
+    BOOL hasUnicode=NO;
+    while ( start < end ) {
+        unsigned char ch=*start;
+        if ( ch == '\\' ) {
+            start++;
+            hasEscape=YES;
+            ch=*start;
+			switch (ch) {
 				case '"':
 				case '\\':
 				case '/':
-					*dest++=*start;
+					*dest++=ch;
 					break;
 				case 'b':
 					*dest++='\b';
@@ -122,9 +134,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
                     unichar charvalue=0;
                     sscanf( hexstring, "%x",&value); 
 					charvalue=value;
-					NSString *charString=[NSString stringWithCharacters:&charvalue length:1];
-					[charString getCString:dest maxLength:5 encoding:NSUTF8StringEncoding];
-					dest+=strlen(dest);
+                    *dest++=charvalue;
 					start+=4;
 
 				}
@@ -134,13 +144,52 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 					break;
 			}
 			start++;
-		} else {
+        } else if ( ch & 128 ) {         // UTF8
+            hasUnicode=YES;
+            unsigned char c=*start++;
+            unsigned char c1,c2,c3;
+            unichar r=0;
+            if ((c & 0xE0) == 0xC0) {
+                c1 = *start++;
+                if (c1 >= 0) {
+                    r = ((c & 0x1F) << 6) | c1;
+                }
+
+                /*
+                 Two continuations (2048 to 55295 and 57344 to 65535)
+                 */
+            } else if ((c & 0xF0) == 0xE0) {
+                c1 = *start++;
+                c2 = *start++;
+                if ((c1 | c2) >= 0) {
+                    r = ((c & 0x0F) << 12) | (c1 << 6) | c2;
+                }
+
+                /*
+                 Three continuations (65536 to 1114111)
+                 */
+            } else if ((c & 0xF8) == 0xF0) {
+                c1 = *start++;
+                c2 = *start++;
+                c3 = *start++;
+                if ((c1 | c2 | c3) >= 0) {
+                    r = ((c & 0x07) << 18) | (c1 << 12) | (c2 << 6) | c3;
+                }
+            }
+            *dest++=r;
+
+        } else {
 			*dest++=*start++;
 		}
 	}
-	
 #ifndef __clang_analyzer__
-	curstr=[[NSString alloc] initWithBytes:buf length:dest-buf encoding:NSUTF8StringEncoding];
+    if (hasEscape || hasUnicode) {
+        curstr=[[NSString alloc] initWithCharacters:buf length:dest-buf];
+        nsstrings++;
+    } else {
+        curstr=MAKEDATA( realstart , len );
+        subdatas++;
+    }
     return curstr;
 #endif
 }
@@ -311,6 +360,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 				break;
 		}
 	}
+    NSLog(@"nsstrings: %ld subdatas: %ld",nsstrings,subdatas);
     return [_builder result];
 
 }
