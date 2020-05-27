@@ -629,6 +629,7 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
 //             @"testParCollect",
              @"testKeysOfInterest",
              @"testQuoteEscapedEntries",
+
              ];
 }
 

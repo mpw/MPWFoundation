@@ -18,7 +18,7 @@ LIBRARY_NAME = libMPWFoundation
 CC = clang
 
 
-OBJCFLAGS += -Wno-import -fobjc-runtime=gnustep
+OBJCFLAGS += -Os -g -Wno-import -fobjc-runtime=gnustep-2
 
 
 MPWFoundation_HEADER_FILES = \
@@ -204,4 +204,4 @@ test    : libMPWFoundation tester
 	LD_LIBRARY_PATH=/home/gnustep/GNUstep/Library/Libraries:/usr/local/lib:/home/gnustep/Build/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	clang -fobjc-runtime=gnustep-1.9 -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/home/gnustep/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
+	clang -fobjc-runtime=gnustep-2 -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/home/gnustep/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc

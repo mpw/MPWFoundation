@@ -801,6 +801,9 @@
 		1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
 		1FF08F691D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
 		1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
+		1FF4538C247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
+		1FF4538D247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
+		1FF4538E247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
 		1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1947006686DDC35ADD82 /* AccessorMacros.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1948006686DDC35ADD82 /* DebugMacros.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1949006686DDC35ADD82 /* MPWObject.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
@@ -1301,6 +1304,7 @@
 		1FEFBD672428C8AA001E44B2 /* empty_elements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = empty_elements.plist; sourceTree = "<group>"; };
 		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
 		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
+		1FF4538B247EA74200B909B3 /* filmliste.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filmliste.json; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBlockTargetStream.h; sourceTree = "<group>"; };
 		1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockTargetStream.m; sourceTree = "<group>"; };
@@ -1898,6 +1902,7 @@
 		1FEFBD382428C756001E44B2 /* JSON Test Files */ = {
 			isa = PBXGroup;
 			children = (
+				1FF4538B247EA74200B909B3 /* filmliste.json */,
 				1FEFBD402428C841001E44B2 /* array.json */,
 				1FEFBD3E2428C841001E44B2 /* dict.json */,
 				1FEFBD3D2428C841001E44B2 /* glossary.json */,
@@ -2692,6 +2697,7 @@
 				1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */,
 				1FED495524263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */,
+				1FF4538D247EA74300B909B3 /* filmliste.json in Resources */,
 				1FED496724263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
 				1FED48FD2426392300AF2FAD /* iso-encoded.xml in Resources */,
 				1FEFBD652428C888001E44B2 /* Itunes_info.plist in Resources */,
@@ -2742,6 +2748,7 @@
 				1FEFBD622428C85E001E44B2 /* dictAfterNumber.json in Resources */,
 				1FED494924263D6800AF2FAD /* c1qt12.html in Resources */,
 				1FED493124263CFE00AF2FAD /* test2.xml in Resources */,
+				1FF4538E247EA74300B909B3 /* filmliste.json in Resources */,
 				1FED495324263D9C00AF2FAD /* Dg-duplex.htm in Resources */,
 				1FED49202426397200AF2FAD /* states.xml in Resources */,
 				1FED495624263D9C00AF2FAD /* accent_grave.html in Resources */,
@@ -2783,6 +2790,7 @@
 				1FED495A24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED491E2426397200AF2FAD /* states.xml in Resources */,
 				1FED494724263D6800AF2FAD /* c1qt12.html in Resources */,
+				1FF4538C247EA74300B909B3 /* filmliste.json in Resources */,
 				1FED494A24263D6800AF2FAD /* mojibake_utf8.xhtml in Resources */,
 				1FEFBD5D2428C85E001E44B2 /* unicodeescapes.json in Resources */,
 				1FED497224263E4F00AF2FAD /* htmlfragment_attribute_no_value.html in Resources */,

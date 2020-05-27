@@ -345,7 +345,11 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
 //    int len=(int)[key lengthOfBytesUsingEncoding:encoding];
     int len=(int)[key length];
     char buffer[len+20];
+#ifndef GNUSTEP
     const char *cstr=CFStringGetCStringPtr((CFStringRef)key, kCFStringEncodingUTF8);
+#else
+    const char *cstr=NULL;
+#endif
     if (!cstr) {
         [key getCString:buffer maxLength:len+10 encoding:encoding];
         cstr=buffer;

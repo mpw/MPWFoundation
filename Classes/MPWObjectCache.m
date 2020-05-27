@@ -208,6 +208,12 @@ intAccessor( hits, setHits )
 }
 #endif
 
+
+-new
+{
+    return [self getObject];
+}
+
 -(void)clearCache
 {
 	int i;

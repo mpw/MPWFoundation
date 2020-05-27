@@ -216,7 +216,11 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 				break;
 			case '"':
                 parsestring( curptr , endptr, &stringstart, &curptr  );
-				if ( curptr[1] == ':' ) {
+                int spaces=0;
+                while (curptr[spaces+1] ==' ') {
+                    spaces++;
+                }
+				if ( curptr[spaces+1] == ':' ) {
                     [_builder writeKeyString:stringstart length:curptr-stringstart];
 					curptr++;
 					
@@ -224,7 +228,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                     curstr = [self makeRetainedJSONStringStart:stringstart length:curptr-stringstart];
 					[_builder writeString:curstr];
 				}
-                curptr++;
+                curptr+=spaces+1;
 				break;
 			case ',':
 				curptr++;
@@ -462,7 +466,14 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 	IDEXPECT([array objectAtIndex:1], @"\n", @"second is newline");
 }
 
++(void)testSpaceBeforeColon
+{
+    MPWMASONParser *parser=[MPWMASONParser parser];
+    NSData *json=[self frameworkResource:@"filmliste" category:@"json"];
+    NSArray *array=[parser parsedData:json];
+    INTEXPECT(array.count,2,@"elements");
 
+}
 
 +testSelectors
 {
@@ -478,6 +489,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 			@"testStringEscapes",
 			@"testUnicodeEscapes",
 			@"testCommonStrings",
+            @"testSpaceBeforeColon",
 			];
 }
 
