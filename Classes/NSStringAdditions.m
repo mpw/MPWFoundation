@@ -188,6 +188,17 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 @end
 
+
+@implementation NSMutableString(Additions)
+
+-(instancetype)reinit
+{
+    [self deleteCharactersInRange:NSMakeRange(0, self.length)];
+    return self;
+}
+
+@end
+
 @interface NSStringAdditionsTesting : NSObject
 @end
 @implementation NSStringAdditionsTesting
@@ -213,10 +224,10 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 +(NSArray*)testSelectors
 {
-    return [NSArray arrayWithObjects:
+    return @[
                 @"testOccurencesOf",
 //				@"testAnyToString",
-                nil];
+                ];
 }
 
 @end
@@ -290,10 +301,19 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
     IDEXPECT([@"Polymorphic Identifiers" camelCaseString], @"polymorphicIdentifiers", @"single word");
 }
 
++(void)testReinit
+{
+    NSMutableString *a=[NSMutableString stringWithString:@"Hi there"];
+    [a reinit];
+    INTEXPECT(a.length, 0, @"empty after reinit");
+    IDEXPECT(a, @"", @"empty after reinit")
+}
+
 +testSelectors
 {
     return @[ @"testUniquedByNumbering",
               @"testUniquedUpdating",
+              @"testReinit",
 //              @"testCamelCase",
               ];
 }

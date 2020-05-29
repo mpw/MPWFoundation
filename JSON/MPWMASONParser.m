@@ -21,6 +21,10 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 {
     self=[super init];
     [self setBuilder:aBuilder];
+    self.stringCache = [MPWObjectCache cacheWithCapacity:20 class:[NSMutableString class]];
+    id dummy=[NSMutableString alloc];
+    [self.stringCache setInitIMP:(IMP0)[dummy methodForSelector:@selector(init)]];
+    self.stringCache.unsafeFastAlloc = YES;
     return self;
 }
 
@@ -39,7 +43,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 -(void)setFrequentStrings:(NSArray*)strings
 {
 	[self setCommonStrings:[[[MPWSmallStringTable alloc] initWithKeys:strings values:strings] autorelease]];
-    [[self builder] setCommonStrings:[self commonStrings]];
+    [(id)[self builder] setCommonStrings:[self commonStrings]];
 }
 
 -(void)pushResult:result withTag:(NSString*)tag
@@ -78,16 +82,21 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 
 static long nsstrings=0;
 static long subdatas=0;
+static long common=0;
 
 
--(NSString*)makeRetainedJSONStringStart:(const char*)start length:(long)len
+-(NSString*)makeJSONStringStart:(const char*)start length:(long)len
 {
+    if ( len==0) {
+        return @"";
+    }
     const char* realstart=start;
 	NSString *curstr;
 	if ( commonStrings  ) {
 		NSString *res=OBJECTFORSTRINGLENGTH( commonStrings, start, len );
 		if ( res ) {
-			return [res retain];
+            common++;
+			return res;
 		}
 	}
 
@@ -182,9 +191,16 @@ static long subdatas=0;
 			*dest++=*start++;
 		}
 	}
+    *dest=0;
 #ifndef __clang_analyzer__
     if (hasEscape || hasUnicode) {
-        curstr=[[NSString alloc] initWithCharacters:buf length:dest-buf];
+#if 0
+        curstr=[self.stringCache getObject];
+        [curstr reinit];
+        [(NSMutableString*)curstr appendFormat:@"%*S",(int)(dest-buf),(const unichar*)buf];
+#else
+        curstr=[[[NSString alloc] initWithCharacters:buf length:dest-buf] autorelease];
+#endif
         nsstrings++;
     } else {
         curstr=MAKEDATA( realstart , len );
@@ -274,7 +290,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 					curptr++;
 					
 				} else {
-                    curstr = [self makeRetainedJSONStringStart:stringstart length:curptr-stringstart];
+                    curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart];
 					[_builder writeString:curstr];
 				}
                 curptr+=spaces+1;
@@ -360,7 +376,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 				break;
 		}
 	}
-    NSLog(@"nsstrings: %ld subdatas: %ld",nsstrings,subdatas);
+    NSLog(@"nsstrings: %ld subdatas: %ld common: %ld",nsstrings,subdatas,common);
     return [_builder result];
 
 }

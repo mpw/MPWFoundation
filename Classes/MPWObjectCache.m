@@ -45,6 +45,11 @@
 "*/
 
 
+-(void)setInitIMP:(IMP0)newImp
+{
+    initImp=newImp;
+}
+
 -initWithCapacity:(int)newCap class:(Class)newClass allocSel:(SEL)aSel initSel:(SEL)iSel
 {
     self = [super init];
@@ -112,7 +117,7 @@
     Return a pointer to the method getObject for fast calls to the allocator.
 "*/
 {
-	[self getObject];
+//	[self getObject];
     return [self methodForSelector:@selector(getObject)];
 }
 

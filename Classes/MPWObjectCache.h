@@ -24,7 +24,7 @@ typedef void (*VOID_IMP)(id, SEL, ...);
 -(void)makeThreadSafeOnDemand;
 -(IMP)getObjectIMP;
 -(void)clearCache;
-
+-(void)setInitIMP:(IMP0)newImp;
 
 boolAccessor_h( unsafeFastAlloc, setUnsafeFastAlloc )
 scalarAccessor_h( SEL, reInitSelector, setReInitSelector )

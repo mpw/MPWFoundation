@@ -18,6 +18,8 @@
 }
 
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
+@property (nonatomic, strong) MPWObjectCache *stringCache;
+
 
 -(void)setFrequentStrings:(NSArray*)strings;
 -(instancetype)initWithClass:(Class)classToDecode;

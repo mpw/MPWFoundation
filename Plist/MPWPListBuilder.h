@@ -45,5 +45,6 @@
 
 -result;
 +(instancetype)builder;
+-(NSString*)key;
 
 @end
