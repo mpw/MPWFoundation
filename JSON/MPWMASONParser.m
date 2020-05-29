@@ -213,7 +213,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     *stringstart=curptr;
     while ( curptr < endptr ) {
         char ch=*curptr;
-
+        utf8or |= ch;
         if ( ch=='"') {
             break;
         }
