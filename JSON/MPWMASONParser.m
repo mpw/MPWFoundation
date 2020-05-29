@@ -85,7 +85,7 @@ static long subdatas=0;
 static long common=0;
 
 
--(NSString*)makeJSONStringStart:(const char*)start length:(long)len
+-(NSString*)makeJSONStringStart:(const char*)start length:(long)len hasUTF8:(BOOL)hasUTF8 hasEscape:(BOOL)hasEscape
 {
     if ( len==0) {
         return @"";
@@ -105,95 +105,90 @@ static long common=0;
 	unichar buf[ len*2 ];
 	unichar *dest=buf;
 	const char *end=start+len;
-    BOOL hasEscape=NO;
-    BOOL hasUnicode=NO;
-    while ( start < end ) {
-        unsigned char ch=*start;
-        if ( ch == '\\' ) {
-            start++;
-            hasEscape=YES;
-            ch=*start;
-			switch (ch) {
-				case '"':
-				case '\\':
-				case '/':
-					*dest++=ch;
-					break;
-				case 'b':
-					*dest++='\b';
-					break;
-				case 'f':
-					*dest++='\f';
-					break;
-				case 'n':
-					*dest++='\n';
-					break;
-				case 'r':
-					*dest++='\r';
-					break;
-				case 't':
-					*dest++='\t';
-					break;
-				case 'u':
-				{
-                    char hexstring[5];
-                    memcpy(hexstring, start+1, 4);
-                    hexstring[4]=0;
-					unsigned int value=0;
-                    unichar charvalue=0;
-                    sscanf( hexstring, "%x",&value); 
-					charvalue=value;
-                    *dest++=charvalue;
-					start+=4;
+    if ( hasEscape || hasUTF8) {
+        while ( start < end ) {
+            unsigned char ch=*start;
+            if ( ch == '\\' ) {
+                start++;
+                ch=*start;
+                switch (ch) {
+                    case '"':
+                    case '\\':
+                    case '/':
+                        *dest++=ch;
+                        break;
+                    case 'b':
+                        *dest++='\b';
+                        break;
+                    case 'f':
+                        *dest++='\f';
+                        break;
+                    case 'n':
+                        *dest++='\n';
+                        break;
+                    case 'r':
+                        *dest++='\r';
+                        break;
+                    case 't':
+                        *dest++='\t';
+                        break;
+                    case 'u':
+                    {
+                        char hexstring[5];
+                        memcpy(hexstring, start+1, 4);
+                        hexstring[4]=0;
+                        unsigned int value=0;
+                        unichar charvalue=0;
+                        sscanf( hexstring, "%x",&value);
+                        charvalue=value;
+                        *dest++=charvalue;
+                        start+=4;
 
-				}
+                    }
 
-					break;
-				default:
-					break;
-			}
-			start++;
-        } else if ( ch & 128 ) {         // UTF8
-            hasUnicode=YES;
-            unsigned char c=*start++;
-            unsigned char c1,c2,c3;
-            unichar r=0;
-            if ((c & 0xE0) == 0xC0) {
-                c1 = *start++;
-                if (c1 >= 0) {
-                    r = ((c & 0x1F) << 6) | c1;
+                        break;
+                    default:
+                        break;
                 }
+                start++;
+            } else if ( ch & 128 ) {         // UTF8
+                unsigned char c=*start++;
+                unsigned char c1,c2,c3;
+                unichar r=0;
+                if ((c & 0xE0) == 0xC0) {
+                    c1 = *start++;
+                    if (c1 >= 0) {
+                        r = ((c & 0x1F) << 6) | c1;
+                    }
 
-                /*
-                 Two continuations (2048 to 55295 and 57344 to 65535)
-                 */
-            } else if ((c & 0xF0) == 0xE0) {
-                c1 = *start++;
-                c2 = *start++;
-                if ((c1 | c2) >= 0) {
-                    r = ((c & 0x0F) << 12) | (c1 << 6) | c2;
-                }
+                    /*
+                     Two continuations (2048 to 55295 and 57344 to 65535)
+                     */
+                } else if ((c & 0xF0) == 0xE0) {
+                    c1 = *start++;
+                    c2 = *start++;
+                    if ((c1 | c2) >= 0) {
+                        r = ((c & 0x0F) << 12) | (c1 << 6) | c2;
+                    }
 
-                /*
-                 Three continuations (65536 to 1114111)
-                 */
-            } else if ((c & 0xF8) == 0xF0) {
-                c1 = *start++;
-                c2 = *start++;
-                c3 = *start++;
-                if ((c1 | c2 | c3) >= 0) {
-                    r = ((c & 0x07) << 18) | (c1 << 12) | (c2 << 6) | c3;
+                    /*
+                     Three continuations (65536 to 1114111)
+                     */
+                } else if ((c & 0xF8) == 0xF0) {
+                    c1 = *start++;
+                    c2 = *start++;
+                    c3 = *start++;
+                    if ((c1 | c2 | c3) >= 0) {
+                        r = ((c & 0x07) << 18) | (c1 << 12) | (c2 << 6) | c3;
+                    }
                 }
+                *dest++=r;
+
+            } else {
+                *dest++=*start++;
             }
-            *dest++=r;
-
-        } else {
-			*dest++=*start++;
-		}
-	}
-    *dest=0;
-#ifndef __clang_analyzer__
-    if (hasEscape || hasUnicode) {
+        }
+        *dest=0;
 #if 0
         curstr=[self.stringCache getObject];
         [curstr reinit];
@@ -207,22 +202,28 @@ static long common=0;
         subdatas++;
     }
     return curstr;
-#endif
 }
 
 
-static inline void parsestring( const char *curptr , const char *endptr, const char **stringstart, const char **stringend )
+static inline void parsestring( const char *curptr , const char *endptr, const char **stringstart, const char **stringend , BOOL *hasEscape , BOOL *hasUTF8)
 {
+    unsigned short utf8or=0;
     curptr++;
     //                NSLog(@"curptr at start of str: '%c'",*curptr);
     *stringstart=curptr;
-    while ( curptr < endptr && *curptr != '"' ) {
-        //                    NSLog(@"curptr in str: '%c'",*curptr);
-        if ( *curptr=='\\'  ) {
+    while ( curptr < endptr ) {
+        char ch=*curptr;
+
+        if ( ch=='"') {
+            break;
+        }
+        if ( ch=='\\'  ) {
+            *hasEscape=YES;
             curptr++;
         }
         curptr++;
     }
+    *hasUTF8=(utf8or & 128) ? YES :NO;
     *stringend=curptr;
 }
 
@@ -280,20 +281,24 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 				curptr++;
 				break;
 			case '"':
-                parsestring( curptr , endptr, &stringstart, &curptr  );
+            {
+                BOOL hasUTF8=NO;
+                BOOL hasEscape=NO;
+                parsestring( curptr , endptr, &stringstart, &curptr , &hasEscape, &hasUTF8 );
                 int spaces=0;
                 while (curptr[spaces+1] ==' ') {
                     spaces++;
                 }
-				if ( curptr[spaces+1] == ':' ) {
+                if ( curptr[spaces+1] == ':' ) {
                     [_builder writeKeyString:stringstart length:curptr-stringstart];
-					curptr++;
-					
-				} else {
-                    curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart];
-					[_builder writeString:curstr];
-				}
+                    curptr++;
+
+                } else {
+                    curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart hasUTF8:hasUTF8 hasEscape:hasEscape];
+                    [_builder writeString:curstr];
+                }
                 curptr+=spaces+1;
+            }
 				break;
 			case ',':
 				curptr++;
