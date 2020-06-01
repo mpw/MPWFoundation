@@ -35,7 +35,12 @@ int runTests( NSArray *testSuiteNames , NSArray *testTypeNames,  BOOL verbose ,B
 
     NSMutableArray *mirrors=[NSMutableArray array];
     for ( NSString *className in classNamesToTest ) {
-        [mirrors addObject:[MPWClassMirror mirrorWithClass:NSClassFromString( className)]];
+        id mirror=[MPWClassMirror mirrorWithClass:NSClassFromString( className)];
+        if (mirror) {
+            [mirrors addObject:mirror];
+        } else {
+            NSLog(@"Couldn't create mirror for %@",className);
+        }
     }
     
     test=[MPWTestSuite testSuiteWithName:@"all" classMirrors:mirrors testTypes:@[ @"testSelectors"]];

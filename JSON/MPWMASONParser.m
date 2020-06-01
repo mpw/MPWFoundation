@@ -543,7 +543,6 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     NSData *json=[self frameworkResource:@"filmliste" category:@"json"];
     NSArray *array=[parser parsedData:json];
     INTEXPECT(array.count,2,@"elements");
-
 }
 
 +testSelectors
