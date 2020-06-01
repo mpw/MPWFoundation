@@ -10,7 +10,6 @@
 #import <objc/objc-class.h>
 #endif
 
-#import <MPWFoundation/MPWUniqueString.h>
 #ifdef Darwin
 #endif
 
@@ -51,7 +50,6 @@
 
 #if Darwin
 
-#if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 )
 +(void)addIvarNamesForCurrentClassToArray:(NSMutableArray*)names
 {
 	unsigned int i,count=0;
@@ -78,50 +76,6 @@
 }
 
 
-#else
-+(NSString*)ivarNameAtOffset:(int)ivarOffset
-{
-    struct objc_class *class=self;
-//    NSLog(@"going to find var at %d isa=%x",ivarOffset,isa);
-    if ( ivarOffset >0 && ivarOffset < class->instance_size ) {
-        int i;
-//        NSLog(@"is within bounds, start check");
-        while ( class ) {
-//            NSLog(@"is->ivars = %x",class->ivars);
-            if ( class->ivars ) {
-//                NSLog(@"ivar-count = %d",class->ivars->ivar_count);
-               for (i=0;i<class->ivars->ivar_count; i++ ) {
-//                   NSLog(@"checking instvar %d",i);
-                   if ( class->ivars->ivar_list[i].ivar_offset == ivarOffset ) {
-                        const char *name =  class->ivars->ivar_list[i].ivar_name;
-//                       NSLog(@"found var[%d] at %d",i,ivarOffset);
- //                       NSLog(@"called %s",name);
-                        return MPWUniqueStringWithCString(name,strlen(name));
-                    }
-                }
-            }
-            class=class->super_class;
-        }
-    }
-    return nil;
-}
-
-+(void)addIvarNamesForCurrentClassToArray:(NSMutableArray*)ivarlist
-{	
-	struct objc_class* class=(struct objc_class*)self;
-	if ( class->ivars ) {
-	int i;
-	for (i=0;i<class->ivars->ivar_count; i++ ) {
-		const char *name =  class->ivars->ivar_list[i].ivar_name;
-		[ivarlist addObject:
-		 MPWUniqueStringWithCString(name,strlen(name))];
-	}
-}
-//    return ivarlist;
-}
-
-
-#endif
 
 #else
 #warning ivar access not implemented yet for gnu runtime!

@@ -482,7 +482,6 @@ int _small_string_table_releaseIndex=0;
 
 #if !TARGET_OS_IPHONE
 
-#import "MPWUniqueString.h"
 
 
 @implementation MPWSmallStringTable(testing)
@@ -602,27 +601,7 @@ int _small_string_table_releaseIndex=0;
               ratio1, (double)COMPUTED_STRING_RATIO );
 }
 
-+(void)testLookupFasterThanMPWUniqueString
-{
-	MPWSmallStringTable *table=[self _testCreateTestTable];
-	MPWRusage* slowStart=[MPWRusage current];
-	int i;
-	for (i=0;i<LOOKUP_COUNT;i++) {
-		MPWUniqueStringWithCString("Marcel", 6);
-	}
-	MPWRusage* slowTime=[MPWRusage timeRelativeTo:slowStart];
-	MPWRusage* fastStart=[MPWRusage current];
-	for (i=0;i<LOOKUP_COUNT;i++) {
-		OBJECTFORCONSTANTSTRING(table,"Marcel");
-	}
-	MPWRusage* fastTime=[MPWRusage timeRelativeTo:fastStart];
-	double ratio = (double)[slowTime userMicroseconds] / (double)[fastTime userMicroseconds];
-	NSLog(@"MPWUniqueString time: %ld (%g ns/iter) stringtable time: %ld (%g ns/iter)",(long)[slowTime userMicroseconds],(1000.0*[slowTime userMicroseconds])/LOOKUP_COUNT,(long)[fastTime userMicroseconds],(1000.0*[fastTime userMicroseconds])/LOOKUP_COUNT);
-	NSLog(@"MPWUniqueString vs. string table lookup time ratio: %g",ratio);
-#define RATIO 2.5 
-	NSAssert2( ratio > RATIO ,@"ratio of small string table to MPWUniqueString (NSMapTable) %g < %g",
-				ratio,RATIO);
-}
+
 #endif
 
 +(void)testFailedLookupGetsDefaultValue

@@ -64,7 +64,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     NSAssert(b, @"opentag no bytes");
     for (int i=0;i<len;i++) {
         if ( start[i]!=b[i]) {
-            endName=TAGFORCSTRING( start, len); //  MPWUniqueStringWithCString( start, len );
+            endName=TAGFORCSTRING( start, len);
             break;
         }
     }
@@ -72,7 +72,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
         endName=openTag;
     }
 #else
-    endName=TAGFORCSTRING( start, len); //  MPWUniqueStringWithCString( start, len );
+    endName=TAGFORCSTRING( start, len);
 #endif
 //   NSLog(@"end element </%@>, currentTag: %@ tagStackLen: %d",endName,CURRENTTAG,tagStackLen);
     if ( shouldProcessNamespaces &&  (namespaceLen>1)) {

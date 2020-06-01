@@ -7,7 +7,6 @@
 //#define encodeObject( coder, name )  [(coder) encodeObject:name withName:@"##name##"]
 //#define decodeObject( coder, name )  name=[[(coder) decodeObjectWithName:@"##name##"] retain]
 
-//#define  QUICKSTRING( str )	(MPWUniqueString( (str), (sizeof (str))-1))
 #define  QUICKSTRING( str )	( @str )
 
 #define encodeVarName( coder, var, name )	[(coder) encodeValueOfObjCType:@encode(typeof(var)) at:(void*)&var withName:name];

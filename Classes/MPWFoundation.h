@@ -71,7 +71,6 @@
 #import "MPWFoundation/MPWEnumeratorEnumerator.h"
 #import "MPWFoundation/MPWEnumeratorSource.h"
 #import "MPWFoundation/MPWRealArray.h"
-#import "MPWFoundation/MPWUniqueString.h"
 #import "MPWFoundation/MPWUShortArray.h"
 #import "MPWFoundation/MPWFakedReturnMethodSignature.h"
 #import "MPWFoundation/MPWKVCSoftPointer.h"
