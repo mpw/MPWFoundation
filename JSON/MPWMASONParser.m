@@ -285,16 +285,15 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                 BOOL hasUTF8=NO;
                 BOOL hasEscape=NO;
                 parsestring( curptr , endptr, &stringstart, &curptr , &hasEscape, &hasUTF8 );
+                curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart hasUTF8:hasUTF8 hasEscape:hasEscape];
                 int spaces=0;
                 while (curptr[spaces+1] ==' ') {
                     spaces++;
                 }
                 if ( curptr[spaces+1] == ':' ) {
-                    [_builder writeKeyString:stringstart length:curptr-stringstart];
+                    [_builder writeKey:curstr];
                     curptr++;
-
                 } else {
-                    curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart hasUTF8:hasUTF8 hasEscape:hasEscape];
                     [_builder writeString:curstr];
                 }
                 curptr+=spaces+1;

@@ -14,7 +14,7 @@
 -(void)endArray;
 -(void)beginDictionary;
 -(void)endDictionary;
-//-(void)writeKey:aKey;
+-(void)writeKey:aKey;
 -(void)writeString:aString;
 -(void)writeNumber:aNumber;
 -(void)writeObject:anObject forKey:aKey;
@@ -22,8 +22,6 @@
 -(void)pushObject:anObject;
 -(void)writeInteger:(long)number;
 
-
--(void)writeKeyString:(const char*)aKey length:(long)len;
 
 -result;
 
@@ -35,8 +33,7 @@
 {
     id          plist;
     id          containerStack[1000];
-    const char  *keyStr;
-    long        keyLen;
+    NSString    *key;
     __unsafe_unretained id    *tos;
 }
 

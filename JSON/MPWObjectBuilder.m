@@ -71,10 +71,11 @@
 
 -(void)writeString:(NSString*)aString
 {
-    if ( keyStr ) {
-        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+    if ( key ) {
+        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
+//        OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
         [accesssor setValue:aString forTarget:*tos];
-        keyStr=NULL;
+        key=NULL;
     } else {
         [self pushObject:aString];
     }
@@ -83,10 +84,11 @@
 
 -(void)writeNumber:(NSString*)number
 {
-    if ( keyStr ) {
-        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+    if ( key ) {
+        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
+//       MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
         [accesssor setValue:number forTarget:*tos];
-        keyStr=NULL;
+        key=nil;
     } else {
         [self pushObject:number];
     }
@@ -94,10 +96,11 @@
 
 -(void)writeInteger:(long)number
 {
-    if ( keyStr ) {
-        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+    if ( key ) {
+        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
+//        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
         [accesssor setIntValue:number forTarget:*tos];
-        keyStr=NULL;
+        key=nil;
     } else {
         [self pushObject:@(number)];
     }

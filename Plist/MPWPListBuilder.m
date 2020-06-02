@@ -42,9 +42,9 @@ idAccessor( plist , setPlist )
 	if (!plist ) {
 		[self setPlist:anObject];
 	} else {
-		if  (keyStr ) {
-			[self writeObject:anObject forKey:[self key]];
-			keyStr=NULL;
+		if  ( key ) {
+			[self writeObject:anObject forKey:key];
+			key=nil;
 		} else {
 			[ARRAYTOS addObject:anObject];
 		}
@@ -108,22 +108,12 @@ idAccessor( plist , setPlist )
 
 -(NSString*)key
 {
-    NSString *key=nil;
-    if ( keyStr) {
-        if ( _commonStrings ) {
-            key=OBJECTFORSTRINGLENGTH(_commonStrings, keyStr, keyLen);
-        }
-        if ( !key ) {
-            key=[[[NSString alloc] initWithBytes:keyStr length:keyLen encoding:NSUTF8StringEncoding] autorelease];
-        }
-    }
     return key;
 }
 
--(void)writeKeyString:(const char*)aKey length:(long)len
+-(void)writeKey:(NSString*)aKey
 {
-    keyStr=aKey;
-    keyLen=len;
+    key=aKey;
 }
 
 
@@ -160,7 +150,7 @@ idAccessor( plist , setPlist )
 {
 	MPWPListBuilder *builder=[self builder];
 	[builder beginDictionary];
-    [builder writeKeyString:"key" length:3];
+    [builder writeKey:@"key"];
 	[builder writeString:@"Hello World"];
 	[builder endDictionary];
 	IDEXPECT([[builder result] objectForKey:@"key"],@"Hello World", @"simple string in dict");
@@ -170,17 +160,17 @@ idAccessor( plist , setPlist )
 {
 	MPWPListBuilder *builder=[self builder];
 	[builder beginDictionary];
-    [builder writeKeyString:"key1" length:4];
+    [builder writeKey:@"key1"];
 	[builder beginArray];
 	[builder beginDictionary];
-    [builder writeKeyString:"key2" length:4];
+    [builder writeKey:@"key2"];
 	[builder writeString:@"hello world"];
 	[builder endDictionary];
 	[builder writeString:@"array string"];
 	[builder endArray];
-    [builder writeKeyString:"key3" length:4];
+    [builder writeKey:@"key3"];
 	[builder beginDictionary];
-    [builder writeKeyString:"key34" length:5];
+    [builder writeKey:@"key34"];
 	[builder writeString:@"nested dict"];
 	[builder endDictionary];
 	[builder endDictionary];
