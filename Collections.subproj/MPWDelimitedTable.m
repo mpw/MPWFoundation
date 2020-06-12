@@ -13,6 +13,7 @@
 #import "MPWSmallStringTable.h"
 #import "MPWObjectCache.h"
 #import "MPWIntArray.h"
+#import "MPWPlistBuilder.h"
 
 @implementation MPWDelimitedTable
 
@@ -336,6 +337,19 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     return results;
 }
 
+-(void)writeOnBuilder:(id <MPWPlistStreaming>)builder
+{
+    [builder beginArray];
+    [self do:^(NSDictionary* theDict, int anIndex){
+        [builder beginDictionary];
+        for (NSString *key in self.headerKeys) {
+            [builder writeObject:theDict[key] forKey:key];
+        }
+        [builder endDictionary];
+    }];
+    [builder endArray];
+}
+
 @end
 
 #import "DebugMacros.h"
@@ -617,6 +631,16 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     IDEXPECT([[dicts lastObject] objectForKey:@"stop_name"], @"Berlin, Staaken Bhf", @"quoted name");
 }
 
++(void)testPlistFromCSV
+{
+    MPWDelimitedTable *table=[self _testQuotedCSVTable];
+    MPWPListBuilder *builder=[MPWPListBuilder builder];
+    [table writeOnBuilder:builder];
+    NSArray *result=[builder result];
+    INTEXPECT(result.count, 2, @"entries");
+//    IDEXPECT([[result lastObject] objectForKey:@"stop_name"], @"Berlin, Staaken Bhf", @"quoted name");
+}
+
 +testSelectors
 {
     return @[
@@ -625,10 +649,11 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
              @"testDictionary",
              @"testCSVTable",
              @"testCollect",
-//             @"testCollect1",
-//             @"testParCollect",
+             @"testCollect1",
+             @"testParCollect",
              @"testKeysOfInterest",
              @"testQuoteEscapedEntries",
+             @"testPlistFromCSV",
 
              ];
 }

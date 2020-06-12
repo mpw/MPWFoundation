@@ -33,7 +33,7 @@ idAccessor( plist , setPlist )
 
 -(void)writeObject:anObject forKey:aKey
 {
-	[DICTTOS setObject:anObject forKey:[self key]];
+	[DICTTOS setObject:anObject forKey:aKey];
 }
 
 

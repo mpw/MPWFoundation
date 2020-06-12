@@ -85,27 +85,27 @@ static long subdatas=0;
 static long common=0;
 
 
--(NSString*)makeJSONStringStart:(const char*)start length:(long)len hasUTF8:(BOOL)hasUTF8 hasEscape:(BOOL)hasEscape
+-(NSString*)parseJSONStringStart:(const char*)start length:(long)len hasUTF8:(BOOL)hasUTF8 hasEscape:(BOOL)hasEscape
 {
     if ( len==0) {
         return @"";
     }
     const char* realstart=start;
-	NSString *curstr;
-	if ( commonStrings  ) {
-		NSString *res=OBJECTFORSTRINGLENGTH( commonStrings, start, len );
-		if ( res ) {
-            common++;
-			return res;
-		}
-	}
+	NSString *curstr=nil;
+//	if ( commonStrings  ) {
+//		NSString *res=OBJECTFORSTRINGLENGTH( commonStrings, start, len );
+//		if ( res ) {
+//            common++;
+//			return res;
+//		}
+//	}
 
 
     
 	unichar buf[ len*2 ];
 	unichar *dest=buf;
 	const char *end=start+len;
-    if ( hasEscape || hasUTF8) {
+    if (   hasEscape || hasUTF8) {
         while ( start < end ) {
             unsigned char ch=*start;
             if ( ch == '\\' ) {
@@ -285,7 +285,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                 BOOL hasUTF8=NO;
                 BOOL hasEscape=NO;
                 parsestring( curptr , endptr, &stringstart, &curptr , &hasEscape, &hasUTF8 );
-                curstr = [self makeJSONStringStart:stringstart length:curptr-stringstart hasUTF8:hasUTF8 hasEscape:hasEscape];
+                curstr = [self parseJSONStringStart:stringstart length:curptr-stringstart hasUTF8:hasUTF8 hasEscape:hasEscape];
                 int spaces=0;
                 while (curptr[spaces+1] ==' ') {
                     spaces++;
@@ -518,7 +518,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
         [parser release];
         IDEXPECT( array[0] , string1 ,@"string1");
         IDEXPECT( array[1], string2 ,@" string2");
-        EXPECTTRUE( array[0]  == string1 ,@"expected the same string for string1");
+//        EXPECTTRUE( array[0]  == string1 ,@"expected the same string for string1");
         EXPECTTRUE( array[1]  == string2 ,@"expected the same string for string2");
         [array release];
     }
@@ -557,7 +557,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 			@"testEmptyElements",
 			@"testStringEscapes",
 			@"testUnicodeEscapes",
-			@"testCommonStrings",
+//          @"testCommonStrings",
             @"testSpaceBeforeColon",
 			];
 }

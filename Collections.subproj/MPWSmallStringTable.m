@@ -8,6 +8,7 @@
 
 #import "MPWSmallStringTable.h"
 #import "DebugMacros.h"
+#import "MPWSubData.h"
 #if !WINDOWS && !LINUX
 #import "MPWRusage.h"
 #endif
@@ -346,7 +347,8 @@ static inline int offsetOfCStringWithLengthInTableOfLength( const unsigned char 
     int len=(int)[key length];
     char buffer[len+20];
 #ifndef GNUSTEP
-    const char *cstr=CFStringGetCStringPtr((CFStringRef)key, kCFStringEncodingUTF8);
+//    const char *cstr=CFStringGetCStringPtr((CFStringRef)key, kCFStringEncodingUTF8);
+    const char *cstr=[(MPWSubData*)key bytes];
 #else
     const char *cstr=NULL;
 #endif
