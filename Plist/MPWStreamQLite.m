@@ -45,9 +45,22 @@ static int callback(void *data, int argc, char **argv, char **azColName){
 
 -(int)exec:(NSString*)sql
 {
-    char *zErrMsg=NULL;
+    sqlite3_stmt *res;
+
     [self.builder beginArray];
-    int rc = sqlite3_exec(db, [sql UTF8String], callback, (void*)self, &zErrMsg);
+    int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &res, 0);
+    int step;
+    while ( SQLITE_ROW == (step = sqlite3_step(res))) {
+        [self.builder beginDictionary];
+        int numCols=sqlite3_column_count(res);
+        for (int i=0; i<numCols;i++) {
+            NSString *key=@(sqlite3_column_name(res, i));
+            NSString *value=@((const char*)sqlite3_column_text(res, i));
+            [self.builder writeObject:value forKey:key];
+        }
+        [self.builder endDictionary];
+    }
+    sqlite3_finalize(res);
     [self.builder endArray];
     return rc;
 }
