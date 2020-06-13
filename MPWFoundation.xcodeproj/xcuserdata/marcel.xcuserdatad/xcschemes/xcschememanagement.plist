@@ -64,7 +64,17 @@
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>121</integer>
+			<integer>123</integer>
+		</dict>
+		<key>SteamQLite.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>124</integer>
+		</dict>
+		<key>StreamQLite.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>115</integer>
 		</dict>
 		<key>TestMPWFoundation.xcscheme</key>
 		<dict>
@@ -83,12 +93,17 @@
 		<key>show-build-dir.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>108</integer>
+			<integer>109</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>1F008F5A10BDAC18001F05D5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F0092262495256400841C30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
