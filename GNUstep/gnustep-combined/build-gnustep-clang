@@ -20,9 +20,9 @@ echo ======================
 echo Installing libobjc2
 
 
-tar zxf libobjc2-1.8.1.tar.gz
-cp patches/libobjc2-1.8.1/* libobjc2-1.8.1/
-cd libobjc2-1.8.1
+tar zxf libobjc2-2.0.tar.gz
+#cp patches/libobjc2-2.0/* libobjc2-2.0/
+cd libobjc2-2.0
 mkdir Build
 cd Build
 # cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang -DTESTS=OFF -DLLVM_OPTS=OFF  ..
