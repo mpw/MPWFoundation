@@ -20,6 +20,13 @@
     sqlite3 *db;
 }
 
++(instancetype)open:(NSString*)newpath
+{
+    MPWStreamQLite *db=[[[self alloc] initWithPath:newpath] autorelease];
+    [db open];
+    return db;
+}
+
 -(instancetype)initWithPath:(NSString*)newpath
 {
     self=[super init];
@@ -105,10 +112,9 @@
 +_chinookDB
 {
     NSString *path=[[NSBundle bundleForClass:self] pathForResource:@"chinook" ofType:@"db"];
-    MPWStreamQLite *db = [[[self alloc] initWithPath:path] autorelease];
+    MPWStreamQLite *db = [self open:path];
     MPWPListBuilder *builder=[MPWPListBuilder builder];
     db.builder = builder;
-    [db open];
     return db;
 }
 
@@ -124,9 +130,13 @@
 {
     MPWStreamQLite *db=[self _chinookDB];
     [db exec:@"select * from tracks;"];
-    NSArray *tracks=[db.builder result];
+    NSArray<NSDictionary*> *tracks=[db.builder result];
     INTEXPECT(tracks.count, 3503, @"number of tracks");
+    IDEXPECT( tracks.lastObject[@"Composer"] , @"Philip Glass", @"composer of last track");
+    IDEXPECT( tracks.lastObject[@"Name"] , @"Koyaanisqatsi", @"name of last track");
+    IDEXPECT( tracks.firstObject[@"Composer"] , @"Angus Young, Malcolm Young, Brian Johnson", @"composer of first track");
 }
+
 
 +(NSArray*)testSelectors
 {
