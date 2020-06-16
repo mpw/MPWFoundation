@@ -43,8 +43,7 @@ idAccessor(target, _setTarget)
 
 -(NSString*)putSelectorStringForName:(NSString*)newName
 {
-    // FIXME: capitalizedString is wrong for CamelCase identifiers
-    return [[@"set" stringByAppendingString:[newName capitalizedString]] stringByAppendingString:@":"];
+    return [[[@"set" stringByAppendingString:[[newName substringToIndex:1] capitalizedString]]  stringByAppendingString:[newName substringFromIndex:1]]stringByAppendingString:@":"];
 }
 
 -(void)setName:(NSString*)newName forComponent:(AccessPathComponent*)component
@@ -65,6 +64,7 @@ idAccessor(target, _setTarget)
         component->getSelector = @selector(objectForKey:);
     }
     component->getIMP=(IMP0)[targetClass instanceMethodForSelector:component->getSelector];
+
     if ( ![targetClass instancesRespondToSelector:component->putSelector] ) {
         component->putSelector = @selector(setObject:forKey:);
     }
