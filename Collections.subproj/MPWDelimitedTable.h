@@ -40,6 +40,7 @@
 
 
 -(NSDictionary*)slowDictionaryAtIndex:(int)anIndex;
+-(void)writeOnBuilder:(id <MPWPlistStreaming>)builder;
 
 
 @end

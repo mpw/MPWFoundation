@@ -34,15 +34,6 @@
     return self;
 }
 
--(void)sqlRow:(int)argc values:(char**)values keys:(char**)keys
-{
-    [self.builder beginDictionary];
-    for(int i = 0; i<argc; i++){
-        [self.builder writeObject:@(values[i]) forKey:@(keys[i])];
-    }
-    [self.builder endDictionary];
-}
-
 -(int)exec:(NSString*)sql
 {
     sqlite3_stmt *res;
@@ -76,10 +67,7 @@
 
 -(int)open
 {
-    int rc;
-
-    rc = sqlite3_open([self.databasePath UTF8String], &db);
-    return rc;
+    return sqlite3_open([self.databasePath UTF8String], &db);
 }
 
 -(void)close

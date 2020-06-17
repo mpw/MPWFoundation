@@ -150,10 +150,11 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 //        NSLog(@"got buffer: %p",buffer);
     } else {
         long maxLen= [anObject maximumLengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-        buffer=alloca(maxLen+1);
+        buffer=alloca(maxLen+2);
 //        NSLog(@"alloca buffer: %p",buffer);
 //        NSAssert(buffer, @"buffer");
-        [anObject getBytes:(void*)buffer maxLength:maxLen usedLength:&len encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(0, len) remainingRange:NULL];
+        [anObject getBytes:(void*)buffer maxLength:maxLen+1 usedLength:&len encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(0, len) remainingRange:NULL];
+        ((char*)buffer)[len]=0;
 //        NSLog(@"got bytes: %d",success);
 //        NSAssert(success,@"got bytes");
 //        [anObject getCString:buffer maxLength:maxLen encoding:NSUTF8StringEncoding];
