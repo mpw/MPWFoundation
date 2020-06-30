@@ -121,13 +121,39 @@
 
 @end
 
+@interface MPWJSONFlatDecodeTestClass : NSObject {}
+@property (assign) long a,b;
+@property (strong) id c;
+@end
+@implementation MPWJSONFlatDecodeTestClass
 
+@end
+
+#import "MPWMASONParser.h"
 
 @implementation MPWObjectBuilder(testing)
+
++(void)testDecodeFlatClassArray
+{
+    NSData *jsonArrayOfFlatObjects=[@"[ { \"a\": 2, \"b\": 3, \"c\": \"First\" } , { \"a\": 20, \"b\": 10, \"c\": \"Second\"} ]" asData];
+    MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONFlatDecodeTestClass class]] autorelease];
+    MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
+    NSArray *result = [parser parsedData:jsonArrayOfFlatObjects];
+    INTEXPECT(result.count, 2, @"parsed array count");
+    MPWJSONFlatDecodeTestClass *first=result.firstObject;
+    INTEXPECT(first.a, 2, @"first.a");
+    INTEXPECT(first.b, 3, @"first.b");
+    IDEXPECT(first.c, @"First", @"first.c");
+    MPWJSONFlatDecodeTestClass *last=result.lastObject;
+    INTEXPECT(last.a, 20, @"last.a");
+    INTEXPECT(last.b, 10, @"last.b");
+    IDEXPECT(last.c, @"Second", @"last.c");
+}
 
 +(NSArray*)testSelectors
 {
     return @[
+                @"testDecodeFlatClassArray",
              ];
 }
 
