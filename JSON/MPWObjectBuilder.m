@@ -15,7 +15,7 @@
 
 @implementation MPWObjectBuilder
 
--(void)setupAcceessors:(Class)theClass
+-(MPWSmallStringTable*)accessorsForClass:(Class)theClass
 {
     NSArray *ivars=[theClass ivarNames];
     if ( [[ivars lastObject] hasPrefix:@"_"]) {
@@ -28,7 +28,12 @@
         [accessors addObject:accessor];
     }
     MPWSmallStringTable *table=[[[MPWSmallStringTable alloc] initWithKeys:ivars values:accessors] autorelease];
-    self.accessorTable=table;
+    return table;
+}
+
+-(void)setupAccessors:(Class)theClass
+{
+    self.accessorTable=[self accessorsForClass:theClass];
 }
 
 
@@ -36,7 +41,7 @@
 {
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
-    [self setupAcceessors:theClass];
+    [self setupAccessors:theClass];
     [self.cache setUnsafeFastAlloc:YES];
     self.streamingThreshold=0;
     return self;
