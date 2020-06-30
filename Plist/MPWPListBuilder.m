@@ -28,8 +28,8 @@ idAccessor( plist , setPlist )
 	return [[[self alloc] init] autorelease];
 }	
 
-#define ARRAYTOS	(NSMutableArray*)(*tos)
-#define DICTTOS		(NSMutableDictionary*)(*tos)
+#define ARRAYTOS	(NSMutableArray*)(tos->container)
+#define DICTTOS		(NSMutableDictionary*)(tos->container)
 
 -(void)writeObject:anObject forKey:aKey
 {
@@ -78,7 +78,7 @@ idAccessor( plist , setPlist )
 {
 	[self pushObject:anObject];
 	tos++;
-	*tos=anObject;
+    tos->container=anObject;
 //	[anObject release];
 }
 

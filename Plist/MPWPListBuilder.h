@@ -29,12 +29,17 @@
 
 @class MPWSmallStringTable;
 
+typedef struct {
+    __unsafe_unretained id container;
+    __unsafe_unretained MPWSmallStringTable *lookup;
+} CurrentBuildContainer;
+
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming>
 {
     id          plist;
-    id          containerStack[1000];
+    CurrentBuildContainer          containerStack[1000];
     NSString    *key;
-    __unsafe_unretained id    *tos;
+    CurrentBuildContainer           *tos;
 }
 
 @property (nonatomic, strong)  MPWSmallStringTable  *commonStrings;

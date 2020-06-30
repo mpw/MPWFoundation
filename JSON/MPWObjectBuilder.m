@@ -8,8 +8,8 @@
 #import "MPWObjectBuilder.h"
 #import "MPWWriteStream.h"
 
-#define ARRAYTOS        (NSMutableArray*)(*tos)
-#define DICTTOS         (NSMutableDictionary*)(*tos)
+#define ARRAYTOS        (NSMutableArray*)(tos->container)
+#define DICTTOS         (NSMutableDictionary*)(tos->container)
 
 
 
@@ -74,7 +74,7 @@
     if ( key ) {
         MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
 //        OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
-        [accesssor setValue:aString forTarget:*tos];
+        [accesssor setValue:aString forTarget:tos->container];
         key=NULL;
     } else {
         [self pushObject:aString];
@@ -87,7 +87,7 @@
     if ( key ) {
         MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
 //       MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
-        [accesssor setValue:number forTarget:*tos];
+        [accesssor setValue:number forTarget:tos->container];
         key=nil;
     } else {
         [self pushObject:number];
@@ -99,7 +99,7 @@
     if ( key ) {
         MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
 //        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
-        [accesssor setIntValue:number forTarget:*tos];
+        [accesssor setIntValue:number forTarget:tos->container];
         key=nil;
     } else {
         [self pushObject:@(number)];
@@ -110,7 +110,7 @@
 -(void)writeObject:anObject forKey:aKey
 {
     MPWValueAccessor *accesssor=[self.accessorTable objectForKey:aKey];
-    [accesssor setValue:anObject forTarget:*tos];
+    [accesssor setValue:anObject forTarget:tos->container];
 }
 
 -(void)dealloc

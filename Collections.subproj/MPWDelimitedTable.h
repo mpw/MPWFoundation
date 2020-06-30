@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class MPWIntArray,MPWObjectCache;
+@protocol MPWPlistStreaming;
 
 @interface MPWDelimitedTable : NSObject
 {
