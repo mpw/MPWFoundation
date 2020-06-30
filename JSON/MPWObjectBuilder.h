@@ -14,6 +14,8 @@
 
 @property (nonatomic, strong) MPWObjectCache *cache;
 @property (nonatomic, strong) MPWSmallStringTable *accessorTable;
+@property (nonatomic, strong) MPWSmallStringTable *accessorTablesByKey;
+@property (nonatomic, strong) NSDictionary *classTable;
 @property (nonatomic, assign) long objectCount;
 @property (nonatomic, assign) long arrayDepth;
 @property (nonatomic, assign) long objectDepth;

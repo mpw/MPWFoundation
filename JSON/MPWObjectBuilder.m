@@ -36,6 +36,26 @@
     self.accessorTable=[self accessorsForClass:theClass];
 }
 
+-(MPWSmallStringTable*)accessorTablesForClassDict:(NSDictionary*)classesByKey
+
+{
+    NSMutableArray *accessorTables=[NSMutableArray array];
+    NSArray *keys=[classesByKey allKeys];
+    for ( NSArray *classKey in keys) {
+        Class theClass=classesByKey[classKey];
+        MPWSmallStringTable *accessorTable=[self accessorsForClass:theClass];
+        [accessorTables addObject:accessorTable];
+    }
+    MPWSmallStringTable *tables=[[[MPWSmallStringTable alloc] initWithKeys:keys values:accessorTables] autorelease];
+    return tables;
+}
+
+-(void)setClassesForKeys:(NSDictionary*)classesByKey
+{
+    self.classTable=classesByKey;
+    self.accessorTablesByKey=[self accessorTablesForClassDict:classesByKey];
+}
+
 
 -(instancetype)initWithClass:(Class)theClass
 {
@@ -61,8 +81,22 @@
 
 -(void)beginDictionary
 {
-    [self pushContainer:GETOBJECT(_cache) ];
-    tos->lookup=self.accessorTable;
+    id container=nil;
+    MPWSmallStringTable *table=nil;
+    if (self.key ) {
+        table=[self.accessorTablesByKey objectForKey:self.key];
+        container = [[[self.classTable[self.key] alloc] init] autorelease];
+    }
+    if (!table) {
+        table=self.accessorTable;
+
+    }
+    if (!container) {
+        container=GETOBJECT(_cache);        container=GETOBJECT(_cache);
+
+    }
+    [self pushContainer:container ];
+    tos->lookup=table;
 }
 
 -(void)endDictionary
@@ -131,7 +165,16 @@
 @property (strong) id c;
 @end
 @implementation MPWJSONFlatDecodeTestClass
+@end
 
+@interface MPWJSONNestedDecodeTestClass : NSObject {}
+@property (strong) MPWJSONFlatDecodeTestClass* firstNested;
+@property (strong) MPWJSONNestedDecodeTestClass* secondNested;
+@property (assign) long nestedInt;
+@property (strong) NSString* nestedString;
+
+@end
+@implementation MPWJSONNestedDecodeTestClass
 @end
 
 #import "MPWMASONParser.h"
@@ -155,10 +198,31 @@
     IDEXPECT(last.c, @"Second", @"last.c");
 }
 
++(void)testDecodeNestedObject
+{
+    NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"firstNested\": { \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } }  ]" asData];
+    MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONNestedDecodeTestClass class]] autorelease];
+    [builder setClassesForKeys:@{ @"firstNested": [MPWJSONFlatDecodeTestClass class] }];
+    NSLog(@"builder accessorTables: %@",builder.accessorTablesByKey);
+    MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
+    NSArray *result = [parser parsedData:jsonNestedObjects];
+    INTEXPECT(result.count, 1, @"parsed array count");
+    MPWJSONNestedDecodeTestClass *first=result.firstObject;
+    INTEXPECT(first.nestedInt, 7, @"first.nestedInt");
+    IDEXPECT(first.nestedString, @"FirstNested", @"first.nestedString");
+    MPWJSONFlatDecodeTestClass *firstSubObject=first.firstNested;
+    EXPECTNOTNIL(firstSubObject, @"there should be a subobject");
+
+    INTEXPECT(firstSubObject.a, 17, @"firstSubObject.a");
+    INTEXPECT(firstSubObject.b, 23, @"firstSubObject.b");
+    IDEXPECT(firstSubObject.c, @"SubObject", @"firstSubObject.c");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
-                @"testDecodeFlatClassArray",
+        @"testDecodeFlatClassArray",
+        @"testDecodeNestedObject",
              ];
 }
 
