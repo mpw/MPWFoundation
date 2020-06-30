@@ -70,7 +70,12 @@
 -(void)beginArray
 {
     _arrayDepth++;
+    NSString *theKey=self.key;
     [super beginArray];
+    if ( theKey ) {
+        tos->lookup=[self.accessorTablesByKey objectForKey:theKey];
+        tos->class=[self classTable][theKey];
+    }
 }
 
 -(void)endArray
@@ -88,12 +93,16 @@
         container = [[[self.classTable[self.key] alloc] init] autorelease];
     }
     if (!table) {
-        table=self.accessorTable;
+        if ( tos-containerStack > 0 && (table=tos->lookup)) {
+            container=[[[tos->class alloc] init] autorelease];
+        }
+        if (!table) {
+            table=self.accessorTable;
+        }
 
     }
     if (!container) {
         container=GETOBJECT(_cache);        container=GETOBJECT(_cache);
-
     }
     [self pushContainer:container ];
     tos->lookup=table;
@@ -169,7 +178,7 @@
 
 @interface MPWJSONNestedDecodeTestClass : NSObject {}
 @property (strong) MPWJSONFlatDecodeTestClass* firstNested;
-@property (strong) MPWJSONNestedDecodeTestClass* secondNested;
+@property (strong) NSArray<MPWJSONNestedDecodeTestClass*> *secondNested;
 @property (assign) long nestedInt;
 @property (strong) NSString* nestedString;
 
@@ -203,7 +212,6 @@
     NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"firstNested\": { \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } }  ]" asData];
     MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONNestedDecodeTestClass class]] autorelease];
     [builder setClassesForKeys:@{ @"firstNested": [MPWJSONFlatDecodeTestClass class] }];
-    NSLog(@"builder accessorTables: %@",builder.accessorTablesByKey);
     MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
     NSArray *result = [parser parsedData:jsonNestedObjects];
     INTEXPECT(result.count, 1, @"parsed array count");
@@ -218,11 +226,33 @@
     IDEXPECT(firstSubObject.c, @"SubObject", @"firstSubObject.c");
 }
 
++(void)testDecodeNestedArrayWithObjects
+{
+    NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"secondNested\": [{ \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } ] }  ]" asData];
+    MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONNestedDecodeTestClass class]] autorelease];
+    [builder setClassesForKeys:@{ @"secondNested": [MPWJSONFlatDecodeTestClass class] }];
+    MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
+    NSArray *result = [parser parsedData:jsonNestedObjects];
+    INTEXPECT(result.count, 1, @"parsed array count");
+    MPWJSONNestedDecodeTestClass *first=result.firstObject;
+    INTEXPECT(first.nestedInt, 7, @"first.nestedInt");
+    IDEXPECT(first.nestedString, @"FirstNested", @"first.nestedString");
+    NSArray *nestedArray=first.secondNested;
+    INTEXPECT(nestedArray.count, 1, @"elements in nested array");
+    MPWJSONFlatDecodeTestClass *firstSubObject=nestedArray.firstObject;
+
+
+   INTEXPECT(firstSubObject.a, 17, @"firstSubObject.a");
+//    INTEXPECT(firstSubObject.b, 23, @"firstSubObject.b");
+//    IDEXPECT(firstSubObject.c, @"SubObject", @"firstSubObject.c");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testDecodeFlatClassArray",
         @"testDecodeNestedObject",
+        @"testDecodeNestedArrayWithObjects",
              ];
 }
 

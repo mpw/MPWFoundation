@@ -32,6 +32,7 @@
 typedef struct {
     __unsafe_unretained id container;
     __unsafe_unretained MPWSmallStringTable *lookup;
+    Class class;
 } CurrentBuildContainer;
 
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming>
