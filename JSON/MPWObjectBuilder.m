@@ -57,6 +57,7 @@
 -(void)beginDictionary
 {
     [self pushContainer:GETOBJECT(_cache) ];
+    tos->lookup=self.accessorTable;
 }
 
 -(void)endDictionary
@@ -72,8 +73,7 @@
 -(void)writeString:(NSString*)aString
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
-//        OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
         [accesssor setValue:aString forTarget:tos->container];
         key=NULL;
     } else {
@@ -85,8 +85,7 @@
 -(void)writeNumber:(NSString*)number
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
-//       MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
         [accesssor setValue:number forTarget:tos->container];
         key=nil;
     } else {
@@ -97,8 +96,7 @@
 -(void)writeInteger:(long)number
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[_accessorTable objectForKey:key];
-//        MPWValueAccessor *accesssor=OBJECTFORSTRINGLENGTH(_accessorTable, keyStr, keyLen);
+        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
         [accesssor setIntValue:number forTarget:tos->container];
         key=nil;
     } else {
@@ -109,7 +107,7 @@
 
 -(void)writeObject:anObject forKey:aKey
 {
-    MPWValueAccessor *accesssor=[self.accessorTable objectForKey:aKey];
+    MPWValueAccessor *accesssor=[tos->lookup objectForKey:aKey];
     [accesssor setValue:anObject forTarget:tos->container];
 }
 
@@ -122,6 +120,8 @@
 
 
 @end
+
+
 
 @implementation MPWObjectBuilder(testing)
 
