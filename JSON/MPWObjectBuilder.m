@@ -50,11 +50,26 @@
     return tables;
 }
 
+-(MPWSmallStringTable*)cachesForClassesByKey:(NSDictionary*)classesByKey
+{
+    NSMutableArray *caches=[NSMutableArray array];
+    NSArray *keys=[classesByKey allKeys];
+    for ( NSArray *classKey in keys) {
+        Class theClass=classesByKey[classKey];
+        MPWObjectCache *cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
+        [caches addObject:cache];
+    }
+    MPWSmallStringTable *cacheMap=[[[MPWSmallStringTable alloc] initWithKeys:keys values:caches] autorelease];
+    return cacheMap;
+}
+
 -(void)setClassesForKeys:(NSDictionary*)classesByKey
 {
     self.classTable=classesByKey;
     self.accessorTablesByKey=[self accessorTablesForClassDict:classesByKey];
+    self.cachesByKey=[self cachesForClassesByKey:classesByKey];
 }
+
 
 
 -(instancetype)initWithClass:(Class)theClass
@@ -74,7 +89,7 @@
     [super beginArray];
     if ( theKey ) {
         tos->lookup=[self.accessorTablesByKey objectForKey:theKey];
-        tos->class=[self classTable][theKey];
+        tos->cache=[self.cachesByKey objectForKey:theKey];
     }
 }
 
@@ -88,21 +103,25 @@
 {
     id container=nil;
     MPWSmallStringTable *table=nil;
+    MPWObjectCache *cacheToUse=nil;
     if (self.key ) {
         table=[self.accessorTablesByKey objectForKey:self.key];
-        container = [[[self.classTable[self.key] alloc] init] autorelease];
+        cacheToUse = [self.cachesByKey objectForKey:self.key];
     }
     if (!table) {
         if ( tos-containerStack > 0 && (table=tos->lookup)) {
-            container=[[[tos->class alloc] init] autorelease];
+            cacheToUse = tos->cache;
         }
         if (!table) {
             table=self.accessorTable;
         }
 
     }
+    if (!cacheToUse) {
+        cacheToUse=_cache;
+    }
     if (!container) {
-        container=GETOBJECT(_cache);        container=GETOBJECT(_cache);
+        container=GETOBJECT(cacheToUse);
     }
     [self pushContainer:container ];
     tos->lookup=table;
@@ -228,7 +247,7 @@
 
 +(void)testDecodeNestedArrayWithObjects
 {
-    NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"secondNested\": [{ \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } ] }  ]" asData];
+    NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"secondNested\": [{ \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } ], \"firstNested\": { \"a\": 14, \"b\": 41, \"c\": \"LaterSubObject\" } }  ]" asData];
     MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONNestedDecodeTestClass class]] autorelease];
     [builder setClassesForKeys:@{ @"secondNested": [MPWJSONFlatDecodeTestClass class] }];
     MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
@@ -239,12 +258,10 @@
     IDEXPECT(first.nestedString, @"FirstNested", @"first.nestedString");
     NSArray *nestedArray=first.secondNested;
     INTEXPECT(nestedArray.count, 1, @"elements in nested array");
-    MPWJSONFlatDecodeTestClass *firstSubObject=nestedArray.firstObject;
-
-
-   INTEXPECT(firstSubObject.a, 17, @"firstSubObject.a");
-//    INTEXPECT(firstSubObject.b, 23, @"firstSubObject.b");
-//    IDEXPECT(firstSubObject.c, @"SubObject", @"firstSubObject.c");
+    MPWJSONFlatDecodeTestClass *secondSubObject=nestedArray.firstObject;
+   INTEXPECT(secondSubObject.a, 17, @"secondSubObject.a");
+   INTEXPECT(secondSubObject.b, 23, @"secondSubObject.b");
+   IDEXPECT(secondSubObject.c, @"SubObject", @"secondSubObject.c");
 }
 
 +(NSArray*)testSelectors

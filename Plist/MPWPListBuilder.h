@@ -27,12 +27,12 @@
 
 @end
 
-@class MPWSmallStringTable;
+@class MPWSmallStringTable,MPWObjectCache;
 
 typedef struct {
     __unsafe_unretained id container;
     __unsafe_unretained MPWSmallStringTable *lookup;
-    Class class;
+    __unsafe_unretained MPWObjectCache *cache;
 } CurrentBuildContainer;
 
 @interface MPWPListBuilder : NSObject <MPWPlistStreaming>
