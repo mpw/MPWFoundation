@@ -59,9 +59,8 @@
 
     allocImp = (IMP0)[newClass methodForSelector:allocSel];
     NSAssert( allocImp != NULL , @"allocImp");
-    initImp = (IMP0)[newClass instanceMethodForSelector:initSel];
     [self setReInitSelector:initSel];
-    NSAssert( initImp != NULL , @"initImp");
+//    NSAssert( initImp != NULL , @"initImp");
     retainImp = (IMP0)[newClass instanceMethodForSelector:@selector(retain)];
     NSAssert( retainImp != NULL , @"retainImp");
     autoreleaseImp = (IMP0)[newClass instanceMethodForSelector:@selector(autorelease)];
@@ -192,8 +191,21 @@ intAccessor( hits, setHits )
 					removeFromCacheImp( objs[objIndex] ,@selector(removeFromCache:), self );
 				}
 			}
-	//		NSLog(@"had to (re)alloc %@/%dm hits:%d misses:%d rate: %d",obj,[obj retainCount],hits,misses,hits*100/(hits+misses));
-			objs[objIndex] = initImp( allocImp( objClass, allocSel ),initSel);
+
+            // lazy fetch of initImp needed for some class clusters
+            // that substitute instances of a different classs
+            // (so IMP from original class won't work for actual instance
+            //  created).
+
+            id allocated = allocImp( objClass, allocSel );
+            if (!initImp) {
+                allocated=((IMP0)objc_msgSend)(allocated, reInitSelector);
+                initImp = (IMP0)[allocated methodForSelector:initSel];
+            } else {
+                allocated=initImp(allocated ,initSel);
+
+            }
+			objs[objIndex] = allocated;
 			obj=objs[objIndex];
 		} else {
 			hits++;
@@ -259,3 +271,25 @@ intAccessor( hits, setHits )
 
 @end
 
+#import "DebugMacros.h"
+
+@implementation MPWObjectCache(testing)
+
++(void)testCanCreateMutableDictionary
+{
+    MPWObjectCache *cache=[self cacheWithCapacity:2 class:[NSMutableDictionary class]];
+    NSMutableDictionary *d=GETOBJECT(cache);
+    INTEXPECT(d.count, 0, @"count of dict after create");
+    d[@"hi"]=@"there";
+    INTEXPECT(d.count, 1, @"count of dict after set");
+    IDEXPECT(d[@"hi"], @"there",@"value we put in");
+}
+
++(NSArray<NSString*>*)testSelectors
+{
+    return @[
+        @"testCanCreateMutableDictionary",
+    ];
+}
+
+@end
