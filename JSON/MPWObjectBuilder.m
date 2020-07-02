@@ -141,7 +141,11 @@
 {
     if ( key ) {
         MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
-        [accesssor setValue:aString forTarget:tos->container];
+        if (accesssor) {
+            [accesssor setValue:aString forTarget:tos->container];
+        } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {
+            [tos->container setObject:aString forKey:key];
+        }
         key=NULL;
     } else {
         [self pushObject:aString];
@@ -164,7 +168,11 @@
 {
     if ( key ) {
         MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
-        [accesssor setIntValue:number forTarget:tos->container];
+        if (accesssor) {
+            [accesssor setIntValue:number forTarget:tos->container];
+        } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {
+            [tos->container setObject:@(number) forKey:key];
+        }
         key=nil;
     } else {
         [self pushObject:@(number)];
@@ -175,7 +183,11 @@
 -(void)writeObject:anObject forKey:aKey
 {
     MPWValueAccessor *accesssor=[tos->lookup objectForKey:aKey];
-    [accesssor setValue:anObject forTarget:tos->container];
+    if (accesssor) {
+        [accesssor setValue:anObject forTarget:tos->container];
+    } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {
+        [tos->container setObject:anObject forKey:aKey];
+    }
 }
 
 -(void)dealloc
@@ -264,12 +276,35 @@
    IDEXPECT(secondSubObject.c, @"SubObject", @"secondSubObject.c");
 }
 
+
++(void)testCanEmbedDictionaries
+{
+    NSData *jsonNestedObjects=[@"[ { \"nestedInt\": 7,  \"nestedString\": \"FirstNested\"  \"firstNested\": { \"a\": 17, \"b\": 23, \"c\": \"SubObject\" } }  ]" asData];
+    MPWObjectBuilder *builder=[[[self alloc] initWithClass:[MPWJSONNestedDecodeTestClass class]] autorelease];
+    [builder setClassesForKeys:@{ @"firstNested": [NSMutableDictionary class] }];
+    MPWMASONParser *parser=[[[MPWMASONParser alloc] initWithBuilder:builder] autorelease];
+    NSArray *result = [parser parsedData:jsonNestedObjects];
+    INTEXPECT(result.count, 1, @"parsed array count");
+    MPWJSONNestedDecodeTestClass *first=result.firstObject;
+    INTEXPECT(first.nestedInt, 7, @"first.nestedInt");
+    IDEXPECT(first.nestedString, @"FirstNested", @"first.nestedString");
+    NSMutableDictionary *firstSubObject=(NSMutableDictionary*)first.firstNested;
+    EXPECTNOTNIL(firstSubObject, @"there should be a subdict");
+    EXPECTTRUE([firstSubObject isKindOfClass:[NSMutableDictionary class]], @"and it's a dictionary");
+    INTEXPECT(firstSubObject.count,3,@"all the values");
+    IDEXPECT(firstSubObject[@"a"], @(17), @"firstSubObject.a");
+    IDEXPECT(firstSubObject[@"b"], @(23), @"firstSubObject.b");
+    IDEXPECT(firstSubObject[@"c"], @"SubObject", @"firstSubObject.c");
+
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testDecodeFlatClassArray",
         @"testDecodeNestedObject",
         @"testDecodeNestedArrayWithObjects",
+        @"testCanEmbedDictionaries",
              ];
 }
 
