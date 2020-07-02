@@ -87,10 +87,12 @@ idAccessor( plist , setPlist )
 #ifndef __clang_analyzer__
 	[self pushContainer:[[NSMutableArray alloc] init]];
 #endif
+    _arrayDepth++;
 }
 
 -(void)endArray
 {
+    _arrayDepth--;
 	tos--;
 }
 
@@ -121,6 +123,7 @@ idAccessor( plist , setPlist )
 {
 	[plist release];
 //	[containerStack release];
+    [(id)_target release];
 	[super dealloc];
 }
 	 

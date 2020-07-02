@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol Streaming;
+
 @protocol MPWPlistStreaming
 
 -(void)beginArray;
@@ -44,6 +46,9 @@ typedef struct {
 }
 
 @property (nonatomic, strong)  MPWSmallStringTable  *commonStrings;
+@property (nonatomic, assign) long arrayDepth;
+@property (nonatomic, assign) long streamingThreshold;
+@property (nonatomic, strong) id <Streaming> target;
 
 
 -result;

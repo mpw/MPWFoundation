@@ -84,7 +84,6 @@
 
 -(void)beginArray
 {
-    _arrayDepth++;
     NSString *theKey=self.key;
     [super beginArray];
     if ( theKey ) {
@@ -95,7 +94,6 @@
 
 -(void)endArray
 {
-    _arrayDepth--;
     [super endArray];
 }
 
@@ -130,7 +128,7 @@
 -(void)endDictionary
 {
     tos--;
-    if ( _arrayDepth <= _streamingThreshold) {
+    if ( self.arrayDepth <= self.streamingThreshold) {
         [self.target writeObject:[ARRAYTOS lastObject]];
         [ARRAYTOS removeLastObject];
     }
@@ -193,7 +191,6 @@
 -(void)dealloc
 {
     [_cache release];
-    [(id)_target release];
     [super dealloc];
 }
 
