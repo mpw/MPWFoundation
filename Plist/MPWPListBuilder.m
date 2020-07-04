@@ -9,6 +9,7 @@
 #import "MPWPListBuilder.h"
 #import "AccessorMacros.h"
 #import "MPWSmallStringTable.h"
+#import "MPWWriteStream.h"
 
 @implementation MPWPListBuilder
 
@@ -20,6 +21,7 @@ idAccessor( plist , setPlist )
 {
 	self=[super init];
 	tos = containerStack;
+    self.streamingThreshold=-1;
 	return self;
 }
 
@@ -105,7 +107,11 @@ idAccessor( plist , setPlist )
 
 -(void)endDictionary
 {
-	tos--;
+    tos--;
+    if ( self.arrayDepth <= self.streamingThreshold) {
+        [self.target writeObject:[ARRAYTOS lastObject]];
+        [ARRAYTOS removeLastObject];
+    }
 }
 
 -(NSString*)key
@@ -185,13 +191,32 @@ idAccessor( plist , setPlist )
 	IDEXPECT( [[array objectAtIndex:0] objectForKey:@"key2"], @"hello world", @"1st nested dict");
 }
 
++(void)testStreaming
+{
+    MPWPListBuilder *builder=[self builder];
+    NSMutableArray *target=[NSMutableArray array];
+    builder.target=target;
+    builder.streamingThreshold=1;
+
+    [builder beginArray];
+    [builder beginDictionary];
+    [builder writeObject:@"Hello World" forKey:@"key1"];
+    [builder endDictionary];
+    [builder endArray];
+    INTEXPECT([builder.result count], 0, @"results were streamed");
+    INTEXPECT(target.count, 1, @"results were streamed");
+    IDEXPECT([target.lastObject objectForKey:@"key1"], @"Hello World", @"dict was streameed");
+
+}
+
 +(NSArray*)testSelectors
 {
 	return [NSArray arrayWithObjects:
 			@"testBuildString",
 			@"testBuildTopLevelArrays",
 			@"testBuildTopLevelDicts",
-			@"testNestedContainers",
+            @"testNestedContainers",
+            @"testStreaming",
 			nil];
 }
 		 

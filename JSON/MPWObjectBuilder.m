@@ -78,7 +78,6 @@
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
     [self setupAccessors:theClass];
     [self.cache setUnsafeFastAlloc:YES];
-    self.streamingThreshold=0;
     return self;
 }
 
@@ -90,11 +89,6 @@
         tos->lookup=[self.accessorTablesByKey objectForKey:theKey];
         tos->cache=[self.cachesByKey objectForKey:theKey];
     }
-}
-
--(void)endArray
-{
-    [super endArray];
 }
 
 -(void)beginDictionary
@@ -125,14 +119,6 @@
     tos->lookup=table;
 }
 
--(void)endDictionary
-{
-    tos--;
-    if ( self.arrayDepth <= self.streamingThreshold) {
-        [self.target writeObject:[ARRAYTOS lastObject]];
-        [ARRAYTOS removeLastObject];
-    }
-}
 
 
 -(void)writeString:(NSString*)aString
