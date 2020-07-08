@@ -23,7 +23,8 @@
 -(void)pushContainer:anObject;
 -(void)pushObject:anObject;
 -(void)writeInteger:(long)number;
-
+@optional 
+-(void)writeObject:(id)anObject;
 
 -result;
 

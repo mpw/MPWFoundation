@@ -12,8 +12,6 @@
 @protocol MPWPlistStreaming;
 
 @interface MPWMASONParser : MPWXmlAppleProplistReader {
-	BOOL inDict;
-	BOOL inArray;
 	MPWSmallStringTable *commonStrings;
 }
 

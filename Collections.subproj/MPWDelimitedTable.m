@@ -337,16 +337,32 @@ lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndex
     return results;
 }
 
+
 -(void)writeOnBuilder:(id <MPWPlistStreaming>)builder
 {
+    NSArray *keys=[self keysOfInterest];
+    MPWIntArray *indexes=[self indexesOfInterest];
+
     [builder beginArray];
-    [self do:^(NSDictionary* theDict, int anIndex){
+    long maxElements =[indexes count];
+    id elements[ maxElements+10];
+    id headerArray[ maxElements+10];
+    int *keyIndexes=[indexes integers];
+
+    [keys getObjects:headerArray range:NSMakeRange(0, maxElements)];
+
+    for (long i=0,maxRows=[self count];i<maxRows;i++) {
         [builder beginDictionary];
-        for (NSString *key in self.headerKeys) {
-            [builder writeObject:theDict[key] forKey:key];
+        long numElems=[self dataAtIndex:(int)i into:elements mapper:keyIndexes max:(int)maxElements];
+        numElems=MIN(numElems,maxElements);
+        for (int j=0;j<numElems;j++) {
+            id elem=elements[j];
+            if ( elem ) {
+                [builder writeObject:elem forKey:headerArray[i]];
+            }
         }
         [builder endDictionary];
-    }];
+    }
     [builder endArray];
 }
 

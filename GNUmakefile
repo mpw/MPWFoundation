@@ -59,7 +59,6 @@ MPWFoundation_HEADER_FILES = \
 	MPWSubData.h			\
 	MPWTrampoline.h			\
 	MPWUShortArray.h		\
-	MPWUniqueString.h		\
 	NSArrayFiltering.h		\
 	NSArrayFilters.h		\
 	NSBundleConveniences.h		\

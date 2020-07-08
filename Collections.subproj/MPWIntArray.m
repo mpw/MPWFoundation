@@ -78,7 +78,6 @@
 	count=newCount;
 }
 
-
 -(instancetype)copy
 {
     MPWIntArray *copy=[[[self class] alloc] initWithCapacity:capacity];
@@ -97,9 +96,25 @@
     count=newCount;
 }
 
+-(void)writeInteger:(long)anInt
+{
+    unsigned long newCount=count+1;
+    if ( newCount >= capacity ) {
+        [self _growTo:newCount];
+    }
+    data[count]=(int)anInt;
+    count=newCount;
+}
+
+
 -(void)addObject:anObject
 {
-	[self addInteger:[anObject intValue]];
+    [self addInteger:[anObject intValue]];
+}
+
+-(void)writeObject:anObject
+{
+    [self addInteger:[anObject intValue]];
 }
 
 -(void)removeLastObject
@@ -453,6 +468,7 @@ static int compareIntegerPointers(const void *va , const void *vb )
     }
     return result;
 }
+
 
 @end
 

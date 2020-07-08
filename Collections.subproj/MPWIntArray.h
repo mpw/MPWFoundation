@@ -10,9 +10,10 @@
 //
 
 #import "MPWObject.h"
+#import "MPWWriteStream.h"
 
 
-@interface MPWIntArray : MPWObject {
+@interface MPWIntArray : MPWObject<Streaming> {
 	int *data;
 	unsigned long count,capacity;
 }
@@ -32,4 +33,5 @@
 -(void)do:(void(^)(int))block;
 -(instancetype)select:(BOOL(^)(int))block;
 
+-(void)writeInteger:(long)anInt;
 @end

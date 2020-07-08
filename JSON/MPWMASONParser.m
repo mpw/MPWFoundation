@@ -249,38 +249,30 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 
 -parsedData:(NSData*)jsonData
 {
-	[self setData:jsonData];
-	const char *curptr=[jsonData bytes];
-	const char *endptr=curptr+[jsonData length];
-	const char *stringstart=NULL;
-	NSString *curstr=nil;
-	while (curptr < endptr ) {
-		switch (*curptr) {
-			case '{':
-				[_builder beginDictionary];
-				inDict=YES;
-				inArray=NO;
-//                NSLog(@"{ -- start dict");
-				curptr++;
-				break;
-			case '}':
-				[_builder endDictionary];
-//				NSLog(@"} -- end dict");
-				curptr++;
-				break;
-			case '[':
-//				NSLog(@"[ -- start array");
-				[_builder beginArray];
-				inDict=NO;
-				inArray=YES;
-				curptr++;
-				break;
-			case ']':
-//				NSLog(@"] -- end array");
-				[_builder endArray];
-				curptr++;
-				break;
-			case '"':
+    [self setData:jsonData];
+    const char *curptr=[jsonData bytes];
+    const char *endptr=curptr+[jsonData length];
+    const char *stringstart=NULL;
+    NSString *curstr=nil;
+    while (curptr < endptr ) {
+        switch (*curptr) {
+            case '{':
+                [_builder beginDictionary];
+                curptr++;
+                break;
+            case '}':
+                [_builder endDictionary];
+                curptr++;
+                break;
+            case '[':
+                [_builder beginArray];
+                curptr++;
+                break;
+            case ']':
+                [_builder endArray];
+                curptr++;
+                break;
+            case '"':
             {
                 BOOL hasUTF8=NO;
                 BOOL hasEscape=NO;
@@ -298,45 +290,45 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                 }
                 curptr+=spaces+1;
             }
-				break;
-			case ',':
-				curptr++;
-				break;
-			case '-':
-			case '0':
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			{
-				BOOL isReal=NO;
-				const char *numstart=curptr;
-				id number=nil;
-				if ( *curptr == '-' ) {
-					curptr++;
-				}
-				while ( curptr < endptr && isdigit(*curptr) ) {
-					curptr++;
-				}
-				if ( *curptr == '.' ) {
-					curptr++;
-					while ( curptr < endptr && isdigit(*curptr) ) {
-						curptr++;
-					}
-					isReal=YES;
-				}
-				if ( curptr < endptr && (*curptr=='e' | *curptr=='E') ) {
-					curptr++;
-					while ( curptr < endptr && isdigit(*curptr) ) {
-						curptr++;
-					}
-					isReal=YES;
-				}
+                break;
+            case ',':
+                curptr++;
+                break;
+            case '-':
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+            {
+                BOOL isReal=NO;
+                const char *numstart=curptr;
+                id number=nil;
+                if ( *curptr == '-' ) {
+                    curptr++;
+                }
+                while ( curptr < endptr && isdigit(*curptr) ) {
+                    curptr++;
+                }
+                if ( *curptr == '.' ) {
+                    curptr++;
+                    while ( curptr < endptr && isdigit(*curptr) ) {
+                        curptr++;
+                    }
+                    isReal=YES;
+                }
+                if ( curptr < endptr && (*curptr=='e' | *curptr=='E') ) {
+                    curptr++;
+                    while ( curptr < endptr && isdigit(*curptr) ) {
+                        curptr++;
+                    }
+                    isReal=YES;
+                }
                 if ( isReal) {
                     number = [self realElement:numstart length:curptr-numstart];
 
@@ -346,40 +338,40 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                     [_builder writeInteger:n];
                 }
 
-				break;
-			}
-			case 't':
-				if ( (endptr-curptr) >=4  && !strncmp(curptr, "true", 4)) {
-					curptr+=4;
-					[_builder pushObject:true_value];
-				}
-				break;
-			case 'f':
-				if ( (endptr-curptr) >=5  && !strncmp(curptr, "false", 5)) {
-					// return false;
-					curptr+=5;
-					[_builder pushObject:false_value];
+                break;
+            }
+            case 't':
+                if ( (endptr-curptr) >=4  && !strncmp(curptr, "true", 4)) {
+                    curptr+=4;
+                    [_builder pushObject:true_value];
+                }
+                break;
+            case 'f':
+                if ( (endptr-curptr) >=5  && !strncmp(curptr, "false", 5)) {
+                    // return false;
+                    curptr+=5;
+                    [_builder pushObject:false_value];
 
-				}
-				break;
-			case 'n':
-				if ( (endptr-curptr) >=4  && !strncmp(curptr, "null", 4)) {
-					[_builder pushObject:[NSNull null]];
-					curptr+=4;
-				}
-				break;
-			case ' ':
-			case '\n':
-				while (curptr < endptr && isspace(*curptr)) {
-					curptr++;
-				}
-				break;
+                }
+                break;
+            case 'n':
+                if ( (endptr-curptr) >=4  && !strncmp(curptr, "null", 4)) {
+                    [_builder pushObject:[NSNull null]];
+                    curptr+=4;
+                }
+                break;
+            case ' ':
+            case '\n':
+                while (curptr < endptr && isspace(*curptr)) {
+                    curptr++;
+                }
+                break;
 
-			default:
-				[NSException raise:@"invalidcharacter" format:@"JSON invalid character %x/'%c' at %td",*curptr,*curptr,curptr-(char*)[data bytes]];
-				break;
-		}
-	}
+            default:
+                [NSException raise:@"invalidcharacter" format:@"JSON invalid character %x/'%c' at %td",*curptr,*curptr,curptr-(char*)[data bytes]];
+                break;
+        }
+    }
     NSLog(@"nsstrings: %ld subdatas: %ld common: %ld",nsstrings,subdatas,common);
     return [_builder result];
 
