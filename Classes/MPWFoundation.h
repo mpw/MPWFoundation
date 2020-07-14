@@ -127,4 +127,6 @@
 #import "MPWFoundation/MPWMasonParser.h"
 #import "MPWFoundation/MPWObjectBuilder.h"
 
-#import "MPWFoundation/MPWStreamQLite.h"
+//#ifndef GNUSTEP
+//#import "MPWFoundation/MPWStreamQLite.h"
+//#endif

@@ -20,12 +20,9 @@ echo ======================
 echo Installing libobjc2
 
 
-tar zxf libobjc2-2.0.tar.gz
-#cp patches/libobjc2-2.0/* libobjc2-2.0/
-cd libobjc2-2.0
+cd libobjc2
 mkdir Build
 cd Build
-# cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang -DTESTS=OFF -DLLVM_OPTS=OFF  ..
 cmake -DTESTS=OFF .. 
 make install
 cd ../..
@@ -39,8 +36,6 @@ cd ..
 
 source /usr/local/share/GNUstep/Makefiles/GNUstep.sh
 cd libs-base
-#tar zxf gnustep-base-1.26.0.tar.gz 
-#cd gnustep-base-1.26.0
 ./configure
 make install
 cd ..
