@@ -2,7 +2,7 @@
 */
 
 
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 
 // typedef id (*IMP0)(id, SEL, ...);
 

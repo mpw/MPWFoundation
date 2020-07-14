@@ -7,11 +7,11 @@
 
 #import "MPWCachingStore.h"
 #import "MPWDictStore.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWGenericReference.h"
 #import "DebugMacros.h"
 #import "MPWMergingStore.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 
 @interface MPWWriteThroughCache()
 

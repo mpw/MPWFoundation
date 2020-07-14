@@ -9,7 +9,7 @@
 
 //
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 #import <MPWFoundation/AccessorMacros.h>
 
 @interface MPWKVCSoftPointer : MPWObject {

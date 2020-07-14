@@ -7,7 +7,7 @@
 //
 
 #import "MPWDirectoryBinding.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 
 @implementation MPWDirectoryBinding

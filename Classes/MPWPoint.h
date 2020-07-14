@@ -4,7 +4,7 @@
 
 #import <MPWFoundation/AccessorMacros.h>
 #import <MPWFoundation/CodingAdditions.h>
-#import "MPWObject.h"
+#import <MPWObject.h>
 #import <Foundation/Foundation.h>
 #import <MPWFoundation/PhoneGeometry.h>
 

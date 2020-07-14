@@ -28,7 +28,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 , created  on Tue 20-Jul-1999 */
 
-#import "MPWMAXParser.h"
+#import <MPWMAXParser.h>
 
 @interface MPWXmlAppleProplistReader : MPWMAXParser
 {

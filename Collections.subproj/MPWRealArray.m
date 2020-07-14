@@ -13,7 +13,7 @@ R
 //---	my includes
 
 #import "MPWRealArray.h"
-//#import "MPWByteStream.h"
+//#import <MPWByteStream.h>
 #import "CodingAdditions.h"
 
 //---	NS includes
@@ -28,7 +28,7 @@ R
 //#import <Accelerate/Accelerate.h>
 //#endif
 
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 
 //---	generic includes
 

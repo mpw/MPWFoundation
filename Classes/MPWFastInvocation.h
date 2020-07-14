@@ -6,7 +6,7 @@
 //  Copyright 2010-2017 by Marcel Weiher. All rights reserved.
 //
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 #import <Foundation/Foundation.h>
 
 @class MPWBlockInvocable;

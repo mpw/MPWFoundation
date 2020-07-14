@@ -7,7 +7,7 @@
 //
 
 #import "MPWStreamSource.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 
 @interface MPWStreamSource()
 

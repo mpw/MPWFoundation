@@ -7,7 +7,7 @@
 //
 
 #import "MPWCombinerStream.h"
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 #import "MPWMapFilter.h"
 
 @interface MPWCombinerStream ()

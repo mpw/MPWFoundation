@@ -13,10 +13,10 @@ R
 
 #import <MPWFoundation/MPWNamedData.h>
 #import <objc/runtime.h>
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "CodingAdditions.h"
 #import "NSStringAdditions.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 
 
 @interface NSCoder(namedDataCoding)

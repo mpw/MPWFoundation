@@ -9,7 +9,7 @@
 
 //
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 @interface MPWObjectReference : MPWObject <NSCopying>{
 	id  targetObject;

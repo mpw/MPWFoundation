@@ -6,9 +6,9 @@
 //
 
 #import "MPWSequentialStore.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWGenericReference.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 
 @implementation MPWSequentialStore
 

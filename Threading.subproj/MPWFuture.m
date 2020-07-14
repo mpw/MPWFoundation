@@ -12,7 +12,7 @@ R
 //
 
 #import "MPWFuture.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWTrampoline.h"
 #import "DebugMacros.h"
 #import "NSInvocationAdditions.h"

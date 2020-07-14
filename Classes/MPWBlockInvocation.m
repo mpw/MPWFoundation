@@ -7,7 +7,7 @@
 //
 
 #import "MPWBlockInvocation.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 //#if NS_BLOCKS_AVAILABLE
 

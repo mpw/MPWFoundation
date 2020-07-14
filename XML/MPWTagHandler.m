@@ -9,7 +9,7 @@
 #import "MPWTagHandler.h"
 #import "MPWTagAction.h"
 #import <objc/objc.h>
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWCaseInsensitiveSmallStringTable.h"
 #import "MPWFastInvocation.h"
 

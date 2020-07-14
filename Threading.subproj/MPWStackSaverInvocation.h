@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Marcel Weiher. All rights reserved.
 //
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 #import <Foundation/Foundation.h>
 
 @interface MPWStackSaverInvocation : MPWObject

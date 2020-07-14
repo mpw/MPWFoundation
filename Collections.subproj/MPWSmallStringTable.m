@@ -6,7 +6,7 @@
 //  Copyright 2007-2017 by Marcel Weiher. All rights reserved.
 //
 
-#import "MPWSmallStringTable.h"
+#import <MPWSmallStringTable.h>
 #import "DebugMacros.h"
 #import "MPWSubData.h"
 #if !WINDOWS && !LINUX

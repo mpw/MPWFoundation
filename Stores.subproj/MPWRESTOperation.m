@@ -6,8 +6,8 @@
 //
 
 #import "MPWRESTOperation.h"
-#import "AccessorMacros.h"
-#import "MPWAbstractStore.h"
+#import <AccessorMacros.h>
+#import <MPWAbstractStore.h>
 
 @implementation MPWRESTOperation
 

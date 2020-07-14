@@ -8,7 +8,7 @@
 #import <MPWFoundation/MPWFoundation.h>
 #endif
 #import "MPWEnumFilter.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWObjectCache.h"
 #import "NSInvocationAdditions_lookup.h"
 #import "NSObjectFiltering.h"

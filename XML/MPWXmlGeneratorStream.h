@@ -29,7 +29,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 , created  on Mon 26-Oct-1998 */
 
 #import <Foundation/Foundation.h>
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 
 
 @interface MPWXmlGeneratorStream : MPWFlattenStream 
@@ -84,7 +84,7 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 -(BOOL)isSimpleXmlContent;
 @end
 
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 
 @interface MPWXMLByteStream : MPWByteStream
 {

@@ -6,7 +6,7 @@
 //
 
 #import "MPWObjectBuilder.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 
 #define ARRAYTOS        (NSMutableArray*)(tos->container)
 #define DICTTOS         (NSMutableDictionary*)(tos->container)

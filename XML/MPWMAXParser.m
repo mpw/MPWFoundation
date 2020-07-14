@@ -17,7 +17,7 @@
 #import <MPWFoundation/MPWSubData.h>
 #import <MPWFoundation/MPWBlockInvocation.h>
 #import "MPWObjectCache.h"
-#import "MPWSmallStringTable.h"
+#import <MPWSmallStringTable.h>
 #import "NSObjectAdditions.h"
 
 #if TARGET_OS_IPHONE

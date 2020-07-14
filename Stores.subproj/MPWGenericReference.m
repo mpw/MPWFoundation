@@ -6,7 +6,7 @@
 //
 
 #import "MPWGenericReference.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @interface MPWGenericReference()
 

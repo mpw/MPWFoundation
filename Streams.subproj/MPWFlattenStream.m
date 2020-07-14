@@ -2,7 +2,7 @@
 */
 
 
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
 

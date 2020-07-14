@@ -7,7 +7,7 @@
 //
 
 #import "MPWTagAction.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWFastInvocation.h"
 
 @interface MPWTagAction(testingSupport)

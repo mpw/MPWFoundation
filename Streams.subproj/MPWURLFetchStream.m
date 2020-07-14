@@ -7,7 +7,7 @@
 //
 
 #import "MPWURLFetchStream.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 #import "MPWURLCall.h"
 #import "NSThreadWaiting.h"
 #import "NSStringAdditions.h"

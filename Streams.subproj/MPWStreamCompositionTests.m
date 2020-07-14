@@ -9,7 +9,7 @@
 #import "MPWStreamCompositionTests.h"
 #import "MPWCombinerStream.h"
 #import "MPWMapFilter.h"
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 #import "MPWPipeline.h"
 #import "DebugMacros.h"
 

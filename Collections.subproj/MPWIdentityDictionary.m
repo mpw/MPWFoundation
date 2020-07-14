@@ -13,7 +13,7 @@
 //#import "MPWFoundation.h>
 #import "MPWObjectReference.h"
 #import "DebugMacros.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWObjectCache.h"
 
 //#import "DebugMacros.h"

@@ -6,7 +6,7 @@
 //
 //
 
-#import "MPWBinding.h"
+#import <MPWBinding.h>
 
 @protocol DirectoryPrinting
 

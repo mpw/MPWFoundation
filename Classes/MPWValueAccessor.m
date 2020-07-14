@@ -7,7 +7,7 @@
 //
 
 #import "MPWValueAccessor.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import <Foundation/Foundation.h>
 #import <MPWFoundation/MPWByteStream.h>
 #import <objc/runtime.h>
@@ -231,7 +231,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 @end
 
 #import "DebugMacros.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 #import "MPWRusage.h"
 
 @interface MPWValueAccessorTestingClass:NSObject

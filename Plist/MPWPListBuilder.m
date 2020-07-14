@@ -7,9 +7,9 @@
 //
 
 #import "MPWPListBuilder.h"
-#import "AccessorMacros.h"
-#import "MPWSmallStringTable.h"
-#import "MPWWriteStream.h"
+#import <AccessorMacros.h>
+#import <MPWSmallStringTable.h>
+#import <MPWWriteStream.h>
 
 @implementation MPWPListBuilder
 

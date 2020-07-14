@@ -10,7 +10,7 @@
 //
 
 #import "MPWObjectReference.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "DebugMacros.h"
 
 @implementation MPWObjectReference

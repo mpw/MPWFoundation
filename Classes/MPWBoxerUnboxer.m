@@ -7,10 +7,10 @@
 //
 
 #import "MPWBoxerUnboxer.h"
-#import "MPWPoint.h"
+#import <MPWPoint.h>
 #import "MPWRect.h"
 #import "MPWInterval.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @interface MPWNSPointBoxer : MPWBoxerUnboxer  @end
 @interface MPWNSRectBoxer : MPWBoxerUnboxer  @end

@@ -7,7 +7,7 @@
 //
 
 #import "MPWFDStreamSource.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 #include <unistd.h>
 #include <fcntl.h>
 

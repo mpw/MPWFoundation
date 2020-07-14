@@ -9,8 +9,8 @@
 
 //
 
-#import "MPWObject.h"
-#import "MPWWriteStream.h"
+#import <MPWObject.h>
+#import <MPWWriteStream.h>
 
 
 @interface MPWIntArray : MPWObject<Streaming> {

@@ -2,7 +2,7 @@
 */
 
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 @interface MPWUShortArray : MPWObject
 {

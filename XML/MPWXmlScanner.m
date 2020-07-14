@@ -31,7 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWXmlScanner.h"
 //#import "MPWXmlScanner16BitBE.h"
 #import "SaxDocumentHandler.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import <objc/message.h>
 #if 0
 

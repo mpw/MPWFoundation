@@ -6,7 +6,7 @@
 //  Copyright 2007 by Marcel Weiher. All rights reserved.
 //
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 #include <stdlib.h>
 #include <sys/resource.h>               // Linux
 

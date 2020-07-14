@@ -6,11 +6,11 @@
 //
 
 #import "MPWBinding.h"
-#import "MPWAbstractStore.h"
+#import <MPWAbstractStore.h>
 #import "MPWGenericReference.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWPathRelativeStore.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 #import "NSObjectFiltering.h"
 
 @implementation MPWBinding

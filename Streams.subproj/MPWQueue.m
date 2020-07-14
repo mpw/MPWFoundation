@@ -6,7 +6,7 @@
 //
 
 #import "MPWQueue.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "NSThreadInterThreadMessaging.h"
 #import "NSThreadWaiting.h"
 

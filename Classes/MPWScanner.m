@@ -3,12 +3,12 @@
 
 
 #import "MPWScanner.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWSubData.h"
 #import "MPWObjectCache.h"
 #import "NSObjectFiltering.h"
 #import "NSStringAdditions.h"
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 
 @implementation MPWScanner
 /*"

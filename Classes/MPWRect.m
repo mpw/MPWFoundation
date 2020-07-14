@@ -3,7 +3,7 @@
 
 
 #import "MPWRect.h"
-#import "MPWPoint.h"
+#import <MPWPoint.h>
 
 @implementation MPWRect
 /*"

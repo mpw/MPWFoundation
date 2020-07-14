@@ -3,8 +3,8 @@
 
 
 #import <Foundation/Foundation.h>
-#import "AccessorMacros.h"
-#import "MPWObject.h"
+#import <AccessorMacros.h>
+#import <MPWObject.h>
 
 
 @protocol Streaming

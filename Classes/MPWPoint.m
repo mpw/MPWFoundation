@@ -2,7 +2,7 @@
 */
 
 
-#import "MPWPoint.h"
+#import <MPWPoint.h>
 #import "MPWObjectCache.h"
 #import "MPWRect.h"
 #import "DebugMacros.h"

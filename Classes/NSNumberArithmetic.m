@@ -7,7 +7,7 @@
 //
 
 #import "NSNumberArithmetic.h"
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 
 @implementation NSNumber(Arithmetic)

@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPWObject.h"
-#import "AccessorMacros.h"
+#import <MPWObject.h>
+#import <AccessorMacros.h>
 
 typedef id (*LOOKUPIMP)(id, SEL, char*, int);
 

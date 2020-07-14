@@ -7,7 +7,7 @@
 //
 
 #import "MPWStackSaverInvocation.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @implementation MPWStackSaverInvocation
 

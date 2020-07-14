@@ -2,8 +2,8 @@
 */
 
 
-#import "MPWObject.h"
-#import "AccessorMacros.h"
+#import <MPWObject.h>
+#import <AccessorMacros.h>
 #import <pthread.h>
 
 

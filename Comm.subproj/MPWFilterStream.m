@@ -11,7 +11,7 @@ R
 */
 
 
-#import "MPWFilterStream.h"
+#import <MPWFilterStream.h>
 
 @implementation MPWFilterStream
 

@@ -10,7 +10,7 @@
 #import "MPWDictStore.h"
 #import "MPWGenericReference.h"
 #import "MPWRESTOperation.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @implementation MPWURLCall2StoreStream
 

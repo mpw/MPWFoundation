@@ -6,7 +6,7 @@
 //
 
 #import "MPWSwitchingStore.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWGenericReference.h"
 
 @implementation MPWSwitchingStore

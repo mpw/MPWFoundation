@@ -4,7 +4,7 @@
 
 #import "MPWSubData.h"
 #import "CodingAdditions.h"
-#import "MPWObject.h"
+#import <MPWObject.h>
 //#import <MPWFoundation/bytecoding.h>
 #import "DebugMacros.h"
 #include <objc/runtime.h>

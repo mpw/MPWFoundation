@@ -7,7 +7,7 @@
 //
 
 #import "MPWURLStreamingStream.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 #import "MPWURLCall.h"
 #import "MPWURLReference.h"
 #import "MPWRESTOperation.h"

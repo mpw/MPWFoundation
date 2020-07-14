@@ -5,11 +5,11 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import "MPWAbstractStore.h"
+#import <MPWAbstractStore.h>
 #import "MPWGenericReference.h"
 #import "NSNil.h"
-#import "MPWByteStream.h"
-#import "MPWWriteStream.h"
+#import <MPWByteStream.h>
+#import <MPWWriteStream.h>
 #import "MPWDirectoryBinding.h"
 #import "NSObjectFiltering.h"
 

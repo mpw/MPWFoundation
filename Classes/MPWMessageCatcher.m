@@ -9,7 +9,7 @@
 
 #import "MPWMessageCatcher.h"
 #import "DebugMacros.h"
-#import "MPWObject.h"
+#import <MPWObject.h>
 #if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 )
 #include <objc/message.h>
 #endif

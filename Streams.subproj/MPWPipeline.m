@@ -250,7 +250,7 @@ typedef id (^ZeroArgBlock)(void);
 @end
 
 #import "DebugMacros.h"
-#import "MPWFlattenStream.h"
+#import <MPWFlattenStream.h>
 
 @implementation MPWPipeline(testing)
 

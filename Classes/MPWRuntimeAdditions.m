@@ -3,7 +3,7 @@
 
 
 #import "MPWRuntimeAdditions.h"
-#import "MPWObject.h"
+#import <MPWObject.h>
 #import "DebugMacros.h"
 //#import <objc/objc-class.h>
 #if 1

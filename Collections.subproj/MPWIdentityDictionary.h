@@ -10,7 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 @class MPWObjectCache;
 

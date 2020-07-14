@@ -2,12 +2,12 @@
 */
 
 
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 #import "NSInvocationAdditions_lookup.h"
 #import "MPWConvertFromJSONStream.h"
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 
 @interface MPWWriteStream(private)
 

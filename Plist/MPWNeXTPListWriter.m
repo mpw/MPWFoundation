@@ -3,7 +3,7 @@
 
 #import <objc/message.h>
 
-#import "MPWNeXTPListWriter.h"
+#import <MPWNeXTPListWriter.h>
 
 
 

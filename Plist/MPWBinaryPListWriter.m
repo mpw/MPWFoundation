@@ -7,7 +7,7 @@
 //
 
 #import "MPWBinaryPListWriter.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWIntArray.h"
 
 

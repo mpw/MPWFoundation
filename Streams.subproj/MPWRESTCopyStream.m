@@ -6,7 +6,7 @@
 //
 
 #import "MPWRESTCopyStream.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "MPWGenericReference.h"
 #import "MPWDictStore.h"
 #import "MPWRESTOperation.h"

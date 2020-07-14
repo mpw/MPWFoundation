@@ -2,7 +2,7 @@
 */
 
 
-#import "MPWByteStream.h"
+#import <MPWByteStream.h>
 #import "bytecoding.h"
 #import "DebugMacros.h"
 #import "MPWDictStore.h"

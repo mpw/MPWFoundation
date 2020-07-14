@@ -8,7 +8,7 @@
 
 #import "MPWInterval.h"
 //#import <MPWFoundation/MPWFoundation.h>
-#import "MPWWriteStream.h"
+#import <MPWWriteStream.h>
 #import "NSNumberArithmetic.h"
 #import "MPWIntArray.h"
 #import "CodingAdditions.h"

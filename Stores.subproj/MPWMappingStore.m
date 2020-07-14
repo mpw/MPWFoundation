@@ -7,8 +7,8 @@
 
 #import "MPWMappingStore.h"
 #import "MPWGenericReference.h"
-#import "AccessorMacros.h"
-#import "MPWByteStream.h"
+#import <AccessorMacros.h>
+#import <MPWByteStream.h>
 #import "MPWDirectoryBinding.h"
 
 @implementation MPWMappingStore

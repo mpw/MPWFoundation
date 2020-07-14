@@ -8,7 +8,7 @@
 
 #import "MPWMAXParser.h"
 #import "MPWXmlAttributes.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @class MPWTagAction,MPWTagHandler;
 

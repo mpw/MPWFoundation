@@ -8,7 +8,7 @@
 
 #import "MPWFastInvocation.h"
 #import "DebugMacros.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 #import "NSInvocationAdditions_lookup.h"
 #define FULL_MPWFOUNDATION 1
 #if FULL_MPWFOUNDATION && !WINDOWS && !LINUX

@@ -15,7 +15,7 @@ R
 
 //---	inheritance chain
 
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 
 @interface MPWRealArray : MPWObject

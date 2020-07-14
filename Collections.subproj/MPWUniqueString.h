@@ -9,7 +9,7 @@ R
 
 
 #import <Foundation/NSString.h>
-#import "MPWObject.h"
+#import <MPWObject.h>
 
 @interface MPWUniqueString : NSString
 {

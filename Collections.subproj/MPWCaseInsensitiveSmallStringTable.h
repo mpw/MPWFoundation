@@ -6,7 +6,7 @@
 //  Copyright 2007 by Marcel Weiher. All rights reserved.
 //
 
-#import "MPWSmallStringTable.h"
+#import <MPWSmallStringTable.h>
 
 
 @interface MPWCaseInsensitiveSmallStringTable : MPWSmallStringTable {

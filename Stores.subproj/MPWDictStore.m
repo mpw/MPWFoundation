@@ -8,7 +8,7 @@
 #import "MPWDictStore.h"
 #import "MPWGenericReference.h"
 #import "NSStringAdditions.h"
-#import "AccessorMacros.h"
+#import <AccessorMacros.h>
 
 @interface MPWDictStore()
 
