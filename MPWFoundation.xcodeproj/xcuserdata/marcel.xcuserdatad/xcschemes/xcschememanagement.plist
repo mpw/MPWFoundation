@@ -73,6 +73,8 @@
 		</dict>
 		<key>StreamQLite.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>115</integer>
 		</dict>
@@ -92,6 +94,8 @@
 		</dict>
 		<key>show-build-dir.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>109</integer>
 		</dict>

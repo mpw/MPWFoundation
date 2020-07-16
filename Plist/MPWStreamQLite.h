@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
 
 -(instancetype)initWithPath:(NSString*)dbPath;
--(int)exec:(NSString*)sql;
+-(int)query:(NSString*)sql;
 -(int)open;
 -(void)close;
 -(NSString*)error;

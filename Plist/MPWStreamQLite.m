@@ -18,6 +18,8 @@
 @implementation MPWStreamQLite
 {
     sqlite3 *db;
+    sqlite3_stmt *insert_stmt;
+
 }
 
 +(instancetype)open:(NSString*)newpath
@@ -34,7 +36,7 @@
     return self;
 }
 
--(int)exec:(NSString*)sql
+-(int)query:(NSString*)sql
 {
     sqlite3_stmt *res;
     int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &res, 0);
@@ -65,9 +67,50 @@
     return rc;
 }
 
+-(int)insert:(NSString*)sql
+{
+    int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+    return rc;
+}
 
+-(void)beginDictionary {
 
+}
 
+-(void)beginArray {
+
+}
+
+-(void)endArray {
+
+}
+
+-(void)writeObject:anObject forKey:(NSString*)aKey
+{
+    NSString *sql_key=[@":" stringByAppendingString:aKey];
+    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
+//    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
+    sqlite3_bind_text(insert_stmt, paramIndex, [utf8data bytes],  (int)[utf8data length],0 );
+}
+
+-(void)writeInteger:(long)anInt forKey:(NSString*)aKey
+{
+    NSString *sql_key=[@":" stringByAppendingString:aKey];
+    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
+//    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+    sqlite3_bind_int64(insert_stmt, paramIndex, anInt);
+}
+
+-(void)endDictionary
+{
+    if ( insert_stmt) {
+        int rc1=sqlite3_step(insert_stmt);
+        int rc2=sqlite3_clear_bindings(insert_stmt);
+        int rc3=sqlite3_reset(insert_stmt);
+        NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
+    }
+}
 
 -(int)open
 {
@@ -113,7 +156,7 @@
 +(void)testOpenChinookAndReadCorrectNumberOfArtists
 {
     MPWStreamQLite *db=[self _chinookDB];
-    [db exec:@"select * from artists;"];
+    [db query:@"select * from artists"];
     NSArray *artists=[db.builder result];
     INTEXPECT(artists.count, 275, @"number of artists");
 }
@@ -121,7 +164,7 @@
 +(void)testReadTracks
 {
     MPWStreamQLite *db=[self _chinookDB];
-    [db exec:@"select * from tracks;"];
+    [db query:@"select * from tracks"];
     NSArray<NSDictionary*> *tracks=[db.builder result];
     INTEXPECT(tracks.count, 3503, @"number of tracks");
     IDEXPECT( tracks.lastObject[@"Composer"] , @"Philip Glass", @"composer of last track");
