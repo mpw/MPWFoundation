@@ -25,8 +25,17 @@
 +(instancetype)open:(NSString*)newpath
 {
     MPWStreamQLite *db=[[[self alloc] initWithPath:newpath] autorelease];
-    [db open];
-    return db;
+    if ([db open]==0) {
+        return db;
+    } else {
+        [self release];
+        return nil;
+    }
+}
+
++(instancetype)memory
+{
+    return [self open:@":memory:"];
 }
 
 -(instancetype)initWithPath:(NSString*)newpath
@@ -172,12 +181,45 @@
     IDEXPECT( tracks.firstObject[@"Composer"] , @"Angus Young, Malcolm Young, Brian Johnson", @"composer of first track");
 }
 
++(void)testInsert
+{
+    MPWStreamQLite *db=[self memory];
+    EXPECTNOTNIL(db, @"got a db");
+    [db query:@"CREATE TABLE Tester (a INT,b INT, c VARCHAR(50))"];
+    db.builder=[MPWPListBuilder builder];
+    [db query:@"select * from Tester"];
+    INTEXPECT([db.builder.result count],0,@"no results");
+    [db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
+    [db beginDictionary];
+    [db writeInteger:2 forKey:@"a"];
+    [db writeInteger:3 forKey:@"b"];
+    [db writeObject:@"hello" forKey:@"c"];
+    [db endDictionary];
+
+    [db beginDictionary];
+    [db writeInteger:4 forKey:@"a"];
+    [db writeInteger:5 forKey:@"b"];
+    [db writeObject:@"world" forKey:@"c"];
+    [db endDictionary];
+
+    db.builder=[MPWPListBuilder builder];
+    [db query:@"select * from Tester"];
+    NSArray<NSDictionary*> *result=db.builder.result;
+    INTEXPECT(result.count,2,@"no results");
+    IDEXPECT(result.firstObject[@"a"],@"2",@"first.a");
+    IDEXPECT(result.firstObject[@"b"],@"3",@"first.b");
+    IDEXPECT(result.firstObject[@"c"],@"hello",@"first.c");
+    IDEXPECT(result.lastObject[@"a"],@"4",@"last.a");
+    IDEXPECT(result.lastObject[@"b"],@"5",@"last.b");
+    IDEXPECT(result.lastObject[@"c"],@"world",@"last.c");
+}
 
 +(NSArray*)testSelectors
 {
    return @[
        @"testOpenChinookAndReadCorrectNumberOfArtists",
        @"testReadTracks",
+       @"testInsert",
 			];
 }
 
