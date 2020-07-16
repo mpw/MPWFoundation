@@ -6,7 +6,7 @@
 //  Copyright 2010 Marcel Weiher. All rights reserved.
 //
 
-#import <MPWXmlAppleProplistReader.h>
+#import <MPWFoundation/MPWXmlAppleProplistReader.h>
 
 @class MPWSmallStringTable;
 @protocol MPWPlistStreaming;

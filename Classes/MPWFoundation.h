@@ -127,6 +127,6 @@
 #import <MPWFoundation/MPWMasonParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
 
-//#ifndef GNUSTEP
-//#import <MPWFoundation/MPWStreamQLite.h>
-//#endif
+#if !GS_API_LATEST
+#import <MPWFoundation/MPWStreamQLite.h>
+#endif

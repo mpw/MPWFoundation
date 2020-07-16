@@ -5,7 +5,7 @@
 #import <MPWFoundation/AccessorMacros.h>
 #import <MPWFoundation/CodingAdditions.h>
 #import <Foundation/Foundation.h>
-#import <MPWPoint.h>
+#import <MPWFoundation/MPWPoint.h>
 
 
 

@@ -12,7 +12,7 @@ R
 
 
 
-#import <MPWFilterStream.h>
+#import <MPWFoundation/MPWFilterStream.h>
 
 @interface MPWASCII85Stream:MPWFilterStream
 {

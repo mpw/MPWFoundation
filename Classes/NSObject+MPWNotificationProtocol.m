@@ -11,7 +11,7 @@
 #import <objc/runtime.h>
 
 #if !TARGET_OS_IPHONE
-@interface Protocol(notificationInstallation)
+@interface NSObject(notificationInstallation)
 
 -(void)installAsNotificationHandler:aHandler;
 
@@ -85,16 +85,16 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
 
 
 #if !TARGET_OS_IPHONE
-@implementation Protocol(notifications)
+@implementation NSObject(notifications)
 
 -(BOOL)isNotificationProtocol
 {
-    return isNotificationProtocol( self );
+    return isNotificationProtocol( (Protocol*)self );
 }
 
 -(void)notify:anObject
 {
-    sendProtocolNotification(self, anObject);
+    sendProtocolNotification((Protocol*)self, anObject);
 
 }
 
@@ -106,7 +106,7 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
 @end
 
 
-@implementation Protocol(notificationInstallation)
+@implementation NSObject(notificationInstallation)
 
 
 -(void)installAsNotificationHandler:aHandler
@@ -114,16 +114,16 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
     if ( [self isNotificationProtocol]) {
         struct objc_method_description *protocolMethods=NULL;
         unsigned int count=0;
-        protocolMethods=protocol_copyMethodDescriptionList(self,YES,YES,&count);
+        protocolMethods=protocol_copyMethodDescriptionList((Protocol*)self,YES,YES,&count);
         if (protocolMethods && count==1) {
             SEL message=protocolMethods[0].name;
-            [aHandler registerMessage:message forNotificationName:notificatioNameFromProtocol(self)];
+            [aHandler registerMessage:message forNotificationName:notificatioNameFromProtocol((Protocol*)self)];
         } else {
-            [NSException raise:@"invalidprotocol" format:@"Notification protocol '%s' needs to have exactly 1 message defined, has %d",protocol_getName(self),count];
+            [NSException raise:@"invalidprotocol" format:@"Notification protocol '%s' needs to have exactly 1 message defined, has %d",protocol_getName((Protocol*)self),count];
         }
         free(protocolMethods);
     } else {
-        [NSException raise:@"invalidprotocol" format:@"Trying to install notification handler for protocol '%s' that's not a notification protocol",protocol_getName(self)];
+        [NSException raise:@"invalidprotocol" format:@"Trying to install notification handler for protocol '%s' that's not a notification protocol",protocol_getName((Protocol*)self)];
     }
 }
 

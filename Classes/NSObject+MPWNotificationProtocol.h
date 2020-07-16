@@ -5,11 +5,13 @@
 //  Created by Marcel Weiher on 4/17/18.
 //  Copyright Marcel Weiher 2018
 //
-
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+#import <objc/Protocol.h>
 
-@interface Protocol:NSObject {} @end
+@import ObjectiveC.Protocol;
+
+
 
 @protocol MPWNotificationProtocol
 -(void)installProtocolNotifications;        // compiler requires >= 1 messages in protocol, so put this here
@@ -28,7 +30,8 @@ void sendProtocolNotification( Protocol *aProtocol, id anObject );
 NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 
 #if !TARGET_OS_IPHONE
-@interface Protocol(notifications)
+//@interface Protocol : NSObject  @end
+@interface NSObject(notifications)
 
 -(void)notify:anObject;
 -(void)notify;

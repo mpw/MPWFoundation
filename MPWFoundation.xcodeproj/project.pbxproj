@@ -501,7 +501,6 @@
 		1FCF26761CF39BB700AC64CE /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26771CF39BB700AC64CE /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26781CF39BB700AC64CE /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FCF267A1CF39BB700AC64CE /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267B1CF39BB700AC64CE /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267C1CF39BB700AC64CE /* NSObjectFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC619D01393D22005ADD88 /* NSObjectFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF267D1CF39BB700AC64CE /* NSArrayFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC61A401397F05005ADD88 /* NSArrayFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -569,7 +568,6 @@
 		1FE37C421969773C00C9A378 /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C431969773C00C9A378 /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C441969773C00C9A378 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FE37C461969773C00C9A378 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C471969773C00C9A378 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C481969773C00C9A378 /* NSObjectFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC619D01393D22005ADD88 /* NSObjectFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE37C491969773C00C9A378 /* NSArrayFiltering.h in Headers */ = {isa = PBXBuildFile; fileRef = 66DC61A401397F05005ADD88 /* NSArrayFiltering.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -847,7 +845,6 @@
 		1FF8FDD309B49D0100652476 /* MPWEnumeratorEnumerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD409B49D0100652476 /* MPWEnumeratorSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF8FDD509B49D0100652476 /* MPWEnumeratorBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
-		1FF8FDD709B49D0100652476 /* MPWUniqueString.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198A006686DDC35ADD82 /* MPWUniqueString.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD809B49D0100652476 /* MPWFakedReturnMethodSignature.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDD909B49D0100652476 /* MPWWriteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1998006686DDC35ADD82 /* MPWWriteStream.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
 		1FF8FDDA09B49D0100652476 /* MPWByteStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF1999006686DDC35ADD82 /* MPWByteStream.h */; settings = {ATTRIBUTES = (Project, Public, ); }; };
@@ -1033,7 +1030,6 @@
 		07DF197A006686DDC35ADD82 /* MPWEnumeratorEnumerator.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorEnumerator.m; sourceTree = "<group>"; };
 		07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorSource.m; sourceTree = "<group>"; };
 		07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumeratorBase.m; sourceTree = "<group>"; };
-		07DF197E006686DDC35ADD82 /* MPWUniqueString.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWUniqueString.m; sourceTree = "<group>"; };
 		07DF197F006686DDC35ADD82 /* MPWFakedReturnMethodSignature.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWFakedReturnMethodSignature.m; sourceTree = "<group>"; };
 		07DF1981006686DDC35ADD82 /* MPWRealArray.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWRealArray.h; sourceTree = "<group>"; };
 		07DF1982006686DDC35ADD82 /* MPWEnumFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumFilter.h; sourceTree = "<group>"; };
@@ -1042,7 +1038,6 @@
 		07DF1986006686DDC35ADD82 /* MPWEnumeratorEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorEnumerator.h; sourceTree = "<group>"; };
 		07DF1987006686DDC35ADD82 /* MPWEnumeratorSource.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorSource.h; sourceTree = "<group>"; };
 		07DF1988006686DDC35ADD82 /* MPWEnumeratorBase.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumeratorBase.h; sourceTree = "<group>"; };
-		07DF198A006686DDC35ADD82 /* MPWUniqueString.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWUniqueString.h; sourceTree = "<group>"; };
 		07DF198B006686DDC35ADD82 /* MPWFakedReturnMethodSignature.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFakedReturnMethodSignature.h; sourceTree = "<group>"; };
 		07DF1992006686DDC35ADD82 /* MPWWriteStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWWriteStream.m; sourceTree = "<group>"; };
 		07DF1993006686DDC35ADD82 /* MPWByteStream.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWByteStream.m; sourceTree = "<group>"; };
@@ -1585,8 +1580,6 @@
 				1F766F6D0BBC5F410038DA7D /* MPWSmallStringTable.m */,
 				07DF1984006686DDC35ADD82 /* MPWSubData.h */,
 				07DF1978006686DDC35ADD82 /* MPWSubData.m */,
-				07DF198A006686DDC35ADD82 /* MPWUniqueString.h */,
-				07DF197E006686DDC35ADD82 /* MPWUniqueString.m */,
 				07DF1983006686DDC35ADD82 /* MPWUShortArray.h */,
 				07DF1977006686DDC35ADD82 /* MPWUShortArray.m */,
 				66DC61A401397F05005ADD88 /* NSArrayFiltering.h */,
@@ -2172,7 +2165,6 @@
 				1FE37C20196976C500C9A378 /* NSDictAdditions.h in Headers */,
 				1FE37C3D1969773C00C9A378 /* MPWRealArray.h in Headers */,
 				1FE37C3F1969773C00C9A378 /* MPWUShortArray.h in Headers */,
-				1FE37C461969773C00C9A378 /* MPWUniqueString.h in Headers */,
 				1FE37C341969770E00C9A378 /* MPWFuture.h in Headers */,
 				1FE37C10196976C500C9A378 /* MPWDirectForwardingTrampoline.h in Headers */,
 				1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
@@ -2281,7 +2273,6 @@
 				1FCF266D1CF39BB700AC64CE /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
 				1FFE3AA220B3285C00E65B93 /* MPWReference.h in Headers */,
 				1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
-				1FCF267A1CF39BB700AC64CE /* MPWUniqueString.h in Headers */,
 				1FCF263A1CF3993C00AC64CE /* MPWDirectForwardingTrampoline.h in Headers */,
 				1FCF260E1CF3990400AC64CE /* MPWConvertFromJSONStream.h in Headers */,
 				1FCF267F1CF39CE600AC64CE /* MPWStackSaverInvocation.h in Headers */,
@@ -2399,7 +2390,6 @@
 				1F313D621CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */,
 				1FF8FDD509B49D0100652476 /* MPWEnumeratorBase.h in Headers */,
 				1F2DCFD91ACB50F3004A39FB /* MPWThreadSwitchStream.h in Headers */,
-				1FF8FDD709B49D0100652476 /* MPWUniqueString.h in Headers */,
 				1FED489E242634AD00AF2FAD /* MPWXmlParser.h in Headers */,
 				1F8671FC22397C14006510FB /* MPWDirectoryBinding.h in Headers */,
 				1F7078A21F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */,
@@ -5906,7 +5896,7 @@
 				1F3AC60A143EB3D9009B8504 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1F4FC9A01DF818AF00B35D27 /* Build configuration list for PBXNativeTarget "TestMPWFoundation" */ = {
 			isa = XCConfigurationList;
@@ -5920,7 +5910,7 @@
 				1F4FC9981DF818AF00B35D27 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1F7045BB22313082005ED7FB /* Build configuration list for PBXNativeTarget "MPWFoundationUI" */ = {
 			isa = XCConfigurationList;
@@ -5934,7 +5924,7 @@
 				1F7045BA22313082005ED7FB /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1F7045CA22313099005ED7FB /* Build configuration list for PBXNativeTarget "MPWFoundationUIKit" */ = {
 			isa = XCConfigurationList;
@@ -5948,7 +5938,7 @@
 				1F7045D122313099005ED7FB /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */ = {
 			isa = XCConfigurationList;
@@ -5962,7 +5952,7 @@
 				1F840DBA193F505700589595 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1FCF25DF1CF3983C00AC64CE /* Build configuration list for PBXNativeTarget "MPWFoundationWatch" */ = {
 			isa = XCConfigurationList;
@@ -5976,7 +5966,7 @@
 				1FCF25DE1CF3983C00AC64CE /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1FD75000085DDFC1001487D3 /* Build configuration list for PBXProject "MPWFoundation" */ = {
 			isa = XCConfigurationList;
@@ -5990,7 +5980,7 @@
 				1F0CC1AD0F5B1A9500BB466F /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		1FF8FE2909B49D0200652476 /* Build configuration list for PBXNativeTarget "MPWFoundationFramework" */ = {
 			isa = XCConfigurationList;
@@ -6004,7 +5994,7 @@
 				1F0CC1AE0F5B1A9500BB466F /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

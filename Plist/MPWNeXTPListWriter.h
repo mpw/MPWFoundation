@@ -2,7 +2,7 @@
 */
 
 
-#import <MPWByteStream.h>
+#import <MPWFoundation/MPWByteStream.h>
 
 @interface MPWNeXTPListWriter : MPWByteStream
 {

@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWNeXTPListWriter.h>
+#import <MPWFoundation/MPWNeXTPListWriter.h>
 
 @class MPWIntArray;
 

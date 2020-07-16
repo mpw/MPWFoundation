@@ -3,8 +3,8 @@
 
 
 #import <Foundation/Foundation.h>
-#import <AccessorMacros.h>
-#import <MPWObject.h>
+#import <MPWFoundation/AccessorMacros.h>
+#import <MPWFoundation/MPWObject.h>
 
 @interface MPWSubData : NSString <NSCoding>		//	make these NSString compatible
 {

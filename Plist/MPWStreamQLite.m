@@ -65,6 +65,10 @@
     return rc;
 }
 
+
+
+
+
 -(int)open
 {
     return sqlite3_open([self.databasePath UTF8String], &db);
