@@ -61,10 +61,22 @@
             @autoreleasepool {
                 [self.builder beginDictionary];
                 for (int i=0; i<numCols;i++) {
-                    const char *text=(const char*)sqlite3_column_text(res, i);
-                    if (text) {
-                        NSString *value=@(text);
-                        [self.builder writeObject:value forKey:keys[i]];
+                    int coltype=sqlite3_column_type(res, i);
+                    switch ( coltype ) {
+                        case SQLITE_INTEGER:
+                        {
+                            long value=sqlite3_column_int64(res, i);
+                            [self.builder writeObject:@(value) forKey:keys[i]];
+                            break;
+                        }
+                        default:
+                        {
+                            const char *text=(const char*)sqlite3_column_text(res, i);
+                            if (text) {
+                                NSString *value=@(text);
+                                [self.builder writeObject:value forKey:keys[i]];
+                            }
+                        }
                     }
                 }
                 [self.builder endDictionary];
@@ -117,7 +129,9 @@
         int rc1=sqlite3_step(insert_stmt);
         int rc2=sqlite3_clear_bindings(insert_stmt);
         int rc3=sqlite3_reset(insert_stmt);
-        NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
+        if ( !(rc1==101 && rc2==0 && rc3==0) ) {
+            NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
+        }
     }
 }
 
@@ -206,11 +220,11 @@
     [db query:@"select * from Tester"];
     NSArray<NSDictionary*> *result=db.builder.result;
     INTEXPECT(result.count,2,@"no results");
-    IDEXPECT(result.firstObject[@"a"],@"2",@"first.a");
-    IDEXPECT(result.firstObject[@"b"],@"3",@"first.b");
+    IDEXPECT(result.firstObject[@"a"],@(2),@"first.a");
+    IDEXPECT(result.firstObject[@"b"],@(3),@"first.b");
     IDEXPECT(result.firstObject[@"c"],@"hello",@"first.c");
-    IDEXPECT(result.lastObject[@"a"],@"4",@"last.a");
-    IDEXPECT(result.lastObject[@"b"],@"5",@"last.b");
+    IDEXPECT(result.lastObject[@"a"],@(4),@"last.a");
+    IDEXPECT(result.lastObject[@"b"],@(5),@"last.b");
     IDEXPECT(result.lastObject[@"c"],@"world",@"last.c");
 }
 
