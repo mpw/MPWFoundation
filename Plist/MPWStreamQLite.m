@@ -7,6 +7,8 @@
 
 #import "MPWStreamQLite.h"
 #import "MPWPListBuilder.h"
+#import "MPWFlattenStream.h"
+
 #include <sqlite3.h>
 
 @interface MPWStreamQLite()
@@ -15,11 +17,79 @@
 
 @end
 
+@interface MPWSQLiteWriter : MPWFlattenStream
+{
+    sqlite3_stmt *insert_stmt;
+}
+-initWithDB:(sqlite3*)db statement:(NSString*)sql;
+@end
+
+@implementation MPWSQLiteWriter
+
+-initWithDB:(sqlite3*)db statement:(NSString*)sql
+{
+    if( nil != (self=[super init]) ) {
+        int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+    }
+    return self;
+}
+
+-(void)writeDictionary:(NSDictionary *)dict
+{
+    [self beginDictionary];
+    for ( NSString *key in [dict allKeys]) {
+        [self writeObject:dict[key] forKey:key];
+    }
+    [self endDictionary];
+}
+
+-(void)beginDictionary {
+
+}
+
+-(void)beginArray {
+
+}
+
+-(void)endArray {
+
+}
+
+-(void)writeObject:anObject forKey:(NSString*)aKey
+{
+    NSString *sql_key=[@":" stringByAppendingString:aKey];
+    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
+    //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
+    sqlite3_bind_text(insert_stmt, paramIndex, [utf8data bytes],  (int)[utf8data length],0 );
+}
+
+-(void)writeInteger:(long)anInt forKey:(NSString*)aKey
+{
+    NSString *sql_key=[@":" stringByAppendingString:aKey];
+    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
+    //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+    sqlite3_bind_int64(insert_stmt, paramIndex, anInt);
+}
+
+-(void)endDictionary
+{
+    if ( insert_stmt) {
+        int rc1=sqlite3_step(insert_stmt);
+        int rc2=sqlite3_clear_bindings(insert_stmt);
+        int rc3=sqlite3_reset(insert_stmt);
+        if ( !(rc1==101 && rc2==0 && rc3==0) ) {
+            NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
+        }
+    }
+}
+
+
+@end
+
 @implementation MPWStreamQLite
 {
     sqlite3 *db;
-    sqlite3_stmt *insert_stmt;
-
 }
 
 +(instancetype)open:(NSString*)newpath
@@ -88,51 +158,9 @@
     return rc;
 }
 
--(int)insert:(NSString*)sql
+-(MPWSQLiteWriter*)insert:(NSString*)sql
 {
-    int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
-    return rc;
-}
-
--(void)beginDictionary {
-
-}
-
--(void)beginArray {
-
-}
-
--(void)endArray {
-
-}
-
--(void)writeObject:anObject forKey:(NSString*)aKey
-{
-    NSString *sql_key=[@":" stringByAppendingString:aKey];
-    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
-//    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
-    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
-    sqlite3_bind_text(insert_stmt, paramIndex, [utf8data bytes],  (int)[utf8data length],0 );
-}
-
--(void)writeInteger:(long)anInt forKey:(NSString*)aKey
-{
-    NSString *sql_key=[@":" stringByAppendingString:aKey];
-    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
-//    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
-    sqlite3_bind_int64(insert_stmt, paramIndex, anInt);
-}
-
--(void)endDictionary
-{
-    if ( insert_stmt) {
-        int rc1=sqlite3_step(insert_stmt);
-        int rc2=sqlite3_clear_bindings(insert_stmt);
-        int rc3=sqlite3_reset(insert_stmt);
-        if ( !(rc1==101 && rc2==0 && rc3==0) ) {
-            NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
-        }
-    }
+    return [[[MPWSQLiteWriter alloc] initWithDB:db statement:sql] autorelease];
 }
 
 -(int)open
@@ -203,18 +231,18 @@
     db.builder=[MPWPListBuilder builder];
     [db query:@"select * from Tester"];
     INTEXPECT([db.builder.result count],0,@"no results");
-    [db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
-    [db beginDictionary];
-    [db writeInteger:2 forKey:@"a"];
-    [db writeInteger:3 forKey:@"b"];
-    [db writeObject:@"hello" forKey:@"c"];
-    [db endDictionary];
+    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
+    [writer beginDictionary];
+    [writer writeInteger:2 forKey:@"a"];
+    [writer writeInteger:3 forKey:@"b"];
+    [writer writeObject:@"hello" forKey:@"c"];
+    [writer endDictionary];
 
-    [db beginDictionary];
-    [db writeInteger:4 forKey:@"a"];
-    [db writeInteger:5 forKey:@"b"];
-    [db writeObject:@"world" forKey:@"c"];
-    [db endDictionary];
+    [writer beginDictionary];
+    [writer writeInteger:4 forKey:@"a"];
+    [writer writeInteger:5 forKey:@"b"];
+    [writer writeObject:@"world" forKey:@"c"];
+    [writer endDictionary];
 
     db.builder=[MPWPListBuilder builder];
     [db query:@"select * from Tester"];
@@ -228,12 +256,33 @@
     IDEXPECT(result.lastObject[@"c"],@"world",@"last.c");
 }
 
++(void)testInsertDict
+{
+    MPWStreamQLite *db=[self memory];
+    EXPECTNOTNIL(db, @"got a db");
+    [db query:@"CREATE TABLE Tester (a INT,b INT, c VARCHAR(50))"];
+    db.builder=[MPWPListBuilder builder];
+    [db query:@"select * from Tester"];
+    INTEXPECT([db.builder.result count],0,@"no results");
+    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
+    [writer writeObject:@{ @"a": @(2), @"b": @(4), @"c": @"More"  }];
+
+    db.builder=[MPWPListBuilder builder];
+    [db query:@"select * from Tester"];
+    NSArray<NSDictionary*> *result=db.builder.result;
+    INTEXPECT(result.count,1,@"results");
+    IDEXPECT(result.firstObject[@"a"],@(2),@"first.a");
+    IDEXPECT(result.firstObject[@"b"],@(4),@"first.b");
+    IDEXPECT(result.firstObject[@"c"],@"More",@"first.c");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testOpenChinookAndReadCorrectNumberOfArtists",
        @"testReadTracks",
        @"testInsert",
+       @"testInsertDict",
 			];
 }
 
