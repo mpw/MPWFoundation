@@ -33,9 +33,12 @@
 -initWithDB:(sqlite3*)db statement:(NSString*)sql
 {
     if( nil != (self=[super init]) ) {
-        sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
-        sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
-        sqlite3_prepare_v2(db, "END TRANSACTION", -1, &end_transaction, 0);
+        int rc1 = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+        int rc2 = sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
+        int rc3 = sqlite3_prepare_v2(db, "END TRANSACTION", -1, &end_transaction, 0);
+        if ( !(rc1==0 && rc2==0 && rc3==0)) {
+            NSLog(@"preparing INSERT statments failed");
+        }
     }
     return self;
 }

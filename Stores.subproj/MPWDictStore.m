@@ -46,7 +46,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
 
--(void)put:theObject at:(id <MPWReferencing>)aReference
+-(void)at:(id <MPWReferencing>)aReference put:theObject
 {
     if ( theObject != nil ) {
         self.dict[[self referenceToKey:(MPWReference*)aReference]]=theObject;
@@ -73,7 +73,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     MPWDictStore* store = [self store];
     id ref=[store referenceForPath:@"World"];
     EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
-    [store put:@"Hello" at:ref];
+    [store at:ref put:@"Hello"];
     IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
 }
 
@@ -83,7 +83,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
     MPWDictStore* store = [self store];
     EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
-    [store put:@"Hello" at:ref];
+    [store at:ref put:@"Hello"];
     IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
 }
 

@@ -60,7 +60,7 @@
     return nil;
 }
 
--(void)put:(NSData*)theObject at:(MPWGenericReference*)aReference
+-(void)at:(MPWGenericReference*)aReference put:(NSData*)theObject
 {
     NSError *error=nil;
     BOOL success=[theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];

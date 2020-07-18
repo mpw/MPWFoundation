@@ -41,7 +41,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
 {
     id result=[self.source at:aReference];
-    [self.cache put:result at:aReference];
+    [self.cache at:aReference put:result];
     return result;
 }
 
@@ -57,13 +57,13 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(void)writeToSource:newObject at:(id <MPWReferencing>)aReference
 {
     if (!self.readOnlySource) {
-        [self.source put:newObject at:aReference];
+        [self.source at:aReference put:newObject];
     }
 }
 
--(void)put:newObject at:(id <MPWReferencing>)aReference
+-(void)at:(id <MPWReferencing>)aReference put:newObject
 {
-    [self.cache put:newObject at:aReference];
+    [self.cache at:aReference put:newObject];
     [self writeToSource:newObject at:aReference];
 }
 
@@ -166,7 +166,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 {
     id resultFromCache = self.cache[self.key];
     EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [self.source put:self.value at:self.key];
+    [self.source at:self.key put:self.value];
     id mainResult = self.store[self.key];
     IDEXPECT( mainResult, self.value, @"reading the cache");
     resultFromCache = self.cache[self.key];
@@ -177,7 +177,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 {
     id resultFromCache = self.cache[self.key];
     EXPECTNIL( resultFromCache , @"shouldn't have anything yet");
-    [self.cache put:self.value at:self.key];
+    [self.cache at:self.key put:self.value];
     id resultFromSource = self.source[self.key];
     EXPECTNIL( resultFromSource , @"nothing in source");
     id mainResult = self.store[self.key];
@@ -186,7 +186,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(void)testWritePopulatesCacheAndSource
 {
-    [self.store put:self.value at:self.key];
+    [self.store at:self.key put:self.value];
     IDEXPECT( [self.source at:self.key], self.value, @"reading the source");
     IDEXPECT( [self.cache at:self.key], self.value, @"reading the cache");
 }
@@ -194,14 +194,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(void)testWritePopulatesCacheAndSourceUnlessDontWriteIsSet
 {
     self.store.readOnlySource=YES;
-    [self.store put:self.value at:self.key];
+    [self.store at:self.key put:self.value];
     EXPECTNIL( [self.source at:self.key], @"reading the source");
     IDEXPECT( [self.cache at:self.key], self.value, @"reading the cache");
 }
 
 -(void)testCanInvalidateCache
 {
-    [self.store put:self.value at:self.key];
+    [self.store at:self.key put:self.value];
     [self.store invalidate:self.key];
     EXPECTNIL( self.cache[self.key] , @"cache should be gone");
     IDEXPECT( self.source[self.key] ,self.value, @"source should still be there");
@@ -209,7 +209,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 -(void)testCanDelete
 {
-    [self.store put:self.value at:self.key];
+    [self.store at:self.key put:self.value];
     [self.store deleteAt:self.key];
     EXPECTNIL( self.cache[self.key] , @"cache should be gone");
     EXPECTNIL( self.source[self.key] , @"source should be gone");

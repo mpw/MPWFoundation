@@ -32,7 +32,7 @@
         merged=[self mergeNew:theObject into:source forReference:aReference];
     }
     if ( merged ) {
-        [self put:merged at:aReference];
+        [self at:aReference put:merged];
     }
 }
 
