@@ -17,19 +17,25 @@
 
 @end
 
-@interface MPWSQLiteWriter : MPWFlattenStream
-{
-    sqlite3_stmt *insert_stmt;
-}
+@interface MPWSQLiteWriter()
 -initWithDB:(sqlite3*)db statement:(NSString*)sql;
 @end
 
+
 @implementation MPWSQLiteWriter
+{
+    sqlite3_stmt *insert_stmt;
+    sqlite3_stmt *begin_transaction;
+    sqlite3_stmt *end_transaction;
+
+}
 
 -initWithDB:(sqlite3*)db statement:(NSString*)sql
 {
     if( nil != (self=[super init]) ) {
-        int rc = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+        int rc1 = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+        int rc2 = sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
+        int rc3 = sqlite3_prepare_v2(db, "END TRANSACTION", -1, &end_transaction, 0);
     }
     return self;
 }
@@ -48,11 +54,13 @@
 }
 
 -(void)beginArray {
-
+    int rc1=sqlite3_step(begin_transaction);
+    int rc3=sqlite3_reset(begin_transaction);
 }
 
 -(void)endArray {
-
+    int rc1=sqlite3_step(end_transaction);
+    int rc3=sqlite3_reset(end_transaction);
 }
 
 -(void)writeObject:anObject forKey:(NSString*)aKey
