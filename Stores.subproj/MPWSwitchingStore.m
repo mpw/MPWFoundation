@@ -32,9 +32,9 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
     return [[self storeForReference:aReference] at:aReference];
 }
 
--(void)put:theObject at:(MPWGenericReference*)aReference
+-(void)at:(MPWGenericReference*)aReference put:theObject
 {
-    [[self storeForReference:aReference] put:theObject at:aReference];
+    [[self storeForReference:aReference] at:aReference put:theObject];
 }
 
 -(void)merge:theObject at:(MPWGenericReference*)aReference

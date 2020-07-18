@@ -31,7 +31,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -(void)setValue:newValue
 {
-    [self.store put:newValue at:self.reference];
+    [self.store at:self.reference put:newValue];
 }
 
 

@@ -23,9 +23,9 @@
     return [self.stores.firstObject at:aReference];
 }
 
--(void)put:(id)theObject at:(id<MPWReferencing>)aReference
+-(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    [self.stores.firstObject put:(id)theObject at:aReference];
+    [self.stores.firstObject at:aReference put:(id)theObject];
 }
 
 -(void)deleteAt:(id<MPWReferencing>)aReference

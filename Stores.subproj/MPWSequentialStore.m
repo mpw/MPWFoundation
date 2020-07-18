@@ -35,7 +35,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return nil;
 }
 
--(void)put:(id)theObject at:(id<MPWReferencing>)aReference
+-(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
     self.stores.firstObject[aReference]=theObject;
 }
@@ -47,7 +47,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 
 -(void)merge:(id)theObject at:(id<MPWReferencing>)aReference
 {
-    [self put:[self at:aReference] at:aReference];
+    [self at:aReference put:[self at:aReference]];
     [self.stores.firstObject merge:theObject at:aReference];
 }
 

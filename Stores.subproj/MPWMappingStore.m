@@ -41,9 +41,9 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self mapRetrievedObject:[self.source at:[self mapReference:aReference]] forReference:aReference];
 }
 
--(void)put:theObject at:(id <MPWReferencing>)aReference
+-(void)at:(id <MPWReferencing>)aReference put:theObject
 {
-    [self.source put:[self mapObjectToStore:theObject forReference:aReference] at:[self mapReference:aReference]];
+    [self.source at:[self mapReference:aReference] put:[self mapObjectToStore:theObject forReference:aReference]];
 }
 
 -(void)merge:theObject at:(id <MPWReferencing>)aReference

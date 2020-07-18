@@ -14,7 +14,7 @@
 @protocol MPWStorage <NSObject>
 
 -at:(id <MPWReferencing>)aReference;
--(void)put:theObject at:(id <MPWReferencing>)aReference;
+-(void)at:(id <MPWReferencing>)aReference put:theObject;
 -(void)merge:theObject at:(id <MPWReferencing>)aReference;
 -(void)deleteAt:(id <MPWReferencing>)aReference;
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;

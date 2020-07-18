@@ -94,14 +94,14 @@
     return nil;
 }
 
--(void)put:theObject at:(MPWReference*)aReference
+-(void)at:(MPWReference*)aReference put:theObject
 {
     return ;
 }
 
 -(void)merge:theObject at:(id <MPWReferencing>)aReference
 {
-    [self put:theObject at:aReference];
+    [self at:aReference put:theObject];
 }
 
 -(void)deleteAt:(MPWReference*)aReference
@@ -121,7 +121,7 @@
 
 -(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
 {
-    [self put:theObject at:(id <MPWReferencing>)key];
+    [self at:(id <MPWReferencing>)key put:theObject];
 }
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
@@ -289,14 +289,9 @@
 //    return [self at:ref];
 //}
 
--(void)at:ref put:object
-{
-    [self put:object at:ref];
-}
-
 //-(void)setObject:object forReference:ref
 //{
-//    [self put:object at:ref];
+//    [self at:ref put:object];
 //}
 //
 //-(void)mergeObject:object forReference:ref
