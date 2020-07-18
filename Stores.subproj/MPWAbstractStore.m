@@ -277,6 +277,10 @@
     return nil;
 }
 
+-(void)put:anObject at:ref
+{
+    [self at:ref put:anObject];
+}
 
 
 -get:uri
