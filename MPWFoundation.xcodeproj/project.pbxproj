@@ -3389,7 +3389,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Core;
 		};
@@ -3397,6 +3396,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -3434,7 +3434,6 @@
 				SKIP_INSTALL = YES;
 				STRINGS_FILE_OUTPUT_ENCODING = "UTF-8";
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3488,7 +3487,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Nightly;
 		};
@@ -3496,6 +3494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -3533,7 +3532,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -3658,7 +3656,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Beta;
 		};
@@ -3666,6 +3663,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -3703,7 +3701,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -4199,6 +4196,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5335,9 +5333,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Debug;
 		};
@@ -5385,7 +5382,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};
@@ -5393,6 +5389,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -5417,6 +5414,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MODULEMAP_FILE = MPWFoundation.map;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -5429,7 +5427,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -5443,6 +5440,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -5480,7 +5478,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -5534,7 +5531,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = AppStore;
 		};
@@ -5542,6 +5538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -5579,7 +5576,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
@@ -5704,7 +5700,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				SDKROOT = macosx;
-				VALID_ARCHS = x86_64;
 			};
 			name = Weekly;
 		};
@@ -5712,6 +5707,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -5749,7 +5745,6 @@
 				SECTORDER_FLAGS = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
-				VALID_ARCHS = x86_64;
 				WARNING_CFLAGS = (
 					"-Wmost",
 					"-Wno-four-char-constants",
