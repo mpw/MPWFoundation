@@ -253,7 +253,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     q.autoFlush=YES;
     INTEXPECT(a.count,0,@"before");
     [q writeObject:@"first"];
-    INTEXPECT(a.count,0,@"directly after write, async drain shouldn't really have executed yet");
+    INTEXPECT(a.count,0,@"directly after write, async drain shouldn't really have executed yet");  // FIXME: random failure
     [NSThread sleepForTimeInterval:0.00001 orUntilConditionIsMet:^{
         return @( a.count == 1 );
     }];

@@ -9,8 +9,9 @@
 #import <objc/runtime.h>
 #import <objc/Protocol.h>
 
+#ifndef GS_API_LATEST
 @import ObjectiveC.Protocol;
-
+#endif
 
 
 @protocol MPWNotificationProtocol
