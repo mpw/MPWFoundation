@@ -18,6 +18,7 @@
 +(NSString*)ivarNameAtOffset:(int)ivarOffset orIndex:(int)index;
 +(NSString*)ivarNameForVarPointer:(const void*)address orIndex:(int)index ofInstance:(const void*)instaddr;
 -(NSString*)ivarNameForVarPointer:(const void*)address orIndex:(int)index;
++(NSMutableArray*)allIvarNames;
 +(NSMutableArray*)ivarNames;
 
 @end

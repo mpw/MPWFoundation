@@ -210,9 +210,9 @@ idAccessor( dataSource, setDataSource )
 
 -makeText:(long)length
 /*"
-    Scans length bytes from the data source, returning an MPWSubData referencing
-    the original data, no copying of data is performed.
-"*/
+ Scans length bytes from the data source, returning an MPWSubData referencing
+ the original data, no copying of data is performed.
+ "*/
 {
     MPWSubData* text = GETOBJECT( (MPWObjectCache*)textCache );
     RESERVE(length);
@@ -220,8 +220,21 @@ idAccessor( dataSource, setDataSource )
         length=end-pos;
     }
     [text reInitWithData:data bytes:pos length:length];
-//    initData(text , @selector(reInitWithData:bytes:length:), data, pos, length );
+    //    initData(text , @selector(reInitWithData:bytes:length:), data, pos, length );
     pos=pos+length;
+    return text;
+}
+
+-(long)currentOffset
+{
+    return pos-start;
+}
+
+-makeTextFrom:(long)startPos to:(long)endPos
+{
+    long length=endPos-startPos;
+    MPWSubData* text = GETOBJECT( (MPWObjectCache*)textCache );
+    [text reInitWithData:data bytes:start+startPos length:length];
     return text;
 }
 

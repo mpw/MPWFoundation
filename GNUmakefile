@@ -18,7 +18,7 @@ LIBRARY_NAME = libMPWFoundation
 CC = clang
 
 
-OBJCFLAGS += -Os -g -Wno-import -fobjc-runtime=gnustep-2 -fmodules
+OBJCFLAGS += -Os -g -Wno-import -fobjc-runtime=gnustep-2 -fmodules -fmodules-cache-path=/home/gnustep/Build/Modules 
 
 
 MPWFoundation_HEADER_FILES = \

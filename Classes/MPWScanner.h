@@ -43,6 +43,9 @@ idAccessor_h( dataSource, setDataSource )
 -nextLine;
 -nextObject;
 
+-(long)currentOffset;
+-makeTextFrom:(long)startPos to:(long)endPos;
+
 
 -(void)setScanPosition:(const  char*)newPos;
 -(const char*)position;

@@ -17,7 +17,7 @@
 
 -(MPWSmallStringTable*)accessorsForClass:(Class)theClass
 {
-    NSArray *ivars=[theClass ivarNames];
+    NSArray *ivars=[theClass allIvarNames];
     if ( [[ivars lastObject] hasPrefix:@"_"]) {
         ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
     }

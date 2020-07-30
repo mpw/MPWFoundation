@@ -229,7 +229,6 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     id ref = [self ref:@"single space"];
     NSArray* components = [ref relativePathComponents];
     NSString *expected = @"single space";
-//    NSString *result = [NSString stringWithString:components.firstObject];
     NSString* result = [[expected stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]] stringByRemovingPercentEncoding];
     NSLog(@"string escaping and unescaping result: '%@' class: %@",result,[result class]);
     BOOL same = [expected isEqualToString:result];

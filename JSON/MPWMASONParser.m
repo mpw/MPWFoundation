@@ -36,7 +36,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 -initWithClass:(Class)classToDecode
 {
     self = [self initWithBuilder:[[[MPWObjectBuilder alloc] initWithClass:classToDecode] autorelease]];
-    [self setFrequentStrings:(NSArray*)[[[classToDecode ivarNames] collect] substringFromIndex:1]];
+    [self setFrequentStrings:(NSArray*)[[[classToDecode allIvarNames] collect] substringFromIndex:1]];
     return self;
 }
 

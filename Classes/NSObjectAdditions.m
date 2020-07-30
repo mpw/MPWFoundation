@@ -82,19 +82,27 @@
 
 #endif
 
++(NSMutableArray*)allIvarNames
+{
+    Class class=self;
+    Class superclass=[class superclass];
+    NSMutableArray *ivarlist;
+
+    if ( superclass ) {
+        ivarlist = [superclass allIvarNames];
+        [class addIvarNamesForCurrentClassToArray:ivarlist];
+        return ivarlist;
+    } else {
+        return [NSMutableArray array];
+    }
+}
+
 +(NSMutableArray*)ivarNames
 {
     Class class=self;
-	Class superclass=[class superclass];
-	NSMutableArray *ivarlist;
-	
-	if ( superclass ) {
-		ivarlist = [superclass ivarNames];
-		[class addIvarNamesForCurrentClassToArray:ivarlist];
-		return ivarlist;
-	} else {
-		return [NSMutableArray array];
-	}
+    NSMutableArray *ivarlist=[NSMutableArray array];
+    [class addIvarNamesForCurrentClassToArray:ivarlist];
+    return ivarlist;
 }
 
 
@@ -185,8 +193,8 @@ intAccessor( debugLevel, setDebugLevel )
 
 +(void)testIvarNames
 {
-	IDEXPECT( [NSObject ivarNames], ([NSArray array]), @"NSObject has no visible ivars");
-	IDEXPECT( [self ivarNames], ([NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"f",nil]), @"ivar names");
+	IDEXPECT( [NSObject allIvarNames], ([NSArray array]), @"NSObject has no visible ivars");
+	IDEXPECT( [self allIvarNames], ([NSArray arrayWithObjects:@"a",@"b",@"c",@"d",@"f",nil]), @"ivar names");
 }
 
 -(char*)addressOfA  { return (char*)&a; };

@@ -73,7 +73,7 @@
 
 +(NSArray*)defaultEncodingKeys
 {
-	return [self ivarNames];
+	return [self allIvarNames];
 }
 
 -(NSArray*)encodingKeys
