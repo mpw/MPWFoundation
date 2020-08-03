@@ -65,6 +65,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other.reference] inStore:self.store];
 }
 
+-(id <MPWReferencing>)asReference
+{
+    return [self reference];
+}
+
 -asScheme
 {
     return [MPWPathRelativeStore storeWithSource:self.store reference:self.reference];
