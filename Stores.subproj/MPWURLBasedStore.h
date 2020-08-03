@@ -9,4 +9,6 @@
 
 @interface MPWURLBasedStore : MPWAbstractStore
 
++(id <MPWStorage>)storeAtURL:(NSURL*)url;
+
 @end

@@ -116,12 +116,12 @@
 
 -objectForKeyedSubscript:key
 {
-    return [self at:key];
+    return [self at:[key asReference]];
 }
 
 -(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
 {
-    [self at:(id <MPWReferencing>)key put:theObject];
+    [self at:(id <MPWReferencing>)[key asReference] put:theObject];
 }
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
@@ -133,7 +133,9 @@
 
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
+//    NSLog(@"-childrenOfReference: %@ %@/'%@'",[self class],[(NSObject*)aReference class],aReference);
     id maybeChildren = [self at:aReference];
+//    NSLog(@"children: %@",[maybeChildren class]);
     if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
         return maybeChildren;
     } else if ( [maybeChildren respondsToSelector:@selector(contents)]) {

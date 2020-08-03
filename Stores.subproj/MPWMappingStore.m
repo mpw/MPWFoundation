@@ -120,7 +120,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     IDEXPECT( mapper[@"hi"], @"there", @"read via mapper");
     mapper[@"hello"]=@"world";
     IDEXPECT( store[@"hello"], @"world", @"write via mapper");
-    [mapper deleteAt:(id <MPWReferencing>)@"hello"];
+    [mapper deleteAt:[@"hello" asReference]];
     EXPECTNIL( store[@"hello"], @"original after delete via mapper");
 }
 

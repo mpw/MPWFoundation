@@ -161,7 +161,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     IDEXPECT( first[@"key"], @"value", @"did store");
     EXPECTNIL( second[@"key"],@"second");
 
-    [store deleteAt:(id<MPWReferencing>)@"key"];
+    [store deleteAt:[@"key" asReference]];
     EXPECTNIL(store[@"key"],@"after delete" );
 
 }
