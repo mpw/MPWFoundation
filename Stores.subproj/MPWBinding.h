@@ -18,6 +18,8 @@
 
 -(void)delete;
 
+-asScheme;
+
 // hierarchy support
 
 -(BOOL)hasChildren;

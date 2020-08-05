@@ -74,6 +74,11 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 -(void)setShouldIndent:(BOOL)should;
 -(BOOL)shouldIndent;
 -(id)writeElementName:(const char *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content;
+-(instancetype)writeElementName:(const char*)name attributes:attrs contents:contents;
+
+-(void)beginStartTag:(const char*)name;
+-(void)endStartTag:(const char*)name;
+
 
 @end
 
