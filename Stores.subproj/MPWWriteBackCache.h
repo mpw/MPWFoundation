@@ -13,6 +13,7 @@
 
 -(void)makeAsynchronous;
 @property (readonly) BOOL isAsynchronous;
+@property (readonly) BOOL hasChanges;
 
 
 @end

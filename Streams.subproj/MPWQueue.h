@@ -21,6 +21,7 @@
 -(void)forwardSingleObject;
 -(void)triggerDrain;
 -(void)makeAsynchronous;
+-(void)drain;
 
 
 @end

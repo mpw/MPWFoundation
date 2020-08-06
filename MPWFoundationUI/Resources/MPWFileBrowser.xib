@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17147" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17147"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="MPWFileBrowser">
+            <connections>
+                <outlet property="browser" destination="8fz-EP-imc" id="RcR-7r-JHa"/>
+                <outlet property="text" destination="70z-F2-JLL" id="0cF-wQ-Vq5"/>
+                <outlet property="view" destination="c22-O7-iKe" id="HLv-UH-600"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="460" height="374"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <splitView fixedFrame="YES" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-Aq-U4W">
+                    <rect key="frame" x="0.0" y="-11" width="460" height="385"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <customView fixedFrame="YES" id="ALO-Hw-76z">
+                            <rect key="frame" x="0.0" y="0.0" width="460" height="192"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <browser verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" enabled="YES" hasHorizontalScroller="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="8fz-EP-imc" customClass="MPWBrowser">
+                                    <rect key="frame" x="0.0" y="0.0" width="460" height="214"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <connections>
+                                        <action selector="didSelect:" target="-2" id="A9Z-SU-c5H"/>
+                                    </connections>
+                                </browser>
+                            </subviews>
+                        </customView>
+                        <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" id="5Bz-cj-fSj">
+                            <rect key="frame" x="0.0" y="202" width="460" height="183"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <clipView key="contentView" drawsBackground="NO" id="uD3-JP-Uhz">
+                                <rect key="frame" x="0.0" y="0.0" width="445" height="183"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="70z-F2-JLL">
+                                        <rect key="frame" x="0.0" y="0.0" width="445" height="183"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        <size key="minSize" width="445" height="183"/>
+                                        <size key="maxSize" width="445" height="10000000"/>
+                                        <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    </textView>
+                                </subviews>
+                            </clipView>
+                            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="xP6-dC-V4G">
+                                <rect key="frame" x="-100" y="-100" width="225" height="15"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                            <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="AcQ-hJ-1sh">
+                                <rect key="frame" x="445" y="0.0" width="15" height="183"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                            </scroller>
+                        </scrollView>
+                    </subviews>
+                    <holdingPriorities>
+                        <real value="250"/>
+                        <real value="250"/>
+                    </holdingPriorities>
+                </splitView>
+            </subviews>
+            <point key="canvasLocation" x="-111" y="128"/>
+        </customView>
+    </objects>
+</document>

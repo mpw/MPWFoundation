@@ -50,11 +50,19 @@
     }
 }
 
-
-
 -(void)makeAsynchronous
 {
     [self.queue makeAsynchronous];
+}
+
+-(void)flush
+{
+    [self.queue drain];
+}
+
+-(BOOL)hasChanges
+{
+    return self.queue.count > 0;
 }
 
 -(BOOL)isAsynchronous
@@ -85,6 +93,7 @@
 
              @"testAsyncWrite",
              @"testAsyncDelete",
+             @"testSyncWrite",
              ];
 }
 
@@ -120,5 +129,19 @@
     }];
     EXPECTNIL( self.source[self.key], @"deleteing source happens eventually");
 }
+
+-(void)testSyncWrite
+{
+    MPWWriteBackCache *store=(MPWWriteBackCache*)self.store;
+    store.queue.autoFlush=NO;
+    EXPECTTRUE( [store isKindOfClass:[MPWWriteBackCache class]], @"expected class");
+    EXPECTFALSE(store.hasChanges,@"has changes");
+    self.store[self.key] = self.value;
+    IDEXPECT( self.cache[self.key], self.value, @"writing cache is synchronous");
+    EXPECTTRUE(store.hasChanges,@"has changes");
+    [store flush];
+    IDEXPECT( self.source[self.key], self.value, @"did write async");
+}
+
 
 @end

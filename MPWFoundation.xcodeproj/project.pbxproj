@@ -306,6 +306,9 @@
 		1FA869D920EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA869DA20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA869DB20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
+		1FA8F32024DCB27000CD69D0 /* MPWFileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */; };
+		1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */; };
+		1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */; };
 		1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
 		1FB0A8061E520FB600E552A0 /* MPWSocketStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1194,6 +1197,9 @@
 		1FA869CD20EBC01500920279 /* MPWLoggingStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWLoggingStore.m; sourceTree = "<group>"; };
 		1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWRESTOperation.h; sourceTree = "<group>"; };
 		1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWRESTOperation.m; sourceTree = "<group>"; };
+		1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWFileBrowser.xib; sourceTree = "<group>"; };
+		1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFileBrowser.h; sourceTree = "<group>"; };
+		1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFileBrowser.m; sourceTree = "<group>"; };
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
 		1FAB9ACD193F663600927665 /* MPWFoundation.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MPWFoundation.map; sourceTree = "<group>"; };
@@ -1749,6 +1755,7 @@
 		1F7045B022313082005ED7FB /* MPWFoundationUI */ = {
 			isa = PBXGroup;
 			children = (
+				1FA8F31E24DCB23800CD69D0 /* Resources */,
 				1F7045D622313175005ED7FB /* Classes */,
 				1F7045B122313082005ED7FB /* MPWFoundationUI.h */,
 				1F7045B222313082005ED7FB /* Info.plist */,
@@ -1768,6 +1775,8 @@
 		1F7045D622313175005ED7FB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */,
+				1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */,
 				1F7045D8223131C2005ED7FB /* MPWBrowser.h */,
 				1F7045D7223131C2005ED7FB /* MPWBrowser.m */,
 				1F7045E8223134F7005ED7FB /* MPWTableView.h */,
@@ -1836,6 +1845,14 @@
 				1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1FA8F31E24DCB23800CD69D0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		1FCF25D51CF3983C00AC64CE /* MPWFoundationWatch */ = {
@@ -2027,6 +2044,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */,
 				1F7045DA223131C2005ED7FB /* MPWBrowser.h in Headers */,
 				1F7045B322313082005ED7FB /* MPWFoundationUI.h in Headers */,
 				1F1BE5E5224BD57D002D58AC /* NSViewAdditions.h in Headers */,
@@ -2676,6 +2694,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FA8F32024DCB27000CD69D0 /* MPWFileBrowser.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2918,6 +2937,7 @@
 				1F7045EB223134F7005ED7FB /* MPWTableView.m in Sources */,
 				1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */,
 				1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */,
+				1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
