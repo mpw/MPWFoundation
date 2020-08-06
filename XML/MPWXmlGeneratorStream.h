@@ -57,7 +57,6 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 -(void)beginStartTag:(const char*)name;
 -(void)endStartTag:(const char*)name single:(BOOL)isSingle;
 
--writeElementName:(const char*)name attributes:attrs contents:contents;
 -writeElementName:(const char*)name contents:contents;
 -writeContentObject:anObject;
 -(void)writeProcessingInstruction:piName attributes:attrs;
@@ -76,8 +75,6 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 -(id)writeElementName:(const char *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content;
 -(instancetype)writeElementName:(const char*)name attributes:attrs contents:contents;
 
--(void)beginStartTag:(const char*)name;
--(void)endStartTag:(const char*)name;
 
 
 @end
