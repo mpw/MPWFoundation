@@ -19,7 +19,7 @@
 CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MPWAbstractStore*)aStore)
 {
     self=[super init];
-    self.reference=ref;
+    self.reference=[ref asReference];
     self.store=aStore;
     return self;
 }
@@ -105,6 +105,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     if ( [self hasChildren]) {
         [[[self children] do] traverse:target];
     }
+}
+
+-copyWithZone:aZone
+{
+    return [[[self class] allocWithZone:aZone] initWithReference:[[self.reference copy] autorelease] inStore:self.store];
 }
 
 -(void)dealloc

@@ -42,6 +42,16 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb
     return [[self class] HTTPVerb:self.verb];
 }
 
+-(NSUInteger)hash
+{
+    return [self.reference hash] + self.verb;
+}
+
+-(BOOL)isEqual:(MPWRESTOperation*)object
+{
+    return self.verb == object.verb &&
+    [self.reference isEqual:object.reference];
+}
 
 -(void)dealloc
 {

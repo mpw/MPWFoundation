@@ -41,6 +41,17 @@
     return [self lastModifiedTime] > [self lastRead];
 }
 
+-(BOOL)isEqual:(MPWFileBinding*)object
+{
+    return self.store == object.store &&
+    [self.reference isEqual:object.reference];
+}
+
+-(NSUInteger)hash
+{
+    [self.reference hash];
+}
+
 //-(void)startWatching
 //{
 //    [[self store] startWatching:self];

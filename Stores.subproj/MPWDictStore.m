@@ -33,7 +33,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -referenceToKey:(MPWReference*)ref
 {
-    return ref;
+    return [ref path];
 }
 
 -at:(MPWReference*)aReference

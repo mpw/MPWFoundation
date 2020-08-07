@@ -8,7 +8,12 @@
 #import "MPWFileBrowser.h"
 #import "MPWBrowser.h"
 #import <MPWFoundation/MPWFoundation.h>
+
 @interface MPWFileBrowser ()
+
+@property (nonatomic,strong)            IBOutlet MPWBrowser *browser;
+@property (nonatomic,strong)            IBOutlet NSTextView *text;
+-(IBAction)didSelect:sender;
 
 @end
 
@@ -19,13 +24,37 @@
     return [self initWithNibName:@"MPWFileBrowser" bundle:[NSBundle bundleForClass:[self class]]];
 }
 
--(IBAction)didSelect:(MPWBrowser*)sender
+-(MPWBinding*)currrentBinding
 {
-    NSLog(@"path: %@", [[[self.browser currentReference] asReference] path]);
-    [self.text setString: [[[self.browser currentReference] value] stringValue]];
+    return (MPWBinding*)[self.browser currentReference];
 }
 
+-(IBAction)didSelect:(MPWBrowser*)sender
+{
+    [self.text setString: [[[self currrentBinding] value] stringValue]];
+}
 
+-(void)saveFileContents
+{
+    [[self currrentBinding] setValue:[[self.text string] asData]];
+}
+
+-(void)textDidChange:(NSNotification *)notification {
+    if ( self.continuous ) {
+        NSLog(@"save");
+        [self saveFileContents];
+    }
+}
+
+-(void)setEditable:(BOOL)isEditable
+{
+    self.text.editable=isEditable;
+}
+
+-(BOOL)isEditable
+{
+    return self.text.isEditable;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
