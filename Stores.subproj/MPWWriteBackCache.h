@@ -14,6 +14,6 @@
 -(void)makeAsynchronous;
 @property (readonly) BOOL isAsynchronous;
 @property (readonly) BOOL hasChanges;
-
+@property (assign)   BOOL autoFlush;
 
 @end

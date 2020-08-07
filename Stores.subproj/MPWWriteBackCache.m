@@ -24,6 +24,16 @@
 
 @implementation MPWWriteBackCache
 
+-(BOOL)autoFlush
+{
+    return self.queue.autoFlush;
+}
+
+-(void)setAutoFlush:(BOOL)flushing
+{
+    self.queue.autoFlush=flushing;
+}
+
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource cache:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newCache
 {
     self=[super initWithSource:newSource cache:newCache];

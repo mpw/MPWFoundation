@@ -307,7 +307,7 @@
 		1FA869DA20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA869DB20EBC7FC00920279 /* MPWRESTOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */; };
 		1FA8F32024DCB27000CD69D0 /* MPWFileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */; };
-		1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */; };
+		1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */; };
 		1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
