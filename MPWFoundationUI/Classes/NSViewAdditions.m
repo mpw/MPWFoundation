@@ -41,7 +41,7 @@
 
 -(NSRect)defaultWindowRect
 {
-    return NSMakeRect(50, 50, 1200, 800);
+    return NSMakeRect(50, 50, 700, 400);
 }
 
 -openInWindow:(NSString*)windowName

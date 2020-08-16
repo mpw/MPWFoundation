@@ -24,10 +24,26 @@
     return [self initWithNibName:@"MPWFileBrowser" bundle:[NSBundle bundleForClass:[self class]]];
 }
 
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    NSTextView *text=self.text;
+
+    [text setAutomaticQuoteSubstitutionEnabled:NO];
+    [text setAutomaticLinkDetectionEnabled:NO];
+    [text setAutomaticDataDetectionEnabled:NO];
+    [text setAutomaticDashSubstitutionEnabled:NO];
+    [text setAutomaticTextReplacementEnabled:NO];
+    [text setAutomaticSpellingCorrectionEnabled:NO];
+//    [text setFont:[NSFont fontWithName:@"Menlo Regular" size:11]];
+
+}
+
 -(MPWBinding*)currrentBinding
 {
     return (MPWBinding*)[self.browser currentReference];
 }
+
 
 -(IBAction)didSelect:(MPWBrowser*)sender
 {
@@ -41,7 +57,6 @@
 
 -(void)textDidChange:(NSNotification *)notification {
     if ( self.continuous ) {
-        NSLog(@"save");
         [self saveFileContents];
     }
 }
