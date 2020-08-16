@@ -22,9 +22,10 @@
 @interface NSMutableArray(collecting)<OrderedCollection>
 @end
 
+#if !GS_API_LATEST
 @interface NSOrderedSet(collecting)<OrderedCollection>
 @end
-
+#endif
 
 @interface MPWQueue()
 
@@ -34,6 +35,9 @@
 @property (nonatomic, assign) id flusherRunLoop;
 @property (nonatomic, assign) BOOL stopAsync;
 
+@property (atomic, strong) NSMutableSet *uniquer;
+
+
 @end
 
 @implementation MPWQueue
@@ -41,7 +45,10 @@
 CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 {
     self=[super initWithTarget:aTarget];
-    self.queue = shouldUnique ? [NSMutableOrderedSet orderedSet] : [NSMutableArray array];
+    self.queue = [NSMutableArray array];
+    if (shouldUnique) {
+        self.uniquer = [NSMutableSet set];
+    }
     return self;
 }
 
@@ -53,7 +60,10 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 -(void)writeObject:(id)anObject sender:aSender
 {
     @synchronized(self) {
-        [self.queue addObject:anObject];
+        if ( self.uniquer == nil || ![self.uniquer containsObject:anObject]) {
+            [self.queue addObject:anObject];
+            [self.uniquer addObject:anObject];
+        }
     }
     if ( self.autoFlush ) {
         [self triggerDrain];
@@ -72,7 +82,9 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
 -(void)removeFirstObject
 {
     @synchronized(self) {
+        id first=self.queue.firstObject;
         [self.queue removeObjectAtIndex:0];
+        [self.uniquer removeObject:first];
     }
 }
 
@@ -106,6 +118,11 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     }
 }
 
+#if GS_API_LATEST
+-(void)_flusherThreadRunLoop {}
+-(void)_exitFlusherThread {}
+
+#else
 -(void)_flusherThreadRunLoop
 {
     if (!self.stopAsync) {
@@ -128,6 +145,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     }
 }
 
+#endif
 
 -(void)setFlusherThreadName
 {
@@ -163,6 +181,7 @@ CONVENIENCEANDINIT( queue, WithTarget:(id)aTarget uniquing:(BOOL)shouldUnique)
     [_flusherThread release];
     [_queue release];
     [_inflight release];
+    [_uniquer release];
     [super dealloc];
 }
 
