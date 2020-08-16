@@ -99,6 +99,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWURLBasedStore.m \
     Stores.subproj/MPWURLReference.m \
     Stores.subproj/MPWDiskStore.m \
+    Stores.subproj/MPWWriteBackCache.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWArrayFlattenStream.m \
@@ -113,6 +114,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWExternalFilter.m \
     Streams.subproj/MPWFDStreamSource.m \
     Streams.subproj/MPWStreamSource.m \
+    Streams.subproj/MPWQueue.m \
     Plist/MPWBinaryPListWriter.m \
     Plist/MPWNeXTPListWriter.m \
     Plist/MPWBinaryPlist.m \
