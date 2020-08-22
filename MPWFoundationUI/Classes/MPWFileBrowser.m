@@ -44,7 +44,6 @@
     return (MPWBinding*)[self.browser currentReference];
 }
 
-
 -(IBAction)didSelect:(MPWBrowser*)sender
 {
     [self.text setString: [[[self currrentBinding] value] stringValue]];
