@@ -11,7 +11,7 @@
 #import <MPWFoundation/MPWFastInvocation.h>
 #import <MPWFoundation/MPWObjectCache.h>
 #import <MPWFoundation/MPWBlockInvocation.h>
-#import <MPWFoundation/MPWRUsage.h>
+#import <MPWFoundation/MPWRusage.h>
 #import <MPWFoundation/MPWMessageCatcher.h>
 #import <MPWFoundation/MPWBoxerUnboxer.h>
 #import <MPWFoundation/MPWRuntimeAdditions.h>
@@ -124,7 +124,7 @@
 
 
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
-#import <MPWFoundation/MPWMasonParser.h>
+#import <MPWFoundation/MPWMASONParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
 
 #if !GS_API_LATEST
