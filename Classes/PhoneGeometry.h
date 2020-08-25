@@ -7,7 +7,7 @@
 //
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_MACCATALYST
 #ifndef PHONE_GEOMETRY
 #define PHONE_GEOMETRY
 #import <CoreGraphics/CoreGraphics.h>

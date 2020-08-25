@@ -49,7 +49,7 @@
 
 -(NSUInteger)hash
 {
-    [self.reference hash];
+    return [self.reference hash];
 }
 
 //-(void)startWatching
