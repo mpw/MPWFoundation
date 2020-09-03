@@ -6,17 +6,17 @@
 //
 //
 
-#import "AppDelegate.h"
+#import "ViewBuilderAppDelegate.h"
 #import <Foundation/Foundation.h>
 #import <MPWTest/MPWTestSuite.h>
 #import <MPWTest/MPWLoggingTester.h>
 #import <MPWTest/MPWClassMirror.h>
 
-@interface AppDelegate ()
+@interface ViewBuilderAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation ViewBuilderAppDelegate
 
 
 int runTests( NSArray *testSuiteNames , NSArray *testTypeNames,  BOOL verbose ,BOOL veryVerbose ) {

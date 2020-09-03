@@ -6,13 +6,13 @@
 //
 //
 
-#import "ViewController.h"
+#import "ViewBuilderController.h"
 
-@interface ViewController ()
+@interface ViewBuilderController ()
 
 @end
 
-@implementation ViewController
+@implementation ViewBuilderController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

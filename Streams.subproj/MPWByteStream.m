@@ -557,30 +557,35 @@ typedef void (^FileBlock)(FILE *f);
     [[byteTarget ifResponds] closeLocal];
 }
 
-typedef void (*IMPVID1)(id, SEL, id);
 
-
-+(void)initialize
-{
-    SEL superSelector = @selector(flattenStructureOntoStream:);
-    SEL mySelector = @selector(writeOnByteStream:);
-
-    if ( ![self instancesRespondToSelector:mySelector]) {
-        IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id stream ){
-            ((IMPVID1)objc_msgSend)(blockSelf, superSelector , stream); }
-                                               );
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-        class_addMethod([NSObject class], mySelector, theImp, "v@:@");
-#pragma clang diagnostic pop
-    }
-
-}
+//typedef void (*IMPVID1)(id, SEL, id);
+//
+//+(void)initialize
+//{
+//    SEL superSelector = @selector(flattenStructureOntoStream:);
+//    SEL mySelector = @selector(writeOnByteStream:);
+//
+//    if ( ![self instancesRespondToSelector:mySelector]) {
+//        IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id stream ){
+//            ((IMPVID1)objc_msgSend)(blockSelf, superSelector , stream); }
+//                                               );
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Wundeclared-selector"
+//        class_addMethod([NSObject class], mySelector, theImp, "v@:@");
+//#pragma clang diagnostic pop
+//    }
+//
+//}
 
 @end
 
 
 @implementation NSObject(ByteAppending)
+
+-(void)writeOnByteStream:aStream
+{
+    [self flattenStructureOntoStream:aStream];
+}
 
 
 -(void)appendBytes:(const void*)bytes length:(long)len

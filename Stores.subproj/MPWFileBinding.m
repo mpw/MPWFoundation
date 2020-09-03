@@ -44,12 +44,12 @@
 -(BOOL)isEqual:(MPWFileBinding*)object
 {
     return self.store == object.store &&
-    [self.reference isEqual:object.reference];
+    [(NSObject*)(self.reference) isEqual:object.reference];
 }
 
 -(NSUInteger)hash
 {
-    return [self.reference hash];
+    return (NSUInteger)[(NSObject*)(self.reference) hash];
 }
 
 //-(void)startWatching

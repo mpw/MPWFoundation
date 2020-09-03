@@ -107,9 +107,9 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     }
 }
 
--copyWithZone:aZone
+-copyWithZone:(NSZone*)aZone
 {
-    return [[[self class] allocWithZone:aZone] initWithReference:[[self.reference copy] autorelease] inStore:self.store];
+    return [[[self class] allocWithZone:aZone] initWithReference:[[self.reference copyWithZone:aZone] autorelease] inStore:self.store];
 }
 
 -(void)dealloc

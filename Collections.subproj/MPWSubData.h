@@ -23,6 +23,7 @@
 -(NSUInteger)length;
 boolAccessor_h( mustUnique, setMustUnique )
 -originalData;
+-(unsigned long)offset;
 
 @end
 
