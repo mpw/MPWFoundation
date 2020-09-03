@@ -514,9 +514,10 @@ typedef void (^FileBlock)(FILE *f);
     if ( fileBlock) {
         char *buffer=malloc(size);
         if (@available(macOS 10.13, *)) {
-            FILE *f=fmemopen( buffer , 8192*1024, "w+b");
+            FILE *f=fmemopen( buffer , size, "w+b");
             if ( f ) {
                 fileBlock(f);
+                fflush(f);
                 long length=ftell(f);
                 if (length>0) {
                     [self appendBytes:buffer length:length];
@@ -526,7 +527,7 @@ typedef void (^FileBlock)(FILE *f);
                 @throw [NSException exceptionWithName:@"internal inconsistency" reason:@"fmemopen() returned NULL" userInfo:nil];
             }
         } else {
-            @throw [NSException exceptionWithName:@"unsupperteed" reason:@"fmemopen() requires 10.13" userInfo:nil];
+            @throw [NSException exceptionWithName:@"unsupperted" reason:@"fmemopen() requires 10.13" userInfo:nil];
         }
         free(buffer);
     }
