@@ -31,17 +31,17 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     return [self initWithDictionary:[NSMutableDictionary dictionary]];
 }
 
--referenceToKey:(MPWReference*)ref
+-referenceToKey:(id <MPWReferencing>)ref
 {
     return [ref path];
 }
 
--at:(MPWReference*)aReference
+-at:(id <MPWReferencing>)aReference
 {
     return self.dict[[self referenceToKey:aReference]];
 }
 
--(void)deleteAt:(MPWReference*)aReference
+-(void)deleteAt:(id <MPWReferencing>)aReference
 {
     [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
@@ -49,7 +49,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 -(void)at:(id <MPWReferencing>)aReference put:theObject
 {
     if ( theObject != nil ) {
-        self.dict[[self referenceToKey:(MPWReference*)aReference]]=theObject;
+        self.dict[[self referenceToKey:aReference]]=theObject;
     } else {
         [self deleteAt:aReference];
     }

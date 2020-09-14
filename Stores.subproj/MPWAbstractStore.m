@@ -121,7 +121,7 @@
 
 -(void)setObject:(id)theObject forKeyedSubscript:(nonnull id<NSCopying>)key
 {
-    [self at:(id <MPWReferencing>)[key asReference] put:theObject];
+    [self at:(id <MPWReferencing>)[(NSString*)key asReference] put:theObject];
 }
 
 -(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
