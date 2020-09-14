@@ -8,6 +8,7 @@
 #import "MPWCompositeStore.h"
 #import <MPWByteStream.h>
 #import "MPWDiskStore.h"
+#import "MPWReference.h"
 
 @implementation MPWCompositeStore
 

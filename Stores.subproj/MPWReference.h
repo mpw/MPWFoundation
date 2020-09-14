@@ -36,6 +36,11 @@
 @end
 
 
+@interface NSString(referencing)
 
+-(id <MPWReferencing>)asReference;
+
+
+@end
 
 
