@@ -139,7 +139,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self path] hasSuffix:@"/"];
 }
 
--copyWithZone:aZone
+-copyWithZone:(NSZone*)aZone
 {
     return [self retain];
 }
