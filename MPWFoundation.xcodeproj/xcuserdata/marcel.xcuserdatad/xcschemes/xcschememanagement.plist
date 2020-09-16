@@ -64,12 +64,12 @@
 		<key>MPWFoundationUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>100</integer>
+			<integer>1</integer>
 		</dict>
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>119</integer>
+			<integer>6</integer>
 		</dict>
 		<key>SteamQLite.xcscheme_^#shared#^_</key>
 		<dict>
@@ -102,7 +102,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>104</integer>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
