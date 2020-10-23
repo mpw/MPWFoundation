@@ -473,9 +473,9 @@ typedef id (^idBlock)(id arg );
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
-//            @"testBlockInvoke",
+           @"testBlockInvoke",
             @"testNSBlockTypes",
-//            @"testBlockCopy",
+            @"testBlockCopy",
             @"testIntArg",
             @"testDoubleArg",
             @"testRectArg",
