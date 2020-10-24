@@ -56,7 +56,7 @@ static struct Block_descriptor sdescriptor= {
     const char *ctypes=[self ctypes];
     return ctypes ? [NSString stringWithCString:ctypes encoding:NSASCIIStringEncoding] : nil;
 }
-#if TARGET_OS_IPHONE
+#if TARGET_CPU_ARM64
 
 static id blockFunVar( id self, ... ) {
     va_list args;
