@@ -82,7 +82,7 @@ objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
 
 static long nsstrings=0;
 static long subdatas=0;
-static long common=0;
+//static long common=0;
 
 
 -(NSString*)parseJSONStringStart:(const char*)start length:(long)len hasUTF8:(BOOL)hasUTF8 hasEscape:(BOOL)hasEscape
@@ -372,7 +372,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
                 break;
         }
     }
-    NSLog(@"nsstrings: %ld subdatas: %ld common: %ld",nsstrings,subdatas,common);
+//    NSLog(@"nsstrings: %ld subdatas: %ld common: %ld",nsstrings,subdatas,common);
     return [_builder result];
 
 }
