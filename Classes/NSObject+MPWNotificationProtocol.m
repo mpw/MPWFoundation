@@ -8,7 +8,8 @@
 
 #import "NSObject+MPWNotificationProtocol.h"
 #import "DebugMacros.h"
-#import <objc/runtime.h>
+
+//#import <objc/runtime.h>
 
 #if !TARGET_OS_IPHONE
 @interface NSObject(notificationInstallation)
