@@ -187,6 +187,9 @@
 		1F783B09256A73AE00BE8654 /* MPWObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWObjectStore.m */; };
 		1F783B0A256A73AE00BE8654 /* MPWObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWObjectStore.m */; };
 		1F783B0B256A73AE00BE8654 /* MPWObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWObjectStore.m */; };
+		1F783B17256B0E1100BE8654 /* SwiftValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B16256B0E1100BE8654 /* SwiftValueStore.swift */; };
+		1F783B18256B0E1100BE8654 /* SwiftValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B16256B0E1100BE8654 /* SwiftValueStore.swift */; };
+		1F783B19256B0E1100BE8654 /* SwiftValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B16256B0E1100BE8654 /* SwiftValueStore.swift */; };
 		1F7A22851B786F9000FF6C03 /* MPWPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193F006686DDC35ADD82 /* MPWPoint.m */; };
 		1F7A22861B786F9000FF6C03 /* MPWRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1940006686DDC35ADD82 /* MPWRect.m */; };
 		1F7A22871B786F9200FF6C03 /* MPWPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF193F006686DDC35ADD82 /* MPWPoint.m */; };
@@ -1175,6 +1178,7 @@
 		1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockInvocation.m; sourceTree = "<group>"; };
 		1F783B04256A73AE00BE8654 /* MPWObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWObjectStore.h; sourceTree = "<group>"; };
 		1F783B05256A73AE00BE8654 /* MPWObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWObjectStore.m; sourceTree = "<group>"; };
+		1F783B16256B0E1100BE8654 /* SwiftValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftValueStore.swift; sourceTree = "<group>"; };
 		1F82D18C059D880200F38A88 /* MPWIntArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWIntArray.h; sourceTree = "<group>"; };
 		1F82D18D059D880200F38A88 /* MPWIntArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWIntArray.m; sourceTree = "<group>"; };
 		1F840DA5193F505700589595 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1534,6 +1538,7 @@
 				1FB93A941292012200D9D630 /* PhoneGeometry.h */,
 				1F3F678D2085B452001B80D9 /* NSObject+MPWNotificationProtocol.h */,
 				1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */,
+				1F783B16256B0E1100BE8654 /* SwiftValueStore.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2668,14 +2673,14 @@
 					};
 					1F840DA4193F505700589595 = {
 						CreatedOnToolsVersion = 6.0;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1220;
 					};
 					1FCF25D31CF3983B00AC64CE = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1220;
 					};
 					1FF8FDB309B49D0100652476 = {
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1220;
 					};
 				};
 			};
@@ -3090,6 +3095,7 @@
 				1F840DDC193F50AC00589595 /* NSNumberArithmetic.m in Sources */,
 				1FED48D6242634CC00AF2FAD /* MPWXmlParser.m in Sources */,
 				1F840DDD193F50AC00589595 /* MPWNumber.m in Sources */,
+				1F783B18256B0E1100BE8654 /* SwiftValueStore.swift in Sources */,
 				1FED492324263BC600AF2FAD /* MPWXmlParserTesting.m in Sources */,
 				1F840DDE193F50AC00589595 /* MPWFloat.m in Sources */,
 				1F840DDF193F50AC00589595 /* MPWInteger.m in Sources */,
@@ -3192,6 +3198,7 @@
 				1FED48C8242634CC00AF2FAD /* MPWXmlElement.m in Sources */,
 				1FED48B9242634CC00AF2FAD /* MPWMAXParser.m in Sources */,
 				1FCF26011CF398F400AC64CE /* MPWFloat.m in Sources */,
+				1F783B19256B0E1100BE8654 /* SwiftValueStore.swift in Sources */,
 				1FCF26611CF39AC400AC64CE /* MPWDelimitedTable.m in Sources */,
 				1FCF26651CF39AD400AC64CE /* MPWIntArray.m in Sources */,
 				1FCF26621CF39AD400AC64CE /* MPWFakedReturnMethodSignature.m in Sources */,
@@ -3246,6 +3253,7 @@
 				1F49BBBA20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FF8FDF809B49D0100652476 /* MPWObject.m in Sources */,
 				1FED48C9242634CC00AF2FAD /* MPWTagAction.m in Sources */,
+				1F783B17256B0E1100BE8654 /* SwiftValueStore.swift in Sources */,
 				1FF8FDF909B49D0100652476 /* NSInvocationAdditions.m in Sources */,
 				1FF8FDFA09B49D0100652476 /* NSStringAdditions.m in Sources */,
 				1F32EC962146AB710074C15A /* MPWQueue.m in Sources */,
@@ -3908,6 +3916,7 @@
 		1F4FC9921DF818AF00B35D27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -3965,6 +3974,7 @@
 		1F4FC9931DF818AF00B35D27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4006,6 +4016,7 @@
 		1F4FC9941DF818AF00B35D27 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4047,6 +4058,7 @@
 		1F4FC9951DF818AF00B35D27 /* Nightly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4088,6 +4100,7 @@
 		1F4FC9961DF818AF00B35D27 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4129,6 +4142,7 @@
 		1F4FC9971DF818AF00B35D27 /* Weekly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -4170,6 +4184,7 @@
 		1F4FC9981DF818AF00B35D27 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
