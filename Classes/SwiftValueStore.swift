@@ -11,7 +11,20 @@ private struct ValueStoreTestStruct {
     let firstIvar=2
     let secondIvar="Hello"
     let thirdIvar=2.3
+    public func sum() -> Double {
+        return Double(firstIvar)+thirdIvar
+    }
 }
+
+public func check(_ condition: @autoclosure () -> Bool, _ message: @autoclosure () -> String = String(), file: StaticString = #file, line: UInt = #line)
+{
+    if !condition() {
+        let msg="\(file):\(line): error: \(message())"
+        let e=NSException.init(name: NSExceptionName(rawValue: "MPWTestFailedException"), reason: msg, userInfo: nil)
+        e.raise()
+    }
+}
+
 
 @objc class SwiftValueStore : MPWAbstractStore {
     var val:Any?
@@ -46,10 +59,10 @@ private struct ValueStoreTestStruct {
         let store=SwiftValueStore.init()
         store.val=ValueStoreTestStruct()
         let result=store.at( MPWGenericReference.init(path: ".") ) as! Array<String>
-        precondition(result.count==3)
-        precondition(result[0]=="firstIvar")
-        precondition(result[1]=="secondIvar")
-        precondition(result[2]=="thirdIvar")
+        check(result.count==3)
+        check(result[0]=="firstIvar")
+        check(result[1]=="secondIvar")
+        check(result[2]=="thirdIvar")
 
     }
 
@@ -57,9 +70,9 @@ private struct ValueStoreTestStruct {
         let store=SwiftValueStore.init()
         store.val=ValueStoreTestStruct()
         let result1=store.at( MPWGenericReference.init(path: "firstIvar") ) as! Int
-        precondition(result1==2)
+        check(result1==2)
         let result2=store.at( MPWGenericReference.init(path: "secondIvar") ) as! String
-        precondition(result2=="Hello")
+        check(result2=="Hello")
 
     }
 
