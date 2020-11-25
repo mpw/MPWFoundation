@@ -28,7 +28,9 @@ public func check(_ condition: @autoclosure () -> Bool, _ message: @autoclosure 
 
 @objc class SwiftValueStore : MPWAbstractStore {
     var val:Any?
-
+    @objc public func setVal(_ newVal:Any ) {
+        val=newVal
+    }
     override public func at(_ ref:MPWReferencing) -> Any? {
         if let val = val {
             let path=ref.path!

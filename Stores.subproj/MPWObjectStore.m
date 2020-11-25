@@ -8,6 +8,11 @@
 #import "MPWObjectStore.h"
 #import "AccessorMacros.h"
 #import "MPWReference.h"
+#import "MPWDirectoryBinding.h"
+#import "NSObjectFiltering.h"
+#import <objc/runtime.h>
+#import "MPWValueAccessor.h"
+
 
 @interface MPWObjectStore()
 
@@ -16,6 +21,11 @@
 @end
 
 @implementation MPWObjectStore
+{
+    MPWDirectoryBinding *listOfProperties;
+}
+
+lazyAccessor(MPWDirectoryBinding, listOfProperties, setListOfProperties, computeListOfProperties)
 
 CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
@@ -24,9 +34,37 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return self;
 }
 
+-(NSArray*)propertyNames
+{
+    Class c = object_getClass(self.object);
+    Class stopClass = [NSObject class];
+    NSMutableArray *propertyNames=[NSMutableArray array];
+    while ( c && c!=stopClass) {
+        unsigned int count=0;
+        objc_property_t *props=class_copyPropertyList(c, &count);
+        for (int i=0;i<count;i++) {
+            const char *name = property_getName(props[i]);
+            [propertyNames addObject:@(name)];
+        }
+        c = class_getSuperclass(c);
+    }
+    return propertyNames;
+}
+
+-(MPWDirectoryBinding*)computeListOfProperties
+{
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self propertyNames] each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+}
+
 -(id)at:(id<MPWReferencing>)aReference
 {
-    return [self.object valueForKey:aReference.path];
+    NSString *path=aReference.path;
+    if ( [path isEqual:@"."] || path.length==0 ) {
+        return [self listOfProperties];
+    } else {
+        return [self.object valueForKey:aReference.path];
+    }
 }
 
 -(void)at:(id<MPWReferencing>)aReference put:anObject
@@ -34,6 +72,19 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return [self.object setValue:anObject forKey:aReference.path];
 }
 
+
+-(MPWBinding*)bindingForReference:(id)aReference inContext:(id)aContext
+{
+    MPWValueAccessor *accessor=[[[MPWValueAccessor alloc] initWithName:[aReference path]] autorelease];
+    [accessor bindToTarget:self.object];
+    return (MPWBinding*)accessor;
+}
+
+-(void)dealloc
+{
+    [listOfProperties release];
+    [super dealloc];
+}
 
 @end
 
@@ -58,7 +109,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     IDEXPECT(store.object, @"hello", @"the object initialized the store with");
 }
 
-+(void)testListVars
++(void)testAccessVars
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
     MPWObjectStore *store=[self storeWithObject:tester];
@@ -70,11 +121,34 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     IDEXPECT( tester.hi, @"other", @"present in object aftere we put it there via store");
 }
 
++(void)testListVars
+{
+    MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
+    MPWObjectStore *store=[self storeWithObject:tester];
+    MPWDirectoryBinding *proplist=[store at:[store referenceForPath:@"."]];
+    INTEXPECT( proplist.contents.count,1,@"");
+
+}
+
++(void)testSimpleReadBinding
+{
+    MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
+    MPWObjectStore *store=[self storeWithObject:tester];
+    id <MPWReferencing> ref=[store referenceForPath:@"hi"];
+    tester.hi=@"there";
+    MPWBinding *binding=[store bindingForReference:ref inContext:nil];
+    NSLog(@"binding: %@",binding);
+    IDEXPECT( [binding value], @"there",@"read via binding");
+
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testInitializeObject",
+       @"testAccessVars",
        @"testListVars",
+       @"testSimpleReadBinding",
 			];
 }
 
