@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWObjectStore : MPWAbstractStore
+@interface MPWPropertyStore : MPWAbstractStore
 
 @end
 

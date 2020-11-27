@@ -22,7 +22,7 @@
 #import <MPWFoundation/MPWInterval.h>
 #import <MPWFoundation/MPWFloat.h>
 #import <MPWFoundation/MPWInteger.h>
-#import <MPWFoundation/MPWValueAccessor.h>
+#import <MPWFoundation/MPWPropertyBinding.h>
 #import <MPWFoundation/MPWObject_fastrc.h>
 
 #import <MPWFoundation/MPWBlockInvocable.h>

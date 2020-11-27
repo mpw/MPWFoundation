@@ -10,7 +10,7 @@
 
 
 
-@interface MPWValueAccessor : MPWObject
+@interface MPWPropertyBinding : MPWObject
 {
     @public
     IMP value;

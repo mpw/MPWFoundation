@@ -23,7 +23,7 @@
     }
     NSMutableArray *accessors=[NSMutableArray arrayWithCapacity:ivars.count];
     for (NSString *ivar in ivars) {
-        MPWValueAccessor *accessor=[MPWValueAccessor valueForName:ivar];
+        MPWPropertyBinding *accessor=[MPWPropertyBinding valueForName:ivar];
         [accessor bindToClass:theClass];
         [accessors addObject:accessor];
     }
@@ -124,7 +124,7 @@
 -(void)writeString:(NSString*)aString
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
+        MPWPropertyBinding *accesssor=[tos->lookup objectForKey:key];
         if (accesssor) {
             [accesssor setValue:aString forTarget:tos->container];
         } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {
@@ -140,7 +140,7 @@
 -(void)writeNumber:(NSString*)number
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
+        MPWPropertyBinding *accesssor=[tos->lookup objectForKey:key];
         [accesssor setValue:number forTarget:tos->container];
         key=nil;
     } else {
@@ -151,7 +151,7 @@
 -(void)writeInteger:(long)number
 {
     if ( key ) {
-        MPWValueAccessor *accesssor=[tos->lookup objectForKey:key];
+        MPWPropertyBinding *accesssor=[tos->lookup objectForKey:key];
         if (accesssor) {
             [accesssor setIntValue:number forTarget:tos->container];
         } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {
@@ -166,7 +166,7 @@
 
 -(void)writeObject:anObject forKey:aKey
 {
-    MPWValueAccessor *accesssor=[tos->lookup objectForKey:aKey];
+    MPWPropertyBinding *accesssor=[tos->lookup objectForKey:aKey];
     if (accesssor) {
         [accesssor setValue:anObject forTarget:tos->container];
     } else if ( [tos->container respondsToSelector:@selector(setObject:forKey:)]) {

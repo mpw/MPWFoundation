@@ -5,22 +5,22 @@
 //  Created by Marcel Weiher on 22.11.20.
 //
 
-#import "MPWObjectStore.h"
+#import "MPWPropertyStore.h"
 #import "AccessorMacros.h"
 #import "MPWReference.h"
 #import "MPWDirectoryBinding.h"
 #import "NSObjectFiltering.h"
 #import <objc/runtime.h>
-#import "MPWValueAccessor.h"
+#import "MPWPropertyBinding.h"
 
 
-@interface MPWObjectStore()
+@interface MPWPropertyStore()
 
 @property (strong, nonatomic)  id object;
 
 @end
 
-@implementation MPWObjectStore
+@implementation MPWPropertyStore
 {
     MPWDirectoryBinding *listOfProperties;
 }
@@ -75,7 +75,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 
 -(MPWBinding*)bindingForReference:(id)aReference inContext:(id)aContext
 {
-    MPWValueAccessor *accessor=[[[MPWValueAccessor alloc] initWithName:[aReference path]] autorelease];
+    MPWPropertyBinding *accessor=[[[MPWPropertyBinding alloc] initWithName:[aReference path]] autorelease];
     [accessor bindToTarget:self.object];
     return (MPWBinding*)accessor;
 }
@@ -101,18 +101,18 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 }
 @end
 
-@implementation MPWObjectStore(testing) 
+@implementation MPWPropertyStore(testing) 
 
 +(void)testInitializeObject
 {
-    MPWObjectStore *store=[self storeWithObject:@"hello"];
+    MPWPropertyStore *store=[self storeWithObject:@"hello"];
     IDEXPECT(store.object, @"hello", @"the object initialized the store with");
 }
 
 +(void)testAccessVars
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
-    MPWObjectStore *store=[self storeWithObject:tester];
+    MPWPropertyStore *store=[self storeWithObject:tester];
     id <MPWReferencing> ref=[store referenceForPath:@"hi"];
     EXPECTNIL( store[ref],@"nothing there yet");
     tester.hi=@"there";
@@ -124,7 +124,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 +(void)testListVars
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
-    MPWObjectStore *store=[self storeWithObject:tester];
+    MPWPropertyStore *store=[self storeWithObject:tester];
     MPWDirectoryBinding *proplist=[store at:[store referenceForPath:@"."]];
     INTEXPECT( proplist.contents.count,1,@"");
 
@@ -133,7 +133,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 +(void)testSimpleReadBinding
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
-    MPWObjectStore *store=[self storeWithObject:tester];
+    MPWPropertyStore *store=[self storeWithObject:tester];
     id <MPWReferencing> ref=[store referenceForPath:@"hi"];
     tester.hi=@"there";
     MPWBinding *binding=[store bindingForReference:ref inContext:nil];
