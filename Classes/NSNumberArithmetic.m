@@ -7,7 +7,7 @@
 //
 
 #import "NSNumberArithmetic.h"
-#import <MPWObject.h>
+#import "MPWObject.h"
 
 
 @implementation NSNumber(Arithmetic)
@@ -140,6 +140,11 @@ defineArithOp( div, / )
     return sqrt([self doubleValue]);
 }
 
+-(double)raisedTo:(double)other
+{
+    return pow([self doubleValue],other);
+}
+
 -(NSString *)stringWithFormat:(NSString*)formatString
 {
     NSNumberFormatter *f=[[[NSNumberFormatter alloc] init] autorelease];
@@ -270,11 +275,17 @@ id _dummyGetNumtest( int value ) {
     INTEXPECT( [[[NSNumber numberWithInt:-42] negated] intValue],42,@"negated -42");
 }
 
++(void)testRaisedTo
+{
+    INTEXPECT( [@(2) raisedTo:3],8,@"2 raisedTo: 3");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
              @"testNot",
              @"testNegated",
+             @"testRaisedTo",
              ];
 }
 
