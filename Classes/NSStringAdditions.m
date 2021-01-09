@@ -186,6 +186,12 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
                                                       format:NULL error:NULL];
 }
 
+-mutablePropertyList
+{
+    return [NSPropertyListSerialization propertyListWithData:self options:NSPropertyListMutableContainers
+                                                      format:NULL error:NULL];
+}
+
 @end
 
 

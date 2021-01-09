@@ -54,6 +54,11 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
+		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>66</integer>
+		</dict>
 		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>isShown</key>
