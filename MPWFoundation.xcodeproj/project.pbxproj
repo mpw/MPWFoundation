@@ -181,9 +181,9 @@
 		1F766F6F0BBC5F410038DA7D /* MPWSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F766F6D0BBC5F410038DA7D /* MPWSmallStringTable.m */; };
 		1F78214812D953EB00E2DB02 /* MPWBlockInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F78214612D953EB00E2DB02 /* MPWBlockInvocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F78214912D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */; };
-		1F783B06256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; };
-		1F783B07256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; };
-		1F783B08256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; };
+		1F783B06256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F783B07256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F783B08256A73AE00BE8654 /* MPWPropertyStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F783B04256A73AE00BE8654 /* MPWPropertyStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F783B09256A73AE00BE8654 /* MPWPropertyStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWPropertyStore.m */; };
 		1F783B0A256A73AE00BE8654 /* MPWPropertyStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWPropertyStore.m */; };
 		1F783B0B256A73AE00BE8654 /* MPWPropertyStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F783B05256A73AE00BE8654 /* MPWPropertyStore.m */; };

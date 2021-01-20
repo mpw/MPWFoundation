@@ -11,6 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWPropertyStore : MPWAbstractStore
 
++(instancetype)storeWithObject:anObject;
+-(instancetype)initWithObject:anObject;
+
+-(NSArray*)propertyNames;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -53,12 +53,11 @@
     self=[self init];
     for ( NSString *key in [dict allKeys]) {
         [self setValue:dict[key] forKey:key];
-}
+    }
     return self;
 }
 
 -(instancetype)with:(void (^)(NSObject *self))block {
-    self=[self init];
     if ( block && self) {
         block(self);
     }
@@ -66,7 +65,7 @@
 }
 
 +(instancetype)with:(void (^)(NSObject *self))block {
-    return [[self alloc] with:block];
+    return [[self new] with:block];
 }
 
 
