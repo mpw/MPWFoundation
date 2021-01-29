@@ -34,7 +34,6 @@
 		1F080E5D1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5E1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
-		1F0984AB219EC8E3006D10D9 /* MPWTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F0984AD219F20D9006D10D9 /* ClassesToTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F0984AC219F20D9006D10D9 /* ClassesToTest.plist */; };
 		1F0984AF219F238A006D10D9 /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
 		1F0984B0219F23F4006D10D9 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
@@ -75,6 +74,7 @@
 		1F22E0171A35FF0C00F664C8 /* MPWBoxerUnboxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0181A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F22E0141A35FF0C00F664C8 /* MPWBoxerUnboxer.m */; };
 		1F22E01A1A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F22E0141A35FF0C00F664C8 /* MPWBoxerUnboxer.m */; };
+		1F23AE0025C15C0400F51B6F /* MPWFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F273F3F17F554F600F5FF9E /* MPWBinaryPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F273F3A17F554F600F5FF9E /* MPWBinaryPlist.m */; };
 		1F2DCFCD1ACB50F3004A39FB /* MPWConvertFromJSONStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2DCFC51ACB50F3004A39FB /* MPWConvertFromJSONStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F2DCFCF1ACB50F3004A39FB /* MPWConvertFromJSONStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2DCFC51ACB50F3004A39FB /* MPWConvertFromJSONStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -154,10 +154,10 @@
 		1F6244CA2148557D00BB00C4 /* MPWMergingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6244C62148557D00BB00C4 /* MPWMergingStore.m */; };
 		1F6244CB2148557D00BB00C4 /* MPWMergingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6244C62148557D00BB00C4 /* MPWMergingStore.m */; };
 		1F6244CC2148557D00BB00C4 /* MPWMergingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6244C62148557D00BB00C4 /* MPWMergingStore.m */; };
+		1F6E65EA25C1C873001E6A0E /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
 		1F7045B322313082005ED7FB /* MPWFoundationUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7045B122313082005ED7FB /* MPWFoundationUI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7045C322313099005ED7FB /* MPWFoundationUIKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7045C822313099005ED7FB /* MPWFoundationUIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */; };
-		1F7045C922313099005ED7FB /* MPWFoundationUIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1F7045D2223130B5005ED7FB /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; };
 		1F7045D4223130BE005ED7FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7045D3223130BE005ED7FB /* Cocoa.framework */; };
 		1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7045D7223131C2005ED7FB /* MPWBrowser.m */; };
@@ -283,7 +283,6 @@
 		1F9726A91D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9726AA1D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
-		1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA1593F17EEF05500BF8F6F /* MPWDelimitedTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */; };
 		1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */ = {isa = PBXBuildFile; fileRef = 1FA1594217EEF18900BF8F6F /* first4.tabdelim */; };
@@ -982,13 +981,11 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		1F9D63CE1F60200C00DA9514 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				1F7045C922313099005ED7FB /* MPWFoundationUIKit.framework in CopyFiles */,
-				1F9D63D01F60203800DA9514 /* MPWFoundation.framework in CopyFiles */,
-				1F0984AB219EC8E3006D10D9 /* MPWTest.framework in CopyFiles */,
+				1F23AE0025C15C0400F51B6F /* MPWFoundation.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2679,6 +2676,7 @@
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = PE4436LT5M;
 						LastSwiftMigration = 1220;
+						ProvisioningStyle = Automatic;
 					};
 					1FCF25D31CF3983B00AC64CE = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -3071,6 +3069,7 @@
 				1F840DC8193F50AC00589595 /* NSStringAdditions.m in Sources */,
 				1F840DC9193F50AC00589595 /* CodingAdditions.m in Sources */,
 				1F840DCA193F50AC00589595 /* MPWObjectCache.m in Sources */,
+				1F6E65EA25C1C873001E6A0E /* MPWExternalFilter.m in Sources */,
 				1F840DCB193F50AC00589595 /* NSRectAdditions.m in Sources */,
 				1F1BEDB4213BE769004B4947 /* MPWFilter.m in Sources */,
 				1F313D651CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */,
@@ -3655,10 +3654,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3683,6 +3685,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -3830,10 +3834,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -3858,6 +3865,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -4896,10 +4905,13 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -4931,6 +4943,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -4955,10 +4969,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -4983,6 +5000,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -5008,10 +5027,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5036,6 +5058,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -5713,10 +5737,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5741,6 +5768,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -5888,10 +5917,13 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -5916,6 +5948,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.metaobject.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = MPWFoundation;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(CONTENTS_FOLDER_PATH)/Headers";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

@@ -41,3 +41,41 @@
 
 @end
 
+
+@implementation NSString(referencing)
+
+-(NSString*)path
+{
+    return self;
+}
+
+-(NSArray<NSString*>*)pathComponents
+{
+    return [self componentsSeparatedByString:@"/"];
+}
+
+-(NSArray<NSString*>*)relativePathComponents
+{
+    return [self componentsSeparatedByString:@"/"];
+}
+
+-(NSString*)schemeName {
+    return nil;
+}
+
+-(void)setSchemeName:(NSString *)schemeName
+{
+    
+}
+
+-(id<MPWReferencing>)asReference
+{
+    return self;
+}
+
+
+- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other { 
+    return [self stringByAppendingPathComponent:[other path]];
+}
+
+@end
