@@ -71,7 +71,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testStoreAndRetrieve
 {
     MPWDictStore* store = [self store];
-    id ref=[store referenceForPath:@"World"];
+    NSString *ref=@"World";
     EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
     [store at:ref put:@"Hello"];
     IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
@@ -80,11 +80,10 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testStoreAndRetrieveViaReference
 {
     NSString *path=@"World";
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
     MPWDictStore* store = [self store];
-    EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
-    [store at:ref put:@"Hello"];
-    IDEXPECT([store at:ref], @"Hello", @"should be there after I store it");
+    EXPECTNIL([store at:path], @"shouldn't be there before I store it");
+    [store at:path put:@"Hello"];
+    IDEXPECT([store at:path], @"Hello", @"should be there after I store it");
 }
 
 +(void)testSubscripts
@@ -98,7 +97,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testDelete
 {
     MPWDictStore* store = [self store];
-    id ref=[store referenceForPath:@"World"];
+    id ref=@"World";
     EXPECTNIL(store[ref], @"shouldn't be there before I store it");
     store[ref]=@"Hello";
     IDEXPECT(store[ref], @"Hello", @"should be there after I store it");

@@ -112,6 +112,7 @@
 #import <MPWFoundation/MPWLoggingStore.h>
 #import <MPWFoundation/MPWMappingStore.h>
 #import <MPWFoundation/MPWMergingStore.h>
+#import <MPWFoundation/MPWNameRemappingStore.h>
 #import <MPWFoundation/MPWPathRelativeStore.h>
 #import <MPWFoundation/MPWReference.h>
 #import <MPWFoundation/MPWSequentialStore.h>
