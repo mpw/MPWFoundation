@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MPWReferencing <NSCopying>
+@protocol MPWReferencing 
 
 @property (readonly) NSArray<NSString*> *pathComponents;
 @property (readonly) NSArray<NSString*> *relativePathComponents;
@@ -37,8 +37,6 @@
 
 
 @interface NSString(referencing) <MPWReferencing>
-
--(id <MPWReferencing>)asReference;
 
 
 @end

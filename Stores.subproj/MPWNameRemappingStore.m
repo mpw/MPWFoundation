@@ -28,7 +28,7 @@
 
 +(void)testNamesAreRemapped
 {
-    MPWDictStore *base=[MPWDictStore storeWithDictionary:@{ @"keyThatExists": @"value" }];
+    MPWDictStore *base=[MPWDictStore storeWithDictionary:[[@{ @"keyThatExists": @"value" } mutableCopy] autorelease]];
     MPWNameRemappingStore *mapper=[self storeWithSource:base];
     IDEXPECT( mapper[@"keyThatExists"],@"value",@"basic sourcing should work");
     EXPECTNIL( mapper[@"keyThatDoesntExist"],@"key that's not in base");

@@ -161,7 +161,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     IDEXPECT( first[@"key"], @"value", @"did store");
     EXPECTNIL( second[@"key"],@"second");
 
-    [store deleteAt:[@"key" asReference]];
+    [store deleteAt:@"key"];
     EXPECTNIL(store[@"key"],@"after delete" );
 
 }

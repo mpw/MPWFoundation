@@ -71,6 +71,11 @@ scalarAccessor( NSRect, rect, setRect )
     return [self mpwSize];
 }
 
+-(instancetype)asRect
+{
+    return self;
+}
+
 -(NSUInteger)count
 {
     return 4;

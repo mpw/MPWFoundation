@@ -153,9 +153,9 @@
     MPWCompositeStore *store=[self stores:@[ [MPWDictStore class] ]];
     store[@"hi"]=@"there";
     IDEXPECT( store[@"hi"], @"there", @"set and get")
-    [store deleteAt:[@"hi" asReference]];
+    [store deleteAt:@"hi"];
     EXPECTNIL( store[@"hi"], @"delete works");
-    [store merge:@"world" at:[@"hi" asReference]];
+    [store merge:@"world" at:@"hi"];
     IDEXPECT( store[@"hi"], @"world", @"merge works like set")
 }
 

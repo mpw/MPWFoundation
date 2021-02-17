@@ -282,12 +282,3 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 @end
 
 
-@implementation  NSString(referencing)
-
--asReference
-{
-    return [MPWGenericReference referenceWithPath:self];
-}
-
-@end
-

@@ -23,6 +23,8 @@ scalarAccessor_h( NSRect, rect, setRect )
 -initWithRect:(NSRect)aRect;
 -origin;
 -mpwSize;
+-(instancetype)asRect;
+
 
 -(double)x;
 -(double)y;

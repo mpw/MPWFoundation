@@ -14,6 +14,11 @@
 "*/
 scalarAccessor( NSPoint, point, setPoint )
 
+-(MPWRect*)asRect
+{
+    return [[[self class] zero] extent:self];
+}
+
 -(NSSize)asSize
 {
     NSSize size={[self point].x , [self point].y};
@@ -298,10 +303,21 @@ reversePointNumberArithmetic( reverseSubPoint )
 
 +(void)testPointValue
 {
-	MPWPoint* point1 = [self pointWithX:20 y:30];
+    MPWPoint* point1 = [self pointWithX:20 y:30];
     NSPoint theNSPoint=[point1 pointValue];
     FLOATEXPECTTOLERANCE(theNSPoint.x, 20, 0.001, @"x");
     FLOATEXPECTTOLERANCE(theNSPoint.y, 30, 0.001, @"y");
+}
+
++(void)testAsRect
+{
+    MPWPoint *size=[self pointWithX:20 y:40];
+    MPWRect  *rect=[size asRect];
+    NSRect r=[rect rect];
+    FLOATEXPECTTOLERANCE(r.origin.x,0,0.001,@"x" );
+    FLOATEXPECTTOLERANCE(r.origin.y,0,0.001,@"y" );
+    FLOATEXPECTTOLERANCE(r.size.width,20,0.001,@"width" );
+    FLOATEXPECTTOLERANCE(r.size.height,40,0.001,@"height" );
 }
 
 
@@ -314,6 +330,7 @@ reversePointNumberArithmetic( reverseSubPoint )
             @"testGetReals",
             @"testCount",
             @"testPointValue",
+            @"testAsRect",
 		nil];
 }
 

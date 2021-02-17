@@ -8,9 +8,20 @@
 
 #import "NSNumberArithmetic.h"
 #import "MPWObject.h"
-
+#import "MPWRect.h"
 
 @implementation NSNumber(Arithmetic)
+
+-(MPWPoint*)asPoint
+{
+    double v=[self doubleValue];
+    return [MPWPoint pointWithX:v y:v];
+}
+
+-(MPWRect*)asRect
+{
+    return [[self asPoint] asRect];
+}
 
 -bitOr:other
 {
