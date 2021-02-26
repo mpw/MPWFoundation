@@ -152,7 +152,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/NSNil.m \
     Classes/MPWScanner.m \
     Classes/MPWBlockInvocation.m \
-    Classes/MPWValueAccessor.m \
+    Classes/MPWPropertyBinding.m \
     Classes/MPWMessageCatcher.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \

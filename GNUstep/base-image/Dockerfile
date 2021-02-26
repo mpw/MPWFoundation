@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     inetutils-ping \
 	vim build-essential  \
-	clang llvm libblocksruntime-dev libkqueue-dev libpthread-workqueue-dev libxml2-dev cmake \
+	clang llvm libblocksruntime-dev  libpthread-workqueue-dev libxml2-dev cmake \
 	libffi-dev \
 	libreadline6-dev \
 	libedit-dev \

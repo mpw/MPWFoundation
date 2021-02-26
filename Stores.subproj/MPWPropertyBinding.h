@@ -1,5 +1,5 @@
 //
-//  MPWValueAccessor.h
+//  MPWPropertyBinding.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/6/12.

@@ -50,7 +50,7 @@ static void runTests()
 //        @"MPWBinding",
         @"MPWPathRelativeStore",
         @"NSNumberArithmeticTests",
-        @"MPWValueAccessor",
+        @"MPWPropertyBinding",
         @"MPWURLReferenceTests",
         @"MPWDiskStore",
         @"MPWInterval",

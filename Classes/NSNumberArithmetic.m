@@ -25,10 +25,20 @@
 
 -bitOr:other
 {
-     return [NSNumber numberWithLong:[self longValue] | [other longValue]];
+    return [NSNumber numberWithLong:[self longValue] | [other longValue]];
 }
 
--pipe:other 
+-bitAnd:other
+{
+    return [NSNumber numberWithLong:[self longValue] & [other longValue]];
+}
+
+-bitXor:other
+{
+    return [NSNumber numberWithLong:[self longValue] ^ [other longValue]];
+}
+
+-pipe:other
 {
      return [self bitOr:other];
 }
@@ -110,6 +120,14 @@ defineArithOp( div, / )
     }
 }
 
+-(instancetype)rounded
+{
+    const char *type=[self objCType];
+    if ( type && ( type[0]=='f' || type[0] == 'd')) {
+        return @((long)round([self doubleValue]));
+    }
+    return self;
+}
 
 -negated
 {

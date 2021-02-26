@@ -1,5 +1,5 @@
 //
-//  MPWValueAccessor.m
+//  MPWPropertyBinding.m
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/6/12.
@@ -234,7 +234,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 #import <MPWByteStream.h>
 #import "MPWRusage.h"
 
-@interface MPWValueAccessorTestingClass:NSObject
+@interface MPWPropertyBindingTestingClass:NSObject
 
 @property (nonatomic,assign) long number;
 @property (nonatomic,strong) NSString* string;
@@ -242,7 +242,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 @end
 
-@implementation MPWValueAccessorTestingClass
+@implementation MPWPropertyBindingTestingClass
 
 -(void)dealloc {
     [_string release];
@@ -250,7 +250,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     [super dealloc];
 }
 
--(BOOL)isEqual:(MPWValueAccessorTestingClass*)other
+-(BOOL)isEqual:(MPWPropertyBindingTestingClass*)other
 {
     return self.number == other.number &&
           (self.string == other.string  ||
@@ -266,25 +266,25 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 @implementation MPWPropertyBinding(testing)
 
-+(MPWValueAccessorTestingClass*)_testTarget
++(MPWPropertyBindingTestingClass*)_testTarget
 {
-    MPWValueAccessorTestingClass *t=[[MPWValueAccessorTestingClass new] autorelease];
+    MPWPropertyBindingTestingClass *t=[[MPWPropertyBindingTestingClass new] autorelease];
     t.string=@"hello";
     t.number=34;
     return t;
 }
 
 
-+(MPWValueAccessorTestingClass*)_testCompoundTarget
++(MPWPropertyBindingTestingClass*)_testCompoundTarget
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     t.target=[self _testTarget];
     return t;
 }
 
 +(void)testBasicUnboundAccess
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"string"];
     IDEXPECT([accessor valueForTarget:t], @"hello", @"objectValue");
 }
@@ -300,7 +300,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testBasicUnboundSetAccess
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"string"];
     [accessor setValue:@"newString" forTarget:t];
     IDEXPECT(t.string, @"newString", @"objectValue");
@@ -309,7 +309,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testBoundGetSetAccess
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"string"];
     [accessor bindToTarget:t];
     IDEXPECT([accessor value], @"hello", @"target after bind");
@@ -319,7 +319,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testPathAccess
 {
-    MPWValueAccessorTestingClass *t=[self _testCompoundTarget];
+    MPWPropertyBindingTestingClass *t=[self _testCompoundTarget];
     MPWPropertyBinding *accessor=[[[self alloc] initWithPath:@"target/string"] autorelease];
     [accessor bindToTarget:t];
     IDEXPECT([accessor value], @"hello", @"target after bind");
@@ -332,7 +332,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 +(void)testPerformanceOfPathAccess
 {
     NSString *keyPath=@"target/string";
-    MPWValueAccessorTestingClass *t=[self _testCompoundTarget];
+    MPWPropertyBindingTestingClass *t=[self _testCompoundTarget];
     MPWRusage* accessorStart=[MPWRusage current];
     MPWPropertyBinding *accessor=[[[self alloc] initWithPath:keyPath] autorelease];
     for (int i=0;i<ACCESS_COUNT;i++) {
@@ -372,7 +372,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testReadAccessOfIntegerIvar
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     IDEXPECT( [accessor value], @(34), @"integer value");
@@ -381,7 +381,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testIntReadAccessOfIntegerIvar
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     INTEXPECT( [accessor integerValue], 34, @"integer value");
@@ -389,7 +389,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testIntWriteAccessOfIntegerIvar
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     [accessor setIntValue:45];
@@ -402,7 +402,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 +(void)testTypeOfIntVar
 {
-    MPWValueAccessorTestingClass *t=[self _testTarget];
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
     MPWPropertyBinding *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     char typeCode=[accessor typeCode];
