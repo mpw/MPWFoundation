@@ -54,6 +54,7 @@
 +(instancetype)stream;
 //-(instancetype)init;
 -(void)writeObjectAndFlush:anObject;
+-(void)writeTarget:aTarget;
 
 
 -(SEL)streamWriterMessage;

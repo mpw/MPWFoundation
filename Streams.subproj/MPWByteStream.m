@@ -421,6 +421,7 @@ intAccessor( indentAmount , setIndentAmount )
     FORWARDCHARS(">");
 }
 
+
 #if 0
 -(void)writeObject:anObject sender:sender
 {

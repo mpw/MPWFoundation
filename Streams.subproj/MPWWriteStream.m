@@ -67,6 +67,11 @@ SEL visSel;
     
 }
 
+-(void)writeTarget:aTarget
+{
+    [self writeObject:[aTarget stringValue]];
+}
+
 -(void)setTarget:aTarget {}   // MPWFilter compatibility
 -target { return nil; }
 
