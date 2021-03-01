@@ -5,12 +5,12 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
+#import <MPWWriteStream.h>
 #import "MPWBinding.h"
 #import <MPWAbstractStore.h>
 #import "MPWGenericReference.h"
 #import <AccessorMacros.h>
 #import "MPWPathRelativeStore.h"
-#import <MPWWriteStream.h>
 #import "NSObjectFiltering.h"
 
 @implementation MPWBinding
@@ -99,6 +99,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other] inStore:self.store];
 }
 
+-(void)writeObject:anObject
+{
+    [self setValue:anObject];
+}
+
 -(void)traverse:(id <Streaming>)target
 {
     [target writeObject:self];
@@ -119,5 +124,23 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [super dealloc];
 }
 
+
+
+@end
+
+// #import "DebugMacros.h"
+
+@implementation MPWBinding(tests)
+
++(void)testCanStreamIntoBinding
+{
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+//        @"testCanStreamIntoBinding",
+    ];
+}
 
 @end

@@ -107,6 +107,11 @@
     return YES;
 }
 
+-(MPWByteStream*)writeStream
+{
+    return [MPWByteStream fileName:self.path mode:@"w" atomically:NO];
+}
+
 -(NSString*)fancyPath
 {
     if ( [self parentPath]) {

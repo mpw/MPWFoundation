@@ -6,6 +6,7 @@
 //
 
 #import <MPWFoundation/MPWReference.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
 @class MPWReference,MPWAbstractStore;
 @protocol MPWReferencing;
@@ -31,7 +32,7 @@
 
 
 
-@interface MPWBinding : NSObject<MPWBinding,MPWReferencing>
+@interface MPWBinding : NSObject<MPWBinding,MPWReferencing,Streaming>
 
 @property (nonatomic, strong) id <MPWReferencing> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;

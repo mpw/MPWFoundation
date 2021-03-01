@@ -184,9 +184,14 @@ static void atexit_b( void *a ) {}
 }
 
 
++fileName:(NSString*)fileName mode:(NSString*)mode atomically:(BOOL)atomic
+{
+    return [self streamWithTarget:[MPWFileTarget fileNameTarget:fileName mode:mode atomically:atomic]];
+}
+
 +fileName:(NSString*)fileName mode:(NSString*)mode
 {
-    return [self streamWithTarget:[MPWFileTarget fileNameTarget:fileName mode:mode atomically:YES]];
+    return [self fileName:fileName mode:mode atomically:YES];
 }
 
 +fileName:(NSString*)fileName

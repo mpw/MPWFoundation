@@ -44,6 +44,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 +(instancetype)file:(FILE*)file;
 +fd:(int)fd;
 +(instancetype)fileName:(NSString*)fileName;
++fileName:(NSString*)fileName mode:(NSString*)mode atomically:(BOOL)atomic;
 +(instancetype)null;
 
 -(void)writeIndent;

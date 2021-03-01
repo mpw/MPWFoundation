@@ -18,5 +18,6 @@
 
 -(NSString*)fancyPath;
 -source;
+-(MPWByteStream*)writeStream;
 
 @end
