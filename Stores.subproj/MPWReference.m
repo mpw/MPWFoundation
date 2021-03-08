@@ -68,6 +68,11 @@
     
 }
 
+-(BOOL)isRoot
+{
+    return [self hasPrefix:@"/"];
+}
+
 -(id<MPWReferencing>)asReference
 {
     return self;

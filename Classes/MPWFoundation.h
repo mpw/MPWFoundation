@@ -31,6 +31,7 @@
 
 
 #import <MPWFoundation/MPWWriteStream.h>
+#import <MPWFoundation/MPWStreamSource.h>
 #import <MPWFoundation/MPWFilter.h>
 #import <MPWFoundation/MPWArrayFlattenStream.h>
 #import <MPWFoundation/MPWFlattenStream.h>
@@ -45,6 +46,8 @@
 #import <MPWFoundation/MPWASCII85Stream.h>
 #import <MPWFoundation/MPWURLCall2StoreStream.h>
 #import <MPWFoundation/MPWNotificationStream.h>
+#import <MPWFoundation/MPWDistributedNotificationStream.h>
+#import <MPWFoundation/MPWDistributedNotificationReceiver.h>
 #import <MPWFoundation/MPWMapFilter.h>
 #import <MPWFoundation/MPWQueue.h>
 
