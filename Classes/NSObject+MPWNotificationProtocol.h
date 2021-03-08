@@ -20,9 +20,14 @@
 -(void)installProtocolNotifications;        // compiler requires >= 1 messages in protocol, so put this here
 @end
 
+@protocol MPWDistributedNotificationProtocol
+-(void)installProtocolNotifications; 
+@end
+
 @interface NSObject (MPWNotificationProtocol) <MPWNotificationProtocol>
 
 -(void)registerMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName;
+-(void)registerMessage:(SEL)aMessage forDistributedNotificationName:(NSString*)notificationName;
 -(void)registerNotificationMessage:(SEL)aMessage;
 
 

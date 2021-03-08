@@ -29,6 +29,11 @@ static BOOL isNotificationProtocol(Protocol *aProtocol ) {
     return protocol_conformsToProtocol(aProtocol,@protocol(MPWNotificationProtocol));
 }
 
+static BOOL isDistributedNotificationProtocol(Protocol *aProtocol ) {
+    return protocol_conformsToProtocol(aProtocol,@protocol(MPWDistributedNotificationProtocol));
+}
+
+
 void sendProtocolNotification( Protocol *aProtocol, id anObject )
 {
     if ( isNotificationProtocol( aProtocol) ) {
@@ -56,12 +61,37 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
         [NSException raise:@"invalidprotocol" format:@"Trying to install notification handler for protocol '%s' that's not a notification protocol",protocol_getName(self)];
     }
 }
+static void installDistributedNotificationProtocol( Protocol *self , id aHandler)
+{
+    if ( isDistributedNotificationProtocol( self ) ) {
+        struct objc_method_description *protocolMethods=NULL;
+        unsigned int count=0;
+        protocolMethods=protocol_copyMethodDescriptionList(self,YES,YES,&count);
+        if (protocolMethods && count==1) {
+            SEL message=protocolMethods[0].name;
+            [aHandler registerMessage:message forDistributedNotificationName:notificatioNameFromProtocol(self)];
+        } else {
+            [NSException raise:@"invalidprotocol" format:@"Notification protocol '%s' needs to have exactly 1 message defined, has %d",protocol_getName(self),count];
+        }
+        free(protocolMethods);
+    } else {
+        [NSException raise:@"invalidprotocol" format:@"Trying to install notification handler for protocol '%s' that's not a notification protocol",protocol_getName(self)];
+    }
+}
+
+
+
 
 @implementation NSObject(MPWNotificationProtocol)
 
 -(void)registerMessage:(SEL)aMessage forNotificationName:(NSString*)notificationName
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:aMessage name:notificationName object:nil];
+}
+
+-(void)registerMessage:(SEL)aMessage forDistributedNotificationName:(NSString*)notificationName
+{
+    [[NSClassFromString(@"NSDistributedNotificationCenter") defaultCenter] addObserver:self selector:aMessage name:notificationName object:nil];
 }
 
 -(void)registerNotificationMessage:(SEL)aMessage
@@ -76,6 +106,9 @@ static void installNotificationProtocol( Protocol *self , id aHandler)
     for (int i=0;i<protocolCount;i++ ) {
         if (  isNotificationProtocol( protocols[i] )) {
             installNotificationProtocol(protocols[i], self);
+        }
+        if (  isDistributedNotificationProtocol( protocols[i] )) {
+            installDistributedNotificationProtocol(protocols[i], self);
         }
     }
     free(protocols);
