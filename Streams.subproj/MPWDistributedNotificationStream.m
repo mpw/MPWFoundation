@@ -11,6 +11,11 @@
 
 @implementation MPWDistributedNotificationStream
 
+CONVENIENCEANDINIT(stream, WithProtocol:(Protocol*)aProtocol) {
+    self=[super init];
+    self.notificationName=@(protocol_getName(aProtocol));
+    return self;
+}
 
 -(void)writeObject:anObject
 {
