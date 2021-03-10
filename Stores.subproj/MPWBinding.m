@@ -104,6 +104,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [self setValue:anObject];
 }
 
+-(void)writeTarget:sender
+{
+    [self writeObject:[sender objectValue]];
+}
+
 -(void)traverse:(id <Streaming>)target
 {
     [target writeObject:self];
@@ -124,7 +129,10 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [super dealloc];
 }
 
-
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: reference: '%@' store: %@>",[self className],self,self.reference,self.store];
+}
 
 @end
 

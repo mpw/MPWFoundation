@@ -33,7 +33,7 @@
     return browser;
 }
 
--(void)setBinding:(MPWBinding*)aBinding
+-(void)setRef:(MPWBinding*)aBinding
 {
     self.store = aBinding.store;
     self.rootReference = aBinding.reference;
