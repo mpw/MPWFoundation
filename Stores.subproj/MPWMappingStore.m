@@ -97,6 +97,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self.source hasChildren:aReference];
 }
 
+-(NSArray*)schemeNames
+{
+    return @[ @"source" ];
+}
+
 -(void)dealloc
 {
     [_source release];
