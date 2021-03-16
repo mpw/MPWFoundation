@@ -122,6 +122,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [[[self class] allocWithZone:aZone] initWithReference:[[(id <NSCopying>)(self.reference) copyWithZone:aZone] autorelease] inStore:self.store];
 }
 
+-(BOOL)isBound
+{
+    return self.value != nil;
+}
+
 -(void)dealloc
 {
     [(id)_reference release];

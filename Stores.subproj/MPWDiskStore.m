@@ -24,7 +24,7 @@
         NSURL *url =  [NSURL fileURLWithPath:[ref path]];              //  [ref URL] doesn't work
         return url;
     } @catch ( id e ) {
-        NSLog(@"-[MPWDistStore fileURLForReference:%@] exception: %@",ref,e);
+        NSLog(@"-[MPWDiskStore fileURLForReference:%@] exception: %@",ref,e);
     }
     return nil;
 }

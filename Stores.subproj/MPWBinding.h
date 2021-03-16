@@ -39,5 +39,6 @@
 
 -(NSString*)path;
 -(id <MPWReferencing>)asReference;
+-(BOOL)isBound;
 
 @end
