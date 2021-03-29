@@ -131,6 +131,37 @@
     }
 }
 
+-(NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column dropOperation:(NSBrowserDropOperation *)dropOperation
+{
+    return NSDragOperationCopy;
+}
+
+- (BOOL)browser:(NSBrowser *)browser
+     acceptDrop:(id<NSDraggingInfo>)info
+          atRow:(NSInteger)row
+         column:(NSInteger)column
+  dropOperation:(NSBrowserDropOperation)dropOperation;
+{
+    NSPasteboard *pb=info.draggingPasteboard;
+    NSString *urlstring=[pb stringForType:NSPasteboardTypeFileURL];
+    NSLog(@"urlstring: '%@'",urlstring);
+    NSURL *url=[NSURL URLWithString:urlstring relativeToURL:nil];
+    NSLog(@"url: '%@'",url);
+    NSData *contents = [NSData dataWithContentsOfURL:url];
+    NSString *name=[[url path] lastPathComponent];
+    NSLog(@"local file: %@ with data of length: %ld",name,(long)[contents length]);
+    id <MPWReferencing> current=[self currentReference];
+    NSLog(@"current Reference: %@",current);
+    NSLog(@"current path: %@",[current path]);
+    NSString *path=[[[current path] stringByDeletingLastPathComponent] stringByAppendingPathComponent:name];
+    NSLog(@"new path: %@",path);
+    id <MPWReferencing> newRef = [[self store] referenceForPath:path];
+    NSLog(@"new reference: %@",newRef);
+    [[self store] at:newRef put:contents];
+    [self reloadColumn:0];
+    return YES;
+}
+
 -(IBAction)dumpGraphivViz:sender
 {
     [self.store graphViz:[MPWByteStream Stderr]];

@@ -85,7 +85,7 @@
         <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="ySW-yG-BSI">
             <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="NYr-Er-M2l"/>
+            <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" id="NYr-Er-M2l"/>
             <point key="canvasLocation" x="-63" y="-131"/>
         </imageView>
     </objects>

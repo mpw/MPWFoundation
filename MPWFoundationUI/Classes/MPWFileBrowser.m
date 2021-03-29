@@ -32,15 +32,14 @@
 {
     [super awakeFromNib];
     NSTextView *text=self.text;
-    NSImageView *image=self.image;
-
+    [self.browser registerForDraggedTypes:@[ NSPasteboardTypeFileURL]];
     [text setAutomaticQuoteSubstitutionEnabled:NO];
     [text setAutomaticLinkDetectionEnabled:NO];
     [text setAutomaticDataDetectionEnabled:NO];
     [text setAutomaticDashSubstitutionEnabled:NO];
     [text setAutomaticTextReplacementEnabled:NO];
     [text setAutomaticSpellingCorrectionEnabled:NO];
-    [image setImageScaling:NSImageScaleProportionallyUpOrDown];
+//    [image setImageScaling:NSImageScaleProportionallyUpOrDown];
 //    [text setFont:[NSFont fontWithName:@"Menlo Regular" size:11]];
 
 }
@@ -99,6 +98,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do view setup here.
+}
+
+-(NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column dropOperation:(NSBrowserDropOperation *)dropOperation
+{
+    return NSDragOperationCopy;
 }
 
 @end
