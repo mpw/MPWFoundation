@@ -101,6 +101,7 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 	return [[[self alloc] initFromInt:newFrom toInt:newTo step:newStep numberClass:[NSNumber class]] autorelease];
 }
 
+
 -asArray
 {
     return [[[MPWIntArray alloc] initFromInt:range.location toInt:range.location+range.length step:step] autorelease];
@@ -142,6 +143,11 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 -initFrom:newFrom to:newTo
 {
 	return [self initFromInt:[newFrom intValue] toInt:[newTo intValue] step:1 numberClass:[newFrom class]];
+}
+
+-(instancetype)init
+{
+    return [self initFrom:0 to:0];
 }
 
 

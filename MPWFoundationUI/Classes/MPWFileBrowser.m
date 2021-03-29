@@ -11,8 +11,12 @@
 
 @interface MPWFileBrowser ()
 
-@property (nonatomic,strong)            IBOutlet MPWBrowser *browser;
-@property (nonatomic,strong)            IBOutlet NSTextView *text;
+@property (nonatomic,strong)            IBOutlet MPWBrowser   *browser;
+@property (nonatomic,strong)            IBOutlet NSTextView   *text;
+@property (nonatomic,strong)            IBOutlet NSScrollView *textScrollView;
+@property (nonatomic,strong)            IBOutlet NSImageView  *image;
+@property (nonatomic,strong)            IBOutlet NSView       *contentView;
+
 -(IBAction)didSelect:sender;
 
 @end
@@ -28,6 +32,7 @@
 {
     [super awakeFromNib];
     NSTextView *text=self.text;
+    NSImageView *image=self.image;
 
     [text setAutomaticQuoteSubstitutionEnabled:NO];
     [text setAutomaticLinkDetectionEnabled:NO];
@@ -35,6 +40,7 @@
     [text setAutomaticDashSubstitutionEnabled:NO];
     [text setAutomaticTextReplacementEnabled:NO];
     [text setAutomaticSpellingCorrectionEnabled:NO];
+    [image setImageScaling:NSImageScaleProportionallyUpOrDown];
 //    [text setFont:[NSFont fontWithName:@"Menlo Regular" size:11]];
 
 }
@@ -46,12 +52,32 @@
 
 -(IBAction)didSelect:(MPWBrowser*)sender
 {
-    [self.text setString: [[[self currrentBinding] value] stringValue]];
+    NSString *pathExtensions = [[[[self currrentBinding] path] pathExtension] lowercaseString];
+    NSData *value = [[self currrentBinding] value];
+    if ( [pathExtensions isEqual:@"png"] || [pathExtensions isEqual:@"jpg"]) {
+        [self.image setImage:[[[NSImage alloc] initWithData:value] autorelease]];
+        [[[self.contentView subviews] do] removeFromSuperview];
+        [self.image setFrameSize:self.contentView.frame.size];
+        [self.contentView addSubview:self.image];
+    } else {
+        [[[self.contentView subviews] do] removeFromSuperview];
+        [self.contentView addSubview:self.textScrollView];
+        [self.text setString: [value stringValue]];
+        [self.textScrollView setFrameSize:self.contentView.frame.size];
+        [self.textScrollView setNeedsLayout:YES];
+        [self.text setNeedsLayout:YES];
+        [self.text setNeedsDisplay:YES];
+    }
 }
 
 -(void)saveFileContents
 {
-    [[self currrentBinding] setValue:[[self.text string] asData]];
+    if ( [[self.contentView subviews] containsObject:self.textScrollView] ) {
+        [[self currrentBinding] setValue:[[self.text string] asData]];
+    } else if ( [[self.contentView subviews] containsObject:self.image] ){
+        NSString *pathExtensions = [[[[self currrentBinding] path] pathExtension] lowercaseString];
+        NSLog(@"can't save image");
+    }
 }
 
 -(void)textDidChange:(NSNotification *)notification {
