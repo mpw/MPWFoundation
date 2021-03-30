@@ -136,6 +136,19 @@
     return NSDragOperationCopy;
 }
 
+-(BOOL)dropPath:(NSString*)urlstring
+{
+    NSURL *url=[NSURL URLWithString:urlstring relativeToURL:nil];
+    NSData *contents = [NSData dataWithContentsOfURL:url];
+    NSString *name=[[url path] lastPathComponent];
+//    NSLog(@"local file: %@ (%@  → '%@') with data of length: %ld",name,urlstring,[url path],(long)[contents length]);
+    id <MPWReferencing> root=[self rootReference];
+    NSString *path=[[root path] stringByAppendingPathComponent:name];
+    id <MPWReferencing> newRef = [[self store] referenceForPath:path];
+    [[self store] at:newRef put:contents];
+    [self reloadColumn:0];
+    return YES;}
+
 - (BOOL)browser:(NSBrowser *)browser
      acceptDrop:(id<NSDraggingInfo>)info
           atRow:(NSInteger)row
@@ -144,16 +157,7 @@
 {
     NSPasteboard *pb=info.draggingPasteboard;
     NSString *urlstring=[pb stringForType:NSPasteboardTypeFileURL];
-    NSURL *url=[NSURL URLWithString:urlstring relativeToURL:nil];
-    NSData *contents = [NSData dataWithContentsOfURL:url];
-    NSString *name=[[url path] lastPathComponent];
-    NSLog(@"local file: %@ with data of length: %ld",name,(long)[contents length]);
-    id <MPWReferencing> root=[self rootReference];
-    NSString *path=[[root path] stringByAppendingPathComponent:name];
-    id <MPWReferencing> newRef = [[self store] referenceForPath:path];
-    [[self store] at:newRef put:contents];
-    [self reloadColumn:0];
-    return YES;
+    return [self dropPath:urlstring];
 }
 
 -(IBAction)dumpGraphivViz:sender
@@ -176,16 +180,30 @@
 
 @implementation MPWBrowser(testing)
 
-+(void)testBasicBrowsing
++(void)testDroppingStuff
 {
-//    EXPECTTRUE(false, @"implemented");
+    MPWBrowser *browser = [[[MPWBrowser alloc] initWithFrame:NSMakeRect(0,0,500,500)] autorelease];
+    MPWDictStore *store=[MPWDictStore store];
+    MPWBinding *binding=[MPWBinding bindingWithReference:@"" inStore:store];
+    [browser setRef:binding];
+    char filenametemplate[80]="/tmp/browserdroptest.XXXXXX";
+    int fd = mkstemp( filenametemplate );
+    char *content="Browser test content";
+    write(fd, content, strlen(content));
+    close(fd);
+    NSString *path=[NSString stringWithUTF8String:filenametemplate];
+    NSString *urlpath=[@"file://" stringByAppendingString:path];
+    NSString *filename=[path lastPathComponent];
+    [browser dropPath:urlpath];
+    IDEXPECT( [store[filename] stringValue], @"Browser test content", @"dropped succsefully");
+    unlink( filenametemplate);
 }
 
 
 +(NSArray*)testSelectors
 {
     return @[
-             @"testBasicBrowsing",
+             @"testDroppingStuff",
              ];
 }
 
