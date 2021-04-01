@@ -77,7 +77,11 @@
 -(BOOL)existsAndIsDirectory:(BOOL*)isDirectory
 {
 	NSFileManager *manager=[NSFileManager defaultManager];
-	return [manager fileExistsAtPath:[self path] isDirectory:isDirectory];;
+	BOOL exists = [manager fileExistsAtPath:[self path] isDirectory:isDirectory];;
+    if (!exists) {
+        *isDirectory=NO;
+    }
+    return exist;
 }
 
 -(BOOL)isBound

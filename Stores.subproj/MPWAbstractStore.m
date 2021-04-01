@@ -131,7 +131,7 @@
 
 
 
--(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
+-(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
 //    NSLog(@"-childrenOfReference: %@ %@/'%@'",[self class],[(NSObject*)aReference class],aReference);
     id maybeChildren = [self at:aReference];

@@ -47,15 +47,11 @@
         prefix=[prefix stringByAppendingString:@"/"];
     }
     long len=[prefix length];
-    NSLog(@"originals: %@",refs);
     for ( id<MPWReferencing> ref in refs ) {
         NSString *refPath=ref.path;
-        NSLog(@"looking at path: '%@' hasPrefix: '%@'",refPath,prefix);
         if ( [refPath hasPrefix:prefix]) {
-            NSLog(@"yep, create mapped ref");
             refPath = [refPath substringFromIndex:len];
             ref=[MPWGenericReference referenceWithPath:refPath];
-            NSLog(@"mapped ref: %@ -> %@",refPath,ref);
         }
         [result addObject:ref];
     }
@@ -99,9 +95,9 @@
     MPWDictStore *store=[MPWDictStore store];
     MPWMappingStore *mapper=[self storeWithSource:store reference:prefix];
     mapper[(id)relative]=@"world!";
-    NSArray<MPWReference*> *nonmappedRefs = [store childrenOfReference:@""];
+    NSArray<MPWReferencing> *nonmappedRefs = [store childrenOfReference:@""];
     IDEXPECT( [nonmappedRefs.firstObject path], combined.path, @"original, unmapped" );
-    NSArray<MPWReference*> *mappedRefs = [mapper childrenOfReference:@""];
+    NSArray<MPWReferencing> *mappedRefs = [mapper childrenOfReference:@""];
     IDEXPECT( [mappedRefs.firstObject path], relative.path, @"original, remapped" );
 
 
