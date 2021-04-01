@@ -124,10 +124,6 @@
     [self at:(NSString*)key put:theObject];
 }
 
--(BOOL)isLeafReference:(id <MPWReferencing>)aReference              //  is this compatibility
-{
-    return ![self hasChildren:aReference];
-}
 
 
 

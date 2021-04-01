@@ -56,9 +56,9 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source deleteAt:[self mapReference:aReference]];
 }
 
--(BOOL)isLeafReference:(id <MPWReferencing>)aReference
+-(BOOL)hasChildren:(id<MPWReferencing>)aReference
 {
-    return [self.source isLeafReference:[self mapReference:aReference]];
+    return [self.source hasChildren:[self mapReference:aReference]];
 }
 
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
@@ -91,11 +91,6 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source graphViz:aStream];
 }
 
--(BOOL)hasChildren:aReference
-{
-//    return [self.source hasChildren:[self mapReference:aReference]];
-    return [self.source hasChildren:aReference];
-}
 
 -(NSArray*)schemeNames
 {

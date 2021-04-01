@@ -42,7 +42,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -(BOOL)hasChildren
 {
-    return ![self.store isLeafReference:self.reference];
+    return [self.store hasChildren:self.reference];
 }
 
 -(NSArray*)children

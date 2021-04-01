@@ -93,11 +93,11 @@
 
 }
 
--(BOOL)isLeafReference:(MPWGenericReference *)aReference
+-(BOOL)hasChildren:(MPWGenericReference *)aReference
 {
     BOOL isDirectory = NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
-    return exists && !isDirectory;
+    return exists && isDirectory;
 }
 
 -(NSArray*)childNamesOfReference:(id <MPWReferencing>)aReference
@@ -122,12 +122,6 @@
 //}
 
 
--(BOOL)hasChildren:(id <MPWReferencing>)aReference
-{
-    BOOL isDirectory = NO;
-    BOOL exists=[self exists:aReference isDirectory:&isDirectory];
-    return exists && isDirectory;
-}
 
 @end
 

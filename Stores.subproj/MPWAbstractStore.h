@@ -34,7 +34,7 @@
 
 @protocol MPWHierarchicalStorage <MPWStorage>
 
--(BOOL)isLeafReference:(id <MPWReferencing>)aReference;
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference;
 -(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference;
 
 @end

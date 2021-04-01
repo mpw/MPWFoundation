@@ -81,7 +81,7 @@
     if (!exists) {
         *isDirectory=NO;
     }
-    return exist;
+    return exists;
 }
 
 -(BOOL)isBound
