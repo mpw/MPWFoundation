@@ -38,11 +38,37 @@
     return [NSString stringWithFormat:@"\"Relative:\\n%@\"",[self.baseReference pathComponents].lastObject];
 }
 
+-childrenOfReference:aReference
+{
+    NSArray *refs=[self.source childrenOfReference:aReference];
+    NSMutableArray *result = [NSMutableArray array];
+    NSString *prefix=self.baseReference.path;
+    if ( ![prefix hasSuffix:@"/"]) {
+        prefix=[prefix stringByAppendingString:@"/"];
+    }
+    long len=[prefix length];
+    NSLog(@"originals: %@",refs);
+    for ( id<MPWReferencing> ref in refs ) {
+        NSString *refPath=ref.path;
+        NSLog(@"looking at path: '%@' hasPrefix: '%@'",refPath,prefix);
+        if ( [refPath hasPrefix:prefix]) {
+            NSLog(@"yep, create mapped ref");
+            refPath = [refPath substringFromIndex:len];
+            ref=[MPWGenericReference referenceWithPath:refPath];
+            NSLog(@"mapped ref: %@ -> %@",refPath,ref);
+        }
+        [result addObject:ref];
+    }
+    return result;
+}
+
 -(void)dealloc
 {
     [(id)_baseReference release];
     [super dealloc];
 }
+
+
 
 @end
 
@@ -65,10 +91,27 @@
     IDEXPECT( mapper[(id)relative], @"new world!", @"store read mapper")
 }
 
++(void)testBackwardMapRetrievedPaths
+{
+    MPWGenericReference *prefix=[MPWGenericReference referenceWithPath:@"base"];
+    MPWGenericReference *relative=[MPWGenericReference referenceWithPath:@"relative"];
+    MPWGenericReference *combined=[MPWGenericReference referenceWithPath:@"base/relative"];
+    MPWDictStore *store=[MPWDictStore store];
+    MPWMappingStore *mapper=[self storeWithSource:store reference:prefix];
+    mapper[(id)relative]=@"world!";
+    NSArray<MPWReference*> *nonmappedRefs = [store childrenOfReference:@""];
+    IDEXPECT( [nonmappedRefs.firstObject path], combined.path, @"original, unmapped" );
+    NSArray<MPWReference*> *mappedRefs = [mapper childrenOfReference:@""];
+    IDEXPECT( [mappedRefs.firstObject path], relative.path, @"original, remapped" );
+
+
+}
+
 +testSelectors
 {
     return @[
-             @"testMapPath"
+             @"testMapPath",
+             @"testBackwardMapRetrievedPaths",
              ];
     
 }

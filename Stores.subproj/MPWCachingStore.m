@@ -101,6 +101,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     self.source=storeDict[@"source"];
 }
 
+-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
+{
+    NSArray<MPWReference*>* sourceRefs = [super childrenOfReference:aReference];
+    NSArray<MPWReference*>* cacheRefs = [self.cache childrenOfReference:aReference];
+    NSLog(@"source refs: %@",sourceRefs);
+    NSLog(@"cache refs: %@",cacheRefs );
+    return sourceRefs;
+}
 
 -(void)graphViz:(MPWByteStream*)aStream
 {

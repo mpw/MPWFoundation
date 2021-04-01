@@ -55,6 +55,10 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     }
 }
 
+-childrenOfReference:aReference
+{
+    return [self.dict allKeys];
+}
 
 -(void)dealloc
 {
@@ -105,6 +109,19 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     EXPECTNIL(store[ref], @"shouldn't be there after delete");
 }
 
++(void)testChildrenOfReference
+{
+    id ref=@"World";
+    MPWDictStore* store = [self store];
+    NSArray *refs=[store childrenOfReference:@""];
+    INTEXPECT( refs.count, 0, @"empty");
+    store[ref]=@"Hello";
+    refs=[store childrenOfReference:@""];
+    INTEXPECT( refs.count, 1, @"no longer empty");
+    IDEXPECT( [refs.firstObject path], ref ,@"ref");
+
+}
+
 
 +(NSArray<NSString*>*)testSelectors
 {
@@ -113,6 +130,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
              @"testStoreAndRetrieveViaReference",
              @"testSubscripts",
              @"testDelete",
+             @"testChildrenOfReference",
              ];
 }
 
