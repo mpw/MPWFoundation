@@ -44,7 +44,7 @@
 		1F11C45515568D3600E597D9 /* MPWStackSaverInvocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F11C45315568D3600E597D9 /* MPWStackSaverInvocation.h */; };
 		1F11C45915568D3600E597D9 /* MPWStackSaverInvocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F11C45415568D3600E597D9 /* MPWStackSaverInvocation.m */; };
 		1F1A30DD154DAE0C00BAC8D7 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F1A30DC154DAE0C00BAC8D7 /* Accelerate.framework */; };
-		1F1BE5E5224BD57D002D58AC /* NSViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BE5E3224BD57D002D58AC /* NSViewAdditions.h */; };
+		1F1BE5E5224BD57D002D58AC /* NSViewAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BE5E3224BD57D002D58AC /* NSViewAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BE5E4224BD57D002D58AC /* NSViewAdditions.m */; };
 		1F1BEDB0213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1BEDB1213BE769004B4947 /* MPWFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1BEDAE213BE769004B4947 /* MPWFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -122,6 +122,8 @@
 		1F49BBBA20BBCE6B00405432 /* MPWMappingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */; };
 		1F49BBBB20BBCE6B00405432 /* MPWMappingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */; };
 		1F49BBBC20BBCE6B00405432 /* MPWMappingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */; };
+		1F4D4413261591960023C2C5 /* MPWWindowController.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F4D4411261591960023C2C5 /* MPWWindowController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4D4412261591960023C2C5 /* MPWWindowController.m */; };
 		1F4FC9771DF818AE00B35D27 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9761DF818AE00B35D27 /* main.m */; };
 		1F4FC97A1DF818AF00B35D27 /* ViewBuilderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC9791DF818AE00B35D27 /* ViewBuilderAppDelegate.m */; };
 		1F4FC97D1DF818AF00B35D27 /* ViewBuilderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC97C1DF818AF00B35D27 /* ViewBuilderController.m */; };
@@ -1145,6 +1147,8 @@
 		1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MPWNotificationProtocol.m"; sourceTree = "<group>"; };
 		1F49BBB520BBCE6B00405432 /* MPWMappingStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWMappingStore.h; sourceTree = "<group>"; };
 		1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWMappingStore.m; sourceTree = "<group>"; };
+		1F4D4411261591960023C2C5 /* MPWWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWWindowController.h; sourceTree = "<group>"; };
+		1F4D4412261591960023C2C5 /* MPWWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWWindowController.m; sourceTree = "<group>"; };
 		1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestMPWFoundation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F4FC9761DF818AE00B35D27 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1F4FC9781DF818AE00B35D27 /* ViewBuilderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewBuilderAppDelegate.h; sourceTree = "<group>"; };
@@ -1831,6 +1835,8 @@
 				1F7045E9223134F7005ED7FB /* MPWTableView.m */,
 				1F1BE5E3224BD57D002D58AC /* NSViewAdditions.h */,
 				1F1BE5E4224BD57D002D58AC /* NSViewAdditions.m */,
+				1F4D4411261591960023C2C5 /* MPWWindowController.h */,
+				1F4D4412261591960023C2C5 /* MPWWindowController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2103,6 +2109,7 @@
 				1F7045B322313082005ED7FB /* MPWFoundationUI.h in Headers */,
 				1F1BE5E5224BD57D002D58AC /* NSViewAdditions.h in Headers */,
 				1F7045EA223134F7005ED7FB /* MPWTableView.h in Headers */,
+				1F4D4413261591960023C2C5 /* MPWWindowController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2996,7 +3003,7 @@
 			name = Test;
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s - $framework/`basename $framework .framework`\n\nif  [ -f ${tester}  ]  ; then\n    $tester ${framework}\nelse\n    echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
+			shellScript = "tester=`which testlogger`\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s - $framework/`basename $framework .framework`\n\nif  [ -f ${tester}  ]  ; then\n    $tester ${framework}\nelse\n    echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3018,6 +3025,7 @@
 				1F7045EB223134F7005ED7FB /* MPWTableView.m in Sources */,
 				1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */,
 				1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */,
+				1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */,
 				1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

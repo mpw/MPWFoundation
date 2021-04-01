@@ -19,7 +19,7 @@ CONVENIENCEANDINIT(stream, WithProtocol:(Protocol*)aProtocol) {
 
 -(void)writeObject:anObject
 {
-    [[NSClassFromString(@"NSDistributedNotificationCenter") defaultCenter] postNotificationName: self.notificationName object:nil userInfo: anObject  deliverImmediately:1];
+    [(id)[NSClassFromString(@"NSDistributedNotificationCenter") defaultCenter] postNotificationName: self.notificationName object:nil userInfo: anObject  deliverImmediately:1];
 }
 
 

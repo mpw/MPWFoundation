@@ -18,4 +18,7 @@ FOUNDATION_EXPORT const unsigned char MPWFoundationUIVersionString[];
 
 #import <MPWFoundationUI/MPWBrowser.h>
 #import <MPWFoundationUI/MPWFileBrowser.h>
+//#import <MPWFoundationUI/MPWTableView.h>
+#import <MPWFoundationUI/MPWWindowController.h>
+#import <MPWFoundationUI/NSViewAdditions.h>
 

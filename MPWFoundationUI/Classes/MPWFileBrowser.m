@@ -11,7 +11,6 @@
 
 @interface MPWFileBrowser ()
 
-@property (nonatomic,strong)            IBOutlet MPWBrowser   *browser;
 @property (nonatomic,strong)            IBOutlet NSTextView   *text;
 @property (nonatomic,strong)            IBOutlet NSScrollView *textScrollView;
 @property (nonatomic,strong)            IBOutlet NSImageView  *image;

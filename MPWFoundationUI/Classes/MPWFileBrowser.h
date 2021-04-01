@@ -7,10 +7,13 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MPWBrowser;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWFileBrowser : NSViewController
 
+@property (nonatomic,strong)            IBOutlet MPWBrowser   *browser;
 @property (assign)                      BOOL     continuous;
 @property (assign,getter=isEditable)    BOOL     editable;
 
