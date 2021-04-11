@@ -9,7 +9,7 @@
 #import <MPWFoundation/MPWFilter.h>
 #import <MPWFoundation/MPWRESTOperation.h>
 
-@class MPWURLCall;
+@class MPWURLCall,NSURLSession,NSURLSessionConfiguration;
 
 @interface MPWURLFetchStream : MPWFilter
 
