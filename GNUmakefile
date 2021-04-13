@@ -95,6 +95,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWRESTOperation.m \
     Stores.subproj/MPWSequentialStore.m \
     Stores.subproj/MPWBinding.m \
+    Stores.subproj/MPWPropertyBinding.m \
     Stores.subproj/MPWPathRelativeStore.m \
     Stores.subproj/MPWURLBasedStore.m \
     Stores.subproj/MPWURLReference.m \
@@ -152,7 +153,6 @@ libMPWFoundation_OBJC_FILES = \
     Classes/NSNil.m \
     Classes/MPWScanner.m \
     Classes/MPWBlockInvocation.m \
-    Classes/MPWPropertyBinding.m \
     Classes/MPWMessageCatcher.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \
