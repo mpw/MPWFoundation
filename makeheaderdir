@@ -1,5 +1,8 @@
 #!/bin/sh
 mkdir -p .headers
 cd .headers
-apply 'ln -s %1' `find .. -type f -name '*.h' `
+for header in `find .. -type f -name '*.h' ` 
+do
+  ln -s $header
+done
 ln -s . MPWFoundation 
