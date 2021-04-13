@@ -25,7 +25,7 @@ R
 #import <Foundation/NSData.h>
 #import <Foundation/NSCoder.h>
 //#if !TARGET_OS_WATCH
-#import <Accelerate/Accelerate.h>
+//#import <Accelerate/Accelerate.h>
 //#endif
 
 #import <MPWByteStream.h>
