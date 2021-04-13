@@ -12,6 +12,16 @@
 
 @implementation NSView(Additions)
 
+-(void)setName:(NSString *)name
+{
+    self.accessibilityIdentifier = name;
+}
+
+-(NSString*)name
+{
+    return self.accessibilityIdentifier;
+}
+
 -(NSRect)defaultWindowRect
 {
     return NSMakeRect(50, 50, 700, 400);
@@ -43,5 +53,35 @@
     return aView ;
 }
 
+
+@end
+
+#import "DebugMacros.h"
+
+@interface NSViewAdditionsTesting:NSObject{}
+@end
+
+@implementation NSViewAdditionsTesting
+
++(void)testNameIsMappedToAccessibilityIdentifer
+{
+    NSView *v=[NSView new];
+    EXPECTNIL(v.name,@"no name");
+    v.name = @"Hello";
+    IDEXPECT(v.name, @"Hello", @"can set name");
+    IDEXPECT(v.accessibilityIdentifier, @"Hello", @"name sets accessibilityIdentifier");
+    v.accessibilityIdentifier=@"World";
+    IDEXPECT(v.accessibilityIdentifier, @"World", @"can set accessibilityIdentifier");
+    IDEXPECT(v.name, @"World", @"accessibilityIdentifier also sets name");
+
+    
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+        @"testNameIsMappedToAccessibilityIdentifer",
+    ];
+}
 
 @end
