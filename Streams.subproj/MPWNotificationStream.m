@@ -30,7 +30,7 @@
 
 -(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
 {
-    return [self initWithNotificationName:notificatioNameFromProtocol(protocol) shouldPostOnMainThread:shouldPostOnMainThread];
+    return [self initWithNotificationName:@(protocol_getName(protocol)) shouldPostOnMainThread:shouldPostOnMainThread];
 }
 
 -(void)postNotificationObject:anObject
