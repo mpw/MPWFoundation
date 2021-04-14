@@ -8,7 +8,7 @@
 
 #import "MPWNotificationStream.h"
 #import "NSObject+MPWNotificationProtocol.h"
-#import "NSThreadInterthreadMessaging.h"
+#import "NSThreadInterThreadMessaging.h"
 
 @interface MPWNotificationStream ()
 

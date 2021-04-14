@@ -92,6 +92,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWMappingStore.m \
     Stores.subproj/MPWCachingStore.m \
     Stores.subproj/MPWMergingStore.m \
+    Stores.subproj/MPWPropertyStore.m \
     Stores.subproj/MPWRESTOperation.m \
     Stores.subproj/MPWSequentialStore.m \
     Stores.subproj/MPWBinding.m \
@@ -109,6 +110,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWRESTCopyStream.m \
     Streams.subproj/MPWCombinerStream.m \
     Streams.subproj/MPWMapFilter.m \
+    Streams.subproj/MPWNotificationStream.m \
     Streams.subproj/MPWPipeline.m \
     Streams.subproj/MPWScatterStream.m \
     Streams.subproj/MPWActionStreamAdapter.m \
