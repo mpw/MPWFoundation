@@ -381,8 +381,15 @@ defineArithOp( div, true )
 +(void)testNumberIntervalConveniences
 {
     IDEXPECT( ([@(1) to:@(10)]), [MPWInterval intervalFromInt:1 toInt:10], @"to: on number");
-    IDEXPECT( ([@(3) collect:^id (id i){ return i;} ]), (@[@(0),@(1),@(2)]), @"collect: on number" );
+}
 
++(void)testIntervalCollect
+{
+#ifndef GS_API_LATEST
+    IDEXPECT( ([@(3) collect:^id (id i){ return i;} ]), (@[@(0),@(1),@(2)]), @"collect: on number" );
+#else
+#warning MPWInterval collect doesn't work on gnustep
+#endif
 }
 
 +testSelectors
@@ -393,6 +400,7 @@ defineArithOp( div, true )
             @"testIntervalWithStep",
             @"testIntervalArithmetic",
             @"testNumberIntervalConveniences",
+            @"testIntervalCollect",
         nil];
 }
 

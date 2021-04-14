@@ -53,7 +53,7 @@ static void runTests()
         @"MPWPropertyBinding",
         @"MPWURLReferenceTests",
         @"MPWDiskStore",
-//        @"MPWInterval",
+        @"MPWInterval",
 //		@"MPWDelimitedTable",
         @"MPWMessageCatcherTesting",
 
