@@ -33,7 +33,7 @@ static void runTests()
 		@"MPWBinaryPlist",
         @"MPWNeXTPListWriter",
 //        @"MPWJSONWriter",
-		@"MPWBinaryPListWriter",
+//		@"MPWBinaryPListWriter",
 		@"MPWIntArray",
 		@"MPWRealArray",
 		@"MPWSubData",
@@ -53,7 +53,7 @@ static void runTests()
         @"MPWPropertyBinding",
         @"MPWURLReferenceTests",
         @"MPWDiskStore",
-        @"MPWInterval",
+//        @"MPWInterval",
 //		@"MPWDelimitedTable",
         @"MPWMessageCatcherTesting",
 
@@ -71,9 +71,9 @@ static void runTests()
 				SEL testSel=NSSelectorFromString( testName );
 				@try {
 					tests++;
-//					NSLog(@"%@:%@ -- will test",className,testName);
+					NSLog(@"%@:%@ -- will test",className,testName);
 					[fixture performSelector:testSel];
-//					NSLog(@"%@:%@ -- success",className,testName);
+					NSLog(@"%@:%@ -- success",className,testName);
 					success++;
 				} @catch (id error)  {
 					NSLog(@"\033[91;31m%@:%@ == error %@\033[0m",className,testName,error);
