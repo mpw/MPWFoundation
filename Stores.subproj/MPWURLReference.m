@@ -10,7 +10,7 @@
 @interface MPWURLReference()
 
 @property (nonatomic,strong) NSString *scheme,*host;
-@property (nonatomic,strong) NSArray *pathComponents;
+@property (nonatomic,strong) NSArray *myPathComponents;
 
 
 
@@ -68,7 +68,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 -(instancetype)initWithPathComponents:(NSArray *)pathComponents host:(NSString*)host scheme:(NSString *)scheme
 {
     self=[super init];
-    self.pathComponents=pathComponents ;
+    self.myPathComponents=pathComponents ;
     self.scheme=scheme;
     self.host=host;
     return self;
@@ -87,6 +87,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [[self urlPath] stringByRemovingPercentEncoding];
 #endif
 }
+
+-(NSArray*)pathComponents
+{
+    return _myPathComponents;
+}
+
 
 -(NSURL *)URL
 {
@@ -169,7 +175,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     [_scheme release];
     [_host release];
-    [_pathComponents release];
+    [_myPathComponents release];
     [super dealloc];
 }
 

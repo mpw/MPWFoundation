@@ -127,6 +127,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return self.value != nil;
 }
 
+-(BOOL)isAffectedBy:(MPWBinding*)other
+{
+    return [[self asReference] isAffectedBy:[other asReference]];
+}
+
 -(void)dealloc
 {
     [(id)_reference release];

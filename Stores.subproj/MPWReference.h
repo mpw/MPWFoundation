@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *schemeName;
 @property (readonly) NSString *path;
 
+-(BOOL)isAffectedBy:(id <MPWReferencing>)other;
 -(instancetype)referenceByAppendingReference:(id<MPWReferencing>)other;
 
 @end
@@ -27,7 +28,7 @@
 
 @end
 
-@interface MPWReference : NSObject
+@interface MPWReference : NSObject <MPWReferencing>
 
 -(NSURL*)URL;
 

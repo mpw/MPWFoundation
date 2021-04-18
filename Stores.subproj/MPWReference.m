@@ -39,6 +39,11 @@
     return self;
 }
 
+-(BOOL)isAffectedBy:other
+{
+    return [self isEqual:other];
+}
+
 @end
 
 
@@ -83,7 +88,32 @@
     return [self stringByAppendingPathComponent:[other path]];
 }
 
+-(BOOL)isAffectedBy:other
+{
+    return [self isEqual:other];
+}
 
 
+
+@end
+
+#import "DebugMacros.h"
+
+@implementation MPWReference(testing)
+
++(void)testIsAffectedBySelf
+{
+    MPWReference *r=[self new];
+    EXPECTTRUE([r isAffectedBy:r],@"ref is affected by itself" );
+}
+
+
++(NSArray*)testSelectors
+{
+    return @[
+        @"testIsAffectedBySelf",
+    ];
+    
+}
 
 @end

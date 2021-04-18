@@ -10,7 +10,7 @@
 
 @interface MPWGenericReference()
 
-@property (nonatomic, strong) NSArray *pathComponents;
+@property (nonatomic, strong) NSArray *myPathComponents;
 
 
 @end
@@ -41,7 +41,7 @@
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme
 {
     self=[super init];
-    self.pathComponents=pathComponents;
+    self.myPathComponents=pathComponents;
     self.schemeName=scheme;
     return self;
 }
@@ -55,6 +55,10 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return self;
 }
 
+-(NSArray*)pathComponents
+{
+    return _myPathComponents;
+}
 
 -(BOOL)isRoot
 {
@@ -106,7 +110,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(BOOL)isEqual:other
 {
-    return [[self pathComponents] isEqual:[other pathComponents]];
+    NSArray *components = [self pathComponents];
+    if ( components ) {
+        return [components isEqual:[other pathComponents]];
+    } else {
+        return components == [other pathComponents];
+    }
 }
 
 -(NSUInteger)hash
@@ -123,7 +132,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(void)dealloc
 {
-    [_pathComponents release];
+    [_myPathComponents release];
     [schemeName release];
     [super dealloc];
 }
@@ -137,7 +146,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(void)setPath:(NSString*)path
 {
-    self.pathComponents = [self componentsOfPath:path];
+    self.myPathComponents = [self componentsOfPath:path];
 }
 
 -(NSURL *)URL
@@ -262,6 +271,11 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     EXPECTTRUE( [[self ref:@"/"] isEqual: [self ref:@"/"]],@"root is equal to self");
 }
 
++(void)testAffectedBy
+{
+    EXPECTTRUE( [[self ref:@"/"] isAffectedBy: [self ref:@"/"]],@"root affected by self");
+}
+
 
 +testSelectors
 {
@@ -276,6 +290,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
              @"testAppendPath",
              @"testAppendPathWithSpaces",
              @"testEquality",
+             @"testAffectedBy",
              ];
 }
 
