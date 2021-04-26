@@ -486,5 +486,34 @@ typedef id (^idBlock)(id arg );
 
 @end
 
+@interface BlockTest : NSObject
+{
+    
+}
+@end
+
+@implementation BlockTest
+
+static void testIMP( id receiver, SEL sel )
+{
+    NSLog(@"testFun with receiver: %@",receiver);
+}
+
+-(void)install
+{
+    void (^stackBlock)(id this) = ^(id this){ NSLog(@"got here! self: %@",this); };
+    void (^heapBlock)(id this) = Block_copy(stackBlock);
+    IMP hi = imp_implementationWithBlock(heapBlock);
+    
+    class_addMethod([self class], @selector(test), hi, "v@:" );
+    class_addMethod([self class], @selector(testFun), (IMP)testIMP, "v@:" );
+}
+
+-(void)runTest
+{
+    [self test];
+}
+
+@end
 
 //#endif
