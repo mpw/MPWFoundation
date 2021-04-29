@@ -15,7 +15,6 @@ include $(GNUSTEP_MAKEFILES)/common.make
 libMPWFoundation_DLL_DEF = MPWFoundation.def
 
 LIBRARY_NAME = libMPWFoundation
-CC = clang
 
 
 OBJCFLAGS += -Os -g -Wno-import
@@ -91,6 +90,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWGenericReference.m \
     Stores.subproj/MPWMappingStore.m \
     Stores.subproj/MPWCachingStore.m \
+    Stores.subproj/MPWLoggingStore.m \
     Stores.subproj/MPWMergingStore.m \
     Stores.subproj/MPWPropertyStore.m \
     Stores.subproj/MPWRESTOperation.m \
@@ -207,4 +207,4 @@ test    : libMPWFoundation tester
 	LD_LIBRARY_PATH=/usr/GNUstep/Local/Library/Libraries:/usr/local/lib:/home/pi/Build/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	clang  -fobjc-runtime=gnustep-2.1   -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L /home/pi/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
+	$(CC)  -fobjc-runtime=gnustep-2.1   -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L /home/pi/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
