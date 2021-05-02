@@ -106,6 +106,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWArrayFlattenStream.m \
     Streams.subproj/MPWFilter.m \
+    Streams.subproj/MPWFixedValueSource.m \
     Streams.subproj/MPWWriteStream.m \
     Streams.subproj/MPWRESTCopyStream.m \
     Streams.subproj/MPWCombinerStream.m \
