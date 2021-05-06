@@ -166,6 +166,7 @@ libMPWFoundation_OBJC_FILES = \
     Collections.subproj/MPWEnumFilter.m \
     Collections.subproj/MPWEnumSelectFilter.m \
     Collections.subproj/NSArrayFiltering.m \
+    GNUstep/ProtocolExtensions.m \
 
 
 

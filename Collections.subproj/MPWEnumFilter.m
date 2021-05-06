@@ -437,10 +437,17 @@ static id returnNil() {  return nil; }
 +testSelectors
 {
     return [NSArray arrayWithObjects:
-        @"testCollect",@"testCollectALot",@"testEmptyCollect",@"testReverseCollect",
+        @"testCollect",@"testCollectALot",
+#if 0
+	@"testEmptyCollect",
+#endif
+    @"testReverseCollect",
         @"testReduce",@"testReduceWithNilInitial",@"testReverseReduce",@"testSourceRetainCount",
         @"testEmptyArgumentDo",
-       @"testSelect",@"testEmptySelect",
+       @"testSelect",
+#if 0
+	@"testEmptySelect",
+#endif
 		@"testSelectArg",@"testSelectCollect",
 		@"testReject",
 #if 0
