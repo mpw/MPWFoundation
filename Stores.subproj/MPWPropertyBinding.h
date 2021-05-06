@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Marcel Weiher. All rights reserved.
 //
 
-#import <MPWFoundation/MPWObject.h>
+#import <MPWFoundation/MPWBinding.h>
 
 
 
-@interface MPWPropertyBinding : MPWObject
+@interface MPWPropertyBinding : MPWBinding
 {
     @public
     IMP value;

@@ -70,7 +70,7 @@ idAccessor(target, _setTarget)
     }
     component->putIMP=(IMP1)[targetClass instanceMethodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
-        [NSException raise:@"bind failed" format:@"bind failed"];
+        [NSException raise:@"bind failed" format:@"MPWropertyBinding bind failed for %@, getImp %p putImp: %p targetClass: %@",self,component->getIMP,component->putIMP,targetClass];
     }
     NSMethodSignature *sig=[targetClass instanceMethodSignatureForSelector:component->getSelector];
     const char *typeString=[sig methodReturnType];
@@ -226,6 +226,11 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 -(char)typeCode
 {
     return components[0].objcType;
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p targetClass: %@ name: %@>",self.class,self,[target class],name];
 }
 
 @end

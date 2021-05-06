@@ -66,7 +66,7 @@ idAccessor( block, _setBlock )
 {
 	MPWBlockInvocation *invocation = [MPWBlockInvocation invocationWithBlock:^{ return 42; } ];
 	EXPECTNOTNIL( invocation, @"should have gotten a block");
-	INTEXPECT( (int)[invocation resultOfInvokingWithArgs:NULL count:0] ,42, @"result of block");
+	INTEXPECT( (long)[invocation resultOfInvokingWithArgs:NULL count:0] ,42, @"result of block");
 	
 }
 
@@ -75,7 +75,7 @@ idAccessor( block, _setBlock )
 	MPWBlockInvocation *invocation = [MPWBlockInvocation invocationWithBlock:^(NSInteger a,NSInteger b,NSInteger c){ return (a+b)*c; } ];
 	EXPECTNOTNIL( invocation, @"should have gotten a block");
 	NSInteger array[3]={ 3 , 4 , 5 };
-	INTEXPECT( (int)[invocation resultOfInvokingWithArgs:(id*)array count:3] ,35, @"result of block");
+	INTEXPECT( (long)[invocation resultOfInvokingWithArgs:(id*)array count:3] ,35, @"result of block");
 	
 }
 
