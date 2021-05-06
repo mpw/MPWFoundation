@@ -68,9 +68,12 @@ idAccessor(target, _setTarget)
     if ( ![targetClass instancesRespondToSelector:component->putSelector] ) {
         component->putSelector = @selector(setObject:forKey:);
     }
+    if ( ![targetClass instancesRespondToSelector:component->putSelector] ) {
+        component->putSelector = @selector(setValue:forKey:);
+    }
     component->putIMP=(IMP1)[targetClass instanceMethodForSelector:component->putSelector];
     if ( (component->getIMP == NULL) || (component->putIMP == NULL) ) {
-        [NSException raise:@"bind failed" format:@"MPWropertyBinding bind failed for %@, getImp %p putImp: %p targetClass: %@",self,component->getIMP,component->putIMP,targetClass];
+        [NSException raise:@"bind failed" format:@"MPWropertyBinding bind failed for %@, getImp %p putSelector: %@ putImp: %p targetClass: %@",self,component->getIMP,NSStringFromSelector(component->putSelector),component->putIMP,targetClass];
     }
     NSMethodSignature *sig=[targetClass instanceMethodSignatureForSelector:component->getSelector];
     const char *typeString=[sig methodReturnType];
