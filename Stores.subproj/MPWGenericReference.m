@@ -120,7 +120,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(NSUInteger)hash
 {
-    return [[self pathComponents] hash];
+    return [[self path] hash];
 }
 
 
