@@ -146,7 +146,7 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
         //        } else {
         if ( c[0].objcType == '@' ) {
             result=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) integerValue];
-        } else if  ( c[0].objcType == 'q' || c[0].objcType == 'l' ) {
+        } else if  ( isInteger( c[0] ) ) {
             result=((long)((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ));
 
         }
@@ -420,7 +420,11 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     MPWPropertyBinding *accessor=[self valueForName:@"number"];
     [accessor bindToTarget:t];
     char typeCode=[accessor typeCode];
-    INTEXPECT(typeCode, 'q', @"type");
+    if ( sizeof(long)==8) {
+        INTEXPECT(typeCode, 'q', @"type");
+    } else {
+        INTEXPECT(typeCode, 'l', @"type");
+    }
 }
 
 +testSelectors
