@@ -26,9 +26,15 @@
     [self.target writeObject:nextValue];
 }
 
--(NSTimer*)fireEvery:(NSTimeInterval)seconds
+-(NSTimer*)timer
 {
-    return [NSTimer scheduledTimerWithTimeInterval:seconds target:self selector:@selector(writeObject:) userInfo:nil repeats:YES];
+    return [NSTimer scheduledTimerWithTimeInterval:self.seconds target:self selector:@selector(writeObject:) userInfo:nil repeats:YES];
+}
+
+-(void)run
+{
+    [self timer];
+    [[NSRunLoop currentRunLoop] run];
 }
 
 -(void)dealloc

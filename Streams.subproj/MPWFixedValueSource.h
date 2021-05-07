@@ -12,8 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWFixedValueSource : MPWFilter
 
 @property (nonatomic, strong) NSArray *values;
+@property (assign) NSTimeInterval seconds;
 
--(NSTimer*)fireEvery:(NSTimeInterval)seconds;
+-(NSTimer*)timer;
+-(void)runTimer;
 
 @end
 
