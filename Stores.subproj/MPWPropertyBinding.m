@@ -116,6 +116,11 @@ idAccessor(name, setName)
     return [self initWithPath:newName];
 }
 
+static inline bool isInteger( AccessPathComponent c  )
+{
+    return c.objcType=='q' || c.objcType=='l';
+}
+
 
 static inline id getValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
     for (int i=0;i<count;i++) {
@@ -124,7 +129,7 @@ static inline id getValueForComponents( id currentTarget, AccessPathComponent *c
         //        } else {
         if ( c[i].objcType == '@' ) {
             currentTarget=((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg );
-        } else if  ( c[i].objcType == 'q' ) {
+        } else if  ( isInteger( c[i] ) ) {
             currentTarget=@((long)((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg ));
 
         }
@@ -133,6 +138,7 @@ static inline id getValueForComponents( id currentTarget, AccessPathComponent *c
     return currentTarget;
 }
 
+
 static inline long getIntValueForComponents( id currentTarget, AccessPathComponent *c , int count) {
     long result = 0;
         //        if ( c[i].targetOffset>= 0 ) {
@@ -140,7 +146,7 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
         //        } else {
         if ( c[0].objcType == '@' ) {
             result=[((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ) integerValue];
-        } else if  ( c[0].objcType == 'q' ) {
+        } else if  ( c[0].objcType == 'q' || c[0].objcType == 'l' ) {
             result=((long)((IMP1)c[0].getIMP)( currentTarget, c[0].getSelector, c[0].additionalArg ));
 
         }
@@ -151,7 +157,7 @@ static inline long getIntValueForComponents( id currentTarget, AccessPathCompone
 static inline void setValueForComponents( id currentTarget, AccessPathComponent *c , int count, id value) {
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
-    if ( c[final].objcType == 'q') {
+    if (  isInteger( c[final] )) {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, (id)[value integerValue], c[final].additionalArg );
     } else {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector,value , c[final].additionalArg );
@@ -161,7 +167,7 @@ static inline void setValueForComponents( id currentTarget, AccessPathComponent 
 static inline void setIntValueForComponents( id currentTarget, AccessPathComponent *c , int count, long value) {
     currentTarget = getValueForComponents( currentTarget, c, count-1);
     int final=count-1;
-    if ( c[final].objcType == 'q') {
+    if (  isInteger( c[final] ) ) {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, (void*)value, c[final].additionalArg );
     } else {
         ((IMP2)c[final].putIMP)( currentTarget, c[final].putSelector, @(value), c[final].additionalArg );
