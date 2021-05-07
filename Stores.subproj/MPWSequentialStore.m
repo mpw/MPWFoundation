@@ -27,7 +27,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 -(id)at:(id<MPWReferencing>)aReference
 {
     for ( MPWAbstractStore *s in self.stores) {
-        id result=s[aReference];
+        id result=[s at:aReference];
         if ( [self isValidResult:result forReference:aReference] ) {
             return result;
         }
@@ -110,16 +110,16 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     EXPECTNIL( onlyFirst[r4],@"cross check with r3 and only one store" );
 
     MPWSequentialStore *firstThenSecond=[self storeWithStores:@[d1,d2]];
-    IDEXPECT( firstThenSecond[r1], @"value11", @"" );
-    IDEXPECT( firstThenSecond[r2], @"value21", @"" );
-    IDEXPECT( firstThenSecond[r3], @"value3", @"" );
-    IDEXPECT( firstThenSecond[r4], @"value4", @"" );
+    IDEXPECT( firstThenSecond[r1], @"value11", @"r1 and stores in d1→d2 order" );
+    IDEXPECT( firstThenSecond[r2], @"value21", @"r2 and stores in d1→d2 order" );
+    IDEXPECT( firstThenSecond[r3], @"value3", @"r3 and stores in d1→d2 order" );
+    IDEXPECT( firstThenSecond[r4], @"value4", @"r4 and stores in d1→d2 order" );
 
     MPWSequentialStore *secondThenFirst=[self storeWithStores:@[d2,d1]];
-    IDEXPECT( secondThenFirst[r1], @"value12", @"" );
-    IDEXPECT( secondThenFirst[r2], @"value22", @"" );
-    IDEXPECT( secondThenFirst[r3], @"value3", @"" );
-    IDEXPECT( secondThenFirst[r4], @"value4", @"" );
+    IDEXPECT( secondThenFirst[r1], @"value12", @"r1 and stores in d2→d1 order" );
+    IDEXPECT( secondThenFirst[r2], @"value22", @"r2 and stores in d2→d1 order" );
+    IDEXPECT( secondThenFirst[r3], @"value3", @"r3 and stores in d2→d1 order" );
+    IDEXPECT( secondThenFirst[r4], @"value4", @"r4 and stores in d2→d1 order" );
 
 
 }
