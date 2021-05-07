@@ -158,6 +158,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWBlockInvocation.m \
     Classes/MPWMessageCatcher.m \
     Classes/NSObjectAdditions.m \
+    Classes/NSRunLoopAdditions.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \
     Collections.subproj/MPWIntArray.m \
