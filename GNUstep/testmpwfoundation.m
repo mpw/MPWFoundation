@@ -9,7 +9,7 @@ static void runTests()
 {
 	int tests=0;
 	int success=0;
-	int failure=0;
+	NSMutableArray *failures=[NSMutableArray array];
 	NSArray *classes=@[
 		@"MPWDictStore",
 		@"MPWMappingStore",
