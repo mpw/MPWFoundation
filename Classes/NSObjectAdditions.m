@@ -31,7 +31,11 @@
 	NSBundle *bundle=[NSBundle bundleForClass:self];
 	id path = [bundle pathForResource:aPath ofType:category];
 	if ( path ) {
+#ifdef GS_API_LATEST
+        return [NSData dataWithContentsOfFile:path error:nil]; 
+#else
         return [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil]; 
+#endif
 	} else {
 		[NSException raise:@"ResourceUnavailable" format:@"Couldn't find resource '%@' of type '%@' (nil path) for bundle '%@' class %@",aPath,category,bundle,self];
 		return nil;
