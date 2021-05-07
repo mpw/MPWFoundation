@@ -21,7 +21,7 @@ static void interrupt(int signal) {
     void (*oldsig)(void ) = signal(SIGINT,interrupt);
     while (!interrupted) {
         @autoreleasepool {
-            [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.01]];
+            [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
         }
     }
     putchar('\n');
