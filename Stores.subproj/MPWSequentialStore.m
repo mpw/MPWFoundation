@@ -104,10 +104,10 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
                         }];
 
     MPWSequentialStore *onlyFirst=[self storeWithStores:@[d1]];
-    IDEXPECT( onlyFirst[r1], @"value11", @"" );
-    IDEXPECT( onlyFirst[r2], @"value21", @"" );
-    IDEXPECT( onlyFirst[r3], @"value3", @"" );
-    EXPECTNIL( onlyFirst[r4],@"" );
+    IDEXPECT( onlyFirst[r1], @"value11", @"cross check with r1 and only one store" );
+    IDEXPECT( onlyFirst[r2], @"value21", @"cross check with r2 and only one store" );
+    IDEXPECT( onlyFirst[r3], @"value3", @"cross check with r3 and only one store" );
+    EXPECTNIL( onlyFirst[r4],@"cross check with r3 and only one store" );
 
     MPWSequentialStore *firstThenSecond=[self storeWithStores:@[d1,d2]];
     IDEXPECT( firstThenSecond[r1], @"value11", @"" );
