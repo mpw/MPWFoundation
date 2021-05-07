@@ -34,8 +34,9 @@
 
 -(void)run
 {
-    [self timer];
+    NSTimer *timer = [self timer];
     [[NSRunLoop currentRunLoop] runInterruptibly];
+    [timer invalidate];
 }
 
 -(void)dealloc
