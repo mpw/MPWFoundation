@@ -11,19 +11,20 @@
 
 static int interrupted=NO;
 
-static void interrupt() {
+static void interrupt(int signal) {
     interrupted=YES;
 }
 
 -(void)runInterruptibly
 {
     interrupted=NO;
-    signal(SIGINT,interrupt);
+    void (*oldsig)(void ) = signal(SIGINT,interrupt);
     while (!interrupted) {
         @autoreleasepool {
             [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.001]];
         }
     }
+    signal(SIGINT, oldsig);
 }
 
 @end
