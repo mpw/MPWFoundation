@@ -6,6 +6,7 @@
 //
 
 #import "MPWFixedValueSource.h"
+#import "NSRunLoopAdditions.h"
 
 @interface MPWFixedValueSource()
 
@@ -34,7 +35,7 @@
 -(void)run
 {
     [self timer];
-    [[NSRunLoop currentRunLoop] run];
+    [[NSRunLoop currentRunLoop] runInterruptibly];
 }
 
 -(void)dealloc
