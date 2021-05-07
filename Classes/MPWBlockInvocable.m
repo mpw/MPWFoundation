@@ -381,7 +381,12 @@ typedef id (^idBlock)(id arg );
     intBlock myBlock=^(int arg){ return 3; };
     const char *csig = blocksig( myBlock);
     NSString *sig=[NSString stringWithCString:csig encoding:NSASCIIStringEncoding];
-    IDEXPECT(sig, @"i12@?0i8", @"signature of int->int block");
+    if ( sizeof(id)==8 ) {
+        IDEXPECT(sig, @"i12@?0i8", @"signature of int->int block");
+    } else if ( sizeof(id) == 4) {
+        IDEXPECT(sig, @"i8@?0i4", @"signature of int->int block");
+        
+    }
 }
 
 
