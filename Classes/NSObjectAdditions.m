@@ -77,7 +77,6 @@
 
 @implementation NSObject(ivarAccess)
 
-#if Darwin
 
 +(void)addIvarNamesForCurrentClassToArray:(NSMutableArray*)names
 {
@@ -104,12 +103,6 @@
 	return name;
 }
 
-
-
-#else
-#warning ivar access not implemented yet for gnu runtime!
-
-#endif
 
 +(NSMutableArray*)allIvarNames
 {
