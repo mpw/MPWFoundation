@@ -44,6 +44,11 @@
     return [self isEqual:other];
 }
 
+-(NSString*)urlPath
+{
+    return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
+}
+
 @end
 
 
@@ -93,6 +98,10 @@
     return [self isEqual:other];
 }
 
+-(NSString*)urlPath
+{
+    return self;
+}
 
 
 @end

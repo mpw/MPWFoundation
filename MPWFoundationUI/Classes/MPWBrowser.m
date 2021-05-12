@@ -119,6 +119,7 @@
 
 -(NSString*)objectValueForReference:(id <MPWReferencing>)item
 {
+//    NSLog(@"item: %@",item);
     return [[item relativePathComponents] lastObject];
 }
 
@@ -173,6 +174,11 @@
     id view = [NSClassFromString(@"MPWGraphVizView") new];
     [view openInWindow:@"Architecture"];
     [view performSelector:NSSelectorFromString(@"setDot:") withObject:full];
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: on: %@ rootReference: %@>",self.className,self,self.store,self.rootReference];
 }
 
 

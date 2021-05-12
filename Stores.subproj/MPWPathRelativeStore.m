@@ -30,7 +30,9 @@
 
 -(id <MPWReferencing>)mapReference:(MPWGenericReference *)aReference
 {
-    return [self.baseReference referenceByAppendingReference:aReference];
+    id mapped = [self.baseReference referenceByAppendingReference:aReference];
+//    NSLog(@"map ref from %@ -> %@ via prefix : %@",aReference,mapped,self.baseReference);
+    return mapped;
 }
 
 -(NSString*)graphVizName
@@ -40,7 +42,8 @@
 
 -childrenOfReference:aReference
 {
-    NSArray *refs=[self.source childrenOfReference:aReference];
+    id mappedReference = [self mapReference:aReference];
+    NSArray *refs=[self.source childrenOfReference:mappedReference];
     NSMutableArray *result = [NSMutableArray array];
     NSString *prefix=self.baseReference.path;
     if ( ![prefix hasSuffix:@"/"]) {
