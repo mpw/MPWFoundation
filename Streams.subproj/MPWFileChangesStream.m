@@ -60,7 +60,9 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
     for (int i=0; i < numEvents; i++) {
         @autoreleasepool {
             NSString *path=[NSString stringWithUTF8String:eventPaths[i]];
-            [self.target writeObject:path];
+            MPWRESTVerb verb=(eventFlags[i] & kFSEventStreamEventFlagItemRemoved) ? MPWRESTVerbDELETE : MPWRESTVerbPUT;
+            MPWRESTOperation *op=[MPWRESTOperation operationWithReference:path verb:verb];
+            [self.target writeObject:op];
         }
     }
 }
@@ -84,13 +86,22 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
     }];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     INTEXPECT(result.count,1,@"should have gotten a change");
-    IDEXPECT(result.firstObject,@"/private/tmp/MPWFileChangesStream_test.txt",@"change");\
+    IDEXPECT([result.firstObject reference],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
+    IDEXPECT([result.firstObject HTTPVerb],@"PUT",@"change");
     [result removeAllObjects];
     [NSTimer scheduledTimerWithTimeInterval:0.00001 repeats:NO block:^(NSTimer * _Nonnull timer) {
         [@"test data" writeToFile:@"/tmp/MPWFileChangesStream_test.txt" atomically:YES encoding:NSASCIIStringEncoding error:nil];
     }];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     INTEXPECT(result.count,3,@"atomically is 3 changes instead of 1");
+    [result removeAllObjects];
+    [NSTimer scheduledTimerWithTimeInterval:0.00001 repeats:NO block:^(NSTimer * _Nonnull timer) {
+        unlink("/tmp/MPWFileChangesStream_test.txt");
+    }];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
+    INTEXPECT(result.count,1,@"atomically is 3 changes instead of 1");
+    IDEXPECT([result.firstObject reference],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
+    IDEXPECT([result.firstObject HTTPVerb],@"DELETE",@"change");
 }
 
 +(NSArray*)testSelectors
