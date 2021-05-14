@@ -15,6 +15,7 @@
 //-asyncOn:(dispatch_queue_t)queue;
 -asyncOnOperationQueue:(NSOperationQueue*)aQueue;
 -onThread:(NSThread*)targetThread;
+-syncOnThread:(NSThread*)targetThread;
 -asyncOnMainThread;
 -syncOnMainThread;
 -onMainThread;

@@ -121,6 +121,16 @@ HOM_METHOD1( onThread  , NSThread* , (id)arg )
     }
 }
 
+HOM_METHOD1( syncOnThread  , NSThread* , (id)arg )
+{
+    if ([NSThread currentThread] == arg) {
+        [invocation invokeWithTarget:self];
+    } else {
+        [invocation retainArguments];
+        [invocation performSelector:@selector(invokeWithTarget:) onThread:arg withObject:self waitUntilDone:YES];
+    }
+}
+
 
 -async {
     return [self asyncOn:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
