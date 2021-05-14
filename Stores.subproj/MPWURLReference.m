@@ -49,9 +49,7 @@ CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 
 CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
-#if !GS_API_LATEST
     pathName=[pathName stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLPathAllowedCharacterSet]];
-#endif
     return [self initWithPathComponents:[pathName componentsSeparatedByString:@"/"] host:nil scheme:nil];
 }
 
