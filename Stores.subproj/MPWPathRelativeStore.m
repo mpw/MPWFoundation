@@ -31,8 +31,23 @@
 -(id <MPWReferencing>)mapReference:(MPWGenericReference *)aReference
 {
     id mapped = [self.baseReference referenceByAppendingReference:aReference];
-//    NSLog(@"map ref from %@ -> %@ via prefix : %@",aReference,mapped,self.baseReference);
+    //    NSLog(@"map ref from %@ -> %@ via prefix : %@",aReference,mapped,self.baseReference);
     return mapped;
+}
+
+-(id <MPWReferencing>)reverseMapReference:(id <MPWReferencing>)aReference
+{
+    NSString *prefix=self.baseReference.path;
+    if ( ![prefix hasSuffix:@"/"]) {
+        prefix=[prefix stringByAppendingString:@"/"];
+    }
+    long len=[prefix length];
+    NSString *refPath=aReference.path;
+    if ( [refPath hasPrefix:prefix]) {
+        refPath = [refPath substringFromIndex:len];
+        aReference=[MPWGenericReference referenceWithPath:refPath];
+    }
+    return aReference;
 }
 
 -(NSString*)graphVizName
@@ -40,23 +55,15 @@
     return [NSString stringWithFormat:@"\"Relative:\\n%@\"",[self.baseReference pathComponents].lastObject];
 }
 
+
+
 -childrenOfReference:aReference
 {
     id mappedReference = [self mapReference:aReference];
     NSArray *refs=[self.source childrenOfReference:mappedReference];
     NSMutableArray *result = [NSMutableArray array];
-    NSString *prefix=self.baseReference.path;
-    if ( ![prefix hasSuffix:@"/"]) {
-        prefix=[prefix stringByAppendingString:@"/"];
-    }
-    long len=[prefix length];
     for ( id<MPWReferencing> ref in refs ) {
-        NSString *refPath=ref.path;
-        if ( [refPath hasPrefix:prefix]) {
-            refPath = [refPath substringFromIndex:len];
-            ref=[MPWGenericReference referenceWithPath:refPath];
-        }
-        [result addObject:ref];
+        [result addObject:[self reverseMapReference:ref]];
     }
     return result;
 }

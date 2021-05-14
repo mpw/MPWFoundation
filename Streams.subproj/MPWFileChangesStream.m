@@ -36,10 +36,16 @@
 -(void)schedule
 {
     FSEventStreamScheduleWithRunLoop(self.streamRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-    if (!FSEventStreamStart(self.streamRef)) {
-        fprintf(stderr, "failed to start the FSEventStream\n");
-    }
+}
 
+-(BOOL)start
+{
+    return FSEventStreamStart(self.streamRef);
+}
+
+-(void)stop
+{
+    FSEventStreamStop(self.streamRef);
 }
 
 static void
@@ -49,14 +55,12 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
                   const FSEventStreamEventFlags *eventFlags,
                   const uint64_t *eventIDs)
 {
-    NSLog(@"got a callback, client info is %p",clientCallBackInfo);
     [(id)clientCallBackInfo fsEvents:numEvents paths:eventPaths flags:eventFlags];
 }
 
 
 -(void)fsEvents:(int)numEvents paths:(const char *const*) eventPaths flags:(const FSEventStreamEventFlags*)eventFlags
 {
-    NSLog(@"got a callback, with %d entries",numEvents);
     for (int i=0; i < numEvents; i++) {
         @autoreleasepool {
             NSString *path=[NSString stringWithUTF8String:eventPaths[i]];
@@ -81,6 +85,7 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
     MPWFileChangesStream *s=[[[MPWFileChangesStream alloc] initWithDirectoryPath:@"/tmp"] autorelease];
     s.target=result;
     [s schedule];
+    [s start];
     [NSTimer scheduledTimerWithTimeInterval:0.00001 repeats:NO block:^(NSTimer * _Nonnull timer) {
         [@"test data" writeToFile:@"/tmp/MPWFileChangesStream_test.txt" atomically:NO encoding:NSASCIIStringEncoding error:nil];
     }];

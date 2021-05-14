@@ -11,6 +11,7 @@
 @interface MPWFixedValueSource()
 
 @property (nonatomic, strong) NSEnumerator *valuesEnumerator;
+@property (nonatomic, strong) NSTimer *timer;
 
 
 @end
@@ -27,16 +28,29 @@
     [self.target writeObject:nextValue];
 }
 
--(NSTimer*)timer
+-(NSTimer*)createTimer
 {
     return [NSTimer scheduledTimerWithTimeInterval:self.seconds target:self selector:@selector(writeObject:) userInfo:nil repeats:YES];
 }
 
+-(void)start
+{
+    if (!self.timer) {
+        self.timer=[self createTimer];
+    }
+}
+
+-(void)stop
+{
+    [self.timer invalidate];
+    self.timer = nil;
+}
+
 -(void)run
 {
-    NSTimer *timer = [self timer];
+    [self start];
     [[NSRunLoop currentRunLoop] runInterruptibly];
-    [timer invalidate];
+    [self stop];
 }
 
 -(void)dealloc
