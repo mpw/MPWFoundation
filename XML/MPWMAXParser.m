@@ -973,7 +973,6 @@ static inline NSString* createNSStringIfAnyHighBitSet( const char *start, long l
         if ( start[i] & 128 ) {
 #if GS_API_LATEST
             return [[NSString alloc] initWithBytes:start length:len encoding:cfDataEncoding];
-
 #else
             return  (id)CFStringCreateWithBytes(NULL, (const unsigned char*)start, len, (CFStringEncoding)cfDataEncoding, NO);
             //                    if (!str ) { return YES; }

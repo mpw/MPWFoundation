@@ -79,11 +79,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 -(NSString *)path
 {
-#if GS_API_LATEST
-    return [self urlPath];
-#else
     return [[self urlPath] stringByRemovingPercentEncoding];
-#endif
 }
 
 -(NSArray*)pathComponents
