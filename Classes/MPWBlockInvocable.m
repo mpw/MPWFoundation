@@ -273,6 +273,8 @@ static NSString *extractStructType( char *s )
 			case 'S':
 			case 'i':
 			case 'I':
+			case 'l':
+			case 'L':
 			{
 				int intArg = va_arg( args, int );
                 //				NSLog(@"int param: %d",intArg );
