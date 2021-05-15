@@ -209,7 +209,7 @@ after-clean ::
 
 
 test    : libMPWFoundation tester
-	LD_LIBRARY_PATH=/usr/GNUstep/Local/Library/Libraries:/usr/local/lib:/home/pi/Build/obj/ ./GNUstep/testmpwfoundation
+	LD_LIBRARY_PATH=/usr/GNUstep/Local/Library/Libraries:/usr/local/lib:$(HOME)/Build/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	$(CC)  -fobjc-runtime=gnustep-2.1   -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L /home/pi/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
+	$(CC)  -fobjc-runtime=gnustep-2.1   -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L $(HOME)/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
