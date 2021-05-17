@@ -19,24 +19,29 @@
     BOOL scheduled;
 }
 
--(void)setDirectoryPath:(NSString*)path
+-(void)setPath:(NSString*)path
 {
-    
+    FSEventStreamContext context={0};
+    context.info=self;
+    self.streamRef = FSEventStreamCreate(kCFAllocatorDefault,
+                                         (FSEventStreamCallback)&fsevents_callback,
+                                         &context,
+                                         (CFArrayRef)@[path],
+                                         kFSEventStreamEventIdSinceNow,
+                                         0.0001,
+                                         kFSEventStreamCreateFlagNoDefer | kFSEventStreamCreateFlagFileEvents);
+    //                                kFSEventStreamCreateFlagWatchRoot);
+}
+
+-(void)setReference:(id <MPWReferencing>)reference
+{
+    [self setPath:reference.path];
 }
 
 -(instancetype)initWithDirectoryPath:(NSString*)path
 {
     self=[super init];
-    FSEventStreamContext context;
-    context.info=self;
-    self.streamRef = FSEventStreamCreate(kCFAllocatorDefault,
-                                     (FSEventStreamCallback)&fsevents_callback,
-                                     &context,
-                                     (CFArrayRef)@[path],
-                                     kFSEventStreamEventIdSinceNow,
-                                     0.0001,
-                                         kFSEventStreamCreateFlagNoDefer | kFSEventStreamCreateFlagFileEvents);
-    //                                kFSEventStreamCreateFlagWatchRoot);
+    [self setPath:path];
     return self;
 }
 
