@@ -54,6 +54,11 @@
 
 @implementation NSString(referencing)
 
++referenceWithPath:aPath
+{
+    return aPath;
+}
+
 -(NSString*)path
 {
     return self;

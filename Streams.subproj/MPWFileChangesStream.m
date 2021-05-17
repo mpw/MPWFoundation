@@ -15,6 +15,14 @@
 
 
 @implementation MPWFileChangesStream
+{
+    BOOL scheduled;
+}
+
+-(void)setDirectoryPath:(NSString*)path
+{
+    
+}
 
 -(instancetype)initWithDirectoryPath:(NSString*)path
 {
@@ -29,17 +37,26 @@
                                      0.0001,
                                          kFSEventStreamCreateFlagNoDefer | kFSEventStreamCreateFlagFileEvents);
     //                                kFSEventStreamCreateFlagWatchRoot);
-    NSLog(@"streamRef=%p",self.streamRef);
     return self;
+}
+
+-(void)scheduleInRunLoop:(NSRunLoop*)runLoop
+{
+    if (!scheduled) {
+        FSEventStreamScheduleWithRunLoop(self.streamRef, runLoop.getCFRunLoop, kCFRunLoopDefaultMode);
+        scheduled=YES;
+    }
+
 }
 
 -(void)schedule
 {
-    FSEventStreamScheduleWithRunLoop(self.streamRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+    [self scheduleInRunLoop:[NSRunLoop currentRunLoop]];
 }
 
 -(BOOL)start
 {
+    [self schedule];
     return FSEventStreamStart(self.streamRef);
 }
 
