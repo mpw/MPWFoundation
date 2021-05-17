@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWPathMapper : MPWFilter
 
+@property (nonatomic,strong) id <MPWReferencing> prefix;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -22,16 +22,24 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     return self;
 }
 
+-(void)writeObject:(id)anObject
+{
+    [self writeObject:anObject sender:nil];
+}
+
 -(void)writeObject:(MPWRESTOperation*)anObject sender:aSender
 {
+//    NSLog(@"-[%@ %@ %@]",[self className],NSStringFromSelector(_cmd),anObject);
     id <MPWReferencing> ref=anObject.reference;
     switch (anObject.verb) {
         case MPWRESTVerbGET:
             self.source[ref]=self.target[ref];
             break;
         case MPWRESTVerbPUT:
+//            NSLog(@"put from: %@ to %@",self.target,self.source);
+//            NSLog(@"data: %@",self.source[ref]);
             self.target[ref]=self.source[ref];
-            break;
+          break;
         case MPWRESTVerbDELETE:
             self.target[ref]=nil;
             break;
