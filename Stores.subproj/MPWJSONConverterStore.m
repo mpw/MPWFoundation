@@ -25,17 +25,26 @@
     return self;
 }
 
+-(id)parsedJSON:(NSData*)json
+{
+    [self.writer setTarget:[NSMutableData data]];
+    [self.writer writeObject:json];
+    return self.writer.target;
+}
 
--(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
+-(NSData*)serialized:(id)anObject
 {
     return [self.reader parsedData:anObject];
 }
 
+-(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
+{
+    return self.toJSONUp ? [self parsedJSON:anObject] : [self serialized:anObject];
+}
+
 -(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    [self.writer setTarget:[NSMutableData data]];
-    [self.writer writeObject:anObject];
-    return self.writer.target;
+    return self.toJSONUp ? [self serialized:anObject] : [self parsedJSON:anObject];
 }
 
 @end
@@ -70,11 +79,40 @@
     IDEXPECT(parsed, expected, @"dicts for JSON");
 }
 
++(void)testConvertDictToJSONUp
+{
+    NSArray *dicts=@[
+        @{ @"Key1":  @"Value1" , @"Key2":  @(15) },
+        @{ @"Key1":  @"Value2" , @"Key2":  @(42)},
+        
+    ];
+    MPWJSONConverterStore *store=[self storeWithSource:nil];
+    store.toJSONUp=true;
+    NSData *json=[store mapRetrievedObject:dicts forReference:nil];
+    IDEXPECT( [json stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
+}
+
++(void)testConvertJSONtoDictDown
+{
+    NSString *jsonSource=@"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]";
+    NSArray *expected=@[
+        @{ @"Key1":  @"Value1" , @"Key2":  @(15) },
+        @{ @"Key1":  @"Value2" , @"Key2":  @(42)},
+        
+    ];
+    MPWJSONConverterStore *store=[self storeWithSource:nil];
+    store.toJSONUp=true;
+    NSArray *parsed=[store mapObjectToStore:[jsonSource asData] forReference:nil];
+    IDEXPECT(parsed, expected, @"dicts for JSON");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testConvertDictToJSONDown",
        @"testConvertJSONtoDictUp",
+       @"testConvertDictToJSONUp",
+       @"testConvertJSONtoDictDown",
 			];
 }
 

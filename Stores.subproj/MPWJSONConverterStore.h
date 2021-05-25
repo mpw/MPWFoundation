@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWJSONConverterStore : MPWMappingStore
 
+@property (nonatomic,assign) BOOL toJSONUp;
 @end
 
 NS_ASSUME_NONNULL_END
