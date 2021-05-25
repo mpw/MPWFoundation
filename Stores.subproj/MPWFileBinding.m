@@ -111,11 +111,6 @@
     return YES;
 }
 
--(MPWByteStream*)writeStream
-{
-    return [MPWByteStream fileName:self.path mode:@"w" atomically:NO];
-}
-
 -(NSString*)fancyPath
 {
     if ( [self parentPath]) {
@@ -185,9 +180,9 @@
     return [MPWFDStreamSource name:[self path]];
 }
 
--(MPWByteStream *)sink
+-(MPWByteStream*)writeStream
 {
-    return [MPWByteStream fileName:[self path]];
+    return [MPWByteStream fileName:self.path mode:@"w" atomically:NO];
 }
 
 -(void)dealloc
