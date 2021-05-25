@@ -91,6 +91,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWMappingStore.m \
     Stores.subproj/MPWCachingStore.m \
     Stores.subproj/MPWLoggingStore.m \
+    Stores.subproj/MPWJSONConverterStore.m \
     Stores.subproj/MPWMergingStore.m \
     Stores.subproj/MPWPropertyStore.m \
     Stores.subproj/MPWRESTOperation.m \
