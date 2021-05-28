@@ -250,6 +250,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 -parsedData:(NSData*)jsonData
 {
     [self setData:jsonData];
+    [self.builder clearResult];
     const char *curptr=[jsonData bytes];
     const char *endptr=curptr+[jsonData length];
     const char *stringstart=NULL;
@@ -414,7 +415,16 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 
 +(void)testParseJSONString
 {
-	IDEXPECT( [self _parseJSONResource:@"string"],@"A JSON String", @"json string");
+    IDEXPECT( [self _parseJSONResource:@"string"],@"A JSON String", @"json string");
+}
+
++(void)testParseSeparateJSONStringsWithSameParser
+{
+    MPWMASONParser *parser=[MPWMASONParser parser];
+    NSData *jsonString1=[@"\"String1\"" asData];
+    NSData *jsonString2=[@"\"String2\"" asData];
+    IDEXPECT( [parser parsedData:jsonString1],@"String1", @"json string 1");
+    IDEXPECT( [parser parsedData:jsonString2],@"String2", @"json string 2");
 }
 
 
@@ -539,7 +549,8 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 +testSelectors
 {
 	return @[
-			@"testParseJSONString",
+        @"testParseJSONString",
+        @"testParseSeparateJSONStringsWithSameParser",
 			@"testParseSimpleJSONDict",
 			@"testParseSimpleJSONArray",
 			@"testParseLiterals",

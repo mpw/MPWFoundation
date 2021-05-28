@@ -21,6 +21,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return self;
 }
 
+-(instancetype)init
+{
+    return [self initWithSource:nil];
+}
+
 -(id <MPWReferencing>)mapReference:(id <MPWReferencing>)aReference
 {
     return aReference;

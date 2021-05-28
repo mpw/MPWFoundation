@@ -75,6 +75,11 @@ idAccessor( plist , setPlist )
 {
 	return plist;
 }
+
+-(void)clearResult
+{
+    plist = nil;
+}
 		 
 -(void)pushContainer:anObject
 {

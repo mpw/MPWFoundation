@@ -55,5 +55,6 @@ typedef struct {
 -result;
 +(instancetype)builder;
 -(NSString*)key;
+-(void)clearResult;
 
 @end
