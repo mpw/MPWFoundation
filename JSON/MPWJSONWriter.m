@@ -23,14 +23,14 @@ typedef struct {
     char buf[INTBUFLEN];
 } intbuf;
 
-static inline char *itoa( int value, intbuf *buf )
+static inline char *ltoa( long value, intbuf *buf )
 {
     char *buffer=buf->buf;
     int offset=INTBUFLEN/2;
     buffer[offset]=0;
     do {
-        int next=value/10;
-        int digit=value - (next*10)+'0';
+        long next=value/10;
+        long digit=value - (next*10)+'0';
         buffer[--offset]=digit;
         value=next;
     } while (value);
@@ -79,13 +79,13 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
     [self writeObject:anObject];
 }
 
--(void)writeInteger:(int)number forKey:(NSString*)aKey
+-(void)writeInteger:(long)number forKey:(NSString*)aKey
 {
     char buffer[1000];
     long len=writeKey(buffer, aKey, firstElementOfDict + currentFirstElement);
     char *ptr=buffer+len;
     intbuf ibuf;
-    char *s=itoa(number, &ibuf);
+    char *s=ltoa(number, &ibuf);
     long ilen=strlen(s);
     memcpy( ptr, s, ilen);
     ptr+=ilen;
@@ -227,7 +227,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	[self appendBytes:"null" length:4];
 }
 
--(void)writeInteger:(int)number
+-(void)writeInteger:(long)number
 {
 	[self printf:@"%d",number];
 }
