@@ -64,6 +64,16 @@
 @property (strong) id c;
 @end
 @implementation MPWJSONCodingStoreTestClass
+
+-(void)writeOnJSONStream:(MPWJSONWriter*)aStream
+{
+    [aStream writeDictionaryLikeObject:self withContentBlock:^(MPWJSONWriter *writer) {
+        [writer writeInteger:self.a forKey:@"a"];
+        [writer writeInteger:self.b forKey:@"b"];
+        [writer writeString:self.c  forKey:@"c"];
+    }];
+ }
+
 @end
 
 
@@ -153,6 +163,22 @@
     IDEXPECT(last.c, @"TestString2", @"last.c");
 }
 
++(void)testConvertObjectToJSONDown
+{
+    MPWJSONCodingStoreTestClass *first=[[MPWJSONCodingStoreTestClass new] autorelease];
+    MPWJSONCodingStoreTestClass *second=[[MPWJSONCodingStoreTestClass new] autorelease];
+    first.a = 561;
+    first.b = 42;
+    first.c = @"Hello";
+    second.a = 3;
+    second.b = 0;
+    second.c = @"World!";
+    NSArray *objects=@[first,second];
+    MPWJSONConverterStore *store=[self storeWithSource:nil];
+    NSData *json=[store mapObjectToStore:objects forReference:nil];
+    IDEXPECT( [json stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
+}
+
 
 
 +(NSArray*)testSelectors
@@ -164,6 +190,7 @@
        @"testConvertJSONtoDictDown",
        @"testConvertDictToJSONDownToSource",
        @"testConvertJSONtoObjectUp",
+       @"testConvertObjectToJSONDown",
 			];
 }
 
