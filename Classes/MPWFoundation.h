@@ -25,6 +25,7 @@
 #import <MPWFoundation/MPWPropertyBinding.h>
 #import <MPWFoundation/NSRunLoopAdditions.h>
 #import <MPWFoundation/MPWObject_fastrc.h>
+#import <MPWFoundation/MPWResource.h>
 
 #import <MPWFoundation/MPWBlockInvocable.h>
 #import <MPWFoundation/NSNil.h>

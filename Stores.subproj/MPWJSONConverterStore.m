@@ -6,6 +6,7 @@
 //
 
 #import "MPWJSONConverterStore.h"
+#import "MPWResource.h"
 
 @interface MPWJSONConverterStore()
 
@@ -25,14 +26,18 @@
     return self;
 }
 
--(NSData*)serialized:json
+-(MPWResource*)serialized:json
 {
     if (!json || [json isNil]) {
         return nil;
     }
     [self.writer setByteTarget:[NSMutableData data]];
     [self.writer writeObject:json];
-    return (NSData*)self.writer.target;
+    NSData *d= (NSData*)self.writer.target;
+    MPWResource *r=[[MPWResource new] autorelease];
+    [r setRawData:d];
+    [r setMIMEType:@"text/json"];
+    return r;
 }
 
 -(void)setClass:(Class)aClass
