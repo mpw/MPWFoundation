@@ -25,11 +25,14 @@
     return self;
 }
 
--(id)parsedJSON:(NSData*)json
+-(NSData*)serialized:json
 {
-    [self.writer setTarget:[NSMutableArray array]];
+    if (!json || [json isNil]) {
+        return nil;
+    }
+    [self.writer setByteTarget:[NSMutableData data]];
     [self.writer writeObject:json];
-    return self.writer.target;
+    return (NSData*)self.writer.target;
 }
 
 -(void)setClass:(Class)aClass
@@ -37,20 +40,19 @@
     self.reader = [[[MPWMASONParser alloc] initWithClass:aClass] autorelease];
 }
 
--(NSData*)serialized:(id)anObject
+-parsedJSON:(NSData*)anObject
 {
-
     return [self.reader parsedData:anObject];
 }
 
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    return self.toJSONUp ? [self parsedJSON:anObject] : [self serialized:anObject];
+    return self.toJSONUp ? [self serialized:anObject] :[self parsedJSON:anObject];
 }
 
 -(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    return self.toJSONUp ? [self serialized:anObject] : [self parsedJSON:anObject];
+    return self.toJSONUp ?  [self parsedJSON:anObject] : [self serialized:anObject];
 }
 
 @end
@@ -176,6 +178,8 @@
     NSArray *objects=@[first,second];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     NSData *json=[store mapObjectToStore:objects forReference:nil];
+    IDEXPECT( [json stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
+    json=[store mapObjectToStore:objects forReference:nil];
     IDEXPECT( [json stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
 }
 
