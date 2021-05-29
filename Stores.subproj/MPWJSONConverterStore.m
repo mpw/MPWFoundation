@@ -36,7 +36,7 @@
     NSData *d= (NSData*)self.writer.target;
     MPWResource *r=[[MPWResource new] autorelease];
     [r setRawData:d];
-    [r setMIMEType:@"text/json"];
+    [r setMIMEType:@"application/json"];
     return r;
 }
 
@@ -95,7 +95,7 @@
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     NSData *json=[store mapObjectToStore:dicts forReference:nil];
-    IDEXPECT( [json stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoDictUp
@@ -121,7 +121,7 @@
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     store.toJSONUp=true;
     NSData *json=[store mapRetrievedObject:dicts forReference:nil];
-    IDEXPECT( [json stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoDictDown
@@ -149,7 +149,7 @@
     MPWDictStore *d = [MPWDictStore store];
     MPWJSONConverterStore *store=[self storeWithSource:d];
     store[@"hi.json"]=dicts;
-    IDEXPECT( [d[@"hi.json"] stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[d[@"hi.json"] rawData] stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoObjectUp
@@ -183,9 +183,9 @@
     NSArray *objects=@[first,second];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     NSData *json=[store mapObjectToStore:objects forReference:nil];
-    IDEXPECT( [json stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
     json=[store mapObjectToStore:objects forReference:nil];
-    IDEXPECT( [json stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
 }
 
 
