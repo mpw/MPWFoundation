@@ -41,7 +41,7 @@
 
 -(void)writeKey:(NSString*)aKey
 {
-    [self writeString:aKey];
+    [self writeObject:aKey];
     [self appendBytes:" = " length:3];
 }
 
@@ -225,10 +225,16 @@
 
 +(void)testWriteIntegers
 {
-	IDEXPECT( [self _encode:[NSNumber numberWithInt:42]], @"42", @"42");
-	IDEXPECT( [self _encode:[NSNumber numberWithInt:1]], @"1", @"1");
-	IDEXPECT( [self _encode:[NSNumber numberWithInt:0]], @"0", @"0");
-	IDEXPECT( [self _encode:[NSNumber numberWithInt:-1]], @"-1", @"1");
+    IDEXPECT( [self _encode:@(42)], @"42", @"42");
+    IDEXPECT( [self _encode:[NSNumber numberWithInt:1]], @"1", @"1");
+    IDEXPECT( [self _encode:[NSNumber numberWithInt:0]], @"0", @"0");
+    IDEXPECT( [self _encode:[NSNumber numberWithInt:-1]], @"-1", @"1");
+}
+
++(void)testWriteDictWithIntegerKeys
+{
+    NSDictionary *d=@{ @(157): @"Hello", @(2): @"World"};
+    IDEXPECT( [self _encode:d], @"{ 157 = \"Hello\";\n2 = \"World\";\n} ", @"dict with int keys");
 }
 
 
@@ -236,10 +242,10 @@
 {
 	return [NSArray arrayWithObjects:
 			@"testWriteString",
-			@"testWriteArray",
-//			@"testWriteLiterals",
+            @"testWriteArray",
 			@"testWriteIntegers",
 			@"testWriteDict",
+            @"testWriteDictWithIntegerKeys",
 //			@"testEscapeStrings",
 //			@"testUnicodeEscapes",
 			nil];

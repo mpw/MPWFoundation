@@ -52,12 +52,12 @@
 
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    return self.toJSONUp ? [self serialized:anObject] :[self parsedJSON:anObject];
+    return self.up ? [self serialized:anObject] :[self parsedJSON:anObject];
 }
 
 -(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    return self.toJSONUp ?  [self parsedJSON:anObject] : [self serialized:anObject];
+    return self.up ?  [self parsedJSON:anObject] : [self serialized:anObject];
 }
 
 @end
@@ -119,7 +119,7 @@
         
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
-    store.toJSONUp=true;
+    store.up=true;
     NSData *json=[store mapRetrievedObject:dicts forReference:nil];
     IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15, \"Key1\":\"Value1\"},{\"Key2\":42, \"Key1\":\"Value2\"}]", @"json for dict");
 }
@@ -133,7 +133,7 @@
         
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
-    store.toJSONUp=true;
+    store.up=true;
     NSArray *parsed=[store mapObjectToStore:[jsonSource asData] forReference:nil];
     IDEXPECT(parsed, expected, @"dicts for JSON");
 }
