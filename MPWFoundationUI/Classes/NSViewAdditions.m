@@ -63,7 +63,7 @@
 
 @implementation NSViewAdditionsTesting
 
-+(void)testNameIsMappedToAccessibilityIdentifer
++(void)testNameIsMappedToAccessibilityIdentifier
 {
     NSView *v=[NSView new];
     EXPECTNIL(v.name,@"no name");
@@ -80,7 +80,7 @@
 +(NSArray*)testSelectors
 {
     return @[
-        @"testNameIsMappedToAccessibilityIdentifer",
+        @"testNameIsMappedToAccessibilityIdentifier",
     ];
 }
 

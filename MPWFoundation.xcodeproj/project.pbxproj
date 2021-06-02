@@ -182,7 +182,7 @@
 		1F7045D4223130BE005ED7FB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F7045D3223130BE005ED7FB /* Cocoa.framework */; };
 		1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7045D7223131C2005ED7FB /* MPWBrowser.m */; };
 		1F7045DA223131C2005ED7FB /* MPWBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7045D8223131C2005ED7FB /* MPWBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F7045EA223134F7005ED7FB /* MPWTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7045E8223134F7005ED7FB /* MPWTableView.h */; };
+		1F7045EA223134F7005ED7FB /* MPWTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7045E8223134F7005ED7FB /* MPWTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7045EB223134F7005ED7FB /* MPWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7045E9223134F7005ED7FB /* MPWTableView.m */; };
 		1F7078A21F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7078A31F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */; settings = {ATTRIBUTES = (Public, ); }; };

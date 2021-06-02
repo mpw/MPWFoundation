@@ -70,7 +70,7 @@
 
 @interface MPWAbstractStore(legacy)
 
--evaluateIdentifier:anIdentifer withContext:aContext;
+-evaluateIdentifier:anIdentifier withContext:aContext;
 -get:(NSString*)uriString parameters:uriParameters;
 -get:uri;
 

@@ -4,7 +4,6 @@
 //
 //  Created by Marcel Weiher on 7.3.2019.
 //
-#if 0
 #import "MPWTableView.h"
 #import <MPWFoundation/MPWFoundation.h>
 
@@ -19,6 +18,7 @@
 
 @implementation MPWTableView
 
+#if 0
 
 
 
@@ -129,6 +129,6 @@
     CGRect r = [self.context boundingRectForText:value inPath:path];
     return r.size.height+10;
 }
+#endif
 
 @end
-#endif

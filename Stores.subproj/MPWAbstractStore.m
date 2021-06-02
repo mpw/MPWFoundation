@@ -222,9 +222,9 @@
 
 @implementation MPWAbstractStore(legacy)
 
--evaluateIdentifier:anIdentifer withContext:aContext
+-evaluateIdentifier:anIdentifier withContext:aContext
 {
-    id value = [self at:anIdentifer];
+    id value = [self at:anIdentifier];
     
     if ( [value respondsToSelector:@selector(isNotNil)]  && ![value isNotNil] ) {
         value=nil;
