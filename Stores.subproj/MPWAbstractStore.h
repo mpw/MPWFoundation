@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MPWReferencing;
+@protocol MPWReferencing,Streaming;
 @class MPWReference,MPWGenericReference,MPWByteStream,MPWDirectoryBinding,MPWBinding;
 
 
@@ -29,6 +29,12 @@
 
 -(MPWBinding*)bindingForReference:aReference inContext:aContext;
 
+@end
+
+@protocol StreamStorage
+
+-(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference;
+-(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream;
 
 @end
 
@@ -39,9 +45,8 @@
 
 @end
 
-@protocol Streaming;
 
-@interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage>
+@interface MPWAbstractStore : NSObject<MPWStorage,MPWHierarchicalStorage,StreamStorage>
 {
 }
 

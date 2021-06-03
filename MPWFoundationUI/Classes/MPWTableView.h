@@ -12,11 +12,13 @@
 @interface MPWTableView : NSTableView <NSTableViewDataSource>
 
 @property (nonatomic, strong) id <MPWStorage> store;
-@property (readonly)          id <MPWReferencing> currentReference;
+@property (nonatomic, strong) id <MPWReferencing> currentReference;
 
 - selectedObject;
 - objectAtRow:(NSUInteger)row;
 
 - (CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName;
+-(NSArray *)unorderedObjects;
+
 
 @end

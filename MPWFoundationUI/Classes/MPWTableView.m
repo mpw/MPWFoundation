@@ -18,7 +18,6 @@
 
 @implementation MPWTableView
 
-#if 0
 
 
 
@@ -31,12 +30,31 @@
 }
 
 
+-(MPWCGDrawingContext*)createContext
+{
+    if ( [NSGraphicsContext currentContext] ) {
+        MPWCGDrawingContext *context=[MPWCGDrawingContext currentContext];
+        [context setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSRegularControlSize]]];
+        return context;
+    }
+    return nil;
+    
+}
+
+
+-(MPWCGDrawingContext*)getContext
+{
+    if ( !self.context ) {
+        self.context = [self createContext];
+    }
+    return self.context;
+}
+
+
 -(void)commonInit
 {
     self.dataSource = self;
     [self installProtocolNotifications];
-    self.context = [MPWCGDrawingContext currentContext];
-    [self.context setFont:[NSFont systemFontOfSize:[NSFont systemFontSizeForControlSize:NSControlSizeRegular]]];
 }
 
 
@@ -69,26 +87,9 @@
 
 
 
-
--(NSArray *)filterCompletedTasks:(NSArray *)objects
-{
-//    if ( [self.ref.entityType isEqualToString:WLEntityTasksType]) {
-//        NSMutableArray *uncompleted=[NSMutableArray array];
-//        for (WLTask *task in objects) {
-//            if (!task.isCompleted) {
-//                [uncompleted addObject:task];
-//            }
-//        }
-//        objects=[uncompleted copy];
-//    }
-//    return objects;
-    return nil;
-}
-
-
 -(NSArray *)objects
 {
-    return [self filterCompletedTasks:[self orderObjects:[self unorderedObjects]]];
+    return [self orderObjects:[self unorderedObjects]];
 }
 
 
@@ -126,9 +127,8 @@
     id path = [self.context path:^(id<MPWDrawingContext> c) {
         [c nsrect:NSMakeRect(0, 0, [[self tableColumnWithIdentifier:columnName] width], 100000 )];
     }];
-    CGRect r = [self.context boundingRectForText:value inPath:path];
+    CGRect r = [[self getContext] boundingRectForText:value inPath:path];
     return r.size.height+10;
 }
-#endif
 
 @end

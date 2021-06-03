@@ -11,6 +11,7 @@
 #import "MPWDirectoryBinding.h"
 #import "NSStringAdditions.h"
 #import "NSObjectFiltering.h"
+#import "MPWByteStream.h"
 
 #include <unistd.h>
 
@@ -91,6 +92,18 @@
     exists=[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:isDirectory];
     return exists;
 
+}
+
+-(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+{
+    NSURL *url = [self fileURLForReference:aReference];
+    NSString *path = [url path];
+    return [MPWByteStream fileName:path];
+}
+
+-(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+{
+    [aStream writeObject:[self at:aReference]];
 }
 
 -(BOOL)hasChildren:(MPWGenericReference *)aReference

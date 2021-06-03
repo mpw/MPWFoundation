@@ -315,6 +315,8 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 			@"testWriteDict",
 			@"testEscapeStrings",
 			@"testUnicodeEscapes",
+//            @"testCreateSerializationMethod",
+
 			nil];
 }
 

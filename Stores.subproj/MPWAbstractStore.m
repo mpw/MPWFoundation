@@ -194,6 +194,17 @@
 {
 }
 
+-(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+{
+    
+}
+
+-(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+{
+    
+}
+
+
 -(MPWBinding*)bindingForReference:aReference inContext:aContext
 {
     return [MPWBinding bindingWithReference:aReference inStore:self];
