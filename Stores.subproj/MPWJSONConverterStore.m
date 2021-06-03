@@ -74,7 +74,7 @@
 
 -(void)writeOnJSONStream:(MPWJSONWriter*)aStream
 {
-    [aStream writeDictionaryLikeObject:self withContentBlock:^(MPWJSONWriter *writer) {
+    [aStream writeDictionaryLikeObject:self withContentBlock:^(id object, MPWJSONWriter *writer) {
         [writer writeInteger:self.a forKey:@"a"];
         [writer writeInteger:self.b forKey:@"b"];
         [writer writeString:self.c  forKey:@"c"];

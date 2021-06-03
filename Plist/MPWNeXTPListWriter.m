@@ -45,13 +45,13 @@
     [self appendBytes:" = " length:3];
 }
 
--(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(id object, MPWNeXTPListWriter* writer))contentBlock
 {
     currentFirstElement++;
     firstElementOfDict[currentFirstElement]=YES;
     [self beginDictionary];
     @try {
-        contentBlock(self);
+        contentBlock(anObject, self);
     } @finally {
         currentFirstElement--;
         [self endDictionary];
@@ -60,7 +60,7 @@
 
 -(void)writeDictionary:(NSDictionary *)dict
 {
-    [self writeDictionaryLikeObject:dict withContentBlock:^(MPWWriteStream *writer){
+    [self writeDictionaryLikeObject:dict withContentBlock:^(id object, MPWWriteStream *writer){
         [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop){
             [self writeObject:obj forKey:key];
         }];

@@ -10,7 +10,7 @@
     int  currentFirstElement;
 }
 
--(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(MPWNeXTPListWriter* writer))contentBlock;
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(id object, MPWNeXTPListWriter* writer))contentBlock;
 -(void)writeArrayContent:(NSArray*)array;
 
 @end

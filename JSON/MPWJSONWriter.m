@@ -7,7 +7,8 @@
 //
 
 #import "MPWJSONWriter.h"
-
+#import "MPWPropertyBinding.h"
+#import <objc/runtime.h>
 
 @implementation MPWJSONWriter
 
@@ -238,6 +239,33 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	[self printf:@"%g",number];
 }
 
+-(void)createEncoderMethodForClass:(Class)theClass
+{
+    NSArray *ivars=[theClass allIvarNames];
+    if ( [[ivars lastObject] hasPrefix:@"_"]) {
+        ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
+    }
+    
+    NSMutableArray *copiers=[[NSMutableArray arrayWithCapacity:ivars.count] retain];
+    for (NSString *ivar in ivars) {
+        MPWPropertyBinding *accessor=[[MPWPropertyBinding valueForName:ivar] retain];
+        [accessor bindToClass:theClass];
+        id block=^(id object, MPWJSONWriter* stream){ [stream writeInteger:[[object valueForKey:ivar] intValue] forKey:ivar]; };
+        [copiers addObject:Block_copy(block)];
+    }
+    void (^encoder)( id object, MPWJSONWriter *writer) = Block_copy( ^void(id object, MPWJSONWriter *writer) {
+        for  ( id block in copiers ) {
+            void (^encodeIvar)(id object, MPWJSONWriter *writer)=block;
+            encodeIvar(object, writer);
+        }
+    });
+    void (^encoderMethod)( id blockself, MPWJSONWriter *writer) = ^void(id blockself, MPWJSONWriter *writer) {
+        [writer writeDictionaryLikeObject:blockself withContentBlock:encoder];
+    };
+    IMP encoderMethodImp = imp_implementationWithBlock(encoderMethod);
+    class_addMethod(theClass, [self streamWriterMessage], encoderMethodImp, "v@:@" );
+
+}
 
 //------------
 
@@ -257,6 +285,22 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 @end
 
 #import <MPWFoundation/DebugMacros.h>
+
+@interface MPWJSONWriterTestClass : NSObject
+
+@property (nonatomic, assign) int a,b;
+//@property (nonatomic, strong) NSString *c;
+
+@end
+@implementation MPWJSONWriterTestClass
+
+-(void)dealloc
+{
+//    [_c release];
+    [super dealloc];
+}
+
+@end
 
 @implementation MPWJSONWriter(testing)
 
@@ -306,6 +350,19 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	IDEXPECT( [self _encode:[NSString stringWithCharacters:&thechar length:1]], @"\"\\u001b\"", @"ASCII 27 is Unicode escaped");
 }
 
++(void)testCreateSerializationMethod
+{
+    MPWJSONWriterTestClass *obj=[[MPWJSONWriterTestClass new] autorelease];
+    MPWJSONWriter *s = [self _testStream];
+    obj.a = 41;
+    obj.b = 12;
+//    obj.c = @"Test String";
+    [s createEncoderMethodForClass:obj.class];
+    [s writeObject:obj];
+    IDEXPECT([s target],@"{\"a\":41,\"b\":12}",@"encoded");
+//    IDEXPECT([s target],@"{\"a\"=41;\"b\"=41;\"c\"=\"Test String\"}",@"encoded");
+}
+
 +(NSArray*)testSelectors {
 	return [NSArray arrayWithObjects:
 			@"testWriteString",
@@ -315,7 +372,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 			@"testWriteDict",
 			@"testEscapeStrings",
 			@"testUnicodeEscapes",
-//            @"testCreateSerializationMethod",
+            @"testCreateSerializationMethod",
 
 			nil];
 }
