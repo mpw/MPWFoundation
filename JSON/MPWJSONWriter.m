@@ -76,7 +76,10 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 
 -(void)writeObject:(id)anObject forKey:(id)aKey
 {
-    [self writeKey:aKey];
+    char buffer[1000];
+    long len=writeKey(buffer, aKey, firstElementOfDict + currentFirstElement);
+    [self appendBytes:buffer length:len];
+//    [self writeKey:aKey];
     [self writeObject:anObject];
 }
 
@@ -124,20 +127,20 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	[self endArray];
 }
 
--(void)writeDictionary:(NSDictionary *)dict
-{
-	BOOL first=YES;
-	[self beginDictionary];
-	for ( NSString *key in [dict allKeys] ) {
-		if ( first ) {
-			first=NO;
-		} else {
-			[self appendBytes:", " length:2];	
-		}
-		[self writeObject:[dict objectForKey:key] forKey:key];
-	}
-	[self endDictionary];
-}
+//-(void)writeDictionary:(NSDictionary *)dict
+//{
+//	BOOL first=YES;
+//	[self beginDictionary];
+//	for ( NSString *key in [dict allKeys] ) {
+//		if ( first ) {
+//			first=NO;
+//		} else {
+//			[self appendBytes:", " length:2];	
+//		}
+//		[self writeObject:[dict objectForKey:key] forKey:key];
+//	}
+//	[self endDictionary];
+//}
 
 -(void)writeString:(NSString*)anObject
 {
@@ -250,7 +253,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
     for (NSString *ivar in ivars) {
         MPWPropertyBinding *accessor=[[MPWPropertyBinding valueForName:ivar] retain];
         [accessor bindToClass:theClass];
-        id block=^(id object, MPWJSONWriter* stream){ [stream writeInteger:[[object valueForKey:ivar] intValue] forKey:ivar]; };
+        id block=^(id object, MPWJSONWriter* stream){ [stream writeObject:[object valueForKey:ivar] forKey:ivar]; };
         [copiers addObject:Block_copy(block)];
     }
     void (^encoder)( id object, MPWJSONWriter *writer) = Block_copy( ^void(id object, MPWJSONWriter *writer) {
@@ -289,14 +292,14 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 @interface MPWJSONWriterTestClass : NSObject
 
 @property (nonatomic, assign) int a,b;
-//@property (nonatomic, strong) NSString *c;
+@property (nonatomic, strong) NSString *c;
 
 @end
 @implementation MPWJSONWriterTestClass
 
 -(void)dealloc
 {
-//    [_c release];
+    [_c release];
     [super dealloc];
 }
 
@@ -312,7 +315,7 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 
 +(void)testWriteDict
 {
-	NSString *expectedEncoding= @"{\"key\":\"value\", \"key1\":\"value1\"}";
+	NSString *expectedEncoding= @"{\"key\":\"value\",\"key1\":\"value1\"}";
 	NSString *actualEncoding=[self _encode:[NSDictionary dictionaryWithObjectsAndKeys:@"value",@"key",
 											@"value1",@"key1",nil ]];
 //	INTEXPECT( [actualEncoding length], [expectedEncoding length], @"lengths");
@@ -356,11 +359,10 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
     MPWJSONWriter *s = [self _testStream];
     obj.a = 41;
     obj.b = 12;
-//    obj.c = @"Test String";
+    obj.c = @"Test String";
     [s createEncoderMethodForClass:obj.class];
     [s writeObject:obj];
-    IDEXPECT([s target],@"{\"a\":41,\"b\":12}",@"encoded");
-//    IDEXPECT([s target],@"{\"a\"=41;\"b\"=41;\"c\"=\"Test String\"}",@"encoded");
+    IDEXPECT([s target],@"{\"a\":41,\"b\":12,\"c\":\"Test String\"}",@"encoded");
 }
 
 +(NSArray*)testSelectors {
