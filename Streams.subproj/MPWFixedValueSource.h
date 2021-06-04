@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (assign) NSTimeInterval seconds;
 
 -(NSTimer*)timer;
--(void)runTimer;
 
 @end
 

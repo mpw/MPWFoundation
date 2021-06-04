@@ -658,7 +658,7 @@ typedef void (^FileBlock)(FILE *f);
 -(void)appendBytes:(const void*)bytes length:(long)len
 {
 #if Darwin || TARGET_OS_IPHONE || TARGET_OS_MAC
-    [self appendFormat:@"%.*s",(int)len,bytes];
+    [self appendFormat:@"%.*s",(int)len,(char*)bytes];
 #else
 	[self appendString:[NSString stringWithCString:bytes length:len]];
 #endif

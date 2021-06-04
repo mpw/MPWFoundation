@@ -9,6 +9,8 @@
 #import "MPWJSONWriter.h"
 #import "MPWPropertyBinding.h"
 #import <objc/runtime.h>
+#import "NSObjectFiltering.h"
+#import "NSObjectAdditions.h"
 
 @implementation MPWJSONWriter
 
@@ -387,6 +389,10 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	IDEXPECT( [self _encode:[NSString stringWithCharacters:&thechar length:1]], @"\"\\u0002\"", @"ASCII 2 is Unicode escaped");
 	thechar=27;
 	IDEXPECT( [self _encode:[NSString stringWithCharacters:&thechar length:1]], @"\"\\u001b\"", @"ASCII 27 is Unicode escaped");
+}
+
++(instancetype)_testStream {
+    return [self streamWithTarget:[NSMutableString string]];
 }
 
 +(void)testCreateSerializationMethod

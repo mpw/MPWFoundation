@@ -196,12 +196,12 @@
 
 -(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
 {
-    
+    return nil;
 }
 
 -(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
 {
-    
+    return ;
 }
 
 

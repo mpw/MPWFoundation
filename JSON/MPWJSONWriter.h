@@ -23,6 +23,7 @@
 @interface MPWJSONWriter(redeclare)
 
 -(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(id object, MPWJSONWriter* writer))contentBlock;
+-(void)createEncoderMethodForClass:(Class)theClass;
 
 
 

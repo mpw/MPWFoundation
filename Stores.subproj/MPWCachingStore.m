@@ -105,9 +105,9 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 {
     NSArray<MPWReferencing>* sourceRefs = [super childrenOfReference:aReference];
     NSArray<MPWReferencing>* cacheRefs = [self.cache childrenOfReference:aReference];
-    NSMutableSet *allRefs=[NSMutableSet setWithArray:sourceRefs];
+    NSMutableSet<MPWReferencing> *allRefs=[NSMutableSet setWithArray:sourceRefs];
     [allRefs addObjectsFromArray:cacheRefs];
-    return allRefs.allObjects;
+    return (NSArray<MPWReferencing>*)(allRefs.allObjects);
 }
 
 -(void)graphViz:(MPWByteStream*)aStream

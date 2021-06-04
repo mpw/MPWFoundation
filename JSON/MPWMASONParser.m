@@ -8,9 +8,9 @@
 
 #import "MPWMASONParser.h"
 #import "MPWMAXParser_private.h"
-#import <MPWFoundation/MPWPListBuilder.h>
-#import <MPWFoundation/MPWObjectBuilder.h>
-#import <MPWFoundation/MPWSmallStringTable.h>
+#import "MPWPListBuilder.h"
+#import "MPWObjectBuilder.h"
+#import "MPWSmallStringTable.h"
 
 
 @implementation MPWMASONParser

@@ -18,7 +18,7 @@ static void interrupt(int signal) {
 -(void)runInterruptibly
 {
     interrupted=NO;
-    void (*oldsig)(void ) = signal(SIGINT,interrupt);
+    void (*oldsig)(int ) = signal(SIGINT,interrupt);
     while (!interrupted) {
         @autoreleasepool {
             [self runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];

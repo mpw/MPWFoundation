@@ -51,7 +51,6 @@ typedef struct {
 @property (nonatomic, assign) long streamingThreshold;
 @property (nonatomic, strong) id <Streaming> target;
 
-
 -result;
 +(instancetype)builder;
 -(NSString*)key;

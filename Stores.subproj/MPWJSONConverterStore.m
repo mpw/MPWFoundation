@@ -95,7 +95,7 @@
         
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
-    NSData *json=[store mapObjectToStore:dicts forReference:nil];
+    MPWResource *json=[store mapObjectToStore:dicts forReference:nil];
     IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15,\"Key1\":\"Value1\"},{\"Key2\":42,\"Key1\":\"Value2\"}]", @"json for dict");
 }
 
@@ -121,7 +121,7 @@
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     store.up=true;
-    NSData *json=[store mapRetrievedObject:dicts forReference:nil];
+    MPWResource *json=[store mapRetrievedObject:dicts forReference:nil];
     IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15,\"Key1\":\"Value1\"},{\"Key2\":42,\"Key1\":\"Value2\"}]", @"json for dict");
 }
 
@@ -183,7 +183,7 @@
     second.c = @"World!";
     NSArray *objects=@[first,second];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
-    NSData *json=[store mapObjectToStore:objects forReference:nil];
+    MPWResource *json=[store mapObjectToStore:objects forReference:nil];
     IDEXPECT( [[json rawData] stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");
     json=[store mapObjectToStore:objects forReference:nil];
     IDEXPECT( [[json rawData] stringValue], @"[{\"a\":561,\"b\":42,\"c\":\"Hello\"},{\"a\":3,\"b\":0,\"c\":\"World!\"}]", @"json for dict");

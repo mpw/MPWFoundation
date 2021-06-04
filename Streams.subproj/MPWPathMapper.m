@@ -60,14 +60,14 @@
 
 @end
 
-@implementation MPWBinding(pathMapper)
-
--(void)writeOnPathMapper:(MPWPathMapper*)mapper
-{
-    [mapper writeBinding:self];
-}
-
-@end
+//@implementation MPWBinding(pathMapper)
+//
+//-(void)writeOnPathMapper:(MPWPathMapper*)mapper
+//{
+//    [mapper writeBinding:self];
+//}
+//
+//@end
 
 @implementation MPWRESTOperation(pathMapper)
 

@@ -44,10 +44,19 @@
     return [self isEqual:other];
 }
 
+- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
+    return nil;
+}
+
+
 -(NSString*)urlPath
 {
     return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
 }
+
+@synthesize path;
+
+@synthesize schemeName;
 
 @end
 

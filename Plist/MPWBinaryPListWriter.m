@@ -145,11 +145,11 @@ objectAccessor(NSMapTable, objectTable, setObjectTable)
 
 -(void)writeArray:(NSArray*)anArray usingElementBlock:(void (^)(MPWBinaryPListWriter* writer,id randomArgument))aBlock
 {
-    int offset=0;
-    offset=(int)[objectTable objectForKey:anArray];
+    long offset=0;
+    offset=(long)[objectTable objectForKey:anArray];
     
     if ( offset ) {
-        [currentIndexes addInteger:offset];
+        [currentIndexes addInteger:(int)offset];
     } else {
         if ( [anArray count]) {
             [self beginArray];
@@ -346,11 +346,11 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
 
 -(void)writeString:(NSString*)aString
 {
-    int offset=0;
-    offset=(int)[objectTable objectForKey:aString];
+    long offset=0;
+    offset=(long)[objectTable objectForKey:aString];
     
     if ( offset ) {
-        [currentIndexes addInteger:offset];
+        [currentIndexes addInteger:(int)offset];
     } else {
         [self _recordByteOffset];
         long l=[aString length];

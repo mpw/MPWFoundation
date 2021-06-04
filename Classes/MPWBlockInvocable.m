@@ -499,6 +499,11 @@ typedef id (^idBlock)(id arg );
 }
 @end
 
+@interface BlockTest(dynamicallyDefinedSelectors)
+-(void)test;
+-(void)testFun;
+@end
+
 @implementation BlockTest
 
 static void testIMP( id receiver, SEL sel )
