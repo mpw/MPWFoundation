@@ -118,7 +118,7 @@ idAccessor(name, setName)
 
 static inline bool isInteger( AccessPathComponent c  )
 {
-    return c.objcType=='q' || c.objcType=='l';
+    return c.objcType=='q' || c.objcType=='l'|| c.objcType=='i';
 }
 
 
@@ -131,7 +131,8 @@ static inline id getValueForComponents( id currentTarget, AccessPathComponent *c
             currentTarget=((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg );
         } else if  ( isInteger( c[i] ) ) {
             currentTarget=@((long)((IMP1)c[i].getIMP)( currentTarget, c[i].getSelector, c[i].additionalArg ));
-
+        } else {
+            currentTarget = nil;
         }
         //        }
     }
@@ -239,7 +240,7 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p targetClass: %@ name: %@>",self.class,self,[target class],name];
+    return [NSString stringWithFormat:@"<%@:%p targetClass: %@ name: %@>",self.class,self,components[0].targetClass,name];
 }
 
 @end
@@ -427,6 +428,31 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
     }
 }
 
++(void)testIntegerValueForTarget
+{
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
+    MPWPropertyBinding *accessor=[self valueForName:@"number"];
+    [accessor bindToClass:t.class];
+    INTEXPECT( [accessor integerValueForTarget:t], 34, @"integer value");
+}
+
++(void)testObjectValueForTarget
+{
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
+    MPWPropertyBinding *accessor=[self valueForName:@"string"];
+    [accessor bindToClass:t.class];
+    IDEXPECT( [accessor valueForTarget:t], @"hello", @"object value");
+}
+
++(void)testObjectValueForIntIVar
+{
+    MPWPropertyBindingTestingClass *t=[self _testTarget];
+    MPWPropertyBinding *accessor=[self valueForName:@"number"];
+    [accessor bindToClass:t.class];
+    IDEXPECT( [accessor valueForTarget:t], @(34), @"object value");
+}
+
+
 +testSelectors
 {
     return [NSArray arrayWithObjects:
@@ -440,6 +466,9 @@ static inline void setIntValueForComponents( id currentTarget, AccessPathCompone
             @"testIntReadAccessOfIntegerIvar",
             @"testIntWriteAccessOfIntegerIvar",
             @"testTypeOfIntVar",
+            @"testIntegerValueForTarget",
+            @"testObjectValueForTarget",
+            @"testObjectValueForIntIVar",
             nil];
 }
 

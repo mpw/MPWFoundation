@@ -43,6 +43,7 @@
 -(void)setClass:(Class)aClass
 {
     self.reader = [[[MPWMASONParser alloc] initWithClass:aClass] autorelease];
+    [self.writer createEncoderMethodForClass:aClass];
 }
 
 -parsedJSON:(NSData*)anObject

@@ -24,8 +24,10 @@
 -value;
 -(void)setValue:newValue;
 -(long)integerValue;
+-(long)integerValueForTarget:aTarget;
 -(void)setIntValue:(long)newValue;
 -(void)setIntValue:(long)newValue forTarget:aTarget;
+-(char)typeCode;
 
 -target;
 -(void)bindToTarget:aTarget;
