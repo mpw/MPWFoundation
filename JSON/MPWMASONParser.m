@@ -250,7 +250,7 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 -parsedData:(NSData*)jsonData
 {
     [self setData:jsonData];
-    [self.builder clearResult];
+    [(MPWPListBuilder*)self.builder clearResult];
     const char *curptr=[jsonData bytes];
     const char *endptr=curptr+[jsonData length];
     const char *stringstart=NULL;
