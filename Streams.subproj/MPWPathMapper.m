@@ -7,6 +7,10 @@
 
 #import "MPWPathMapper.h"
 
+@interface NSObject(pathMapping)
+-(void)writeOnPathMapper:aMapper;
+@end
+
 @implementation MPWPathMapper
 
 -(SEL)streamWriterMessage

@@ -8,7 +8,7 @@
 
 #import "MPWStreamSource.h"
 #import <MPWWriteStream.h>
-
+#import "MPWBlockTargetStream.h"
 
 
 @implementation MPWStreamSource
@@ -18,6 +18,11 @@
 -(void)run
 {
     ;
+}
+
+-(void)do:aBlock
+{
+    [self setTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
 }
 
 -(void)runInThread

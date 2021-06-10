@@ -67,6 +67,11 @@ SEL visSel;
     
 }
 
+-(void)do:aBlock
+{
+    [self setTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+}
+
 -(void)writeTarget:aTarget
 {
     [self writeObject:[aTarget stringValue]];

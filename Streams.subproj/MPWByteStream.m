@@ -120,8 +120,6 @@ idAccessor(byteTarget, _setByteTarget)
 }
 
 
-
-
 +stringStream
 {
 	return [self streamWithTarget:[NSMutableString string]];
