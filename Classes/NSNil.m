@@ -296,4 +296,32 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
     return [NSNil nsNil];
 }
 
+
+-(BOOL)isNotNil
+/*" The reason we use isNotNil instead of isNil is that this works for plain nil as well as NSNil\
+ "*/
+{
+    return YES;
+}
+
+@end
+
+@implementation NSNull(notNil)
+
+-(BOOL)isNotNil
+{
+    return NO;
+}
+
+-ifNotNil:(id <Evaluable>)anArg
+{
+    return self;
+}
+
+-ifNil:anArg
+{
+    return [anArg value];
+}
+
+
 @end
