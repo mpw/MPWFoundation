@@ -135,7 +135,7 @@
     if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
         return maybeChildren;
     } else if ( [maybeChildren respondsToSelector:@selector(contents)]) {
-        return [maybeChildren contents];
+        return (NSArray<MPWReferencing>*)[maybeChildren contents];
     } else {
         return nil;
     }

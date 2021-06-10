@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) MPWJSONWriter *writer;
 @property (nonatomic, strong) MPWMASONParser *reader;
+@property (nonatomic, assign) Class theConverterClass;
 
 @end
 
@@ -40,10 +41,16 @@
     return r;
 }
 
--(void)setClass:(Class)aClass
+-(void)setConverterClass:(Class)aClass
 {
+    self.theConverterClass = aClass;
     self.reader = [[[MPWMASONParser alloc] initWithClass:aClass] autorelease];
     [self.writer createEncoderMethodForClass:aClass];
+}
+
+-(Class)converterClass
+{
+    return self.theConverterClass;
 }
 
 -parsedJSON:(NSData*)anObject
@@ -157,7 +164,7 @@
 {
     NSString *jsonSource=@"[{\"a\":15, \"b\":13, \"c\":\"TestString1\"},{\"a\":42,\"b\":1, \"c\":\"TestString2\"}]";
     MPWJSONConverterStore *store=[self storeWithSource:nil];
-    [store setClass:[MPWJSONCodingStoreTestClass class]];
+    [store setConverterClass:[MPWJSONCodingStoreTestClass class]];
     NSArray *parsed=[store mapRetrievedObject:[jsonSource asData] forReference:nil];
     INTEXPECT(parsed.count, 2, @"number of objects");
     MPWJSONCodingStoreTestClass *first,*last;

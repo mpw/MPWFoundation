@@ -15,7 +15,7 @@
 
 @interface MPWWriteThroughCache()
 
-@property (nonatomic, strong) id <MPWStorage> cache;
+@property (nonatomic, strong) id <MPWHierarchicalStorage> cache;
 
 @end
 
@@ -104,8 +104,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     NSArray<MPWReferencing>* sourceRefs = [super childrenOfReference:aReference];
-    NSArray<MPWReferencing>* cacheRefs = [self.cache childrenOfReference:aReference];
-    NSMutableSet<MPWReferencing> *allRefs=[NSMutableSet setWithArray:sourceRefs];
+    NSArray<MPWReferencing>* cacheRefs = [(id <MPWHierarchicalStorage>)self.cache childrenOfReference:aReference];
+    NSMutableSet<MPWReferencing> *allRefs=(NSMutableSet<MPWReferencing> *)[NSMutableSet setWithArray:sourceRefs];
     [allRefs addObjectsFromArray:cacheRefs];
     return (NSArray<MPWReferencing>*)(allRefs.allObjects);
 }
