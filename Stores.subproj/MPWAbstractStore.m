@@ -205,6 +205,7 @@
 }
 
 
+
 -(MPWBinding*)bindingForReference:aReference inContext:aContext
 {
     return [MPWBinding bindingWithReference:aReference inStore:self];

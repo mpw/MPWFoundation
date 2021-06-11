@@ -23,6 +23,7 @@
 -(void)do:aBlock
 {
     [self setTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+    [self run];
 }
 
 -(void)runInThread

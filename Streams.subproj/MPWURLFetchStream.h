@@ -18,7 +18,7 @@
 @property (nonatomic, strong) id <Streaming> errorTarget;
 @property (nonatomic,assign) MPWRESTVerb defaultMethod;
 @property (assign) BOOL  formEncode;
-@property (nonatomic, readonly) NSMutableSet *inflight;
+@property (nonatomic, readonly) NSMutableOrderedSet *inflight;
 @property (nonatomic, readonly) NSURLSession *downloader;
 
 +streamWithBaseURL:(NSURL*)newBaseURL target:aTarget session:(NSURLSession*)session;
@@ -31,6 +31,7 @@
 
 -(NSURLRequest*)resolvedRequest:(MPWURLCall*)request;
 -(void)executeRequest:(MPWURLCall*)request;
+-(void)enqueueRequest:(MPWURLCall*)request;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb  body:(NSData *)body;
 -(NSURLSessionConfiguration *)config;
 

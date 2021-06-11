@@ -17,7 +17,7 @@
 @interface MPWURLFetchStream()
 
 @property (nonatomic, strong) NSDictionary *theHeaderDict;
-@property (nonatomic, strong) NSMutableSet *inflight;
+@property (nonatomic, strong) NSMutableOrderedSet *inflight;
 @property (nonatomic, strong) NSURLSession *downloader;
 
 @end
@@ -34,7 +34,7 @@ CONVENIENCEANDINIT(stream, WithBaseURL:(NSURL*)newBaseURL target:aTarget session
     [self setBaseURL:newBaseURL];
     [self setErrorTarget:[MPWByteStream Stderr]];
     [self setDefaultMethod:MPWRESTVerbGET];
-    [self setInflight:[NSMutableSet set]];
+    [self setInflight:[NSMutableOrderedSet orderedSet]];
     return self;
 }
 
@@ -247,7 +247,7 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 
--(void)executeRequest:(MPWURLCall*)request
+-(void)enqueueRequest:(MPWURLCall*)request
 {
     [request retain];
     request.task = [self taskForExecutingRequest:request];
@@ -258,7 +258,28 @@ static NSURLSession *_defaultURLSession=nil;
     } else {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
-    [request.task resume];
+}
+
+-(MPWURLCall*)lastRequest
+{
+    return self.inflight.lastObject;
+}
+
+-(void)run
+{
+    [[self lastRequest].task resume];
+}
+
+-(void)do:aBlock
+{
+    [super do:aBlock];
+    [self run];
+}
+
+-(void)executeRequest:(MPWURLCall*)request
+{
+    [self enqueueRequest:request];
+    [self run];
 }
 
 -(int)inflightCount
