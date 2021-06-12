@@ -36,15 +36,6 @@
     return [self initWithTarget:[[self class] defaultTarget]];
 }
 
--(void)setFinalTarget:newTarget
-{
-    if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
-        [(MPWFilter*)[self target] setFinalTarget:newTarget];
-    } else {
-        [self setTarget:newTarget];
-    }
-}
-
 
 -(void)writeNSObject:anObject
 {

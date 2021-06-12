@@ -13,6 +13,7 @@
 #import "MPWURLFetchStream.h"
 #import "MPWURLCall.h"
 #import "MPWURLReference.h"
+#import "MPWBytesToLines.h"
 
 @interface SayYES : NSObject
 {
@@ -193,6 +194,13 @@ objectAccessor(NSError, error, setError)
     request.isStreaming=YES;
     MPWURLStreamingStream *s=[MPWURLStreamingStream streamWithTarget:nil];
     [s enqueueRequest:request];
+    return s;
+}
+
+-lines
+{
+    MPWURLStreamingStream *s=[self stream];
+    [s setTarget:[MPWBytesToLines stream]];
     return s;
 }
 

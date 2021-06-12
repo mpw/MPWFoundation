@@ -19,10 +19,23 @@
 {
     ;
 }
+-(void)setFinalTarget:newTarget
+{
+    NSLog(@"setFinalTarget: %@",newTarget);
+    if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
+        NSLog(@"target %@ has a finalTarget",[self target]);
+        [[self target] setFinalTarget:newTarget];
+    } else {
+        NSLog(@"target %@ does not have finalTarget",[self target]);
+        [self setTarget:newTarget];
+    }
+}
 
 -(void)do:aBlock
 {
-    [self setTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+    NSLog(@"target before: %@",self.target);
+    [self setFinalTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+    NSLog(@"target after: %@",self.target);
     [self run];
 }
 

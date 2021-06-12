@@ -44,7 +44,7 @@
 
 -(id)referenceForPath:(NSString *)name
 {
-    NSLog(@"referenceForPath: %@",name);
+//    NSLog(@"referenceForPath: %@",name);
     id <MPWReferencing> reference=[super referenceForPath:name];
     reference.schemeName=[self schemePrefix];
     return reference;

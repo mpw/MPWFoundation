@@ -67,9 +67,19 @@ SEL visSel;
     
 }
 
+-(void)setFinalTarget:newTarget
+{
+    if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
+        [(MPWFilter*)[self target] setFinalTarget:newTarget];
+    } else {
+        [self setTarget:newTarget];
+    }
+}
+
+
 -(void)do:aBlock
 {
-    [self setTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
+    [self setFinalTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
 }
 
 -(void)writeTarget:aTarget
