@@ -14,6 +14,7 @@
 #import "MPWURLCall.h"
 #import "MPWURLReference.h"
 #import "MPWBytesToLines.h"
+#import "MPWSkipFilter.h"
 
 @interface SayYES : NSObject
 {
@@ -197,6 +198,8 @@ objectAccessor(NSError, error, setError)
     return s;
 }
 
+
+
 -lines
 {
     MPWURLStreamingStream *s=[self stream];
@@ -204,6 +207,14 @@ objectAccessor(NSError, error, setError)
     return s;
 }
 
+-linesAfter:(int)numToSkip
+{
+    MPWURLStreamingStream *stream=[self lines];
+    MPWSkipFilter *skipper=[MPWSkipFilter stream];
+    skipper.skip = numToSkip;
+    [stream setFinalTarget:skipper];
+    return stream;
+}
 
 
 -(NSString *)description

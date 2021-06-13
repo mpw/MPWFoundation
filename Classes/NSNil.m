@@ -16,6 +16,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 @protocol Evaluable
 
 -value;
+-value:arg;
 
 @end
 
@@ -184,6 +185,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
     return NO;
 }
 
+
 @end
 
 #import "DebugMacros.h"
@@ -223,7 +225,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 +(void)testNilIfNotNil
 {
-    IDEXPECT( [[self nsNil] ifNotNil:self], [self nsNil], @"nsNil ifNil ->");
+    IDEXPECT( [[self nsNil] ifNotNil:^{ return @"wasn't nil"; }], [self nsNil], @"nsNil ifNil ->");
 }
 
 
@@ -235,7 +237,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 +(void)testNotNilIfNotNil
 {
-    IDEXPECT( [@"" ifNotNil:self], @"value", @"");
+    IDEXPECT( [@"value" ifNotNil:^(id arg){ return arg; }], @"value", @"");
 
 }
 
@@ -251,6 +253,11 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
         EXPECTNIL(exception, @"should not have gotten exception");
     }
     EXPECTNIL(result, @"result should have been nil");
+}
+
++(void)testNotNilParsedAsArg
+{
+    IDEXPECT( [@"hi" ifNotNil:^(id arg){ return arg; }] ,@"hi", @"");
 }
 
 #if !TARGET_OS_IPHONE            
@@ -275,7 +282,8 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
             @"testNilIfNil",@"testNilIfNotNil",
             @"testNotNilIfNil",@"testNotNilIfNotNil",
             @"testNilEatsMessages",
-#if !TARGET_OS_IPHONE            
+            @"testNotNilParsedAsArg",
+#if !TARGET_OS_IPHONE
 //            @"testnilReceiver",
 #endif            
             nil
@@ -288,7 +296,7 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 -ifNotNil:(id <Evaluable>)anArg
 {
-    return [anArg value];
+    return [anArg value:self];
 }
 
 -ifNil:anArg
@@ -325,3 +333,6 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 
 @end
+
+
+

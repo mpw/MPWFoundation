@@ -16,4 +16,9 @@
     NSMutableData *responseData;
 }
 
+-stream;
+-lines;
+-linesAfter:(int)numToSkip;
+
+
 @end

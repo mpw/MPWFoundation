@@ -14,7 +14,7 @@
 
 @interface MPWURLStreamingFetchHelper : MPWFilter <NSURLSessionDelegate>
 
-@property (nonatomic, strong)  NSMutableSet *inflight;
+@property (nonatomic, strong)  NSMutableOrderedSet *inflight;
 
 @end
 
@@ -86,7 +86,9 @@
 didCompleteWithError:(nullable NSError *)error
 {
     @synchronized (self) {
-        [self.inflight removeObject:task];
+        //  a streaming fetchstream can only have one in progress
+        //  and we don't have accesss to the MPWCall here.
+        [self.inflight removeAllObjects];
     }
     if ( error ){
         [self reportError:error];

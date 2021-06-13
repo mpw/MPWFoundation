@@ -8,6 +8,7 @@
 #import "MPWThreadSwitchStream.h"
 #import "MPWBlockTargetStream.h"
 #import <MPWByteStream.h>
+#import "MPWResource.h"
 
 @interface MPWWriteStream(private)
 
@@ -163,6 +164,11 @@ SEL visSel;
     [pool drain];
 }
 
+-(void)writeResource:(MPWResource*)aResource
+{
+    [self writeObject:[aResource rawData]];
+}
+
 -(void)writeEnumerator_fast:(NSEnumerator*)e spacer:spacer
 {
     id nextObject;
@@ -234,6 +240,15 @@ SEL visSel;
 
 @end
 
+@implementation MPWResource(streaming)
+
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream
+{
+    [aStream writeResource:self];
+}
+
+@end
+
 @implementation NSObject(MPWStreaming)
 
 
@@ -296,6 +311,11 @@ SEL visSel;
     [aStream writeNSObject:self];
 }
 
+-processedWith:(MPWWriteStream*)streamOrStreamClass
+{
+    return [streamOrStreamClass process:self];
+}
+
 -finalTarget
 {
     return self;
@@ -309,6 +329,7 @@ SEL visSel;
 }
 
 @end
+
 
 @implementation NSMutableArray(StreamTarget)
 

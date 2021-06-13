@@ -125,6 +125,8 @@ idAccessor( _target, _setTarget )
     return result;
 }
 
+
+
 -firstObject { return [[self finalTarget] firstObject]; }
 -lastObject { return [[self finalTarget] lastObject]; }
 

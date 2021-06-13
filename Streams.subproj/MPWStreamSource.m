@@ -33,9 +33,7 @@
 
 -(void)do:aBlock
 {
-    NSLog(@"target before: %@",self.target);
     [self setFinalTarget:[MPWBlockTargetStream streamWithBlock:aBlock]];
-    NSLog(@"target after: %@",self.target);
     [self run];
 }
 
