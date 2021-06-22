@@ -125,6 +125,11 @@ idAccessor( _target, _setTarget )
     return result;
 }
 
+-process:anObject
+{
+    return [self processObject:anObject];
+}
+
 
 
 -firstObject { return [[self finalTarget] firstObject]; }

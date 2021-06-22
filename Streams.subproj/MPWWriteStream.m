@@ -113,6 +113,11 @@ SEL visSel;
     [self writeNSObject:d];
 }
 
+-(void)writeString:(NSString*)s
+{
+    [self writeNSObject:s];
+}
+
 -(void)flushLocal
 {
     ;
@@ -227,6 +232,16 @@ SEL visSel;
 -(void)writeOnMPWStream:(MPWWriteStream*)aStream
 {
     [aStream writeData:self];
+}
+
+@end
+
+
+@implementation NSString(MPWStreaming)
+
+-(void)writeOnMPWStream:(MPWWriteStream*)aStream
+{
+    [aStream writeString:self];
 }
 
 @end

@@ -15,5 +15,6 @@
 
 -(void)run;
 -(void)runInThread;
-
+-(void)setFinalTarget:newTarget;
+-(void)awaitResultForSeconds:(NSTimeInterval)seconds;
 @end

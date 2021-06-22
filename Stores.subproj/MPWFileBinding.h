@@ -8,6 +8,7 @@
 
 #import <MPWFoundation/MPWBinding.h>
 
+@class MPWStreamSource;
 
 @interface MPWFileBinding : MPWBinding {
     BOOL ignoreChanges;
@@ -19,5 +20,7 @@
 -(NSString*)fancyPath;
 -source;
 -(MPWByteStream*)writeStream;
+-(MPWStreamSource*)lines;
+-(MPWStreamSource*)linesAfter:(int)numToSkip;
 
 @end

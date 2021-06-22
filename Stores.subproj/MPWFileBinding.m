@@ -9,6 +9,9 @@
 #import "MPWFileBinding.h"
 #import <MPWFoundation/AccessorMacros.h>
 #import <MPWFoundation/MPWFoundation.h>
+#import "MPWBytesToLines.h"
+#import "MPWSkipFilter.h"
+
 #import <unistd.h>
 
 @interface NSObject (workspaceMBethods)
@@ -180,10 +183,33 @@
     return [MPWFDStreamSource name:[self path]];
 }
 
+-stream
+{
+    return [self source];
+}
+
 -(MPWByteStream*)writeStream
 {
     return [MPWByteStream fileName:self.path mode:@"w" atomically:NO];
 }
+
+-(MPWStreamSource*)lines
+{
+    MPWFDStreamSource *s=[self stream];
+    [s setTarget:[MPWBytesToLines stream]];
+    return s;
+}
+
+-(MPWStreamSource*)linesAfter:(int)numToSkip
+{
+    MPWStreamSource *stream=[self lines];
+    MPWSkipFilter *skipper=[MPWSkipFilter stream];
+    skipper.skip = numToSkip;
+    [stream setFinalTarget:skipper];
+    return stream;
+}
+
+
 
 -(void)dealloc
 {

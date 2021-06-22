@@ -317,6 +317,25 @@
 
 @end
 
+@implementation NSDictionary(storeLegacy)
+
+-evaluateIdentifier:anIdentifier withContext:aContext
+{
+    id value = [self at:anIdentifier];
+    
+    if ( [value respondsToSelector:@selector(isNotNil)]  && ![value isNotNil] ) {
+        value=nil;
+    }
+    return value;
+}
+
+-referenceForPath:aPath
+{
+    return aPath;
+}
+
+@end
+
 
 #import "DebugMacros.h"
 
