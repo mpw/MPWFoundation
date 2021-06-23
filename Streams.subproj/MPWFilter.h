@@ -31,7 +31,7 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 -(void)forward:anObject;
 -finalTarget;
 -processObject:anObject;
-
+-process:anObject;
 +defaultTarget;
 
 -(void)insertStream:aStream;

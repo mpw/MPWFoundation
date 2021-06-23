@@ -246,8 +246,13 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     return val;
 }
 
+-process:(NSData*)jsonData
+{
+    return [self parsedData:jsonData];
+}
 
--parsedData:(NSData*)jsonData
+
+-(void)writeData:(NSData*)jsonData
 {
     [self setData:jsonData];
     [(MPWPListBuilder*)self.builder clearResult];
@@ -374,10 +379,15 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
         }
     }
 //    NSLog(@"nsstrings: %ld subdatas: %ld common: %ld",nsstrings,subdatas,common);
-    return [_builder result];
 
 }
 
+-parsedData:(NSData*)jsonData
+{
+    [self writeData:jsonData];
+    return [_builder result];
+
+}
 -(void)dealloc
 {
 	[(id)_builder release];

@@ -254,8 +254,6 @@
 		1F7FCD0E264BBCA6008B6D1A /* MPWFileChangesStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7FCD0B264BBCA6008B6D1A /* MPWFileChangesStream.h */; };
 		1F7FCD0F264BBCA6008B6D1A /* MPWFileChangesStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7FCD0B264BBCA6008B6D1A /* MPWFileChangesStream.h */; };
 		1F7FCD10264BBCA6008B6D1A /* MPWFileChangesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FCD0C264BBCA6008B6D1A /* MPWFileChangesStream.m */; };
-		1F7FCD11264BBCA6008B6D1A /* MPWFileChangesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FCD0C264BBCA6008B6D1A /* MPWFileChangesStream.m */; };
-		1F7FCD12264BBCA6008B6D1A /* MPWFileChangesStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7FCD0C264BBCA6008B6D1A /* MPWFileChangesStream.m */; };
 		1F7FCD38264ECE24008B6D1A /* MPWPathMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7FCD36264ECE24008B6D1A /* MPWPathMapper.h */; };
 		1F7FCD39264ECE24008B6D1A /* MPWPathMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7FCD36264ECE24008B6D1A /* MPWPathMapper.h */; };
 		1F7FCD3A264ECE24008B6D1A /* MPWPathMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7FCD36264ECE24008B6D1A /* MPWPathMapper.h */; };
@@ -3236,7 +3234,6 @@
 				1F6A725F26735282003A5B5C /* MPWURLBinding.m in Sources */,
 				1F54A15F209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */,
 				1FEFBD362427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */,
-				1F7FCD11264BBCA6008B6D1A /* MPWFileChangesStream.m in Sources */,
 				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
 				1F575D8920BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */,
 				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
@@ -3465,7 +3462,6 @@
 				1FCF26181CF3990400AC64CE /* MPWByteStream.m in Sources */,
 				1FCF260D1CF3990400AC64CE /* MPWBlockTargetStream.m in Sources */,
 				1F6A726326735282003A5B5C /* MPWURLBinding.m in Sources */,
-				1F7FCD12264BBCA6008B6D1A /* MPWFileChangesStream.m in Sources */,
 				1F783B0B256A73AE00BE8654 /* MPWPropertyStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

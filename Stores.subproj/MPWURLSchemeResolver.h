@@ -11,7 +11,6 @@
 @class MPWURLBinding,MPWResource;
 
 @interface MPWURLSchemeResolver : MPWURLBasedStore {
-
 }
 
 -(instancetype)initWithSchemePrefix:(NSString*)schemeName;
@@ -22,5 +21,8 @@
 
 -(NSString*)schemePrefix;
 -(MPWResource*)resourceWithRequest:(NSURLRequest*)request;
+
+@property (nonatomic, strong ) NSDictionary *headers;
+
 
 @end

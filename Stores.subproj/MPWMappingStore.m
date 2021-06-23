@@ -61,6 +61,18 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [self.source deleteAt:[self mapReference:aReference]];
 }
 
+-(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+{
+    return [self.source writeStreamAt:[self mapReference:aReference]];
+}
+
+-(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+{
+    [[self source] at:[self mapReference:aReference] readToStream:aStream];
+    return ;
+}
+
+
 -(BOOL)hasChildren:(id<MPWReferencing>)aReference
 {
     return [self.source hasChildren:[self mapReference:aReference]];

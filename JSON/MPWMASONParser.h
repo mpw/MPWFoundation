@@ -22,5 +22,6 @@
 -(void)setFrequentStrings:(NSArray*)strings;
 -(instancetype)initWithClass:(Class)classToDecode;
 -(instancetype)initWithBuilder:aBuilder;
+-process:(NSData*)jsonData;
 
 @end

@@ -29,17 +29,26 @@
 
 -(MPWResource*)serialized:json
 {
-    if (!json || [json isNil]) {
-        return nil;
-    }
-    [self.writer setByteTarget:[NSMutableData data]];
-    [self.writer writeObject:json];
-    NSData *d= (NSData*)self.writer.target;
+    NSData *d=[self.writer process:json];
     MPWResource *r=[[MPWResource new] autorelease];
     [r setRawData:d];
     [r setMIMEType:@"application/json"];
     return r;
 }
+
+-(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+{
+    [self.writer setByteTarget:[self.source writeStreamAt:aReference]];
+    return self.writer;
+}
+
+-(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+{
+    [aStream setFinalTarget:self.reader];
+    [[self source] at:aReference readToStream:aStream];
+    return ;
+}
+
 
 -(void)setConverterClass:(Class)aClass
 {
@@ -55,7 +64,7 @@
 
 -parsedJSON:(NSData*)anObject
 {
-    return [self.reader parsedData:anObject];
+    return [self.reader process:anObject];
 }
 
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference

@@ -63,7 +63,12 @@
 #ifdef GS_API_LATEST
     NSData *rawData = [NSData dataWithContentsOfURL:aURL];
 #else
-    NSData *rawData = [NSData dataWithContentsOfURL:aURL  options:NSDataReadingMapped error:&error];
+    NSData *rawData=nil;
+    if ( [aURL.scheme hasPrefix:@"http"]) {
+        rawData = [self atURL:aURL];
+    } else {
+        rawData = [NSData dataWithContentsOfURL:aURL  options:NSDataReadingMapped error:&error];
+    }
 #endif
     MPWResource *result=[[[MPWResource alloc] init] autorelease];
     [result setSource:aURL];
@@ -91,8 +96,10 @@
 {
     NSHTTPURLResponse *response=nil;
     NSError *localError=nil;
+    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+    NSLog(@"request URL: %@",request.URL);
     NSData *rawData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&localError];
-    
+
     if ( [response statusCode] != 404 ) {
         MPWResource *result=[[[MPWResource alloc] init] autorelease];
         [result setSource:[request URL]];
@@ -104,13 +111,18 @@
     }
 }
 
--_valueWithURL:(NSURL*)aURL
+-atURL:(NSURL*)aURL
 {
     NSMutableURLRequest *request=[[[NSMutableURLRequest alloc] initWithURL:aURL] autorelease];
     NSMutableDictionary *headers=[NSMutableDictionary dictionaryWithObject:@"locale=en-us" forKey:@"Cookies"];
+    if ( self.headers ) {
+        [headers addEntriesFromDictionary:self.headers];
+    }
     [headers setObject:@"stsh" forKey:@"User-Agent"];
     [headers setObject:@"*/*" forKey:@"Accept"];
+    NSLog(@"headers: %@",headers);
     [request setAllHTTPHeaderFields:headers];
+    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
     return [self resourceWithRequest:request];
 }
 

@@ -11,6 +11,7 @@
 #include <unistd.h>
 #import <objc/message.h>
 #import <objc/runtime.h>
+#import "NSNil.h"
 
 @interface NSString(fastCString)
 
@@ -396,6 +397,17 @@ intAccessor( indentAmount , setIndentAmount )
 -(NSUInteger)length
 {
     return totalBytes;
+}
+
+-(NSData*)processObject:anObject
+{
+    if (!anObject || [anObject isNil]) {
+        return nil;
+    }
+    NSMutableData *data=[NSMutableData data];
+    [self setByteTarget:data];
+    [self writeObject:anObject];
+    return [self byteTarget];
 }
 
 -(long)targetLength

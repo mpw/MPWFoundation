@@ -188,11 +188,6 @@
     return [self source];
 }
 
--(MPWByteStream*)writeStream
-{
-    return [MPWByteStream fileName:self.path mode:@"w" atomically:NO];
-}
-
 -(MPWStreamSource*)lines
 {
     MPWFDStreamSource *s=[self stream];

@@ -109,6 +109,12 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [self writeObject:[sender objectValue]];
 }
 
+-writeStream
+{
+    return [self.store writeStreamAt:self.reference];
+}
+
+
 -(void)traverse:(id <Streaming>)target
 {
     [target writeObject:self];
