@@ -713,13 +713,13 @@ scalarAccessor( SEL, selector, setSelector )
 
 @implementation MPWAbstractFileTarget
 
-idAccessor( tempFileName, setTempFileName )
-idAccessor( finalFileName, setFinalFileName )
+objectAccessor( NSString, tempFileName, setTempFileName )
+objectAccessor( NSString, finalFileName, setFinalFileName )
 
-+fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic
++(instancetype)fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic
 {
-    id tempName = filename;
-    id target;
+    NSString* tempName = filename;
+    MPWAbstractFileTarget* target;
     if ( atomic ) {
         tempName=[filename stringByAppendingString:@"~"];
     }

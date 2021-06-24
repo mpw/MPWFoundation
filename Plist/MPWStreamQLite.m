@@ -33,11 +33,17 @@
 -initWithDB:(sqlite3*)db statement:(NSString*)sql
 {
     if( nil != (self=[super init]) ) {
-        int rc1 = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
-        int rc2 = sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
-        int rc3 = sqlite3_prepare_v2(db, "END TRANSACTION", -1, &end_transaction, 0);
+        int rc1=0,rc2=0,rc3=0;
+        rc1 = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
+        if ( !rc1 ) {
+            rc2 = sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
+        }
+        if ( !rc1 && !rc2 ) {
+            rc3 = sqlite3_prepare_v2(db, "END TRANSACTION", -1, &end_transaction, 0);
+        }
         if ( !(rc1==0 && rc2==0 && rc3==0)) {
-            NSLog(@"preparing INSERT statments failed");
+            NSLog(@"preparing INSERT statments failed rc1=%d rc2=%d rc3=%d",rc1,rc2,rc3);
+            NSLog(@"error: %s",(sqlite3_errmsg(db)));
         }
     }
     return self;
@@ -242,15 +248,15 @@
     db.builder=[MPWPListBuilder builder];
     [db query:@"select * from Tester"];
     INTEXPECT([db.builder.result count],0,@"no results");
-    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
+    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:an,:b,:c)"];
     [writer beginDictionary];
-    [writer writeInteger:2 forKey:@"a"];
+    [writer writeInteger:2 forKey:@"an"];
     [writer writeInteger:3 forKey:@"b"];
     [writer writeObject:@"hello" forKey:@"c"];
     [writer endDictionary];
 
     [writer beginDictionary];
-    [writer writeInteger:4 forKey:@"a"];
+    [writer writeInteger:4 forKey:@"an"];
     [writer writeInteger:5 forKey:@"b"];
     [writer writeObject:@"world" forKey:@"c"];
     [writer endDictionary];
