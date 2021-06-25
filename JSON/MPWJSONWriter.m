@@ -245,45 +245,6 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 	[self printf:@"%g",number];
 }
 
--(void)createEncoderMethodForClass:(Class)theClass
-{
-    NSArray *ivars=[theClass allIvarNames];
-    if ( [[ivars lastObject] hasPrefix:@"_"]) {
-        ivars=(NSArray*)[[ivars collect] substringFromIndex:1];
-    }
-    
-    NSMutableArray *copiers=[[NSMutableArray arrayWithCapacity:ivars.count] retain];
-    for (NSString *ivar in ivars) {
-        MPWPropertyBinding *accessor=[[MPWPropertyBinding valueForName:ivar] retain];
-        [ivar retain];
-        [accessor bindToClass:theClass];
-
-        id objBlock=^(id object, MPWJSONWriter* stream){
-            [stream writeObject:[accessor valueForTarget:object] forKey:ivar];
-        };
-        id intBlock=^(id object, MPWJSONWriter* stream){
-            [stream writeInteger:[accessor integerValueForTarget:object] forKey:ivar];
-        };
-        int typeCode = [accessor typeCode];
-        
-        if ( typeCode == 'i' || typeCode == 'q' || typeCode == 'l' ) {
-            [copiers addObject:Block_copy(intBlock)];
-        } else {
-            [copiers addObject:Block_copy(objBlock)];
-        }
-    }
-    void (^encoder)( id object, MPWJSONWriter *writer) = Block_copy( ^void(id object, MPWJSONWriter *writer) {
-        for  ( id block in copiers ) {
-            void (^encodeIvar)(id object, MPWJSONWriter *writer)=block;
-            encodeIvar(object, writer);
-        }
-    });
-    void (^encoderMethod)( id blockself, MPWJSONWriter *writer) = ^void(id blockself, MPWJSONWriter *writer) {
-        [writer writeDictionaryLikeObject:blockself withContentBlock:encoder];
-    };
-    IMP encoderMethodImp = imp_implementationWithBlock(encoderMethod);
-    class_addMethod(theClass, [self streamWriterMessage], encoderMethodImp, "v@:@" );
-}
 
 //------------
 

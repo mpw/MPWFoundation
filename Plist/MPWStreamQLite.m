@@ -27,13 +27,14 @@
     sqlite3_stmt *insert_stmt;
     sqlite3_stmt *begin_transaction;
     sqlite3_stmt *end_transaction;
-
+    sqlite3 *db;
 }
 
--initWithDB:(sqlite3*)db statement:(NSString*)sql
+-initWithDB:(sqlite3*)theDb statement:(NSString*)sql
 {
     if( nil != (self=[super init]) ) {
         int rc1=0,rc2=0,rc3=0;
+        db=theDb;
         rc1 = sqlite3_prepare_v2(db, [sql UTF8String], -1, &insert_stmt, 0);
         if ( !rc1 ) {
             rc2 = sqlite3_prepare_v2(db, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
@@ -59,7 +60,7 @@
 }
 
 -(void)beginDictionary {
-
+    NSLog(@"begin dictionary");
 }
 
 -(void)beginArray {
@@ -74,6 +75,7 @@
 
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
+    NSLog(@"key: %@ object: %@",aKey,anObject);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -83,6 +85,7 @@
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
+    NSLog(@"key: %@ integer: %ld",aKey,anInt);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -91,13 +94,26 @@
 
 -(void)endDictionary
 {
+    NSLog(@"end dictionary");
     if ( insert_stmt) {
         int rc1=sqlite3_step(insert_stmt);
         int rc2=sqlite3_clear_bindings(insert_stmt);
         int rc3=sqlite3_reset(insert_stmt);
         if ( !(rc1==101 && rc2==0 && rc3==0) ) {
             NSLog(@"rc of step,clear,reset: %d %d %d",rc1,rc2,rc3);
+            NSLog(@"error: %@",@(sqlite3_errmsg(db)));
         }
+    }
+}
+
+
+-(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(id object, MPWSQLiteWriter* writer))contentBlock
+{
+    [self beginDictionary];
+    @try {
+        contentBlock(anObject, self);
+    } @finally {
+        [self endDictionary];
     }
 }
 
