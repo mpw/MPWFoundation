@@ -3,14 +3,16 @@
 
 
 #import <MPWFoundation/MPWArrayFlattenStream.h>
+#import <MPWFoundation/MPWPListBuilder.h>
 
-@interface MPWFlattenStream : MPWArrayFlattenStream
+@interface MPWFlattenStream : MPWArrayFlattenStream <MPWPlistStreaming>
 {
 
 }
 
 -(void)writeDictionary:(NSDictionary*)dict;
 -(void)writeKeyEnumerator:(NSEnumerator*)keys withDict:(NSDictionary*)dict;
+-(void)createEncoderMethodForClass:(Class)theClass;
 
 
 @end

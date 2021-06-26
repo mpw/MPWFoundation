@@ -59,9 +59,6 @@
     [self endDictionary];
 }
 
--(void)beginDictionary {
-    NSLog(@"begin dictionary");
-}
 
 -(void)beginArray {
     sqlite3_step(begin_transaction);
@@ -75,7 +72,6 @@
 
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
-    NSLog(@"key: %@ object: %@",aKey,anObject);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -85,7 +81,6 @@
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
-    NSLog(@"key: %@ integer: %ld",aKey,anInt);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -94,7 +89,6 @@
 
 -(void)endDictionary
 {
-    NSLog(@"end dictionary");
     if ( insert_stmt) {
         int rc1=sqlite3_step(insert_stmt);
         int rc2=sqlite3_clear_bindings(insert_stmt);
@@ -107,16 +101,11 @@
 }
 
 
--(void)writeDictionaryLikeObject:anObject withContentBlock:(void (^)(id object, MPWSQLiteWriter* writer))contentBlock
-{
-    [self beginDictionary];
-    @try {
-        contentBlock(anObject, self);
-    } @finally {
-        [self endDictionary];
-    }
-}
 
+//-(SEL)streamWriterMessage
+//{
+//    return @selector(writeOnSQLiteStream:);
+//}
 
 @end
 
