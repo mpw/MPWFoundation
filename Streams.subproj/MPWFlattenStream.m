@@ -120,8 +120,10 @@
         int typeCode = [accessor typeCode];
         
         if ( typeCode == 'i' || typeCode == 'q' || typeCode == 'l' ) {
+//            NSLog(@"int block for %@ (type:%c)",ivar,typeCode);
             [copiers addObject:Block_copy(intBlock)];
         } else {
+//            NSLog(@"object block for %@ (type:%c)",ivar,typeCode);
             [copiers addObject:Block_copy(objBlock)];
         }
     }

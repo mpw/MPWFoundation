@@ -81,6 +81,7 @@
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
+//    NSLog(@"SQLite int: %d forKey: %@",anInt,aKey);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -269,7 +270,7 @@
     db.builder=[MPWPListBuilder builder];
     [db query:@"select * from Tester"];
     NSArray<NSDictionary*> *result=db.builder.result;
-    INTEXPECT(result.count,2,@"no results");
+    INTEXPECT(result.count,2,@"number of rows");
     IDEXPECT(result.firstObject[@"a"],@(2),@"first.a");
     IDEXPECT(result.firstObject[@"b"],@(3),@"first.b");
     IDEXPECT(result.firstObject[@"c"],@"hello",@"first.c");

@@ -313,11 +313,7 @@ static NSString *extractStructType( char *s )
 //    NSLog(@"signature[0]='%c'",signature[0]);
 	if ( signature[0] == 'i' ) {
 //        NSLog(@"converting to int");
-#ifdef __x86_64__
 		returnVal=(id)[returnVal longValue];
-#else
-		returnVal=(id)[returnVal longValue];
-#endif
 	}
 	return returnVal;
 }
