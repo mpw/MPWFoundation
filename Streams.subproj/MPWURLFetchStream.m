@@ -311,7 +311,7 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)post:(NSData*)theData toURL:(NSURL *)theURL
 {
-    [self executeRequestWithURL:theURL method:MPWRESTVerbGET body:theData];
+    [self executeRequestWithURL:theURL method:MPWRESTVerbPOST body:theData];
 }
 
 -(void)patch:(NSData*)theData toURL:(NSURL *)theURL

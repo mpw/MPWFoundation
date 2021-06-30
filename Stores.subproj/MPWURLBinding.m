@@ -142,28 +142,57 @@ objectAccessor(NSError, error, setError)
     }
 }
 
-//-(NSData*)post:data withName:(NSString*)postName
-//{
-//    NSString *boundary=@"0xKhTmLbOuNdArY";
-//    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
-//
-//    [urlRequest setHTTPMethod:@"POST"];
-//    
-//    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
-//    
-//    NSMutableData *postData = [NSMutableData data];
-//    [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n\r\n", postName, postName] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [postData appendData:data];
-//    [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [urlRequest setHTTPBody:postData];
-//    return [self resourceWithRequest:urlRequest];
-//}
+-(NSData *)formEncodeDictionary:(NSDictionary*)aDict
+{
+    MPWByteStream *s=[MPWByteStream stream];
+    BOOL first=YES;
+    //    NSLog(@"should encode dictionary: %@",aDict);
+    for ( NSString *key in aDict.allKeys ) {
+        [s printFormat:@"%@%@=%@",first?@"":@"&", key,aDict[key]];
+        first=NO;
+    }
+    //    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
+    return (NSData*)[s target];
+}
 
-//-(NSData*)post:data
-//{
-//    return [self post:data withName:@"methods"];       // FIXME:  remove
-//}
+-(NSData*)postForm:(NSDictionary*)form
+{
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
+    NSData *data=[self formEncodeDictionary:form];
+    [urlRequest setHTTPMethod:@"POST"];
+    
+    [urlRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *postData = [NSMutableData data];
+    [postData appendData:data];
+    [urlRequest setHTTPBody:postData];
+    return [[self store] resourceWithRequest:urlRequest];
+}
+
+
+
+-(NSData*)post:data withName:(NSString*)postName
+{
+    NSString *boundary=@"0xKhTmLbOuNdArY";
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
+
+    [urlRequest setHTTPMethod:@"POST"];
+    
+    [urlRequest setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+    
+    NSMutableData *postData = [NSMutableData data];
+    [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n\r\n", postName, postName] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:data];
+    [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [urlRequest setHTTPBody:postData];
+    return [[self store] resourceWithRequest:urlRequest];
+}
+
+-(NSData*)post:data
+{
+    return [self post:data withName:@"methods"];       // FIXME:  remove
+}
 //
 //- (void)connectionDidFinishLoading:(NSURLConnection *)connection
 //{

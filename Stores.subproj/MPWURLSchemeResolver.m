@@ -96,8 +96,8 @@
 {
     NSHTTPURLResponse *response=nil;
     NSError *localError=nil;
-    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
-    NSLog(@"request URL: %@",request.URL);
+//    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+//    NSLog(@"request URL: %@",request.URL);
     NSData *rawData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&localError];
 
     if ( [response statusCode] != 404 ) {
@@ -120,9 +120,9 @@
     }
     [headers setObject:@"stsh" forKey:@"User-Agent"];
     [headers setObject:@"*/*" forKey:@"Accept"];
-    NSLog(@"headers: %@",headers);
+//    NSLog(@"headers: %@",headers);
     [request setAllHTTPHeaderFields:headers];
-    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+//    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
     return [self resourceWithRequest:request];
 }
 
