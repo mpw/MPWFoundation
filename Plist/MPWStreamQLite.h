@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 
+
 @interface MPWStreamQLite : NSObject
 
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
@@ -34,6 +35,15 @@ NS_ASSUME_NONNULL_BEGIN
 -(MPWSQLiteWriter*)insert:(NSString*)sql;
 
 @end
+
+@interface MPWSQLTable : NSObject
+
+@property (nonatomic,assign) Class tableClass;
+@property (nonatomic,strong) MPWStreamQLite *db;
+@property (nonatomic,strong) NSString *name;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

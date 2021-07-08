@@ -8,6 +8,7 @@
 #import "MPWStreamQLite.h"
 #import "MPWPListBuilder.h"
 #import "MPWFlattenStream.h"
+#import "MPWObjectBuilder.h"
 
 #include <sqlite3.h>
 
@@ -72,6 +73,7 @@
 
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
+//    NSLog(@"MPWSQLiteWriter writeObject: '%@'/%@ forKey: %@",anObject,[anObject class],aKey);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -81,7 +83,7 @@
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
-//    NSLog(@"SQLite int: %d forKey: %@",anInt,aKey);
+//    NSLog(@"MPWSQLiteWriter writeInteger: %ld forKey: %@",anInt,aKey);
     NSString *sql_key=[@":" stringByAppendingString:aKey];
     int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
@@ -310,3 +312,57 @@
 }
 
 @end
+
+
+
+@implementation MPWSQLTable {
+    NSString *sqlForInsert;
+    NSString *sqlForCreate;
+}
+
+lazyAccessor(NSString, sqlForInsert, setSqlForInsert, computeSQLForInsert )
+lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
+
+-(NSString*)computeSQLForInsert
+{
+    NSString *classSpecificSQL=[self.tableClass sqlForInsert];
+    return [NSString stringWithFormat:@"INSERT INTO %@ %@ ",[self name],classSpecificSQL];
+}
+
+-(NSString*)computeSQLForCreate
+{
+    NSString *classSpecificSQL=[self.tableClass sqlForCreate];
+    return [NSString stringWithFormat:@"CREATE TABLE %@ %@ ",[self name],classSpecificSQL];
+}
+
+-(void)create
+{
+    [self.db query:[self sqlForCreate]];
+}
+
+-(void)insert:array
+{
+    MPWSQLiteWriter *writer = [self.db insert: [self sqlForInsert]];
+    [writer writeObject:array];
+}
+
+-(NSArray*)objectsForQuery:(NSString*)query
+{
+    MPWObjectBuilder *builder = [[[MPWObjectBuilder alloc] initWithClass: self.tableClass] autorelease];
+    [self.db setBuilder:builder];
+    [self.db query:query];
+    return [[self.db builder] result];
+}
+
+-select
+{
+    return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@",self.name]];
+}
+
+-selectWhere:query
+{
+    return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
+}
+
+@end
+

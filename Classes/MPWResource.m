@@ -132,6 +132,7 @@ idAccessor( source, setSource )
     return [self rawData];
 }
 
+
 -(void)dealloc
 {
 	[source release];

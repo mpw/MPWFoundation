@@ -118,7 +118,7 @@ idAccessor(name, setName)
 
 static inline bool isInteger( AccessPathComponent c  )
 {
-    return c.objcType=='q' || c.objcType=='l'|| c.objcType=='i';
+    return c.objcType=='q' || c.objcType=='l'|| c.objcType=='i' || c.objcType=='B';
 }
 
 

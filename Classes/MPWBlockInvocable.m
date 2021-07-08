@@ -311,14 +311,12 @@ static NSString *extractStructType( char *s )
 	}
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
 //    NSLog(@"signature[0]='%c'",signature[0]);
-	if ( signature[0] == 'i' ) {
+	if ( signature[0] == 'i' || signature[0] == 'l' ) {
 //        NSLog(@"converting to int");
 		returnVal=(id)[returnVal longValue];
 	}
 	return returnVal;
 }
-
-
 
 @end
 
