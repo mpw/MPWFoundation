@@ -323,10 +323,31 @@
 lazyAccessor(NSString, sqlForInsert, setSqlForInsert, computeSQLForInsert )
 lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
+
+
+-(NSString*)computeSQLForInsertWithKeys:(NSArray<NSString*>*)sqlKeys
+{
+    NSMutableString *sql=[NSMutableString string];
+    MPWByteStream *s=[MPWByteStream streamWithTarget:sql];
+    [s printFormat:@"INSERT INTO %@ (",[self name]];
+    BOOL first=YES;
+    for ( NSString *key in sqlKeys ) {
+        [s printFormat:@"%s%@",first?"":", ",key];
+        first=NO;
+    }
+    first=YES;
+    [s printFormat:@") VALUES ("];
+    for ( NSString *key in sqlKeys ) {
+        [s printFormat:@"%s:%@",first?"":", ",key];
+        first=NO;
+    }
+    [s printFormat:@");"];
+    return sql;
+}
+
 -(NSString*)computeSQLForInsert
 {
-    NSString *classSpecificSQL=[self.tableClass sqlForInsert];
-    return [NSString stringWithFormat:@"INSERT INTO %@ %@ ",[self name],classSpecificSQL];
+    return [self computeSQLForInsertWithKeys: [self.tableClass sqlInsertKeys]];
 }
 
 -(NSString*)computeSQLForCreate
@@ -362,6 +383,25 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 -selectWhere:query
 {
     return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
+}
+
+@end
+
+@implementation MPWSQLTable(testing)
+
++(void)testSQLForInsert
+{
+    MPWSQLTable *table=[[MPWSQLTable new] autorelease];
+    table.name=@"tasks";
+    NSString *insertSQL=[table computeSQLForInsertWithKeys:@[ @"id", @"title", @"completed"]];
+    IDEXPECT(insertSQL,@"INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed);",@"SQL for insert");
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+        @"testSQLForInsert",
+    ];
 }
 
 @end
