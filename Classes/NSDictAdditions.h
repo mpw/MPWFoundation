@@ -10,6 +10,7 @@
 - (float)floatForKey:(NSString *)defaultName;
 - (BOOL)boolForKey:(NSString *)defaultName;
 -objectForIntKey:(int)intKey;
+- at:aKey;
 
 @end
 @interface NSMutableDictionary(Additions)

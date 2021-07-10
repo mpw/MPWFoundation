@@ -24,7 +24,7 @@
 //    NSLog(@"setFinalTarget: %@",newTarget);
     if ( [self target] && [[self target] respondsToSelector:@selector(setFinalTarget:)]) {
 //        NSLog(@"target %@ has a finalTarget",[self target]);
-        [[self target] setFinalTarget:newTarget];
+        [(MPWWriteStream*)[self target] setFinalTarget:newTarget];
     } else {
 //        NSLog(@"target %@ does not have finalTarget",[self target]);
         [self setTarget:newTarget];

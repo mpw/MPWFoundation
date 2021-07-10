@@ -173,20 +173,6 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
 
 @end
 
-@implementation NSObject(Testnil)
-
--(BOOL)isNotNil
-{
-    return YES;
-}
-
--(BOOL)isNil
-{
-    return NO;
-}
-
-
-@end
 
 #import "DebugMacros.h"
 
@@ -310,6 +296,11 @@ static id idresult( id receiver, SEL selector, ... )  { return nil; }
  "*/
 {
     return YES;
+}
+
+-(BOOL)isNil
+{
+    return NO;
 }
 
 @end

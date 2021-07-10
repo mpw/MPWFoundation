@@ -155,7 +155,7 @@ objectAccessor(NSError, error, setError)
     return (NSData*)[s target];
 }
 
--(NSData*)postForm:(NSDictionary*)form
+-(MPWResource*)postForm:(NSDictionary*)form
 {
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
     NSData *data=[self formEncodeDictionary:form];

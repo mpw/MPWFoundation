@@ -6,6 +6,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "MPWPropertyBinding.h"
+#import "NSObjectAdditions.h"
 
 @implementation NSObject(MPWStructureFlattening)
 

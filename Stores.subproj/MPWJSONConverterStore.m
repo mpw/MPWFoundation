@@ -44,7 +44,7 @@
 
 -(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
 {
-    [aStream setFinalTarget:self.reader];
+    [(MPWFilter*)aStream setFinalTarget:self.reader];
     [[self source] at:aReference readToStream:aStream];
     return ;
 }

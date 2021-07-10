@@ -9,7 +9,7 @@
 
 @interface MPWMappingStore : MPWAbstractStore
 
-@property (nonatomic, strong) NSObject<MPWStorage,MPWHierarchicalStorage>* source;
+@property (nonatomic, strong) NSObject<MPWStorage,MPWHierarchicalStorage,StreamStorage>* source;
 
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;
 +(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;

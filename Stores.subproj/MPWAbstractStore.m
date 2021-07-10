@@ -12,6 +12,7 @@
 #import "MPWWriteStream.h"
 #import "MPWDirectoryBinding.h"
 #import "NSObjectFiltering.h"
+#import "NSDictAdditions.h"
 
 @interface NSArray(unique)
 

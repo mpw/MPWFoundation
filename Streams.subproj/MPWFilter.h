@@ -27,7 +27,6 @@ typedef id (*IMP_2_id_args)(id, SEL, id,id);
 -(void)flush:(int)n;
 -(void)close:(int)n;
 
--(void)setFinalTarget:newTarget;
 -(void)forward:anObject;
 -finalTarget;
 -processObject:anObject;

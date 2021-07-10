@@ -55,6 +55,7 @@
 //-(instancetype)init;
 -(void)writeObjectAndFlush:anObject;
 -(void)writeTarget:aTarget;
+-(void)setFinalTarget:newTarget;
 
 
 -(SEL)streamWriterMessage;
