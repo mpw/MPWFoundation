@@ -73,6 +73,7 @@ objectAccessor(NSError, error, setError)
 }
 
 
+
 -getWithArgs
 {
 //  NSLog(@"getWithArgs");
@@ -155,6 +156,8 @@ objectAccessor(NSError, error, setError)
     return (NSData*)[s target];
 }
 
+#define STORE   ((MPWURLSchemeResolver*)self.store)
+
 -(MPWResource*)postForm:(NSDictionary*)form
 {
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
@@ -166,12 +169,12 @@ objectAccessor(NSError, error, setError)
     NSMutableData *postData = [NSMutableData data];
     [postData appendData:data];
     [urlRequest setHTTPBody:postData];
-    return [[self store] resourceWithRequest:urlRequest];
+    return [STORE resourceWithRequest:urlRequest];
 }
 
 
 
--(NSData*)post:data withName:(NSString*)postName
+-(MPWResource*)post:data withName:(NSString*)postName
 {
     NSString *boundary=@"0xKhTmLbOuNdArY";
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[self URL]];
@@ -186,10 +189,10 @@ objectAccessor(NSError, error, setError)
     [postData appendData:data];
     [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [urlRequest setHTTPBody:postData];
-    return [[self store] resourceWithRequest:urlRequest];
+    return [STORE resourceWithRequest:urlRequest];
 }
 
--(NSData*)post:data
+-(MPWResource*)post:data
 {
     return [self post:data withName:@"methods"];       // FIXME:  remove
 }

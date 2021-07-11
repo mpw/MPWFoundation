@@ -6,13 +6,14 @@
 //
 
 #import "MPWPrintLiner.h"
+#import "MPWByteStream.h"
 
 @implementation MPWPrintLiner
 
 -(void)writeObject:(id)anObject sender:dummy
 {
     NSString *s=[anObject stringValue];
-    [self.target println:s];
+    [(MPWByteStream*)(self.target) println:s];
 }
 
 @end

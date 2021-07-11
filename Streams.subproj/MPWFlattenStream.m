@@ -7,6 +7,7 @@
 #import <objc/message.h>
 #import "MPWPropertyBinding.h"
 #import "NSObjectAdditions.h"
+#import "NSObjectFiltering.h"
 
 @implementation NSObject(MPWStructureFlattening)
 

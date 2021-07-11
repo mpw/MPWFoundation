@@ -56,6 +56,7 @@
 -(void)writeObjectAndFlush:anObject;
 -(void)writeTarget:aTarget;
 -(void)setFinalTarget:newTarget;
+-(void)do:aBlock;
 
 
 -(SEL)streamWriterMessage;

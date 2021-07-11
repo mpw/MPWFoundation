@@ -1,4 +1,4 @@
-/* MPWByteStream.h Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWByteStream.h Copyright (c) 1998-2021 by Marcel Weiher, All Rights Reserved.
 */
 
 
@@ -46,6 +46,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 +(instancetype)fileName:(NSString*)fileName;
 +fileName:(NSString*)fileName mode:(NSString*)mode atomically:(BOOL)atomic;
 +(instancetype)null;
+-(void)setByteTarget:newTarget;
 
 -(void)writeIndent;
 -(void)writeString:(NSString*)aString;

@@ -323,7 +323,7 @@
 lazyAccessor(NSString, sqlForInsert, setSqlForInsert, computeSQLForInsert )
 lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
-
++(NSArray*)sqlInsertKeys { return @[]; }
 
 -(NSString*)computeSQLForInsertWithKeys:(NSArray<NSString*>*)sqlKeys
 {
