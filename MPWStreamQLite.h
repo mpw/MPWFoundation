@@ -12,14 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol MPWPlistStreaming;
 
-@interface MPWSQLiteWriter : MPWFlattenStream
--(void)beginArray;
--(void)endArray;
 
-@end
-
-
-
+@class MPWSQLiteWriter;
 
 @interface MPWStreamQLite : NSObject
 
@@ -33,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)close;
 -(NSString*)error;
 -(MPWSQLiteWriter*)insert:(NSString*)sql;
+-(void*)sqliteDB;
 
 @end
 

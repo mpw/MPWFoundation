@@ -250,7 +250,7 @@ static inline int taggedIntegerToBuffer( unsigned char *buffer, long anInt, int 
     }
 }
 
--(void)writeInteger:(int)anInteger forKey:(NSString*)aKey
+-(void)writeInteger:(long)anInteger forKey:(NSString*)aKey
 {
     [self writeString:aKey];
     [self writeInteger:anInteger];

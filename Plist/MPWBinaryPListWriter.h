@@ -33,7 +33,7 @@
 -(void)beginArray;
 -(void)endArray;
 
--(void)writeInteger:(int)anInt forKey:(NSString*)aKey;
+-(void)writeInteger:(long)anInt forKey:(NSString*)aKey;
 -(void)writeFloat:(float)aFloat forKey:(NSString*)aKey;
 -(void)writeObject:anObject forKey:(NSString*)aKey;
 -(void)writeString:(NSString*)anObject forKey:(NSString*)aKey;
