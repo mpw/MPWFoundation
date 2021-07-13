@@ -1544,6 +1544,7 @@
 				1FFE3A8D20B309F200E65B93 /* Stores */,
 				07DF1990006686DDC35ADD82 /* Streams */,
 				1FEFBD392428C784001E44B2 /* Plist */,
+				1F1E09C2269D933300567AF6 /* SQLite */,
 				1FED489B242633F500AF2FAD /* XML */,
 				1F8856CD2427B27E008950E8 /* JSON */,
 				07DF19A1006686DDC35ADD82 /* Threading */,
@@ -1872,6 +1873,15 @@
 			path = StreamQLite;
 			sourceTree = "<group>";
 		};
+		1F1E09C2269D933300567AF6 /* SQLite */ = {
+			isa = PBXGroup;
+			children = (
+				1FF6590824957007002371E9 /* MPWStreamQLite.h */,
+				1FF6590924957007002371E9 /* MPWStreamQLite.m */,
+			);
+			name = SQLite;
+			sourceTree = "<group>";
+		};
 		1F4FC9741DF818AE00B35D27 /* TestMPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
@@ -2114,8 +2124,6 @@
 			children = (
 				1F75BB9C12D2589800E7ABB4 /* MPWPListBuilder.h */,
 				1F75BB9D12D2589800E7ABB4 /* MPWPListBuilder.m */,
-				1FF6590824957007002371E9 /* MPWStreamQLite.h */,
-				1FF6590924957007002371E9 /* MPWStreamQLite.m */,
 				1F75FA6617E4908E00D43D15 /* MPWBinaryPListWriter.h */,
 				1F75FA6717E4908E00D43D15 /* MPWBinaryPListWriter.m */,
 				07DF199B006686DDC35ADD82 /* MPWNeXTPListWriter.h */,
