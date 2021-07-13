@@ -10,6 +10,7 @@
 #import "MPWByteStream.h"
 #import "MPWStreamQLite.h"
 #import "MPWObjectBuilder.h"
+#import "MPWSQLColumnInfo.h"
 
 @implementation MPWSQLTable {
     NSString *sqlForInsert;
@@ -63,12 +64,28 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     [writer writeObject:array];
 }
 
--(NSArray*)objectsForQuery:(NSString*)query
+-(NSArray*)objectsForQuery:(NSString*)query builder:(MPWPListBuilder*)builder
 {
-    MPWObjectBuilder *builder = [[[MPWObjectBuilder alloc] initWithClass: self.tableClass] autorelease];
     [self.db setBuilder:builder];
     [self.db query:query];
     return [[self.db builder] result];
+}
+
+-(MPWPListBuilder*)defaultBuilder
+{
+    return self.tableClass ? [[[MPWObjectBuilder alloc] initWithClass: self.tableClass] autorelease] :
+    [MPWPListBuilder builder];
+}
+
+-(NSArray*)objectsForQuery:(NSString*)query
+{
+    return [self objectsForQuery:query builder:[self defaultBuilder]];
+}
+
+-schema
+{
+    NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class]] autorelease]];
+    return resultSet;
 }
 
 -select
