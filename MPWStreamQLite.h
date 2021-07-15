@@ -13,11 +13,12 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MPWPlistStreaming;
 
 
-@class MPWSQLiteWriter;
+@class MPWSQLiteWriter,MPWSQLTable;
 
 @interface MPWStreamQLite : NSObject
 
 @property (nonatomic, strong) id <MPWPlistStreaming> builder;
+@property (readonly) NSDictionary<NSString*,MPWSQLTable*>* tables;
 
 +(instancetype)open:(NSString*)newpath;
 +(instancetype)memory;
@@ -31,6 +32,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface MPWStreamQLite(testing)
+
++_chinookDB;
+
+
+@end
 
 NS_ASSUME_NONNULL_END
 

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)initWithDB:(MPWStreamQLite*)db statement:(NSString*)sql;
 -(void)beginArray;
 -(void)endArray;
+-(void)writeInteger:(long)anInt forKey:(NSString*)aKey;
 
 @end
 

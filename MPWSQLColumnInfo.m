@@ -14,6 +14,11 @@
     return [NSString stringWithFormat:@"<%@:%p: name: '%@' type: '%@' %@ %@",self.class,self,self.name,self.type,self.pk ? @"PRIMARY KEY":@"",self.notnull ? @"NOTNULL":@""];
 }
 
+-(NSString*)objcType
+{
+    return @"@";
+}
+
 -(void)dealloc
 {
     [_name release];

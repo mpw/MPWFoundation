@@ -10,6 +10,7 @@
 #import "MPWFlattenStream.h"
 #import "MPWObjectBuilder.h"
 #import "MPWSQLiteWriter.h"
+#import "MPWSQLTable.h"
 
 #include <sqlite3.h>
 
@@ -24,7 +25,10 @@
 @implementation MPWStreamQLite
 {
     sqlite3 *db;
+    NSArray <MPWSQLTable*>* tables;
 }
+
+lazyAccessor(NSDictionary , tables, setTables, getTables )
 
 +(instancetype)open:(NSString*)newpath
 {
@@ -106,6 +110,33 @@
 {
     return sqlite3_open([self.databasePath UTF8String], &db);
 }
+
+-(NSArray*)dbTableNames
+{
+    [self setBuilder:[MPWPListBuilder builder]];
+    [self query:@"select name from sqlite_master where [type] = \"table\""];
+    NSArray *names=[[[self.builder result] collect] objectForKey:@"name"];
+    return names;
+}
+
+-(NSArray<MPWSQLTable*>*)getTablesList
+{
+    NSMutableArray *computedTables=[NSMutableArray array];
+    for ( NSString *name in [self dbTableNames]){
+        MPWSQLTable *table=[[MPWSQLTable new] autorelease];
+        table.name=name;
+        table.db=self;
+        [computedTables addObject:table];
+    }
+    return computedTables;
+}
+
+-(NSDictionary<NSString*,MPWSQLTable*>*)getTables
+{
+    return [NSDictionary dictionaryWithObjects:[self getTablesList] byKey:@"name"];
+}
+
+
 
 -(void)close
 {
@@ -215,6 +246,26 @@
     IDEXPECT(result.firstObject[@"c"],@"More",@"first.c");
 }
 
++(void)testQueryTableNames
+{
+    MPWStreamQLite *db=[self _chinookDB];
+    NSArray *tableNames = [db dbTableNames];
+    INTEXPECT( tableNames.count, 13, @"number of tables" );
+    IDEXPECT( [tableNames componentsJoinedByString:@","],@"albums,sqlite_sequence,artists,customers,employees,genres,invoices,invoice_items,media_types,playlists,playlist_track,tracks,sqlite_stat1",@"tables");
+}
+
++(void)testGetTables
+{
+    MPWStreamQLite *db=[self _chinookDB];
+    [db open];
+    NSDictionary<NSString*,MPWSQLTable*> *tables=[db getTables];
+    INTEXPECT(tables.count, 13, @"number of tables");
+    MPWSQLTable *albums=tables[@"albums"];
+    IDEXPECT( [albums name],@"albums",@"name of first table");
+    NSArray *albumsScheme=albums.schema;
+    INTEXPECT([albumsScheme count], 3, @"number of columns");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -222,6 +273,8 @@
        @"testReadTracks",
        @"testInsert",
        @"testInsertDict",
+       @"testQueryTableNames",
+       @"testGetTables",
 			];
 }
 

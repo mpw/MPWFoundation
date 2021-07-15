@@ -58,6 +58,7 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     [self.db query:[self sqlForCreate]];
 }
 
+
 -(void)insert:array
 {
     MPWSQLiteWriter *writer = [self.db insert: [self sqlForInsert]];
@@ -82,7 +83,13 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     return [self objectsForQuery:query builder:[self defaultBuilder]];
 }
 
--schema
+-(NSInteger)count
+{
+    return [[[[self objectsForQuery:[NSString stringWithFormat:@"select count(*) from %@",self.name] builder:[MPWPListBuilder builder]] firstObject] at:@"count(*)"] longValue];
+}
+
+
+-(NSArray<MPWSQLColumnInfo*>*)schema
 {
     NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class]] autorelease]];
     return resultSet;
@@ -110,10 +117,37 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     IDEXPECT(insertSQL,@"INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed);",@"SQL for insert");
 }
 
++(void)testGetTableSchema
+{
+    MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
+    MPWSQLTable *artists=[db tables][@"artists"];
+    NSArray *schema=[artists schema];
+    INTEXPECT(schema.count,2,@"columns");
+    MPWSQLColumnInfo *nameColumn=schema.lastObject;
+    MPWSQLColumnInfo *idColumn=schema.firstObject;
+    IDEXPECT(idColumn.name, @"ArtistId", @"name of id column");
+    IDEXPECT(idColumn.type, @"INTEGER", @"type of id column");
+    EXPECTTRUE(idColumn.pk, @"ArtistId is primary key");
+    EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
+    IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
+    IDEXPECT(nameColumn.type, @"NVARCHAR(120)", @"type of 'name' column");
+    EXPECTFALSE(nameColumn.pk, @"name is primary key");
+    EXPECTFALSE(nameColumn.notnull, @"name not null");
+}
+
++(void)testCount
+{
+    MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
+    MPWSQLTable *artists=[db tables][@"artists"];
+    INTEXPECT( artists.count, 275, @"number of artists");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testSQLForInsert",
+        @"testGetTableSchema",
+        @"testCount",
     ];
 }
 

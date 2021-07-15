@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign)  BOOL notnull;
 @property (nonatomic, strong)  NSString *name;
 @property (nonatomic, strong)  NSString *type;
-
+@property (readonly) NSString *objcType;
 
 @end
 
