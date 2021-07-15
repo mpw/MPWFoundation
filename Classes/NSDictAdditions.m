@@ -38,11 +38,16 @@
 	return [self objectForKey:[NSNumber numberWithInt:intKey]];
 }
 
--(id)at:aKey      // FIXME (maybe:  having at: as a synonym for objectForKey: interferes with at: for stores eval.)
-{
-    return [self objectForKey:aKey];
-}
+//-(id)at:aKey      // FIXME (maybe:  having at: as a synonym for objectForKey: interferes with at: for stores eval.)
+//{
+//    return [self valueForKeyPath:aKey];
+//}
 
++(instancetype)dictionaryWithObjects:(NSArray*)sourceArray byKey:(NSString*)key
+{
+    NSArray *keys=[sourceArray valueForKey:key];
+    return [NSDictionary dictionaryWithObjects:sourceArray forKeys:keys];
+}
 
 @end
 @implementation NSMutableDictionary(Additions)
