@@ -115,7 +115,8 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
 {
     [self setBuilder:[MPWPListBuilder builder]];
     [self query:@"select name from sqlite_master where [type] = \"table\""];
-    NSArray *names=[[[self.builder result] collect] objectForKey:@"name"];
+    NSMutableArray *names=[[[[[self.builder result] collect] objectForKey:@"name"] mutableCopy] autorelease];
+    [names removeObject:@"schema"];
     return names;
 }
 
@@ -136,6 +137,10 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     return [NSDictionary dictionaryWithObjects:[self getTablesList] byKey:@"name"];
 }
 
+-(void)enableWAL
+{
+    [self query:@"PRAGMA journal_mode=WAL;"];
+}
 
 
 -(void)close

@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString*)error;
 -(MPWSQLiteWriter*)insert:(NSString*)sql;
 -(void*)sqliteDB;
+-(void)enableWAL;
 
 @end
 

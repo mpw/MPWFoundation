@@ -25,9 +25,15 @@
     return @selector(flattenOntoStream:);
 }
 
+-(void)beginArray {}
+-(void)endArray {}
+
+
 -(void)writeArray:(NSArray*)anArray
 {
+    [self beginArray];
     [[anArray objectEnumerator] writeOnStream:self];
+    [self endArray];
 }
 
 -defaultSpacer

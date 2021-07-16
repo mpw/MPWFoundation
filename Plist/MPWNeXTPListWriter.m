@@ -123,7 +123,7 @@
 
 -(void)writeArrayContent:(NSArray*)array
 {
-    [super writeArray:array];
+    [[array objectEnumerator] writeOnStream:self];
 }
 
 -(void)writeArray:(NSArray*)anArray
