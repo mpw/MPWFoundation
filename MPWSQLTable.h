@@ -5,13 +5,13 @@
 //  Created by Marcel Weiher on 13.07.21.
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class MPWStreamQLite,MPWSQLColumnInfo;
 
-@interface MPWSQLTable : NSObject
+@interface MPWSQLTable : MPWFlattenStream
 
 
 @property (nonatomic,assign) Class tableClass;
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *name;
 
 -(NSArray<MPWSQLColumnInfo*>*)schema;
+-(void)setSourceDB:(MPWStreamQLite*)sourceDB;
 
 @end
 

@@ -9,7 +9,6 @@
 #import "MPWPListBuilder.h"
 #import "MPWFlattenStream.h"
 #import "MPWObjectBuilder.h"
-#import "MPWSQLiteWriter.h"
 #import "MPWSQLTable.h"
 
 #include <sqlite3.h>
@@ -96,11 +95,6 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     return rc;
 }
 
--(MPWSQLiteWriter*)insert:(NSString*)sql
-{
-    return [[[MPWSQLiteWriter alloc] initWithDB:self statement:sql] autorelease];
-}
-
 -(void*)sqliteDB
 {
     return db;
@@ -126,7 +120,7 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     for ( NSString *name in [self dbTableNames]){
         MPWSQLTable *table=[[MPWSQLTable new] autorelease];
         table.name=name;
-        table.db=self;
+        [table setSourceDB:self];
         [computedTables addObject:table];
     }
     return computedTables;
@@ -198,7 +192,7 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     IDEXPECT( tracks.firstObject[@"Composer"] , @"Angus Young, Malcolm Young, Brian Johnson", @"composer of first track");
 }
 
-+(void)testInsert
++(instancetype)_testerDB
 {
     MPWStreamQLite *db=[self memory];
     EXPECTNOTNIL(db, @"got a db");
@@ -206,15 +200,21 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     db.builder=[MPWPListBuilder builder];
     [db query:@"select * from Tester"];
     INTEXPECT([db.builder.result count],0,@"no results");
-    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:an,:b,:c)"];
+    return db;
+}
+
++(void)testInsert
+{
+    MPWStreamQLite *db=[self _testerDB];
+    MPWSQLTable *writer=[db tables][@"Tester"];
     [writer beginDictionary];
-    [writer writeInteger:2 forKey:@"an"];
+    [writer writeInteger:2 forKey:@"a"];
     [writer writeInteger:3 forKey:@"b"];
     [writer writeObject:@"hello" forKey:@"c"];
     [writer endDictionary];
 
     [writer beginDictionary];
-    [writer writeInteger:4 forKey:@"an"];
+    [writer writeInteger:4 forKey:@"a"];
     [writer writeInteger:5 forKey:@"b"];
     [writer writeObject:@"world" forKey:@"c"];
     [writer endDictionary];
@@ -233,13 +233,9 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
 
 +(void)testInsertDict
 {
-    MPWStreamQLite *db=[self memory];
-    EXPECTNOTNIL(db, @"got a db");
-    [db query:@"CREATE TABLE Tester (a INT,b INT, c VARCHAR(50))"];
-    db.builder=[MPWPListBuilder builder];
-    [db query:@"select * from Tester"];
-    INTEXPECT([db.builder.result count],0,@"no results");
-    MPWSQLiteWriter *writer=[db insert:@"insert into Tester (a,b,c) VALUES (:a,:b,:c)"];
+    MPWStreamQLite *db=[self _testerDB];
+    MPWSQLTable *writer=[db tables][@"Tester"];
+
     [writer writeObject:@{ @"a": @(2), @"b": @(4), @"c": @"More"  }];
 
     db.builder=[MPWPListBuilder builder];
