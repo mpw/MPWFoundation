@@ -20,6 +20,8 @@
     sqlite3_stmt *begin_transaction;
     sqlite3_stmt *end_transaction;
     sqlite3 *sqlitedb;
+    NSMutableDictionary<NSString*,NSData*> *insertParams;
+    NSArray<NSMutableData*>* buffers;
 }
 
 lazyAccessor(NSString, sqlForInsert, setSqlForInsert, computeSQLForInsert )
@@ -30,19 +32,16 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     self.db = sourceDB;
     sqlitedb = [sourceDB sqliteDB];
     [self createInsertStatement];
+    [self createBuffers];
 }
 
--initWithSqliteDB:(sqlite3*)theDb
+-(void)createBuffers
 {
-    if( nil != (self=[super init]) ) {
-        [self createInsertStatement];
+    int numBuffers=[[self schema] count];
+    buffers=[[NSMutableArray alloc] init];
+    for (int i=0;i<numBuffers+1;i++) {
+        [buffers addObject:[NSMutableData dataWithCapacity:8192]];
     }
-    return self;
-}
-
--(instancetype)initWithDB:(MPWStreamQLite*)theDB statement:(NSString*)sql
-{
-    return [self initWithSqliteDB:[theDB sqliteDB] statement:sql];
 }
 
 -(void)writeDictionary:(NSDictionary *)dict
@@ -65,23 +64,47 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     sqlite3_reset(end_transaction);
 }
 
+-(int)paramIndexForKey:(NSString*)aKey
+{
+    NSData *d=insertParams[aKey];
+    if (!d) {
+        NSString *sql_key=[@":" stringByAppendingString:aKey];
+        NSMutableData *md=[[[sql_key dataUsingEncoding:NSASCIIStringEncoding] mutableCopy] autorelease];
+        [md appendBytes:"" length:1];
+        d=md;
+        if ( !insertParams) {
+            insertParams=[[NSMutableDictionary alloc] init];
+        }
+        insertParams[aKey]=d;
+    }
+
+    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [d bytes]);
+    return paramIndex;
+}
+
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
-    //    NSLog(@"MPWSQLiteWriter writeObject: '%@'/%@ forKey: %@",anObject,[anObject class],aKey);
-    NSString *sql_key=[@":" stringByAppendingString:aKey];
-    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
-    //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
-    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
-    sqlite3_bind_text(insert_stmt, paramIndex, [utf8data bytes],  (int)[utf8data length],0 );
+    if ( anObject ) {
+        int keyIndex=[self paramIndexForKey:aKey];
+        //    NSLog(@"MPWSQLiteWriter writeObject: '%@'/%@ forKey: %@",anObject,[anObject class],aKey);
+        //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+        NSString *s=[anObject stringValue];
+        char *buffer=[[buffers objectAtIndex:keyIndex] mutableBytes];
+        NSUInteger len=0;
+        [s getBytes:buffer maxLength:8192 usedLength:&len encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(0,s.length) remainingRange:NULL];
+        //    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
+        //    buffer[len]=0;
+        buffer[len]=0;
+//        NSLog(@"key: %@ keyIndex: %d object: %@ string: %@ buffer: %s",aKey,keyIndex,anObject,s,buffer );
+        sqlite3_bind_text(insert_stmt,keyIndex , buffer,  (int)len,0 );    }
+
 }
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
     //    NSLog(@"MPWSQLiteWriter writeInteger: %ld forKey: %@",anInt,aKey);
-    NSString *sql_key=[@":" stringByAppendingString:aKey];
-    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
     //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
-    sqlite3_bind_int64(insert_stmt, paramIndex, anInt);
+    sqlite3_bind_int64(insert_stmt, [self paramIndexForKey:aKey], anInt);
 }
 
 -(void)endDictionary

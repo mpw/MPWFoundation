@@ -214,7 +214,7 @@ lazyAccessor(NSDictionary , tables, setTables, getTables )
     [writer endDictionary];
 
     [writer beginDictionary];
-    [writer writeInteger:4 forKey:@"a"];
+    [writer writeObject:@(4) forKey:@"a"];
     [writer writeInteger:5 forKey:@"b"];
     [writer writeObject:@"world" forKey:@"c"];
     [writer endDictionary];
