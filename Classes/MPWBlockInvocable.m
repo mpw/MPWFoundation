@@ -222,13 +222,14 @@ static NSString *extractStructType( char *s )
 -invokeWithTarget:target args:(va_list)args
 {
 //    NSLog(@"ivokeWithTarget:args:");
-	id formalParameters = [self formalParameters];
-	id parameters=[NSMutableArray array];
-	const char *sig_in=[self typeSignature];
+	NSArray* formalParameters = [self formalParameters];
+    NSMutableArray *parameters=nil;
+    const char *sig_in=[self typeSignature];
+    id returnVal;
     char signature[128];
     const char *source=sig_in;
     char *dest=signature;
-
+    
     while ( *source ) {
         if ( !isdigit(*source)  ) {
             *dest++=*source;
@@ -237,78 +238,80 @@ static NSString *extractStructType( char *s )
     }
     *dest++=0;
     int signatureLen=(int)(dest-signature);
-	id returnVal;
-//    NSLog(@"signature: %s",signature);
-    int singleParamSignatureLen=1;
-//    NSLog(@"%d parameters",(int)[formalParameters count]);
-	for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex+=singleParamSignatureLen ) {
-//        NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
-         singleParamSignatureLen=1;
-        if ( signature[i+3]==0) {
-            NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,(int)[formalParameters count],formalParameters);
-            break;
-        }
-        id theArg;
-
-		switch ( signature[signatureIndex] ) {
-			case ':':{
-                
-                SEL sel=va_arg( args,SEL);
-                theArg = NSStringFromSelector(sel);
-				[parameters addObject:theArg];
+    if ( formalParameters.count) {
+        parameters=[NSMutableArray array];
+        //    NSLog(@"signature: %s",signature);
+        int singleParamSignatureLen=1;
+        //    NSLog(@"%d parameters",(int)[formalParameters count]);
+        for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex+=singleParamSignatureLen ) {
+            //        NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
+            singleParamSignatureLen=1;
+            if ( signature[i+3]==0) {
+                NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,(int)[formalParameters count],formalParameters);
                 break;
             }
-			case '@':
-			case '#':
-				theArg = va_arg( args, id );
-                //				NSLog(@"object arg: %@",theArg);
-				if ( theArg == nil ) {
-					theArg=[NSNil nsNil];
-				}
-				[parameters addObject:theArg];
-				break;
-			case 'c':
-			case 'C':
-			case 's':
-			case 'S':
-			case 'i':
-			case 'I':
-			case 'l':
-			case 'L':
-			{
-				int intArg = va_arg( args, int );
-                //				NSLog(@"int param: %d",intArg );
-				[parameters addObject:[NSNumber numberWithInt:intArg]];
-				break;
-			}
-			case 'f':
-			case 'F':
-				[parameters addObject:[NSNumber numberWithFloat:va_arg( args, double )]];
-				break;
-#if 1
-            case '{':
-            {
-                NSString *structType=extractStructType( signature+signatureIndex);
-                singleParamSignatureLen=(int)[structType length];
-                id result=nil;
-                MPWBoxerUnboxer *boxer = [MPWBoxerUnboxer converterForTypeString:structType];
-                if ( boxer ) {
-                    result=[boxer boxedObjectForVararg:args];
-                }
-                if ( result ) {
-                    [parameters addObject:result];
+            id theArg;
+            
+            switch ( signature[signatureIndex] ) {
+                case ':':{
+                    
+                    SEL sel=va_arg( args,SEL);
+                    theArg = NSStringFromSelector(sel);
+                    [parameters addObject:theArg];
                     break;
                 }
-                
-            }
+                case '@':
+                case '#':
+                    theArg = va_arg( args, id );
+                    //                NSLog(@"object arg: %@",theArg);
+                    if ( theArg == nil ) {
+                        theArg=[NSNil nsNil];
+                    }
+                    [parameters addObject:theArg];
+                    break;
+                case 'c':
+                case 'C':
+                case 's':
+                case 'S':
+                case 'i':
+                case 'I':
+                case 'l':
+                case 'L':
+                {
+                    int intArg = va_arg( args, int );
+                    //                NSLog(@"int param: %d",intArg );
+                    [parameters addObject:[NSNumber numberWithInt:intArg]];
+                    break;
+                }
+                case 'f':
+                case 'F':
+                    [parameters addObject:[NSNumber numberWithFloat:va_arg( args, double )]];
+                    break;
+#if 1
+                case '{':
+                {
+                    NSString *structType=extractStructType( signature+signatureIndex);
+                    singleParamSignatureLen=(int)[structType length];
+                    id result=nil;
+                    MPWBoxerUnboxer *boxer = [MPWBoxerUnboxer converterForTypeString:structType];
+                    if ( boxer ) {
+                        result=[boxer boxedObjectForVararg:args];
+                    }
+                    if ( result ) {
+                        [parameters addObject:result];
+                        break;
+                    }
+                    
+                }
 #endif
-			default:
-                
-                [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%@'",i,extractStructType( signature+signatureIndex)];
-				va_arg( args, void* );
-
-		}
-	}
+                default:
+                    
+                    [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%@'",i,extractStructType( signature+signatureIndex)];
+                    va_arg( args, void* );
+                    
+            }
+        }
+    }
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
 //    NSLog(@"signature[0]='%c'",signature[0]);
 	if ( signature[0] == 'i' || signature[0] == 'l' ) {

@@ -92,11 +92,9 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
         char *buffer=[[buffers objectAtIndex:keyIndex] mutableBytes];
         NSUInteger len=0;
         [s getBytes:buffer maxLength:8192 usedLength:&len encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(0,s.length) remainingRange:NULL];
-        //    NSData *utf8data=[[[anObject stringValue] dataUsingEncoding:NSUTF8StringEncoding] retain];
-        //    buffer[len]=0;
         buffer[len]=0;
-//        NSLog(@"key: %@ keyIndex: %d object: %@ string: %@ buffer: %s",aKey,keyIndex,anObject,s,buffer );
-        sqlite3_bind_text(insert_stmt,keyIndex , buffer,  (int)len,0 );    }
+        sqlite3_bind_text(insert_stmt,keyIndex , buffer,  (int)len,0 );
+    }
 
 }
 
