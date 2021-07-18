@@ -20,7 +20,7 @@
     sqlite3_stmt *begin_transaction;
     sqlite3_stmt *end_transaction;
     sqlite3 *sqlitedb;
-    NSMutableDictionary<NSString*,NSData*> *insertParams;
+    NSMutableDictionary<NSString*,NSNumber*> *insertParams;
     NSArray<NSMutableData*>* buffers;
 }
 
@@ -66,20 +66,17 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
 -(int)paramIndexForKey:(NSString*)aKey
 {
-    NSData *d=insertParams[aKey];
-    if (!d) {
+    NSNumber *paramIndex=insertParams[aKey];
+    int paramIndexInt=paramIndex.intValue;
+    if (!paramIndex) {
         NSString *sql_key=[@":" stringByAppendingString:aKey];
-        NSMutableData *md=[[[sql_key dataUsingEncoding:NSASCIIStringEncoding] mutableCopy] autorelease];
-        [md appendBytes:"" length:1];
-        d=md;
+        paramIndexInt=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
         if ( !insertParams) {
             insertParams=[[NSMutableDictionary alloc] init];
         }
-        insertParams[aKey]=d;
+        insertParams[aKey]=@(paramIndexInt);
     }
-
-    int paramIndex=sqlite3_bind_parameter_index(insert_stmt, [d bytes]);
-    return paramIndex;
+    return paramIndexInt;
 }
 
 -(void)writeObject:anObject forKey:(NSString*)aKey

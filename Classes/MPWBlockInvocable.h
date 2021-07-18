@@ -35,6 +35,7 @@ struct Block_struct
 	struct Block_descriptor *descriptor;
 	IMP stub;
     char *typeSignature;
+    int numParams;
 }
 
 

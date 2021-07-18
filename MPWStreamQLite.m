@@ -24,7 +24,7 @@
 @implementation MPWStreamQLite
 {
     sqlite3 *db;
-    NSArray <MPWSQLTable*>* tables;
+    NSDictionary <NSString*,MPWSQLTable*>* tables;
 }
 
 lazyAccessor(NSDictionary , tables, setTables, getTables )

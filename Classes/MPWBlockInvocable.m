@@ -222,7 +222,7 @@ static NSString *extractStructType( char *s )
 -invokeWithTarget:target args:(va_list)args
 {
 //    NSLog(@"ivokeWithTarget:args:");
-	NSArray* formalParameters = [self formalParameters];
+    NSArray* formalParameters=nil;
     NSMutableArray *parameters=nil;
     const char *sig_in=[self typeSignature];
     id returnVal;
@@ -238,7 +238,8 @@ static NSString *extractStructType( char *s )
     }
     *dest++=0;
     int signatureLen=(int)(dest-signature);
-    if ( formalParameters.count) {
+    if ( numParams) {
+        formalParameters = [self formalParameters];
         parameters=[NSMutableArray array];
         //    NSLog(@"signature: %s",signature);
         int singleParamSignatureLen=1;
@@ -331,7 +332,7 @@ static NSString *extractStructType( char *s )
 {
 }
 
-@property (strong) NSArray *formalParameters;
+@property (nonatomic, strong) NSArray *formalParameters;
 
 @end
 
@@ -352,6 +353,11 @@ static NSString *extractStructType( char *s )
 typedef int (^intBlock)(int arg );
 typedef id (^idBlock)(id arg );
 
+-(void)setFormalParameters:(NSArray *)formalParameters
+{
+    _formalParameters=formalParameters;
+    numParams=[formalParameters count];
+}
 
 -(id)invokeWithArgs:(va_list)args
 {
