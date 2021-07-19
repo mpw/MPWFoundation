@@ -14,11 +14,11 @@
 #import <sqlite3.h>
 
 @interface NSString(getISOLatinCharacters)
--(void)getISOLatinCharacters:(char*)buffer;
+-(NSInteger)getISOLatinCharacters:(char*)buffer;
 @end
 
 @implementation NSString(getISOLatinCharacters)
--(void)getISOLatinCharacters:(char*)buffer
+-(NSInteger)getISOLatinCharacters:(char*)buffer
 {
     NSInteger len=self.length;
     unichar unibuf[len+10];
@@ -29,6 +29,7 @@
     //        NSUInteger len=0;
     //        [s getBytes:buffer maxLength:8192 usedLength:&len encoding:NSUTF8StringEncoding options:0 range:NSMakeRange(0,s.length) remainingRange:NULL];
     buffer[len]=0;
+    return len;
 }
 @end
 
@@ -43,7 +44,8 @@
     sqlite3 *sqlitedb;
     NSMutableDictionary<NSString*,NSNumber*> *insertParams;
     NSArray<NSMutableData*>* buffers;
-    id keys[10];
+    char *bufferpointers[20];
+    id keys[20];
     int numKeys;
 }
 
@@ -64,6 +66,7 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     buffers=[[NSMutableArray alloc] init];
     for (int i=0;i<numBuffers+1;i++) {
         [buffers addObject:[NSMutableData dataWithCapacity:8192]];
+        bufferpointers[i]=[buffers[i] mutableBytes];
     }
 }
 
@@ -116,12 +119,9 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 {
     if ( anObject ) {
         int keyIndex=[self paramIndexForKey:aKey];
-        //    NSLog(@"MPWSQLiteWriter writeObject: '%@'/%@ forKey: %@",anObject,[anObject class],aKey);
-        //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
-        NSString *s=[anObject stringValue];
-        char *buffer=[[buffers objectAtIndex:keyIndex] mutableBytes];
-        [s getISOLatinCharacters:buffer];
-        sqlite3_bind_text(insert_stmt,keyIndex , buffer,  (int)s.length,0 );
+        char *buffer=bufferpointers[keyIndex];
+        NSInteger len = [[anObject stringValue] getISOLatinCharacters:buffer];
+        sqlite3_bind_text(insert_stmt,keyIndex , buffer,  (int)len ,0 );
     }
 
 }
