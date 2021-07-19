@@ -43,7 +43,7 @@
     sqlite3_stmt *end_transaction;
     sqlite3 *sqlitedb;
     NSMutableDictionary<NSString*,NSNumber*> *insertParams;
-    NSArray<NSMutableData*>* buffers;
+    NSMutableArray<NSMutableData*>* buffers;
     char *bufferpointers[20];
     id keys[20];
     int numKeys;
@@ -62,7 +62,7 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
 -(void)createBuffers
 {
-    int numBuffers=[[self schema] count];
+    int numBuffers=(int)[[self schema] count];
     buffers=[[NSMutableArray alloc] init];
     for (int i=0;i<numBuffers+1;i++) {
         [buffers addObject:[NSMutableData dataWithCapacity:8192]];
@@ -293,3 +293,4 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 }
 
 @end
+
