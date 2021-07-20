@@ -128,8 +128,8 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
 -(void)writeInteger:(long)anInt forKey:(NSString*)aKey
 {
-    //    NSLog(@"MPWSQLiteWriter writeInteger: %ld forKey: %@",anInt,aKey);
-    //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+//    NSLog(@"MPWSQLiteWriter writeInteger: %ld forKey: %@",anInt,aKey);
+//    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
     sqlite3_bind_int64(insert_stmt, [self paramIndexForKey:aKey], anInt);
 }
 
@@ -183,10 +183,20 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     return sql;
 }
 
+-(NSArray*)insertKeys
+{
+    NSMutableArray *insertKeys=[NSMutableArray array];
+    for ( MPWSQLColumnInfo *column in [self schema]) {
+        if ( !([column.type isEqual:@"INTEGER"] && column.pk) ) {
+            [insertKeys addObject:column.name];
+        }
+    }
+    return insertKeys;
+}
+
 -(NSString*)computeSQLForInsert
 {
-    id keys = [[[self schema] collect] name];
-    return [self computeSQLForInsertWithKeys: keys];
+    return [self computeSQLForInsertWithKeys: [self insertKeys]];
 }
 
 -(NSString*)computeSQLForCreate
