@@ -15,5 +15,6 @@
 -mul:other;
 -sub:other;
 -div:other;
-
+-(double)log;
+-(double)log10;
 @end

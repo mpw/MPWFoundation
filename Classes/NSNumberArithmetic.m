@@ -169,6 +169,16 @@ defineArithOp( div, / )
     return sqrt([self doubleValue]);
 }
 
+-(double)log10
+{
+    return log10([self doubleValue]);
+}
+
+-(double)log
+{
+    return log([self doubleValue]);
+}
+
 -(double)raisedTo:(double)other
 {
     return pow([self doubleValue],other);
