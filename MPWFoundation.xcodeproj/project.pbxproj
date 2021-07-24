@@ -1163,8 +1163,6 @@
 		07DF19B3006686DDC35ADD82 /* System.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = System.framework; path = /System/Library/Frameworks/System.framework; sourceTree = "<absolute>"; };
 		07DF19B4006686DDC35ADD82 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "OCTests-Info.plist"; sourceTree = "<group>"; };
-		1F0092292495256400841C30 /* StreamQLite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StreamQLite.h; sourceTree = "<group>"; };
-		1F00922A2495256400841C30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCombinerStream.h; sourceTree = "<group>"; };
 		1F0200B81D8BF836009538C5 /* MPWCombinerStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCombinerStream.m; sourceTree = "<group>"; };
 		1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = testmpwfoundation.m; path = GNUstep/testmpwfoundation.m; sourceTree = "<group>"; };
@@ -1575,7 +1573,6 @@
 				1F4FC98E1DF818AF00B35D27 /* TestMPWFoundationUITests */,
 				1F7045B022313082005ED7FB /* MPWFoundationUI */,
 				1F7045C222313099005ED7FB /* MPWFoundationUIKit */,
-				1F0092282495256400841C30 /* StreamQLite */,
 				07DF19B6006686DDC35ADD82 /* Products */,
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
 				1F9D63C91F601E1800DA9514 /* Frameworks */,
@@ -1880,15 +1877,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1F0092282495256400841C30 /* StreamQLite */ = {
-			isa = PBXGroup;
-			children = (
-				1F0092292495256400841C30 /* StreamQLite.h */,
-				1F00922A2495256400841C30 /* Info.plist */,
-			);
-			path = StreamQLite;
-			sourceTree = "<group>";
-		};
 		1F1E09C2269D933300567AF6 /* SQLite */ = {
 			isa = PBXGroup;
 			children = (
@@ -1900,6 +1888,7 @@
 				1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */,
 			);
 			name = SQLite;
+			path = StreamQLite;
 			sourceTree = "<group>";
 		};
 		1F4FC9741DF818AE00B35D27 /* TestMPWFoundation */ = {
