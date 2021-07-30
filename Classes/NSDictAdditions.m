@@ -99,6 +99,12 @@
     return [self objectAtIndex:[anIndex intValue]];
 }
 
+-at:anIndex put:anObject
+{
+    [NSException raise:@"invalidaccess" format:@"at:put: trying to modify an immutable array"];
+    return nil;
+}
+
 @end
 
 @implementation NSMutableArray(atput)
