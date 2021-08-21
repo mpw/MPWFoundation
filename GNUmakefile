@@ -103,6 +103,8 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWURLReference.m \
     Stores.subproj/MPWDiskStore.m \
     Stores.subproj/MPWWriteBackCache.m \
+    Stores.subproj/MPWURLSchemeResolver.m \
+    Stores.subproj/MPWURLBinding.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWArrayFlattenStream.m \
@@ -120,6 +122,12 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWFDStreamSource.m \
     Streams.subproj/MPWStreamSource.m \
     Streams.subproj/MPWQueue.m \
+    Streams.subproj/MPWSkipFilter.m \
+    Streams.subproj/MPWBlockTargetStream.m \
+    Streams.subproj/MPWBytesToLines.m \
+    Streams.subproj/MPWURLCall.m \
+    Streams.subproj/MPWURLStreamingStream.m \
+    Streams.subproj/MPWURLFetchStream.m \
     Plist/MPWBinaryPListWriter.m \
     Plist/MPWNeXTPListWriter.m \
     Plist/MPWBinaryPlist.m \
@@ -127,6 +135,7 @@ libMPWFoundation_OBJC_FILES = \
     JSON/MPWMASONParser.m \
     JSON/MPWObjectBuilder.m \
     JSON/MPWConvertFromJSONStream.m \
+    JSON/MPWJSONWriter.m \
     XML/MPWXmlScanner.m \
     XML/MPWXmlAppleProplistReader.m \
     XML/MPWMAXParser.m \
@@ -160,6 +169,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWMessageCatcher.m \
     Classes/NSObjectAdditions.m \
     Classes/NSRunLoopAdditions.m \
+    Classes/MPWResource.m \
     Threading.subproj/NSThreadInterThreadMessaging.m \
     Collections.subproj/MPWSmallStringTable.m \
     Collections.subproj/MPWCaseInsensitiveSmallStringTable.m \
@@ -185,7 +195,7 @@ MPWFoundation_SUBPROJECTS = \
 	Comm.subproj		\
 
 
-LIBRARIES_DEPEND_UPON += -lgnustep-base 
+LIBRARIES_DEPEND_UPON += -lgnustep-base -lgnustep-corebase
 
 # LDFLAGS += -L /C/GNUstep/System/Libraries/ix86/mingw32/gnu-gnu-gnu/ 
 
@@ -197,7 +207,7 @@ include $(GNUSTEP_MAKEFILES)/library.make
 -include GNUmakefile.postamble
 
 before-all ::
-	
+
 #	@$(MKDIRS) $(libMPWFoundation_HEADER_FILES_DIR)
 #	cp *.h $(libMPWFoundation_HEADER_FILES_DIR)
 #	cp Collections.subproj/*.h $(libMPWFoundation_HEADER_FILES_DIR)
@@ -213,4 +223,4 @@ test    : libMPWFoundation tester
 	LD_LIBRARY_PATH=/usr/GNUstep/Local/Library/Libraries:/usr/local/lib:${HOME}/Build/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	$(CC)  -fobjc-runtime=gnustep-2.1   -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L ${HOME}/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
+	$(CC)  -fobjc-runtime=gnustep-2.1 -fblocks  -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L ${HOME}/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
