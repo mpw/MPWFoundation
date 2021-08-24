@@ -84,7 +84,10 @@ static NSURLSession *_defaultURLSession=nil;
 -(NSURLSessionConfiguration *)config
 {
     NSURLSessionConfiguration *sessionConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+#ifndef GNUSTEP
+    // TODO GNUStep has no allowsCellularAccess property defined
     sessionConfiguration.allowsCellularAccess = YES;
+#endif    
     sessionConfiguration.HTTPShouldUsePipelining = YES;
     sessionConfiguration.HTTPShouldSetCookies = YES;
     sessionConfiguration.requestCachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
