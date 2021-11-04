@@ -57,16 +57,6 @@
 
 
 
--childrenOfReference:aReference
-{
-    id mappedReference = [self mapReference:aReference];
-    NSArray *refs=[self.source childrenOfReference:mappedReference];
-    NSMutableArray *result = [NSMutableArray array];
-    for ( id<MPWReferencing> ref in refs ) {
-        [result addObject:[self reverseMapReference:ref]];
-    }
-    return result;
-}
 
 -(void)dealloc
 {

@@ -54,6 +54,11 @@
     return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
 }
 
+-(const char*)UTF8String
+{
+    return [[self path] UTF8String];
+}
+
 @synthesize path;
 
 @synthesize schemeName;

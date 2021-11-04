@@ -22,8 +22,9 @@
 {
     if ( self.prefix && [path hasPrefix:self.prefix.path] ) {
         return [path substringFromIndex:self.prefix.path.length];
+    } else {
+        return path;
     }
-    return nil;
 }
 
 

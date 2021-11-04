@@ -78,10 +78,10 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self.source hasChildren:[self mapReference:aReference]];
 }
 
--(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
-{
-    return [[self mapRetrievedObject:[[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
-}
+//-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
+//{
+//    return [[self mapRetrievedObject:[[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
+//}
 
 -(MPWReference*)referenceForPath:(NSString*)path
 {
@@ -91,6 +91,24 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return result;
 
 }
+
+-(id <MPWReferencing>)reverseMapReference:(id <MPWReferencing>)aReference
+{
+    return aReference;
+}
+
+
+-childrenOfReference:aReference
+{
+    id mappedReference = [self mapReference:aReference];
+    NSArray *refs=[self.source childrenOfReference:mappedReference];
+    NSMutableArray *result = [NSMutableArray array];
+    for ( id<MPWReferencing> ref in refs ) {
+        [result addObject:[self reverseMapReference:ref]];
+    }
+    return result;
+}
+
 
 
 

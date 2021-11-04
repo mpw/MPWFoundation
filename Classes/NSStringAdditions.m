@@ -62,6 +62,11 @@
     return [self stringWithCharacters:&ch length:1];
 }
 
+-(NSString*)lf
+{
+    return [self stringByAppendingString:@"\n"];
+}
+
 -(NSComparisonResult)numericCompare:other
 {
 	return [self compare:other options:64];

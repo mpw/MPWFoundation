@@ -413,6 +413,12 @@
 		1FA8F32024DCB27000CD69D0 /* MPWFileBrowser.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */; };
 		1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */; };
+		1FA8FC2827347E5C005E2824 /* MPWExtensionMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */; };
+		1FA8FC2927347E5C005E2824 /* MPWExtensionMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */; };
+		1FA8FC2A27347E5C005E2824 /* MPWExtensionMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */; };
+		1FA8FC2B27347E5C005E2824 /* MPWExtensionMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */; };
+		1FA8FC2C27347E5C005E2824 /* MPWExtensionMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */; };
+		1FA8FC2D27347E5C005E2824 /* MPWExtensionMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */; };
 		1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FAABE2B0BA242DD00938299 /* NSNumberArithmetic.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */; };
 		1FB0A8061E520FB600E552A0 /* MPWSocketStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB0A8041E520FB600E552A0 /* MPWSocketStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1344,6 +1350,8 @@
 		1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWFileBrowser.xib; sourceTree = "<group>"; };
 		1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFileBrowser.h; sourceTree = "<group>"; };
 		1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWFileBrowser.m; sourceTree = "<group>"; };
+		1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWExtensionMapper.h; sourceTree = "<group>"; };
+		1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWExtensionMapper.m; sourceTree = "<group>"; };
 		1FAABE280BA242DD00938299 /* NSNumberArithmetic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberArithmetic.h; sourceTree = "<group>"; };
 		1FAABE290BA242DD00938299 /* NSNumberArithmetic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberArithmetic.m; sourceTree = "<group>"; };
 		1FAB9ACD193F663600927665 /* MPWFoundation.map */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = MPWFoundation.map; sourceTree = "<group>"; };
@@ -2195,6 +2203,8 @@
 				1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */,
 				1FFE3A9E20B3285C00E65B93 /* MPWReference.h */,
 				1FFE3A9F20B3285C00E65B93 /* MPWReference.m */,
+				1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */,
+				1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */,
 				1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */,
 				1FA869D520EBC7FC00920279 /* MPWRESTOperation.m */,
 				1F1BEDBE213DD199004B4947 /* MPWSequentialStore.h */,
@@ -2362,6 +2372,7 @@
 				1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
 				1F6A72702673F813003A5B5C /* MPWPrintLiner.h in Headers */,
 				1F6A7278267520B5003A5B5C /* MPWSkipFilter.h in Headers */,
+				1FA8FC2927347E5C005E2824 /* MPWExtensionMapper.h in Headers */,
 				1FE37C4D1969784B00C9A378 /* MPWPropertyBinding.h in Headers */,
 				1FE37C11196976C500C9A378 /* MPWNamedData.h in Headers */,
 				1FE37C401969773C00C9A378 /* MPWSubData.h in Headers */,
@@ -2520,6 +2531,7 @@
 				1F080E531E4F13F600B78EF3 /* MPWFDStreamSource.h in Headers */,
 				1F6A72712673F813003A5B5C /* MPWPrintLiner.h in Headers */,
 				1F6A7279267520B5003A5B5C /* MPWSkipFilter.h in Headers */,
+				1FA8FC2A27347E5C005E2824 /* MPWExtensionMapper.h in Headers */,
 				1FCF26541CF3993C00AC64CE /* bytecoding.h in Headers */,
 				1FCF264F1CF3993C00AC64CE /* MPWRect.h in Headers */,
 				1FCF26411CF3993C00AC64CE /* MPWObject_fastrc.h in Headers */,
@@ -2586,6 +2598,7 @@
 				1FF8FDBB09B49D0100652476 /* NSStringAdditions.h in Headers */,
 				1FF8FDBC09B49D0100652476 /* NSInvocationAdditions_lookup.h in Headers */,
 				1FB7B5E01E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */,
+				1FA8FC2827347E5C005E2824 /* MPWExtensionMapper.h in Headers */,
 				1FF8FDBD09B49D0100652476 /* CodingAdditions.h in Headers */,
 				1FED48CF242634CC00AF2FAD /* MPWTagAction.h in Headers */,
 				1FEFBD272427F88E001E44B2 /* MPWMASONParser.h in Headers */,
@@ -3290,6 +3303,7 @@
 				1F1BEDB4213BE769004B4947 /* MPWFilter.m in Sources */,
 				1F313D651CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */,
 				1F840DCC193F50AC00589595 /* MPWScanner.m in Sources */,
+				1FA8FC2C27347E5C005E2824 /* MPWExtensionMapper.m in Sources */,
 				1FFA48AA1ACDEA51002FF8EA /* MPWBlockTargetStream.m in Sources */,
 				1F6A725E26735282003A5B5C /* MPWURLSchemeResolver.m in Sources */,
 				1F840DCD193F50AC00589595 /* NSDictAdditions.m in Sources */,
@@ -3432,6 +3446,7 @@
 				1FC35CD0254BF05B005D04F7 /* MPWValueArray.m in Sources */,
 				1FFE3AB520B32C6C00E65B93 /* MPWDictStore.m in Sources */,
 				1FCF265D1CF39ABD00AC64CE /* MPWRealArray.m in Sources */,
+				1FA8FC2D27347E5C005E2824 /* MPWExtensionMapper.m in Sources */,
 				1FA869D320EBC01500920279 /* MPWLoggingStore.m in Sources */,
 				1FCF26021CF398F400AC64CE /* MPWInteger.m in Sources */,
 				1F7FCD0A264570E6008B6D1A /* NSRunLoopAdditions.m in Sources */,
@@ -3502,6 +3517,7 @@
 				1F185BF026622CA800BA8219 /* MPWResource.m in Sources */,
 				1F2DCFD01ACB50F3004A39FB /* MPWConvertFromJSONStream.m in Sources */,
 				1FED48D5242634CC00AF2FAD /* MPWXmlParser.m in Sources */,
+				1FA8FC2B27347E5C005E2824 /* MPWExtensionMapper.m in Sources */,
 				1F49BBBA20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FF8FDF809B49D0100652476 /* MPWObject.m in Sources */,
 				1FED48C9242634CC00AF2FAD /* MPWTagAction.m in Sources */,
