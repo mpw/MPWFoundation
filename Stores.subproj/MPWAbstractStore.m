@@ -33,12 +33,12 @@
     if ( [storeDescription respondsToSelector:@selector(store)]) {
         storeDescription=[storeDescription store];
     } else if ( [storeDescription isKindOfClass:[NSArray class]]) {
-        storeDescription=[self mapStores:storeDescription].firstObject;
+        storeDescription=[self storesWithDescription:storeDescription].firstObject;
     }
     return storeDescription;
 }
 
-+(NSArray*)mapStores:(NSArray*)storeDescriptions
++(NSArray*)storesWithDescription:(NSArray*)storeDescriptions
 {
  //   NSMutableOrderedSet *stores=[NSMutableOrderedSet orderedSetWithCapacity:storeDescriptions.count];
     NSMutableArray *stores=[NSMutableArray arrayWithCapacity:storeDescriptions.count];
@@ -82,7 +82,7 @@
 
 +(instancetype)stores:(NSArray*)storeDescriptions
 {
-    return [self mapStores:storeDescriptions].firstObject;
+    return [self storesWithDescription:storeDescriptions].firstObject;
 }
 
 -(instancetype)initWithArray:(NSArray *)stores

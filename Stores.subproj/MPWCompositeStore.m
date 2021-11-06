@@ -15,7 +15,7 @@
 +(instancetype)stores:(NSArray *)storeDescriptions
 {
     MPWCompositeStore *store=[super store];
-    store.stores=[self mapStores:storeDescriptions];
+    store.stores=[self storesWithDescription:storeDescriptions];
     return store;
 }
 

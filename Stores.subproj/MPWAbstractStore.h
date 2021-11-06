@@ -54,7 +54,7 @@
 @property (nonatomic, retain)  NSString *name;
 
 +(instancetype)store;
-+(NSArray*)mapStores:(NSArray*)storeDescriptions;
++(NSArray*)storesWithDescription:(NSArray*)storeDescriptions;
 +(instancetype)stores:(NSArray*)storeDescriptions;
 
 -objectForKeyedSubscript:key;
