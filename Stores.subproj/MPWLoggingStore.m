@@ -46,11 +46,34 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     [self.log graphViz:aStream];
 }
 
+-(MPWLoggingStore*)logger
+{
+    return self;
+}
 
 -(void)dealloc
 {
     [_log release];
     [super dealloc];
+}
+
+
+@end
+
+@implementation MPWAbstractStore(logging)
+
+-(MPWLoggingStore*)logger
+{
+    return [MPWLoggingStore storeWithSource:self];
+}
+
+@end
+
+@implementation NSDictionary(logging)
+
+-(MPWLoggingStore*)logger
+{
+    return [MPWLoggingStore storeWithSource:(id)self];
 }
 
 @end

@@ -16,3 +16,9 @@
 @property (nonatomic, strong) NSObject <Streaming>* log;
 
 @end
+
+@interface MPWAbstractStore(logging)
+
+-(MPWLoggingStore*)logger;
+
+@end

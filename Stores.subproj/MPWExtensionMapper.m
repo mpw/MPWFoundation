@@ -9,7 +9,6 @@
 
 @implementation MPWExtensionMapper
 
-
 -reverseMapReference:aReference {
     return [[aReference path] stringByAppendingPathExtension: self.extension];
 }
