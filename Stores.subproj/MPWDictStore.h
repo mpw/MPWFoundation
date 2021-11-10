@@ -12,5 +12,7 @@
 +(instancetype)storeWithDictionary:(NSMutableDictionary*)newDict;
 -(instancetype)initWithDictionary:(NSMutableDictionary*)newDict;
 
+@property (readonly) NSMutableDictionary *dict;
+
 
 @end

@@ -57,7 +57,20 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -childrenOfReference:aReference
 {
-    return [self.dict allKeys];
+//    if ( [aReference isRoot]) {
+        return [self.dict allKeys];
+//    } else {
+//        return nil;
+//    }
+}
+
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference
+{
+    if ( [(MPWGenericReference*)aReference isRoot]) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 -(void)dealloc
@@ -116,7 +129,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     NSArray *refs=[store childrenOfReference:@""];
     INTEXPECT( refs.count, 0, @"empty");
     store[ref]=@"Hello";
-    refs=[store childrenOfReference:@""];
+    refs=[store childrenOfReference:@"/"];
     INTEXPECT( refs.count, 1, @"no longer empty");
     IDEXPECT( [refs.firstObject path], ref ,@"ref");
 

@@ -63,7 +63,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 -(BOOL)isRoot
 {
     NSArray *components=self.pathComponents;
-    return components.count == 2 && [components[0] length]==0 && [components[1] length]==0;
+    return components.count == 0 || (components.count == 2 && [components[0] length]==0 && [components[1] length]==0);
 }
 
 -(BOOL)isAbsolute

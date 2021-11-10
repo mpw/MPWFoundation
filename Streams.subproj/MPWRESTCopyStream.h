@@ -8,11 +8,12 @@
 #import <MPWFoundation/MPWWriteStream.h>
 
 @class MPWAbstractStore;
+@protocol MPWStorage;
 
 @interface MPWRESTCopyStream : MPWWriteStream
 
-@property (nonatomic, strong) MPWAbstractStore *source,*target;
+@property (nonatomic, strong) id <MPWStorage> source,target;
 
--initWithSource:(MPWAbstractStore*)newSource target:(MPWAbstractStore*)newTarget;
+-initWithSource:(id <MPWStorage>)newSource target:(id <MPWStorage>)newTarget;
 
 @end

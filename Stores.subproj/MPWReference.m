@@ -99,7 +99,7 @@
 
 -(BOOL)isRoot
 {
-    return [self hasPrefix:@"/"];
+    return self.length == 0 || [self isEqual:@"/"];
 }
 
 -(id<MPWReferencing>)asReference
