@@ -13,6 +13,7 @@
 #import "MPWDirectoryBinding.h"
 #import "NSObjectFiltering.h"
 #import "NSDictAdditions.h"
+#import "MPWPathRelativeStore.h"
 
 @interface NSArray(unique)
 
@@ -220,6 +221,11 @@
 -(MPWBinding*)bindingForPath:(NSString*)path
 {
     return [self bindingForReference:[self referenceForPath:path]];
+}
+
+-(MPWPathRelativeStore*)relativeStoreAt:(id <MPWReferencing>)reference
+{
+    return [MPWPathRelativeStore storeWithSource:self reference:reference];
 }
 
 -(void)dealloc

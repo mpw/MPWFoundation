@@ -14,4 +14,6 @@
 +(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef;
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource reference:( id <MPWReferencing>)newRef;
 
+@property (readonly) id <MPWReferencing> baseReference;
+
 @end

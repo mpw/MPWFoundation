@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWFileChangesStream : MPWStreamSource
 
+-(instancetype)initWithDirectoryPath:(NSString*)path;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -12,6 +12,7 @@
 #import "NSStringAdditions.h"
 #import "NSObjectFiltering.h"
 #import "MPWByteStream.h"
+#import "MPWDirectoryStore.h"
 
 #include <unistd.h>
 
@@ -127,6 +128,13 @@
     }
    return childNames;
 }
+
+-(MPWDirectoryStore*)relativeStoreAt:(id <MPWReferencing>)reference
+{
+    return [MPWDirectoryStore storeWithSource:self reference:reference];
+}
+
+
 
 //-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
 //{
