@@ -9,7 +9,7 @@
 #import "MPWFileChangesStream.h"
 #import "MPWPathMapper.h"
 #import "AccessorMacros.h"
-
+#import "MPWDiskStore.h"
 
 @implementation MPWDirectoryStore{
     id loggingSource;
@@ -38,3 +38,15 @@ lazyAccessor( MPWFileChangesStream, loggingSource, setLoggingSource, createLoggi
 }
 
 @end
+
+
+@implementation MPWDiskStore(directoryStore)
+
+
+-(MPWDirectoryStore*)relativeStoreAt:(id <MPWReferencing>)reference
+{
+    return [MPWDirectoryStore storeWithSource:self reference:reference];
+}
+
+@end
+

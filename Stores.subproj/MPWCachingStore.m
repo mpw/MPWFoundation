@@ -33,6 +33,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self initWithSource:newSource cache:[MPWDictStore store]];
 }
 
++(instancetype)memoryStore
+{
+    return [[[self alloc] initWithSource:nil cache:[MPWDictStore store]] autorelease];
+}
+
 -(instancetype)init
 {
     return [self initWithSource:nil cache:[MPWDictStore store]];

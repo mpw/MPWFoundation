@@ -24,8 +24,11 @@
 
 -(instancetype)init
 {
-    return [self initWithNibName:@"MPWFileBrowser" bundle:[NSBundle bundleForClass:[self class]]];
+    self = [super initWithNibName:@"MPWFileBrowser" bundle:[NSBundle bundleForClass:[self class]]];
+    [self view];
+    return self;
 }
+
 
 -(void)awakeFromNib
 {
@@ -77,6 +80,22 @@
         NSLog(@"can't save image");
     }
 }
+
+-(void)setStore:newStore
+{
+    self.browser.store=newStore;
+}
+
+-store
+{
+    return self.browser.store;
+}
+
+-openInWindow:(NSString*)windowName
+{
+    return [self.view openInWindow:windowName];
+}
+
 
 -(void)textDidChange:(NSNotification *)notification {
     if ( self.continuous ) {

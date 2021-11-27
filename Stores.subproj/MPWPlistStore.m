@@ -16,9 +16,10 @@
     id tempResult=self.dict;
         NSArray *pathComponents=[aReference relativePathComponents];
         for (NSString *step in pathComponents) {
-//            NSLog(@"step '%@'",step);
             if ( step.length > 0) {
-                tempResult = [tempResult at:step];
+                if ( ![step isEqualToString:@"."]) {
+                    tempResult = [tempResult at:step];
+                }
             }
 //            NSLog(@"after step: %@",tempResult);
         }

@@ -129,12 +129,6 @@
    return childNames;
 }
 
--(MPWDirectoryStore*)relativeStoreAt:(id <MPWReferencing>)reference
-{
-    return [MPWDirectoryStore storeWithSource:self reference:reference];
-}
-
-
 
 //-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
 //{
