@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *titleAddition;
 @property (nonatomic,strong) NSView *view;
+@property (nonatomic,strong) NSViewController *viewController;
 
 @end
 

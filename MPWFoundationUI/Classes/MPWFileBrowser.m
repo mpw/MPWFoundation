@@ -8,6 +8,7 @@
 #import "MPWFileBrowser.h"
 #import "MPWBrowser.h"
 #import <MPWFoundation/MPWFoundation.h>
+#import "MPWWindowController.h"
 
 @interface MPWFileBrowser ()
 
@@ -93,7 +94,12 @@
 
 -openInWindow:(NSString*)windowName
 {
-    return [self.view openInWindow:windowName];
+    NSDocument *doc = [[NSDocumentController sharedDocumentController]   currentDocument];
+    NSWindow *window = [self.view openInWindow:windowName];
+    MPWWindowController *windowController=[[[MPWWindowController alloc] initWithWindow:window] autorelease];
+    windowController.viewController=self;
+    [doc addWindowController:windowController];
+    return window;
 }
 
 
@@ -121,6 +127,13 @@
 -(NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column dropOperation:(NSBrowserDropOperation *)dropOperation
 {
     return NSDragOperationCopy;
+}
+
+-(void)dealloc
+{
+    [_browser release];
+    NSLog(@"deallocating MPWFileBrowser: %p",self);
+    [super dealloc];
 }
 
 @end

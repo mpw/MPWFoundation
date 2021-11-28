@@ -41,6 +41,7 @@
 -(void)dealloc
 {
     [_view release];
+    [_viewController release];
     [super dealloc];
 }
 
