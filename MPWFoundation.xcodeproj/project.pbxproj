@@ -2847,9 +2847,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1F840DBE193F505800589595 /* Build configuration list for PBXNativeTarget "MPWFoundationTouch" */;
 			buildPhases = (
+				1F840DA2193F505700589595 /* Headers */,
 				1F840DA0193F505700589595 /* Sources */,
 				1F840DA1193F505700589595 /* Frameworks */,
-				1F840DA2193F505700589595 /* Headers */,
 				1F840DA3193F505700589595 /* Resources */,
 			);
 			buildRules = (
