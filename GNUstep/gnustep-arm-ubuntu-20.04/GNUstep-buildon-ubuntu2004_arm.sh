@@ -34,29 +34,12 @@ sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update
 sudo apt-get install -y gcc-4.9
 sudo apt-get install -y libstdc++6
-echo “Getting clang9 binaries for Aarch64”
+sudo apt-get install libcurl4-gnutls-dev
 
-#sudo apt-get install -y clang9
-#wget --no-clobber http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-aarch64-linux-gnu.tar.xz
-#echo "Untarring/unxzipping (this step can take a while)..."
-#tar xf clang+llvm-9.0.0-aarch64-linux-gnu.tar.xz
-#cd clang+llvm-9.0.0-aarch64-linux-gnu/bin/
-#ln -s clang-9 clang++-9
-#cd ../../
 
-#export PATH=`pwd`/clang+llvm-9.0.0-aarch64-linux-gnu/bin/:$PATH
-#echo "export PATH=`pwd`/clang+llvm-9.0.0-aarch64-linux-gnu/bin/:\$PATH" >> ~/.bashrc
-
-echo $PATH
 # Set clang as compiler
 export CC=clang
 export CXX=clang++
-
-echo === running the compiler in CC
-
-$CC -v
-
-echo === did run the compiler in CC
 
 wget --no-clobber https://github.com/Kitware/CMake/releases/download/v3.15.5/cmake-3.15.5.tar.gz
 tar xfz cmake-3.15.5.tar.gz
@@ -91,6 +74,8 @@ cd libobjc2
 cd ..
 git clone https://github.com/gnustep/tools-make.git
 git clone https://github.com/gnustep/libs-base.git
+git clone https://github.com/gnustep/libs-corebase.git
+
 
 
 
@@ -101,7 +86,7 @@ echo -e "\n\n"
 echo -e "${GREEN}Building GNUstep-make for the first time...${NC}"
 cd tools-make
 # git checkout `git rev-list -1 --first-parent --before=2017-04-06 master` # fixes segfault, should probably be looked at.
-./configure --enable-debug-by-default --with-layout=gnustep  --enable-objc-arc  --with-library-combo=ng-gnu-gnu
+./configure --enable-debug-by-default --with-layout=gnustep  --enable-objc-arc  --with-library-combo=ng-gnu-gnu --enable-nsurlsession
 make -j8
 sudo -E make install
 
@@ -156,11 +141,22 @@ showPrompt
 echo -e "\n\n"
 echo -e "${GREEN}Building GNUstep-make for the second time...${NC}"
 cd ../../tools-make
-./configure --enable-debug-by-default --with-layout=gnustep --enable-objc-arc --with-library-combo=ng-gnu-gnu
+./configure --enable-debug-by-default --with-layout=gnustep --enable-objc-arc --with-library-combo=ng-gnu-gnu --enable-nsurlsession
 make -j8
 sudo -E make install
 
 . /usr/GNUstep/System/Library/Makefiles/GNUstep.sh
+
+showPrompt
+
+# Build GNUstep corebase (CoreFoundation)
+echo -e "\n\n"
+echo -e "${GREEN}Building GNUstep-corebase...${NC}"
+cd ../libs-corebase/
+./configure
+make -j8
+sudo -E make install
+
 
 showPrompt
 
