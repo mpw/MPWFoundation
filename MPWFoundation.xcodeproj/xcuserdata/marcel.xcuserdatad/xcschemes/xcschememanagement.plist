@@ -76,6 +76,11 @@
 			<key>orderHint</key>
 			<integer>63</integer>
 		</dict>
+		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>63</integer>
+		</dict>
 		<key>SteamQLite.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -153,6 +158,11 @@
 			<true/>
 		</dict>
 		<key>1F840DAE193F505700589595</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F93B8FC284DE20D00455231</key>
 		<dict>
 			<key>primary</key>
 			<true/>

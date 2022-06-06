@@ -354,6 +354,15 @@
 		1F89EB9A223FE7E5000A82D6 /* MPWFileBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F89EB94223FE7E4000A82D6 /* MPWFileBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F89EB9D22401FB8000A82D6 /* MPWXArgsFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F89EB9B22401FB8000A82D6 /* MPWXArgsFilter.h */; };
 		1F89EB9E22401FB8000A82D6 /* MPWXArgsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F89EB9C22401FB8000A82D6 /* MPWXArgsFilter.m */; };
+		1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B900284DE20D00455231 /* ObjectiveSSH.docc */; };
+		1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F93B910284DE25500455231 /* knownhosts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90B284DE25500455231 /* knownhosts.c */; };
+		1F93B911284DE25500455231 /* scp_write.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90C284DE25500455231 /* scp_write.m */; };
+		1F93B912284DE25500455231 /* connect_ssh.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90D284DE25500455231 /* connect_ssh.c */; };
+		1F93B913284DE25500455231 /* authentication.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90E284DE25500455231 /* authentication.c */; };
+		1F93B914284DE25500455231 /* examples_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B90F284DE25500455231 /* examples_common.h */; };
+		1F93B916284DE2D800455231 /* priv.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B915284DE2D800455231 /* priv.h */; };
+		1F93B918284DE32100455231 /* libssh.4.8.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F93B917284DE32100455231 /* libssh.4.8.7.dylib */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1334,6 +1343,16 @@
 		1F89EB9C22401FB8000A82D6 /* MPWXArgsFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWXArgsFilter.m; sourceTree = "<group>"; };
 		1F8A18AE21CCEAD9000A0884 /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		1F8C938924F5702C00646461 /* MPWFoundationTouch copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MPWFoundationTouch copy-Info.plist"; path = "/Users/marcel/programming/Kits/MPWFoundation/MPWFoundationTouch copy-Info.plist"; sourceTree = "<absolute>"; };
+		1F93B8FD284DE20D00455231 /* ObjectiveSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveSSH.h; sourceTree = "<group>"; };
+		1F93B900284DE20D00455231 /* ObjectiveSSH.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ObjectiveSSH.docc; sourceTree = "<group>"; };
+		1F93B90B284DE25500455231 /* knownhosts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = knownhosts.c; sourceTree = "<group>"; };
+		1F93B90C284DE25500455231 /* scp_write.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scp_write.m; sourceTree = "<group>"; };
+		1F93B90D284DE25500455231 /* connect_ssh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connect_ssh.c; sourceTree = "<group>"; };
+		1F93B90E284DE25500455231 /* authentication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = authentication.c; sourceTree = "<group>"; };
+		1F93B90F284DE25500455231 /* examples_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = examples_common.h; sourceTree = "<group>"; };
+		1F93B915284DE2D800455231 /* priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priv.h; sourceTree = "<group>"; };
+		1F93B917284DE32100455231 /* libssh.4.8.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh.4.8.7.dylib; path = ../../../../../opt/homebrew/Cellar/libssh/0.9.6/lib/libssh.4.8.7.dylib; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
@@ -1557,6 +1576,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1F93B8FA284DE20D00455231 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F93B918284DE32100455231 /* libssh.4.8.7.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1FCF25D01CF3983B00AC64CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -1601,6 +1628,7 @@
 				1F4FC98E1DF818AF00B35D27 /* TestMPWFoundationUITests */,
 				1F7045B022313082005ED7FB /* MPWFoundationUI */,
 				1F7045C222313099005ED7FB /* MPWFoundationUIKit */,
+				1F93B8FE284DE20D00455231 /* ObjectiveSSH */,
 				07DF19B6006686DDC35ADD82 /* Products */,
 				1F0083C70DAE09BB003E7ED1 /* OCTests-Info.plist */,
 				1F9D63C91F601E1800DA9514 /* Frameworks */,
@@ -1901,6 +1929,7 @@
 				1F4FC9731DF818AE00B35D27 /* TestMPWFoundation.app */,
 				1F7045AF22313082005ED7FB /* MPWFoundationUI.framework */,
 				1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */,
+				1F93B8FD284DE20D00455231 /* ObjectiveSSH.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2039,9 +2068,25 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
+		1F93B8FE284DE20D00455231 /* ObjectiveSSH */ = {
+			isa = PBXGroup;
+			children = (
+				1F93B915284DE2D800455231 /* priv.h */,
+				1F93B90E284DE25500455231 /* authentication.c */,
+				1F93B90D284DE25500455231 /* connect_ssh.c */,
+				1F93B90F284DE25500455231 /* examples_common.h */,
+				1F93B90B284DE25500455231 /* knownhosts.c */,
+				1F93B90C284DE25500455231 /* scp_write.m */,
+				1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */,
+				1F93B900284DE20D00455231 /* ObjectiveSSH.docc */,
+			);
+			path = ObjectiveSSH;
+			sourceTree = "<group>";
+		};
 		1F9D63C91F601E1800DA9514 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1F93B917284DE32100455231 /* libssh.4.8.7.dylib */,
 				1F6B03CE274A50D0004E61A7 /* DrawingContext.framework */,
 				1F6B03CA274A50C2004E61A7 /* DrawingContext.framework */,
 				1F7045D3223130BE005ED7FB /* Cocoa.framework */,
@@ -2440,6 +2485,16 @@
 				1FED48D0242634CC00AF2FAD /* MPWTagAction.h in Headers */,
 				1FEFBD282427F88E001E44B2 /* MPWMASONParser.h in Headers */,
 				1FE37C3A1969773C00C9A378 /* MPWSmallStringTable.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F93B8F8284DE20D00455231 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F93B914284DE25500455231 /* examples_common.h in Headers */,
+				1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */,
+				1F93B916284DE2D800455231 /* priv.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2861,6 +2916,24 @@
 			productReference = 1F840DA5193F505700589595 /* MPWFoundation.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1F93B8FC284DE20D00455231 /* ObjectiveSSH */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1F93B90A284DE20D00455231 /* Build configuration list for PBXNativeTarget "ObjectiveSSH" */;
+			buildPhases = (
+				1F93B8F8284DE20D00455231 /* Headers */,
+				1F93B8F9284DE20D00455231 /* Sources */,
+				1F93B8FA284DE20D00455231 /* Frameworks */,
+				1F93B8FB284DE20D00455231 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjectiveSSH;
+			productName = ObjectiveSSH;
+			productReference = 1F93B8FD284DE20D00455231 /* ObjectiveSSH.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		1FCF25D31CF3983B00AC64CE /* MPWFoundationWatch */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FCF25DF1CF3983C00AC64CE /* Build configuration list for PBXNativeTarget "MPWFoundationWatch" */;
@@ -2933,6 +3006,11 @@
 						LastSwiftMigration = 1220;
 						ProvisioningStyle = Automatic;
 					};
+					1F93B8FC284DE20D00455231 = {
+						CreatedOnToolsVersion = 13.4;
+						DevelopmentTeam = WP7GQ6LCB4;
+						ProvisioningStyle = Automatic;
+					};
 					1FCF25D31CF3983B00AC64CE = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PE4436LT5M;
@@ -2968,6 +3046,7 @@
 				1F3AC607143EB3D9009B8504 /* show-build-dir */,
 				1F7045AE22313082005ED7FB /* MPWFoundationUI */,
 				1F7045C022313099005ED7FB /* MPWFoundationUIKit */,
+				1F93B8FC284DE20D00455231 /* ObjectiveSSH */,
 			);
 		};
 /* End PBXProject section */
@@ -3053,6 +3132,13 @@
 				1FED493F24263D6800AF2FAD /* cdatatest1.xml in Resources */,
 				1F0984B2219F23F4006D10D9 /* first4.tabdelim in Resources */,
 				1FED49002426392300AF2FAD /* checkForPenApps_with_ISO8859_claiming_UTF8.xmlrpc in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F93B8FB284DE20D00455231 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3395,6 +3481,18 @@
 				1F1BEDC4213DD199004B4947 /* MPWSequentialStore.m in Sources */,
 				1F3D02021D702902001A9732 /* MPWScatterStream.m in Sources */,
 				1F840DE4193F50AC00589595 /* MPWPropertyBinding.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F93B8F9284DE20D00455231 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */,
+				1F93B912284DE25500455231 /* connect_ssh.c in Sources */,
+				1F93B911284DE25500455231 /* scp_write.m in Sources */,
+				1F93B913284DE25500455231 /* authentication.c in Sources */,
+				1F93B910284DE25500455231 /* knownhosts.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5382,6 +5480,368 @@
 			};
 			name = Core;
 		};
+		1F93B903284DE20D00455231 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1F93B904284DE20D00455231 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1F93B905284DE20D00455231 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = AppStore;
+		};
+		1F93B906284DE20D00455231 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Nightly;
+		};
+		1F93B907284DE20D00455231 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Beta;
+		};
+		1F93B908284DE20D00455231 /* Weekly */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Weekly;
+		};
+		1F93B909284DE20D00455231 /* Core */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = WP7GQ6LCB4;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				EXCLUDED_ARCHS = x86_64;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = /opt/homebrew/include/;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/homebrew/Cellar/libssh/0.9.6/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.ObjectiveSSH;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Core;
+		};
 		1FCF25D91CF3983C00AC64CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6393,6 +6853,20 @@
 				1F1412E31CEC7EF0000E2802 /* Beta */,
 				57D466961D5D7D6D00513893 /* Weekly */,
 				1F840DBA193F505700589595 /* Core */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1F93B90A284DE20D00455231 /* Build configuration list for PBXNativeTarget "ObjectiveSSH" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1F93B903284DE20D00455231 /* Debug */,
+				1F93B904284DE20D00455231 /* Release */,
+				1F93B905284DE20D00455231 /* AppStore */,
+				1F93B906284DE20D00455231 /* Nightly */,
+				1F93B907284DE20D00455231 /* Beta */,
+				1F93B908284DE20D00455231 /* Weekly */,
+				1F93B909284DE20D00455231 /* Core */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
