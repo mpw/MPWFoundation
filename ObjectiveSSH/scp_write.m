@@ -396,17 +396,84 @@ static int do_copy(struct location *src, struct location *dest, int recursive) {
     } while(total < size);
 
     SSH_STRING_FREE_CHAR(filename);
-    printf("wrote %zu bytes\n", total);
+//    printf("wrote %zu bytes\n", total);
     return 0;
 }
 
+
+
+
 @interface SCPWriter : NSObject
 -(void)writeFile:(NSString*)name;
+-(void)writeData:(NSData*)data toRemoteFile:(NSString*)name;
+
+@property (nonatomic,strong) NSString *host;
+@property (nonatomic,strong) NSString *user;
+
 
 @end
 
 
 @implementation SCPWriter
+
+
+-(void)writeData:(NSData*)data toRemoteFile:(NSString*)name
+{
+    size_t size=[data length];
+    socket_t fd;
+    struct stat s;
+    int w, r;
+    size_t total = 0;
+    mode_t mode;
+    char *filename = NULL;
+    
+    struct location dest;
+    
+    dest.is_ssh=1;
+    dest.user=[self.user UTF8String];   // ubuntu
+    dest.host=[self.host UTF8String];   //"130.61.236.203";
+    dest.path=[name UTF8String];
+    
+    
+    
+    if (open_location(&dest, WRITE) < 0) {
+        r = EXIT_FAILURE;
+        printf("couldn't open dest\n");
+        goto end;
+    }
+    
+
+    
+    if (dest.is_ssh) {
+        r = ssh_scp_push_file(dest.scp, dest.path, size, mode);
+        //  snprintf(buffer, sizeof(buffer), "C0644 %d %s\n", size, src->path);
+        if (r == SSH_ERROR) {
+            fprintf(stderr,"error: %s\n",ssh_get_error(dest.session));
+            ssh_scp_free(dest.scp);
+            dest.scp = NULL;
+            return ;
+        }
+    }
+    
+    char *bytes=[data bytes];
+    do {
+        char *partToWrite = bytes + total;
+        int r=MIN( 16384, [data length]-total);
+        w = ssh_scp_write(dest.scp, partToWrite, r);
+        if (w == SSH_ERROR) {
+            fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(dest.session));
+            ssh_scp_free(dest.scp);
+            dest.scp = NULL;
+            return;
+        }
+       total += r;
+        
+    } while(total < size);
+    
+    //    printf("wrote %zu bytes\n", total);
+end:
+    return ;
+}
 
 
 -(void)writeFile:(NSString*)name
@@ -415,8 +482,8 @@ static int do_copy(struct location *src, struct location *dest, int recursive) {
     int r;
 
 	dest.is_ssh=1;
-    dest.user="ubuntu";
-    dest.host="130.61.236.203";
+    dest.user=[self.user UTF8String];   // ubuntu
+    dest.host=[self.host UTF8String];   //"130.61.236.203";
     dest.path=[name UTF8String];
 
 	
