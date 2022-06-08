@@ -26,13 +26,14 @@ echo -e "\n\n${GREEN}Installing dependencies...${NC}"
 
 sudo apt -y install clang-9 git libffi-dev libxml2-dev \
 libgnutls28-dev libicu-dev libblocksruntime-dev  libpthread-workqueue-dev autoconf libtool \
-libjpeg-dev libtiff-dev libffi-dev libcairo-dev libx11-dev libxt-dev libxft-dev
+libjpeg-dev libtiff-dev libffi-dev 
+#ibcairo-dev libx11-dev libxt-dev libxft-dev
 
 echo “Getting updated libstdc++6 for GLIBCXX for clang9”
 sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
 sudo apt-get update
-sudo apt-get install -y gcc-4.9
+#sudo apt-get install -y gcc-4.9
 sudo apt-get install -y libstdc++6
 sudo apt-get install libcurl4-gnutls-dev
 
