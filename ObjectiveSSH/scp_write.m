@@ -177,236 +177,17 @@ static void close_location(struct location *loc) {
     }
 }
 
-static int open_location(struct location *loc, int flag) {
-    if (loc->is_ssh && flag == WRITE) {
-        loc->session = connect_ssh(loc->host, loc->user, verbosity);
-        if (!loc->session) {
-            fprintf(stderr, "Couldn't connect to %s\n", loc->host);
-            return -1;
-        }
-
-        loc->scp = ssh_scp_new(loc->session, SSH_SCP_WRITE, loc->path);
-        if (!loc->scp) {
-            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
-            ssh_disconnect(loc->session);
-            ssh_free(loc->session);
-            loc->session = NULL;
-            return -1;
-        }
-
-        if (ssh_scp_init(loc->scp) == SSH_ERROR) {
-            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
-            ssh_scp_free(loc->scp);
-            loc->scp = NULL;
-            ssh_disconnect(loc->session);
-            ssh_free(loc->session);
-            loc->session = NULL;
-            return -1;
-        }
-        return 0;
-    } else if (loc->is_ssh && flag == READ) {
-        loc->session = connect_ssh(loc->host, loc->user, verbosity);
-        if (!loc->session) {
-            fprintf(stderr, "Couldn't connect to %s\n", loc->host);
-            return -1;
-        }
-
-        loc->scp = ssh_scp_new(loc->session, SSH_SCP_READ, loc->path);
-        if (!loc->scp) {
-            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
-            ssh_disconnect(loc->session);
-            ssh_free(loc->session);
-            loc->session = NULL;
-            return -1;
-        }
-
-        if (ssh_scp_init(loc->scp) == SSH_ERROR) {
-            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
-            ssh_scp_free(loc->scp);
-            loc->scp = NULL;
-            ssh_disconnect(loc->session);
-            ssh_free(loc->session);
-            loc->session = NULL;
-            return -1;
-        }
-        return 0;
-    } else {
-        loc->file = fopen(loc->path, flag == READ ? "r":"w");
-        if (!loc->file) {
-            if (errno == EISDIR) {
-                if (loc->path != NULL && chdir(loc->path)) {
-                    fprintf(stderr,
-                            "Error changing directory to %s: %s\n",
-                            loc->path, strerror(errno));
-                    return -1;
-                }
-                return 0;
-            }
-            fprintf(stderr,
-                    "Error opening %s: %s\n",
-                    loc->path, strerror(errno));
-            return -1;
-        }
-        return 0;
-    }
-    return -1;
-}
-
-/** @brief copies files from source location to destination
- * @param src source location
- * @param dest destination location
- * @param recursive Copy also directories
- */
-static int do_copy(struct location *src, struct location *dest, int recursive) {
-    size_t size;
-    socket_t fd;
-    struct stat s;
-    int w, r;
-    char buffer[16384];
-    size_t total = 0;
-    mode_t mode;
-    char *filename = NULL;
-
-    /* recursive mode doesn't work yet */
-    (void)recursive;
-    /* Get the file name and size*/
-    if (!src->is_ssh) {
-        fd = fileno(src->file);
-        if (fd < 0) {
-            fprintf(stderr,
-                    "Invalid file pointer, error: %s\n",
-                    strerror(errno));
-            return -1;
-        }
-        r = fstat(fd, &s);
-        if (r < 0) {
-            return -1;
-        }
-        size = s.st_size;
-        mode = s.st_mode & ~S_IFMT;
-        filename = ssh_basename(src->path);
-    } else {
-        size = 0;
-        do {
-            r = ssh_scp_pull_request(src->scp);
-            if (r == SSH_SCP_REQUEST_NEWDIR) {
-                ssh_scp_deny_request(src->scp, "Not in recursive mode");
-                continue;
-            }
-            if (r == SSH_SCP_REQUEST_NEWFILE) {
-                size = ssh_scp_request_get_size(src->scp);
-                filename = strdup(ssh_scp_request_get_filename(src->scp));
-                mode = ssh_scp_request_get_permissions(src->scp);
-                //ssh_scp_accept_request(src->scp);
-                break;
-            }
-            if (r == SSH_ERROR) {
-                fprintf(stderr,
-                        "Error: %s\n",
-                        ssh_get_error(src->session));
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-        } while(r != SSH_SCP_REQUEST_NEWFILE);
-    }
-
-    if (dest->is_ssh) {
-        r = ssh_scp_push_file(dest->scp, src->path, size, mode);
-        //  snprintf(buffer, sizeof(buffer), "C0644 %d %s\n", size, src->path);
-        if (r == SSH_ERROR) {
-            fprintf(stderr,
-                    "error: %s\n",
-                    ssh_get_error(dest->session));
-            SSH_STRING_FREE_CHAR(filename);
-            ssh_scp_free(dest->scp);
-            dest->scp = NULL;
-            return -1;
-        }
-    } else {
-        if (!dest->file) {
-            dest->file = fopen(filename, "w");
-            if (!dest->file) {
-                fprintf(stderr,
-                        "Cannot open %s for writing: %s\n",
-                        filename, strerror(errno));
-                if (src->is_ssh) {
-                    ssh_scp_deny_request(src->scp, "Cannot open local file");
-                }
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-        }
-        if (src->is_ssh) {
-            ssh_scp_accept_request(src->scp);
-        }
-    }
-
-    do {
-        if (src->is_ssh) {
-            r = ssh_scp_read(src->scp, buffer, sizeof(buffer));
-            if (r == SSH_ERROR) {
-                fprintf(stderr,
-                        "Error reading scp: %s\n",
-                        ssh_get_error(src->session));
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-
-            if (r == 0) {
-                break;
-            }
-        } else {
-            r = fread(buffer, 1, sizeof(buffer), src->file);
-            if (r == 0) {
-                break;
-            }
-
-            if (r < 0) {
-                fprintf(stderr,
-                        "Error reading file: %s\n",
-                        strerror(errno));
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-        }
-
-        if (dest->is_ssh) {
-            w = ssh_scp_write(dest->scp, buffer, r);
-            if (w == SSH_ERROR) {
-                fprintf(stderr,
-                        "Error writing in scp: %s\n",
-                        ssh_get_error(dest->session));
-                ssh_scp_free(dest->scp);
-                dest->scp = NULL;
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-        } else {
-            w = fwrite(buffer, r, 1, dest->file);
-            if (w <= 0) {
-                fprintf(stderr,
-                        "Error writing in local file: %s\n",
-                        strerror(errno));
-                SSH_STRING_FREE_CHAR(filename);
-                return -1;
-            }
-        }
-        total += r;
-
-    } while(total < size);
-
-    SSH_STRING_FREE_CHAR(filename);
-//    printf("wrote %zu bytes\n", total);
-    return 0;
-}
 
 
 
 
 @interface SCPWriter : NSObject
--(void)writeFile:(NSString*)name;
+{
+    struct location dest;
+}
 -(void)writeData:(NSData*)data toRemoteFile:(NSString*)name;
 
+@property (nonatomic,assign) int verbosity;
 @property (nonatomic,strong) NSString *host;
 @property (nonatomic,strong) NSString *user;
 
@@ -416,18 +197,57 @@ static int do_copy(struct location *src, struct location *dest, int recursive) {
 
 @implementation SCPWriter
 
+-(int)openSession
+{
+    dest.session = connect_ssh(dest.host, dest.user, verbosity);
+    if (dest.session) {
+        fprintf(stderr, "Couldn't connect to %s\n", dest.host);
+        return -1;
+    }
+    return 0;
+}
+
+-(int)openLocation
+{
+    struct location *loc=&dest;
+    if (loc->is_ssh) {
+        loc->session = connect_ssh(loc->host, loc->user, verbosity);
+        if (!loc->session) {
+            fprintf(stderr, "Couldn't connect to %s\n", loc->host);
+            return -1;
+        }
+        
+        loc->scp = ssh_scp_new(loc->session, SSH_SCP_WRITE, loc->path);
+        if (!loc->scp) {
+            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
+            ssh_disconnect(loc->session);
+            ssh_free(loc->session);
+            loc->session = NULL;
+            return -1;
+        }
+        
+        if (ssh_scp_init(loc->scp) == SSH_ERROR) {
+            fprintf(stderr, "error : %s\n", ssh_get_error(loc->session));
+            ssh_scp_free(loc->scp);
+            loc->scp = NULL;
+            ssh_disconnect(loc->session);
+            ssh_free(loc->session);
+            loc->session = NULL;
+            return -1;
+        }
+        return 0;
+    }
+    return -1;
+}
+
 
 -(void)writeData:(NSData*)data toRemoteFile:(NSString*)name
 {
     size_t size=[data length];
-    socket_t fd;
-    struct stat s;
     int w, r;
     size_t total = 0;
-    mode_t mode;
-    char *filename = NULL;
+    mode_t mode=0644;
     
-    struct location dest;
     
     dest.is_ssh=1;
     dest.user=[self.user UTF8String];   // ubuntu
@@ -436,7 +256,7 @@ static int do_copy(struct location *src, struct location *dest, int recursive) {
     
     
     
-    if (open_location(&dest, WRITE) < 0) {
+    if ([self openLocation] < 0) {
         r = EXIT_FAILURE;
         printf("couldn't open dest\n");
         goto end;
@@ -471,47 +291,6 @@ static int do_copy(struct location *src, struct location *dest, int recursive) {
     } while(total < size);
     
     //    printf("wrote %zu bytes\n", total);
-end:
-    return ;
-}
-
-
--(void)writeFile:(NSString*)name
-{
-    struct location dest, src;
-    int r;
-
-	dest.is_ssh=1;
-    dest.user=[self.user UTF8String];   // ubuntu
-    dest.host=[self.host UTF8String];   //"130.61.236.203";
-    dest.path=[name UTF8String];
-
-	
-
-    if (open_location(&dest, WRITE) < 0) {
-        r = EXIT_FAILURE;
-		printf("couldn't open dest\n");
-        goto end;
-    }
-
-    {
-        src.is_ssh = 0;
-        src.path = [name UTF8String];
-
-        if (open_location(&src, READ) < 0) {
-            r = EXIT_FAILURE;
-            goto close_dest;
-        }
-
-        do_copy(&src, &dest, 0);
-        close_location(&src);
-    }
-
-    r = 0;
-
-close_dest:
-    close_location(&dest);
-//    location_free(dest);
 end:
     return ;
 }
