@@ -7,6 +7,8 @@
 #include <stdlib.h>
 
 #include <libssh/libssh.h>
+#include <libssh/sftp.h>
+
 #include "examples_common.h"
 
 
@@ -14,6 +16,7 @@
 @interface SCPWriter : NSObject
 {
     struct ssh_session_struct *session;
+    sftp_session sftp;
     struct ssh_scp_struct *scp;
 }
 -(void)writeData:(NSData*)data toRemoteFile:(NSString*)name;
@@ -28,7 +31,7 @@
 
 @implementation SCPWriter
 
--(int)openSession
+-(int)openSSH
 {
     if ( !session ) {
         session = connect_ssh([[self host] UTF8String], [[self user] UTF8String], self.verbosity);
@@ -38,6 +41,23 @@
         }
     }
     return 0;
+}
+
+-(int)openSFTP
+{
+    if ( !sftp ) {
+        [self openSSH];
+        if ( session )  {
+            sftp=sftp_new(session);
+            if (sftp) {
+                sftp_init(sftp);
+            } else {
+                sftp_free(sftp);
+                return -1;
+            }
+        }
+    }
+    return sftp ? 0 : -1;
 }
 
 -(void)disconnect
@@ -57,72 +77,42 @@
     return nil;
 }
 
--(int)openDest:(NSString*)dest
-{
-    if (YES) {
-        if ([self openSession]<0) {
-            return -1;
-        }
-        
-        scp = ssh_scp_new(session, SSH_SCP_WRITE, [dest UTF8String] );
-        if (!scp) {
-            NSLog(@"error: %@",[self sshError]);
-            return -1;
-        }
-        
-        if (ssh_scp_init(scp) == SSH_ERROR) {
-            fprintf(stderr, "error : %s\n", ssh_get_error(session));
-            ssh_scp_free(scp);
-            scp = NULL;
-            ssh_disconnect(session);
-            ssh_free(session);
-            session = NULL;
-            return -1;
-        }
-        return 0;
-    }
-    return -1;
-}
 
 
 -(void)writeData:(NSData*)data toRemoteFile:(NSString*)name
 {
     size_t size=[data length];
-    int w;
     size_t total = 0;
-    mode_t mode=0644;
     const char *bytes=[data bytes];
+    int access_type = O_WRONLY | O_CREAT | O_TRUNC;
+    sftp_file file;
 
     
-    if ([self openDest:name] < 0) {
+    if ([self openSFTP] < 0) {
         printf("couldn't open dest\n");
         goto end;
     }
     
     
-    
-    int r = ssh_scp_push_file(scp, [name UTF8String], size, mode);
-    //  snprintf(buffer, sizeof(buffer), "C0644 %d %s\n", size, src->path);
-    if (r == SSH_ERROR) {
-        fprintf(stderr,"error: %s\n",ssh_get_error(session));
-        ssh_scp_free(scp);
-        scp = NULL;
-        return ;
+    file = sftp_open(sftp, [name UTF8String], access_type, S_IRWXU);
+    if ( file ) {
+        do {
+            const char *partToWrite = bytes + total;
+            size_t numBytesToWrite=(int)MIN( 16384, [data length]-total);
+            size_t written = sftp_write(file, partToWrite, numBytesToWrite);
+            if (written == SSH_ERROR) {
+                fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
+                ssh_scp_free(scp);
+                scp = NULL;
+                return;
+            }
+            total += written;
+            
+        } while(total < size);
+        sftp_close(file);
+    } else {
+        NSLog(@"error opening sftp file connection: %@",[self sshError]);
     }
-    
-    do {
-        const char *partToWrite = bytes + total;
-        unsigned long r=MIN( 16384, [data length]-total);
-        w = ssh_scp_write(scp, partToWrite, r);
-        if (w == SSH_ERROR) {
-            fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
-            ssh_scp_free(scp);
-            scp = NULL;
-            return;
-        }
-        total += r;
-        
-    } while(total < size);
     
     //    printf("wrote %zu bytes\n", total);
 end:
