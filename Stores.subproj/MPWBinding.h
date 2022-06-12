@@ -7,9 +7,10 @@
 
 #import <MPWFoundation/MPWReference.h>
 #import <MPWFoundation/MPWWriteStream.h>
+#import <MPWFoundation/MPWAbstractStore.h>
 
 @class MPWReference,MPWAbstractStore;
-@protocol MPWReferencing;
+@protocol MPWReferencing,MPWStorage;
 
 @protocol MPWBinding
 
@@ -19,7 +20,7 @@
 
 -(void)delete;
 
--asScheme;
+-(id <MPWStorage>)asScheme;
 
 // hierarchy support
 

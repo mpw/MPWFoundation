@@ -223,7 +223,7 @@
     return [self bindingForReference:[self referenceForPath:path]];
 }
 
--(MPWPathRelativeStore*)relativeStoreAt:(id <MPWReferencing>)reference
+-(id<MPWStorage>)relativeStoreAt:(id <MPWReferencing>)reference
 {
     return [MPWPathRelativeStore storeWithSource:self reference:reference];
 }
