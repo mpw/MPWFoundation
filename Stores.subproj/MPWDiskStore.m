@@ -71,7 +71,12 @@
 -(void)at:(MPWGenericReference*)aReference put:(NSData*)theObject
 {
     NSError *error=nil;
-    BOOL success=[theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
+    BOOL success=NO;
+    if ( theObject == nil ) {
+        success=[[NSFileManager defaultManager] createDirectoryAtURL:[self fileURLForReference:aReference] withIntermediateDirectories:NO attributes:nil error:&error];
+    } else {
+        success=[theObject writeToURL:[self fileURLForReference:aReference] options:NSDataWritingAtomic error:&error];
+    }
     if ( !success) {
         if (!error) {
             error=[NSError errorWithDomain:NSCocoaErrorDomain code:4 userInfo:@{}];
