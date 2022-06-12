@@ -357,7 +357,7 @@
 		1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B900284DE20D00455231 /* ObjectiveSSH.docc */; };
 		1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F93B910284DE25500455231 /* knownhosts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90B284DE25500455231 /* knownhosts.c */; };
-		1F93B911284DE25500455231 /* scp_write.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90C284DE25500455231 /* scp_write.m */; };
+		1F93B911284DE25500455231 /* SFTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90C284DE25500455231 /* SFTPStore.m */; };
 		1F93B912284DE25500455231 /* connect_ssh.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90D284DE25500455231 /* connect_ssh.c */; };
 		1F93B913284DE25500455231 /* authentication.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90E284DE25500455231 /* authentication.c */; };
 		1F93B914284DE25500455231 /* examples_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B90F284DE25500455231 /* examples_common.h */; };
@@ -365,6 +365,7 @@
 		1F93B918284DE32100455231 /* libssh.4.8.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F93B917284DE32100455231 /* libssh.4.8.7.dylib */; };
 		1F93B9192855FFEF00455231 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; };
 		1F93B91A2855FFEF00455231 /* MPWFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1F93B91F28567B6400455231 /* SFTPStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B91E28567B6400455231 /* SFTPStore.h */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1367,12 +1368,13 @@
 		1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveSSH.h; sourceTree = "<group>"; };
 		1F93B900284DE20D00455231 /* ObjectiveSSH.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ObjectiveSSH.docc; sourceTree = "<group>"; };
 		1F93B90B284DE25500455231 /* knownhosts.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = knownhosts.c; sourceTree = "<group>"; };
-		1F93B90C284DE25500455231 /* scp_write.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = scp_write.m; sourceTree = "<group>"; };
+		1F93B90C284DE25500455231 /* SFTPStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTPStore.m; sourceTree = "<group>"; };
 		1F93B90D284DE25500455231 /* connect_ssh.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = connect_ssh.c; sourceTree = "<group>"; };
 		1F93B90E284DE25500455231 /* authentication.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = authentication.c; sourceTree = "<group>"; };
 		1F93B90F284DE25500455231 /* examples_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = examples_common.h; sourceTree = "<group>"; };
 		1F93B915284DE2D800455231 /* priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priv.h; sourceTree = "<group>"; };
 		1F93B917284DE32100455231 /* libssh.4.8.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh.4.8.7.dylib; path = ../../../../../opt/homebrew/Cellar/libssh/0.9.6/lib/libssh.4.8.7.dylib; sourceTree = "<group>"; };
+		1F93B91E28567B6400455231 /* SFTPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFTPStore.h; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
@@ -2097,7 +2099,8 @@
 				1F93B90D284DE25500455231 /* connect_ssh.c */,
 				1F93B90F284DE25500455231 /* examples_common.h */,
 				1F93B90B284DE25500455231 /* knownhosts.c */,
-				1F93B90C284DE25500455231 /* scp_write.m */,
+				1F93B91E28567B6400455231 /* SFTPStore.h */,
+				1F93B90C284DE25500455231 /* SFTPStore.m */,
 				1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */,
 				1F93B900284DE20D00455231 /* ObjectiveSSH.docc */,
 			);
@@ -2516,6 +2519,7 @@
 				1F93B914284DE25500455231 /* examples_common.h in Headers */,
 				1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */,
 				1F93B916284DE2D800455231 /* priv.h in Headers */,
+				1F93B91F28567B6400455231 /* SFTPStore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3513,7 +3517,7 @@
 			files = (
 				1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */,
 				1F93B912284DE25500455231 /* connect_ssh.c in Sources */,
-				1F93B911284DE25500455231 /* scp_write.m in Sources */,
+				1F93B911284DE25500455231 /* SFTPStore.m in Sources */,
 				1F93B913284DE25500455231 /* authentication.c in Sources */,
 				1F93B910284DE25500455231 /* knownhosts.c in Sources */,
 			);
@@ -5516,7 +5520,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5572,7 +5576,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5623,7 +5627,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5674,7 +5678,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5725,7 +5729,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5776,7 +5780,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -5827,7 +5831,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;

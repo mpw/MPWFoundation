@@ -1,10 +1,11 @@
-/* libssh_scp.c
- */
+// SFTPStore.m
+//
+// Copyright 2022 Marcel Weiher
+//
 
-#import <MPWFoundation/MPWFoundation.h>
 
-#include <stdio.h>
-#include <stdlib.h>
+#import "SFTPStore.h"
+
 
 #include <libssh/libssh.h>
 #include <libssh/sftp.h>
@@ -13,23 +14,13 @@
 
 
 
-@interface SCPWriter : MPWAbstractStore
-{
-    struct ssh_session_struct *session;
-    sftp_session sftp;
-    struct ssh_scp_struct *scp;
-}
--(void)writeData:(NSData*)data toRemoteFile:(NSString*)name;
-
-@property (nonatomic,assign) int verbosity;
-@property (nonatomic,strong) NSString *host;
-@property (nonatomic,strong) NSString *user;
-
-
-@end
 
 
 @implementation SCPWriter
+{
+    struct ssh_session_struct *session;
+    sftp_session sftp;
+}
 
 -(int)openSSH
 {
@@ -103,8 +94,6 @@
             size_t written = sftp_write(file, partToWrite, numBytesToWrite);
             if (written == SSH_ERROR) {
                 fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
-                ssh_scp_free(scp);
-                scp = NULL;
                 return;
             }
             total += written;
@@ -122,7 +111,6 @@ end:
 
 -(NSData*)readDataAtPath:(NSString*)name
 {
-    size_t total = 0;
     int access_type = O_RDONLY;
     sftp_file file;
     NSMutableData *result=nil;
@@ -141,9 +129,8 @@ end:
         do {
             numBytesRead = sftp_read(file, buffer, BUFFER_SIZE);
             if (numBytesRead == SSH_ERROR) {
-                fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
-                ssh_scp_free(scp);
-                scp = NULL;
+                fprintf(stderr, "Error reading in sftp: %s\n", ssh_get_error(session));
+                sftp_close(file);
                 return result;
             }
             [result appendBytes:buffer length:numBytesRead];
@@ -196,6 +183,14 @@ end:
             }
         }
     }
+}
+
+-(void)dealloc
+{
+    [self disconnect];
+    [_host release];
+    [_user release];
+    [super dealloc];
 }
 
 @end
