@@ -1,7 +1,7 @@
 /* libssh_scp.c
  */
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWFoundation.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 
 
 
-@interface SCPWriter : NSObject
+@interface SCPWriter : MPWAbstractStore
 {
     struct ssh_session_struct *session;
     sftp_session sftp;
@@ -77,10 +77,11 @@
     return nil;
 }
 
-
+#define BUFFER_SIZE 16384
 
 -(void)writeData:(NSData*)data toRemoteFile:(NSString*)name
 {
+    data = [data asData];
     size_t size=[data length];
     size_t total = 0;
     const char *bytes=[data bytes];
@@ -98,7 +99,7 @@
     if ( file ) {
         do {
             const char *partToWrite = bytes + total;
-            size_t numBytesToWrite=(int)MIN( 16384, [data length]-total);
+            size_t numBytesToWrite=(int)MIN( BUFFER_SIZE, [data length]-total);
             size_t written = sftp_write(file, partToWrite, numBytesToWrite);
             if (written == SSH_ERROR) {
                 fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
@@ -117,6 +118,54 @@
     //    printf("wrote %zu bytes\n", total);
 end:
     return ;
+}
+
+-(NSData*)readDataAtPath:(NSString*)name
+{
+    size_t total = 0;
+    int access_type = O_RDONLY;
+    sftp_file file;
+    NSMutableData *result=nil;
+
+    if ([self openSFTP] < 0) {
+        printf("couldn't open dest\n");
+        goto end;
+    }
+    
+    
+    file = sftp_open(sftp, [name UTF8String], access_type, S_IRWXU);
+    if ( file ) {
+        result=[NSMutableData data];
+        char *buffer[BUFFER_SIZE];
+        size_t numBytesRead=0;
+        do {
+            numBytesRead = sftp_read(file, buffer, BUFFER_SIZE);
+            if (numBytesRead == SSH_ERROR) {
+                fprintf(stderr, "Error writing in scp: %s\n", ssh_get_error(session));
+                ssh_scp_free(scp);
+                scp = NULL;
+                return result;
+            }
+            [result appendBytes:buffer length:numBytesRead];
+        } while(numBytesRead >= BUFFER_SIZE);
+        sftp_close(file);
+    } else {
+        NSLog(@"error opening sftp file connection: %@",[self sshError]);
+    }
+    
+    //    printf("wrote %zu bytes\n", total);
+end:
+    return result;
+}
+
+-(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+{
+    [self writeData:[theObject asData] toRemoteFile:[aReference path]];
+}
+
+-(id)at:(id<MPWReferencing>)aReference
+{
+    return [self readDataAtPath:[aReference path]];
 }
 
 

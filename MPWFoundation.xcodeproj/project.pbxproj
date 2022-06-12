@@ -363,6 +363,8 @@
 		1F93B914284DE25500455231 /* examples_common.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B90F284DE25500455231 /* examples_common.h */; };
 		1F93B916284DE2D800455231 /* priv.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B915284DE2D800455231 /* priv.h */; };
 		1F93B918284DE32100455231 /* libssh.4.8.7.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F93B917284DE32100455231 /* libssh.4.8.7.dylib */; };
+		1F93B9192855FFEF00455231 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; };
+		1F93B91A2855FFEF00455231 /* MPWFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1099,9 +1101,27 @@
 			remoteGlobalIDString = 1F7045C022313099005ED7FB;
 			remoteInfo = MPWFoundationUIKit;
 		};
+		1F93B91B2855FFEF00455231 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07DF1931006686DDC35ADD82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FF8FDB309B49D0100652476;
+			remoteInfo = MPWFoundationFramework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		1F93B91D2855FFEF00455231 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1F93B91A2855FFEF00455231 /* MPWFoundation.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1F9D63CE1F60200C00DA9514 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -1580,6 +1600,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F93B9192855FFEF00455231 /* MPWFoundation.framework in Frameworks */,
 				1F93B918284DE32100455231 /* libssh.4.8.7.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2924,10 +2945,12 @@
 				1F93B8F9284DE20D00455231 /* Sources */,
 				1F93B8FA284DE20D00455231 /* Frameworks */,
 				1F93B8FB284DE20D00455231 /* Resources */,
+				1F93B91D2855FFEF00455231 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1F93B91C2855FFEF00455231 /* PBXTargetDependency */,
 			);
 			name = ObjectiveSSH;
 			productName = ObjectiveSSH;
@@ -3801,6 +3824,11 @@
 			isa = PBXTargetDependency;
 			target = 1F7045C022313099005ED7FB /* MPWFoundationUIKit */;
 			targetProxy = 1F7045C622313099005ED7FB /* PBXContainerItemProxy */;
+		};
+		1F93B91C2855FFEF00455231 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FF8FDB309B49D0100652476 /* MPWFoundationFramework */;
+			targetProxy = 1F93B91B2855FFEF00455231 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
