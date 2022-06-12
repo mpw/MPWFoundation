@@ -160,7 +160,11 @@ end:
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    [self writeData:[theObject asData] toRemoteFile:[aReference path]];
+    if ( theObject ) {
+        [self writeData:[theObject asData] toRemoteFile:[aReference path]];
+    } else {
+        [self mkdir:aReference];
+    }
 }
 
 -(id)at:(id<MPWReferencing>)aReference
@@ -168,5 +172,30 @@ end:
     return [self readDataAtPath:[aReference path]];
 }
 
+-(void)mkdir:(id<MPWReferencing>)aReference
+{
+    if ([self openSFTP] >= 0) {
+        sftp_mkdir(sftp, [[aReference path] UTF8String], 0644);
+    }
+}
+
+-(void)deleteAt:(id<MPWReferencing>)aReference
+{
+    if ([self openSFTP] >= 0) {
+        const char *path = [[aReference path] UTF8String];
+        if ( path ) {
+            sftp_attributes attrs = sftp_stat(sftp, path );
+            int errcode=0;
+            if ( attrs && attrs->type == SSH_FILEXFER_TYPE_DIRECTORY) {
+                errcode = sftp_rmdir(sftp, path);
+            } else {
+                errcode = sftp_unlink(sftp, path);
+            }
+            if (errcode < 0 ) {
+                NSLog(@"Error deleting: %@",[self sshError]);
+            }
+        }
+    }
+}
 
 @end
