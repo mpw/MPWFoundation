@@ -366,6 +366,10 @@
 		1F93B9192855FFEF00455231 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; };
 		1F93B91A2855FFEF00455231 /* MPWFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F93B91F28567B6400455231 /* SFTPStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B91E28567B6400455231 /* SFTPStore.h */; };
+		1F93B9222858C43900455231 /* SFTPReadStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B9202858C43900455231 /* SFTPReadStream.h */; };
+		1F93B9232858C43900455231 /* SFTPReadStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B9212858C43900455231 /* SFTPReadStream.m */; };
+		1F93B9262858CC3800455231 /* SSHCommandStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B9242858CC3800455231 /* SSHCommandStream.h */; };
+		1F93B9272858CC3800455231 /* SSHCommandStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B9252858CC3800455231 /* SSHCommandStream.m */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1375,6 +1379,10 @@
 		1F93B915284DE2D800455231 /* priv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = priv.h; sourceTree = "<group>"; };
 		1F93B917284DE32100455231 /* libssh.4.8.7.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssh.4.8.7.dylib; path = ../../../../../opt/homebrew/Cellar/libssh/0.9.6/lib/libssh.4.8.7.dylib; sourceTree = "<group>"; };
 		1F93B91E28567B6400455231 /* SFTPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFTPStore.h; sourceTree = "<group>"; };
+		1F93B9202858C43900455231 /* SFTPReadStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SFTPReadStream.h; sourceTree = "<group>"; };
+		1F93B9212858C43900455231 /* SFTPReadStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SFTPReadStream.m; sourceTree = "<group>"; };
+		1F93B9242858CC3800455231 /* SSHCommandStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHCommandStream.h; sourceTree = "<group>"; };
+		1F93B9252858CC3800455231 /* SSHCommandStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHCommandStream.m; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
@@ -2101,8 +2109,12 @@
 				1F93B90B284DE25500455231 /* knownhosts.c */,
 				1F93B91E28567B6400455231 /* SFTPStore.h */,
 				1F93B90C284DE25500455231 /* SFTPStore.m */,
+				1F93B9202858C43900455231 /* SFTPReadStream.h */,
+				1F93B9212858C43900455231 /* SFTPReadStream.m */,
 				1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */,
 				1F93B900284DE20D00455231 /* ObjectiveSSH.docc */,
+				1F93B9242858CC3800455231 /* SSHCommandStream.h */,
+				1F93B9252858CC3800455231 /* SSHCommandStream.m */,
 			);
 			path = ObjectiveSSH;
 			sourceTree = "<group>";
@@ -2519,7 +2531,9 @@
 				1F93B914284DE25500455231 /* examples_common.h in Headers */,
 				1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */,
 				1F93B916284DE2D800455231 /* priv.h in Headers */,
+				1F93B9222858C43900455231 /* SFTPReadStream.h in Headers */,
 				1F93B91F28567B6400455231 /* SFTPStore.h in Headers */,
+				1F93B9262858CC3800455231 /* SSHCommandStream.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3515,6 +3529,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F93B9232858C43900455231 /* SFTPReadStream.m in Sources */,
+				1F93B9272858CC3800455231 /* SSHCommandStream.m in Sources */,
 				1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */,
 				1F93B912284DE25500455231 /* connect_ssh.c in Sources */,
 				1F93B911284DE25500455231 /* SFTPStore.m in Sources */,

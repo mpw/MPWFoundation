@@ -10,6 +10,8 @@
 @interface SCPWriter : MPWAbstractStore
 
 @property (nonatomic,assign) int verbosity;
+@property (nonatomic,assign) int directoryUMask;
+@property (nonatomic,assign) int fileUMask;
 @property (nonatomic,strong) NSString *host;
 @property (nonatomic,strong) NSString *user;
 

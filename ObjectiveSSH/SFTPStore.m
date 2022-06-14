@@ -5,7 +5,8 @@
 
 
 #import "SFTPStore.h"
-
+#import "SFTPReadStream.h"
+#import "SSHCommandStream.h"
 
 #include <libssh/libssh.h>
 #include <libssh/sftp.h>
@@ -20,6 +21,14 @@
 {
     struct ssh_session_struct *session;
     sftp_session sftp;
+}
+
+-(instancetype)init
+{
+    self=[super init];
+    self.directoryUMask = S_IRUSR|S_IWUSR|S_IXUSR;
+    self.fileUMask = S_IRUSR|S_IWUSR;
+    return self;
 }
 
 -(int)openSSH
@@ -53,6 +62,10 @@
 
 -(void)disconnect
 {
+    if ( sftp )  {
+        sftp_free(sftp);
+        sftp=NULL;
+    }
     if ( session ) {
         ssh_disconnect(session);
         ssh_free(session);
@@ -86,7 +99,7 @@
     }
     
     
-    file = sftp_open(sftp, [name UTF8String], access_type, S_IRWXU);
+    file = sftp_open(sftp, [name UTF8String], access_type, S_IRUSR|S_IWUSR);
     if ( file ) {
         do {
             const char *partToWrite = bytes + total;
@@ -111,6 +124,20 @@ end:
 
 -(NSData*)readDataAtPath:(NSString*)name
 {
+    NSMutableData *result=[NSMutableData data];
+    
+    if ([self openSFTP] < 0) {
+        printf("couldn't open dest\n");
+    }
+    MPWByteStream *s=[MPWByteStream streamWithTarget:result];
+    SFTPReadStream *sftpstream=[[[SFTPReadStream alloc] initWithSFTPSession:sftp name:name] autorelease];
+    sftpstream.target = s;
+    [sftpstream run];
+    return result;
+}
+
+-(NSData*)readDataAtPath1:(NSString*)name
+{
     int access_type = O_RDONLY;
     sftp_file file;
     NSMutableData *result=nil;
@@ -121,7 +148,7 @@ end:
     }
     
     
-    file = sftp_open(sftp, [name UTF8String], access_type, S_IRWXU);
+    file = sftp_open(sftp, [name UTF8String], access_type, S_IRUSR|S_IWUSR );
     if ( file ) {
         result=[NSMutableData data];
         char *buffer[BUFFER_SIZE];
@@ -154,15 +181,49 @@ end:
     }
 }
 
+-command:(NSString*)command
+{
+    return [[[SSHCommandStream alloc] initWithSSHSession:session command:command] autorelease];
+}
+
+-(NSArray*)childNamesOfReference:(id<MPWReferencing>)aReference
+{
+    NSMutableArray *names=[NSMutableArray array];
+    sftp_dir dir = sftp_opendir(sftp, [[aReference path] UTF8String]);
+    if (dir) {
+        sftp_attributes direntry = NULL;
+        while ( (!sftp_dir_eof( dir)) && (direntry = sftp_readdir(sftp, dir)) ) {
+            [names addObject:[NSString stringWithUTF8String:direntry->name]];
+        }
+    }
+    return names;
+}
+
+
+-directoryForReference:(id<MPWReferencing>)aReference
+{
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:combinedRefs] autorelease];
+}
+
+
 -(id)at:(id<MPWReferencing>)aReference
 {
-    return [self readDataAtPath:[aReference path]];
+    const char *path=[[aReference path] UTF8String];
+    sftp_attributes attrs = sftp_stat(sftp, path );
+//    int errcode=0;
+    if ( attrs && attrs->type == SSH_FILEXFER_TYPE_DIRECTORY) {
+        return [self directoryForReference:aReference];
+    } else {
+        return [self readDataAtPath:[aReference path]];
+    }
 }
 
 -(void)mkdir:(id<MPWReferencing>)aReference
 {
     if ([self openSFTP] >= 0) {
-        sftp_mkdir(sftp, [[aReference path] UTF8String], 0644);
+        sftp_mkdir(sftp, [[aReference path] UTF8String], self.directoryUMask );
     }
 }
 
