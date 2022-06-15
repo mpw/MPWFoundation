@@ -36,9 +36,7 @@
     if ( channel ) {
         int rc;
         rc = ssh_channel_open_session(channel);
-        NSLog(@"open channel: %d",rc);
         rc = ssh_channel_request_exec(channel, [self.command UTF8String]);
-        NSLog(@"request exec: %d",rc);
         char buffer[256];
         int nbytes=0;
         do {

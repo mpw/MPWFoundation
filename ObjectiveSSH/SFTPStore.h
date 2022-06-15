@@ -7,15 +7,14 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@interface SCPWriter : MPWAbstractStore
+@interface SFTPStore : MPWAbstractStore
+
 
 @property (nonatomic,assign) int verbosity;
 @property (nonatomic,assign) int directoryUMask;
 @property (nonatomic,assign) int fileUMask;
-@property (nonatomic,strong) NSString *host;
-@property (nonatomic,strong) NSString *user;
 
--(int)openSSH;
+-(instancetype)initWithSession:(void*)newSession;
 -(int)openSFTP;
 -(void)disconnect;
 

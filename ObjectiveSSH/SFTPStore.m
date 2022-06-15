@@ -11,42 +11,32 @@
 #include <libssh/libssh.h>
 #include <libssh/sftp.h>
 
-#include "examples_common.h"
 
 
 
 
 
-@implementation SCPWriter
+@implementation SFTPStore
 {
-    struct ssh_session_struct *session;
+    ssh_session session;
     sftp_session sftp;
 }
 
--(instancetype)init
+-(instancetype)initWithSession:(void*)newSession
 {
-    self=[super init];
-    self.directoryUMask = S_IRUSR|S_IWUSR|S_IXUSR;
-    self.fileUMask = S_IRUSR|S_IWUSR;
+    self = [super init];
+    if ( self ) {
+        session = newSession;
+        self.directoryUMask = S_IRUSR|S_IWUSR|S_IXUSR;
+        self.fileUMask = S_IRUSR|S_IWUSR;
+    }
     return self;
 }
 
--(int)openSSH
-{
-    if ( !session ) {
-        session = connect_ssh([[self host] UTF8String], [[self user] UTF8String], self.verbosity);
-        if (!session) {
-            fprintf(stderr, "Couldn't connect to %s\n", [[self host] UTF8String]);
-            return -1;
-        }
-    }
-    return 0;
-}
 
 -(int)openSFTP
 {
     if ( !sftp ) {
-        [self openSSH];
         if ( session )  {
             sftp=sftp_new(session);
             if (sftp) {
@@ -249,8 +239,6 @@ end:
 -(void)dealloc
 {
     [self disconnect];
-    [_host release];
-    [_user release];
     [super dealloc];
 }
 
