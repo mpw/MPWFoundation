@@ -14,7 +14,7 @@
 @property (nonatomic,assign) int directoryUMask;
 @property (nonatomic,assign) int fileUMask;
 
--(instancetype)initWithSession:(void*)newSession;
+-(instancetype)initWithSession:newSession;
 -(int)openSFTP;
 -(void)disconnect;
 

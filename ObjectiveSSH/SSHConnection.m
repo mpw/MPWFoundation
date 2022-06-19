@@ -29,16 +29,21 @@
     return 0;
 }
 
+-(void*)sshSession
+{
+    return session;
+}
+
 -(SFTPStore*)store
 {
     [self openSSH];
-    return [[[SFTPStore alloc] initWithSession:session] autorelease];
+    return [[[SFTPStore alloc] initWithSession:self] autorelease];
 }
 
 -(SSHCommandStream*)command:(NSString*)command outputTo:(NSObject <Streaming>*)output
 {
     [self openSSH];
-    SSHCommandStream *s = [[[SSHCommandStream alloc] initWithSSHSession:session command:command] autorelease];
+    SSHCommandStream *s = [[[SSHCommandStream alloc] initWithSSHSession:self command:command] autorelease];
     s.target = output;
     return s;
 }
@@ -55,7 +60,7 @@
 {
     if ( session ) {
         ssh_disconnect(session);
-        ssh_free(session);
+//        ssh_free(session);
         session = NULL;
     }
 }

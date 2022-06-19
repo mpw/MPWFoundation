@@ -129,6 +129,7 @@
 #import <MPWFoundation/MPWFileBinding.h>
 #import <MPWFoundation/MPWPropertyStore.h>
 #import <MPWFoundation/MPWURLSchemeResolver.h>
+#import <MPWFoundation/MPWSFTPStore.h>
 
 
 #import <MPWFoundation/MPWXmlGeneratorStream.h>

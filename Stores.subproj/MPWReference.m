@@ -48,6 +48,10 @@
     return nil;
 }
 
+-(NSString*)relativePath
+{
+    return [[self relativePathComponents] componentsJoinedByString:@"/"];
+}
 
 -(NSString*)urlPath
 {

@@ -17,7 +17,8 @@ typedef NS_ENUM(int, MPWRESTVerb) {
     MPWRESTVerbPUT,
     MPWRESTVerbPATCH,
     MPWRESTVerbDELETE,
-    MPWRESTVerbPOST
+    MPWRESTVerbPOST,
+    MPWRESTVerbInvalid = -1
 };
 
 @property (nonatomic,assign) MPWRESTVerb verb;

@@ -6,14 +6,17 @@
 
 #import "SFTPStore.h"
 #import "SFTPReadStream.h"
+#import "SSHConnection.h""
 #import "SSHCommandStream.h"
 
 #include <libssh/libssh.h>
 #include <libssh/sftp.h>
 
+@interface SFTPStore()
 
+@property (nonatomic, strong) SSHConnection *theSession;
 
-
+@end
 
 
 @implementation SFTPStore
@@ -22,11 +25,12 @@
     sftp_session sftp;
 }
 
--(instancetype)initWithSession:(void*)newSession
+-(instancetype)initWithSession:(SSHConnection*)newSession
 {
     self = [super init];
     if ( self ) {
-        session = newSession;
+        self.theSession = newSession;
+        session = [newSession sshSession];
         self.directoryUMask = S_IRUSR|S_IWUSR|S_IXUSR;
         self.fileUMask = S_IRUSR|S_IWUSR;
     }
@@ -55,11 +59,6 @@
     if ( sftp )  {
         sftp_free(sftp);
         sftp=NULL;
-    }
-    if ( session ) {
-        ssh_disconnect(session);
-        ssh_free(session);
-        session = NULL;
     }
 }
 
@@ -164,7 +163,7 @@ end:
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    if ( theObject ) {
+     if ( theObject ) {
         [self writeData:[theObject asData] toRemoteFile:[aReference path]];
     } else {
         [self mkdir:aReference];
@@ -200,9 +199,11 @@ end:
 
 -(id)at:(id<MPWReferencing>)aReference
 {
+    if ([self openSFTP] < 0) {
+        printf("couldn't open dest\n");
+    }
     const char *path=[[aReference path] UTF8String];
     sftp_attributes attrs = sftp_stat(sftp, path );
-//    int errcode=0;
     if ( attrs && attrs->type == SSH_FILEXFER_TYPE_DIRECTORY) {
         return [self directoryForReference:aReference];
     } else {
@@ -239,6 +240,7 @@ end:
 -(void)dealloc
 {
     [self disconnect];
+    [self.theSession release];
     [super dealloc];
 }
 

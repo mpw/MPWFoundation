@@ -71,14 +71,14 @@
 -(void)writeInotifyEvent:(struct inotify_event *)i
 {
     @autoreleasepool {
+        MPWRESTVerb verb = MPWRESTVerbInvalid;
         NSString *path=[NSString stringWithUTF8String:i->name];
-//        NSLog(@"mask: %x path :%s",i->mask,i->name);
         if ( i->mask & IN_MODIFY ) {
-            MPWRESTVerb verb=MPWRESTVerbPUT;
-            MPWRESTOperation *op=[MPWRESTOperation operationWithReference:path verb:verb];
-            [self.target writeObject:op];
+            verb=MPWRESTVerbPUT;
         } else if  ( i->mask & IN_DELETE ) {
-            MPWRESTVerb verb=MPWRESTVerbDELETE;
+            verb=MPWRESTVerbDELETE;
+        }
+        if (verb !=  MPWRESTVerbInvalid) {
             MPWRESTOperation *op=[MPWRESTOperation operationWithReference:path verb:verb];
             [self.target writeObject:op];
         }
