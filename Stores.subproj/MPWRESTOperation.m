@@ -59,9 +59,10 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb
     [super dealloc];
 }
 
+
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@ %@>",[self HTTPVerb],self.reference];
+    return [NSString stringWithFormat:@"<%@ %@>\n",[self HTTPVerb],self.reference];
 }
 
 @end

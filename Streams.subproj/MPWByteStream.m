@@ -61,10 +61,13 @@
 
 @interface MPWFileTarget : MPWFileDescriptorTarget
 {
+    int bufferSize;
     char buffer[LARGEBUFSIZE];
     int  written;
 }
 
+-(int)bufferSize;
+-(void)setBufferSize;
 
 @end
 
@@ -922,6 +925,17 @@ intAccessor( fd, setFd )
 
 @implementation MPWFileTarget
 
+-(int)bufferSize
+{
+    return bufferSize;
+}
+
+-(void)setBufferSize:(int)newSize
+{
+    bufferSize = MAX(MIN( newSize, LARGEBUFSIZE), 0);
+}
+
+
 -initWithFd:(int)newFd
 {
     self=[super initWithFd:newFd];
@@ -938,10 +952,10 @@ intAccessor( fd, setFd )
 
 -(void)appendBytes:(const void *)bytes length:(unsigned long)len
 {
-    if ( len + written >= LARGEBUFSIZE) {
+    if ( len + written >= bufferSize) {
         [self flushLocal];
     }
-    if ( len > LARGEBUFSIZE) {
+    if ( len > bufferSize) {
         [super appendBytes:bytes length:len];
     } else {
         memcpy( buffer+written, bytes, len);
