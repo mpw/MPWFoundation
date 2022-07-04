@@ -7,11 +7,13 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+@class SSHConnection;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SSHCommandStream : MPWStreamSource
 
--initWithSSHSession:(void*)session command:(NSString*)name;
+-initWithSSHSession:(SSHConnection*)session command:(NSString*)name;
 -(void)run;
 
 

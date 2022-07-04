@@ -6,6 +6,7 @@
 //
 
 #import "SSHCommandStream.h"
+#import "SSHConnection.h"
 #import <libssh/libssh.h>
 
 @interface SSHCommandStream()
@@ -19,17 +20,19 @@
     ssh_channel channel;
 }
 
--initWithSSHSession:(void*)session command:(NSString*)command
+-initWithSSHSession:(SSHConnection*)session command:(NSString*)command
 {
     self=[super init];
     self.command = command;
     if ( self ) {
-        channel = ssh_channel_new(session);
+        channel = ssh_channel_new([session sshSession]);
         if ( !channel ) {
+            NSLog(@"couldn't create channel from sesion %p: %s",[session sshSession],ssh_get_error([session sshSession]));
         }
     }
     return self;
 }
+
 
 -(void)run
 {
