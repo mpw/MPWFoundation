@@ -282,8 +282,8 @@ lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
     IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
     IDEXPECT(nameColumn.type, @"NVARCHAR(120)", @"type of 'name' column");
-    EXPECTFALSE(nameColumn.pk, @"name is primary key");
-    EXPECTFALSE(nameColumn.notnull, @"name not null");
+//    EXPECTFALSE(nameColumn.pk, @"name is primary key");
+//    EXPECTFALSE(nameColumn.notnull, @"name not null");
 }
 
 +(void)testCount

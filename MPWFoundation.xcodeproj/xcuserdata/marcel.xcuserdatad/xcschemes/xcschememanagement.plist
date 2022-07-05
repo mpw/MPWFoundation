@@ -69,12 +69,12 @@
 		<key>MPWFoundationUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>18</integer>
 		</dict>
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>63</integer>
+			<integer>92</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>

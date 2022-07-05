@@ -6,7 +6,7 @@
 
 #import "SFTPStore.h"
 #import "SFTPReadStream.h"
-#import "SSHConnection.h""
+#import "SSHConnection.h"
 #import "SSHCommandStream.h"
 
 #include <libssh/libssh.h>
