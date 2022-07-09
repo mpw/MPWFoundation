@@ -12,6 +12,7 @@
 @interface SSHCommandStream()
 
 @property (nonatomic, strong) NSString *command;
+@property (nonatomic, weak) SSHConnection *connection;
 
 @end
 
@@ -24,6 +25,7 @@
 {
     self=[super init];
     self.command = command;
+    self.connection = session;
     if ( self ) {
         channel = ssh_channel_new([session sshSession]);
         if ( !channel ) {
@@ -33,13 +35,49 @@
     return self;
 }
 
+//
+//   For some reason ssh_channel_request_env() never seems to work
+//
+//-(void)sendEnvironmentVariables
+//{
+//    NSDictionary *env=self.env;
+//    NSLog(@"env: %@",env);
+//    for ( NSString *name in env) {
+//        NSString *value=env[name];
+//        if ( channel && name && value ) {
+//            const char *n=[name UTF8String];
+//            const char *v=[value UTF8String];
+//            NSLog(@"will write '%s' %s' to channel %p",n,v,channel);
+//            int rc = ssh_channel_request_env(channel,n,v);
+//            NSLog(@"ssh_channel_request_env() rc=%d",rc);
+//            if (rc <0 ) {
+//                NSLog(@"error: %@",[self.connection sshError]);
+//            }
+//        }
+//    }
+//}
+
+-(NSString*)commandsForEnvironmentVariables
+{
+    NSDictionary *env=self.env;
+    NSMutableString *envCmd=[NSMutableString string];
+    for ( NSString *name in env) {
+        NSString *value=env[name];
+        [envCmd appendFormat:@"export %@='%@'; ",name,value];
+    }
+    return envCmd;
+}
 
 -(void)run
 {
     if ( channel ) {
         int rc;
+//        [self sendEnvironmentVariables];
         rc = ssh_channel_open_session(channel);
-        rc = ssh_channel_request_exec(channel, [self.command UTF8String]);
+        NSString *envCmd=[self commandsForEnvironmentVariables];
+        NSString *totalCmd=[envCmd stringByAppendingString:self.command];
+        rc = ssh_channel_request_exec(channel, [totalCmd UTF8String]);
+//        NSLog(@"ssh_channel_request_exec() rc=%d",rc);
         char buffer[256];
         int nbytes=0;
         do {

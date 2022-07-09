@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SSHCommandStream : MPWStreamSource
 
+@property (nonatomic, strong) NSDictionary *env;
+
+
 -initWithSSHSession:(SSHConnection*)session command:(NSString*)name;
 -(void)run;
 

@@ -16,11 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *host;
 @property (nonatomic,strong) NSString *user;
 @property (nonatomic,assign) int verbosity;
+@property (nonatomic, strong) NSDictionary *env;
 
 -(SFTPStore*)store;
 -(SSHCommandStream*)command:(NSString*)command outputTo:(NSObject <Streaming>*)output;
 -(NSData*)run:(NSString*)command;
 -(void*)sshSession;
+-(NSString*)sshError;
+
 
 @end
 

@@ -7,6 +7,8 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+@class SSHConnection;
+
 @interface SFTPStore : MPWAbstractStore
 
 
@@ -14,9 +16,10 @@
 @property (nonatomic,assign) int directoryUMask;
 @property (nonatomic,assign) int fileUMask;
 
--(instancetype)initWithSession:newSession;
+-(instancetype)initWithSession:(SSHConnection*)newSession;
 -(int)openSFTP;
 -(void)disconnect;
+
 
 @end
 

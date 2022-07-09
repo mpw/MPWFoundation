@@ -12,6 +12,7 @@
 #include <libssh/libssh.h>
 #include "examples_common.h"
 
+
 @implementation SSHConnection
 {
     ssh_session session;
@@ -34,6 +35,16 @@
     return session;
 }
 
+-(NSString*)sshError
+{
+    if ( session ) {
+        return @(ssh_get_error(session));
+    }
+    return nil;
+}
+
+
+
 -(SFTPStore*)store
 {
     [self openSSH];
@@ -44,6 +55,7 @@
 {
     [self openSSH];
     SSHCommandStream *s = [[[SSHCommandStream alloc] initWithSSHSession:self command:command] autorelease];
+    s.env = self.env;
     s.target = output;
     return s;
 }
