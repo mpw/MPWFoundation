@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(SFTPStore*)store;
 -(SSHCommandStream*)command:(NSString*)command outputTo:(NSObject <Streaming>*)output;
+-(void)run:(NSString*)command outputTo:(NSObject <Streaming>*)output;
 -(NSData*)run:(NSString*)command;
 -(void*)sshSession;
 -(NSString*)sshError;

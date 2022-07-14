@@ -60,11 +60,16 @@
     return s;
 }
 
+-(void)run:(NSString*)command outputTo:(NSObject <Streaming>*)output
+{
+    SSHCommandStream *c=[self command:command outputTo:output];
+    [c run];
+}
+
 -(NSData*)run:(NSString*)command
 {
     MPWByteStream *s=[MPWByteStream stream];
-    SSHCommandStream *c=[self command:command outputTo:s];
-    [c run];
+    [self run:command outputTo:s];
     return [s byteTarget];
 }
 

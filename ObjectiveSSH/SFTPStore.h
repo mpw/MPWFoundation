@@ -9,7 +9,7 @@
 
 @class SSHConnection;
 
-@interface SFTPStore : MPWAbstractStore
+@interface SFTPStore : MPWAbstractStore <MPWStorage>
 
 
 @property (nonatomic,assign) int verbosity;
