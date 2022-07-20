@@ -67,7 +67,7 @@
 }
 
 -(int)bufferSize;
--(void)setBufferSize;
+-(void)setBufferSize:(int)newSize;
 
 @end
 

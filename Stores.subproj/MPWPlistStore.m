@@ -33,14 +33,14 @@
     id base =  [self at:aReference];
     NSString *path=[aReference path];
     path = [path hasPrefix:@"/"] ? [path substringFromIndex:1] : path;
-    NSArray *retval=nil;
+    NSArray<MPWReferencing> *retval=nil;
     if ( [base isKindOfClass:[NSDictionary class]] ) {
 //        return [[path collect] stringByAppendingPathComponent:[[base allKeys] each]];
-        retval = [base allKeys];
+        retval = (NSArray<MPWReferencing>*)[base allKeys];
     } else {
-        NSMutableArray *result=[NSMutableArray arrayWithCapacity:[base count]+1];
+        NSMutableArray<MPWReferencing> *result=[NSMutableArray arrayWithCapacity:[base count]+1];
         for ( long i=0,max=[base count];i<max;i++) {
-            [result addObject:[NSString stringWithFormat:@"%d",i]];
+            [result addObject:[NSString stringWithFormat:@"%ld",i]];
         }
         retval = result;
     }
@@ -64,9 +64,9 @@
 
 +(void)testCanReturnNestedElement
 {
-    NSDictionary *d=@{
+    NSMutableDictionary *d=[[@{
         @"base" : @{ @"level1" : @1 }
-    };
+    }  mutableCopy] autorelease];
     MPWPlistStore *s=[self storeWithDictionary:d];
     NSNumber *one=s[@"base/level1"];
     IDEXPECT(one, @1, @"value at nested path");
@@ -74,9 +74,9 @@
 
 +(void)testCanReturnNestedArrayElements
 {
-    NSDictionary *d=@{
+    NSMutableDictionary *d=[[@{
         @"base" : @[ @1, @2, @3 ]
-    };
+    }  mutableCopy] autorelease];
     MPWPlistStore *s=[self storeWithDictionary:d];
     NSNumber *one=s[@"base/1"];
     IDEXPECT(one, @2, @"value at nested path");
@@ -84,9 +84,9 @@
 
 +(void)testHasChildren
 {
-    NSDictionary *d=@{
+    NSMutableDictionary *d=[[@{
         @"base" : @[ @1, @2, @3 ]
-    };
+    }  mutableCopy] autorelease];
     MPWPlistStore *s=[self storeWithDictionary:d];
     EXPECTTRUE([s hasChildren:@"/"],@"root has children");
     EXPECTTRUE([s hasChildren:@"base"],@"base has children");
@@ -95,10 +95,10 @@
 
 +(void)testChildrenOf
 {
-    NSDictionary *d=@{
+    NSMutableDictionary *d=[[@{
         @"base" : @[ @1, @2, @3 ],
         @"second" : @{ @"a": @"hello" , @"b": @"world"}
-    };
+    } mutableCopy] autorelease];
     MPWPlistStore *s=[self storeWithDictionary:d];
     id rootChildren=[s childrenOfReference:@"/"];
     IDEXPECT( rootChildren, (@[@"base", @"second"]),@"children of root");

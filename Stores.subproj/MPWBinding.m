@@ -160,7 +160,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 {
     MPWAbstractStore *s=[MPWAbstractStore store];
     MPWBinding *binding=[s bindingForReference:@"hello/world" inContext:nil];
-    MPWPathRelativeStore* relativeStore = [binding asScheme];
+    MPWPathRelativeStore* relativeStore = (MPWPathRelativeStore*)[binding asScheme];
 
     IDEXPECT( [relativeStore mapReference:@"base"], @"hello/world/base", @"mapped from scheme");
 }

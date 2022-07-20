@@ -13,7 +13,7 @@
 +(instancetype)storeWithSource:(NSObject <MPWStorage,MPWHierarchicalStorage>*)aSource loggingTo:(id <Streaming>)log;
 -(instancetype)initWithSource:(NSObject <MPWStorage,MPWHierarchicalStorage>*)aSource loggingTo:(id <Streaming>)log;
 
-@property (nonatomic, strong) NSObject <StreamSource>* log;
+@property (nonatomic, strong) NSObject <Streaming>* log;
 
 @end
 

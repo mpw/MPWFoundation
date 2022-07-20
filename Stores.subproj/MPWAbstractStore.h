@@ -17,6 +17,7 @@
 -(void)at:(id <MPWReferencing>)aReference put:theObject;
 -(void)merge:theObject at:(id <MPWReferencing>)aReference;
 -(void)deleteAt:(id <MPWReferencing>)aReference;
+-(void)mkdirAt:(id <MPWReferencing>)reference;
 -(id <MPWReferencing>)referenceForPath:(NSString*)path;
 
 @optional
@@ -28,6 +29,7 @@
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference;
 
 -(MPWBinding*)bindingForReference:aReference inContext:aContext;
+-(id<MPWStorage>)relativeStoreAt:(id <MPWReferencing>)reference;
 
 @end
 

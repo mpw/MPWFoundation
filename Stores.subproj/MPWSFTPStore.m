@@ -61,7 +61,7 @@
         relativePath=[relativePath substringFromIndex:1];
     }
     MPWGenericReference *pathRef=[MPWGenericReference referenceWithPath:relativePath];
-    return [[self storeForURL:connectionURL] relativeStoreAt:pathRef];
+    return [(MPWAbstractStore*)[self storeForURL:connectionURL] relativeStoreAt:pathRef];
 }
 
 

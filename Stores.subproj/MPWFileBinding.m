@@ -158,21 +158,6 @@
     [[NSClassFromString(@"NSWorkspace") sharedWorkspace] openURL:[self URL]];
 }
 
-// FIXME:  change notification should probably be delegated to the store/scheme handler
-
-//-(void)didChange
-//{
-//    if ( !ignoreChanges) {
-//        ignoreChanges=YES;
-//        if (delegate && [self modifiedSinceLastWritten]) {
-////            NSLog(@"%@ sending changed: to delegate:%p/%@/%@",[self class],delegate,[delegate class],delegate);
-//            [[delegate onMainThread] changed:self];
-////            NSLog(@"did send changed to delegate: %@",delegate);
-//        }
-//        ignoreChanges=NO;
-//    }
-//}
-
 -(NSString*)urlPath
 {
     return [(id)[self reference] urlPath];
@@ -187,6 +172,12 @@
 {
     return [self source];
 }
+
+-(MPWByteStream*)writeStream
+{
+    return [MPWByteStream fileName:[self path]];
+}
+
 
 -(MPWStreamSource*)lines
 {

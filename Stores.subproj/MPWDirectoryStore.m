@@ -17,7 +17,7 @@
 
 lazyAccessor( MPWFileChangesStream, loggingSource, setLoggingSource, createLoggingSource )
 
--(id <StreamSource>)createLoggingSource
+-(MPWFileChangesStream*)createLoggingSource
 {
     MPWFileChangesStream *changeDetector = [[[MPWFileChangesStream alloc] initWithDirectoryPath:self.baseReference.path] autorelease];
     MPWPathMapper *pathMapper = [[MPWPathMapper new] autorelease];
@@ -34,7 +34,7 @@ lazyAccessor( MPWFileChangesStream, loggingSource, setLoggingSource, createLoggi
 
 -(MPWLoggingStore *)logger
 {
-    return self;
+    return (MPWLoggingStore *)self;
 }
 
 @end

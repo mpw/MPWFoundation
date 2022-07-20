@@ -228,6 +228,13 @@
     return [MPWPathRelativeStore storeWithSource:self reference:reference];
 }
 
+-(void)mkdirAt:(id <MPWReferencing>)reference
+{
+    [self at:reference put:nil];
+}
+
+
+
 -(void)dealloc
 {
     [_name release];
@@ -304,22 +311,6 @@
 {
     return [self get:uri parameters:nil];
 }
-
-//-objectForReference:ref
-//{
-//    return [self at:ref];
-//}
-
-//-(void)setObject:object forReference:ref
-//{
-//    [self at:ref put:object];
-//}
-//
-//-(void)mergeObject:object forReference:ref
-//{
-//    [self merge:object at:ref];
-//}
-//
 
 
 @end

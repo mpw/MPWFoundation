@@ -356,7 +356,7 @@ typedef id (^idBlock)(id arg );
 -(void)setFormalParameters:(NSArray *)formalParameters
 {
     _formalParameters=formalParameters;
-    numParams=[formalParameters count];
+    numParams=(int)[formalParameters count];
 }
 
 -(id)invokeWithArgs:(va_list)args

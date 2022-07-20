@@ -12,6 +12,8 @@
 @interface MPWWriteBackCache : MPWWriteThroughCache
 
 -(void)makeAsynchronous;
+-(void)flush;
+
 @property (readonly) BOOL isAsynchronous;
 @property (readonly) BOOL hasChanges;
 @property (assign)   BOOL autoFlush;

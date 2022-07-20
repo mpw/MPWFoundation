@@ -272,16 +272,15 @@
 
 @implementation NSArray(sorted)
 
-typedef NSInteger (^SortBlock)(id a,id b);
+typedef id (^SortBlock)(id a,id b);
 
 
-static NSInteger compareUsingBlock( id a, id b, void *voidblock )
+static NSInteger compareUsingBlock( id a, id b, void *context )
 {
-    SortBlock sortBlock  = voidblock;
-    return sortBlock(a,b);
+    return [((SortBlock)context)(a,b) intValue];
 }
 
--(NSArray*)sorted:(NSComparisonResult (^)(id a,id b))sortBlock
+-(NSArray*)sorted:(SortBlock)sortBlock
 {
     return [self sortedArrayUsingFunction:compareUsingBlock context:sortBlock];
 }

@@ -10,6 +10,7 @@
 @interface MPWURLReference : MPWReference <MPWReferencing,MPWReferenceCreation>
 
 @property (nonatomic, readonly, strong) NSURL *URL;
+@property (nonatomic,assign) int port;
 
 +(instancetype)referenceWithURL:(NSURL*)components;
 
