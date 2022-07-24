@@ -8,6 +8,7 @@
 #import "SSHConnection.h"
 #import "SFTPStore.h"
 #import "SSHCommandStream.h"
+#import "SSHCommandStore.h"
 
 #include <libssh/libssh.h>
 #include "examples_common.h"
@@ -49,6 +50,12 @@
 {
     [self openSSH];
     return [[[SFTPStore alloc] initWithSession:self] autorelease];
+}
+
+-(SSHCommandStore*)commandStore
+{
+    [self openSSH];
+    return [[[SSHCommandStore alloc] initWithConnection:self] autorelease];
 }
 
 -(SSHCommandStream*)command:(NSString*)command outputTo:(NSObject <Streaming>*)output
