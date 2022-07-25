@@ -75,9 +75,9 @@
 
 -(NSData*)run:(NSString*)command
 {
-    MPWByteStream *s=[MPWByteStream stream];
-    [self run:command outputTo:s];
-    return [s byteTarget];
+    NSMutableData *result=[NSMutableData data];
+    [self run:command outputTo:[MPWByteStream streamWithTarget:result]];
+    return result;
 }
 
 -(void)disconnect

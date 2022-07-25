@@ -168,34 +168,6 @@
     return [MPWFDStreamSource name:[self path]];
 }
 
--stream
-{
-    return [self source];
-}
-
--(MPWByteStream*)writeStream
-{
-    return [MPWByteStream fileName:[self path]];
-}
-
-
--(MPWStreamSource*)lines
-{
-    MPWFDStreamSource *s=[self stream];
-    [s setTarget:[MPWBytesToLines stream]];
-    return s;
-}
-
--(MPWStreamSource*)linesAfter:(int)numToSkip
-{
-    MPWStreamSource *stream=[self lines];
-    MPWSkipFilter *skipper=[MPWSkipFilter stream];
-    skipper.skip = numToSkip;
-    [stream setFinalTarget:skipper];
-    return stream;
-}
-
-
 
 -(void)dealloc
 {

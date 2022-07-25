@@ -6,11 +6,11 @@
 //  Copyright 2008 Apple. All rights reserved.
 //
 
-#import <MPWFoundation/MPWBinding.h>
+#import <MPWFoundation/MPWStreamableBinding.h>
 
 @class MPWStreamSource;
 
-@interface MPWFileBinding : MPWBinding {
+@interface MPWFileBinding : MPWStreamableBinding {
     BOOL ignoreChanges;
     NSTimeInterval lastRead,lastWritten;
 }
@@ -19,8 +19,5 @@
 
 -(NSString*)fancyPath;
 -source;
--(MPWByteStream*)writeStream;
--(MPWStreamSource*)lines;
--(MPWStreamSource*)linesAfter:(int)numToSkip;
 
 @end

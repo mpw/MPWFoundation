@@ -328,7 +328,7 @@ SEL visSel;
 
 -processedWith:(MPWWriteStream*)streamOrStreamClass
 {
-    return [streamOrStreamClass process:self];
+    return [(id)streamOrStreamClass process:self];
 }
 
 -finalTarget

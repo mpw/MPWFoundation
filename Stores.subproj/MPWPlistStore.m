@@ -38,7 +38,7 @@
 //        return [[path collect] stringByAppendingPathComponent:[[base allKeys] each]];
         retval = (NSArray<MPWReferencing>*)[base allKeys];
     } else {
-        NSMutableArray<MPWReferencing> *result=[NSMutableArray arrayWithCapacity:[base count]+1];
+        NSMutableArray<MPWReferencing> * _Nonnull result=(NSMutableArray<MPWReferencing> * _Nonnull)[NSMutableArray arrayWithCapacity:[base count]+1];
         for ( long i=0,max=[base count];i<max;i++) {
             [result addObject:[NSString stringWithFormat:@"%ld",i]];
         }
