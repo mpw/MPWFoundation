@@ -7,6 +7,8 @@
 
 #import "SSHCommandStore.h"
 #import "SSHCommandStream.h"
+#import "SSHCommandBinding.h"
+
 
 @interface SSHCommandStore()
 
@@ -23,18 +25,17 @@
     return self;
 }
 
+-(SSHCommandBinding *)bindingForReference:(id)aReference inContext:(id)aContext
+{
+    SSHCommandBinding *binding = [SSHCommandBinding bindingWithReference:aReference inStore:self];
+    binding.connection = self.connection;
+    return binding;
+}
 
 -(id)at:(id<MPWReferencing>)aReference
 {
-    NSArray *components = [aReference pathComponents];
-    NSString *name=[components firstObject];
-    NSArray *args = [components subarrayWithRange:NSMakeRange(1,components.count-1)];
-    NSString *cmdAndArgs = [components componentsJoinedByString:@" "];
-    SSHCommandStream *s=[[[SSHCommandStream alloc] initWithSSHSession:self.connection command:cmdAndArgs] autorelease];
-    NSMutableData *result=[NSMutableData data];
-    s.target = [MPWByteStream streamWithTarget:result];
-    [s run];
-    return result;
+    SSHCommandBinding *binding = [self bindingForReference:aReference inContext:nil];
+    return [binding value];
 }
 
 

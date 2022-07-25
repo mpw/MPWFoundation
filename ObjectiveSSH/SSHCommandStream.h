@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSDictionary *env;
 
 
--initWithSSHSession:(SSHConnection*)session command:(NSString*)name;
+-initWithSSHConnection:(SSHConnection*)session command:(NSString*)name;
 -(void)run;
 
 

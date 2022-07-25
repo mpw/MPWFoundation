@@ -21,15 +21,17 @@
     ssh_channel channel;
 }
 
--initWithSSHSession:(SSHConnection*)session command:(NSString*)command
+-initWithSSHConnection:(SSHConnection*)connection command:(NSString*)command
 {
     self=[super init];
     self.command = command;
-    self.connection = session;
+    self.connection = connection;
     if ( self ) {
-        channel = ssh_channel_new([session sshSession]);
+        channel = ssh_channel_new([connection sshSession]);
         if ( !channel ) {
-            NSLog(@"couldn't create channel from sesion %p: %s",[session sshSession],ssh_get_error([session sshSession]));
+            NSLog(@"couldn't create channel from connection %p",connection);
+            NSLog(@"couldn't create channel from connection %@",connection);
+            NSLog(@"couldn't create channel from sesion %p: %s",[connection sshSession],ssh_get_error([connection sshSession]));
         }
     }
     return self;

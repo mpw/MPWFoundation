@@ -14,7 +14,7 @@
 
 @interface SFTPStore()
 
-@property (nonatomic, strong) SSHConnection *theSession;
+@property (nonatomic, strong) SSHConnection *connection;
 
 @end
 
@@ -29,7 +29,7 @@
 {
     self = [super init];
     if ( self ) {
-        self.theSession = newSession;
+        self.connection = newSession;
         session = [newSession sshSession];
         self.directoryUMask = S_IRUSR|S_IWUSR|S_IXUSR;
         self.fileUMask = S_IRUSR|S_IWUSR;
@@ -172,7 +172,7 @@ end:
 
 -command:(NSString*)command
 {
-    return [[[SSHCommandStream alloc] initWithSSHSession:session command:command] autorelease];
+    return [[[SSHCommandStream alloc] initWithSSHConnection:self.connection command:command] autorelease];
 }
 
 -(NSArray*)childNamesOfReference:(id<MPWReferencing>)aReference
@@ -240,7 +240,7 @@ end:
 -(void)dealloc
 {
     [self disconnect];
-    [self.theSession release];
+    [self.connection release];
     [super dealloc];
 }
 

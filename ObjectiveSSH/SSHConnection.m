@@ -61,7 +61,7 @@
 -(SSHCommandStream*)command:(NSString*)command outputTo:(NSObject <Streaming>*)output
 {
     [self openSSH];
-    SSHCommandStream *s = [[[SSHCommandStream alloc] initWithSSHSession:self command:command] autorelease];
+    SSHCommandStream *s = [[[SSHCommandStream alloc] initWithSSHConnection:self command:command] autorelease];
     s.env = self.env;
     s.target = output;
     return s;
