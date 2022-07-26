@@ -95,6 +95,19 @@
     }
 }
 
+-(NSData*)value
+{
+    SSHCommandStream *s=self;
+    if ( !self.target){
+        NSMutableData *result=[NSMutableData data];
+        s.target = [MPWByteStream streamWithTarget:result];
+    }
+    [s run];
+    return [s finalTarget];
+}
+
+
+
 
 
 @end

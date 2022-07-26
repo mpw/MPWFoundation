@@ -31,6 +31,14 @@
     }
 }
 
+-finalTarget
+{
+    if ( [self target]) {
+        return [[self target] finalTarget];
+    }
+    return self;
+}
+
 -(void)awaitResultForSeconds:(NSTimeInterval)seconds
 {
     // is current synchronous
