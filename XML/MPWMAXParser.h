@@ -26,7 +26,7 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
 THE POSSIBILITY OF SUCH DAMAGE. */
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWByteStream.h>
 
 #if MPWXMLINTEGRATED
 #import "NSXMLParserMAX.h"
@@ -72,7 +72,7 @@ typedef id (*XMLIMP6)(id, SEL, id,id,id,id,id,id);
 
 
 #endif
-@interface MPWMAXParser : NSObject   {
+@interface MPWMAXParser : MPWByteStream   {
 	id						data;
 	id						scanner;
     id						documentHandler;

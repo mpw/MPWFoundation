@@ -304,6 +304,15 @@ static inline long writeKey( char *buffer, NSString *key, BOOL *firstPtr)
 
 @end
 
+@implementation NSObject(asJSON)
+
+-(NSData*)asJSON
+{
+    return [MPWJSONWriter process:self];
+}
+
+@end
+
 @implementation MPWJSONWriter(testing)
 
 +(void)testWriteArray

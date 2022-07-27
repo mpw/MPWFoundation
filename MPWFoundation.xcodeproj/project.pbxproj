@@ -21,6 +21,10 @@
 		1F02B99E288EC5EE0023588A /* MPWStreamableBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B998288EC5EE0023588A /* MPWStreamableBinding.m */; };
 		1F02B9A5288EEDA70023588A /* SSHCommandBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F02B9A3288EEDA70023588A /* SSHCommandBinding.h */; };
 		1F02B9A6288EEDA70023588A /* SSHCommandBinding.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B9A4288EEDA70023588A /* SSHCommandBinding.m */; };
+		1F02B9A928913CA00023588A /* MPWUnixDomainHTTPStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F02B9A728913CA00023588A /* MPWUnixDomainHTTPStore.h */; };
+		1F02B9AB28913CA80023588A /* MPWUnixDomainHTTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B9A828913CA00023588A /* MPWUnixDomainHTTPStore.m */; };
+		1F02B9AC28913CA80023588A /* MPWUnixDomainHTTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B9A828913CA00023588A /* MPWUnixDomainHTTPStore.m */; };
+		1F02B9AD28913CA90023588A /* MPWUnixDomainHTTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F02B9A828913CA00023588A /* MPWUnixDomainHTTPStore.m */; };
 		1F04A53821D2E01500E19C3F /* MPWInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F04A53621D2E01500E19C3F /* MPWInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F04A53921D2E01500E19C3F /* MPWInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F04A53621D2E01500E19C3F /* MPWInterval.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F04A53A21D2E01500E19C3F /* MPWInterval.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F04A53621D2E01500E19C3F /* MPWInterval.h */; };
@@ -1238,6 +1242,8 @@
 		1F02B998288EC5EE0023588A /* MPWStreamableBinding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStreamableBinding.m; sourceTree = "<group>"; };
 		1F02B9A3288EEDA70023588A /* SSHCommandBinding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHCommandBinding.h; sourceTree = "<group>"; };
 		1F02B9A4288EEDA70023588A /* SSHCommandBinding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHCommandBinding.m; sourceTree = "<group>"; };
+		1F02B9A728913CA00023588A /* MPWUnixDomainHTTPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUnixDomainHTTPStore.h; sourceTree = "<group>"; };
+		1F02B9A828913CA00023588A /* MPWUnixDomainHTTPStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUnixDomainHTTPStore.m; sourceTree = "<group>"; };
 		1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = testmpwfoundation.m; path = GNUstep/testmpwfoundation.m; sourceTree = "<group>"; };
 		1F04A53621D2E01500E19C3F /* MPWInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWInterval.h; sourceTree = "<group>"; };
 		1F04A53721D2E01500E19C3F /* MPWInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWInterval.m; sourceTree = "<group>"; };
@@ -2308,6 +2314,8 @@
 			children = (
 				1F6A725126735166003A5B5C /* MPWURLSchemeResolver.h */,
 				1F6A725226735166003A5B5C /* MPWURLSchemeResolver.m */,
+				1F02B9A728913CA00023588A /* MPWUnixDomainHTTPStore.h */,
+				1F02B9A828913CA00023588A /* MPWUnixDomainHTTPStore.m */,
 				1F6A724926734FA3003A5B5C /* MPWURLBinding.h */,
 				1F6A724A26734FA3003A5B5C /* MPWURLBinding.m */,
 				1FFE3A8E20B30A2400E65B93 /* MPWAbstractStore.h */,
@@ -2577,6 +2585,7 @@
 				1FFA1B67288D443D0095A876 /* SSHCommandStore.h in Headers */,
 				1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */,
 				1F93B916284DE2D800455231 /* priv.h in Headers */,
+				1F02B9A928913CA00023588A /* MPWUnixDomainHTTPStore.h in Headers */,
 				1F93B92A2859CD7600455231 /* SSHConnection.h in Headers */,
 				1F93B9222858C43900455231 /* SFTPReadStream.h in Headers */,
 				1F93B91F28567B6400455231 /* SFTPStore.h in Headers */,
@@ -3480,6 +3489,7 @@
 				1F04A53C21D2E01500E19C3F /* MPWInterval.m in Sources */,
 				1F7FCD09264570E6008B6D1A /* NSRunLoopAdditions.m in Sources */,
 				1F6A725F26735282003A5B5C /* MPWURLBinding.m in Sources */,
+				1F02B9AC28913CA80023588A /* MPWUnixDomainHTTPStore.m in Sources */,
 				1F54A15F209C71A4003113E0 /* MPWArrayFlattenStream.m in Sources */,
 				1FEFBD362427F8C2001E44B2 /* MPWXmlAppleProplistReader.m in Sources */,
 				1F840E04193F50E400589595 /* MPWBinaryPListWriter.m in Sources */,
@@ -3599,6 +3609,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F02B9AD28913CA90023588A /* MPWUnixDomainHTTPStore.m in Sources */,
 				1FCF261B1CF3990400AC64CE /* MPWFlattenStream.m in Sources */,
 				1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */,
 				1F3D02031D702902001A9732 /* MPWScatterStream.m in Sources */,
@@ -3795,6 +3806,7 @@
 				1FC70F8620CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
 				1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */,
 				1F7FCD08264570E6008B6D1A /* NSRunLoopAdditions.m in Sources */,
+				1F02B9AB28913CA80023588A /* MPWUnixDomainHTTPStore.m in Sources */,
 				1F6A725B26735282003A5B5C /* MPWURLBinding.m in Sources */,
 				1FA296991CF74A6500F19039 /* MPWPipeline.m in Sources */,
 				1FF8FE0B09B49D0100652476 /* MPWLZWStream.m in Sources */,

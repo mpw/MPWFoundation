@@ -1274,6 +1274,11 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	return scanComplete;
 }
 
+-(void)writeData:(NSData*)xmlData
+{
+    [self parseFragment:xmlData];
+}
+
 -(BOOL)parseSource:(NSEnumerator*)aSource
 {
 	NSData *nextData=nil;
