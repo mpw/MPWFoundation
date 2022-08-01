@@ -43,8 +43,6 @@
         printf("SOCKET ERROR = %d\n", errno);
         exit(1);
     }
-    
-        
 
     server_sockaddr.sun_family = AF_UNIX;
     const char *spath=[self.socketPath UTF8String];
@@ -89,5 +87,14 @@
 }
 
 
+@end
+
+
+@implementation MPWFileBinding(UnixSocket)
+
+-asUnixSocketStore
+{
+    return [[[MPWUnixDomainHTTPStore alloc] initWithSocketPath:self.reference.path] autorelease];
+}
 
 @end

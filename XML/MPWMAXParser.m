@@ -1522,7 +1522,6 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 @end
 
-#ifndef MPWXmlCoreOnly
 
 #import "MPWXmlGeneratorStream.h"
 #import "DebugMacros.h"
@@ -1673,7 +1672,6 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	IDEXPECT( [result objectForKey:@"zero"], @"0" , @"hex ");
 	IDEXPECT( [result objectForKey:@"one"], @"1" , @"decimal ");
 }
-
 
 +domForResource:(NSString*)resourceName category:(NSString*)resourceType
 {
@@ -1829,8 +1827,6 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	EXPECTNOTNIL( result, @"should have parsed something");
 }
 
-
-
 +(void)testAttributeValuesInPlistParse
 {
 	id xmlData=[self frameworkResource:@"session" category:@"xml"];
@@ -1857,6 +1853,18 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	
 }
 
++(void)testParseFromStreamingProtocol
+{
+    NSData* xmldata=[self frameworkResource:@"test3" category:@"xml"];
+    MPWMAXParser* parser=[self parser];
+    NSDictionary* expectedResults=[NSDictionary dictionaryWithObjectsAndKeys:@"content",@"nested1",@"content1",@"nested2",nil];
+    [parser setUndefinedTagAction:MAX_ACTION_PLIST];
+    [parser writeData:xmldata];
+    IDEXPECT( [parser parseResult] , expectedResults, @"testPlistParse");
+}
+
+
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
@@ -1869,7 +1877,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 			@"testParseElementsToXMLAttributesWithUniqueKeys",
 			@"testParseElementsToXMLAttributesWithNamespaces",
 			@"testRecoverFromISOEncodingClaimingUTF8ResultingInIllegalByteSequences",
-		@"testNumericEntities",
+            @"testNumericEntities",
 			@"testEmptyXmlParse",
 			@"testNestedXmlParse",
 			@"testXmlWithAttributes",
@@ -1883,7 +1891,8 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 			@"testParsingNilReturnsNil",
 			@"testParseStatesDotXml",
 			@"testAttributeValuesInPlistParse",
-			@"testSimpleInlineBlockParseAction",
+            @"testSimpleInlineBlockParseAction",
+            @"testParseFromStreamingProtocol",
 			nil];
 }
 
@@ -1891,123 +1900,3 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 
 @end
-#endif
-
-#ifndef RELEASE
-
-@implementation NSXMLParser(MessageOrientedParsing)
-
--(void)_activateMAX
-{
-	if (!_reserved2 || ![_reserved2 isKindOfClass:[MPWMAXParser class]]) {
-		_reserved2=[[MPWMAXParser alloc] init];
-	}
-}
-
-+parser
-{
-	id parser=[[[self alloc] initWithData:[NSData data]] autorelease];
-	[parser _activateMAX];
-	return parser;
-}
-
--(BOOL)reportIgnoreableWhitespace
-{
-	[self _activateMAX];
-	return [_reserved2 reportIgnoreableWhitespace];
-}
-
--(BOOL)enforceTagNesting
-{
-	[self _activateMAX];
-	return [_reserved2 enforceTagNesting];
-}
-
--(BOOL)ignoreCase
-{
-	[self _activateMAX];
-	return [_reserved2 ignoreCase];
-}
-
--(void)setReportIgnoreableWhitespace:(BOOL)flag
-{
-	[self _activateMAX];
-	[_reserved2 setReportIgnoreableWhitespace:flag];
-}
-
--(void)setIgnoreCase:(BOOL)flag
-{
-	[self _activateMAX];
-	[_reserved2 setIgnoreCase:flag];
-}
-
--(void)setEnforceTagNesting:(BOOL)flag
-{
-	[self _activateMAX];
-	[_reserved2 setEnforceTagNesting:flag];
-}
-
--(BOOL)parse:(NSData*)data
-{
-	[self _activateMAX];
-	return [_reserved2 parse:data];
-}
-
--(NSInteger)currentElementNestingLevel
-{
-	[self _activateMAX];
-	return [_reserved2 currentElementNestingLevel];
-}
-
--(NSString*)elementNameAtNestingLevel:(NSInteger)depth
-{
-	[self _activateMAX];
-	return [_reserved2 elementNameAtNestingLevel:depth];
-}
-
-
--(id <NSXMLAttributes>)elementAttributesAtNestingLevel:(NSInteger)depth
-{
-	[self _activateMAX];
-	return [_reserved2 elementAttributesAtNestingLevel:depth];
-}
-
--(id)parseResult
-{
-	[self _activateMAX];
-	return [_reserved2 parseResult];
-}
-
-
-
--(void)setHandler:(id)handler forElements:(NSArray*)elementNames inNamespace:(NSString*)namespaceString
-							   prefix:(NSString*)prefix map:(NSDictionary*)map 
-{
-	[self _activateMAX];
-	[_reserved2 setHandler:handler forElements:elementNames inNamespace:namespaceString
-							   prefix:prefix map:map ];
-}							   
-
-
--(void)setHandler:(id)handler forTags:(NSArray*)tagNamespace inNamespace:(NSString*)namespaceString 
-						       prefix:(NSString*)prefix map:(NSDictionary*)map
-{
-	[self _activateMAX];
-	[_reserved2 setHandler:handler forTags:tagNamespace inNamespace:namespaceString 
-						       prefix:prefix map:map];
-}							   
-
-
--(void)declareAttributes:(NSArray*)attributes inNamespace:(NSString*)namespaceString 
-{
-	[self _activateMAX];
-	[_reserved2 declareAttributes:attributes inNamespace:namespaceString ];
-}
-
-
-
-
-@end
-
-#endif
-
