@@ -72,7 +72,7 @@ typedef id (*XMLIMP6)(id, SEL, id,id,id,id,id,id);
 
 
 #endif
-@interface MPWMAXParser : MPWByteStream   {
+@interface MPWMAXParser : MPWFlattenStream   {
 	id						data;
 	id						scanner;
     id						documentHandler;

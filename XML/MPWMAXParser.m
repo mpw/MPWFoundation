@@ -39,6 +39,7 @@ NSString *MPWXMLPCDataKey=nil;
 
 @implementation MPWMAXParser
 {
+    id newTarget;
 }
 
 intAccessor( undefinedTagAction, setUndefinedTagAction)
@@ -50,7 +51,7 @@ boolAccessor( ignoreCase, setIgnoreCase )
 scalarAccessor( NSInteger, maxDepthAllowed, setMaxDepthAllowed )
 objectAccessor( NSData, buffer, setBuffer )
 objectAccessor( NSURL, url, setUrl )
-
+idAccessor( newTarget, setNewTarget )
 
 #define POPTAGNORELEASE						(((NSXMLElementInfo*)_elementStack)[--tagStackLen].elementName)
 // #define POPTAG						( [POPTAGNORELEASE release])
@@ -64,7 +65,18 @@ objectAccessor( NSURL, url, setUrl )
 
 #define	INITIALOBJECTSTACKDEPTH 100
 
-idAccessor( parseResult, setParseResult )
+
+-parseResult
+{
+    return [[self target] lastObject];
+}
+
+-(void)setParseResult:newParseResult
+{
+    [self forward:newParseResult];
+//    [self setNewTarget:newParseResult];
+}
+
 idAccessor( version, setVersion )
 idAccessor( scanner, setScanner )
 idAccessor( data, setData )
@@ -105,11 +117,14 @@ boolAccessor( enforceTagNesting, setEnforceTagNesting )
 #endif	
 }
 
--init
++(id)defaultTarget
 {
-//     id pool=[[NSAutoreleasePool alloc] init];
-   self = [super init];
-//	NSLog(@"init");
+    return [NSMutableArray array];
+}
+
+-initWithTarget:newTarget
+{
+   self = [super initWithTarget:newTarget];
     @autoreleasepool {
         [self setScanner:[[[NSXMLScanner alloc] init] autorelease]];
     }
