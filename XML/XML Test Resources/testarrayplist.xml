@@ -1,0 +1,14 @@
+<xml>
+<object>
+	<nested1>content1</nested1>
+	<nested2>content2</nested2>
+</object>
+<object>
+	<nested1>content3</nested1>
+	<nested2>content4</nested2>
+</object>
+<object>
+	<nested1>content5</nested1>
+	<nested2>content6</nested2>
+</object>
+</xml>
