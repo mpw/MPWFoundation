@@ -115,6 +115,7 @@ typedef id (*XMLIMP6)(id, SEL, id,id,id,id,id,id);
 
 +parser;															//	returns a non-configured parser
 
+@property (assign) int streamingThreshhold;
 @property(assign) BOOL reportIgnoreableWhitespace;						//	default is NO  (whether to report whitespace in mixed content)
 @property(assign) BOOL enforceTagNesting;								//	default is YES (NO allows HTML or slightly bad XML to be parsed)
 @property(assign) BOOL ignoreCase;										//	default is NO  (YES makes it easier to deal with HTML)

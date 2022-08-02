@@ -10,10 +10,24 @@
 
 @implementation MPWPrintLiner
 
+
+-(void)writeNSObject:(id)anObject
+{
+    NSString *s=[anObject stringValue];
+    NSLog(@"printlner: %@",s);
+    [(MPWByteStream*)(self.target) println:s];
+}
+
 -(void)writeObject:(id)anObject sender:dummy
 {
     NSString *s=[anObject stringValue];
+    NSLog(@"printlner: %@",s);
     [(MPWByteStream*)(self.target) println:s];
+}
+
+-(void)writeObject:(id)anObject
+{
+    [self writeObject:anObject sender:nil];
 }
 
 @end

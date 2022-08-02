@@ -19,6 +19,8 @@
 #import "MPWObjectCache.h"
 #import <MPWSmallStringTable.h>
 #import "NSObjectAdditions.h"
+#import "MPWJSONWriter.h"
+#import "MPWPrintLiner.h"
 
 #if TARGET_OS_IPHONE
 #define CFMakeCollectable(x)   (x)
@@ -218,7 +220,7 @@ static inline id currentChildrenNoCheck( NSXMLElementInfo *base, long offset , M
 #undef PUSHOBJECT
 #endif
 #define PUSHOBJECT( anObject, aKey, aNamespace ) \
-	if ( tagStackLen > 0 ) { \
+	if ( tagStackLen > _streamingThreshhold ) { \
 		[currentChildrenNoCheck( ((NSXMLElementInfo*)_elementStack), tagStackLen, attributeCache )  setValueAndRelease:anObject forAttribute:aKey namespace:aNamespace]; \
 	} else { \
 		[self setParseResult:anObject];\
@@ -1903,6 +1905,18 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
     IDEXPECT( [parser parseResult] , expectedResults, @"testPlistParse");
 }
 
++(void)testStreamPlistResult
+{
+    id xmldata=[self frameworkResource:@"testarrayplist" category:@"xml"];
+    MPWMAXParser* parser=[self parser];
+    [parser setUndefinedTagAction:MAX_ACTION_PLIST];
+    NSData *jsonResult=[NSMutableData data];
+    NSString *expectedJSON=@"{\"nested1\":\"content1\",\"nested2\":\"content2\"}{\"nested1\":\"content3\",\"nested2\":\"content4\"}{\"nested1\":\"content5\",\"nested2\":\"content6\"}\"\"";   // this is slightly incorrect!
+    [parser setTarget:[MPWJSONWriter streamWithTarget:jsonResult]];
+    parser.streamingThreshhold = 1;
+    [parser parse:xmldata];
+    IDEXPECT( [jsonResult stringValue] , expectedJSON, @"streamPlistToJSON");
+}
 
 
 +testSelectors
@@ -1934,6 +1948,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 			@"testAttributeValuesInPlistParse",
             @"testSimpleInlineBlockParseAction",
             @"testParseFromStreamingProtocol",
+            @"testStreamPlistResult",
 			nil];
 }
 
