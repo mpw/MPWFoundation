@@ -366,6 +366,9 @@
 		1F89EB9A223FE7E5000A82D6 /* MPWFileBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F89EB94223FE7E4000A82D6 /* MPWFileBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F89EB9D22401FB8000A82D6 /* MPWXArgsFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F89EB9B22401FB8000A82D6 /* MPWXArgsFilter.h */; };
 		1F89EB9E22401FB8000A82D6 /* MPWXArgsFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F89EB9C22401FB8000A82D6 /* MPWXArgsFilter.m */; };
+		1F9120222899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
+		1F9120232899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
+		1F9120242899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
 		1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B900284DE20D00455231 /* ObjectiveSSH.docc */; };
 		1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F93B910284DE25500455231 /* knownhosts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90B284DE25500455231 /* knownhosts.c */; };
@@ -1395,6 +1398,7 @@
 		1F89EB9C22401FB8000A82D6 /* MPWXArgsFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWXArgsFilter.m; sourceTree = "<group>"; };
 		1F8A18AE21CCEAD9000A0884 /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		1F8C938924F5702C00646461 /* MPWFoundationTouch copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MPWFoundationTouch copy-Info.plist"; path = "/Users/marcel/programming/Kits/MPWFoundation/MPWFoundationTouch copy-Info.plist"; sourceTree = "<absolute>"; };
+		1F9120212899296900DF656C /* testarrayplist.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testarrayplist.xml; sourceTree = "<group>"; };
 		1F93B8FD284DE20D00455231 /* ObjectiveSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveSSH.h; sourceTree = "<group>"; };
 		1F93B900284DE20D00455231 /* ObjectiveSSH.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ObjectiveSSH.docc; sourceTree = "<group>"; };
@@ -2228,6 +2232,7 @@
 		1FED48E82426386A00AF2FAD /* XML Test Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F9120212899296900DF656C /* testarrayplist.xml */,
 				1FED496424263E4F00AF2FAD /* attrparserunonbug.html */,
 				1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */,
 				1FED496124263E4E00AF2FAD /* htmlfragment_entities.html */,
@@ -3223,6 +3228,7 @@
 				1FED495B24263D9C00AF2FAD /* c1qt12.txt in Resources */,
 				1FED495224263D9B00AF2FAD /* Dg-duplex.htm in Resources */,
 				1F0984B1219F23F4006D10D9 /* archiving-times-and-sizes.csv in Resources */,
+				1F9120232899296900DF656C /* testarrayplist.xml in Resources */,
 				1FED491F2426397200AF2FAD /* states.xml in Resources */,
 				1FEFBD4E2428C841001E44B2 /* numbers.json in Resources */,
 				1FEFBD612428C85E001E44B2 /* dictAfterNumber.json in Resources */,
@@ -3273,6 +3279,7 @@
 				1FF4538E247EA74300B909B3 /* filmliste.json in Resources */,
 				1FED495324263D9C00AF2FAD /* Dg-duplex.htm in Resources */,
 				1FED49202426397200AF2FAD /* states.xml in Resources */,
+				1F9120242899296900DF656C /* testarrayplist.xml in Resources */,
 				1FED495624263D9C00AF2FAD /* accent_grave.html in Resources */,
 				1FED49112426397200AF2FAD /* archiversample.xml in Resources */,
 				1FED493424263CFE00AF2FAD /* emptyelement.xml in Resources */,
@@ -3334,6 +3341,7 @@
 				1FED49122426397200AF2FAD /* Faehre.xml in Resources */,
 				1FED495724263D9C00AF2FAD /* accent_grave.txt in Resources */,
 				1FF6591324957F16002371E9 /* chinook.db in Resources */,
+				1F9120222899296900DF656C /* testarrayplist.xml in Resources */,
 				1FA1594317EEF18900BF8F6F /* first4.tabdelim in Resources */,
 				1FEFBD572428C85E001E44B2 /* stringescapes.json in Resources */,
 				1FED496C24263E4F00AF2FAD /* xml_comment_with_dash.xml in Resources */,

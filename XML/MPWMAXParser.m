@@ -1597,12 +1597,37 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 +(void)testParseUndeclaredElementsToPlist
 {
-	id xmldata=[self frameworkResource:@"test3" category:@"xml"];
-	id parser=[self parser];
-	id expectedResults=[NSDictionary dictionaryWithObjectsAndKeys:@"content",@"nested1",@"content1",@"nested2",nil];
-	[parser setUndefinedTagAction:MAX_ACTION_PLIST];
-	[parser parse:xmldata];
-	IDEXPECT( [parser parseResult] , expectedResults, @"testPlistParse");
+    id xmldata=[self frameworkResource:@"test3" category:@"xml"];
+    id parser=[self parser];
+    id expectedResults=@{
+        @"nested1":  @"content",
+        @"nested2":  @"content1",
+    };
+    [parser setUndefinedTagAction:MAX_ACTION_PLIST];
+    [parser parse:xmldata];
+    IDEXPECT( [parser parseResult] , expectedResults, @"testPlistParse");
+}
+
++(void)testParseUndeclaredElementsToArrayPlist
+{
+    id xmldata=[self frameworkResource:@"testarrayplist" category:@"xml"];
+    id parser=[self parser];
+    id expectedResults=@[ @{
+        @"nested1":  @"content1",
+        @"nested2":  @"content2",
+    },
+    @{
+        @"nested1":  @"content3",
+        @"nested2":  @"content4",
+    },
+    @{
+        @"nested1":  @"content5",
+        @"nested2":  @"content6",
+    },
+    ];
+    [parser setUndefinedTagAction:MAX_ACTION_PLIST];
+    [parser parse:xmldata];
+    IDEXPECT( [parser parseResult] , expectedResults, @"testPlistParse");
 }
 
 +(void)testParseUndeclaredElementsToXMLAttributes
@@ -1888,6 +1913,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 			@"testWindowsEncodingSetByXML",
 			@"testXMLVersion",
 			@"testParseUndeclaredElementsToPlist",
+            @"testParseUndeclaredElementsToArrayPlist",
 			@"testParseUndeclaredElementsToXMLAttributes",
 			@"testParseElementsToXMLAttributesWithUniqueKeys",
 			@"testParseElementsToXMLAttributesWithNamespaces",
