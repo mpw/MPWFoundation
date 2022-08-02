@@ -222,7 +222,7 @@ static inline id currentChildrenNoCheck( NSXMLElementInfo *base, long offset , M
 #define PUSHOBJECT( anObject, aKey, aNamespace ) \
 	if ( tagStackLen > _streamingThreshhold ) { \
 		[currentChildrenNoCheck( ((NSXMLElementInfo*)_elementStack), tagStackLen, attributeCache )  setValueAndRelease:anObject forAttribute:aKey namespace:aNamespace]; \
-	} else { \
+	} else if ( tagStackLen == _streamingThreshhold )  { \
 		[self setParseResult:anObject];\
 	}\
 
@@ -1911,7 +1911,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
     MPWMAXParser* parser=[self parser];
     [parser setUndefinedTagAction:MAX_ACTION_PLIST];
     NSData *jsonResult=[NSMutableData data];
-    NSString *expectedJSON=@"{\"nested1\":\"content1\",\"nested2\":\"content2\"}{\"nested1\":\"content3\",\"nested2\":\"content4\"}{\"nested1\":\"content5\",\"nested2\":\"content6\"}\"\"";   // this is slightly incorrect!
+    NSString *expectedJSON=@"{\"nested1\":\"content1\",\"nested2\":\"content2\"}{\"nested1\":\"content3\",\"nested2\":\"content4\"}{\"nested1\":\"content5\",\"nested2\":\"content6\"}";   // this is slightly incorrect!
     [parser setTarget:[MPWJSONWriter streamWithTarget:jsonResult]];
     parser.streamingThreshhold = 1;
     [parser parse:xmldata];
