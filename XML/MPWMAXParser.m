@@ -1261,12 +1261,16 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 -(BOOL)parseFragment:(NSData*)nextData
 {
+//    NSLog(@"parseFragment");
 //	id oldData=[[self data] retain];
 	BOOL scanComplete;
 	if ( buffer ) {
+//        NSLog(@"have existing buffer: %@",buffer);
 		[buffer appendData:nextData];
 		nextData=buffer;
-	}
+    } else {
+//        NSLog(@"no existing buffer: %@",nextData);
+    }
 	[self setData:nextData];
 	lastGoodPosition=[nextData bytes];
 	scanComplete=[scanner parse:nextData];
@@ -1296,7 +1300,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 -(void)writeNSObject:(NSData*)xmlData
 {
-    NSLog(@"writeNSObject: %@",xmlData);
+//    NSLog(@"writeNSObject: %@",xmlData);
     [self parseFragment:xmlData];
 }
 

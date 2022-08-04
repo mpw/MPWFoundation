@@ -353,7 +353,7 @@ static int scanXml(
 		
         currentCallback=openTagCallback;
         
-        if (isalnum(*currentPtr)) {
+        if (INRANGE && isalnum(*currentPtr)) {
             //--- it's an open tag (or an empty tag)
         } else {
             //--- it's something else, check the possibilities
@@ -423,7 +423,7 @@ static int scanXml(
         while ( INRANGE && !isspace(*currentPtr) && !ISCLOSETAG(*currentPtr) && !ISNAMESPACEDELIMITER(*currentPtr) ) {
             currentPtr++;
         }
-        if ( ISNAMESPACEDELIMITER(*currentPtr)) {
+        if ( INRANGE && ISNAMESPACEDELIMITER(*currentPtr)) {
             namespaceLen=CURRENTCHARCOUNT;
         }
         while ( INRANGE && !isspace(*currentPtr) && !ISCLOSETAG(*currentPtr) ) {
@@ -460,7 +460,7 @@ static int scanXml(
             while ( INRANGE && *currentPtr != '=' && !ISCLOSETAG(*currentPtr) && !ISNAMESPACEDELIMITER(*currentPtr)) {
                 currentPtr++;
             }
-            if ( ISNAMESPACEDELIMITER(*currentPtr)) {
+            if ( INRANGE && ISNAMESPACEDELIMITER(*currentPtr)) {
                 attrNameSpaceLen=currentPtr-attNameStart;
                 currentPtr++;
             }
