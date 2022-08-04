@@ -516,7 +516,9 @@ static int scanXml(
                 attValEnd=attValStart;
             }
             BOOL valueHasHighBit= (valueMask & 0x80)==0x80;
-            attributeValueCallBack( clientData, NULL, attNameStart, attNameEnd-attNameStart, attValStart, attValEnd-attValStart,attrNameSpaceLen, valueHasHighBit );
+            if ( INRANGE ) {
+                attributeValueCallBack( clientData, NULL, attNameStart, attNameEnd-attNameStart, attValStart, attValEnd-attValStart,attrNameSpaceLen, valueHasHighBit );
+            }
             if ( INRANGE && attValDelim!=' ' && *currentPtr == attValDelim ) {
                 currentPtr++;
             }

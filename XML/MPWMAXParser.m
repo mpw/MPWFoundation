@@ -1903,7 +1903,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 {
     NSData *xmldata=[self frameworkResource:@"testxmlattributes" category:@"xml"];
     NSDictionary *expectedResult = @{ @"attribute": @"Some sort of value"};
-    for (int i=4;i<xmldata.length-4;i++) {
+    for (int i=1;i<xmldata.length-1;i++) {
         NSData *d1 = [xmldata subdataWithRange:NSMakeRange(0,i)];
         NSData *d2 = [xmldata subdataWithRange:NSMakeRange(i,xmldata.length-i)];
         MPWMAXParser* parser=[self parser];
