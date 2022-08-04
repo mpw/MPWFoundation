@@ -38,7 +38,7 @@
 
 -(int)defaultBufferSize
 {
-    return 8192;
+    return 512 * 1024;
 }
 
 +(instancetype)fd:(int)fd

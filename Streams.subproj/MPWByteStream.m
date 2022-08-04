@@ -939,6 +939,7 @@ intAccessor( fd, setFd )
 -initWithFd:(int)newFd
 {
     self=[super initWithFd:newFd];
+    [self setBufferSize:LARGEBUFSIZE];
     return self;
 }
 
