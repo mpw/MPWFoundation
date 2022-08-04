@@ -1899,6 +1899,23 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 }
 
 
++(void)testFragmentParsingHandlesAttributes
+{
+    NSData *xmldata=[self frameworkResource:@"testxmlattributes" category:@"xml"];
+    NSDictionary *expectedResult = @{ @"attribute": @"Some sort of value"};
+    for (int i=4;i<xmldata.length-4;i++) {
+        NSData *d1 = [xmldata subdataWithRange:NSMakeRange(0,i)];
+        NSData *d2 = [xmldata subdataWithRange:NSMakeRange(i,xmldata.length-i)];
+        MPWMAXParser* parser=[self parser];
+        [parser setUndefinedTagAction:MAX_ACTION_PLIST];
+        [parser parseFragment:d1];
+        [parser parseFragment:d2];
+        NSString *atmsg = [NSString stringWithFormat:@"xml with attributes at %d",i];
+        IDEXPECT( [parser parseResult], expectedResult, atmsg);
+    }
+}
+
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
@@ -1929,6 +1946,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
             @"testSimpleInlineBlockParseAction",
             @"testParseFromStreamingProtocol",
             @"testStreamPlistResult",
+            @"testFragmentParsingHandlesAttributes",
 			nil];
 }
 

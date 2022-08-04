@@ -369,6 +369,9 @@
 		1F9120222899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
 		1F9120232899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
 		1F9120242899296900DF656C /* testarrayplist.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F9120212899296900DF656C /* testarrayplist.xml */; };
+		1F912026289C310700DF656C /* testxmlattributes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F912025289C310700DF656C /* testxmlattributes.xml */; };
+		1F912027289C310700DF656C /* testxmlattributes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F912025289C310700DF656C /* testxmlattributes.xml */; };
+		1F912028289C310700DF656C /* testxmlattributes.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1F912025289C310700DF656C /* testxmlattributes.xml */; };
 		1F93B901284DE20D00455231 /* ObjectiveSSH.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B900284DE20D00455231 /* ObjectiveSSH.docc */; };
 		1F93B902284DE20D00455231 /* ObjectiveSSH.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F93B910284DE25500455231 /* knownhosts.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B90B284DE25500455231 /* knownhosts.c */; };
@@ -1399,6 +1402,7 @@
 		1F8A18AE21CCEAD9000A0884 /* GNUmakefile */ = {isa = PBXFileReference; lastKnownFileType = text; path = GNUmakefile; sourceTree = "<group>"; };
 		1F8C938924F5702C00646461 /* MPWFoundationTouch copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "MPWFoundationTouch copy-Info.plist"; path = "/Users/marcel/programming/Kits/MPWFoundation/MPWFoundationTouch copy-Info.plist"; sourceTree = "<absolute>"; };
 		1F9120212899296900DF656C /* testarrayplist.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testarrayplist.xml; sourceTree = "<group>"; };
+		1F912025289C310700DF656C /* testxmlattributes.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = testxmlattributes.xml; sourceTree = "<group>"; };
 		1F93B8FD284DE20D00455231 /* ObjectiveSSH.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ObjectiveSSH.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F93B8FF284DE20D00455231 /* ObjectiveSSH.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectiveSSH.h; sourceTree = "<group>"; };
 		1F93B900284DE20D00455231 /* ObjectiveSSH.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = ObjectiveSSH.docc; sourceTree = "<group>"; };
@@ -2232,6 +2236,7 @@
 		1FED48E82426386A00AF2FAD /* XML Test Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1F912025289C310700DF656C /* testxmlattributes.xml */,
 				1F9120212899296900DF656C /* testarrayplist.xml */,
 				1FED496424263E4F00AF2FAD /* attrparserunonbug.html */,
 				1FED496524263E4F00AF2FAD /* htmlfragment_attribute_no_value.html */,
@@ -3216,6 +3221,7 @@
 				1FEFBD512428C841001E44B2 /* array.json in Resources */,
 				1FED48FA2426392300AF2FAD /* windows-encoded.xml in Resources */,
 				1FED495524263D9C00AF2FAD /* accent_grave.html in Resources */,
+				1F912027289C310700DF656C /* testxmlattributes.xml in Resources */,
 				1FED49162426397200AF2FAD /* Faehre-iso.xml in Resources */,
 				1FF4538D247EA74300B909B3 /* filmliste.json in Resources */,
 				1FED496724263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
@@ -3297,6 +3303,7 @@
 				1FED496824263E4F00AF2FAD /* htmlfragment_entities.html in Resources */,
 				1FEFBD522428C841001E44B2 /* array.json in Resources */,
 				1FED494024263D6800AF2FAD /* cdatatest1.xml in Resources */,
+				1F912028289C310700DF656C /* testxmlattributes.xml in Resources */,
 				1FEFBD492428C841001E44B2 /* glossary.json in Resources */,
 				1FED48F82426392300AF2FAD /* test3.xml in Resources */,
 				1FED497124263E4F00AF2FAD /* attrparserunonbug.html in Resources */,
@@ -3311,6 +3318,7 @@
 				1FED493224263CFE00AF2FAD /* emptyelement.xml in Resources */,
 				1FED496924263E4F00AF2FAD /* htmlfragment_unquoted_attr_values.html in Resources */,
 				1FED493624263D2B00AF2FAD /* emptyElementWithAttribute.xml in Resources */,
+				1F912026289C310700DF656C /* testxmlattributes.xml in Resources */,
 				1FED490C2426397200AF2FAD /* nested.xml in Resources */,
 				1FED48F92426392300AF2FAD /* windows-encoded.xml in Resources */,
 				1FEFBD5A2428C85E001E44B2 /* emptyelements.json in Resources */,
