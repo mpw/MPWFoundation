@@ -40,9 +40,6 @@ NSString *MPWXMLPCDataKey=nil;
 #endif
 
 @implementation MPWMAXParser
-{
-    id newTarget;
-}
 
 intAccessor( undefinedTagAction, setUndefinedTagAction)
 longAccessor( cfDataEncoding, setCfDataEncoding )
@@ -53,7 +50,6 @@ boolAccessor( ignoreCase, setIgnoreCase )
 scalarAccessor( NSInteger, maxDepthAllowed, setMaxDepthAllowed )
 objectAccessor( NSData, buffer, setBuffer )
 objectAccessor( NSURL, url, setUrl )
-idAccessor( newTarget, setNewTarget )
 
 #define POPTAGNORELEASE						(((NSXMLElementInfo*)_elementStack)[--tagStackLen].elementName)
 // #define POPTAG						( [POPTAGNORELEASE release])
@@ -75,8 +71,9 @@ idAccessor( newTarget, setNewTarget )
 
 -(void)setParseResult:newParseResult
 {
-    [self forward:newParseResult];
-//    [self setNewTarget:newParseResult];
+    @autoreleasepool {
+        [self forward:newParseResult];
+    }
 }
 
 idAccessor( version, setVersion )
@@ -1291,8 +1288,15 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	return scanComplete;
 }
 
+
 -(void)writeData:(NSData*)xmlData
 {
+    [self parseFragment:xmlData];
+}
+
+-(void)writeNSObject:(NSData*)xmlData
+{
+    NSLog(@"writeNSObject: %@",xmlData);
     [self parseFragment:xmlData];
 }
 
@@ -1506,34 +1510,6 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 	MPWTagHandler *handler=[self defaultNamespaceHandler];
 	[handler setInvocation:[MPWBlockInvocation invocationWithBlock:aBlock] forElement:elementName];
-}
-
-
-@end
-
-@implementation MPWMAXParser(urlLoading)
-
-// Forward errors to the delegate.
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)ioError {
-			isReceivingData=NO;
-	[self setParserError:ioError];
-//    isReceivingData=NO;
-    NSLog(@"got an I/O error: %@",ioError);
-    [NSException raise:@"connectionFailed" format:@"network error: %@",ioError];
-}
-
-// Called when a chunk of data has been downloaded.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)receivedData {
-//	NSLog(@"did receive:%d bytes: '%@'",[receivedData length],
-//			[[[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding] autorelease]);
-	[self parseFragment:receivedData];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-	if ( [documentHandler respondsToSelector:@selector(parserDidEndDocument:) ] ) {
-		[documentHandler parserDidEndDocument:(NSXMLParser*)self];
-	}	
-	isReceivingData=NO;
 }
 
 
