@@ -46,7 +46,9 @@ static NSURL *url( NSString *scheme, NSString* host1, int port1, NSString *path1
 
 CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 {
-    return [self initWithPathComponents:[newURL.path componentsSeparatedByString:@"/"] host:newURL.host scheme:newURL.scheme];
+    MPWURLReference *r = [self initWithPathComponents:[newURL.path componentsSeparatedByString:@"/"] host:newURL.host scheme:newURL.scheme];
+    r.port = newURL.port.intValue;
+    return r;
 }
 
 
@@ -111,7 +113,9 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
 {
-    return  [[self class] referenceWithURL:url( [self schemeName], [self host],0,[self urlPath], [(MPWURLReference*)other urlPath])];
+    NSURL *u1=[self URL];
+    NSURL *u2=[u1 URLByAppendingPathComponent:[other path]];
+    return  [[self class] referenceWithURL:u2];
 }
             
 
@@ -224,11 +228,25 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     
 }
 
++(void)testAppendReferenceToBaseReferenceWithPort
+{
+    NSURL *url1=[NSURL URLWithString:@"http://localhost:50001/"];
+    NSString *url2 = @"hi.txt";
+    MPWURLReference *baseRef = [[MPWURLReference alloc] initWithURL:url1];
+    MPWURLReference *additionalRef = [[MPWURLReference alloc] initWithPath:url2];
+    
+    MPWURLReference *result = [baseRef referenceByAppendingReference:additionalRef];
+    IDEXPECT( [result stringValue], @"http://localhost:50001/hi.txt", @"concatenated URL ref");
+}
+
+
+
 +testSelectors
 {
     return @[
         @"testURL",
         @"testURLWithPort",
+        @"testAppendReferenceToBaseReferenceWithPort",
     ];
 }
 

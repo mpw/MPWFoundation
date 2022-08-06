@@ -14,7 +14,6 @@
 
 @property (nonatomic,strong) NSString* schemePrefix;
 
-
 @end
 
 
@@ -44,10 +43,15 @@
 
 -(id)referenceForPath:(NSString *)name
 {
-//    NSLog(@"referenceForPath: %@",name);
-    id <MPWReferencing> reference=[super referenceForPath:name];
-    reference.schemeName=[self schemePrefix];
-    return reference;
+    NSString *combined=name;
+    if ( [name hasPrefix:@"//"]) {
+        combined = [NSString stringWithFormat:@"%@:%@",[self schemePrefix],name];
+    }
+    NSURL *u=[NSURL URLWithString:combined];
+    return [MPWURLReference referenceWithURL:u];
+//    id <MPWReferencing> reference=[super referenceForPath:name];
+//    reference.schemeName=[self schemePrefix];
+//    return reference;
 }
 
 
@@ -58,23 +62,31 @@
 
 -(id)at:(id)aReference
 {
-    NSError *error=nil;
+    
     NSURL *aURL=[aReference URL];
+//    NSLog(@"get, ref: %@ - url: %@",aReference,aURL);
 #ifdef GS_API_LATEST
     NSData *rawData = [NSData dataWithContentsOfURL:aURL];
-#else
-    NSData *rawData=nil;
-    if ( [aURL.scheme hasPrefix:@"http"]) {
-        rawData = [self atURL:aURL];
-    } else {
-        rawData = [NSData dataWithContentsOfURL:aURL  options:NSDataReadingMapped error:&error];
-    }
-#endif
     MPWResource *result=[[[MPWResource alloc] init] autorelease];
     [result setSource:aURL];
     [result setRawData:rawData];
     [result setError:error];
+#else
+//    NSData *rawData=nil;
+//    if ( [aURL.scheme hasPrefix:@"http"]) {
+//        rawData = [self atURL:aURL];
+//    } else {
+//        rawData = [NSData dataWithContentsOfURL:aURL  options:NSDataReadingMapped error:&error];
+//    }
+    MPWResource *result=[self atURL:aURL];
+#endif
     return result;
+}
+
+-(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+{
+//    NSLog(@"PUT, ref: %@ - url: %@",aReference,[aReference URL]);
+    [self atURL:[aReference URL] put:theObject];
 }
 
 
@@ -111,21 +123,39 @@
     }
 }
 
--atURL:(NSURL*)aURL
+-(NSMutableURLRequest*)requestForURL:(NSURL*)aURL
 {
     NSMutableURLRequest *request=[[[NSMutableURLRequest alloc] initWithURL:aURL] autorelease];
     NSMutableDictionary *headers=[NSMutableDictionary dictionaryWithObject:@"locale=en-us" forKey:@"Cookies"];
+    [headers setObject:@"stsh" forKey:@"User-Agent"];
+    [headers setObject:@"*/*" forKey:@"Accept"];
     if ( self.headers ) {
         [headers addEntriesFromDictionary:self.headers];
     }
-    [headers setObject:@"stsh" forKey:@"User-Agent"];
-    [headers setObject:@"*/*" forKey:@"Accept"];
-//    NSLog(@"headers: %@",headers);
+    //    NSLog(@"headers: %@",headers);
     [request setAllHTTPHeaderFields:headers];
-//    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+    //    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+    return request;
+}
+
+-atURL:(NSURL*)aURL
+{
+    return [self resourceWithRequest:[self requestForURL:aURL]];
+}
+
+-atURL:(NSURL*)aURL put:(NSData*)data
+{
+    NSMutableURLRequest *request=[self requestForURL:aURL];
+    request.HTTPMethod = @"PUT";
+    request.HTTPBody = data;
     return [self resourceWithRequest:request];
 }
 
+-(void)dealloc
+{
+    [_schemePrefix release];
+    [super dealloc];
+}
 
 
 @end

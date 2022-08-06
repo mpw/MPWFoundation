@@ -322,6 +322,11 @@ static NSURLSession *_defaultURLSession=nil;
     [self executeRequestWithURL:theURL method:MPWRESTVerbPATCH body:theData];
 }
 
+-(void)put:(NSData*)theData toURL:(NSURL *)theURL
+{
+    [self executeRequestWithURL:theURL method:MPWRESTVerbPUT body:theData];
+}
+
 -(void)delete:(NSURL*)theURL
 {
     [self executeRequestWithURL:theURL method:MPWRESTVerbDELETE body:nil];
