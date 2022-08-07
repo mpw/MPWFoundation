@@ -836,7 +836,9 @@ static IMP unknownMethod;
 
 +parser
 {
-    return [[[self alloc] init] autorelease];
+    MPWMAXParser *parser = [[[self alloc] init] autorelease];
+    parser.undefinedTagAction = MAX_ACTION_CHILDREN;
+    return parser;
 }
 
 +plistParser

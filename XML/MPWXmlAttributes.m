@@ -400,6 +400,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	[self copyValueOfKey:xmlkey toObject:targetObject usingKey:xmlkey];
 }
 
+-(NSArray*)at:(NSString*)key
+{
+    return [self objectsForKey:key];
+}
+
 
 @end
 
@@ -452,10 +457,26 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 +(void)testByteStreaming
 {
-	MPWXMLAttributes* attrs=[[self new] autorelease];
-	[attrs setValue:@"value1" forAttribute:@"key"];
-	[attrs setValue:@"value2" forAttribute:@"key"];
+    MPWXMLAttributes* attrs=[[self new] autorelease];
+    [attrs setValue:@"value1" forAttribute:@"key"];
+    [attrs setValue:@"value2" forAttribute:@"key"];
     IDEXPECT( [MPWByteStream makeString:attrs], @"{\n    key: value1;\n    key: value2;\n}" ,@"serialize");
+}
+
++(void)objectsForKey
+{
+    MPWXMLAttributes* attrs=[[self new] autorelease];
+    [attrs setValue:@"value1" forAttribute:@"key"];
+    [attrs setValue:@"value2" forAttribute:@"key"];
+    IDEXPECT( [attrs objectsForKey:@"key"], (@[ @"value1", @"value2"]), @"getting multiple values")
+}
+
++(void)testAtIsObjectsForKey
+{
+    MPWXMLAttributes* attrs=[[self new] autorelease];
+    [attrs setValue:@"value1" forAttribute:@"key"];
+    [attrs setValue:@"value2" forAttribute:@"key"];
+    IDEXPECT( [attrs at:@"key"], (@[ @"value1", @"value2"]), @"getting multiple values for at:")
 }
 
 +testSelectors
@@ -464,7 +485,9 @@ THE POSSIBILITY OF SUCH DAMAGE.
 			@"testTextCombining",
 			@"testObjectForUniqueKey",
 			@"testCopyKeys",
-			@"testByteStreaming",
+            @"testByteStreaming",
+            @"objectsForKey",
+            @"testAtIsObjectsForKey",
 			];
 }
 
