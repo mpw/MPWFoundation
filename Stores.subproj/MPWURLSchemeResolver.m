@@ -85,10 +85,22 @@
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-//    NSLog(@"PUT, ref: %@ - url: %@",aReference,[aReference URL]);
-    [self atURL:[aReference URL] put:theObject];
+    //    NSLog(@"PUT, ref: %@ - url: %@",aReference,[aReference URL]);
+    [self atURL:[aReference URL] put:[theObject asData]];
 }
 
+-(void)deleteAt:(id<MPWReferencing>)aReference
+{
+    [self deleteAtURL:[aReference URL]];
+}
+
+-(void)at:(id<MPWReferencing>)aReference post:(id)theObject
+{
+    if ( [theObject isKindOfClass:[NSDictionary class]]) {
+        [self atURL:[aReference URL] postDictionary:theObject];
+    }
+    [self atURL:[aReference URL] post:[theObject asData]];
+}
 
 ///----- support for HOM-based argument-construction
 
@@ -143,6 +155,13 @@
     return [self resourceWithRequest:[self requestForURL:aURL]];
 }
 
+-deleteAtURL:(NSURL*)aURL
+{
+    NSMutableURLRequest *request=[self requestForURL:aURL];
+    request.HTTPMethod = @"DELETE";
+    return [self resourceWithRequest:request];
+}
+
 -atURL:(NSURL*)aURL put:(NSData*)data
 {
     NSMutableURLRequest *request=[self requestForURL:aURL];
@@ -150,6 +169,55 @@
     request.HTTPBody = data;
     return [self resourceWithRequest:request];
 }
+
+
+-(NSData*)encodeData:data asPOSTFormithName:(NSString*)postName boundary:(NSString*)boundary
+{
+    
+    
+    NSMutableData *postData = [NSMutableData data];
+    [postData appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n\r\n", postName, postName] dataUsingEncoding:NSUTF8StringEncoding]];
+    [postData appendData:data];
+    [postData appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    return postData;
+}
+
+-atURL:(NSURL*)aURL post:(NSData*)data
+{
+    NSMutableURLRequest *request=[self requestForURL:aURL];
+    NSString *boundary=@"0xKhTmLbOuNdArY";
+    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [self encodeData:data asPOSTFormithName:@"file" boundary:boundary];
+    return [self resourceWithRequest:request];
+}
+
+
+-(NSData *)formEncodeDictionary:(NSDictionary*)aDict
+{
+    MPWByteStream *s=[MPWByteStream stream];
+    BOOL first=YES;
+    //    NSLog(@"should encode dictionary: %@",aDict);
+    for ( NSString *key in aDict.allKeys ) {
+        [s printFormat:@"%@%@=%@",first?@"":@"&", key,aDict[key]];
+        first=NO;
+    }
+    //    NSLog(@"encoded dict: '%@'",[[s target] stringValue]);
+    return (NSData*)[s target];
+}
+
+-atURL:(NSURL*)aURL postDictionary:(NSDictionary*)dict
+{
+    NSMutableURLRequest *request=[self requestForURL:aURL];
+    NSString *boundary=@"0xKhTmLbOuNdArY";
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [self formEncodeDictionary:dict];
+    return [self resourceWithRequest:request];
+}
+
+
 
 -(void)dealloc
 {
