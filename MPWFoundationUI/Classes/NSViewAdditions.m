@@ -56,6 +56,17 @@
 
 @end
 
+@implementation NSControl(setAction)
+
+-(void)setTheAction:(NSString*)action
+{
+    [self setAction:NSSelectorFromString(action)];
+}
+
+
+
+@end
+
 #import "DebugMacros.h"
 
 @interface NSViewAdditionsTesting:NSObject{}

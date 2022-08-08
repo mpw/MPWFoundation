@@ -14,15 +14,12 @@
 -(void)writeNSObject:(id)anObject
 {
     NSString *s=[anObject stringValue];
-    NSLog(@"printlner: %@",s);
     [(MPWByteStream*)(self.target) println:s];
 }
 
 -(void)writeObject:(id)anObject sender:dummy
 {
-    NSString *s=[anObject stringValue];
-    NSLog(@"printlner: %@",s);
-    [(MPWByteStream*)(self.target) println:s];
+    [self writeNSObject:anObject];
 }
 
 -(void)writeObject:(id)anObject
