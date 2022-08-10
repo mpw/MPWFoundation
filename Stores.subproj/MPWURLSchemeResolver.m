@@ -83,18 +83,18 @@
     return result;
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(MPWURLReference*)aReference put:(id)theObject
 {
     //    NSLog(@"PUT, ref: %@ - url: %@",aReference,[aReference URL]);
     [self atURL:[aReference URL] put:[theObject asData]];
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(MPWURLReference*)aReference
 {
     [self deleteAtURL:[aReference URL]];
 }
 
--(void)at:(id<MPWReferencing>)aReference post:(id)theObject
+-(void)at:(MPWURLReference*)aReference post:(id)theObject
 {
     if ( [theObject isKindOfClass:[NSDictionary class]]) {
         [self atURL:[aReference URL] postDictionary:theObject];
