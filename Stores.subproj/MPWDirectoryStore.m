@@ -15,7 +15,7 @@
     id loggingSource;
 }
 
-lazyAccessor( MPWFileChangesStream, loggingSource, setLoggingSource, createLoggingSource )
+lazyAccessor( MPWFileChangesStream*, loggingSource, setLoggingSource, createLoggingSource )
 
 -(MPWFileChangesStream*)createLoggingSource
 {

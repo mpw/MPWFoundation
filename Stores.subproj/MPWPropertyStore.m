@@ -25,7 +25,7 @@
     MPWDirectoryBinding *listOfProperties;
 }
 
-lazyAccessor(MPWDirectoryBinding, listOfProperties, setListOfProperties, computeListOfProperties)
+lazyAccessor(MPWDirectoryBinding*, listOfProperties, setListOfProperties, computeListOfProperties)
 
 CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {

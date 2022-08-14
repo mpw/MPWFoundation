@@ -18,14 +18,14 @@
 @implementation MPWDelimitedTable
 
 objectAccessor(NSData*, data, _setData)
-lazyAccessor(NSArray, headerKeys, setHeaderKeys, computeHeaderKeys)
+lazyAccessor(NSArray*, headerKeys, setHeaderKeys, computeHeaderKeys)
 objectAccessor(NSString*, fieldDelimiter, _setFieldDelimiter)
-lazyAccessor(MPWIntArray, lineOffsets, setLineOffsets, computeLineOffsets)
+lazyAccessor(MPWIntArray*, lineOffsets, setLineOffsets, computeLineOffsets)
 intAccessor(eolLength, setEOLLength)
 objectAccessor(MPWObjectCache*, subdatas, setSubdatas)
 
-lazyAccessor(NSArray, keysOfInterest , _setKeysOfInterest, headerKeys)
-lazyAccessor(MPWIntArray, indexesOfInterest , setIndexesOfInterest, computeIndexesOfInterest)
+lazyAccessor(NSArray*, keysOfInterest , _setKeysOfInterest, headerKeys)
+lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeIndexesOfInterest)
 
 
 

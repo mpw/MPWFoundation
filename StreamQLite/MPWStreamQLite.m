@@ -27,7 +27,7 @@
     NSDictionary <NSString*,MPWSQLTable*>* tables;
 }
 
-lazyAccessor(NSDictionary , tables, setTables, getTables )
+lazyAccessor(NSDictionary*, tables, setTables, getTables )
 
 +(instancetype)open:(NSString*)newpath
 {

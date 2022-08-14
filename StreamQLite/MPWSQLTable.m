@@ -49,8 +49,8 @@
     int numKeys;
 }
 
-lazyAccessor(NSString, sqlForInsert, setSqlForInsert, computeSQLForInsert )
-lazyAccessor(NSString, sqlForCreate, setSqlForCreate, computeSQLForCreate )
+lazyAccessor(NSString*, sqlForInsert, setSqlForInsert, computeSQLForInsert )
+lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
 -(void)setSourceDB:(MPWStreamQLite*)sourceDB
 {

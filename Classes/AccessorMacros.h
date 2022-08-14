@@ -100,10 +100,10 @@
 #define boolAccessor_h(var,setVar )         scalarAccessor_h( BOOL, var, setVar )
 
 #define lazyAccessor( ltype, lvar ,setLVar, computeVar )   \
-	readAccessorName( ltype*, lvar, _##lvar ) \
-	setAccessor( ltype*, lvar, setLVar ) \
+	readAccessorName( ltype, lvar, _##lvar ) \
+	setAccessor( ltype, lvar, setLVar ) \
 \
--(ltype*)lvar { \
+-(ltype)lvar { \
     if ( ![self _##lvar] )  { \
       [self setLVar:[self computeVar]]; \
     }  \
@@ -111,10 +111,10 @@
 } \
 
 #define slazyAccessor( ltype, lvar ,setLVar, computeVar )   \
-readAccessorName( ltype*, lvar, _##lvar ) \
-setAccessor( ltype*, lvar, setLVar ) \
+readAccessorName( ltype, lvar, _##lvar ) \
+setAccessor( ltype, lvar, setLVar ) \
 \
--(ltype*)lvar { \
+-(ltype)lvar { \
 @synchronized( self ) { \
 if ( ![self _##lvar] )  { \
 [self setLVar:[self computeVar]]; \
@@ -126,8 +126,8 @@ return [self _##lvar]; \
 
 
 #define dictAccessor( objectType, var, setVar, someDict ) \
-    -(objectType*)var { return [someDict objectForKey:@""#var]; } \
-    -(void)setVar:(objectType*)newValue { [someDict setObject:newValue forKey:@""#var]; } \
+    -(objectType)var { return [someDict objectForKey:@""#var]; } \
+    -(void)setVar:(objectType)newValue { [someDict setObject:newValue forKey:@""#var]; } \
 
 #define scalarDictAccessor( scalarType, var, setVar, someDict ) \
      -(scalarType)var { scalarType temp=0;  [[someDict objectForKey:@""#var] getValue:&temp]; return temp; }\

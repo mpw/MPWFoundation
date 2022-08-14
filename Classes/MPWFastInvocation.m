@@ -24,7 +24,7 @@ CACHING_ALLOC( quickInvocation, 5, YES )
 scalarAccessor( id, target, _setTarget )
 idAccessor( result, setResult )
 boolAccessor( useCaching, _setUseCaching )
-lazyAccessor( NSMethodSignature , methodSignature, setMethodSignature, getSignature)
+lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignature)
 // extern id objc_msgSend( id receiver, SEL _cmd, ... );
 
 -(NSMethodSignature*)getSignature

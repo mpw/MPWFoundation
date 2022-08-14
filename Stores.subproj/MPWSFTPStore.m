@@ -8,16 +8,6 @@
 #import "MPWSFTPStore.h"
 #import "MPWGenericReference.h"
 
-@protocol SSHConnection
-
-@property (nonatomic, strong) NSString *host, *user;
-
--(int)openConnection;
--store;
--run:(NSString*)command;
-
-@end
-
 
 @implementation MPWSFTPStore
 
