@@ -10,7 +10,7 @@
 
 @implementation MPWConvertFromJSONStream
 
-objectAccessor(NSString, key, setKey)
+objectAccessor(NSString*, key, setKey)
 
 CONVENIENCEANDINIT(stream, WithKey:(NSString*)newKey target:(id)aTarget)
 {

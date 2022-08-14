@@ -20,8 +20,8 @@
 
 @implementation MPWIdentityDictionary
 
-objectAccessor( NSMutableDictionary, realDict, setRealDict )
-objectAccessor( MPWObjectCache,  cache, setCache )
+objectAccessor(NSMutableDictionary*, realDict, setRealDict )
+objectAccessor(MPWObjectCache*,  cache, setCache )
 
 -initWithCapacity:(NSUInteger)capacity
 {

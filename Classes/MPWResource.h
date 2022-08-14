@@ -17,9 +17,9 @@
     NSError     *error;
 }
 
-objectAccessor_h( NSData, rawData, setRawData )
-objectAccessor_h( NSString, MIMEType, setMIMEType )
-objectAccessor_h( NSError, error, setError)
+objectAccessor_h(NSData*, rawData, setRawData )
+objectAccessor_h(NSString*, MIMEType, setMIMEType )
+objectAccessor_h(NSError*, error, setError)
 idAccessor_h( source, setSource )
 
 

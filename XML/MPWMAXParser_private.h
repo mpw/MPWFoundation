@@ -94,7 +94,7 @@ typedef struct _NSXMLElementInfo {
 
 @interface MPWMAXParser(private)
 
-objectAccessor_h( NSError, parserError, setParserError )
+objectAccessor_h(NSError*, parserError, setParserError )
 
 -(void)_growTagStack:(long)newCapacity;
 -currentTag;

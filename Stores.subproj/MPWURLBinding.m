@@ -65,7 +65,7 @@ idAccessor( target, setTarget )
 
 @implementation MPWURLBinding
 
-objectAccessor(NSError, error, setError)
+objectAccessor(NSError*, error, setError)
 
 -(BOOL)isBound
 {

@@ -13,7 +13,7 @@
     NSString *key;
 }
 
-objectAccessor_h(NSString, key, setKey)
+objectAccessor_h(NSString*, key, setKey)
 
 +(instancetype)streamWithKey:(NSString*)newKey target:(id)aTarget;
 -(instancetype)initWithKey:(NSString*)newKey target:(id)aTarget;

@@ -19,12 +19,12 @@
 
 @implementation MPWTagAction
 
-objectAccessor(NSString, tagName, setTagName)
-objectAccessor(NSString, mappedName, setMappedName)
-objectAccessor(NSString, tagNamespace, setTagNamespace)
-objectAccessor(NSString, namespacePrefix, setNamespacePrefix)
-objectAccessor(MPWFastInvocation, tagAction, setTagAction)
-objectAccessor(MPWFastInvocation, elementAction, setElementAction)
+objectAccessor(NSString*, tagName, setTagName)
+objectAccessor(NSString*, mappedName, setMappedName)
+objectAccessor(NSString*, tagNamespace, setTagNamespace)
+objectAccessor(NSString*, namespacePrefix, setNamespacePrefix)
+objectAccessor(MPWFastInvocation*, tagAction, setTagAction)
+objectAccessor(MPWFastInvocation*, elementAction, setElementAction)
 
 
 -initWithTagName:(NSString*)tag

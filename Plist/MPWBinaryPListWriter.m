@@ -73,11 +73,11 @@ From:  https://github.com/opensource-apple/CF/blob/master/CFBinaryPList.c
 
 
 
-objectAccessor(MPWIntArray, offsets, setOffsets)
-objectAccessor(NSMutableArray, indexStack, setIndexStack)
-objectAccessor(NSMutableArray, reserveIndexes, setResrveIndexes)
+objectAccessor(MPWIntArray*, offsets, setOffsets)
+objectAccessor(NSMutableArray*, indexStack, setIndexStack)
+objectAccessor(NSMutableArray*, reserveIndexes, setResrveIndexes)
 scalarAccessor(MPWIntArray*, currentIndexes, setCurrentIndexes)
-objectAccessor(NSMapTable, objectTable, setObjectTable)
+objectAccessor(NSMapTable*, objectTable, setObjectTable)
 
 -(id)initWithTarget:(id)aTarget
 {

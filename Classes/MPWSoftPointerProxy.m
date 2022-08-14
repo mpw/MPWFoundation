@@ -15,7 +15,7 @@
 
 @implementation MPWSoftPointerProxy
 
-objectAccessor( MPWKVCSoftPointer, xxxsoftPointer, xxxsetSoftPointer )
+objectAccessor(MPWKVCSoftPointer*, xxxsoftPointer, xxxsetSoftPointer )
 
 
 +proxyWithSoftPointer:softPointer

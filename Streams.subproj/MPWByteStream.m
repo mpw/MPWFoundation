@@ -716,8 +716,8 @@ scalarAccessor( SEL, selector, setSelector )
 
 @implementation MPWAbstractFileTarget
 
-objectAccessor( NSString, tempFileName, setTempFileName )
-objectAccessor( NSString, finalFileName, setFinalFileName )
+objectAccessor(NSString*, tempFileName, setTempFileName )
+objectAccessor(NSString*, finalFileName, setFinalFileName )
 
 +(instancetype)fileNameTarget:(NSString*)filename mode:(NSString*)mode atomically:(BOOL)atomic
 {

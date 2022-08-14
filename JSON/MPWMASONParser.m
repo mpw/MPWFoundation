@@ -15,7 +15,7 @@
 
 @implementation MPWMASONParser
 
-objectAccessor( MPWSmallStringTable, commonStrings, setCommonStrings )
+objectAccessor(MPWSmallStringTable*, commonStrings, setCommonStrings )
 
 -initWithBuilder:aBuilder
 {

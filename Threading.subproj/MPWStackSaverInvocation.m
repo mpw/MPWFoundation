@@ -11,8 +11,8 @@
 
 @implementation MPWStackSaverInvocation
 
-objectAccessor(NSInvocation, invocation, setInvocation )
-objectAccessor(NSArray, stackTrace, setStackTrace )
+objectAccessor(NSInvocation*, invocation, setInvocation )
+objectAccessor(NSArray*, stackTrace, setStackTrace )
 
 -initWithInvocation:(NSInvocation*)anInvocation
 {

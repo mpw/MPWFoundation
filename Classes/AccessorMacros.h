@@ -63,9 +63,9 @@
     }\
 }\
 
-#define objectAccessor( objectType, var, setVar ) \
-    readAccessor( objectType*, var )\
-    setAccessor( objectType*, var,setVar )
+#define objectAccessor(objectType, var, setVar ) \
+    readAccessor( objectType, var )\
+    setAccessor( objectType, var,setVar )
 
 #define idAccessor( var, setVar )\
     readAccessor( id, var )\
@@ -86,7 +86,7 @@
 -(void)setVar:(scalarType)newVar; \
 -(scalarType)var;
 
-#define objectAccessor_h( objectType, var, setVar )   scalarAccessor_h( objectType*, var, setVar )
+#define objectAccessor_h(objectType, var, setVar )   scalarAccessor_h( objectType, var, setVar )
 
 #define intAccessor( var, setVar )          scalarAccessor( int, var, setVar )
 #define intAccessor_h( var, setVar )        scalarAccessor_h( int, var, setVar )

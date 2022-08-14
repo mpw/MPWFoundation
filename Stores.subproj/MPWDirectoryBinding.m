@@ -12,7 +12,7 @@
 
 @implementation MPWDirectoryBinding
 
-objectAccessor(NSArray, contents, setContents)
+objectAccessor(NSArray*, contents, setContents)
 boolAccessor(fancy, setFancy)
 
 -(instancetype)initWithContents:(NSArray *)newContents

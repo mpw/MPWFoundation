@@ -90,9 +90,9 @@ ARCDEALLOC(
     long    currentDictOffset,currentDictLength,currentDictIndex;
 }
 
-objectAccessor(NSData, data, setData)
-objectAccessor(MPWIntArray, objectNoStack, setObjectNoStack)
-objectAccessor(MPWIntArray, keyNoStack, setKeyNoStack)
+objectAccessor(NSData*, data, setData)
+objectAccessor(MPWIntArray*, objectNoStack, setObjectNoStack)
+objectAccessor(MPWIntArray*, keyNoStack, setKeyNoStack)
 boolAccessor(lazyArray, setLazyArray)
 
 static const char headerString[]="bplist00";

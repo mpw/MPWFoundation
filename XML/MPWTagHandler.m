@@ -15,12 +15,12 @@
 
 @implementation MPWTagHandler
 
-objectAccessor( NSDictionary , exceptionMap, setExceptionMap )
+objectAccessor(NSDictionary*, exceptionMap, setExceptionMap )
 idAccessor( attributeMap, setAttributeMap )
 idAccessor( namespaceString, setNamespaceString )
-objectAccessor(NSMutableDictionary, tagDict, setTagDict)
-objectAccessor(MPWSmallStringTable, tagTable, setTagTable)
-objectAccessor(MPWTagAction, undeclared, setUndeclared )
+objectAccessor(NSMutableDictionary*, tagDict, setTagDict)
+objectAccessor(MPWSmallStringTable*, tagTable, setTagTable)
+objectAccessor(MPWTagAction*, undeclared, setUndeclared )
 boolAccessor(isCaseInsensitive, setIsCaseInsensitive)
 -init
 {

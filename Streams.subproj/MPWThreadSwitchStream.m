@@ -11,7 +11,7 @@
 
 @implementation MPWThreadSwitchStream
 
-objectAccessor(NSThread, targetThread, setTargetThread )
+objectAccessor(NSThread*, targetThread, setTargetThread )
 
 CONVENIENCEANDINIT(stream, WithThread:(NSThread*)aThread target:aTarget)
 {
