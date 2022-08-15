@@ -67,13 +67,21 @@
     
     memset(buf, 0, sizeof(buf));
     NSMutableData *result=[NSMutableData data];
-    rc = (int)read(client_sock, buf, sizeof buf );
     do {
         rc = (int)read(client_sock, buf, sizeof buf );
         if ( rc > 0) {
             [result appendBytes:buf length:rc];
         }
     } while ( rc > 0);
+    NSData *body = nil;
+    char *bytes=[result bytes];
+    for (int i=0,max=result.length-3;i<max;i++) {
+        if ( bytes[i]=='\r' && bytes[i+1]=='\n' && bytes[i+2]=='\r' && bytes[i+3]=='\n' ) {
+            body=[result subdataWithRange:NSMakeRange(i+4,result.length-(i+5))];
+//            NSLog(@"body at %d: '%@'",i,[body stringValue]);
+            break;
+        }
+    }
     if (rc == -1) {
         printf("RECV ERROR = %d\n", errno);
     }
@@ -83,7 +91,7 @@
     /******************************/
     close(client_sock);
     
-    return result;
+    return body;
 }
 
 
