@@ -9,6 +9,7 @@
 #import "MPWGenericReference.h"
 #import "NSStringAdditions.h"
 #import <AccessorMacros.h>
+#import "MPWDirectoryBinding.h"
 
 @interface MPWDictStore()
 
@@ -34,7 +35,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 -referenceToKey:(id <MPWReferencing>)ref
 {
     NSArray *components=[ref relativePathComponents];
-    return components.firstObject;
+    return [components componentsJoinedByString:@"/"];
 }
 
 -(NSArray*)childNamesOfReference:aReference
@@ -153,7 +154,19 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     refs=[store childrenOfReference:@"/"];
     INTEXPECT( refs.count, 1, @"no longer empty");
     IDEXPECT( [refs.firstObject path], ref ,@"ref");
+    
+}
 
++(void)testRootDirectory
+{
+    id ref=@"World";
+    MPWDictStore* store = [self store];
+    MPWDirectoryBinding *dir1=store[@"/"];
+    INTEXPECT(dir1.count, 0, @"empty directory");
+    store[ref]=@"Hello";
+    MPWDirectoryBinding *dir2=store[@"/"];
+    INTEXPECT(dir2.count, 1, @"directory no longer empty");
+    IDEXPECT(dir2.contents.firstObject, [store referenceForPath:ref],@"contents");
 }
 
 
@@ -165,6 +178,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
              @"testSubscripts",
              @"testDelete",
              @"testChildrenOfReference",
+             @"testRootDirectory",
              ];
 }
 
