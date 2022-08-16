@@ -27,6 +27,11 @@ boolAccessor(fancy, setFancy)
     return contents;
 }
 
+-(long)count
+{
+    return contents.count;
+}
+
 -(void)dealloc
 {
     [contents release];

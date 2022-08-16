@@ -33,12 +33,33 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -referenceToKey:(id <MPWReferencing>)ref
 {
-    return [ref path];
+    NSArray *components=[ref relativePathComponents];
+    return components.firstObject;
 }
+
+-(NSArray*)childNamesOfReference:aReference
+{
+    if ( [(MPWGenericReference*)aReference isRoot]) {
+        return [[self dict] allKeys];
+    } else {
+        return @[];
+    }
+}
+
+-directoryForReference:(MPWGenericReference*)aReference
+{
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+}
+
 
 -at:(id <MPWReferencing>)aReference
 {
-    return self.dict[[self referenceToKey:aReference]];
+    if ( [(MPWGenericReference*)aReference isRoot]) {
+        return [self directoryForReference:aReference];
+    } else {
+        return self.dict[[self referenceToKey:aReference]];
+    }
 }
 
 -(void)deleteAt:(id <MPWReferencing>)aReference
