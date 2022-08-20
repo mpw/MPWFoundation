@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CLIApp : NSApplication <NSApplicationDelegate>
 
+@property (assign) bool terminateFlag;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -27,10 +27,46 @@
     [menuBarItem setSubmenu:myMenu];
 }
 
+-(void)terminate:(id)sender
+{
+    self.terminateFlag = YES;
+    NSLog(@"terminate:");
+    [self performSelectorOnMainThread:@selector(tickle) withObject:nil waitUntilDone:NO];
+}
+
+-(void)tickle { NSLog(@"tickle"); }
+
 - (void) applicationWillFinishLaunching: (NSNotification *)notification {
     [self createMenu];
 }
 
+-(BOOL)shouldTerminate
+{
+    return [[self windows] count] == 0 || self.terminateFlag;
+}
+
+-(void)run
+{
+    [self finishLaunching];
+    self.terminateFlag = NO;
+    NSAutoreleasePool *pool=nil;
+    do
+    {
+        [pool release];
+        pool = [[NSAutoreleasePool alloc] init];
+        
+        NSEvent *event =
+        [self
+         nextEventMatchingMask:NSEventMaskAny
+         untilDate:[NSDate dateWithTimeIntervalSinceNow:10]
+         inMode:NSDefaultRunLoopMode
+         dequeue:YES];
+        if ( event ) {
+            [self sendEvent:event];
+            [self updateWindows];
+        }
+    } while (!self.shouldTerminate);
+}
 
 -(instancetype)init
 {
@@ -40,16 +76,15 @@
     return self;
 }
 
--(void)runFromCLI:(NSWindow*)window
+
+-(void)runFromCLI:(NSWindow*)windowOrView
 {
-    [window makeKeyAndOrderFront:self];
+    if ( [windowOrView isKindOfClass:[NSView class]]) {
+        windowOrView = [(NSView*)windowOrView openInWindow:@"CLI"];
+    }
+    [windowOrView makeKeyAndOrderFront:self];
     [self activateIgnoringOtherApps:YES];
     [self run];
-}
-
-+(void)runFromCLI:(NSWindow*)window
-{
-    [[self sharedApplication] runFromCLI:window];
 }
 
 @end
