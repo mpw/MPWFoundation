@@ -34,18 +34,25 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return self;
 }
 
+-(void)addPropertyNamesOfClass:(Class)c toArray:(NSMutableArray*)propertyNames
+{
+    unsigned int count=0;
+    objc_property_t *props=class_copyPropertyList(c, &count);
+    for (int i=0;i<count;i++) {
+        NSString *name = @(property_getName(props[i]));
+        if (![propertyNames containsObject:name]) {
+            [propertyNames addObject:name];
+        }
+    }
+}
+
 -(NSArray*)propertyNames
 {
     Class c = object_getClass(self.object);
     Class stopClass = [NSObject class];
     NSMutableArray *propertyNames=[NSMutableArray array];
     while ( c && c!=stopClass) {
-        unsigned int count=0;
-        objc_property_t *props=class_copyPropertyList(c, &count);
-        for (int i=0;i<count;i++) {
-            const char *name = property_getName(props[i]);
-            [propertyNames addObject:@(name)];
-        }
+        [self addPropertyNamesOfClass:c toArray:propertyNames];
         c = class_getSuperclass(c);
     }
     return propertyNames;
@@ -60,7 +67,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 -(id)at:(id<MPWReferencing>)aReference
 {
     NSString *path=aReference.path;
-    if ( [path isEqual:@"."] || path.length==0 ) {
+    if ( [path isEqual:@"."] || path.length==0 || [aReference isRoot] ) {
         return [self listOfProperties];
     } else {
         return [self.object valueForKey:aReference.path];
