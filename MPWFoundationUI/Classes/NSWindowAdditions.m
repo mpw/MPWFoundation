@@ -33,34 +33,3 @@
 
 
 @end
-
-@interface CLIApp : NSApplication <NSApplicationDelegate> {}
-@end
-
-@implementation CLIApp
--(BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)app
-  {
-    return YES;
-}
-
--(instancetype)init
-{
-    self=[super init];
-    [self setDelegate:self];
-    [self setActivationPolicy:0];
-    return self;
-}
-
--(void)runFromCLI:(NSWindow*)window
-{
-    [window makeKeyAndOrderFront:self];
-    [self activateIgnoringOtherApps:YES];
-    [self run];
-}
-
-+(void)runFromCLI:(NSWindow*)window
-{
-    [[self sharedApplication] runFromCLI:window];
-}
-@end
-
