@@ -331,3 +331,15 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 @end
 
+
+@implementation NSCharacterSet(whiteSpaceAndPunctuation)
+
++(instancetype)whiteSpaceAndPunctuation
+{
+    NSMutableCharacterSet *ws=[NSMutableCharacterSet whitespaceAndNewlineCharacterSet];
+    NSCharacterSet *punct=[NSCharacterSet punctuationCharacterSet];
+    [ws formUnionWithCharacterSet:punct];
+    return ws;
+}
+
+@end
