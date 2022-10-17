@@ -8,16 +8,16 @@
 #import <Cocoa/Cocoa.h>
 
 @protocol MPWStorage,MPWReferencing;
+@class MPWBinding;
 
 @interface MPWTableView : NSTableView <NSTableViewDataSource>
 
-@property (nonatomic, strong) id <MPWStorage> store;
-@property (nonatomic, strong) id <MPWReferencing> currentReference;
+@property (nonatomic, strong) MPWBinding *binding;
 
 - selectedObject;
 - objectAtRow:(NSUInteger)row;
 
-- (CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName;
+-(CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName;
 -(NSArray *)unorderedObjects;
 
 

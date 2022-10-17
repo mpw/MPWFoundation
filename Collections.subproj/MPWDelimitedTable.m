@@ -43,7 +43,7 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
         [NSException raise:@"limitcheck" format:@"field delimiter length %ld exceed max 10",newLen];
     }
     fieldDelimiterLength=(int)newLen;
-    [newFieldDelim getBytes:fieldDelimiterBytes maxLength:10 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0,10) remainingRange:NULL];
+    [newFieldDelim getBytes:fieldDelimiterBytes maxLength:10 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0,fieldDelimiterLength) remainingRange:NULL];
     fieldDelimiterBytes[fieldDelimiterLength]=0;
 }
 
