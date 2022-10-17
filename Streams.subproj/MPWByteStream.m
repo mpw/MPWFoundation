@@ -328,8 +328,13 @@ intAccessor( indentAmount , setIndentAmount )
 #endif
 -(void)writeString:(NSString*)string
 {
-//	NSLog(@"-[MPWByteStream writeString:%@]",string);
-	[self outputString:string];
+    [self outputString:string];
+}
+
+-(void)writeNullTerminatedString:(NSString*)string
+{
+    [self writeString:string];
+    [self appendBytes:"" length:1];
 }
 
 -(void)writeData:(NSData*)data

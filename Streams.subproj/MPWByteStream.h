@@ -50,6 +50,7 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 
 -(void)writeIndent;
 -(void)writeString:(NSString*)aString;
+-(void)writeNullTerminatedString:(NSString*)aString;
 -(long)targetLength;
 -(void)outputString:(NSString*)aString;
 -(void)indent;
