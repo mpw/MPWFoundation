@@ -133,8 +133,15 @@ static id blockFun( id self, ... ) {
     return parameters;
 }
 
+-(IMP)stub
+{
+    if ( !stub) {
+        stub=imp_implementationWithBlock( self );
+    }
+    return stub;
+}
 
--(Method)getMethodForMessage:(SEL)messageName inClass:(Class)aClass
+-(Method)getExistingMethodForMessage:(SEL)messageName inClass:(Class)aClass
 {
     unsigned int methodCount=0;
     Method *methods = class_copyMethodList(aClass, &methodCount);
@@ -152,19 +159,11 @@ static id blockFun( id self, ... ) {
     return result;
 }
 
--(IMP)stub
-{
-    if ( !stub) {
-        stub=imp_implementationWithBlock( self );
-    }
-    return stub;
-}
-
 -(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr
 {
     Method methodDescriptor=NULL;
 	if ( aClass != nil ) {
-		methodDescriptor=[self getMethodForMessage:aSelector inClass:aClass];
+		methodDescriptor=[self getExistingMethodForMessage:aSelector inClass:aClass];
 		
 		if ( methodDescriptor  && oldImpPtr) {
             IMP old=class_getMethodImplementation(aClass, aSelector);
@@ -182,10 +181,10 @@ static id blockFun( id self, ... ) {
 	return methodDescriptor;
 }
 
--(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
+-(void)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
 {
     typeSignature=(char*)signature;
-    return [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
+    [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
 }
 
 -(void)installInClass:(Class)aClass withSignatureString:(NSString*)signatureString selectorString:(NSString*)selectorName

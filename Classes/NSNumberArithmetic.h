@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 
+NSNumber* MPWCreateInteger( long theInteger );
+
 @interface NSNumber(Arithmetic)
 
 -add:other;

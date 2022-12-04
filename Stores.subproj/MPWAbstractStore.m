@@ -332,6 +332,9 @@
     return aPath;
 }
 
+-(void)setEvaluator:anEvaluator {}
+-(id)evaluator { return nil; }
+
 @end
 
 

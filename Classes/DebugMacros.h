@@ -58,6 +58,8 @@ MPWTESTASSERT( (got)!=NULL, ([NSString stringWithFormat:@"%@ was nil but expecte
 MPWTESTASSERT( (got) == nil , ([NSString stringWithFormat:@"%@ was %p instead of nil",msg,got]),@"");
 #define INTEXPECT( got, expect, msg  ) \
 MPWTESTASSERT(((long)expect)==((long)got) , ([NSString stringWithFormat:@"got %ld instead of expected %ld for %@",(long)got,(long)expect,msg]),@"");
+#define HEXEXPECT( got, expect, msg  ) \
+MPWTESTASSERT(((long)expect)==((long)got) , ([NSString stringWithFormat:@"got 0x%lx instead of expected 0x%lx for %@",(long)got,(long)expect,msg]),@"");
 #define RECTEXPECT( rect, ex,ey,ew,eh , msg) \
 { \
 int _ax=ROUNDTOINTFORTEST(rect.origin.x);\

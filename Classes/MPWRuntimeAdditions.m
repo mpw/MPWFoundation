@@ -28,35 +28,14 @@
 
 @end
 
-#if ! TARGET_OS_IPHONE
 
 @implementation NSObject(methodAliasing)
 
 +(void)addMethod:(IMP)method forSelector:(SEL)selector types:(const char*)types
 {
-
-	NSLog(@"addMethod:...");
-#if __OBJC2__ || ( MAC_OS_X_VERSION_MAX_ALLOWED >= MAC_OS_X_VERSION_10_5 )
+    types = strdup(types);
 	class_addMethod((Class)self ,selector,method,types);
-#else
-	   struct objc_method_list meth_list;
-
-    memset( &meth_list, 0, sizeof meth_list );
-    meth_list.method_count=1;
-    meth_list.method_list[0].method_name=selector;
-    meth_list.method_list[0].method_imp=method;
-    meth_list.method_list[0].method_types=(char*)types;
-    class_addMethods(self, &meth_list);
-#endif	
 }
-
-/*"
-   Method aliasing allows use of appropriate selector names without a run-time penalty.
-"*/
-
-#if 0
-// FIXME:  redo with objc2 functions, allows direct access to method types
-
 
 +(void)aliasInstanceMethod:(SEL)old to:(SEL)new in:(Class)newClass
 {
@@ -72,11 +51,9 @@
 {
     [self aliasInstanceMethod:old to:new in:self];
 }
-#endif
 
 @end
 
-#endif 
 
 extern void *objc_msgForward( id target, SEL _cmd, ... );
 

@@ -10,7 +10,14 @@
 #import "MPWObject.h"
 #import "MPWRect.h"
 
+NSNumber* MPWCreateInteger( long theInteger )
+{
+    return [NSNumber numberWithLong:theInteger];
+}
+
+
 @implementation NSNumber(Arithmetic)
+
 
 -(MPWPoint*)asPoint
 {
