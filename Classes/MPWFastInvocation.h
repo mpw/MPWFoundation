@@ -9,8 +9,6 @@
 #import <MPWFoundation/MPWObject.h>
 #import <Foundation/Foundation.h>
 
-@class MPWBlockInvocable;
-
 @interface MPWFastInvocation : MPWObject {
 	SEL selector;
 	id	target;
