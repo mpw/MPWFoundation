@@ -3435,7 +3435,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s - $framework/`basename $framework .framework`\necho \"test $framework\"\nif test /Users/marcel/programming/_BuildTemp.noindex/MPWFoundation.build/Release/MPWFoundationFramework.build/DerivedSources/test.success -nt /Users/marcel/programming/_BuildTemp.noindex/MPWFoundation.build/Release/MPWFoundationFramework.build/Objects-normal/x86_64/Binary/MPWFoundation  ; then\n  exit 0\nfi\n\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${DERIVED_FILE_DIR}/test.success\n     else\n         rm ${DERIVED_FILE_DIR}/test.success\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
+			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n  exit 0\n  else\n    echo No changes, tests skipped\nfi\ncodesign -s - $framework/`basename $framework .framework`\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
