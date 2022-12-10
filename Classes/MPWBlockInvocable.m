@@ -91,11 +91,6 @@ static id blockFun( id self, ... ) {
 	self=[super init];
 	if ( self ) {
 		invoke=(IMP)[self invokeMapper];
-		descriptor=&sdescriptor;
-        flags=1;
-//		flags|=(1 << 28);   // is global
-        flags|=(1 << 24);  // we are a heap block
-        typeSignature="@@:@@";
 	}
 	return self;
 }

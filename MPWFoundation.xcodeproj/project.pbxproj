@@ -181,6 +181,12 @@
 		1F575D8820BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };
 		1F575D8920BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };
 		1F575D8A20BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */; };
+		1F5BBA2D2943801700C3D345 /* MPWBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5BBA2B2943801700C3D345 /* MPWBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F5BBA2E2943801700C3D345 /* MPWBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5BBA2B2943801700C3D345 /* MPWBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F5BBA2F2943801700C3D345 /* MPWBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5BBA2B2943801700C3D345 /* MPWBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F5BBA302943801700C3D345 /* MPWBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5BBA2C2943801700C3D345 /* MPWBlock.m */; };
+		1F5BBA312943801700C3D345 /* MPWBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5BBA2C2943801700C3D345 /* MPWBlock.m */; };
+		1F5BBA322943801700C3D345 /* MPWBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5BBA2C2943801700C3D345 /* MPWBlock.m */; };
 		1F5E509909B4B7CA000298D9 /* NSNil.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF1935006686DDC35ADD82 /* NSNil.m */; };
 		1F5EE32825D518C600C7C71C /* MPWNameRemappingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5EE32625D518C600C7C71C /* MPWNameRemappingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F5EE32925D518C600C7C71C /* MPWNameRemappingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5EE32625D518C600C7C71C /* MPWNameRemappingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1339,6 +1345,8 @@
 		1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWArrayFlattenStream.m; sourceTree = "<group>"; };
 		1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWPathRelativeStore.h; sourceTree = "<group>"; };
 		1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWPathRelativeStore.m; sourceTree = "<group>"; };
+		1F5BBA2B2943801700C3D345 /* MPWBlock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWBlock.h; sourceTree = "<group>"; };
+		1F5BBA2C2943801700C3D345 /* MPWBlock.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWBlock.m; sourceTree = "<group>"; };
 		1F5EE32625D518C600C7C71C /* MPWNameRemappingStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWNameRemappingStore.h; sourceTree = "<group>"; };
 		1F5EE32725D518C600C7C71C /* MPWNameRemappingStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWNameRemappingStore.m; sourceTree = "<group>"; };
 		1F6244B5214835EF00BB00C4 /* MPWMapFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWMapFilter.h; sourceTree = "<group>"; };
@@ -1731,6 +1739,8 @@
 				07DF1948006686DDC35ADD82 /* DebugMacros.h */,
 				1FCE1E131371BB250035A429 /* MPWBlockInvocable.h */,
 				1FCE1E141371BB250035A429 /* MPWBlockInvocable.m */,
+				1F5BBA2B2943801700C3D345 /* MPWBlock.h */,
+				1F5BBA2C2943801700C3D345 /* MPWBlock.m */,
 				1F78214612D953EB00E2DB02 /* MPWBlockInvocation.h */,
 				1F78214712D953EB00E2DB02 /* MPWBlockInvocation.m */,
 				1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */,
@@ -2512,6 +2522,7 @@
 				1F2DCFCF1ACB50F3004A39FB /* MPWConvertFromJSONStream.h in Headers */,
 				1FFA48A71ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */,
 				1F81BF9A19698EE60066DF43 /* MPWObject_fastrc.h in Headers */,
+				1F5BBA2E2943801700C3D345 /* MPWBlock.h in Headers */,
 				1F81BF9D19698F570066DF43 /* MPWDelimitedTable.h in Headers */,
 				1F9F8D6C263F387A003019DC /* MPWFixedValueSource.h in Headers */,
 				1F81BF9919698E9E0066DF43 /* MPWLZWStream.h in Headers */,
@@ -2692,6 +2703,7 @@
 				1FCF26471CF3993C00AC64CE /* CodingAdditions.h in Headers */,
 				1FCF26681CF39B4E00AC64CE /* MPWASCII85Stream.h in Headers */,
 				1FCF26721CF39BB700AC64CE /* MPWEnumFilter.h in Headers */,
+				1F5BBA2F2943801700C3D345 /* MPWBlock.h in Headers */,
 				1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */,
 				1F9F8D6D263F387B003019DC /* MPWFixedValueSource.h in Headers */,
 				1FCF262F1CF3993C00AC64CE /* DebugMacros.h in Headers */,
@@ -2892,6 +2904,7 @@
 				1FF8FDE809B49D0100652476 /* MPWIntArray.h in Headers */,
 				1FF8FDE909B49D0100652476 /* MPWObjectReference.h in Headers */,
 				1FF8FDEA09B49D0100652476 /* MPWIdentityDictionary.h in Headers */,
+				1F5BBA2D2943801700C3D345 /* MPWBlock.h in Headers */,
 				1FED48C3242634CC00AF2FAD /* MPWMAXParser_private.h in Headers */,
 				1FF8FDEB09B49D0100652476 /* MPWMessageCatcher.h in Headers */,
 				1FFA48A51ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */,
@@ -3416,7 +3429,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s - $framework/`basename $framework .framework`\n\nif  [ -f ${tester}  ]  ; then\n$tester ${framework}\nelse\necho \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
+			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\ncodesign -s - $framework/`basename $framework .framework`\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n    echo No changes, tests skipped\n    exit 0\nfi\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
 		1FF8FE2809B49D0200652476 /* Test */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -3435,7 +3448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n  exit 0\n  else\n    echo No changes, tests skipped\nfi\ncodesign -s - $framework/`basename $framework .framework`\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
+			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\ncodesign -s - $framework/`basename $framework .framework`\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n    echo No changes, tests skipped\n    exit 0\nfi\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -3573,6 +3586,7 @@
 				1F840DCF193F50AC00589595 /* NSObjectAdditions.m in Sources */,
 				1FEFBD252427F88E001E44B2 /* MPWObjectBuilder.m in Sources */,
 				1F840DD2193F50AC00589595 /* MPWTrampoline.m in Sources */,
+				1F5BBA312943801700C3D345 /* MPWBlock.m in Sources */,
 				1FFE3A9420B30A2400E65B93 /* MPWAbstractStore.m in Sources */,
 				1F8671FA22397C14006510FB /* MPWDirectoryBinding.m in Sources */,
 				1F840DD3193F50AC00589595 /* MPWMsgExpression.m in Sources */,
@@ -3748,6 +3762,7 @@
 				1FCF25F11CF398F400AC64CE /* MPWRuntimeAdditions.m in Sources */,
 				1FCF26171CF3990400AC64CE /* MPWWriteStream.m in Sources */,
 				1FFE3AAD20B3296800E65B93 /* MPWBinding.m in Sources */,
+				1F5BBA322943801700C3D345 /* MPWBlock.m in Sources */,
 				1FA2969B1CF74A6500F19039 /* MPWPipeline.m in Sources */,
 				1F1E09D2269D968200567AF6 /* MPWSQLTable.m in Sources */,
 				1FFE3AC420B34D2000E65B93 /* MPWDiskStore.m in Sources */,
@@ -3836,6 +3851,7 @@
 				1FA869D920EBC7FC00920279 /* MPWRESTOperation.m in Sources */,
 				1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */,
 				1F89EB9E22401FB8000A82D6 /* MPWXArgsFilter.m in Sources */,
+				1F5BBA302943801700C3D345 /* MPWBlock.m in Sources */,
 				1FB6EB5C1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
 				1FF8FE0A09B49D0100652476 /* MPWFilterStream.m in Sources */,
 				1F0200BC1D8BF836009538C5 /* MPWCombinerStream.m in Sources */,
