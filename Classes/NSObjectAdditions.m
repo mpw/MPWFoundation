@@ -188,6 +188,30 @@
 
 @end
 
+@implementation NSObject(stackCheck)
+
+
++(BOOL)isPointerOnStackAboveMe:(void*)ptr within:(long)maxDiff
+{
+    void *roughlyMyFrame = &_cmd;
+    long differenceFromPtr = ptr - roughlyMyFrame;
+    return differenceFromPtr > 0 && differenceFromPtr < maxDiff;
+}
+
++(BOOL)isPointerOnStackAboveMe:(void*)ptr
+{
+    return [self isPointerOnStackAboveMe:ptr within:1000];
+}
+
+
++(id)isPointerOnStackAboveMeForST:(void*)ptr
+{
+    return @([self isPointerOnStackAboveMe:ptr]);
+}
+
+@end
+
+
 #import "DebugMacros.h"
 
 @interface NSObjectIvarAcccessTesting : NSObject { id a; int b; float c; NSString *d;id f; }
