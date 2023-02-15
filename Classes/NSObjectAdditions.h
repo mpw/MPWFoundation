@@ -41,4 +41,11 @@
 
 @end
 
+@interface NSObject(stackCheck)
 
+
++(BOOL)isPointerOnStackAboveMe:(void*)ptr within:(long)maxDiff;
++(BOOL)isPointerOnStackAboveMe:(void*)ptr;
++(id)isPointerOnStackAboveMeForST:(void*)ptr;
+
+@end

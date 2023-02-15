@@ -14,7 +14,7 @@
 #endif
 
 #import <AccessorMacros.h>
-
+#import "MPWByteStream.h"
 
 //#import "Foundation/NSDebug.h"
 
@@ -207,6 +207,29 @@
 +(id)isPointerOnStackAboveMeForST:(void*)ptr
 {
     return @([self isPointerOnStackAboveMe:ptr]);
+}
+
+@end
+
+
+@implementation NSObject(stprocess)
+
+
+-main:args
+{
+    return @(0);
+}
+
+-Stdout
+{
+    return [MPWByteStream Stdout];
+}
+
+
+-(int)runWithStdin:(id <StreamSource>)source Stdout:(MPWByteStream*)target
+{
+    [[target do] println:[self each]];
+    return 0;
 }
 
 @end
