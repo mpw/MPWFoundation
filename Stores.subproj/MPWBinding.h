@@ -15,6 +15,7 @@
 @protocol MPWBinding
 
 +(instancetype)bindingWithReference:aReference inStore:aStore;
+-(instancetype)initWithReference:aReference inStore:aStore;
 
 @property (nonatomic, retain) id value;
 
