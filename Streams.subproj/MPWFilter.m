@@ -149,6 +149,18 @@ idAccessor( _target, _setTarget )
     }
 }
 
+-(int)runWithStdin:(id <StreamSource>)source Stdout:(MPWByteStream*)target
+{
+    [source setTarget:self];
+    [self setTarget:target];
+    [source run];
+}
+
++(int)runWithStdin:(id <StreamSource>)source Stdout:(MPWByteStream*)target
+{
+    return [[self streamWithTarget:target] runWithStdin:source Stdout:target];
+}
+
 @end
 
 
