@@ -128,6 +128,8 @@
 #import <MPWFoundation/MPWDirectoryBinding.h>
 #import <MPWFoundation/MPWFileBinding.h>
 #import <MPWFoundation/MPWPropertyStore.h>
+#import <MPWFoundation/MPWTCPStore.h>
+#import <MPWFoundation/MPWTCPBinding.h>
 #import <MPWFoundation/MPWURLSchemeResolver.h>
 #import <MPWFoundation/MPWSFTPStore.h>
 #import <MPWFoundation/MPWStreamableBinding.h>

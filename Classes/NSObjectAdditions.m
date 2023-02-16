@@ -232,6 +232,12 @@
     return 0;
 }
 
++(int)runWithStdin:(id <StreamSource>)source Stdout:(MPWByteStream*)target
+{
+    [[[self new] autorelease] runWithStdin:source Stdout:target];
+    return 0;
+}
+
 @end
 
 
