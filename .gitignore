@@ -21,3 +21,5 @@ xcuserdata/
 *.xcscmblueprint
 .headers
 testmpwfoundation
+
+testdependencies.d
