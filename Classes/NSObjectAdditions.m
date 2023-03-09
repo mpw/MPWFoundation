@@ -238,6 +238,22 @@
     return 0;
 }
 
++(int)main:args
+{
+    return [[[[[self alloc] init] autorelease] main:args] intValue];
+}
+
++(int)mainArgc:(int)argc argv:(char**)argv
+{
+    NSMutableArray *args=[NSMutableArray array];
+    [NSClassFromString(@"MPWBlockContext") class];            //
+    for (int i=0;i<argc;i++) {
+        [args addObject:@(argv[i])];
+    }
+    return [self main:args];
+}
+
+
 @end
 
 
