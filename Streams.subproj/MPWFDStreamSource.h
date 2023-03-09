@@ -18,6 +18,7 @@
 -initWithFilename:(NSString *)filename;
 -initWithFD:(int)fd;
 +fd:(int)fd;
++Stdin;
 +name:(NSString*)filename;
 
 @end
