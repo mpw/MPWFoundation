@@ -26,6 +26,12 @@
     return NO;
 }
 
++ (void)sleep:(NSNumber*)timeToWait
+{
+    [self sleepForTimeInterval:timeToWait.doubleValue];
+}
+
+
 @end
 
 @interface NSThreadWaitingTests : NSThread
