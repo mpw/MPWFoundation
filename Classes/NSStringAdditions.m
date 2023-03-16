@@ -56,6 +56,11 @@
     return result;
 }
 
+-at:(NSNumber*)anIndex
+{
+    return [self substringWithRange:NSMakeRange(anIndex.intValue,1)];
+}
+
 +(id)stringWithCharacter:(int)theChar
 {
     unichar ch=theChar;

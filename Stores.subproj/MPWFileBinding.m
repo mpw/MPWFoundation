@@ -153,6 +153,17 @@
 //    }
 //}
 
+-mkdir:(NSString*)additionalPath
+{
+    NSString *fullPath=[[self path] stringByAppendingPathComponent:additionalPath];
+    NSError *error=nil;
+    BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:fullPath  withIntermediateDirectories:YES attributes:nil error:&error];
+    if (!success) {
+        NSLog(@"error: %@",error);
+    }
+    return [[self store] bindingForReference:fullPath inContext:nil];
+}
+
 -(void)open
 {
     [[NSClassFromString(@"NSWorkspace") sharedWorkspace] openURL:[self URL]];

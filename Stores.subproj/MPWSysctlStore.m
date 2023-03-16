@@ -19,6 +19,7 @@
     if ( retval < 0) {
         perror("sysctl failed");
     }
+    NSLog(@"at: %@ -> %@ -> %d bytes returned",aReference.path,name,(int)size);
     buffer[size]=0;
     return @(buffer);
 }
@@ -34,6 +35,7 @@
 {
     MPWSysctlStore *ctl=[MPWSysctlStore store];
     IDEXPECT( ctl[@"hw/model"], @"MacBookAir10,1",@"HW Model");
+//    INTEXPECT([ctl[@"hw/activecpu"] intValue],8,@"active cpu");
 }
 
 +(NSArray*)testSelectors

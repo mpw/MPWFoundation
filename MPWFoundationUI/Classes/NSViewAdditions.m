@@ -57,6 +57,18 @@
     return theWindow;
 }
 
+-main:args
+{
+    NSLog(@"-[%@ main:]",[self class]);
+    NSWindow *w=[self openInWindow:@"Window"];
+    NSLog(@"window: %@",w);
+    return [w main:args];
+}
+
+-(int)runWithStdin:source Stdout:target
+{
+    return [[self main:nil] intValue];
+}
 -openInWindowController:(NSString*)windowName
 {
     NSWindow *window=[self openInWindow:windowName];
