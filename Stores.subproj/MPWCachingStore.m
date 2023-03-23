@@ -124,6 +124,11 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     [aStream printFormat:@"\n"];
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p source: %@ cache: %@>",self.class,self,self.source,self.cache];
+}
+
 -(void)dealloc
 {
     [_cache release];
