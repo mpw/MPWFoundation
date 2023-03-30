@@ -79,11 +79,6 @@
     return NO;
 }
 
--(BOOL)isReferencingMethod:(id <MPWReferencing>)ref
-{
-    return [[ref relativePathComponents] count] > 2;
-}
-
 -(MPWBinding*)rootBinding
 {
     id <MPWReferencing> ref = self.rootReference;
