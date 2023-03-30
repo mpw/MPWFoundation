@@ -131,7 +131,7 @@
     } else {
         NSLog(@"no children for %@, error: %@",aReference,error);
     }
-   return childNames;
+    return childNames;
 }
 
 

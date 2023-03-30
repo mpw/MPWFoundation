@@ -109,10 +109,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
 {
     NSArray<MPWReferencing>* sourceRefs = [super childrenOfReference:aReference];
-    NSArray<MPWReferencing>* cacheRefs = [(id <MPWHierarchicalStorage>)self.cache childrenOfReference:aReference];
-    NSMutableSet<MPWReferencing> *allRefs=(NSMutableSet<MPWReferencing> *)[NSMutableSet setWithArray:sourceRefs];
-    [allRefs addObjectsFromArray:cacheRefs];
-    return (NSArray<MPWReferencing>*)(allRefs.allObjects);
+//    NSArray<MPWReferencing>* cacheRefs = [(id <MPWHierarchicalStorage>)self.cache childrenOfReference:aReference];
+//    NSMutableSet<MPWReferencing> *allRefs=(NSMutableSet<MPWReferencing> *)[NSMutableSet setWithArray:sourceRefs];
+//    [allRefs addObjectsFromArray:cacheRefs];
+//    NSLog(@"allRefs: %@",allRefs);
+//    NSArray<MPWReferencing>* sortedRefs= (NSArray<MPWReferencing>*)([allRefs.allObjects sortedArrayUsingSelector:@selector(compare:)]);
+//    NSLog(@"sortedRefs: %@",sortedRefs);
+//    return sortedRefs;
+    return sourceRefs;
 }
 
 -(void)graphViz:(MPWByteStream*)aStream

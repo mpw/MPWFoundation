@@ -63,6 +63,11 @@
     return [[self path] UTF8String];
 }
 
+-(NSComparisonResult)compare:other
+{
+    return [[self path] compare:[other path]];
+}
+
 @synthesize path;
 
 @synthesize schemeName;
