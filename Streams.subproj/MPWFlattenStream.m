@@ -98,6 +98,7 @@
 
 
 - (void)writeString:(id)aString {
+    FORWARD(aString);
 }
 
 -(void)createEncoderMethodForClass:(Class)theClass
@@ -180,6 +181,8 @@
     IDEXPECT(actualResult,correctResult,@"nested dict flattening");
 }
 
+
+
 +testSelectors
 {
     return [NSArray arrayWithObjects:@"testNestedArrayFlattening",@"testNestedDictFlatteningWithProcess",
@@ -201,5 +204,14 @@
 
 @end
 
+@implementation NSString(MPWFlattening)
+
+-(void)flattenOntoStream:(MPWFlattenStream*)aStream
+{
+    //    NSLog(@"dictionary flattenOntoStream: %@",aStream);
+    [aStream writeString:self];
+}
+
+@end
 
 

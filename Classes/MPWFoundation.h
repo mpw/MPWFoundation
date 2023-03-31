@@ -67,6 +67,7 @@
 #import <MPWFoundation/MPWExternalFilter.h>
 #import <MPWFoundation/MPWRESTCopyStream.h>
 #import <MPWFoundation/MPWSkipFilter.h>
+#import <MPWFoundation/MPWExtensionAdder.h>
 
 #import <MPWFoundation/NSThreadWaiting.h>
 #import <MPWFoundation/MPWFuture.h>
