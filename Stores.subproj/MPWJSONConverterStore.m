@@ -112,7 +112,7 @@
     ];
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     MPWResource *json=[store mapObjectToStore:dicts forReference:nil];
-    IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15,\"Key1\":\"Value1\"},{\"Key2\":42,\"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"Key1\":\"Value1\",\"Key2\":15},{\"Key1\":\"Value2\",\"Key2\":42}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoDictUp
@@ -138,7 +138,7 @@
     MPWJSONConverterStore *store=[self storeWithSource:nil];
     store.up=true;
     MPWResource *json=[store mapRetrievedObject:dicts forReference:nil];
-    IDEXPECT( [[json rawData] stringValue], @"[{\"Key2\":15,\"Key1\":\"Value1\"},{\"Key2\":42,\"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[json rawData] stringValue], @"[{\"Key1\":\"Value1\",\"Key2\":15},{\"Key1\":\"Value2\",\"Key2\":42}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoDictDown
@@ -166,7 +166,7 @@
     MPWDictStore *d = [MPWDictStore store];
     MPWJSONConverterStore *store=[self storeWithSource:d];
     store[@"hi.json"]=dicts;
-    IDEXPECT( [[d[@"hi.json"] rawData] stringValue], @"[{\"Key2\":15,\"Key1\":\"Value1\"},{\"Key2\":42,\"Key1\":\"Value2\"}]", @"json for dict");
+    IDEXPECT( [[d[@"hi.json"] rawData] stringValue], @"[{\"Key1\":\"Value1\",\"Key2\":15},{\"Key1\":\"Value2\",\"Key2\":42}]", @"json for dict");
 }
 
 +(void)testConvertJSONtoObjectUp

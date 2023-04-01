@@ -4163,7 +4163,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4272,7 +4272,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4463,7 +4463,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6791,7 +6791,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
@@ -6851,7 +6851,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6959,7 +6959,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7150,7 +7150,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_dylib;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
 				OTHER_CFLAGS = (
 					"-fpie",
