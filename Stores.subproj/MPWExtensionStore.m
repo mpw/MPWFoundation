@@ -14,7 +14,7 @@
 -(id<MPWReferencing>)mapReference:(id<MPWReferencing>)aReference
 {
     NSString *r=aReference.path;
-    id ref = [[aReference class] referenceWithPath:[[r stringByDeletingPathExtension] stringByAppendingPathExtension:self.extension]];
+    id ref = [[aReference class] referenceWithPath:[r stringByAppendingPathExtension:self.extension]];
     NSLog(@"mapped ref from '%@' to '%@'",aReference,ref);
     return ref;
 }
@@ -52,17 +52,17 @@
     EXPECTNIL([self _testStore][@"test"],@"key not there");
 }
 
-+(void)testExtensionStrippedBeforeAdding
++(void)testExtensionNotStrippedBeforeAdding
 {
-    IDEXPECT([self _testStore][@"index.html"],@"hello world",@"extension not added twice");
-    IDEXPECT([self _testStore][@"index.txt"],@"hello world",@"other extension stripped");
+    EXPECTNIL([self _testStore][@"index.html"],@"extension added twice, so no result");
+    EXPECTNIL([self _testStore][@"index.txt"],@"other extension not stripped");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
        @"testExtensionAdded",
-       @"testExtensionStrippedBeforeAdding",
+       @"testExtensionNotStrippedBeforeAdding",
 			];
 }
 
