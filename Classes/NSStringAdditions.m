@@ -32,6 +32,25 @@
     return [self dataUsingEncoding:NSUTF8StringEncoding];
 }
 
+-(NSArray<NSString*>*)resultsOfCommand
+{
+    FILE *fin = popen([self UTF8String], "r");
+    NSMutableArray<NSString*> *result=[NSMutableArray array];
+    if ( fin ) {
+        char buffer[16390]="";
+        char *fgetsResult;
+        do {
+            fgetsResult=fgets(buffer, 16384, fin);
+            if ( strlen(buffer)) {
+                [result addObject:[NSString stringWithUTF8String:buffer]];
+            }
+        } while (fgetsResult!=NULL);
+        pclose(fin);
+    }
+    return result;
+
+}
+
 -(BOOL)writeToURL:(NSURL*)url options:(long)option error:(NSError**)error
 {
     return [[self asData] writeToURL:url options:option error:error];
