@@ -70,7 +70,7 @@
     MPWResource *result=[[[MPWResource alloc] init] autorelease];
     [result setSource:aURL];
     [result setRawData:rawData];
-    [result setError:error];
+//    [result setError:error];
 #else
 //    NSData *rawData=nil;
 //    if ( [aURL.scheme hasPrefix:@"http"]) {

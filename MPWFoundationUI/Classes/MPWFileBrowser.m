@@ -27,6 +27,9 @@
 {
     self = [super initWithNibName:@"MPWFileBrowser" bundle:[NSBundle bundleForClass:[self class]]];
     [self view];
+    NSLog(@"MPWFileBrowser: %p",self);
+    NSLog(@"browser target: %@",self.browser.target);
+    NSLog(@"browser action: %@",NSStringFromSelector(self.browser.action));
     return self;
 }
 
