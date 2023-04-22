@@ -86,6 +86,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWDirectoryBinding.m \
     Stores.subproj/MPWFileBinding.m \
+    Stores.subproj/MPWExtensionStore.m \
     Stores.subproj/MPWReference.m \
     Stores.subproj/MPWGenericReference.m \
     Stores.subproj/MPWTCPStore.m \
