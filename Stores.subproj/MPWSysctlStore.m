@@ -19,7 +19,7 @@
     if ( retval < 0) {
         perror("sysctl failed");
     }
-    NSLog(@"at: %@ -> %@ -> %d bytes returned",aReference.path,name,(int)size);
+//    NSLog(@"at: %@ -> %@ -> %d bytes returned",aReference.path,name,(int)size);
     buffer[size]=0;
     return @(buffer);
 }
@@ -33,9 +33,10 @@
 
 +(void)testRetrieveASpecificSysctl
 {
+    NSString *expectedHWString=[[[@"sysctl hw.model" resultsOfCommand] lastObject] substringFromIndex:10];
+    expectedHWString = [expectedHWString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     MPWSysctlStore *ctl=[MPWSysctlStore store];
-    IDEXPECT( ctl[@"hw/model"], @"MacBookAir10,1",@"HW Model");
-//    INTEXPECT([ctl[@"hw/activecpu"] intValue],8,@"active cpu");
+    IDEXPECT( ctl[@"hw/model"], expectedHWString,@"HW Model");
 }
 
 +(NSArray*)testSelectors

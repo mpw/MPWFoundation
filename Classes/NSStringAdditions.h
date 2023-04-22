@@ -20,6 +20,7 @@
 @property (readonly)  NSString *stringValue;
 
 -(NSData*)asData;
+-(NSArray<NSString*>*)resultsOfCommand;
 
 @end
 
