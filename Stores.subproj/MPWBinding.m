@@ -34,6 +34,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [self.store at:self.reference put:newValue];
 }
 
+-(void)post:newValue
+{
+    [self.store at:self.reference post:newValue];
+}
+
 
 -(void)delete
 {
