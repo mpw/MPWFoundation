@@ -34,9 +34,9 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     [self.store at:self.reference put:newValue];
 }
 
--(void)post:newValue
+-post:newValue
 {
-    [self.store at:self.reference post:newValue];
+    return [self.store at:self.reference post:newValue];
 }
 
 

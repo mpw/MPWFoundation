@@ -101,6 +101,11 @@
     return ;
 }
 
+-(id)at:(MPWReference*)aReference post:theObject
+{
+    return nil;
+}
+
 -(void)merge:theObject at:(id <MPWReferencing>)aReference
 {
     [self at:aReference put:theObject];

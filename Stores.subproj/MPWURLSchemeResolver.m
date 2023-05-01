@@ -94,12 +94,12 @@
     [self deleteAtURL:[aReference URL]];
 }
 
--(void)at:(MPWURLReference*)aReference post:(id)theObject
+-(id)at:(MPWURLReference*)aReference post:(id)theObject
 {
     if ( [theObject isKindOfClass:[NSDictionary class]]) {
-        [self atURL:[aReference URL] postDictionary:theObject];
+        return [self atURL:[aReference URL] postDictionary:theObject];
     }
-    [self atURL:[aReference URL] post:[theObject asData]];
+    return [self atURL:[aReference URL] post:[theObject asData]];
 }
 
 ///----- support for HOM-based argument-construction
