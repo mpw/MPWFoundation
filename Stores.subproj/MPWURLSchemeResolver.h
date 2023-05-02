@@ -21,7 +21,7 @@
 
 -(NSString*)schemePrefix;
 -(MPWResource*)resourceWithRequest:(NSURLRequest*)request;
--(void)at:(MPWURLReference*)aReference post:(id)theObject;
+-(id)at:(MPWURLReference*)aReference post:(id)theObject;
 
 @property (nonatomic, strong ) NSDictionary *headers;
 
