@@ -33,7 +33,7 @@
        PS1="\u@\h[\W]"
        set autolist=beepnone           # tcsh lists filename-completions
        
-       . /usr/local/share/GNUstep/Makefiles/GNUstep.sh
+       . /usr/GNUstep/System/Library/Makefiles/GNUstep.sh
 	   export LD_LIBRARY_PATH=/home/gnustep/GNUstep/Library/Libraries:/usr/local/lib:/home/gnustep/Build/obj/
 
        function  trless {
