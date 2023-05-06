@@ -97,10 +97,8 @@
 -(id)at:(MPWURLReference*)aReference post:(id)theObject
 {
     if ( [theObject isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"will FORM encode dictionary for POST");
         return [self atURL:[aReference URL] postDictionary:theObject];
     } else {
-        NSLog(@"data already encoded, just POST it");
         return [self atURL:[aReference URL] post:[theObject asData]];
     }
 }
@@ -123,9 +121,11 @@
 {
     NSHTTPURLResponse *response=nil;
     NSError *localError=nil;
-    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
+//    NSLog(@"request headers: %@",[request allHTTPHeaderFields]);
 //    NSLog(@"request URL: %@",request.URL);
     NSData *rawData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&localError];
+//    NSLog(@"response: %@",response);
+//    NSLog(@"rawData: %@",[rawData stringValue]);
 
     if ( [response statusCode] != 404 ) {
         MPWResource *result=[[[MPWResource alloc] init] autorelease];
@@ -189,11 +189,8 @@
 -atURL:(NSURL*)aURL post:(NSData*)data
 {
     NSMutableURLRequest *request=[self requestForURL:aURL];
-    NSLog(@"headers before adding: %@",[request allHTTPHeaderFields]);
-    NSString *boundary=@"0xKhTmLbOuNdArY";
-//    [request setValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField:@"Content-Type"];
+//    NSLog(@"url: %@",aURL);
     request.HTTPMethod = @"POST";
-//    request.HTTPBody = [self encodeData:data asPOSTFormithName:@"file" boundary:boundary];
     request.HTTPBody = data;
     return [self resourceWithRequest:request];
 }

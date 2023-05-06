@@ -31,6 +31,12 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return aReference;
 }
 
+-(NSURL*)URLForReference:(MPWGenericReference*)aReference
+{
+    return [self.source URLForReference:[self mapReference:aReference]];
+}
+
+
 -mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference
 {
     return anObject;

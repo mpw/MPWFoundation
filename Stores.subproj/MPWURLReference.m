@@ -97,7 +97,8 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSURL *resultURL =  url(self.scheme, self.host, self.port, self.urlPath, nil);
     if ( ! resultURL || (self.path.length >0 &&  [resultURL.path length]==0) ) {
-        NSLog(@"Trouble converting components: scheme: %@ host: %@ urlPath: %@",self.scheme,self.host,self.urlPath);
+        NSLog(@"Trouble converting components: scheme: %@ host: %@ urlPath: %@\nstack:\n%@",self.scheme,self.host,self.urlPath,[NSThread callStackSymbols]);
+        @throw [NSException exceptionWithName:@"nourl" reason:[resultURL description] userInfo:@{ @"url": resultURL }];
     }
     return resultURL;
 }

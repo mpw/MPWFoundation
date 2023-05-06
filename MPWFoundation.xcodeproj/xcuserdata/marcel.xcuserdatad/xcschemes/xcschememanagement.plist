@@ -57,7 +57,7 @@
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>6</integer>
 		</dict>
 		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
 		<dict>
@@ -74,7 +74,7 @@
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>54</integer>
+			<integer>58</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>
