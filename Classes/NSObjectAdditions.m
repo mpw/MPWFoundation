@@ -163,9 +163,19 @@
     }
 }
 
+-(instancetype)concat:(NSDictionary*)other
+{
+    NSMutableDictionary *combined=[NSMutableDictionary dictionaryWithDictionary:self];
+    for (id key in [other keyEnumerator]) {
+        combined[key]=other[key];
+    }
+    return combined;
+}
+
+
 @end
 
-@implementation NSArray(ivarAccess)
+@implementation NSArray(additions)
 
 +(NSString*)ivarNameAtOffset:(int)ivarOffset orIndex:(int)index
 {
@@ -179,6 +189,7 @@
 }
 
 @end
+
 @implementation NSObject(memberOfSet1)
 
 -(id)memberOfSet:(NSSet*)aSet
@@ -309,11 +320,33 @@ intAccessor( debugLevel, setDebugLevel )
 
 +testSelectors
 {
-	return [NSArray arrayWithObjects:
+	return @[
 			@"testIvarNames",
 			@"testIvarAtOffset",
-			nil];
+			];
 }
 
 @end
 
+@interface NSDictionaryAdditionsTesting : NSObject @end
+@implementation NSDictionaryAdditionsTesting
+
++(void)testConcatDicts
+{
+    NSDictionary *a=@{ @"a": @(3) };
+    NSDictionary *b=@{ @"b": @(12) };
+    NSDictionary *combined = [a concat:b];
+    INTEXPECT( combined.count,2, @"elements");
+    IDEXPECT(combined[@"a"],@(3), @"from a");
+    IDEXPECT(combined[@"b"],@(12), @"from a");
+
+}
+
++testSelectors
+{
+    return @[
+        @"testConcatDicts",
+    ];
+}
+
+@end
