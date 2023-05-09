@@ -177,7 +177,7 @@
 -(void)copyFrom:(id <MPWStorage>)source
 {
     MPWRESTCopyStream *copier = [[MPWRESTCopyStream alloc] initWithSource:source target:self];
-    [copier bringUpToDate];
+    [copier update];
 }
 
 -(void)copyTo:(id <MPWStorage>)dest

@@ -49,7 +49,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     }
 }
 
--(void)bringUpToDate
+-(void)update
 {
     NSArray *children=[self.source childrenOfReference:@"."];
     for ( id ref in children ) {
