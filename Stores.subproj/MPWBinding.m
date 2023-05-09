@@ -65,11 +65,6 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     return [(MPWGenericReference*)self.reference path];
 }
 
--(instancetype)div:(MPWBinding*)other
-{
-    return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other.reference] inStore:self.store];
-}
-
 -(id <MPWReferencing>)asReference
 {
     return [self reference];
@@ -103,6 +98,12 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 - (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
     return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other] inStore:self.store];
 }
+
+-(instancetype)div:(MPWBinding*)other
+{
+    return [self referenceByAppendingReference:other];
+}
+
 
 -(void)writeObject:anObject
 {

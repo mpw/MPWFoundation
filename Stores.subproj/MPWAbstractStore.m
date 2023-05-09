@@ -14,6 +14,8 @@
 #import "NSObjectFiltering.h"
 #import "NSDictAdditions.h"
 #import "MPWPathRelativeStore.h"
+#import "MPWRESTCopyStream.h"
+#import "MPWLoggingStore.h"
 
 @interface NSArray(unique)
 
@@ -161,6 +163,26 @@
 -(MPWDirectoryBinding*)listForNames:(NSArray*)nameList
 {
     return [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericReference collect] referenceWithPath:[nameList each]]] autorelease];
+}
+
+
+-(MPWRESTCopyStream*)syncToTarget:(id <MPWStorage>)target
+{
+    MPWRESTCopyStream *copier = [[MPWRESTCopyStream alloc] initWithSource:self target:target];
+    MPWLoggingStore *logger = [self logger];
+    [logger setLog:copier];
+    return copier;
+}
+
+-(void)copyFrom:(id <MPWStorage>)source
+{
+    MPWRESTCopyStream *copier = [[MPWRESTCopyStream alloc] initWithSource:source target:self];
+    [copier bringUpToDate];
+}
+
+-(void)copyTo:(id <MPWStorage>)dest
+{
+    [dest copyFrom:self];
 }
 
 -(NSString*)generatedName

@@ -49,6 +49,14 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     }
 }
 
+-(void)bringUpToDate
+{
+    NSArray *children=[self.source childrenOfReference:@"."];
+    for ( id ref in children ) {
+        [self writeObject:[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbPUT] sender:self];
+    }
+}
+
 -(void)dealloc
 {
     [_source release];
