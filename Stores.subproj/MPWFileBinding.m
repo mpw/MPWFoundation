@@ -75,8 +75,6 @@
 //    }
 //}
 
-
-
 -(BOOL)existsAndIsDirectory:(BOOL*)isDirectory
 {
 	NSFileManager *manager=[NSFileManager defaultManager];

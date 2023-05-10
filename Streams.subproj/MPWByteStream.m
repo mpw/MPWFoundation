@@ -899,6 +899,11 @@ intAccessor( fd, setFd )
 	return self;
 }
 
+-(void)redirectTo:(MPWFileDescriptorTarget*)otherFDTarget
+{
+    dup2([otherFDTarget fd], [self fd]);
+}
+
 -(instancetype)initWithName:(NSString*)name mode:(NSString*)mode // atomically:(BOOL)atomic
 {
     return [self initWithFd:open( [name fileSystemRepresentation], O_WRONLY | O_CREAT , S_IRUSR | S_IWUSR)];
