@@ -4,5 +4,6 @@ cp  *.so* /usr/GNUstep/Local/Library/Libraries/
 cd /usr/local/lib/
 cp  libBlocksRuntime.so libdispatch.so /usr/GNUstep/Local/Library/Libraries/
 cd /usr/
+echo /usr/lib/`uname -p`-linux-gnu/libmicrohttpd.* /usr/GNUstep/Local/Library/Libraries/ 
+cp /usr/lib/`uname -p`-linux-gnu/libmicrohttpd.* /usr/GNUstep/Local/Library/Libraries/ 
 tar zcf ~/ObjS-GNUstep-installed.tgz GNUstep
-cp /usr/lib/aarch64-linux-gnu/libmicrohttpd.* /usr/GNUstep/Local/Library/Libraries/ 
