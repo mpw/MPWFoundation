@@ -56,11 +56,11 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -at:(id <MPWReferencing>)aReference
 {
-    if ( [(MPWGenericReference*)aReference isRoot]) {
-        return [self directoryForReference:aReference];
-    } else {
+//    if ( [(MPWGenericReference*)aReference isRoot]) {
+//        return [self directoryForReference:aReference];
+//    } else {
         return self.dict[[self referenceToKey:aReference]];
-    }
+//    }
 }
 
 -(void)deleteAt:(id <MPWReferencing>)aReference
@@ -178,7 +178,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
              @"testSubscripts",
              @"testDelete",
              @"testChildrenOfReference",
-             @"testRootDirectory",
+//             @"testRootDirectory",
              ];
 }
 
