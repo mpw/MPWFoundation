@@ -190,6 +190,17 @@
 
 @end
 
+@implementation NSData(concat)
+
+-concat:other
+{
+    NSMutableData *combined = [self mutableCopy];
+    [combined appendData:[other asData]];
+    return [combined autorelease];
+}
+
+@end
+
 @implementation NSObject(memberOfSet1)
 
 -(id)memberOfSet:(NSSet*)aSet
