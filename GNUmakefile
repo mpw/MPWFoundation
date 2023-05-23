@@ -187,12 +187,20 @@ libMPWFoundation_OBJC_FILES = \
     Collections.subproj/MPWEnumFilter.m \
     Collections.subproj/MPWEnumSelectFilter.m \
     Collections.subproj/NSArrayFiltering.m \
+    Markdown/MPWMarkdownTransformer.m \
+    Markdown/NSDataMarkdown.m \
     GNUstep/ProtocolExtensions.m \
-
 
 
 libMPWFoundation_C_FILES = \
     bytecoding.c \
+    Markdown/autolink.c \
+    Markdown/buffer.c \
+    Markdown/houdini_href_e.c \
+    Markdown/houdini_html_e.c \
+    Markdown/html.c \
+    Markdown/markdown.c \
+    Markdown/stack.c \
 
 
 

@@ -97,6 +97,12 @@
     return attributes[NSFileModificationDate];
 }
 
+-(long)length
+{
+    NSDictionary *attributes=[[NSFileManager defaultManager] attributesOfItemAtPath:[self path] error:NULL];
+    return [attributes[NSFileSize] longValue];
+}
+
 -(NSTimeInterval)lastModifiedTime
 {
     return [[self lastModifiedDate] timeIntervalSinceReferenceDate];
@@ -143,14 +149,6 @@
     return [NSString stringWithFormat:@"file:%@",[self path]];
 }
 
-//-(void)mkdir          --- don't have -parent, so no sense to keep this
-//{
-//    if ( ![self isBound] ) {
-//        [[self parent] mkdir];
-//        [[NSFileManager defaultManager] createDirectoryAtPath:[self path] withIntermediateDirectories:YES attributes:nil error:nil];
-//    }
-//}
-
 -mkdir:(NSString*)additionalPath
 {
     NSString *fullPath=[[self path] stringByAppendingPathComponent:additionalPath];
@@ -162,7 +160,7 @@
     return [[self store] bindingForReference:fullPath inContext:nil];
 }
 
--(void)open
+-(void)openInWorkspace
 {
     [[NSClassFromString(@"NSWorkspace") sharedWorkspace] openURL:[self URL]];
 }

@@ -105,6 +105,8 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
 {
     NSMutableArray *result=[NSMutableArray array];
     MPWFileChangesStream *s=[[[MPWFileChangesStream alloc] initWithDirectoryPath:@"/tmp"] autorelease];
+    
+    [s retain];             // FIXME:  workaround for
     s.target=result;
     [s schedule];
     [s start];

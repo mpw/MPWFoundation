@@ -15,7 +15,7 @@
 {
     NSString *r=aReference.path;
     id ref = [[aReference class] referenceWithPath:[r stringByAppendingPathExtension:self.extension]];
-    NSLog(@"mapped ref from '%@' to '%@'",aReference,ref);
+//    NSLog(@"mapped ref from '%@' to '%@'",aReference,ref);
     return ref;
 }
 

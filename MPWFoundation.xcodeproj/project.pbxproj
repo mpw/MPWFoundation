@@ -175,6 +175,42 @@
 		1F4FC9821DF818AF00B35D27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC9811DF818AF00B35D27 /* Assets.xcassets */; };
 		1F4FC9851DF818AF00B35D27 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC9831DF818AF00B35D27 /* LaunchScreen.storyboard */; };
 		1F51F33B17F0E75800DFE855 /* archiving-times-and-sizes.csv in Resources */ = {isa = PBXBuildFile; fileRef = 1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */; };
+		1F5335F32A1D284600AA1754 /* stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E12A1D284500AA1754 /* stack.c */; };
+		1F5335F42A1D284600AA1754 /* stack.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E12A1D284500AA1754 /* stack.c */; };
+		1F5335F52A1D284600AA1754 /* houdini_href_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E22A1D284500AA1754 /* houdini_href_e.c */; };
+		1F5335F62A1D284600AA1754 /* houdini_href_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E22A1D284500AA1754 /* houdini_href_e.c */; };
+		1F5335F72A1D284600AA1754 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E32A1D284600AA1754 /* markdown.c */; };
+		1F5335F82A1D284600AA1754 /* markdown.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E32A1D284600AA1754 /* markdown.c */; };
+		1F5335F92A1D284600AA1754 /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E42A1D284600AA1754 /* buffer.h */; };
+		1F5335FA2A1D284600AA1754 /* buffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E42A1D284600AA1754 /* buffer.h */; };
+		1F5335FB2A1D284600AA1754 /* html_blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E52A1D284600AA1754 /* html_blocks.h */; };
+		1F5335FC2A1D284600AA1754 /* html_blocks.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E52A1D284600AA1754 /* html_blocks.h */; };
+		1F5335FD2A1D284600AA1754 /* autolink.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E62A1D284600AA1754 /* autolink.h */; };
+		1F5335FE2A1D284600AA1754 /* autolink.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E62A1D284600AA1754 /* autolink.h */; };
+		1F5335FF2A1D284600AA1754 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E72A1D284600AA1754 /* autolink.c */; };
+		1F5336002A1D284600AA1754 /* autolink.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335E72A1D284600AA1754 /* autolink.c */; };
+		1F5336012A1D284600AA1754 /* html.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E82A1D284600AA1754 /* html.h */; };
+		1F5336022A1D284600AA1754 /* html.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E82A1D284600AA1754 /* html.h */; };
+		1F5336032A1D284600AA1754 /* stack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E92A1D284600AA1754 /* stack.h */; };
+		1F5336042A1D284600AA1754 /* stack.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335E92A1D284600AA1754 /* stack.h */; };
+		1F5336052A1D284600AA1754 /* MPWMarkdownTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EA2A1D284600AA1754 /* MPWMarkdownTransformer.h */; };
+		1F5336062A1D284600AA1754 /* MPWMarkdownTransformer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EA2A1D284600AA1754 /* MPWMarkdownTransformer.h */; };
+		1F5336072A1D284600AA1754 /* houdini.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EB2A1D284600AA1754 /* houdini.h */; };
+		1F5336082A1D284600AA1754 /* houdini.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EB2A1D284600AA1754 /* houdini.h */; };
+		1F5336092A1D284600AA1754 /* houdini_html_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335EC2A1D284600AA1754 /* houdini_html_e.c */; };
+		1F53360A2A1D284600AA1754 /* houdini_html_e.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335EC2A1D284600AA1754 /* houdini_html_e.c */; };
+		1F53360B2A1D284600AA1754 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335ED2A1D284600AA1754 /* buffer.c */; };
+		1F53360C2A1D284600AA1754 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335ED2A1D284600AA1754 /* buffer.c */; };
+		1F53360D2A1D284600AA1754 /* html.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335EE2A1D284600AA1754 /* html.c */; };
+		1F53360E2A1D284600AA1754 /* html.c in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335EE2A1D284600AA1754 /* html.c */; };
+		1F53360F2A1D284600AA1754 /* NSDataMarkdown.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EF2A1D284600AA1754 /* NSDataMarkdown.h */; };
+		1F5336102A1D284600AA1754 /* NSDataMarkdown.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335EF2A1D284600AA1754 /* NSDataMarkdown.h */; };
+		1F5336112A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335F02A1D284600AA1754 /* MPWMarkdownTransformer.m */; };
+		1F5336122A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335F02A1D284600AA1754 /* MPWMarkdownTransformer.m */; };
+		1F5336132A1D284600AA1754 /* markdown.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335F12A1D284600AA1754 /* markdown.h */; };
+		1F5336142A1D284600AA1754 /* markdown.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5335F12A1D284600AA1754 /* markdown.h */; };
+		1F5336152A1D284600AA1754 /* NSDataMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335F22A1D284600AA1754 /* NSDataMarkdown.m */; };
+		1F5336162A1D284600AA1754 /* NSDataMarkdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5335F22A1D284600AA1754 /* NSDataMarkdown.m */; };
 		1F54A15B209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F54A15C209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F54A15D209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1379,6 +1415,24 @@
 		1F4FC98F1DF818AF00B35D27 /* TestMPWFoundationUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestMPWFoundationUITests.m; sourceTree = "<group>"; };
 		1F4FC9911DF818AF00B35D27 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F51F33A17F0E75800DFE855 /* archiving-times-and-sizes.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "archiving-times-and-sizes.csv"; sourceTree = "<group>"; };
+		1F5335E12A1D284500AA1754 /* stack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = stack.c; sourceTree = "<group>"; };
+		1F5335E22A1D284500AA1754 /* houdini_href_e.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = houdini_href_e.c; sourceTree = "<group>"; };
+		1F5335E32A1D284600AA1754 /* markdown.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = markdown.c; sourceTree = "<group>"; };
+		1F5335E42A1D284600AA1754 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		1F5335E52A1D284600AA1754 /* html_blocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html_blocks.h; sourceTree = "<group>"; };
+		1F5335E62A1D284600AA1754 /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = autolink.h; sourceTree = "<group>"; };
+		1F5335E72A1D284600AA1754 /* autolink.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = autolink.c; sourceTree = "<group>"; };
+		1F5335E82A1D284600AA1754 /* html.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = html.h; sourceTree = "<group>"; };
+		1F5335E92A1D284600AA1754 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		1F5335EA2A1D284600AA1754 /* MPWMarkdownTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWMarkdownTransformer.h; sourceTree = "<group>"; };
+		1F5335EB2A1D284600AA1754 /* houdini.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = houdini.h; sourceTree = "<group>"; };
+		1F5335EC2A1D284600AA1754 /* houdini_html_e.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = houdini_html_e.c; sourceTree = "<group>"; };
+		1F5335ED2A1D284600AA1754 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = buffer.c; sourceTree = "<group>"; };
+		1F5335EE2A1D284600AA1754 /* html.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = html.c; sourceTree = "<group>"; };
+		1F5335EF2A1D284600AA1754 /* NSDataMarkdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataMarkdown.h; sourceTree = "<group>"; };
+		1F5335F02A1D284600AA1754 /* MPWMarkdownTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWMarkdownTransformer.m; sourceTree = "<group>"; };
+		1F5335F12A1D284600AA1754 /* markdown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markdown.h; sourceTree = "<group>"; };
+		1F5335F22A1D284600AA1754 /* NSDataMarkdown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataMarkdown.m; sourceTree = "<group>"; };
 		1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWArrayFlattenStream.h; sourceTree = "<group>"; };
 		1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWArrayFlattenStream.m; sourceTree = "<group>"; };
 		1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWPathRelativeStore.h; sourceTree = "<group>"; };
@@ -1753,6 +1807,7 @@
 				1FEFBD392428C784001E44B2 /* Plist */,
 				1F1E09C2269D933300567AF6 /* SQLite */,
 				1FED489B242633F500AF2FAD /* XML */,
+				1F5335E02A1D27CA00AA1754 /* Markdown */,
 				1F8856CD2427B27E008950E8 /* JSON */,
 				07DF19A1006686DDC35ADD82 /* Threading */,
 				07DF195D006686DDC35ADD82 /* Other Sources */,
@@ -2123,6 +2178,31 @@
 				1F4FC9911DF818AF00B35D27 /* Info.plist */,
 			);
 			path = TestMPWFoundationUITests;
+			sourceTree = "<group>";
+		};
+		1F5335E02A1D27CA00AA1754 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				1F5335EB2A1D284600AA1754 /* houdini.h */,
+				1F5335E22A1D284500AA1754 /* houdini_href_e.c */,
+				1F5335EC2A1D284600AA1754 /* houdini_html_e.c */,
+				1F5335E72A1D284600AA1754 /* autolink.c */,
+				1F5335E62A1D284600AA1754 /* autolink.h */,
+				1F5335EE2A1D284600AA1754 /* html.c */,
+				1F5335E52A1D284600AA1754 /* html_blocks.h */,
+				1F5335E82A1D284600AA1754 /* html.h */,
+				1F5335ED2A1D284600AA1754 /* buffer.c */,
+				1F5335E42A1D284600AA1754 /* buffer.h */,
+				1F5335E32A1D284600AA1754 /* markdown.c */,
+				1F5335F12A1D284600AA1754 /* markdown.h */,
+				1F5335E12A1D284500AA1754 /* stack.c */,
+				1F5335E92A1D284600AA1754 /* stack.h */,
+				1F5335EF2A1D284600AA1754 /* NSDataMarkdown.h */,
+				1F5335EA2A1D284600AA1754 /* MPWMarkdownTransformer.h */,
+				1F5335F02A1D284600AA1754 /* MPWMarkdownTransformer.m */,
+				1F5335F22A1D284600AA1754 /* NSDataMarkdown.m */,
+			);
+			path = Markdown;
 			sourceTree = "<group>";
 		};
 		1F7045B022313082005ED7FB /* MPWFoundationUI */ = {
@@ -2523,8 +2603,10 @@
 				1FCAD0FC29BA072B00228DB3 /* MPWSysctlStore.h in Headers */,
 				1FE37C04196976C500C9A378 /* AccessorMacros.h in Headers */,
 				1F846B5129D6D00F001BAC41 /* MPWExtensionStore.h in Headers */,
+				1F5335FA2A1D284600AA1754 /* buffer.h in Headers */,
 				1FA869C720E8E01200920279 /* MPWCachingStore.h in Headers */,
 				1F81BF9C19698F3A0066DF43 /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
+				1F5335FE2A1D284600AA1754 /* autolink.h in Headers */,
 				1FA869D720EBC7FC00920279 /* MPWRESTOperation.h in Headers */,
 				1FEFBD332427F8C2001E44B2 /* MPWXmlAppleProplistReader.h in Headers */,
 				1F313D631CE9DE00002104E4 /* MPWObjectCreatorStream.h in Headers */,
@@ -2543,6 +2625,7 @@
 				1FE37C09196976C500C9A378 /* PhoneGeometry.h in Headers */,
 				1FED48BE242634CC00AF2FAD /* MPWXmlAttributes.h in Headers */,
 				1FE37C3C1969773C00C9A378 /* MPWIdentityDictionary.h in Headers */,
+				1F5335FC2A1D284600AA1754 /* html_blocks.h in Headers */,
 				1F846B4C29D6CF1E001BAC41 /* MPWExtensionAdder.h in Headers */,
 				1FED489F242634AE00AF2FAD /* MPWXmlParser.h in Headers */,
 				1FE37C26196976C500C9A378 /* MPWMsgExpression.h in Headers */,
@@ -2567,6 +2650,7 @@
 				1FE37C12196976C500C9A378 /* MPWIgnoreUnknownTrampoline.h in Headers */,
 				1FE37C2B196976C500C9A378 /* MPWKVCSoftPointer.h in Headers */,
 				1FE37C1C196976C500C9A378 /* CodingAdditions.h in Headers */,
+				1F5336062A1D284600AA1754 /* MPWMarkdownTransformer.h in Headers */,
 				1F81BF9019698C410066DF43 /* NSInvocationAdditions.h in Headers */,
 				1F81BF9B19698F330066DF43 /* MPWBinaryPlist.h in Headers */,
 				1F783B07256A73AE00BE8654 /* MPWPropertyStore.h in Headers */,
@@ -2583,6 +2667,7 @@
 				1F080E521E4F13F600B78EF3 /* MPWFDStreamSource.h in Headers */,
 				1FE37C1D196976C500C9A378 /* MPWObjectCache.h in Headers */,
 				1F2DCFCF1ACB50F3004A39FB /* MPWConvertFromJSONStream.h in Headers */,
+				1F5336042A1D284600AA1754 /* stack.h in Headers */,
 				1FFA48A71ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */,
 				1F81BF9A19698EE60066DF43 /* MPWObject_fastrc.h in Headers */,
 				1F5BBA2E2943801700C3D345 /* MPWBlock.h in Headers */,
@@ -2611,6 +2696,7 @@
 				1F81BF9819698E9A0066DF43 /* MPWFilterStream.h in Headers */,
 				1F7FCD06264570E6008B6D1A /* NSRunLoopAdditions.h in Headers */,
 				1FB6EB5A1DDA28B1002B82A5 /* MPWDelayStream.h in Headers */,
+				1F5336082A1D284600AA1754 /* houdini.h in Headers */,
 				1F6244C82148557D00BB00C4 /* MPWMergingStore.h in Headers */,
 				1FE37C16196976C500C9A378 /* MPWObject.h in Headers */,
 				1FE37C1F196976C500C9A378 /* MPWScanner.h in Headers */,
@@ -2643,6 +2729,7 @@
 				1F7FCD39264ECE24008B6D1A /* MPWPathMapper.h in Headers */,
 				1F2DCFE11ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */,
 				1FCBEDDE1CFC2DA800F2EE0E /* NSThreadWaiting.h in Headers */,
+				1F5336102A1D284600AA1754 /* NSDataMarkdown.h in Headers */,
 				1FB2C88D217760DF0061C3F9 /* MPWJSONWriter.h in Headers */,
 				1FE37C2E1969770000C9A378 /* MPWByteStream.h in Headers */,
 				1FE37C441969773C00C9A378 /* MPWEnumeratorBase.h in Headers */,
@@ -2659,12 +2746,14 @@
 				1F6A72682673E352003A5B5C /* MPWBytesToLines.h in Headers */,
 				1FE37C3D1969773C00C9A378 /* MPWRealArray.h in Headers */,
 				1FE37C3F1969773C00C9A378 /* MPWUShortArray.h in Headers */,
+				1F5336142A1D284600AA1754 /* markdown.h in Headers */,
 				1FE37C341969770E00C9A378 /* MPWFuture.h in Headers */,
 				1FE37C10196976C500C9A378 /* MPWDirectForwardingTrampoline.h in Headers */,
 				1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
 				1F1BEDB9213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */,
 				1FE37C03196974BC00C9A378 /* MPWFoundation.h in Headers */,
 				1FE37C471969773C00C9A378 /* MPWFakedReturnMethodSignature.h in Headers */,
+				1F5336022A1D284600AA1754 /* html.h in Headers */,
 				1F02B99A288EC5EE0023588A /* MPWStreamableBinding.h in Headers */,
 				1FE37C51196978CA00C9A378 /* MPWBinaryPListWriter.h in Headers */,
 				1FED48A2242634AE00AF2FAD /* MPWMAXParser.h in Headers */,
@@ -2881,6 +2970,7 @@
 				1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */,
 				1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */,
 				1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */,
+				1F5336012A1D284600AA1754 /* html.h in Headers */,
 				1FF8FDB809B49D0100652476 /* NSNil.h in Headers */,
 				1FF8FDB909B49D0100652476 /* MPWFoundation.h in Headers */,
 				1FC70F8320CE8770008718B2 /* MPWURLBasedStore.h in Headers */,
@@ -2926,10 +3016,12 @@
 				1F04A53821D2E01500E19C3F /* MPWInterval.h in Headers */,
 				1FF8FDCC09B49D0100652476 /* MPWFilterStream.h in Headers */,
 				1FF8FDCD09B49D0100652476 /* MPWLZWStream.h in Headers */,
+				1F5336052A1D284600AA1754 /* MPWMarkdownTransformer.h in Headers */,
 				1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */,
 				1F54A15B209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */,
 				1F89EB98223FE7E5000A82D6 /* MPWFileBinding.h in Headers */,
 				1F185BED26622CA800BA8219 /* MPWResource.h in Headers */,
+				1F5335F92A1D284600AA1754 /* buffer.h in Headers */,
 				1FF8FDCE09B49D0100652476 /* MPWRealArray.h in Headers */,
 				1FF8FDCF09B49D0100652476 /* MPWEnumFilter.h in Headers */,
 				1FF8FDD009B49D0100652476 /* MPWUShortArray.h in Headers */,
@@ -2956,6 +3048,7 @@
 				1FF8FDDA09B49D0100652476 /* MPWByteStream.h in Headers */,
 				1F6A726F2673F813003A5B5C /* MPWPrintLiner.h in Headers */,
 				1FA869D620EBC7FC00920279 /* MPWRESTOperation.h in Headers */,
+				1F5336072A1D284600AA1754 /* houdini.h in Headers */,
 				1FA8FC35273C21E8005E2824 /* MPWPlistStore.h in Headers */,
 				1F9F8D6B263F387A003019DC /* MPWFixedValueSource.h in Headers */,
 				1FED48CC242634CC00AF2FAD /* MPWTagHandler.h in Headers */,
@@ -2977,6 +3070,7 @@
 				1FFE3AA820B3296800E65B93 /* MPWBinding.h in Headers */,
 				1FF8FDE709B49D0100652476 /* MPWSoftPointerProxy.h in Headers */,
 				1FF8FDE809B49D0100652476 /* MPWIntArray.h in Headers */,
+				1F5336132A1D284600AA1754 /* markdown.h in Headers */,
 				1FF8FDE909B49D0100652476 /* MPWObjectReference.h in Headers */,
 				1FF8FDEA09B49D0100652476 /* MPWIdentityDictionary.h in Headers */,
 				1F5BBA2D2943801700C3D345 /* MPWBlock.h in Headers */,
@@ -3001,7 +3095,10 @@
 				1FB2C88C217760DF0061C3F9 /* MPWJSONWriter.h in Headers */,
 				1FC97CDD0BB0A8B900F8CB51 /* MPWNumber.h in Headers */,
 				1FC97CF00BB0A9B200F8CB51 /* MPWInteger.h in Headers */,
+				1F5336032A1D284600AA1754 /* stack.h in Headers */,
 				1FC97D010BB0AB8B00F8CB51 /* MPWFloat.h in Headers */,
+				1F5335FD2A1D284600AA1754 /* autolink.h in Headers */,
+				1F53360F2A1D284600AA1754 /* NSDataMarkdown.h in Headers */,
 				1FA1D3E90BB9DACA0097A924 /* MPWFastInvocation.h in Headers */,
 				1FA1D4580BBAAD520097A924 /* MPWRusage.h in Headers */,
 				1FA74A0525F642DC001AA6A8 /* MPWDistributedNotificationStream.h in Headers */,
@@ -3014,6 +3111,7 @@
 				1FC35CCB254BF05B005D04F7 /* MPWValueArray.h in Headers */,
 				1F02B999288EC5EE0023588A /* MPWStreamableBinding.h in Headers */,
 				1FB93A951292012200D9D630 /* PhoneGeometry.h in Headers */,
+				1F5335FB2A1D284600AA1754 /* html_blocks.h in Headers */,
 				1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */,
 				1FFE3AA020B3285C00E65B93 /* MPWReference.h in Headers */,
 				1F1BEDB0213BE769004B4947 /* MPWFilter.h in Headers */,
@@ -3578,6 +3676,7 @@
 				1FC35CCF254BF05B005D04F7 /* MPWValueArray.m in Sources */,
 				1F840DEA193F50E400589595 /* MPWEnumSelectFilter.m in Sources */,
 				1FA869DA20EBC7FC00920279 /* MPWRESTOperation.m in Sources */,
+				1F5335F62A1D284600AA1754 /* houdini_href_e.c in Sources */,
 				1F840DEB193F50E400589595 /* MPWIdentityDictionary.m in Sources */,
 				1FC70F8720CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
 				1FED48E6242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
@@ -3585,6 +3684,7 @@
 				1FFE3AC320B34D2000E65B93 /* MPWDiskStore.m in Sources */,
 				1F840DED193F50E400589595 /* MPWEnumFilter.m in Sources */,
 				1F3F67932085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */,
+				1F5335F42A1D284600AA1754 /* stack.c in Sources */,
 				1FCBEDE11CFC2DA800F2EE0E /* NSThreadWaiting.m in Sources */,
 				1FA869CA20E8E01200920279 /* MPWCachingStore.m in Sources */,
 				1F9726A91D00397800D76F3A /* MPWURLCall.m in Sources */,
@@ -3601,13 +3701,16 @@
 				1F22E01A1A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */,
 				1F840DF6193F50E400589595 /* MPWFakedReturnMethodSignature.m in Sources */,
 				1F840DF7193F50E400589595 /* NSObjectFiltering.m in Sources */,
+				1F5335F82A1D284600AA1754 /* markdown.c in Sources */,
 				1F840DF8193F50E400589595 /* NSArrayFiltering.m in Sources */,
 				1F840DF9193F50E400589595 /* MPWIntArray.m in Sources */,
 				1F840DFA193F50E400589595 /* MPWSmallStringTable.m in Sources */,
 				1F7A22871B786F9200FF6C03 /* MPWPoint.m in Sources */,
+				1F53360A2A1D284600AA1754 /* houdini_html_e.c in Sources */,
 				1FA2969A1CF74A6500F19039 /* MPWPipeline.m in Sources */,
 				1F840DFB193F50E400589595 /* MPWDelimitedTable.m in Sources */,
 				1F1BEDCC213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */,
+				1F5336122A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */,
 				1F1E09D1269D968200567AF6 /* MPWSQLTable.m in Sources */,
 				1F840DFD193F50E400589595 /* MPWWriteStream.m in Sources */,
 				1FA869D220EBC01500920279 /* MPWLoggingStore.m in Sources */,
@@ -3655,6 +3758,7 @@
 				1F840DC9193F50AC00589595 /* CodingAdditions.m in Sources */,
 				1F840DCA193F50AC00589595 /* MPWObjectCache.m in Sources */,
 				1FCAD0FF29BA072B00228DB3 /* MPWSysctlStore.m in Sources */,
+				1F5336162A1D284600AA1754 /* NSDataMarkdown.m in Sources */,
 				1F6E65EA25C1C873001E6A0E /* MPWExternalFilter.m in Sources */,
 				1F840DCB193F50AC00589595 /* NSRectAdditions.m in Sources */,
 				1F1BEDB4213BE769004B4947 /* MPWFilter.m in Sources */,
@@ -3683,6 +3787,7 @@
 				1F846B4A29D6CF19001BAC41 /* MPWExtensionAdder.m in Sources */,
 				1FB6EB5D1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
 				1FB0A8081E520FC000E552A0 /* MPWSocketStream.m in Sources */,
+				1F5336002A1D284600AA1754 /* autolink.c in Sources */,
 				1F840DD7193F50AC00589595 /* MPWKVCSoftPointer.m in Sources */,
 				1F840DD8193F50AC00589595 /* MPWSoftPointerProxy.m in Sources */,
 				1F32EC8821456B800074C15A /* MPWWriteBackCache.m in Sources */,
@@ -3708,7 +3813,9 @@
 				1F840DDE193F50AC00589595 /* MPWFloat.m in Sources */,
 				1F840DDF193F50AC00589595 /* MPWInteger.m in Sources */,
 				1F840DE0193F50AC00589595 /* MPWFastInvocation.m in Sources */,
+				1F53360E2A1D284600AA1754 /* html.c in Sources */,
 				1F2DCFE41ACB50F3004A39FB /* MPWURLFetchStream.m in Sources */,
+				1F53360C2A1D284600AA1754 /* buffer.c in Sources */,
 				1FB2C890217760DF0061C3F9 /* MPWJSONWriter.m in Sources */,
 				1FB7B5E41E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */,
 				1F49BBBB20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
@@ -3908,10 +4015,12 @@
 				1FA8FC2B27347E5C005E2824 /* MPWExtensionMapper.m in Sources */,
 				1F49BBBA20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FF8FDF809B49D0100652476 /* MPWObject.m in Sources */,
+				1F5335FF2A1D284600AA1754 /* autolink.c in Sources */,
 				1FED48C9242634CC00AF2FAD /* MPWTagAction.m in Sources */,
 				1F783B17256B0E1100BE8654 /* SwiftValueStore.swift in Sources */,
 				1FF8FDF909B49D0100652476 /* NSInvocationAdditions.m in Sources */,
 				1FF8FDFA09B49D0100652476 /* NSStringAdditions.m in Sources */,
+				1F5336152A1D284600AA1754 /* NSDataMarkdown.m in Sources */,
 				1F32EC962146AB710074C15A /* MPWQueue.m in Sources */,
 				1FF8FDFB09B49D0100652476 /* CodingAdditions.m in Sources */,
 				1FF8FDFC09B49D0100652476 /* MPWObjectCache.m in Sources */,
@@ -3965,6 +4074,7 @@
 				1FED48E5242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
 				1FF8FE1109B49D0100652476 /* MPWWriteStream.m in Sources */,
 				1FF8FE1209B49D0100652476 /* MPWByteStream.m in Sources */,
+				1F5336112A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */,
 				1FF8FE1409B49D0100652476 /* MPWNeXTPListWriter.m in Sources */,
 				1FF6590D24957007002371E9 /* MPWStreamQLite.m in Sources */,
 				1FF8FE1509B49D0100652476 /* MPWFlattenStream.m in Sources */,
@@ -3983,6 +4093,7 @@
 				1F02B99C288EC5EE0023588A /* MPWStreamableBinding.m in Sources */,
 				1F846B4929D6B7DF001BAC41 /* MPWExtensionAdder.m in Sources */,
 				1FF8FE1E09B49D0200652476 /* MPWIdentityDictionary.m in Sources */,
+				1F53360D2A1D284600AA1754 /* html.c in Sources */,
 				1FB0A8071E520FB600E552A0 /* MPWSocketStream.m in Sources */,
 				1FF8FE1F09B49D0200652476 /* MPWMessageCatcher.m in Sources */,
 				1FA74A0825F642DC001AA6A8 /* MPWDistributedNotificationStream.m in Sources */,
@@ -3994,6 +4105,7 @@
 				1FF8FE2209B49D0200652476 /* MPWIgnoreUnknownTrampoline.m in Sources */,
 				1F74D049299D09B7004A3DF0 /* MPWTCPStore.m in Sources */,
 				1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */,
+				1F5335F32A1D284600AA1754 /* stack.c in Sources */,
 				1FFA48A81ACDEA51002FF8EA /* MPWBlockTargetStream.m in Sources */,
 				1F6A725A26735282003A5B5C /* MPWURLSchemeResolver.m in Sources */,
 				1F313D641CE9DE00002104E4 /* MPWObjectCreatorStream.m in Sources */,
@@ -4025,8 +4137,11 @@
 				1FB7B5E31E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */,
 				1FA1D4590BBAAD520097A924 /* MPWRusage.m in Sources */,
 				1F6244CA2148557D00BB00C4 /* MPWMergingStore.m in Sources */,
+				1F5335F72A1D284600AA1754 /* markdown.c in Sources */,
 				1F1BEDB3213BE769004B4947 /* MPWFilter.m in Sources */,
 				1F6A726A2673E352003A5B5C /* MPWBytesToLines.m in Sources */,
+				1F5335F52A1D284600AA1754 /* houdini_href_e.c in Sources */,
+				1F5336092A1D284600AA1754 /* houdini_html_e.c in Sources */,
 				1FC35CCE254BF05B005D04F7 /* MPWValueArray.m in Sources */,
 				1FE85E37285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */,
 				1F766F6F0BBC5F410038DA7D /* MPWSmallStringTable.m in Sources */,
@@ -4044,6 +4159,7 @@
 				1F75BB9F12D2589800E7ABB4 /* MPWPListBuilder.m in Sources */,
 				1FED48D2242634CC00AF2FAD /* MPWXmlAttributes.m in Sources */,
 				1F1BEDCB213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */,
+				1F53360B2A1D284600AA1754 /* buffer.c in Sources */,
 				1F1BEDBB213DCBC5004B4947 /* MPWSwitchingStore.m in Sources */,
 				1F78214912D953EB00E2DB02 /* MPWBlockInvocation.m in Sources */,
 				1FEFBD242427F88E001E44B2 /* MPWObjectBuilder.m in Sources */,
