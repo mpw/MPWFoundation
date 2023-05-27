@@ -207,4 +207,4 @@ CONVENIENCE( name##initsel , init##initsel ) \
 #endif
 
 #define let __auto_type const
-#define var __auto_type
+// #define var __auto_type
