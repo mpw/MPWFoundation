@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 	vim build-essential  \
 	libreadline6-dev \
 	libedit-dev \
-	libmicrohttpd-dev \
+	libmicrohttpd-dev
 
 
 RUN useradd -ms /bin/bash gnustep
