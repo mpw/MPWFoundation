@@ -44,7 +44,7 @@
     return [self isEqual:other];
 }
 
-- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
+-(instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
     return nil;
 }
 

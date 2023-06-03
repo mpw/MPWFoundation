@@ -13,9 +13,13 @@
 CONVENIENCEANDINIT( component, WithString:(NSString*)s)
 {
     self=[super init];
-    if ( [s hasPrefix:@"*:"]) {
+    if ( [s hasPrefix:@"*"]) {
         self.isWildcard=YES;
-        self.parameter=[s substringFromIndex:2];
+        if ( [s hasPrefix:@"*:"]) {
+            self.parameter=[s substringFromIndex:2];
+        } else {
+            self.parameter=nil;
+        }
     } else if ( [s hasPrefix:@":"]) {
         self.parameter=[s substringFromIndex:1];
     } else {
@@ -41,7 +45,7 @@ CONVENIENCEANDINIT( component, WithString:(NSString*)s)
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: propertyPath: name: %@ paramater: %@>",[self class],self,self.name,self.parameter];
+    return [NSString stringWithFormat:@"<%@:%p: propertyPath: name: %@ paramater: %@ wildcard: %d>",[self class],self,self.name,self.parameter,self.isWildcard];
 }
 
 -(void)dealloc
