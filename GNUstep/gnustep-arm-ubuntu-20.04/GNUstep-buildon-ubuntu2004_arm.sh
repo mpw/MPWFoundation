@@ -42,9 +42,9 @@ sudo apt-get install libcurl4-gnutls-dev
 export CC=clang
 export CXX=clang++
 
-wget --no-clobber https://github.com/Kitware/CMake/releases/download/v3.15.5/cmake-3.15.5.tar.gz
-tar xfz cmake-3.15.5.tar.gz
-cd cmake-3.15.5
+wget --no-clobber https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4.tar.gz
+tar xfz cmake-3.26.4.tar.gz
+cd cmake-3.26.4
 ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
 make -j2
 sudo make install
@@ -150,17 +150,6 @@ sudo -E make install
 
 showPrompt
 
-# Build GNUstep corebase (CoreFoundation)
-echo -e "\n\n"
-echo -e "${GREEN}Building GNUstep-corebase...${NC}"
-cd ../libs-corebase/
-./configure
-make -j8
-sudo -E make install
-
-
-showPrompt
-
 # Build GNUstep base
 echo -e "\n\n"
 echo -e "${GREEN}Building GNUstep-base...${NC}"
@@ -168,6 +157,19 @@ cd ../libs-base/
 ./configure
 make -j8
 sudo -E make install
+
+showPrompt
+
+echo "You need to build corebase manually"
+
+# Build GNUstep corebase (CoreFoundation)
+#echo -e "\n\n"
+#echo -e "${GREEN}Building GNUstep-corebase...${NC}"
+#cd ../libs-corebase/
+#./configure
+#make -j8
+#sudo -E make install
+
 
 
 echo -e "\n\n"

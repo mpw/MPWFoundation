@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y \
     sudo \
     curl \
     inetutils-ping \
+    clang \
+    libssl-dev \
+    pkg-config \
 	vim build-essential  \
 	libreadline6-dev \
 	libedit-dev \
@@ -29,8 +32,11 @@ COPY bashrc /.bashrc
 COPY profile /.profile
 
 COPY GNUstep-buildon-ubuntu2004_arm.sh /home/gnustep/GNUstep-buildon-ubuntu2004_arm.sh
+COPY build-corebase.sh /home/gnustep/build-corebase.sh
 RUN chmod u+x /home/gnustep/GNUstep-buildon-ubuntu2004_arm.sh
+RUN chmod u+x /home/gnustep/build-corebase.sh
 RUN /home/gnustep/GNUstep-buildon-ubuntu2004_arm.sh  
+RUN /home/gnustep/build-corebase.sh
 
 CMD ["bash"]
 
