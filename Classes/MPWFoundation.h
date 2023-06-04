@@ -135,7 +135,6 @@
 #import <MPWFoundation/MPWSFTPStore.h>
 #import <MPWFoundation/MPWStreamableBinding.h>
 #import <MPWFoundation/MPWReferenceTemplate.h>
-#import <MPWFoundation/MPWPRopertyPathComponent.h>
 
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
 #import <MPWFoundation/MPWMASONParser.h>

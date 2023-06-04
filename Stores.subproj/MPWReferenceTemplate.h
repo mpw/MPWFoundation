@@ -11,7 +11,6 @@
 
 @interface MPWReferenceTemplate : NSObject
 
-@property (nonatomic, strong) NSArray *pathComponents;
 @property (readonly) NSString *name;
 @property (readonly) NSArray *formalParameters;
 
