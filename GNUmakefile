@@ -109,7 +109,6 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWWriteBackCache.m \
     Stores.subproj/MPWURLSchemeResolver.m \
     Stores.subproj/MPWURLBinding.m \
-    Stores.subproj/MPWPropertyPathComponent.m \
     Stores.subproj/MPWReferenceTemplate.m \
     Stores.subproj/MPWStreamableBinding.m \
     Streams.subproj/MPWByteStream.m \
