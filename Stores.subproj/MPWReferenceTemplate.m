@@ -8,56 +8,50 @@
 #import "MPWReferenceTemplate.h"
 #import <MPWFoundation/MPWFoundation.h>
 
-typedef struct {
-    BOOL isWildcard;
-    NSString *segmentName;
-    NSString *parameterName;
-} ReferenceTemplateComponent;
-
-typedef struct {
-    int count;
-    ReferenceTemplateComponent components[0];
-} ReferenceTemplateComponents;
-
 @implementation MPWReferenceTemplate
 {
     ReferenceTemplateComponents *components;
+    NSArray *formalParameters;
 }
 
+lazyAccessor(NSArray*, formalParameters, setFormalParamters, createFormalParameters)
 
+ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )
+{
+    NSArray *pathComponents=ref.pathComponents;
+    long count=pathComponents.count;
+    ReferenceTemplateComponents* components = calloc( sizeof(ReferenceTemplateComponents)+sizeof(ReferenceTemplateComponent)*count,1);
+    components->count=count;
+    for (int i=0;i<count;i++) {
+        NSString *s=pathComponents[i];
+        ReferenceTemplateComponent *component=&components->components[i];
+        if ( [s hasPrefix:@"*"]) {
+            component->isWildcard=YES;
+            if ( [s hasPrefix:@"*:"]) {
+                component->parameterName=[[s substringFromIndex:2] retain];
+            } else {
+                component->parameterName=nil;
+            }
+        } else if ( [s hasPrefix:@":"]) {
+            component->parameterName=[[s substringFromIndex:1] retain];
+        } else {
+            component->segmentName=[s retain];
+        }
+    }
+    return components;
+}
+
+-initWithComponents:(ReferenceTemplateComponents*)newComponents
+{
+    if (self=[super init]) {
+        components=newComponents;
+    }
+    return self;
+}
 
 CONVENIENCEANDINIT( propertyPath, WithReference:(id <MPWReferencing>)ref)
 {
-    if (self=[super init] ) {
-        NSArray *pathComponents=ref.pathComponents;
-        long count=pathComponents.count;
-        components = calloc( sizeof(ReferenceTemplateComponents)+sizeof(ReferenceTemplateComponent)*count,1);
-        components->count=count;
-        for (int i=0;i<count;i++) {
-            NSString *s=pathComponents[i];
-            ReferenceTemplateComponent *component=&components->components[i];
-            if ( [s hasPrefix:@"*"]) {
-                component->isWildcard=YES;
-                if ( [s hasPrefix:@"*:"]) {
-                    component->parameterName=[[s substringFromIndex:2] retain];
-                } else {
-                    component->parameterName=nil;
-                }
-            } else if ( [s hasPrefix:@":"]) {
-                component->parameterName=[[s substringFromIndex:1] retain];
-            } else {
-                component->segmentName=[s retain];
-            }
-        }
-    } else {
-        [self release];
-    }
-//
-//    NSMutableArray *comps=[NSMutableArray array];
-//    for ( NSString *s in ref.pathComponents) {
-//        [comps addObject:[MPWReferenceTemplateComponent componentWithString:s]];
-//    }
-    return self;
+    return [self initWithComponents:componentsFromReference(ref)];
 }
 
 CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
@@ -131,7 +125,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
     }
 }
 
--(NSArray*)formalParameters
+-(NSArray*)createFormalParameters
 {
     NSMutableArray *parameters=[NSMutableArray array];
     for ( int i=0;i<components->count;i++) {
@@ -178,7 +172,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: %d pathComponents: <tbd>>",[self class],self,components->count];
+    return [NSString stringWithFormat:@"<%@:%p: %ld pathComponents: %@>",[self class],self,components->count,[self name]];
 }
 
 -(void)dealloc

@@ -7,7 +7,21 @@
 
 #import <Foundation/Foundation.h>
 
+
 @protocol MPWReferencing;
+
+typedef struct {
+    BOOL isWildcard;
+    NSString *segmentName;
+    NSString *parameterName;
+} ReferenceTemplateComponent;
+
+typedef struct {
+    long count;
+    ReferenceTemplateComponent components[0];
+} ReferenceTemplateComponents;
+
+ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref );
 
 @interface MPWReferenceTemplate : NSObject
 
