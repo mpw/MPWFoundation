@@ -28,7 +28,7 @@ ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref );
 @property (readonly) NSString *name;
 @property (readonly) NSArray *formalParameters;
 
-+(instancetype)propertyPathWithReference:(id <MPWReferencing>)ref;
++(instancetype)templateWithReference:(id <MPWReferencing>)ref;
 -(instancetype)initWithReference:(id <MPWReferencing>)ref;
 
 -(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref;

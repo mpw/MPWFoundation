@@ -49,12 +49,12 @@ ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )
     return self;
 }
 
-CONVENIENCEANDINIT( propertyPath, WithReference:(id <MPWReferencing>)ref)
+CONVENIENCEANDINIT( template, WithReference:(id <MPWReferencing>)ref)
 {
     return [self initWithComponents:componentsFromReference(ref)];
 }
 
-CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
+CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 {
     MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
 
@@ -177,8 +177,6 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 -(void)dealloc
 {
-//    [_name release];
-//    [_pathComponents release];
     if ( components ) {
         for (int i=0;i<components->count;i++) {
             [components->components[i].parameterName release];
@@ -198,7 +196,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testInitializeWithSingleConstantPath
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello"];
     INTEXPECT([pp count], 1, @"number of components")
     IDEXPECT([pp segmentNameAtIndex:0], @"hello", @"name");
     
@@ -206,7 +204,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testInitializeWithArguments
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/:arg1/world/:arg2"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/:arg2"];
     INTEXPECT([pp count], 4, @"number of components")
     IDEXPECT([pp segmentNameAtIndex:0], @"hello", @"name");
     IDEXPECT([pp parameterNameAtIndex:1], @"arg1", @"arg1");
@@ -217,7 +215,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testInitializeWithWildcard
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/*:remainder"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/*:remainder"];
     INTEXPECT([pp count], 2, @"number of components")
     IDEXPECT([pp segmentNameAtIndex:0], @"hello", @"name");
     IDEXPECT([pp parameterNameAtIndex:1], @"remainder", @"arg1");
@@ -227,7 +225,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testMatchAgainstConstantPath
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/world"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/world"];
     NSDictionary *result=[pp bindingsForMatchedPath:@"hello/world"];
     EXPECTNOTNIL(result,@"got a match");
     INTEXPECT(result.count,0,@"no bound vars");
@@ -238,7 +236,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testMatchAgainstPathWithParameters
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/:arg1/world/:arg2"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/:arg2"];
     NSDictionary *result=[pp bindingsForMatchedPath:@"hello/this/world/cruel"];
     EXPECTNOTNIL(result,@"got a match");
     INTEXPECT(result.count,2,@"two bound vars");
@@ -248,14 +246,14 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testNonMatchTooManyComponentsInProperty
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@":arg1/count"];
+    MPWReferenceTemplate *pp=[self templateWithString:@":arg1/count"];
     NSDictionary *result=[pp bindingsForMatchedPath:@"hello"];
     EXPECTNIL(result,@"no match");
 }
 
 +(void)testMatchAgainstWildcard
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/:arg1/world/*:arg2"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/*:arg2"];
     NSDictionary *result=[pp bindingsForMatchedPath:@"hello/this/world/cruel/remainder"];
     EXPECTNOTNIL(result,@"got a match");
     INTEXPECT(result.count,2,@"two bound vars");
@@ -265,7 +263,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testMatchRootAgainstWildcard
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"*"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"*"];
     NSDictionary *result=[pp bindingsForMatchedPath:@"/"];
     EXPECTNOTNIL(result,@"got a match");
     
@@ -273,7 +271,7 @@ CONVENIENCEANDINIT( propertyPath, WithPathString:(NSString*)path)
 
 +(void)testListFormalParameters
 {
-    MPWReferenceTemplate *pp=[self propertyPathWithPathString:@"hello/:arg1/world/:arg2"];
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/:arg2"];
     NSArray *formalParameters=[pp formalParameters];
     
     INTEXPECT(formalParameters.count,2,@"two parameters");
