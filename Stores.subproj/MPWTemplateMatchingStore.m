@@ -8,6 +8,7 @@
 #import "MPWTemplateMatchingStore.h"
 #import "MPWReferenceTemplate.h"
 
+
 @interface MPWTemplateMatchingStore()
 
 @property (nonatomic, strong)  NSMutableArray<MPWReferenceTemplate*> *templates;
@@ -75,12 +76,33 @@
     EXPECTNIL((store[@"base1/path2"]),@"base path is not flexible");
 }
 
++(void)testEvaluateWithPathParamters
+{
+    MPWTemplateMatchingStore *store=[self store];
+    store[@"base/:param"]=@{};
+    IDEXPECT((store[@"base/path1"]),(@{@"param": @"path1" }),@"simple lookup with parameterised template");
+    IDEXPECT((store[@"base/path2"]),(@{@"param": @"path2" }),@"simple lookup with different parameter");
+    EXPECTNIL((store[@"base1/path2"]),@"base path is not flexible");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testCanMatchSimpleConstant",
        @"testCanMatchParameter",
+       @"testEvaluateWithPathParamters",
 			];
+}
+
+@end
+
+@implementation NSDictionary(evaluation)
+
+-valueWithBindings:(NSDictionary*)bindings
+{
+    NSMutableDictionary *result=[self mutableCopy];
+    [result addEntriesFromDictionary:bindings];
+    return [result autorelease];
 }
 
 @end

@@ -65,13 +65,13 @@ int theFun( id theBlock, int arg ) {
 +(void)testInvocationAsBlock
 {
     MPWBlock *block=[MPWBlock new];
-    [block setFun:theFun];
+    [block setFun:(IMP)theFun];
     intBlock cBlock=(intBlock)block;
     int result=cBlock(5);
     INTEXPECT(result, 28, @"called the block");
 }
 
-int theIdFun( id theBlock, id arg ) {
+id theIdFun( id theBlock, id arg ) {
     return @([arg intValue]+51);
 }
 
@@ -79,8 +79,7 @@ int theIdFun( id theBlock, id arg ) {
 +(void)testBlockValue
 {
     MPWBlock *block=[MPWBlock new];
-    [block setFun:theIdFun];
-    idBlock cBlock=(idBlock)block;
+    [block setFun:(IMP)theIdFun];
     id result=[block value:@(20)];
     IDEXPECT(result, @(71), @"called the block");
 }
