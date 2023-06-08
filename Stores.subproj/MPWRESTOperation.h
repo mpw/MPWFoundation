@@ -18,6 +18,7 @@ typedef NS_ENUM(int, MPWRESTVerb) {
     MPWRESTVerbPATCH,
     MPWRESTVerbDELETE,
     MPWRESTVerbPOST,
+    MPWRESTVerbMAX,
     MPWRESTVerbInvalid = -1
 };
 

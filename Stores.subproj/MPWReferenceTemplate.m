@@ -82,9 +82,11 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     return pathName;
  }
 
--(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref
+
+
+-(NSArray*)parametersForMatchedReference:(id <MPWReferencing>)ref
 {
-    NSMutableDictionary *result=[NSMutableDictionary dictionary];
+    NSMutableArray *result=[NSMutableArray array];
     NSArray *pathComponents=[ref relativePathComponents];
     long pathCount = pathComponents.count;
     BOOL isWild=NO;
@@ -94,6 +96,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             ReferenceTemplateComponent *component=&components->components[i];
             NSString *matcherName=component->segmentName;
             NSString *argName=component->parameterName;
+            NSString *nextMatch=nil;
             
             if ( matcherName ) {
                 if ( ![matcherName isEqualToString:segment]) {
@@ -102,28 +105,46 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             } else if ( argName) {
                 if ( component->isWildcard ) {
                     isWild=YES;
-                    result[argName]=[[pathComponents subarrayWithRange:NSMakeRange(i,pathComponents.count-i)] componentsJoinedByString:@"/"];
-                    break;
+                    nextMatch=[[pathComponents subarrayWithRange:NSMakeRange(i,pathComponents.count-i)] componentsJoinedByString:@"/"];
                 } else {
-                    result[argName]=segment;
+                    nextMatch=segment;
                 }
+            }
+            if (nextMatch) {
+                [result addObject:nextMatch];
+                nextMatch=nil;
             }
         }
     } else if ( [ref isRoot] ) {
         if ( components->count == 1) {
             if (components->components[0].isWildcard) {
                 isWild=YES;
-                result[@"/"]=@[@"/"];
-           }
+            }
         }
     }
-
+    
     if ( isWild || pathComponents.count == components->count) {
         return result;
     } else {
         return nil;
     }
 }
+
+-(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref
+{
+    NSArray *matches = [self parametersForMatchedReference:ref];
+    if ( matches ) {
+        NSArray *parameters=[self formalParameters];
+        if (parameters.count != matches.count){
+            NSLog(@"mismatch, formal: %@  matched: %@ ref: %@  template: %@",
+                  parameters,matches,ref,self);
+        }
+        return [NSDictionary dictionaryWithObjects:matches forKeys:self.formalParameters];
+    } else {
+        return nil;
+    }
+}
+
 
 -(NSArray*)createFormalParameters
 {
@@ -226,10 +247,10 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 +(void)testMatchAgainstConstantPath
 {
     MPWReferenceTemplate *pp=[self templateWithString:@"hello/world"];
-    NSDictionary *result=[pp bindingsForMatchedPath:@"hello/world"];
+    NSArray *result=[pp parametersForMatchedReference:@"hello/world"];
     EXPECTNOTNIL(result,@"got a match");
     INTEXPECT(result.count,0,@"no bound vars");
-    result=[pp bindingsForMatchedPath:@"h"];
+    result=[pp parametersForMatchedReference:@"h"];
     EXPECTNIL(result,@"no match");
     
 }
@@ -237,9 +258,19 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 +(void)testMatchAgainstPathWithParameters
 {
     MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/:arg2"];
-    NSDictionary *result=[pp bindingsForMatchedPath:@"hello/this/world/cruel"];
-    EXPECTNOTNIL(result,@"got a match");
+    NSArray *result=[pp parametersForMatchedReference:@"hello/this/world/cruel"];
     INTEXPECT(result.count,2,@"two bound vars");
+    
+    IDEXPECT(result[0],@"this",@"binding for arg1");
+    IDEXPECT(result[1],@"cruel",@"binding for arg2");
+}
+
++(void)testMatchAgainstPathWithParametersReturningBindings
+{
+    MPWReferenceTemplate *pp=[self templateWithString:@"hello/:arg1/world/:arg2"];
+    NSDictionary *result=[pp bindingsForMatchedReference:@"hello/this/world/cruel"];
+    INTEXPECT(result.count,2,@"two bound vars");
+    
     IDEXPECT(result[@"arg1"],@"this",@"binding for arg1");
     IDEXPECT(result[@"arg2"],@"cruel",@"binding for arg2");
 }
@@ -247,7 +278,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 +(void)testNonMatchTooManyComponentsInProperty
 {
     MPWReferenceTemplate *pp=[self templateWithString:@":arg1/count"];
-    NSDictionary *result=[pp bindingsForMatchedPath:@"hello"];
+    NSArray *result=[pp parametersForMatchedReference:@"hello"];
     EXPECTNIL(result,@"no match");
 }
 
@@ -278,6 +309,23 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     IDEXPECT(formalParameters,(@[ @"arg1", @"arg2"]),@"the parameters");
 }
 
++(void)testListFormalParametersForWildcard
+{
+    MPWReferenceTemplate *pp=[self templateWithString:@"*"];
+    NSArray *formalParameters=[pp formalParameters];
+    
+    INTEXPECT(formalParameters.count,0,@"no parameters specified");
+}
+
++(void)testListFormalParametersForWildcardWithArgname
+{
+    MPWReferenceTemplate *pp=[self templateWithString:@"*:rest"];
+    NSArray *formalParameters=[pp formalParameters];
+    
+    INTEXPECT(formalParameters.count,1,@"no parameters specified");
+    IDEXPECT(formalParameters,(@[ @"rest"]),@"the parameters");
+}
+
 
 +testSelectors
 {
@@ -287,9 +335,12 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
              @"testInitializeWithWildcard",
              @"testMatchAgainstConstantPath",
              @"testMatchAgainstPathWithParameters",
+             @"testMatchAgainstPathWithParametersReturningBindings",
              @"testMatchAgainstWildcard",
-//             @"testMatchRootAgainstWildcard",
+             @"testMatchRootAgainstWildcard",
              @"testListFormalParameters",
+             @"testListFormalParametersForWildcard",
+             @"testListFormalParametersForWildcardWithArgname",
              @"testNonMatchTooManyComponentsInProperty",
     ];
 }
