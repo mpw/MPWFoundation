@@ -32,5 +32,7 @@ ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref );
 -(instancetype)initWithReference:(id <MPWReferencing>)ref;
 
 -(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref;
+-(BOOL)getParameters:(NSString **)params  forMatchedReference:(id <MPWReferencing>)ref;
+-(NSArray*)parametersForMatchedReference:(id <MPWReferencing>)ref;
 
 @end

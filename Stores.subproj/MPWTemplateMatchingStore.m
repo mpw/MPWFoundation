@@ -31,11 +31,11 @@
 {
     for ( long i=0,max=self.templates.count; i<max; i++ ) {
         MPWReferenceTemplate *template = self.templates[i];
-        NSDictionary *bindings = [template bindingsForMatchedReference:aReference];
-        if ( bindings ) {
+        NSArray *params = [template parametersForMatchedReference:aReference];
+        if ( params ) {
             id value = self.values[i];
-            if ( [value respondsToSelector:@selector(valueWithBindings:)]) {
-                value = [value valueWithBindings:bindings];
+            if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
+                value = [value evaluateOnObject:nil parameters:params];
             }
             return value;
         }
@@ -64,7 +64,7 @@
     store[@"key"]=@"value";
     IDEXPECT((store[@"key"]), @"value",@"simple lookup");
     EXPECTNIL((store[@"key1"]),@"simple lookup of non-existent key");
-    EXPECTNIL((store[@"key/path"]),@"simple lookup of non-existent complex");
+    EXPECTNIL((store[@"key/path"]),@"simple lookup of non-existent complex path");
 }
 
 +(void)testCanMatchParameter
@@ -79,9 +79,9 @@
 +(void)testEvaluateWithPathParamters
 {
     MPWTemplateMatchingStore *store=[self store];
-    store[@"base/:param"]=@{};
-    IDEXPECT((store[@"base/path1"]),(@{@"param": @"path1" }),@"simple lookup with parameterised template");
-    IDEXPECT((store[@"base/path2"]),(@{@"param": @"path2" }),@"simple lookup with different parameter");
+    store[@"base/:param"]=@[];
+    IDEXPECT((store[@"base/path1"]),(@[ @"path1" ]),@"simple lookup with parameterised template");
+    IDEXPECT((store[@"base/path2"]),(@[@"path2"] ),@"simple lookup with different parameter");
     EXPECTNIL((store[@"base1/path2"]),@"base path is not flexible");
 }
 
@@ -108,8 +108,11 @@
 @end
 
 
-@implementation NSMutableArray(evaluation)
+@implementation NSArray(evaluation)
 
-
+-evaluateOnObject:target parameters:params
+{
+    return [self arrayByAddingObjectsFromArray:params];
+}
 
 @end

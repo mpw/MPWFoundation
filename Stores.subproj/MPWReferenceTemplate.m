@@ -12,6 +12,7 @@
 {
     ReferenceTemplateComponents *components;
     NSArray *formalParameters;
+    int parameterCount;
 }
 
 lazyAccessor(NSArray*, formalParameters, setFormalParamters, createFormalParameters)
@@ -45,6 +46,13 @@ ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )
 {
     if (self=[super init]) {
         components=newComponents;
+        int paramCount=0;
+        for (int i=0;i<newComponents->count;i++) {
+            if ( newComponents->components[i].parameterName) {
+                paramCount++;
+            }
+        }
+        parameterCount=paramCount;
     }
     return self;
 }
@@ -84,9 +92,9 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 
 
 
--(NSArray*)parametersForMatchedReference:(id <MPWReferencing>)ref
+-(BOOL)getParameters:(NSString **)params  forMatchedReference:(id <MPWReferencing>)ref
 {
-    NSMutableArray *result=[NSMutableArray array];
+    int currentParam=0;
     NSArray *pathComponents=[ref relativePathComponents];
     long pathCount = pathComponents.count;
     BOOL isWild=NO;
@@ -100,7 +108,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             
             if ( matcherName ) {
                 if ( ![matcherName isEqualToString:segment]) {
-                    return nil;
+                    return NO;
                 }
             } else if ( argName) {
                 if ( component->isWildcard ) {
@@ -111,7 +119,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
                 }
             }
             if (nextMatch) {
-                [result addObject:nextMatch];
+                params[currentParam++]=nextMatch;
                 nextMatch=nil;
             }
         }
@@ -124,10 +132,21 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     }
     
     if ( isWild || pathComponents.count == components->count) {
-        return result;
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(NSArray*)parametersForMatchedReference:(id <MPWReferencing>)ref
+{
+    NSString *params[parameterCount+1];
+    if ( [self getParameters:params forMatchedReference:ref] ) {
+        return [NSArray arrayWithObjects:params count:parameterCount];
     } else {
         return nil;
     }
+    
 }
 
 -(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref

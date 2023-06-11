@@ -18,6 +18,11 @@ typedef struct {
     PropertyPathDef defs[0];
 } PropertyPathDefs;
 
+@interface MPWPropertyPathStore()
+
+@end
+
+
 @implementation MPWPropertyPathStore
 
 @end

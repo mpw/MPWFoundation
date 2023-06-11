@@ -362,7 +362,7 @@ typedef id (^idBlock)(id arg );
 {
     va_list ap;
     va_start(ap,target);
-    id result =[self invokeWithTarget:target args:ap];
+    id result = [self invokeWithTarget:target args:ap];
     va_end(ap);
 
     return result;
