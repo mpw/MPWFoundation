@@ -35,7 +35,7 @@
         if ( params ) {
             id value = self.values[i];
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
-                value = [value evaluateOnObject:nil parameters:params];
+                value = [value evaluateOnObject:self.target parameters:params];
             }
             return value;
         }
