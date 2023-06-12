@@ -212,10 +212,6 @@ defineArithOp( div, / )
 	return [[self numberWithInt:0] retain];
 }
 
--objcTypeString {
-	return [NSString stringWithCString:[self objCType] encoding:NSASCIIStringEncoding];
-}
-
 static int fib( int n) {
     if ( n <= 1 ) {
         return n;
@@ -249,6 +245,14 @@ static int fib( int n) {
     }
     return [NSNumber numberWithInt:next];
 
+}
+
+@end
+
+@implementation NSValue(encoding)
+
+-objcTypeString {
+    return [NSString stringWithCString:[self objCType] encoding:NSASCIIStringEncoding];
 }
 
 @end

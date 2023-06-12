@@ -16,8 +16,18 @@
 #endif
 #import "MPWObjectCache.h"
 
+#define MAXARGS  10
 
-@implementation MPWFastInvocation
+@implementation MPWFastInvocation {
+    SEL selector;
+    id    target;
+    int    numargs;
+    id   args[MAXARGS];
+    id    result;
+    IMP0 cached;
+    BOOL useCaching;
+    NSMethodSignature *methodSignature;
+}
 
 CACHING_ALLOC( quickInvocation, 5, YES )
 
@@ -78,10 +88,19 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 #endif
 }
 
+-(void)setIMP:(IMP)newImp
+{
+    cached=newImp;
+}
+
 -(void)setTarget:newTarget
 {
-	[self _setTarget:newTarget];
-	[self recache];
+    BOOL needToRecache=target != newTarget;
+
+    [self _setTarget:newTarget];
+    if (useCaching && needToRecache) {
+        [self recache];
+    }
 }
 
 -(void)setUseCaching:(BOOL)shouldUseCaching
@@ -99,6 +118,15 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 {
 	selector=newSelector;
 	[self recache];
+}
+
+-(id)evaluateOnObject:newTarget parameters:(NSArray*)parameters
+{
+    long paramCount = parameters.count;
+    for (long i=0,max=MIN(MAXARGS,paramCount); i<max;i++) {
+        args[i]=parameters[i];
+    }
+    return [self returnValueAfterInvokingWithTarget:newTarget];
 }
 
 -(void)setArgument:(void*)argbuf atIndex:(NSInteger)anIndex
@@ -134,12 +162,6 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
     }
     va_end(varArgs);
     return [self resultOfInvoking];
-}
-
--(void)invokeWithTarget:aTarget
-{
-    [self setTarget:aTarget];
-    [self resultOfInvoking];
 }
 
 -returnValueAfterInvokingWithTarget:aTarget
@@ -340,6 +362,14 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
     INTEXPECT( (NSInteger)[invocation resultOfInvoking], 'o', @"character at four");
 }
 
++(void)testEvaluateOn
+{
+    NSDictionary *d=@{@"a": @(2), @"b": @(10) };
+    MPWFastInvocation *inv = [d invocationForSelector:@selector(objectForKey:)];
+    IDEXPECT( ([inv evaluateOnObject:d parameters:@[ @"a"]]), @(2), @"evaluate");
+}
+
+
 +testSelectors
 {
 	return [NSArray arrayWithObjects:
@@ -349,9 +379,32 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 				@"testFasterThanNSInvocationWitCaching",
 //				@"testCachingFasterThanNonCaching",
 				@"testCachedInvocationFasterThanMessaging",
-				@"testIntArgAndReturnValue",
+            @"testIntArgAndReturnValue",
+            @"testEvaluateOn",
 				nil];
 }
 
 @end
 
+
+@implementation NSObject(invocations)
+
+-invocationForSelector:(SEL)selector
+{
+    MPWFastInvocation *inv = [MPWFastInvocation invocation];
+    [inv setSelector:selector];
+    [inv setIMP:[self methodForSelector:selector]];
+    [inv setUseCaching:NO];
+    return inv;
+}
+
++instanceInvocationForSelector:(SEL)selector
+{
+    MPWFastInvocation *inv = [MPWFastInvocation invocation];
+    [inv setSelector:selector];
+    [inv setIMP:[self instanceMethodForSelector:selector]];
+    [inv setUseCaching:NO];
+    return inv;
+}
+
+@end

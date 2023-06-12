@@ -10,14 +10,6 @@
 #import <Foundation/Foundation.h>
 
 @interface MPWFastInvocation : MPWObject {
-	SEL selector;
-	id	target;
-	int	numargs;
-	id   args[10];
-	id	result;
-	IMP0 cached;
-	BOOL useCaching;
-    NSMethodSignature *methodSignature;
 	@public
 	IMP0  invokeFun;
 }
