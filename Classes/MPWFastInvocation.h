@@ -9,7 +9,11 @@
 #import <MPWFoundation/MPWObject.h>
 #import <Foundation/Foundation.h>
 
-@interface MPWFastInvocation : MPWObject {
+@protocol MPWEvaluation
+-(id)evaluateOnObject:newTarget parameters:(NSArray*)parameters;
+@end
+
+@interface MPWFastInvocation : MPWObject <MPWEvaluation> {
 	@public
 	IMP0  invokeFun;
 }

@@ -848,9 +848,9 @@
 		1FE85E37285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE85E33285FA38200A0EDD3 /* MPWSFTPStore.m */; };
 		1FE85E38285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE85E33285FA38200A0EDD3 /* MPWSFTPStore.m */; };
 		1FE85E39285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE85E33285FA38200A0EDD3 /* MPWSFTPStore.m */; };
-		1FEBBC4C2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; };
-		1FEBBC4D2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; };
-		1FEBBC4E2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; };
+		1FEBBC4C2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FEBBC4D2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FEBBC4E2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FEBBC4F2A2DF9B60007567F /* MPWTemplateMatchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBC4B2A2DF9B60007567F /* MPWTemplateMatchingStore.m */; };
 		1FEBBC502A2DF9B60007567F /* MPWTemplateMatchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBC4B2A2DF9B60007567F /* MPWTemplateMatchingStore.m */; };
 		1FEBBC512A2DF9B60007567F /* MPWTemplateMatchingStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FEBBC4B2A2DF9B60007567F /* MPWTemplateMatchingStore.m */; };

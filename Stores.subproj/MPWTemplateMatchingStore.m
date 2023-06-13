@@ -7,7 +7,7 @@
 
 #import "MPWTemplateMatchingStore.h"
 #import "MPWReferenceTemplate.h"
-
+#import "MPWFastInvocation.h"
 
 @interface MPWTemplateMatchingStore()
 
@@ -92,17 +92,6 @@
        @"testCanMatchParameter",
        @"testEvaluateWithPathParamters",
 			];
-}
-
-@end
-
-@implementation NSDictionary(evaluation)
-
--valueWithBindings:(NSDictionary*)bindings
-{
-    NSMutableDictionary *result=[self mutableCopy];
-    [result addEntriesFromDictionary:bindings];
-    return [result autorelease];
 }
 
 @end

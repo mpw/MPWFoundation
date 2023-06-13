@@ -15,8 +15,5 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol MPWEValuation
--valueWithBindings:(NSDictionary*)bindings;
-@end
 
 NS_ASSUME_NONNULL_END
