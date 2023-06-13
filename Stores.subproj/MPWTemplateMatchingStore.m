@@ -29,17 +29,17 @@
 
 -(id)at:(id<MPWReferencing>)aReference
 {
-    NSLog(@"at: %@",aReference);
+//    NSLog(@"at: %@",aReference);
     for ( long i=0,max=self.templates.count; i<max; i++ ) {
-        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
+//        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
         MPWReferenceTemplate *template = self.templates[i];
         NSArray *params = [template parametersForMatchedReference:aReference];
         if ( params ) {
-            NSLog(@"match at %ld",i);
+//            NSLog(@"match at %ld",i);
             id value = self.values[i];
 //            NSLog(@"got value: %@",value);
             if ( self.useParam ) {
-                NSLog(@"use additional param: %@",self.additionalParam);
+//                NSLog(@"use additional param: %@",self.additionalParam);
                 params = [params arrayByAddingObject:self.additionalParam];
             }
             if ( self.addRef) {
@@ -83,6 +83,20 @@
     EXPECTNIL((store[@"key/path"]),@"simple lookup of non-existent complex path");
 }
 
++(void)testWildcardMatchesRoot
+{
+    MPWTemplateMatchingStore *store=[self store];
+    store[@"*"]=@"value";
+    IDEXPECT((store[@"/"]), @"value",@"root matched");
+}
+
++(void)testSlashWildcardMatchesRoot
+{
+    MPWTemplateMatchingStore *store=[self store];
+    store[@"/*"]=@"value";
+    IDEXPECT((store[@"/"]), @"value",@"root matched");
+}
+
 +(void)testCanMatchParameter
 {
     MPWTemplateMatchingStore *store=[self store];
@@ -107,6 +121,8 @@
        @"testCanMatchSimpleConstant",
        @"testCanMatchParameter",
        @"testEvaluateWithPathParamters",
+//       @"testWildcardMatchesRoot",
+       @"testSlashWildcardMatchesRoot",
 			];
 }
 

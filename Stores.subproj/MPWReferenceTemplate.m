@@ -94,11 +94,13 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 
 -(BOOL)getParameters:(NSString **)params  forMatchedReference:(id <MPWReferencing>)ref
 {
+//    NSLog(@"getParameters:forMatchedReference: %@/%@",[ref class],ref);
     int currentParam=0;
     NSArray *pathComponents=[ref relativePathComponents];
     long pathCount = pathComponents.count;
     BOOL isWild=NO;
-    if ( pathCount > 0) {
+    if ( pathCount > 0 ) {
+//        NSLog(@"have path components: %ld",pathCount);
         for (long i=0, max=MIN(pathCount,components->count);i<max;i++) {
             NSString *segment=pathComponents[i];
             ReferenceTemplateComponent *component=&components->components[i];
@@ -110,12 +112,12 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
                 if ( ![matcherName isEqualToString:segment]) {
                     return NO;
                 }
-            } else if ( argName) {
-                if ( component->isWildcard ) {
-                    isWild=YES;
+            } else if ( argName && !component->isWildcard) {
+                nextMatch=segment;
+            } else if ( component->isWildcard) {
+                isWild=YES;
+                if ( argName ) {
                     nextMatch=[[pathComponents subarrayWithRange:NSMakeRange(i,pathComponents.count-i)] componentsJoinedByString:@"/"];
-                } else {
-                    nextMatch=segment;
                 }
             }
             if (nextMatch) {
@@ -124,7 +126,9 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             }
         }
     } else if ( [ref isRoot] ) {
-        if ( components->count == 1) {
+        NSLog(@"incoming isRoot");
+        if ( components->count >= 1) {
+            NSLog(@"isRoot");
             if (components->components[0].isWildcard) {
                 isWild=YES;
             }
@@ -313,10 +317,18 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 
 +(void)testMatchRootAgainstWildcard
 {
+    NSLog(@"testMatchRootAgainstWildcard");
     MPWReferenceTemplate *pp=[self templateWithString:@"*"];
-    NSDictionary *result=[pp bindingsForMatchedPath:@"/"];
+    NSArray *result=[pp parametersForMatchedReference:@"/"];
+    NSLog(@"done: testMatchRootAgainstWildcard: %@",result);
     EXPECTNOTNIL(result,@"got a match");
-    
+}
+
++(void)testMatchEmptyAgainstWildcard
+{
+    MPWReferenceTemplate *pp=[self templateWithString:@"*"];
+    NSDictionary *result=[pp bindingsForMatchedPath:@""];
+    EXPECTNOTNIL(result,@"got a match");
 }
 
 +(void)testListFormalParameters
@@ -357,6 +369,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
              @"testMatchAgainstPathWithParametersReturningBindings",
              @"testMatchAgainstWildcard",
              @"testMatchRootAgainstWildcard",
+             @"testMatchEmptyAgainstWildcard",
              @"testListFormalParameters",
              @"testListFormalParametersForWildcard",
              @"testListFormalParametersForWildcardWithArgname",
