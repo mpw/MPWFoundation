@@ -65,7 +65,14 @@
     [self.values addObject:theObject];
 }
 
-
+-(void)setContext:aContext
+{
+    for (id template in self.templates) {
+        if ( [template respondsToSelector:@selector(setContext:)]) {
+            [template setContext:aContext];
+        }
+    }
+}
 
 @end
 
