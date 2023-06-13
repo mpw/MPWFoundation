@@ -29,13 +29,22 @@
 
 -(id)at:(id<MPWReferencing>)aReference
 {
+    NSLog(@"at: %@",aReference);
     for ( long i=0,max=self.templates.count; i<max; i++ ) {
+        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
         MPWReferenceTemplate *template = self.templates[i];
         NSArray *params = [template parametersForMatchedReference:aReference];
         if ( params ) {
+            NSLog(@"match at %ld",i);
             id value = self.values[i];
+            NSLog(@"got value: %@",value);
+            if ( self.addRef) {
+                params = [params arrayByAddingObject:aReference];
+            }
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
+                NSLog(@"will evaluate with parameters: %@",params);
                 value = [value evaluateOnObject:self.target parameters:params];
+                NSLog(@"did evaluate, got new value: %@",value);
             }
             return value;
         }
@@ -45,7 +54,10 @@
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    [self.templates addObject:[MPWReferenceTemplate templateWithReference:aReference]];
+    if ( ![aReference isKindOfClass:[MPWReferenceTemplate class]]) {
+        aReference = (id)[MPWReferenceTemplate templateWithReference:aReference];
+    }
+    [self.templates addObject:aReference];
     [self.values addObject:theObject];
 }
 
@@ -105,3 +117,4 @@
 }
 
 @end
+
