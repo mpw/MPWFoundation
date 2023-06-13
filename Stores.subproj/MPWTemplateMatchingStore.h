@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWTemplateMatchingStore : MPWAbstractStore
 
 @property (nonatomic, strong) id target;
-@property (nonatomic, assign) bool addRef;
+@property (nonatomic, strong) id additionalParam;
+@property (nonatomic, assign) bool addRef,useParam;
 @end
 
 

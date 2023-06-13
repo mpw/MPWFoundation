@@ -37,14 +37,18 @@
         if ( params ) {
             NSLog(@"match at %ld",i);
             id value = self.values[i];
-            NSLog(@"got value: %@",value);
+//            NSLog(@"got value: %@",value);
+            if ( self.useParam ) {
+                NSLog(@"use additional param: %@",self.additionalParam);
+                params = [params arrayByAddingObject:self.additionalParam];
+            }
             if ( self.addRef) {
                 params = [params arrayByAddingObject:aReference];
             }
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
-                NSLog(@"will evaluate with parameters: %@",params);
+//                NSLog(@"will evaluate with parameters: %@",params);
                 value = [value evaluateOnObject:self.target parameters:params];
-                NSLog(@"did evaluate, got new value: %@",value);
+//                NSLog(@"did evaluate, got new value: %@",value);
             }
             return value;
         }
