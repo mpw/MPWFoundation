@@ -15,6 +15,11 @@
     int parameterCount;
 }
 
+-(int)parameterCount
+{
+    return parameterCount;
+}
+
 lazyAccessor(NSArray*, formalParameters, setFormalParamters, createFormalParameters)
 
 ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )

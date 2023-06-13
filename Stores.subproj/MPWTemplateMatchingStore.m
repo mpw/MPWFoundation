@@ -27,34 +27,46 @@
     return self;
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
-//    NSLog(@"at: %@",aReference);
+    id params[100];
+    //    NSLog(@"at: %@",aReference);
     for ( long i=0,max=self.templates.count; i<max; i++ ) {
-//        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
+        //        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
         MPWReferenceTemplate *template = self.templates[i];
-        NSArray *params = [template parametersForMatchedReference:aReference];
-        if ( params ) {
-//            NSLog(@"match at %ld",i);
+//        NSArray *params = [template parametersForMatchedReference:aReference];
+        if ( [template getParameters:params forMatchedReference:aReference] ) {
+            int numParams = template.parameterCount;
+            for (int j=0;j<extraParamCount;j++) {
+                params[numParams+j]=extraParams[j];
+            }
             id value = self.values[i];
-//            NSLog(@"got value: %@",value);
-            if ( self.useParam ) {
-//                NSLog(@"use additional param: %@",self.additionalParam);
-                params = [params arrayByAddingObject:self.additionalParam];
-            }
-            if ( self.addRef) {
-                params = [params arrayByAddingObject:aReference];
-            }
+            NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
+//            NSArray *paramArray=nil;
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
-//                NSLog(@"will evaluate with parameters: %@",params);
-                value = [value evaluateOnObject:self.target parameters:params];
-//                NSLog(@"did evaluate, got new value: %@",value);
+                //                NSLog(@"will evaluate with parameters: %@",params);
+                value = [value evaluateOnObject:self.target parameters:paramArray];
+                //                NSLog(@"did evaluate, got new value: %@",value);
             }
             return value;
         }
     }
     return nil;
 }
+
+
+-(id)at:(id<MPWReferencing>)aReference
+{
+    id extraParams[2];
+    int numExtraParams=0;
+    if ( self.useParam) {
+        extraParams[numExtraParams++]=self.additionalParam;
+    }
+    if ( self.addRef) {
+        extraParams[numExtraParams++]=aReference;
+    }
+    return [self at:aReference for:self.target with:extraParams count:numExtraParams];
+ }
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
