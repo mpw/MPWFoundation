@@ -14,7 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) id target;
 @property (nonatomic, strong) id additionalParam;
 @property (nonatomic, assign) bool addRef,useParam;
+
+-(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount;
+
+
 @end
+
 
 
 NS_ASSUME_NONNULL_END
