@@ -11,9 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWTemplateMatchingStore : MPWAbstractStore
 
-@property (nonatomic, strong) id target;
-@property (nonatomic, strong) id additionalParam;
-@property (nonatomic, assign) bool addRef,useParam;
+@property (nonatomic, weak) id target;
 
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount;
 

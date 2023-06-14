@@ -30,11 +30,8 @@
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
     id params[100];
-    //    NSLog(@"at: %@",aReference);
     for ( long i=0,max=self.templates.count; i<max; i++ ) {
-        //        NSLog(@"try template[%ld]=%@",i,self.templates[i]);
         MPWReferenceTemplate *template = self.templates[i];
-//        NSArray *params = [template parametersForMatchedReference:aReference];
         if ( [template getParameters:params forMatchedReference:aReference] ) {
             int numParams = template.parameterCount;
             for (int j=0;j<extraParamCount;j++) {
@@ -42,7 +39,6 @@
             }
             id value = self.values[i];
             NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
-//            NSArray *paramArray=nil;
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
                 //                NSLog(@"will evaluate with parameters: %@",params);
                 value = [value evaluateOnObject:target parameters:paramArray];
@@ -57,15 +53,8 @@
 
 -(id)at:(id<MPWReferencing>)aReference
 {
-    id extraParams[2];
-    int numExtraParams=0;
-    if ( self.useParam) {
-        extraParams[numExtraParams++]=self.additionalParam;
-    }
-    if ( self.addRef) {
-        extraParams[numExtraParams++]=aReference;
-    }
-    return [self at:aReference for:self.target with:extraParams count:numExtraParams];
+    id extraParams[1]={NULL};
+    return [self at:aReference for:self.target with:extraParams count:0];
  }
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
