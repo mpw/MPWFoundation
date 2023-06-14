@@ -45,7 +45,7 @@
 //            NSArray *paramArray=nil;
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
                 //                NSLog(@"will evaluate with parameters: %@",params);
-                value = [value evaluateOnObject:self.target parameters:paramArray];
+                value = [value evaluateOnObject:target parameters:paramArray];
                 //                NSLog(@"did evaluate, got new value: %@",value);
             }
             return value;
