@@ -7,17 +7,18 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
+//_Pragma("clang assume_null begin")
 
 @interface MPWTemplateMatchingStore : MPWAbstractStore
 
-@property (nonatomic, weak) id target;
+@property (nonatomic, weak) id _Nullable target;
 
--(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount;
+-(id)at:(id<MPWReferencing>)aReference for:target with:(id *)extraParams count:(int)extraParamCount;
+
+//_Pragma("clang assume_null end")
+-(void)setContext:aContext;
 
 
 @end
 
 
-
-NS_ASSUME_NONNULL_END

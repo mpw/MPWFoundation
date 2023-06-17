@@ -34,7 +34,7 @@
         MPWReferenceTemplate *template = self.templates[i];
         if ( [template getParameters:params forMatchedReference:aReference] ) {
             int numParams = template.parameterCount;
-            for (int j=0;j<extraParamCount;j++) {
+            for (int j=0;extraParams && j<extraParamCount;j++) {
                 params[numParams+j]=extraParams[j];
             }
             id value = self.values[i];
@@ -59,10 +59,11 @@
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    if ( ![aReference isKindOfClass:[MPWReferenceTemplate class]]) {
-        aReference = (id)[MPWReferenceTemplate templateWithReference:aReference];
+    MPWReferenceTemplate *template = (MPWReferenceTemplate*)aReference;
+    if ( ![template isKindOfClass:[MPWReferenceTemplate class]]) {
+        template = [MPWReferenceTemplate templateWithReference:aReference];
     }
-    [self.templates addObject:aReference];
+    [self.templates addObject:template];
     [self.values addObject:theObject];
 }
 
@@ -129,7 +130,7 @@
        @"testCanMatchSimpleConstant",
        @"testCanMatchParameter",
        @"testEvaluateWithPathParamters",
-//       @"testWildcardMatchesRoot",
+       @"testWildcardMatchesRoot",
        @"testSlashWildcardMatchesRoot",
 			];
 }
