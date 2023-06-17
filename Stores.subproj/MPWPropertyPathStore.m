@@ -8,15 +8,6 @@
 #import "MPWPropertyPathStore.h"
 #import "MPWRESTOperation.h"
 
-typedef struct {
-    NSString *propertyPath;
-    IMP  functions[MPWRESTVerbMAX];
-} PropertyPathDef;
-
-typedef struct {
-    int count;
-    PropertyPathDef defs[0];
-} PropertyPathDefs;
 
 @interface MPWPropertyPathStore()
 

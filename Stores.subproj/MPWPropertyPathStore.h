@@ -7,6 +7,7 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWPropertyPathStore : MPWAbstractStore

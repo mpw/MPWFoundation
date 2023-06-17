@@ -9,6 +9,18 @@
 
 //_Pragma("clang assume_null begin")
 
+typedef struct {
+    NSString *propertyPath;
+    IMP      function;
+    id       method;
+} PropertyPathDef;
+
+typedef struct {
+    MPWRESTVerb verb;
+    int count;
+    PropertyPathDef defs[0];
+} PropertyPathDefs;
+
 @interface MPWTemplateMatchingStore : MPWAbstractStore
 
 @property (nonatomic, weak) id _Nullable target;

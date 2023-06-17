@@ -154,9 +154,9 @@
 		1F3F67922085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
 		1F3F67932085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
 		1F3F67942085B452001B80D9 /* NSObject+MPWNotificationProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */; };
-		1F3F7F302A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; };
-		1F3F7F312A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; };
-		1F3F7F322A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; };
+		1F3F7F302A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F3F7F312A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F3F7F322A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F3F7F332A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
 		1F3F7F342A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
 		1F3F7F352A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
