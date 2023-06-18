@@ -10,7 +10,7 @@
 //_Pragma("clang assume_null begin")
 
 typedef struct {
-    NSString *propertyPath;
+    MPWReferenceTemplate *propertyPath;
     IMP      function;
     id       method;
 } PropertyPathDef;
@@ -25,6 +25,7 @@ typedef struct {
 
 @property (nonatomic, weak) id _Nullable target;
 
+-(instancetype)initWithPropertyPathDefs:(PropertyPathDefs*)defs;
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id *)extraParams count:(int)extraParamCount;
 
 //_Pragma("clang assume_null end")

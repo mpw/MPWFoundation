@@ -9,35 +9,49 @@
 #import "MPWReferenceTemplate.h"
 #import "MPWFastInvocation.h"
 
-@interface MPWTemplateMatchingStore()
-
-@property (nonatomic, strong)  NSMutableArray<MPWReferenceTemplate*> *templates;
-@property (nonatomic, strong)  NSMutableArray *values;
-
-@end
-
 
 @implementation MPWTemplateMatchingStore
+{
+    PropertyPathDef *defs;
+    int count;
+    int max;
+}
 
--(instancetype)init
+-(void)addPropertyPathDefs:(PropertyPathDef*)additionalDefs count:(int)newCount
+{
+    int newTotalCount = newCount + count;
+    if ( newTotalCount > max )  {
+        int newMax = newTotalCount * 2 + 10;
+        PropertyPathDef *newDefs=calloc( newMax , sizeof(PropertyPathDef));
+        if ( defs && newDefs) {
+            memcpy( newDefs, defs, count * sizeof(PropertyPathDef) );
+        }
+        max=newMax;
+        defs=newDefs;
+    }
+    memcpy( defs+count, additionalDefs, newCount * sizeof(PropertyPathDef) );
+    count=newTotalCount;
+}
+
+-(instancetype)initWithPropertyPathDefs:(PropertyPathDefs *)newDefs
 {
     self=[super init];
-    self.templates = [NSMutableArray array];
-    self.values    = [NSMutableArray array];
+    [self addPropertyPathDefs:newDefs->defs count:newDefs->count];
     return self;
 }
 
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
     id params[100];
-    for ( long i=0,max=self.templates.count; i<max; i++ ) {
-        MPWReferenceTemplate *template = self.templates[i];
-        if ( [template getParameters:params forMatchedReference:aReference] ) {
-            int numParams = template.parameterCount;
+    
+    for ( long i=0,max=count; i<max; i++ ) {
+        PropertyPathDef *def=&defs[i];
+        if ( [def->propertyPath getParameters:params forMatchedReference:aReference] ) {
+            int numParams = def->propertyPath.parameterCount;
             for (int j=0;extraParams && j<extraParamCount;j++) {
                 params[numParams+j]=extraParams[j];
             }
-            id value = self.values[i];
+            id value = def->method;
             NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
             if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
                 //                NSLog(@"will evaluate with parameters: %@",params);
@@ -63,17 +77,27 @@
     if ( ![template isKindOfClass:[MPWReferenceTemplate class]]) {
         template = [MPWReferenceTemplate templateWithReference:aReference];
     }
-    [self.templates addObject:template];
-    [self.values addObject:theObject];
+    PropertyPathDef def = {
+        [template retain], NULL, [theObject retain]
+    };
+    [self addPropertyPathDefs:&def count:1];
+//    [self.templates addObject:template];
+//    [self.values addObject:theObject];
 }
 
 -(void)setContext:aContext
 {
-    for (id template in self.templates) {
+    for (int i=0;i<count;i++) {
+        id template=defs[i].propertyPath;
         if ( [template respondsToSelector:@selector(setContext:)]) {
             [template setContext:aContext];
         }
     }
+}
+
+-(void)dealloc
+{
+    
 }
 
 @end
