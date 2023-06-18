@@ -44,19 +44,33 @@
 {
     id params[100];
     
-    for ( long i=0,max=count; i<max; i++ ) {
+    for ( long i=0; i<count; i++ ) {
         PropertyPathDef *def=&defs[i];
         if ( [def->propertyPath getParameters:params forMatchedReference:aReference] ) {
+            id value = nil;
             int numParams = def->propertyPath.parameterCount;
+            int totalParams = numParams + extraParamCount;
             for (int j=0;extraParams && j<extraParamCount;j++) {
                 params[numParams+j]=extraParams[j];
             }
-            id value = def->method;
-            NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
-            if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
-                //                NSLog(@"will evaluate with parameters: %@",params);
-                value = [value evaluateOnObject:target parameters:paramArray];
-                //                NSLog(@"did evaluate, got new value: %@",value);
+            if ( def->function) {
+                switch ( totalParams ) {
+                        
+                    case 1:
+                        value = ((IMP1)(def->function))( target, _cmd, params[0]);
+                        break;
+                    default:
+                        [NSException raise:@"unsupported" format:@"template matcher function with %d total arguments not support for %@",totalParams,aReference];
+
+                }
+            } else {
+                value = def->method;
+                NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
+                if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
+                    //                NSLog(@"will evaluate with parameters: %@",params);
+                    value = [value evaluateOnObject:target parameters:paramArray];
+                    //                NSLog(@"did evaluate, got new value: %@",value);
+                }
             }
             return value;
         }
@@ -97,7 +111,14 @@
 
 -(void)dealloc
 {
-    
+    if ( defs ) {
+        for (int i=0;i<count;i++) {
+            [defs[i].propertyPath release];
+            [defs[i].method release];
+        }
+        free(defs);
+    }
+    [super dealloc];
 }
 
 @end
@@ -148,6 +169,23 @@
     EXPECTNIL((store[@"base1/path2"]),@"base path is not flexible");
 }
 
+static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
+{
+    return [@"Matching Functions says hello to: " stringByAppendingString:matched1];
+}
+
++(void)testEvaluateFunction
+{
+    PropertyPathDef defs[] = {
+            { [[MPWReferenceTemplate templateWithReference:@"base/:param"] retain], (IMP)matchedMethod, nil   },
+    };
+    MPWTemplateMatchingStore *store=[self store];
+    [store addPropertyPathDefs:defs count:1];
+    id value=[store at:@"base/Marcel"];
+    IDEXPECT(value, @"Matching Functions says hello to: Marcel",@"function result");
+
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -156,6 +194,7 @@
        @"testEvaluateWithPathParamters",
        @"testWildcardMatchesRoot",
        @"testSlashWildcardMatchesRoot",
+       @"testEvaluateFunction",
 			];
 }
 
