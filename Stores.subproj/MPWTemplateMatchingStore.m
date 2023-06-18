@@ -59,6 +59,10 @@
                     case 1:
                         value = ((IMP1)(def->function))( target, _cmd, params[0]);
                         break;
+                    case 2:
+                        NSLog(@"target: %@ arg0=%@ arg1=%@",target,params[0],params[1]);
+                        value = ((IMP2)(def->function))( target, _cmd, params[0],params[1]);
+                        break;
                     default:
                         [NSException raise:@"unsupported" format:@"template matcher function with %d total arguments not support for %@",totalParams,aReference];
 
@@ -177,13 +181,33 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
 +(void)testEvaluateFunction
 {
     PropertyPathDef defs[] = {
-            { [[MPWReferenceTemplate templateWithReference:@"base/:param"] retain], (IMP)matchedMethod, nil   },
+        { [[MPWReferenceTemplate templateWithReference:@"base/:param"] retain], (IMP)matchedMethod, nil   },
     };
     MPWTemplateMatchingStore *store=[self store];
     [store addPropertyPathDefs:defs count:1];
     id value=[store at:@"base/Marcel"];
     IDEXPECT(value, @"Matching Functions says hello to: Marcel",@"function result");
+    
+}
 
++(void)testEvaluateFunctionOnObjectWithAdditionalParams
+{
+    NSMutableDictionary *base=[[@{ @"hi": @"there"} mutableCopy] autorelease];
+    IMP get=[base methodForSelector:@selector(at:)];
+    IMP set=[base methodForSelector:@selector(at:put:)];
+    MPWReferenceTemplate *t1=[MPWReferenceTemplate templateWithReference:@"get/:key"];
+    MPWReferenceTemplate *t2=[MPWReferenceTemplate templateWithReference:@"set/:key"];
+    PropertyPathDef defs[] = {
+        { [t1 retain], (IMP)get, nil   },
+        { [t2 retain], (IMP)set, nil   },
+    };
+    MPWTemplateMatchingStore *store=[self store];
+    [store addPropertyPathDefs:defs count:2];
+    id value1=[store at:@"get/hi" for:base with:nil count:0];
+    IDEXPECT(value1, @"there",@"function result");
+    id newObject=@"theBlubVal";
+    [store at:@"set/blub" for:base with:&newObject count:1];
+    IDEXPECT( base[@"blub"], @"theBlubVal", @"set was successfull");
 }
 
 +(NSArray*)testSelectors
@@ -195,6 +219,7 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
        @"testWildcardMatchesRoot",
        @"testSlashWildcardMatchesRoot",
        @"testEvaluateFunction",
+       @"testEvaluateFunctionOnObjectWithAdditionalParams",
 			];
 }
 
