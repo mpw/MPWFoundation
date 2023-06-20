@@ -25,7 +25,7 @@ typedef struct {
 
 @property (nonatomic, weak) id _Nullable target;
 
--(instancetype)initWithPropertyPathDefs:(PropertyPathDefs*)defs;
+-(instancetype)initWithPropertyPathDefs:(PropertyPathDef *)newDefs count:(int)count;
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id *)extraParams count:(int)extraParamCount;
 
 //_Pragma("clang assume_null end")

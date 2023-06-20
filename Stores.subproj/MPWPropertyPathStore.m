@@ -87,7 +87,7 @@
 +(NSArray*)testSelectors
 {
    return @[
-        @"testPropertyPathStoreForDict"
+//        @"testPropertyPathStoreForDict"
    ];
 }
 

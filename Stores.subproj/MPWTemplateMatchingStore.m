@@ -33,12 +33,13 @@
     count=newTotalCount;
 }
 
--(instancetype)initWithPropertyPathDefs:(PropertyPathDefs *)newDefs
+-(instancetype)initWithPropertyPathDefs:(PropertyPathDef *)newDefs count:(int)count
 {
     self=[super init];
-    [self addPropertyPathDefs:newDefs->defs count:newDefs->count];
+    [self addPropertyPathDefs:newDefs count:count];
     return self;
 }
+
 
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
@@ -201,8 +202,7 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
         { [t1 retain], (IMP)get, nil   },
         { [t2 retain], (IMP)set, nil   },
     };
-    MPWTemplateMatchingStore *store=[self store];
-    [store addPropertyPathDefs:defs count:2];
+    MPWTemplateMatchingStore *store=[[[self alloc] initWithPropertyPathDefs:defs count:2] autorelease];
     id value1=[store at:@"get/hi" for:base with:nil count:0];
     IDEXPECT(value1, @"there",@"function result");
     id newObject=@"theBlubVal";
