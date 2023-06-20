@@ -64,6 +64,10 @@
                         NSLog(@"target: %@ arg0=%@ arg1=%@",target,params[0],params[1]);
                         value = ((IMP2)(def->function))( target, _cmd, params[0],params[1]);
                         break;
+                    case 3:
+                        NSLog(@"target: %@ arg0=%@ arg1=%@ arg2=%@",target,params[0],params[1],params[2]);
+                        value = ((IMP3)(def->function))( target, _cmd, params[0],params[1],params[2]);
+                        break;
                     default:
                         [NSException raise:@"unsupported" format:@"template matcher function with %d total arguments not support for %@",totalParams,aReference];
 

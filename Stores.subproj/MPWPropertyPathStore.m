@@ -29,11 +29,11 @@
     return self;
 }
 
--(void)createMatchers:(PropertyPathDefs*)defs
+-(void)createMatchers:(PropertyPathDef*)defs count:(int)numDefs verb:(MPWRESTVerb)verb
 {
-    MPWTemplateMatchingStore *matcher=[[MPWTemplateMatchingStore alloc] initWithPropertyPathDefs:defs];
-    [stores[defs->verb] release];
-    stores[defs->verb]=matcher;
+    MPWTemplateMatchingStore *matcher=[[MPWTemplateMatchingStore alloc] initWithPropertyPathDefs:defs count:numDefs];
+    [stores[verb] release];
+    stores[verb]=matcher;
 }
 
 -theTarget
@@ -81,13 +81,34 @@
 
 +(void)testPropertyPathStoreForDict
 {
-	EXPECTTRUE(false, @"implemented");
+    NSMutableDictionary *base=[[@{ @"hi": @"there"} mutableCopy] autorelease];
+    IMP get=[base methodForSelector:@selector(at:)];
+    IMP set=[base methodForSelector:@selector(at:put:)];
+    MPWReferenceTemplate *t1=[MPWReferenceTemplate templateWithReference:@"get/:key"];
+    MPWReferenceTemplate *t2=[MPWReferenceTemplate templateWithReference:@"set/:key"];
+    PropertyPathDef getdefs[] = {
+        { [t1 retain], (IMP)get, nil   },
+    };
+    PropertyPathDef setdefs[] = {
+        { [t2 retain], (IMP)set, nil   },
+    };
+    MPWPropertyPathStore *store=[self store];
+    [store createMatchers:getdefs count:1 verb:MPWRESTVerbGET];
+    [store createMatchers:setdefs count:1 verb:MPWRESTVerbPUT];
+    store.target = base;
+    
+
+    id value1=[store at:@"get/hi"];
+    IDEXPECT(value1, @"there",@"function result");
+    id newObject=@"theBlubVal";
+    [store at:@"set/blub" put:newObject];
+    IDEXPECT( base[@"blub"], @"theBlubVal", @"set was successfull");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-//        @"testPropertyPathStoreForDict"
+        @"testPropertyPathStoreForDict"
    ];
 }
 
