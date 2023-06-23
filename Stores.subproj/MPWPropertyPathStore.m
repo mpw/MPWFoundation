@@ -101,7 +101,8 @@
     id value1=[store at:@"get/hi"];
     IDEXPECT(value1, @"there",@"function result");
     id newObject=@"theBlubVal";
-    [store at:@"set/blub" put:newObject];
+    store[@"set/blub"]=newObject;
+//    [store at:@"set/blub" put:newObject];
     IDEXPECT( base[@"blub"], @"theBlubVal", @"set was successfull");
 }
 
