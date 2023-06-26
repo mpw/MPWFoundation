@@ -7,7 +7,7 @@
 
 #import "MPWPropertyPathStore.h"
 #import "MPWRESTOperation.h"
-
+#import "NSObjectAdditions.h"
 
 @interface MPWPropertyPathStore()
 
@@ -91,13 +91,30 @@ void installPropertyPathsOnClass( Class targetClass, PropertyPathDef* getters,in
         id extras[2]={ value, aReference };
         [store at:aReference verb:MPWRESTVerbPUT for:self with:extras count:2];
     };
-    
-    
+    [targetClass installIMP:imp_implementationWithBlock(atBlock) withSignature:"@:@" selector:@selector(at:) oldIMP:NULL];
+    [targetClass installIMP:imp_implementationWithBlock(atPutBlock) withSignature:"@:@@" selector:@selector(at:put:) oldIMP:NULL];
 }
 
 
 @end
 
+
+@interface MPWPropertyPathStoreTargetTestClass1 : NSObject
+{
+}
+@property (nonatomic,strong ) id value;
+@end
+@interface MPWPropertyPathStoreTargetTestClass1(dynamic)
+-at:key;
+-(void)at:key put:value;
+@end
+
+@implementation MPWPropertyPathStoreTargetTestClass1
+
+
+
+
+@end
 
 #import <MPWFoundation/DebugMacros.h>
 
@@ -126,14 +143,37 @@ void installPropertyPathsOnClass( Class targetClass, PropertyPathDef* getters,in
     IDEXPECT(value1, @"there",@"function result");
     id newObject=@"theBlubVal";
     store[@"set/blub"]=newObject;
-//    [store at:@"set/blub" put:newObject];
     IDEXPECT( base[@"blub"], @"theBlubVal", @"set was successfull");
+}
+
++(void)testConstructPropertyPathStoreAndAttachToClass
+{
+    MPWPropertyPathStoreTargetTestClass1 *t=[MPWPropertyPathStoreTargetTestClass1 new];
+    IMP get=[t methodForSelector:@selector(value)];
+    IMP set=[t methodForSelector:@selector(setValue:)];
+    MPWReferenceTemplate *t1=[MPWReferenceTemplate templateWithReference:@"get"];
+    MPWReferenceTemplate *t2=[MPWReferenceTemplate templateWithReference:@"set"];
+    PropertyPathDef getdefs[] = {
+        { [t1 retain], (IMP)get, nil   },
+    };
+    PropertyPathDef setdefs[] = {
+        { [t2 retain], (IMP)set, nil   },
+    };
+    installPropertyPathsOnClass( t.class, getdefs,1 ,setdefs, 1 );
+    
+    t.value=@"Hi";
+    id value1=[t at:@"get"];
+    IDEXPECT(value1, @"Hi",@"function result");
+    id newObject=@"theBlubVal";
+    [t at:@"set" put:newObject];
+    IDEXPECT( t.value, @"theBlubVal", @"set was successfull");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-        @"testPropertyPathStoreForDict"
+       @"testPropertyPathStoreForDict",
+       @"testConstructPropertyPathStoreAndAttachToClass",
    ];
 }
 

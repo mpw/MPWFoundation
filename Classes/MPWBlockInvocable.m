@@ -137,30 +137,10 @@ static id blockFun( id self, ... ) {
     return stub;
 }
 
--(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr
-{
-    return [aClass installIMP:[self stub] withSignature:signature selector:aSelector oldIMP:oldImpPtr];
-}
-
 -(void)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
 {
     typeSignature=(char*)signature;
-    [aClass installIMP:[self stub] withSignature:signature selector:aSelector oldIMP:NULL];
-//    [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
-}
-
--(void)installInClass:(Class)aClass withSignatureString:(NSString*)signatureString selectorString:(NSString*)selectorName
-{
-#ifndef __clang_analyzer__  
-    // analyzer reports leak of signature, we have to leak for runtime structs
-    char *signature;
-    long siglen=[signatureString length];
-    signature = malloc( siglen + 10);
-    [signatureString getBytes:signature maxLength:siglen+2 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, siglen) remainingRange:NULL];
-    signature[siglen]=0;
-//    [aClass installIMP:[self stub] withSignature:signature selector:NSSelectorFromString(selectorName) oldIMP:NULL];
-    [self installInClass:aClass withSignature:(const char*)signature selector:NSSelectorFromString(selectorName)];
-#endif
+    [aClass installIMP:[self stub] withSignature:(char*)signature selector:aSelector oldIMP:NULL];
 }
 
 static NSString *extractStructType( char *s )

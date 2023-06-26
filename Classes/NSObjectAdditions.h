@@ -53,7 +53,6 @@
 
 @interface NSObject(methodInstallation)
 
-+(Method)getExistingMethodForMessage:(SEL)messageName;
 +(Method)installIMP:(IMP)newIMP withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
 
 
