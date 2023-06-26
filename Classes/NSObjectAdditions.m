@@ -149,6 +149,51 @@
 
 @end
 
+@implementation NSObject(methodInstallation)
+
++(Method)getExistingMethodForMessage:(SEL)messageName
+{
+    unsigned int methodCount=0;
+    Method *methods = class_copyMethodList(self, &methodCount);
+    Method result=NULL;
+    
+    if ( methods ) {
+        for ( int i=0;i< methodCount; i++ ) {
+            if ( method_getName(methods[i]) == messageName ) {
+                result = methods[i];
+                break;
+            }
+        }
+        free(methods);
+    }
+    return result;
+}
+
++(Method)installIMP:(IMP)newIMP withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr
+{
+    Method methodDescriptor=NULL;
+    if ( self != nil ) {
+        methodDescriptor=[self getExistingMethodForMessage:aSelector];
+        
+        if ( methodDescriptor  && oldImpPtr) {
+            IMP old=class_getMethodImplementation(self, aSelector);
+            *oldImpPtr = old;
+        }
+        if ( methodDescriptor ) {
+            method_setImplementation(methodDescriptor, newIMP);
+        } else {
+            if ( class_addMethod(self, aSelector, newIMP, signature )) {
+                methodDescriptor=class_getInstanceMethod( self, aSelector);
+            }
+            
+        }
+    }
+    return methodDescriptor;
+}
+
+
+@end
+
 @implementation NSDictionary(ivarAccess)
 
 +(NSString*)ivarNameAtOffset:(int)ivarOffset orIndex:(int)index

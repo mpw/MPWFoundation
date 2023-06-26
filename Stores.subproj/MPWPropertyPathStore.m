@@ -41,26 +41,32 @@
     return self.target ?: self;
 }
 
+-(id)at:(id<MPWReferencing>)aReference verb:(MPWRESTVerb)verb for:target with:(id*)args count:(int)count
+{
+    return [stores[verb] at:aReference for:target with:args count:count];
+}
+
+
 -(id)at:(id<MPWReferencing>)aReference
 {
-    return [stores[MPWRESTVerbGET] at:aReference for:self.theTarget with:&aReference count:1];
+    return [self at:aReference verb:MPWRESTVerbGET for:self.theTarget with:&aReference count:1];
 }
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
     id extras[]={theObject,aReference};
-    [stores[MPWRESTVerbPUT] at:aReference for:self.theTarget with:extras count:2];
+    [self at:aReference verb:MPWRESTVerbPUT for:self.theTarget with:extras count:2];
 }
 
 -(void)at:(id<MPWReferencing>)aReference post:(id)theObject
 {
     id extras[]={theObject,aReference};
-    [stores[MPWRESTVerbPOST] at:aReference for:self.theTarget with:extras count:2];
+    [self at:aReference verb:MPWRESTVerbPOST for:self.theTarget with:extras count:2];
 }
 
 -(void)deleteAt:(id<MPWReferencing>)aReference
 {
-    [stores[MPWRESTVerbDELETE] at:aReference for:self.theTarget with:&aReference count:1];
+    [self at:aReference verb:MPWRESTVerbDELETE for:self.theTarget with:&aReference count:1];
 }
 
 -(void)dealloc
@@ -71,6 +77,24 @@
     [_target release];
     [super dealloc];
 }
+
+void installPropertyPathsOnClass( Class targetClass, PropertyPathDef* getters,int getterCount ,PropertyPathDef* setters, int setterCount ) {
+    
+    MPWPropertyPathStore *store=[[MPWPropertyPathStore store] retain];
+    [store createMatchers:getters count:getterCount verb:MPWRESTVerbGET];
+    [store createMatchers:setters count:setterCount verb:MPWRESTVerbPUT];
+    id atBlock = ^(id self, id aReference ){
+        return [store at:aReference verb:MPWRESTVerbGET for:self with:&aReference count:1];
+    };
+    
+    id atPutBlock = ^(id self, id aReference, id value ){
+        id extras[2]={ value, aReference };
+        [store at:aReference verb:MPWRESTVerbPUT for:self with:extras count:2];
+    };
+    
+    
+}
+
 
 @end
 

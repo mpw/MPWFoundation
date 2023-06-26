@@ -3,6 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <objc/runtime.h>
 
 @interface NSObject(FramweworkPathAdditions)
 
@@ -47,5 +48,13 @@
 +(BOOL)isPointerOnStackAboveMe:(void*)ptr within:(long)maxDiff;
 +(BOOL)isPointerOnStackAboveMe:(void*)ptr;
 +(id)isPointerOnStackAboveMeForST:(void*)ptr;
+
+@end
+
+@interface NSObject(methodInstallation)
+
++(Method)getExistingMethodForMessage:(SEL)messageName;
++(Method)installIMP:(IMP)newIMP withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
+
 
 @end

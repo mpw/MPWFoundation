@@ -10,6 +10,7 @@
 #import "NSNil.h"
 #import "MPWRect.h"
 #import "MPWBoxerUnboxer.h"
+#import "NSObjectAdditions.h"
 
 enum {
     BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
@@ -136,50 +137,16 @@ static id blockFun( id self, ... ) {
     return stub;
 }
 
--(Method)getExistingMethodForMessage:(SEL)messageName inClass:(Class)aClass
-{
-    unsigned int methodCount=0;
-    Method *methods = class_copyMethodList(aClass, &methodCount);
-    Method result=NULL;
-    
-    if ( methods ) {
-        for ( int i=0;i< methodCount; i++ ) {
-            if ( method_getName(methods[i]) == messageName ) {
-                result = methods[i];
-                break;
-            }
-        }
-        free(methods);
-    }
-    return result;
-}
-
 -(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr
 {
-    Method methodDescriptor=NULL;
-	if ( aClass != nil ) {
-		methodDescriptor=[self getExistingMethodForMessage:aSelector inClass:aClass];
-		
-		if ( methodDescriptor  && oldImpPtr) {
-            IMP old=class_getMethodImplementation(aClass, aSelector);
-			*oldImpPtr = old;
-		}
-		if ( methodDescriptor ) {
-			method_setImplementation(methodDescriptor, [self stub]);
-		} else {
-			if ( class_addMethod(aClass, aSelector, [self stub], signature )) {
-                methodDescriptor=class_getInstanceMethod( aClass, aSelector);
-            }
-            
-		}
-	}
-	return methodDescriptor;
+    return [aClass installIMP:[self stub] withSignature:signature selector:aSelector oldIMP:oldImpPtr];
 }
 
 -(void)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector
 {
     typeSignature=(char*)signature;
-    [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
+    [aClass installIMP:[self stub] withSignature:signature selector:aSelector oldIMP:NULL];
+//    [self installInClass:aClass withSignature:signature selector:aSelector oldIMP:NULL];
 }
 
 -(void)installInClass:(Class)aClass withSignatureString:(NSString*)signatureString selectorString:(NSString*)selectorName
@@ -191,6 +158,7 @@ static id blockFun( id self, ... ) {
     signature = malloc( siglen + 10);
     [signatureString getBytes:signature maxLength:siglen+2 usedLength:NULL encoding:NSASCIIStringEncoding options:0 range:NSMakeRange(0, siglen) remainingRange:NULL];
     signature[siglen]=0;
+//    [aClass installIMP:[self stub] withSignature:signature selector:NSSelectorFromString(selectorName) oldIMP:NULL];
     [self installInClass:aClass withSignature:(const char*)signature selector:NSSelectorFromString(selectorName)];
 #endif
 }
