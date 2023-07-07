@@ -129,6 +129,11 @@
     return result;
 }
 
+-(SEL)asSelector
+{
+    return NSSelectorFromString(self);
+}
+
 #ifdef GS_API_LATEST
 - (BOOL)getBytes:(nullable void *)buffer maxLength:(NSUInteger)maxBufferCount usedLength:(nullable NSUInteger *)usedBufferCount encoding:(NSStringEncoding)encoding options:(NSStringEncodingConversionOptions)options range:(NSRange)range remainingRange:(nullable NSRangePointer)leftover
 {
@@ -238,11 +243,6 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 @end
 @implementation NSStringAdditionsTesting
 
-+(void)testOccurencesOf
-{
-    INTEXPECT( [@"This is a test string" countOccurencesOfCharacter:'i'],3,@"occurences of");
-}
-
 #if 0
 
 +(void)testAnyToString
@@ -257,13 +257,7 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 
 #endif
 
-+(NSArray*)testSelectors
-{
-    return @[
-                @"testOccurencesOf",
-//				@"testAnyToString",
-                ];
-}
+
 
 @end
 
@@ -344,11 +338,25 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
     IDEXPECT(a, @"", @"empty after reinit")
 }
 
++(void)testOccurencesOf
+{
+    INTEXPECT( [@"This is a test string" countOccurencesOfCharacter:'i'],3,@"occurences of");
+}
+
++(void)testAsSelector
+{
+    SEL converted = [@"stringByAppendingString:" asSelector];
+    PTREXPECT( converted, @selector(stringByAppendingString:) ,@"asSelector");
+}
+
+
 +testSelectors
 {
     return @[ @"testUniquedByNumbering",
               @"testUniquedUpdating",
               @"testReinit",
+              @"testOccurencesOf",
+              @"testAsSelector",
 //              @"testCamelCase",
               ];
 }
