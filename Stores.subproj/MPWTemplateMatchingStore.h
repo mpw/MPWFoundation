@@ -10,9 +10,9 @@
 //_Pragma("clang assume_null begin")
 
 typedef struct {
-    MPWReferenceTemplate *propertyPath;
-    IMP      function;
-    id       method;
+     MPWReferenceTemplate  * _Nullable propertyPath;
+    _Nullable IMP      function;
+    _Nullable id       method;
 } PropertyPathDef;
 
 typedef struct {
@@ -25,8 +25,8 @@ typedef struct {
 
 @property (nonatomic, weak) id _Nullable target;
 
--(instancetype)initWithPropertyPathDefs:(PropertyPathDef *)newDefs count:(int)count;
--(id)at:(id<MPWReferencing>)aReference for:target with:(id *)extraParams count:(int)extraParamCount;
+-(instancetype _Nullable )initWithPropertyPathDefs:(PropertyPathDef  *_Nullable)newDefs _Nullablecount:(int)count;
+-(id _Nullable )at:(id<MPWReferencing>_Nullable)aReference for:target with:(_Nullable id *_Nullable)extraParams count:(int)extraParamCount;
 
 //_Pragma("clang assume_null end")
 -(void)setContext:aContext;

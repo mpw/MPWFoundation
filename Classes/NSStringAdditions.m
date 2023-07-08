@@ -327,12 +327,13 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 +(void)testCamelCase
 {
     IDEXPECT([@"Polymorphic" camelCaseString], @"polymorphic", @"single word");
-    IDEXPECT([@"Polymorphic Identifiers" camelCaseString], @"polymorphicIdentifiers", @"single word");
+    IDEXPECT([@"Polymorphic Identifiers" camelCaseString], @"polymorphicIdentifiers", @"two words");
 }
 
 +(void)testReinit
 {
     NSMutableString *a=[NSMutableString stringWithString:@"Hi there"];
+    INTEXPECT(a.length, 8, @"not empty before reinit");
     [a reinit];
     INTEXPECT(a.length, 0, @"empty after reinit");
     IDEXPECT(a, @"", @"empty after reinit")
@@ -357,7 +358,7 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
               @"testReinit",
               @"testOccurencesOf",
               @"testAsSelector",
-//              @"testCamelCase",
+              @"testCamelCase",
               ];
 }
 
