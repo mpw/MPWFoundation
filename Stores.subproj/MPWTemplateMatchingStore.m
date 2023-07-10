@@ -17,6 +17,19 @@
     int max;
 }
 
+PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPathDef *theDefs) {
+    PropertyPathDefs* defs=calloc( sizeof *defs + count * sizeof(PropertyPathDef),1);
+    defs->count=count;
+    defs->verb=MPWRESTVerbGET;
+    for (int i=0;i<count;i++) {
+        defs->defs[i].propertyPath = theDefs[i].propertyPath;
+        defs->defs[i].function=theDefs[i].function;
+        defs->defs[i].method=theDefs[i].method;
+    }
+    return defs;
+}
+
+
 -(void)addPropertyPathDefs:(PropertyPathDef*)additionalDefs count:(int)newCount
 {
     int newTotalCount = newCount + count;
@@ -33,10 +46,10 @@
     count=newTotalCount;
 }
 
--(instancetype)initWithPropertyPathDefs:(PropertyPathDef *)newDefs count:(int)count
+-(instancetype)initWithPropertyPathDefs:(PropertyPathDef *)newDefs count:(int)newCount
 {
     self=[super init];
-    [self addPropertyPathDefs:newDefs count:count];
+    [self addPropertyPathDefs:newDefs count:newCount];
     return self;
 }
 
@@ -49,7 +62,7 @@
         PropertyPathDef *def=&defs[i];
         if ( [def->propertyPath getParameters:params forMatchedReference:aReference] ) {
             id value = nil;
-            int numParams = def->propertyPath.parameterCount;
+            int numParams = [(id)(def->propertyPath) parameterCount];
             int totalParams = numParams + extraParamCount;
             for (int j=0;extraParams && j<extraParamCount;j++) {
                 params[numParams+j]=extraParams[j];
@@ -195,6 +208,7 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
     
 }
 
+
 +(void)testEvaluateFunctionOnObjectWithAdditionalParams
 {
     NSMutableDictionary *base=[[@{ @"hi": @"there"} mutableCopy] autorelease];
@@ -203,8 +217,8 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
     MPWReferenceTemplate *t1=[MPWReferenceTemplate templateWithReference:@"get/:key"];
     MPWReferenceTemplate *t2=[MPWReferenceTemplate templateWithReference:@"set/:key"];
     PropertyPathDef defs[] = {
-        { [t1 retain], (IMP)get, nil   },
-        { [t2 retain], (IMP)set, nil   },
+            { [t1 retain], (IMP)get, nil   },
+            { [t2 retain], (IMP)set, nil   }
     };
     MPWTemplateMatchingStore *store=[[[self alloc] initWithPropertyPathDefs:defs count:2] autorelease];
     id value1=[store at:@"get/hi" for:base with:nil count:0];
