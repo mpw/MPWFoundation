@@ -33,3 +33,7 @@ boolAccessor_h( mustUnique, setMustUnique )
 
 @end
 
+@interface NSData(mpwsubdata)
+-(MPWSubData*)mpwSubdataWithRange:(NSRange)theRange;
+
+@end

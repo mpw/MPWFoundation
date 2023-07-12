@@ -190,13 +190,11 @@ boolAccessor( mustUnique, setMustUnique )
     if ( self == other ) {
         return YES;
     }
-	if ( other &&  object_getClass( other) == object_getClass( self) ) {
+	if ( other  ) {
 		long otherLen=[other length];
 		const void *otherBytes=[other bytes];
 		return otherLen==myLength &&
-		((otherBytes==myBytes) || !strncmp( [other bytes],myBytes, myLength ));
-		//		} else if ( otherCString = (const char*)[other _fastCStringContents:NO] ) {
-		//			return  !strncmp( myBytes, otherCString, myLength );
+		((otherBytes==myBytes) || !bcmp( [other bytes],myBytes, myLength ));
 	}
 	if ( [other respondsToSelector:@selector(length)] &&  myLength == [other length] ) {
 		return [self compare:other] == 0;
@@ -304,6 +302,7 @@ boolAccessor( mustUnique, setMustUnique )
     return self;
 }
 
+
 -originalData
 {
     return myData;
@@ -404,7 +403,7 @@ boolAccessor( mustUnique, setMustUnique )
 
 @end
 
-@implementation NSData(stringValue)
+@implementation NSData(mpwsubdata)
 
 -stringValue
 {
@@ -417,6 +416,12 @@ boolAccessor( mustUnique, setMustUnique )
         s=[[[NSString alloc] initWithData:self encoding:NSISOLatin1StringEncoding] autorelease];
     }
     return s; 
+}
+
+-(MPWSubData*)mpwSubdataWithRange:(NSRange)theRange
+{
+//    return [[MPWSubData alloc] initWithData:self bytes:self.bytes+theRange.location length:theRange.length];
+    return [[[MPWSubData alloc] initWithData:self bytes:self.bytes+theRange.location length:theRange.length] autorelease];
 }
 
 @end
@@ -461,7 +466,8 @@ boolAccessor( mustUnique, setMustUnique )
 	return [NSArray arrayWithObjects:
 			@"testSubDataProtectsAgainstNilOriginalData",
 			@"testSubDataIntValue",
-			@"testSubDataLongValue",
+            @"testSubDataLongValue",
+//            @"testSubDatasHaveSamePointer",
 		nil];
 }
 
