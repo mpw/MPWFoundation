@@ -20,7 +20,7 @@
 PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPathDef *theDefs) {
     PropertyPathDefs* defs=calloc( sizeof(PropertyPathDefs) + (count+10) * sizeof(PropertyPathDef),1);
     defs->count=count;
-    defs->verb=MPWRESTVerbGET;
+    defs->verb=verb;
     for (int i=0;i<count;i++) {
         defs->defs[i].propertyPath = theDefs[i].propertyPath;
         defs->defs[i].function=theDefs[i].function;
