@@ -16,6 +16,8 @@
 #import "MPWPathRelativeStore.h"
 #import "MPWRESTCopyStream.h"
 #import "MPWLoggingStore.h"
+#import "MPWPropertyPathStore.h"
+#include <dlfcn.h>
 
 @interface NSArray(unique)
 
@@ -339,6 +341,24 @@
     return [self get:uri parameters:nil];
 }
 
++(void)initializePropertyPathsWithSymbolName:(NSString*)symbolName
+{
+    PropertyPathDefs *d=dlsym(NULL, [symbolName UTF8String]);
+    if ( d ) {
+        installPropertyPathsOnClass( self , d->defs,d->count , d->defs,  0 );
+    }
+}
+
++(void)initializePropertyPaths
+{
+    [self initializePropertyPathsWithSymbolName:[NSString stringWithFormat:@"_%@_PropertyPaths_get",self.className]];
+}
+
+
++(void)initialize
+{
+    [self initializePropertyPaths];
+}
 
 @end
 
