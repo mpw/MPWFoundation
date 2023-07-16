@@ -236,6 +236,49 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     [super dealloc];
 }
 
+-(NSString *)stringValue
+{
+    return [self name];
+}
+
+
+@end
+
+
+@implementation NSObject(asReferenceTemplate)
+
+-asReferenceTemplate
+{
+   return [MPWReferenceTemplate templateWithReference:[self stringValue]];
+}
+
+@end
+
+@implementation NSString(asReferenceTemplate)
+
+-asReferenceTemplate
+{
+   return [MPWReferenceTemplate templateWithReference:self];
+}
+
+@end
+
+@implementation MPWReferenceTemplate(asReferenceTemplate)
+
+-asReferenceTemplate
+{
+   return self;
+}
+
+@end
+
+
+@implementation MPWReference(asReferenceTemplate)
+
+-asReferenceTemplate
+{
+   return [MPWReferenceTemplate templateWithReference:self];
+}
 
 @end
 

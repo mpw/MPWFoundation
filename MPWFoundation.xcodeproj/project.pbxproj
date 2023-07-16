@@ -1640,7 +1640,7 @@
 		1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWObject_fastrc.h; sourceTree = "<group>"; };
 		1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCompositeStore.h; sourceTree = "<group>"; };
 		1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWCompositeStore.m; sourceTree = "<group>"; };
-		1FD848B22A2BA4820020BCF9 /* MPWReferenceTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWReferenceTemplate.m; sourceTree = "<group>"; };
+		1FD848B22A2BA4820020BCF9 /* MPWReferenceTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = MPWReferenceTemplate.m; sourceTree = "<group>"; };
 		1FD848B32A2BA4820020BCF9 /* MPWReferenceTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWReferenceTemplate.h; sourceTree = "<group>"; };
 		1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumSelectFilter.h; sourceTree = "<group>"; };
 		1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumSelectFilter.m; sourceTree = "<group>"; };

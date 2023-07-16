@@ -343,15 +343,17 @@
 
 +(void)initializePropertyPathsWithSymbolName:(NSString*)symbolName
 {
-    PropertyPathDefs *d=dlsym(NULL, [symbolName UTF8String]);
+//    NSLog(@"-[%@ initializePropertyPathsWithSymbolName:%@]",self.className,symbolName);
+    PropertyPathDefs *d=dlsym(RTLD_DEFAULT, [symbolName UTF8String]);
     if ( d ) {
+//        NSLog(@"found symbol %p, installing",d);
         installPropertyPathsOnClass( self , d->defs,d->count , d->defs,  0 );
     }
 }
 
 +(void)initializePropertyPaths
 {
-    [self initializePropertyPathsWithSymbolName:[NSString stringWithFormat:@"_%@_PropertyPaths_get",self.className]];
+    [self initializePropertyPathsWithSymbolName:[NSString stringWithFormat:@"%@_PropertyPaths_get",self.className]];
 }
 
 

@@ -33,6 +33,9 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 -(void)addPropertyPathDefs:(PropertyPathDef*)additionalDefs count:(int)newCount
 {
     int newTotalCount = newCount + count;
+    for (int i=0;i<newCount;i++) {
+        additionalDefs[i].propertyPath=[[additionalDefs[i].propertyPath asReferenceTemplate] retain];
+    }
     if ( newTotalCount > max )  {
         int newMax = newTotalCount * 2 + 10;
         PropertyPathDef *newDefs=calloc( newMax , sizeof(PropertyPathDef));
@@ -74,11 +77,11 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
                         value = ((IMP1)(def->function))( target, _cmd, params[0]);
                         break;
                     case 2:
-                        NSLog(@"target: %@ arg0=%@ arg1=%@",target,params[0],params[1]);
+//                        NSLog(@"target: %@ arg0=%@ arg1=%@",target,params[0],params[1]);
                         value = ((IMP2)(def->function))( target, _cmd, params[0],params[1]);
                         break;
                     case 3:
-                        NSLog(@"target: %@ arg0=%@ arg1=%@ arg2=%@",target,params[0],params[1],params[2]);
+//                        NSLog(@"target: %@ arg0=%@ arg1=%@ arg2=%@",target,params[0],params[1],params[2]);
                         value = ((IMP3)(def->function))( target, _cmd, params[0],params[1],params[2]);
                         break;
                     default:
