@@ -131,9 +131,9 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             }
         }
     } else if ( [ref isRoot] ) {
-        NSLog(@"incoming isRoot");
+//        NSLog(@"incoming isRoot");
         if ( components->count >= 1) {
-            NSLog(@"isRoot");
+//            NSLog(@"isRoot");
             if (components->components[0].isWildcard) {
                 isWild=YES;
             }

@@ -1248,21 +1248,25 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	RECORDSCANPOSITION( start, len );
     start+=2;
     nameLen-=2;
-//    len-=3;
-//    attrStart=start+nameLen+1;
-//    attrLen=len-nameLen-1;
+    len-=2;
 	id localVersion;
-	tag = TAGFORCSTRING( start, nameLen);
-	encoding = [_attributes objectForKey:@"encoding"];
-	if ( encoding ) {
-		[self setStringEncodingFromIANACharset:encoding];
-	}
-	localVersion = [_attributes objectForKey:@"version"];
-	if ( localVersion ) {
-		[self setVersion:localVersion];
-	}
+    if ( nameLen == 3 && !strncmp( start, "xml", 3 )) {
+        tag=@"xml";
+        encoding = [_attributes objectForKey:@"encoding"];
+        if ( encoding ) {
+            [self setStringEncodingFromIANACharset:encoding];
+        }
+        localVersion = [_attributes objectForKey:@"version"];
+        if ( localVersion ) {
+            [self setVersion:localVersion];
+        }
+    } else {
+        tag = TAGFORCSTRING( start, nameLen);
+    }
+    start+=nameLen+1;
+    len-=nameLen+3;
 	if ( [documentHandler respondsToSelector:@selector(parser:foundProcessingInstructionWithTarget:data:)] ) {
-		[documentHandler parser:(NSXMLParser*)self foundProcessingInstructionWithTarget:tag data:(NSString*)_attributes];	// FIXME
+		[documentHandler parser:(NSXMLParser*)self foundProcessingInstructionWithTarget:tag data:[self makeData:start length:len]];	// FIXME
 	}
 	[self clearAttributes];
     return YES;

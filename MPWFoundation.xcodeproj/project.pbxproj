@@ -1895,9 +1895,9 @@
 				07DF1943006686DDC35ADD82 /* MPWMsgExpression.m */,
 				1F6EF94808E5F82B0011386A /* MPWNamedData.h */,
 				1F6EF94908E5F82B0011386A /* MPWNamedData.m */,
-				1FC97CDB0BB0A8B900F8CB51 /* MPWNumber.h */,
 				1F7FCD03264570E6008B6D1A /* NSRunLoopAdditions.h */,
 				1F7FCD04264570E6008B6D1A /* NSRunLoopAdditions.m */,
+				1FC97CDB0BB0A8B900F8CB51 /* MPWNumber.h */,
 				1FC97CDC0BB0A8B900F8CB51 /* MPWNumber.m */,
 				1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */,
 				07DF1949006686DDC35ADD82 /* MPWObject.h */,
@@ -3644,7 +3644,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\ncodesign -s - $framework/`basename $framework .framework`\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n    echo No changes, tests skipped\n    exit 0\nfi\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
+			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\ncodesign -s - $framework/`basename $framework .framework`\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n    echo No changes, tests skipped\n    exit 0\nfi\nif [ -x  ${tester}  ] ; then\n     if $tester MPWFoundation DrawingContext ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
 		1FF8FE2809B49D0200652476 /* Test */ = {
 			isa = PBXShellScriptBuildPhase;
