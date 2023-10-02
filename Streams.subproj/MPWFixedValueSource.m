@@ -55,6 +55,8 @@
 
 -(void)dealloc
 {
+    NSLog(@"deallocating MPWFixedValueSource, will stop timer");
+    [self stop];
     [_values release];
     [_valuesEnumerator release];
     [super dealloc];

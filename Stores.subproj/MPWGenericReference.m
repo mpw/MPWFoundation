@@ -98,6 +98,19 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return refs;
 }
 
+-(NSUInteger)length
+{
+    NSLog(@"-[MPWGenericReference length] on %@ -> %@",self,[NSThread callStackSymbols]);
+    return [[self name] length];
+}
+
+-(int)characterAtIndex:(NSUInteger)theIndex
+{
+    NSLog(@"-[MPWGenericReference characterAtIndex:%ld] on %@ -> %@",theIndex,self,[NSThread callStackSymbols]);
+    return [[self name] characterAtIndex:theIndex];
+}
+
+
 -(NSArray*)relativePathComponents
 {
     return [super relativePathComponents];      // shut up the compiler

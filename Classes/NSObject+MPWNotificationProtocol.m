@@ -104,8 +104,11 @@ static void installDistributedNotificationProtocol( Protocol *self , id aHandler
     unsigned int protocolCount=0;
     Protocol** protocols=class_copyProtocolList([self class], &protocolCount);
     for (int i=0;i<protocolCount;i++ ) {
+//        NSLog(@"attempt to install protocol notification[%d/%d]: %@ on %@",i,protocolCount,notificatioNameFromProtocol(protocols[i]),self );
         if (  isNotificationProtocol( protocols[i] )) {
+//            NSLog(@"will install: %@",protocols[i]);
             installNotificationProtocol(protocols[i], self);
+//            NSLog(@"did install: %@",protocols[i]);
         }
         if (  isDistributedNotificationProtocol( protocols[i] )) {
             installDistributedNotificationProtocol(protocols[i], self);

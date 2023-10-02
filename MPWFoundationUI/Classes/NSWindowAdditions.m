@@ -33,3 +33,16 @@
 
 
 @end
+
+
+@implementation NSFormatter(objectValue)
+
+-(id)objectValue:(NSString*)s
+{
+    id value=nil;
+    [self getObjectValue:&value forString:s errorDescription:nil];
+    return value;
+}
+
+
+@end
