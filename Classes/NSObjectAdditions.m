@@ -72,6 +72,16 @@
     return [[self new] with:block];
 }
 
+-at:aRefence
+{
+    NSString *path=[aRefence path];
+    return [self valueForKeyPath:path];
+}
+
+-(void)at:aRefence put:object
+{
+    [self setValue:object forKeyPath:[aRefence path]];
+}
 
 @end
 
