@@ -164,7 +164,9 @@
 
 -(MPWDirectoryBinding*)listForNames:(NSArray*)nameList
 {
-    return [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericReference collect] referenceWithPath:[nameList each]]] autorelease];
+    MPWDirectoryBinding *binding = [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericReference collect] referenceWithPath:[nameList each]]] autorelease];
+    [binding setStore:self];
+    return binding;
 }
 
 

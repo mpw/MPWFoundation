@@ -27,6 +27,15 @@ boolAccessor(fancy, setFancy)
     return contents;
 }
 
+-dicts
+{
+    NSMutableArray *dicts=[NSMutableArray array];
+    for ( id <MPWReferencing> ref in self.contents) {
+        [dicts addObject:@{ @"name": ref.path , @"value": self.store[ref] }];
+    }
+    return dicts;
+}
+
 -(long)count
 {
     return contents.count;

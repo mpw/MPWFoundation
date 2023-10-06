@@ -209,3 +209,21 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 @end
+
+
+@implementation MPWGenericReference(allKeys)
+
+-(NSArray*)allKeys
+{
+    return @[@"path"];
+}
+
+@end
+@implementation NSObject(allKeys)
+
+-(NSArray*)allKeys
+{
+    return @[@"self"];
+}
+
+@end
