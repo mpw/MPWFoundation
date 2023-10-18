@@ -485,6 +485,8 @@
 		1F93B92B2859CD7600455231 /* SSHConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F93B9292859CD7600455231 /* SSHConnection.m */; };
 		1F9403680C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9403690C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */; };
+		1F9584C62AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9726A61D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9726A71D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1574,6 +1576,7 @@
 		1F93B9292859CD7600455231 /* SSHConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHConnection.m; sourceTree = "<group>"; };
 		1F9403660C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWCaseInsensitiveSmallStringTable.h; sourceTree = "<group>"; };
 		1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWCaseInsensitiveSmallStringTable.m; sourceTree = "<group>"; };
+		1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDidChangeNotification.h; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
 		1F9726A41D00397800D76F3A /* MPWURLCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWURLCall.m; sourceTree = "<group>"; };
 		1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MPWTest (iOS).framework"; path = "../../Build/Development-iphoneos/MPWTest (iOS).framework"; sourceTree = "<group>"; };
@@ -2268,6 +2271,7 @@
 		1F7045D622313175005ED7FB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */,
 				1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */,
 				1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */,
 				1F7045D8223131C2005ED7FB /* MPWBrowser.h */,
@@ -2618,6 +2622,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F9584C62AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 				1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */,
 				1F7045DA223131C2005ED7FB /* MPWBrowser.h in Headers */,
 				1F7045B322313082005ED7FB /* MPWFoundationUI.h in Headers */,
@@ -2634,6 +2639,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
+				1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

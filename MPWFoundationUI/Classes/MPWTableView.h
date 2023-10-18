@@ -6,13 +6,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "ModelDidChangeNotification.h"
 
 @protocol MPWStorage,MPWReferencing;
 @class MPWBinding;
 
-@interface MPWTableView : NSTableView <NSTableViewDataSource>
+@interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange>
 
-@property (nonatomic, strong) MPWBinding *binding;
+@property (nonatomic, strong, nullable) MPWBinding *binding;
+@property (nonatomic, strong, nullable) NSArray* (^valueFilter)(id object);
 
 - selectedObject;
 - objectAtRow:(NSUInteger)row;

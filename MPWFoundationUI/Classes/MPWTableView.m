@@ -34,7 +34,6 @@ objectAccessor( NSMutableArray*, items, _setItems)
     [self _setItems:newItems];
 }
 
-
 -(void)writeObject:anObject
 {
     [[self items] addObject:anObject];
@@ -91,8 +90,18 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 -(void)modelDidChange:(NSNotification *)notification
 {
 //    id <MPWReferencing> changedRef=[notification object];
-//    if ( [self.ref  isMatchedByReference:changedRef] /* || [[self.ref asPositionsReference] isMatchedByReference:changedRef] */) {
-//        [self reloadData];
+//
+//    if ( self.binding) {
+//        id newItems = self.binding.value;
+//        NSLog(@"binding: %@",self.binding);
+//        NSLog(@"newItems: %@",newItems);
+//        if ( self.valueFilter ) {
+//            NSLog(@"will filter");
+//            newItems=self.valueFilter( newItems );
+//            NSLog(@"did filter: %@",newItems);
+//        }
+//        [self setItems:newItems];
+        [self reloadData];
 //    }
 }
 
@@ -150,7 +159,11 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(NSArray *)unorderedObjects
 {
-    return [self.binding value];
+    id newItems = [self.binding value];
+    if ( self.valueFilter) {
+        newItems = self.valueFilter( newItems );
+    }
+    return newItems;
 }
 
 -(NSArray *)orderObjects:(NSArray*)objects
@@ -227,3 +240,4 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 @end
+

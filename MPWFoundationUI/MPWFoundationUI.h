@@ -22,4 +22,5 @@ FOUNDATION_EXPORT const unsigned char MPWFoundationUIVersionString[];
 #import <MPWFoundationUI/MPWWindowController.h>
 #import <MPWFoundationUI/NSViewAdditions.h>
 #import <MPWFoundationUI/CLIApp.h>
+#import <MPWFoundationUI/ModelDidChangeNotification.h>
 

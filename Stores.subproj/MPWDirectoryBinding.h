@@ -25,6 +25,7 @@
 
 -(instancetype)initWithContents:(NSArray*)newContents;
 -(NSArray*)contents;
+-(NSArray*)dicts;
 
 @property (readonly) long count;
 

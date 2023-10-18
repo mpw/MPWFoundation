@@ -14,19 +14,23 @@
 
 -(id)at:(id<MPWReferencing>)aReference
 {
+    NSString *path=[aReference path];
+    if ( [aReference isRoot] || [path isEqual:@"."]) {
+        return [self listForNames:[[self dict] allKeys]];
+    }
     NSArray *components=[aReference relativePathComponents];
+    
     id result=[super at:components[0]];
     if ( components.count > 1 ) {
         components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
         NSString *remainderRef=[components componentsJoinedByString:@"/"];
         //        MPWReference *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
         result = [result at:remainderRef];
+    } else {
     }
     return result;
     
 }
-
-
 
 -(void)at:(id<MPWReferencing>)aReference put:theObject
 {
@@ -82,12 +86,24 @@
     IDEXPECT( filter.target, target, @"did write to second level");
 }
 
++(void)testGetDirectory
+{
+    MPWObjectStore *store=[self store];
+    MPWDirectoryBinding *b1=[store at:@"."];
+    INTEXPECT( b1.count, 0,@"empty");
+    store[@"hi"]=@"there";
+    MPWDirectoryBinding *b2=[store at:@"."];
+    INTEXPECT( b2.count, 1,@"1 entry");
+    IDEXPECT( [b2.children[0] path],@"hi",@"entry" );
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testObjectAtFirstLevel",
        @"testReadDeeper",
        @"testWriteDeeper",
+       @"testGetDirectory",
 			];
 }
 
