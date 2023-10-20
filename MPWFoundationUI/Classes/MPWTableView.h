@@ -11,9 +11,10 @@
 @protocol MPWStorage,MPWReferencing;
 @class MPWBinding;
 
-@interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange>
+@interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange,NSTableViewDelegate>
 
 @property (nonatomic, strong, nullable) MPWBinding *binding;
+@property (nonatomic, strong, nullable) MPWBinding *cursorRef;
 @property (nonatomic, strong, nullable) NSArray* (^valueFilter)(id object);
 
 - selectedObject;

@@ -77,6 +77,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     self.binding = (MPWBinding*)self;
     [self setItems:[NSMutableArray array]];
     [self installProtocolNotifications];
+    self.delegate = self;
     [self registerForDraggedTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData]];
 }
 
@@ -203,6 +204,14 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 - selectedObject
 {
     return [self objects][[self selectedRow]];
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)notification
+{
+    if (self.cursorRef && self.binding) {
+        MPWCursor *cursor=[MPWCursor cursorWithBinding:self.binding offset:[self selectedRow]];
+        self.cursorRef.value = cursor;
+    }
 }
 
 -(void)dealloc

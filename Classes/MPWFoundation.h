@@ -136,6 +136,10 @@
 #import <MPWFoundation/MPWStreamableBinding.h>
 #import <MPWFoundation/MPWReferenceTemplate.h>
 #import <MPWFoundation/MPWTemplateMatchingStore.h>
+#import <MPWFoundation/MPWCursor.h>
+#import <MPWFoundation/MPWInitStore.h>
+#import <MPWFoundation/MPWObjectStore.h>
+//#import <MPWFoundation/MPWPropertyPathStore.h>
 
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
 #import <MPWFoundation/MPWMASONParser.h>
