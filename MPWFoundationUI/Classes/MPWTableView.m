@@ -211,8 +211,11 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     if (self.cursorRef && self.binding) {
         MPWCursor *cursor=[MPWCursor cursorWithBinding:self.binding offset:[self selectedRow]];
         self.cursorRef.value = cursor;
+    } else {
+        
     }
 }
+
 
 -(void)dealloc
 {

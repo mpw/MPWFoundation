@@ -163,7 +163,7 @@ static NSString *extractStructType( char *s )
 
 -invokeWithTarget:target args:(va_list)args
 {
-//    NSLog(@"ivokeWithTarget:args:");
+//    NSLog(@"invokeWithTarget:args:");
     NSArray* formalParameters=nil;
     NSMutableArray *parameters=nil;
     const char *sig_in=[self typeSignature];
@@ -187,7 +187,7 @@ static NSString *extractStructType( char *s )
         int singleParamSignatureLen=1;
         //    NSLog(@"%d parameters",(int)[formalParameters count]);
         for (int i=0,signatureIndex=3;i<[formalParameters count] && signatureIndex<signatureLen;i++,signatureIndex+=singleParamSignatureLen ) {
-            //        NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
+//            NSLog(@"param[%d]: %c %x",i,signature[i+3],signature[i+3]);
             singleParamSignatureLen=1;
             if ( signature[i+3]==0) {
                 NSLog(@"ran off end of signature: %s index: %d, signatureIndex: %d formal parameter count: %d formal parameters: %@",signature,i,signatureIndex,(int)[formalParameters count],formalParameters);
@@ -206,7 +206,8 @@ static NSString *extractStructType( char *s )
                 case '@':
                 case '#':
                     theArg = va_arg( args, id );
-                    //                NSLog(@"object arg: %@",theArg);
+//                    NSLog(@"object arg: %p",theArg);
+//                    NSLog(@"object arg: %@",theArg);
                     if ( theArg == nil ) {
                         theArg=[NSNil nsNil];
                     }
