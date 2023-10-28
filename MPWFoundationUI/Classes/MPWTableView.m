@@ -211,8 +211,10 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     if (self.cursorRef && self.binding) {
         MPWCursor *cursor=[MPWCursor cursorWithBinding:self.binding offset:[self selectedRow]];
         self.cursorRef.value = cursor;
-    } else {
-        
+    }
+    if ( [self.items respondsToSelector:@selector(setOffset:)] ) {
+        [self.items setOffset:[self selectedRow]];
+        [@protocol(ModelDidChange) notify];
     }
 }
 
