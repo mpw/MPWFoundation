@@ -89,17 +89,22 @@
 
 -(void)at:ref put:value
 {
-    NSLog(@"%@ at:%@ put:%@",self,ref,value);
+//    NSLog(@"%@ at:%@ put:%@",self,ref,value);
     if ( [ref isKindOfClass:[NSNumber class]]) {
          [self replaceObjectAtIndex:[ref longValue] withObject:value];
     } else {
         NSArray *comps=[ref pathComponents];
+//        NSLog(@"comps: %@",comps);
         id target=self;
         for (int i=0;i<comps.count-1;i++) {
             NSString *comp=comps[i];
+//            NSLog(@"comps[%d]=%@",i,comp);
+//            NSLog(@"target=%@",target);
             if ( [comp isEqual:@"selectedObject"]) {
+//                NSLog(@"special handling of selectedObject");
                 target = [target selectedObject];
             } else {
+//                NSLog(@"comp: %@",comp);
                 target = [target valueForKey:comp];
             }
         }

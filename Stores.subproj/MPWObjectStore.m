@@ -37,18 +37,21 @@
 
 -(void)at:(id<MPWReferencing>)aReference put:theObject
 {
+//    NSLog(@"ObjectStore at:'%@' put:'%@'",aReference,theObject);
     NSArray *components=[aReference relativePathComponents];
-    NSString *componentToWrite=components.lastObject;
-    components=[components subarrayWithRange:NSMakeRange(0,components.count-1)];
+//    components=[components subarrayWithRange:NSMakeRange(0,components.count-1)];
     id <MPWStorage> theStore=self;
-    if ( components.count > 0 ) {
+    if ( components.count > 1 ) {
         theStore=[super at:components[0]];
-//        components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
-//        NSString *remainderRef=[components componentsJoinedByString:@"/"];
+//        NSLog(@"got the next level store: %@",theStore);
+        components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
+        NSString *remainderRef=[components componentsJoinedByString:@"/"];
         //        MPWReference *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
-//        theStore = [result at:remainderRef];
-        [theStore at:componentToWrite put:theObject];
+//        theStore = [super at:remainderRef];
+//        NSLog(@"got initial now doing reminder: '%@' <- '%@'",remainderRef,theObject);
+        [theStore at:remainderRef put:theObject];
     } else {
+        NSString *componentToWrite=components.lastObject;
         [super at:componentToWrite put:theObject];
     }
 }
