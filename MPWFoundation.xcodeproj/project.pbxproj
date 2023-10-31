@@ -1210,6 +1210,10 @@
 		1FF8FE2209B49D0200652476 /* MPWIgnoreUnknownTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F847510084642DD001AF9CD /* MPWIgnoreUnknownTrampoline.m */; };
 		1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF94908E5F82B0011386A /* MPWNamedData.m */; };
 		1FF8FE2609B49D0200652476 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
+		1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
+		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; };
+		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; };
+		1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FFA1B67288D443D0095A876 /* SSHCommandStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFA1B65288D443D0095A876 /* SSHCommandStore.h */; };
 		1FFA1B68288D443D0095A876 /* SSHCommandStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA1B66288D443D0095A876 /* SSHCommandStore.m */; };
 		1FFA48A51ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1771,6 +1775,9 @@
 		1FF6590924957007002371E9 /* MPWStreamQLite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStreamQLite.m; sourceTree = "<group>"; };
 		1FF6591224957F16002371E9 /* chinook.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = chinook.db; sourceTree = "<group>"; };
 		1FF8FE2F09B49D0200652476 /* MPWFoundation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MPWFoundation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWView_iOS.h; sourceTree = "<group>"; };
+		1FF930722AF10B60009B4DC6 /* MPWView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWView.m; sourceTree = "<group>"; };
+		1FF930732AF10B60009B4DC6 /* MPWView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWView.h; sourceTree = "<group>"; };
 		1FFA1B65288D443D0095A876 /* SSHCommandStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SSHCommandStore.h; sourceTree = "<group>"; };
 		1FFA1B66288D443D0095A876 /* SSHCommandStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SSHCommandStore.m; sourceTree = "<group>"; };
 		1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBlockTargetStream.h; sourceTree = "<group>"; };
@@ -2295,6 +2302,9 @@
 		1F7045D622313175005ED7FB /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1FF930732AF10B60009B4DC6 /* MPWView.h */,
+				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
+				1FF930722AF10B60009B4DC6 /* MPWView.m */,
 				1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */,
 				1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */,
 				1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */,
@@ -2661,6 +2671,7 @@
 				1F854E6528A02C420085034C /* NSWindowAdditions.h in Headers */,
 				1F4D4413261591960023C2C5 /* MPWWindowController.h in Headers */,
 				1F34669F28B0D1F3003257CB /* CLIApp.h in Headers */,
+				1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2668,6 +2679,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */,
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
 				1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 			);
@@ -3757,6 +3769,7 @@
 				1F7045EB223134F7005ED7FB /* MPWTableView.m in Sources */,
 				1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */,
 				1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */,
+				1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */,
 				1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */,
 				1F854E6628A02C420085034C /* NSWindowAdditions.m in Sources */,
 				1FA8F32824DCB4A900CD69D0 /* MPWFileBrowser.m in Sources */,
@@ -3768,6 +3781,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
