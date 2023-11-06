@@ -84,6 +84,21 @@
 }
 
 @end
+#import "DebugMacros.h"
+
+@implementation NSObject(testingHelpers)
+
+
+-value { return self; }
+
+-(void)assertTrue:msg  {   EXPECTTRUE([[self value] boolValue], msg ); }
+
+-(void)assertEqual:other msg:msg  {   IDEXPECT([self value],[other value] , msg ); }
+
+
+
+@end
+
 
 @implementation NSObject(ivarAccess)
 
@@ -334,7 +349,6 @@
 @end
 
 
-#import "DebugMacros.h"
 
 @interface NSObjectIvarAcccessTesting : NSObject { id a; int b; float c; NSString *d;id f; }
 @end
