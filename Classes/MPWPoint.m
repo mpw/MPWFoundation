@@ -187,6 +187,14 @@ pointArithmetic( reverseSubPoint, - )
     return 2;
 }
 
+-(BOOL)isEqual:(MPWPoint*)otherPoint
+{
+    if ( otherPoint == self ) {
+        return YES;
+    }
+    return [self x] == [otherPoint x] && [self y] == [otherPoint y];
+}
+
 @end
 
 
@@ -209,6 +217,8 @@ pointArithmetic( reverseSubPoint, - )
     return [[self asPoint] asSize];
 }
 
+
+
 @end
 #endif
 
@@ -226,7 +236,6 @@ reversePointNumberArithmetic( mulPoint )
 reversePointNumberArithmetic( reverseDivPoint)
 reversePointNumberArithmetic( addPoint )
 reversePointNumberArithmetic( reverseSubPoint )
-
 
 
 @end
@@ -320,6 +329,17 @@ reversePointNumberArithmetic( reverseSubPoint )
     FLOATEXPECTTOLERANCE(r.size.height,40,0.001,@"height" );
 }
 
++(void)testIsEqual
+{
+    MPWPoint *a=[self pointWithX:1 y:2];
+    MPWPoint *b=[self pointWithX:1 y:2];
+    MPWPoint *c=[self pointWithX:2 y:2];
+    MPWPoint *d=[self pointWithX:1 y:1];
+    IDEXPECT( a,a ,@"point equal to itself");
+    IDEXPECT( a,b ,@"point equal to same coords");
+    EXPECTFALSE( [a isEqual:c] ,@"x not equal");
+    EXPECTFALSE( [a isEqual:d] ,@"y not equal");
+}
 
 +testSelectors
 {
@@ -331,6 +351,7 @@ reversePointNumberArithmetic( reverseSubPoint )
             @"testCount",
             @"testPointValue",
             @"testAsRect",
+            @"testIsEqual",
 		nil];
 }
 
