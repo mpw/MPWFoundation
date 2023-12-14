@@ -61,6 +61,19 @@
     return self;
 }
 
+-(instancetype)connectComponents
+{
+    return self;
+}
+
+-(instancetype)initWithDictionaryAndConnect:(NSDictionary *)dict
+{
+    self=[self initWithDictionary:dict];
+    return [self connectComponents];
+}
+
+
+
 -(instancetype)with:(void (^)(NSObject *self))block {
     if ( block && self) {
         block(self);
