@@ -29,10 +29,15 @@
 
 @implementation MPWEnsureNonNilStore(testing)
 
-+(void)testNilResultRaises
++(instancetype)_testStore
 {
     MPWDictStore *base=[[[MPWDictStore alloc] initWithDictionary:[[@{ @"a": @(20) } mutableCopy] autorelease]] autorelease];
-    MPWEnsureNonNilStore *store=[MPWEnsureNonNilStore storeWithSource:base];
+    return [MPWEnsureNonNilStore storeWithSource:base];
+}
+
++(void)testNilResultRaises
+{
+    MPWEnsureNonNilStore *store=[self _testStore];;
     id dummy=nil;
     @try {
         dummy=store[@"b"];
@@ -43,10 +48,16 @@
     EXPECTNIL(dummy,@"should still be nil");
 }
 
++(void)testNonNilResultDoesNotRaise
+{
+    IDEXPECT( [self _testStore][@"a"],@(20),@"value that exists should just be retrieved");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
-			@"testNilResultRaises",
+       @"testNilResultRaises",
+       @"testNonNilResultDoesNotRaise",
 			];
 }
 
