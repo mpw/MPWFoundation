@@ -11,7 +11,8 @@
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
     if (anObject == nil ) {
-        @throw [NSException exceptionWithName:@"nilnotallowed" reason:@"object was nil but should not have been" userInfo:@{
+        NSString *reason=[NSString stringWithFormat:@"%@ was nil but should not have been",[aReference path]];
+        @throw [NSException exceptionWithName:@"nilnotallowed" reason:reason userInfo:@{
             @"ref": aReference,
             @"store" : self.source
         }];

@@ -586,9 +586,9 @@
 		1FB2C88F217760DF0061C3F9 /* MPWJSONWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */; };
 		1FB2C890217760DF0061C3F9 /* MPWJSONWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */; };
 		1FB2C891217760DF0061C3F9 /* MPWJSONWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB2C88B217760DF0061C3F9 /* MPWJSONWriter.m */; };
-		1FB561F72B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; };
-		1FB561F82B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; };
-		1FB561F92B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; };
+		1FB561F72B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB561F82B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB561F92B3ED658009FC583 /* MPWEnsureNonNilStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FB561F52B3ED658009FC583 /* MPWEnsureNonNilStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FB561FA2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB561F62B3ED658009FC583 /* MPWEnsureNonNilStore.m */; };
 		1FB561FB2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB561F62B3ED658009FC583 /* MPWEnsureNonNilStore.m */; };
 		1FB561FC2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FB561F62B3ED658009FC583 /* MPWEnsureNonNilStore.m */; };

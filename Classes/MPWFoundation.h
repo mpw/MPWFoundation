@@ -139,6 +139,7 @@
 #import <MPWFoundation/MPWCursor.h>
 #import <MPWFoundation/MPWInitStore.h>
 #import <MPWFoundation/MPWObjectStore.h>
+#import <MPWFoundation/MPWEnsureNonNilStore.h>
 //#import <MPWFoundation/MPWPropertyPathStore.h>
 
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
