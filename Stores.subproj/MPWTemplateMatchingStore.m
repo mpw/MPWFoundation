@@ -90,6 +90,9 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
                 }
             } else {
                 value = def->method;
+                if ( params[0]==nil ) {         //  workaround for empty paths in HTTP
+                    params[0]=@"";
+                }
                 NSArray *paramArray = [NSArray arrayWithObjects:params count:numParams+extraParamCount];
                 if ( [value respondsToSelector:@selector(evaluateOnObject:parameters:)]) {
                     //                NSLog(@"will evaluate with parameters: %@",params);
