@@ -102,6 +102,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 //    NSLog(@"getParameters:forMatchedReference: %@/%@",[ref class],ref);
     int currentParam=0;
     NSArray *pathComponents=[ref relativePathComponents];
+    BOOL hasTrailingSlash=[ref hasTrailingSlash];
     long pathCount = pathComponents.count;
     BOOL isWild=NO;
     if ( pathCount > 0 ) {
@@ -123,6 +124,9 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
                 isWild=YES;
                 if ( argName ) {
                     nextMatch=[[pathComponents subarrayWithRange:NSMakeRange(i,pathComponents.count-i)] componentsJoinedByString:@"/"];
+                   if ( hasTrailingSlash ) {
+                      nextMatch = [nextMatch stringByAppendingString:@"/"];
+                   }
                 }
             }
             if (nextMatch) {
@@ -360,7 +364,15 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     EXPECTNOTNIL(result,@"got a match");
     INTEXPECT(result.count,2,@"two bound vars");
     IDEXPECT(result[@"arg2"],@"cruel/remainder",@"binding for arg2");
-    
+}
+
++(void)testMatchPathWithSlashAtEndAgainstWildcard
+{
+   MPWReferenceTemplate *pp=[self templateWithString:@"hello/*:arg2"];
+   NSDictionary *result=[pp bindingsForMatchedPath:@"hello/slash/"];
+   EXPECTNOTNIL(result,@"got a match");
+   INTEXPECT(result.count,1,@"two bound vars");
+   IDEXPECT(result[@"arg2"],@"slash/",@"binding for arg2");
 }
 
 +(void)testMatchRootAgainstWildcard
@@ -416,6 +428,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
              @"testMatchAgainstPathWithParameters",
              @"testMatchAgainstPathWithParametersReturningBindings",
              @"testMatchAgainstWildcard",
+             @"testMatchPathWithSlashAtEndAgainstWildcard",
              @"testMatchRootAgainstWildcard",
              @"testMatchEmptyAgainstWildcard",
              @"testListFormalParameters",

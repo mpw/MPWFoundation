@@ -87,6 +87,11 @@
     return self;
 }
 
+-(BOOL)hasTrailingSlash
+{
+    return [self hasSuffix:@"/"];
+}
+
 -(NSArray<NSString*>*)pathComponents
 {
     return [self componentsSeparatedByString:@"/"];

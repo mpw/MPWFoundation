@@ -12,7 +12,7 @@
 
 -(id)at:(id<MPWReferencing>)aReference
 {
-    NSLog(@"at: %@",aReference);
+//    NSLog(@"at: %@",aReference);
     id tempResult=self.dict;
         NSArray *pathComponents=[aReference relativePathComponents];
         for (NSString *step in pathComponents) {
@@ -23,13 +23,13 @@
             }
 //            NSLog(@"after step: %@",tempResult);
         }
-        NSLog(@"return: %@",[tempResult class]);
+//        NSLog(@"return: %@",[tempResult class]);
         return tempResult;
 }
 
 -(NSArray<MPWReferencing> *)childrenOfReference:(id<MPWReferencing>)aReference
 {
-    NSLog(@"childrenOfReference: %@",aReference);
+//    NSLog(@"childrenOfReference: %@",aReference);
     id base =  [self at:aReference];
     NSString *path=[aReference path];
     path = [path hasPrefix:@"/"] ? [path substringFromIndex:1] : path;
@@ -44,7 +44,7 @@
         }
         retval = result;
     }
-    NSLog(@"children: %@",retval);
+//    NSLog(@"children: %@",retval);
     return retval;
 }
 
@@ -52,7 +52,7 @@
 {
     id element = [self at:aReference];
     BOOL hasChildren = [element isKindOfClass:[NSArray class]] || [element isKindOfClass:[NSDictionary class]];
-    NSLog(@"%@ hasChildren: %d",aReference,hasChildren);
+//    NSLog(@"%@ hasChildren: %d",aReference,hasChildren);
     return hasChildren;
 }
 

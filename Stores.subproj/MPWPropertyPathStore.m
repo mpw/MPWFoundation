@@ -169,10 +169,16 @@ void installPropertyPathsOnClass( Class targetClass, PropertyPathDef* getters,in
     IDEXPECT( t.value, @"theBlubVal", @"set was successfull");
 }
 
++(void)testTrailingSlashMatersForPropertyPathStore
+{
+    
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testPropertyPathStoreForDict",
+//       @"testTrailingSlashMatersForPropertyPathStore",
        @"testConstructPropertyPathStoreAndAttachToClass",
    ];
 }

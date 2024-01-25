@@ -165,6 +165,13 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
     EXPECTNIL((store[@"key/path"]),@"simple lookup of non-existent complex path");
 }
 
++(void)testTrailingSlashMatters
+{
+    MPWTemplateMatchingStore *store=[self store];
+    store[@"key/"]=@"value";
+    IDEXPECT((store[@"key/"]), @"value",@"simple lookup");
+}
+
 +(void)testWildcardMatchesRoot
 {
     MPWTemplateMatchingStore *store=[self store];
@@ -242,6 +249,7 @@ static id matchedMethod( id self, SEL _cmd, NSString *matched1, id ref )
        @"testEvaluateWithPathParamters",
        @"testWildcardMatchesRoot",
        @"testSlashWildcardMatchesRoot",
+       @"testTrailingSlashMatters",
        @"testEvaluateFunction",
        @"testEvaluateFunctionOnObjectWithAdditionalParams",
 			];

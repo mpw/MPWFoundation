@@ -220,7 +220,7 @@ typedef id (^ZeroArgBlock)(void);
         if (!blockClass) {
             blockClass=NSClassFromString(@"_NSBlock");
         }
-        NSLog(@"blockClass: %@",blockClass);
+//        NSLog(@"blockClass: %@",blockClass);
 
         IMP theImp=imp_implementationWithBlock( ^(id blockSelf, id argument){ ((OneArgBlock)blockSelf)(argument); } );
 #pragma clang diagnostic push

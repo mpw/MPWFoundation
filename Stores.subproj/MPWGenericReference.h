@@ -12,6 +12,7 @@
 -(void)setPath:(NSString*)path;         // legacy/compatibility
 -(NSString*)identifierName;
 -(BOOL)isRoot;
+-(BOOL)hasTrailingSlash;
 
 @end
 

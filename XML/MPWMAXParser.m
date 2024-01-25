@@ -1822,7 +1822,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 
 +(void)testUTF8Attributes
 {
-    NSLog(@"===testUTF8Attributes====");
+//    NSLog(@"===testUTF8Attributes====");
 	MPWMAXParser* parser=[self domParser];
 	id xmlData=[self frameworkResource:@"Faehre" category:@"xml"];
 	id dom=nil;
@@ -1830,7 +1830,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	[parser parse:xmlData];
 	dom=[parser parseResult];
 	faehre=[[(MPWXmlElement*)[dom childAtIndex:0] attributes] objectForKey:@"Art"];
-    NSLog(@"faehre: %@",faehre);
+//    NSLog(@"faehre: %@",faehre);
     INTEXPECT( [faehre characterAtIndex:0], 'F', @"Non-Umlaut in UTF-8");
 	INTEXPECT( [faehre characterAtIndex:1], 228, @"Umlaut in UTF-8");
 }

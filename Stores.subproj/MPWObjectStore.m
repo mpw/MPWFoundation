@@ -25,10 +25,10 @@
         components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
         NSString *remainderRef=[components componentsJoinedByString:@"/"];
         //        MPWReference *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
-        NSLog(@"initial result: %@",result);
-        NSLog(@"remainder path: '%@'",remainderRef);
+//        NSLog(@"initial result: %@",result);
+//        NSLog(@"remainder path: '%@'",remainderRef);
         result = [result at:remainderRef];
-        NSLog(@"result: %@",result);
+//        NSLog(@"result: %@",result);
     } else {
     }
     return result;
