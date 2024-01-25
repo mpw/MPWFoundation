@@ -105,8 +105,9 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     BOOL hasTrailingSlash=[ref hasTrailingSlash];
     long pathCount = pathComponents.count;
     BOOL isWild=NO;
+   long componentCount = components->count;
     if ( pathCount > 0 ) {
-//        NSLog(@"have path components: %ld",pathCount);
+//        NSLog(@"have path components in path: %ld in matcher: %ld ",pathCount,componentCount);
         for (long i=0, max=MIN(pathCount,components->count);i<max;i++) {
             NSString *segment=pathComponents[i];
             ReferenceTemplateComponent *component=&components->components[i];
@@ -115,6 +116,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
             NSString *nextMatch=nil;
             
             if ( matcherName ) {
+//               NSLog(@"try to match name: %@ to segment: %@",matcherName,segment);
                 if ( ![matcherName isEqualToString:segment]) {
                     return NO;
                 }
@@ -134,7 +136,16 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
                 nextMatch=nil;
             }
         }
-    } else if ( [ref isRoot] ) {
+//       NSLog(@"at end of match loop");
+       if ( componentCount == pathCount+1 && hasTrailingSlash ) {
+          // match a trailing slash with a wildcard
+          ReferenceTemplateComponent *component=&components->components[componentCount-1];
+          if ( component->isWildcard ) {
+             params[currentParam++]=@"";
+             pathCount++;
+          }
+       }
+    } else if ( [ref isRoot] || componentCount==0) {
 //        NSLog(@"incoming isRoot");
         if ( components->count >= 1) {
 //            NSLog(@"isRoot");
@@ -144,7 +155,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
         }
     }
     
-    if ( isWild || pathComponents.count == components->count) {
+    if ( isWild || pathCount == componentCount) {
         return YES;
     } else {
         return NO;
@@ -371,16 +382,26 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
    MPWReferenceTemplate *pp=[self templateWithString:@"hello/*:arg2"];
    NSDictionary *result=[pp bindingsForMatchedPath:@"hello/slash/"];
    EXPECTNOTNIL(result,@"got a match");
-   INTEXPECT(result.count,1,@"two bound vars");
+   INTEXPECT(result.count,1,@"one bound var");
    IDEXPECT(result[@"arg2"],@"slash/",@"binding for arg2");
+}
+
++(void)testMatchPathWithOnlyTheSlashAtEndAgainstWildcard
+{
+   MPWReferenceTemplate *pp=[self templateWithString:@"hello/*:arg2"];
+   NSDictionary *result=[pp bindingsForMatchedPath:@"hello/"];
+   EXPECTNOTNIL(result,@"got a match");
+   INTEXPECT(result.count,1,@"one bound vars");
+   IDEXPECT(result[@"arg2"],@"",@"binding for arg2");
+   NSDictionary *resultWithoutSlash=[pp bindingsForMatchedPath:@"hello"];
+   EXPECTNIL(resultWithoutSlash, @"should no match");
 }
 
 +(void)testMatchRootAgainstWildcard
 {
-    NSLog(@"testMatchRootAgainstWildcard");
     MPWReferenceTemplate *pp=[self templateWithString:@"*"];
     NSArray *result=[pp parametersForMatchedReference:@"/"];
-    NSLog(@"done: testMatchRootAgainstWildcard: %@",result);
+
     EXPECTNOTNIL(result,@"got a match");
 }
 
@@ -429,6 +450,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
              @"testMatchAgainstPathWithParametersReturningBindings",
              @"testMatchAgainstWildcard",
              @"testMatchPathWithSlashAtEndAgainstWildcard",
+             @"testMatchPathWithOnlyTheSlashAtEndAgainstWildcard",
              @"testMatchRootAgainstWildcard",
              @"testMatchEmptyAgainstWildcard",
              @"testListFormalParameters",
