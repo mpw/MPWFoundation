@@ -136,13 +136,15 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
                 nextMatch=nil;
             }
         }
+       if ( hasTrailingSlash) {
+          pathCount++;
+       }
 //       NSLog(@"at end of match loop");
-       if ( componentCount == pathCount+1 && hasTrailingSlash ) {
+       if ( componentCount == pathCount && hasTrailingSlash ) {
           // match a trailing slash with a wildcard
           ReferenceTemplateComponent *component=&components->components[componentCount-1];
           if ( component->isWildcard ) {
              params[currentParam++]=@"";
-             pathCount++;
           }
        }
     } else if ( [ref isRoot] || componentCount==0) {
@@ -397,6 +399,13 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
    EXPECTNIL(resultWithoutSlash, @"should no match");
 }
 
++(void)testPathWithSlashShouldNotMatchTemplateWithout
+{
+   MPWReferenceTemplate *pp=[self templateWithString:@"hello"];
+   NSDictionary *result=[pp bindingsForMatchedPath:@"hello/"];
+   EXPECTNIL(result,@"should not match");
+}
+
 +(void)testMatchRootAgainstWildcard
 {
     MPWReferenceTemplate *pp=[self templateWithString:@"*"];
@@ -450,6 +459,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
              @"testMatchAgainstPathWithParametersReturningBindings",
              @"testMatchAgainstWildcard",
              @"testMatchPathWithSlashAtEndAgainstWildcard",
+             @"testPathWithSlashShouldNotMatchTemplateWithout",
              @"testMatchPathWithOnlyTheSlashAtEndAgainstWildcard",
              @"testMatchRootAgainstWildcard",
              @"testMatchEmptyAgainstWildcard",

@@ -59,8 +59,8 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 
 -(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
-    id params[100];
-    
+    id params[100]={nil,nil,nil,nil,nil,nil};
+//    NSLog(@"at: %@ for: %@ with %d exptra params",aReference,target,extraParamCount);
     for ( long i=0; i<count; i++ ) {
         PropertyPathDef *def=&defs[i];
         if ( [def->propertyPath getParameters:params forMatchedReference:aReference] ) {
@@ -72,7 +72,6 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
             }
             if ( def->function) {
                 switch ( totalParams ) {
-                        
                     case 1:
                         value = ((IMP1)(def->function))( target, _cmd, params[0]);
                         break;
@@ -169,7 +168,7 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 {
     MPWTemplateMatchingStore *store=[self store];
     store[@"key/"]=@"value";
-    IDEXPECT((store[@"key/"]), @"value",@"simple lookup");
+    IDEXPECT((store[([MPWGenericReference referenceWithPath:@"key/"])]), @"value",@"simple lookup");
 }
 
 +(void)testWildcardMatchesRoot
