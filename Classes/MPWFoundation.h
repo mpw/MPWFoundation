@@ -142,6 +142,8 @@
 #import <MPWFoundation/MPWEnsureNonNilStore.h>
 //#import <MPWFoundation/MPWPropertyPathStore.h>
 
+#import <MPWFoundation/MPWMAXParser.h>
+#import <MPWFoundation/MPWXmlParser.h>
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
 #import <MPWFoundation/MPWMASONParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
