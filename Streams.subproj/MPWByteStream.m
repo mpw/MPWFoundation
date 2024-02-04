@@ -12,6 +12,7 @@
 #import <objc/message.h>
 #import <objc/runtime.h>
 #import "NSNil.h"
+#import "MPWStringTemplate.h"
 
 @interface NSString(fastCString)
 
@@ -491,46 +492,10 @@ intAccessor( indentAmount , setIndentAmount )
 
 -(void)writeInterpolatedString:(NSString*)s withEnvironment:(MPWAbstractStore*)env
 {
-//    NSLog(@"writeInterpolatedString: %@ withEnvironment: %@",s,env);
-    long curIndex=0;
-    long maxIndex=[s length];
-    while (curIndex < maxIndex) {
-    
-        NSRange leftBrace=[s rangeOfString:@"{"
-                                   options:0
-                                     range:NSMakeRange(curIndex,maxIndex-curIndex)];
-        if ( leftBrace.location == NSNotFound ) {
-            break;
-        }
-        if ( !isascii([s characterAtIndex:leftBrace.location+1]) ) {
-            curIndex=leftBrace.location+1;
-            continue;
-        }
-        NSRange rightBrace=[s rangeOfString:@"}"
-                                    options:0
-                                      range:NSMakeRange(curIndex,maxIndex-curIndex)];
-        if ( rightBrace.location == NSNotFound ) {
-            break;
-        }
-        NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
-        NSString *varName=[s substringWithRange:varRange];
-        [self outputString:[s substringWithRange:NSMakeRange(curIndex,leftBrace.location-curIndex)]];
-//        NSLog(@"environment: %@",env);
-//        NSLog(@"varName: %@",varName);
-        id reference = [env referenceForPath:varName];
-//        NSLog(@"reference: %@ - %@",[reference schemeName],[reference path]);
-//        NSLog(@"will get value");
-        id value=[env at:reference];
-//        NSLog(@"did get value");
-//        NSLog(@"value: %@",value);
-        [self writeObject:value];
-        curIndex = rightBrace.location+1;
-    }
-    if ( curIndex <= maxIndex ) {
-        [self outputString:[s substringFromIndex:curIndex]];
-    }
-}
 
+    MPWStringTemplate *t=[MPWStringTemplate templateWithString:s];
+    [t writeOnByteStream:self withBindings:env];
+}
 
 typedef void (^FileBlock)(FILE *f);
 //TypeName blockName = ^returnType(parameters) {...};

@@ -42,19 +42,19 @@
         if ( rightBrace.location == NSNotFound ) {
             break;
         }
-        curIndex = rightBrace.location + rightBrace.length + 1;
+        curIndex = rightBrace.location + rightBrace.length;
         NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
         NSString *varName=[s substringWithRange:varRange];
         [frags addObject:varName];
 //        [self outputString:[s         curIndex = rightBrace.location+1;
     }
     if ( curIndex <= maxIndex ) {
-        [frags addObject:[s substringFromIndex:curIndex-1]];
+        [frags addObject:[s substringFromIndex:curIndex]];
     }
 }
 
 
-CONVENIENCEANDINIT(template, initWithString:(NSString*)aString)
+CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 {
     self=[super init];
     self.fragments=[NSMutableArray array];
@@ -83,22 +83,29 @@ CONVENIENCEANDINIT(template, initWithString:(NSString*)aString)
 
 +(void)testNumberOfParsedFragments
 {
-    INTEXPECT([self templateinitWithString:@"first {var} second"].fragments.count, 3, @"number of fragments parsed");
+    INTEXPECT([self templateWithString:@"first {var} second"].fragments.count, 3, @"number of fragments parsed");
 }
 
 +(void)testParsedFragments
 {
-    IDEXPECT([self templateinitWithString:@"first{var}second"].fragments, (@[@"first",@"var",@"second"]), @"ragments parsed");
+    IDEXPECT([self templateWithString:@"first{var}second"].fragments, (@[@"first",@"var",@"second"]), @"ragments parsed");
 }
+
++(void)testParsedFiveFragments
+{
+    IDEXPECT([self templateWithString:@"Hello {var} {var2}!"].fragments, (@[@"Hello ",@"var",@" ", @"var2",@"!"]), @"ragments parsed");
+}
+
+
 
 +(void)testAlwaysStartWithConstantStringEvenIfEmpty
 {
-    INTEXPECT([self templateinitWithString:@"{var} second"].fragments.count, 3, @"number of fragments parsed");
+    INTEXPECT([self templateWithString:@"{var} second"].fragments.count, 3, @"number of fragments parsed");
 }
 
 +(void)testWriteResultWithSubstition
 {
-    MPWStringTemplate *t=[self templateinitWithString:@"first {var} second"];
+    MPWStringTemplate *t=[self templateWithString:@"first {var} second"];
     MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
     [t writeOnByteStream:output withBindings:@{ @"var": @"value of var"}];
     IDEXPECT( output.target, @"first value of var second",@"substituted");
@@ -110,7 +117,8 @@ CONVENIENCEANDINIT(template, initWithString:(NSString*)aString)
 			@"testNumberOfParsedFragments",
             @"testParsedFragments",
             @"testAlwaysStartWithConstantStringEvenIfEmpty",
-            @"testWriteResultWithSubstition"
+            @"testWriteResultWithSubstition",
+            @"testParsedFiveFragments",
 			];
 }
 
