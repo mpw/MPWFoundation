@@ -320,10 +320,6 @@ defineArithOp( div, true )
     [[@(0) to:[self sub:@(1)]] do:aBlock];
 }
 
--collect:aBlock
-{
-    return [[@(0) to:[self sub:@(1)]] collect:aBlock];
-}
 
 -(void)repeat:aBlock
 {

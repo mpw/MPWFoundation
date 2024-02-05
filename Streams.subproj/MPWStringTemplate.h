@@ -9,10 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPWByteStream;
+
 @interface MPWStringTemplate : NSObject
 
 +(instancetype)templateWithString:(NSString*)s;
 -(instancetype)initWithString:(NSString*)s;
+-(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:(NSDictionary*)bindings;
 
 
 @end

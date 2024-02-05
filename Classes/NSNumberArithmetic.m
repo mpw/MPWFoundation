@@ -247,6 +247,25 @@ static int fib( int n) {
 
 }
 
+-(void)do:aBlock
+{
+    if ( self == (id)kCFBooleanTrue) {
+        [aBlock value:self];
+    }
+}
+
+-collect:aBlock
+{
+    if ( self == (id)kCFBooleanTrue ) {
+        return [aBlock value:self];
+    } else if ( self == (id)kCFBooleanFalse) {
+        return nil;
+    } else
+       return [[@(0) to:[self sub:@(1)]] collect:aBlock];
+;
+}
+
+
 @end
 
 @implementation NSValue(encoding)
