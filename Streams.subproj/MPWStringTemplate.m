@@ -7,19 +7,20 @@
 
 #import "MPWStringTemplate.h"
 #import "MPWByteStream.h"
+#import "MPWAbstractStore.h"
 
 @interface MPWStringTemplate()
 
-@property(nonatomic,strong) NSMutableArray *fragments;
+@property(nonatomic,strong) NSArray *fragments;
 
 @end
 
 @implementation MPWStringTemplate
 
--(void)parseString:(NSString*)s
++(NSArray*)parseString:(NSString*)s
 {
     //    NSLog(@"writeInterpolatedString: %@ withEnvironment: %@",s,env);
-    NSMutableArray *frags=self.fragments;
+    NSMutableArray *frags=[NSMutableArray array];
     long curIndex=0;
     long maxIndex=[s length];
     while (curIndex < maxIndex) {
@@ -51,28 +52,61 @@
     if ( curIndex <= maxIndex ) {
         [frags addObject:[s substringFromIndex:curIndex]];
     }
+    return frags;
 }
 
+-(instancetype)initWithFragments:(NSArray*)newFrags
+{
+    self=[super init];
+    self.fragments = newFrags;
+    return self;
+}
 
 CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 {
-    self=[super init];
-    self.fragments=[NSMutableArray array];
-    [self parseString:aString];
-    return self;
+    return [self initWithFragments:[[self class] parseString:aString]];
+}
+
+-(void)writeFragments:(NSArray*)frags onByteStream:(MPWByteStream*)aStream withBindings:env
+{
+    for (int i=0;i<frags.count;i+=2 ) {
+        [aStream outputString:frags[i]];
+        if (i+1 < frags.count ) {
+            NSString *name = frags[i+1];
+            id value = nil;
+            if ( [name isEqual:@"."]) {
+                value = env;
+            } else if ( [name hasPrefix:@"#"]) {
+                name=[name substringFromIndex:1];
+                NSMutableArray *fragments=[NSMutableArray array];
+                for (int j=i+2;i<frags.count;j++) {
+                    if ( [frags[j] hasPrefix:@"/"] ) {
+                        i=j-1;
+                        break;
+                    }
+                    [fragments addObject:frags[j]];
+                }
+                NSLog(@"sub fragments: %@",fragments);
+                id reference = [env referenceForPath:name];
+                id array = [env at:reference];
+                for (id obj in array ) {
+                    NSLog(@"evaluate with %@",obj);
+                    [self writeFragments:fragments onByteStream:aStream withBindings:obj];
+                }
+                
+                continue;
+            } else {
+                id reference = [env referenceForPath:name];
+                value = [env at:reference];
+            }
+            [aStream writeObject:value];
+        }
+    }
 }
 
 -(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:env
 {
-    NSArray *frags=self.fragments;
-    for (int i=0;i<frags.count;i+=2 ) {
-        [aStream outputString:frags[i]];
-        if (i+1 < frags.count ) {
-            id reference = [env referenceForPath:frags[i+1]];
-
-            [aStream writeObject:[env at:reference]];
-        }
-    }
+    [self writeFragments:self.fragments onByteStream:aStream withBindings:env];
 }
 
 @end
@@ -113,6 +147,22 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( output.target, @"first value of var second",@"substituted");
 }
 
++(void)testSubstituteWholeContext
+{
+    MPWStringTemplate *t=[self templateWithString:@"first {.} second"];
+    MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [t writeOnByteStream:output withBindings:@"single value"];
+    IDEXPECT( output.target, @"first single value second",@"substituted");
+}
+
++(void)testIterateOverArrayWithNestedReference
+{
+    MPWStringTemplate *t=[self templateWithString:@"Array: {#array}Entry {.} {/array}After"];
+    MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [t writeOnByteStream:output withBindings:@{@"array": @[ @"First", @"Second", @"Third"  ]}];
+    IDEXPECT( output.target, @"Array: Entry First Entry Second Entry Third After", @"collect over array");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -121,6 +171,8 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testAlwaysStartWithConstantStringEvenIfEmpty",
             @"testWriteResultWithSubstition",
             @"testParsedFiveFragments",
+            @"testSubstituteWholeContext",
+            @"testIterateOverArrayWithNestedReference",
 			];
 }
 

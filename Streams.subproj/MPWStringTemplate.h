@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)templateWithString:(NSString*)s;
 -(instancetype)initWithString:(NSString*)s;
--(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:(NSDictionary*)bindings;
+-(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:bindings;
 
 
 @end
