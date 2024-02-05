@@ -62,13 +62,15 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     return self;
 }
 
--(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:(NSDictionary*)bindings
+-(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:env
 {
     NSArray *frags=self.fragments;
     for (int i=0;i<frags.count;i+=2 ) {
         [aStream outputString:frags[i]];
         if (i+1 < frags.count ) {
-            [aStream writeObject:bindings[frags[i+1]]];
+            id reference = [env referenceForPath:frags[i+1]];
+
+            [aStream writeObject:[env at:reference]];
         }
     }
 }
