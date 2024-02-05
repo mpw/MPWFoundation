@@ -20,4 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface NSString(templateEval)
+
+-(NSString*)evaluateAsTemplateWith:env;
+
+@end
+
 NS_ASSUME_NONNULL_END

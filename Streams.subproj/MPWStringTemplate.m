@@ -87,11 +87,11 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
                     }
                     [fragments addObject:frags[j]];
                 }
-                NSLog(@"sub fragments: %@",fragments);
+//              NSLog(@"sub fragments: %@",fragments);
                 id reference = [env referenceForPath:name];
                 id array = [env at:reference];
                 for (id obj in array ) {
-                    NSLog(@"evaluate with %@",obj);
+//                    NSLog(@"evaluate with %@",obj);
                     [self writeFragments:fragments onByteStream:aStream withBindings:obj];
                 }
                 
@@ -112,6 +112,26 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 @end
 
+@implementation NSString(templateEval)
+
+-(NSString*)evaluateAsTemplateWith:env
+{
+    id result=[NSMutableString string];
+    @autoreleasepool {
+        MPWStringTemplate *t=[MPWStringTemplate templateWithString:self];
+        MPWByteStream *s=[MPWByteStream streamWithTarget:result];
+        [t writeOnByteStream:s withBindings:env];
+    }
+    return result;
+}
+
+@end
+
+@implementation NSObject(referenceForPath)
+
+-referenceForPath:aPath { return aPath; }
+
+@end
 
 #import <MPWFoundation/DebugMacros.h>
 
@@ -169,12 +189,17 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     @try {
         MPWStringTemplate *t=[self templateWithString:@"Array: {#array}Entry {.} {/notarray}After"];
         MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
-        [t writeOnByteStream:output withBindings:@{@"array": @[ @"First", @"Second", @"Third"  ]}];
+        [t writeOnByteStream:output withBindings:nil];
     } @catch ( NSException* exception ) {
         EXPECTTRUE([[exception reason] containsString:@"closing tag '/notarray' must match opening tag 'array'"],@"the exception we expected");
         return ;
     }
     EXPECTTRUE(false, @"non-matching tags should have raised");
+}
+
++(void)testEvaluateStringAsTemplateDirectly
+{
+    IDEXPECT( ([@"Array: {#array}Entry {.} {/array}After" evaluateAsTemplateWith:@{@"array": @[ @"First", @"Second", @"Third"  ]}]),@"Array: Entry First Entry Second Entry Third After",@"convenience works");
 }
 
 +(NSArray*)testSelectors
@@ -188,6 +213,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testSubstituteWholeContext",
             @"testIterateOverArrayWithNestedReference",
             @"testNonMatchingClosingTagIsCaught",
+            @"testEvaluateStringAsTemplateDirectly",
 			];
 }
 
