@@ -81,6 +81,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
                 NSMutableArray *fragments=[NSMutableArray array];
                 for (int j=i+2;i<frags.count;j++) {
                     if ( [frags[j] hasPrefix:@"/"] ) {
+                        NSAssert2( [[frags[j] substringFromIndex:1] isEqual:name],@"closing tag '%@' must match opening tag '%@'",frags[j],name);
                         i=j-1;
                         break;
                     }
@@ -163,6 +164,19 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( output.target, @"Array: Entry First Entry Second Entry Third After", @"collect over array");
 }
 
++(void)testNonMatchingClosingTagIsCaught
+{
+    @try {
+        MPWStringTemplate *t=[self templateWithString:@"Array: {#array}Entry {.} {/notarray}After"];
+        MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
+        [t writeOnByteStream:output withBindings:@{@"array": @[ @"First", @"Second", @"Third"  ]}];
+    } @catch ( NSException* exception ) {
+        EXPECTTRUE([[exception reason] containsString:@"closing tag '/notarray' must match opening tag 'array'"],@"the exception we expected");
+        return ;
+    }
+    EXPECTTRUE(false, @"non-matching tags should have raised");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -173,6 +187,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testParsedFiveFragments",
             @"testSubstituteWholeContext",
             @"testIterateOverArrayWithNestedReference",
+            @"testNonMatchingClosingTagIsCaught",
 			];
 }
 
