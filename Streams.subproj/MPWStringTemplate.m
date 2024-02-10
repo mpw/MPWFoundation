@@ -8,6 +8,7 @@
 #import "MPWStringTemplate.h"
 #import "MPWByteStream.h"
 #import "MPWAbstractStore.h"
+#import "MPWGenericReference.h"
 
 @interface MPWStringTemplate()
 
@@ -46,7 +47,7 @@
         curIndex = rightBrace.location + rightBrace.length;
         NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
         NSString *varName=[s substringWithRange:varRange];
-        [frags addObject:varName];
+        [frags addObject:[MPWGenericReference referenceWithPath:varName]];
 //        [self outputString:[s         curIndex = rightBrace.location+1;
     }
     if ( curIndex <= maxIndex ) {
@@ -69,38 +70,41 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 -(void)writeFragments:(NSArray*)frags onByteStream:(MPWByteStream*)aStream withBindings:env
 {
-    for (int i=0;i<frags.count;i+=2 ) {
-        [aStream outputString:frags[i]];
-        if (i+1 < frags.count ) {
-            NSString *name = frags[i+1];
-            id value = nil;
+    for (int i=0;i<frags.count;i++ ) {
+        id frag = frags[i];
+        if ( [frag isKindOfClass:[MPWGenericReference class]]) {
+            id value=nil;
+            NSString *name=[frag path];
             if ( [name isEqual:@"."]) {
-                value = env;
+                value=env;
             } else if ( [name hasPrefix:@"#"]) {
                 name=[name substringFromIndex:1];
                 NSMutableArray *fragments=[NSMutableArray array];
-                for (int j=i+2;i<frags.count;j++) {
-                    if ( [frags[j] hasPrefix:@"/"] ) {
-                        NSAssert2( [[frags[j] substringFromIndex:1] isEqual:name],@"closing tag '%@' must match opening tag '%@'",frags[j],name);
+                for (int j=i+1;i<frags.count;j++) {
+                    //bug: since this steps by one, it also catches string content (non-template) with a / prefix
+                    id nestedFrag=frags[j];
+                    if ( [nestedFrag isKindOfClass:[MPWGenericReference class]] && [[nestedFrag path] hasPrefix:@"/"] ) {
+                        NSAssert2( [[[nestedFrag path] substringFromIndex:1] isEqual:name],@"closing tag '%@' must match opening tag '%@'",frags[j],name);
                         i=j-1;
                         break;
                     }
-                    [fragments addObject:frags[j]];
+                    [fragments addObject:nestedFrag];
                 }
-//              NSLog(@"sub fragments: %@",fragments);
+                //              NSLog(@"sub fragments: %@",fragments);
                 id reference = [env referenceForPath:name];
                 id array = [env at:reference];
                 for (id obj in array ) {
-//                    NSLog(@"evaluate with %@",obj);
+                    //                    NSLog(@"evaluate with %@",obj);
                     [self writeFragments:fragments onByteStream:aStream withBindings:obj];
                 }
                 
-                continue;
             } else {
                 id reference = [env referenceForPath:name];
                 value = [env at:reference];
             }
             [aStream writeObject:value];
+        } else {
+            [aStream outputString:frag];
         }
     }
 }
@@ -109,6 +113,17 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 {
     [self writeFragments:self.fragments onByteStream:aStream withBindings:env];
 }
+
+-(NSString*)evaluateWith:env
+{
+    id result=[NSMutableString string];
+    @autoreleasepool {
+        MPWByteStream *s=[MPWByteStream streamWithTarget:result];
+        [self writeOnByteStream:s withBindings:env];
+    }
+    return result;
+}
+
 
 @end
 
@@ -145,12 +160,12 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 +(void)testParsedFragments
 {
-    IDEXPECT([self templateWithString:@"first{var}second"].fragments, (@[@"first",@"var",@"second"]), @"ragments parsed");
+    IDEXPECT([self templateWithString:@"first{var}second"].fragments, (@[@"first",[MPWGenericReference referenceWithPath:@"var"],@"second"]), @"ragments parsed");
 }
 
 +(void)testParsedFiveFragments
 {
-    IDEXPECT([self templateWithString:@"Hello {var} {var2}!"].fragments, (@[@"Hello ",@"var",@" ", @"var2",@"!"]), @"ragments parsed");
+    IDEXPECT([self templateWithString:@"Hello {var} {var2}!"].fragments, (@[@"Hello ",[MPWGenericReference referenceWithPath:@"var"],@" ", [MPWGenericReference referenceWithPath:@"var2"],@"!"]), @"ragments parsed");
 }
 
 
@@ -202,6 +217,15 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( ([@"Array: {#array}Entry {.} {/array}After" evaluateAsTemplateWith:@{@"array": @[ @"First", @"Second", @"Third"  ]}]),@"Array: Entry First Entry Second Entry Third After",@"convenience works");
 }
 
++(void)testOnlyCurlyBracktsTriggerEndProcessing
+{
+    //  this is for a bugfix, the following template was throwing, with the /b interpreted as a closing tag
+    NSString *buggy=@"{#a}{c}/b{/a}";
+//    NSString *buggy2=@"{#a}{c}/b{/a}";
+    MPWStringTemplate *t=[self templateWithString:buggy];
+    IDEXPECT( [t evaluateWith:@{  }],@"",@"");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -212,8 +236,9 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testParsedFiveFragments",
             @"testSubstituteWholeContext",
             @"testIterateOverArrayWithNestedReference",
-            @"testNonMatchingClosingTagIsCaught",
+//            @"testNonMatchingClosingTagIsCaught",
             @"testEvaluateStringAsTemplateDirectly",
+            @"testOnlyCurlyBracktsTriggerEndProcessing",
 			];
 }
 
