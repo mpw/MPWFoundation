@@ -107,6 +107,7 @@
 
 -(id)at:(MPWReference*)aReference post:theObject
 {
+    NSLog(@"MPWAbstractStore(%@) at: %@ post: %@/%@",self,aReference,[theObject class],theObject);
     return nil;
 }
 
@@ -303,8 +304,8 @@
 
 -post:(NSString*)uriString parameters:uriParameters
 {
-    fprintf(stderr,"POST %s %s\n",[uriString UTF8String],[[uriParameters description] UTF8String]);
-    return nil;
+    fprintf(stderr,"MPWAbstractStore POST %s %s\n",[uriString UTF8String],[[uriParameters description] UTF8String]);
+    return [self at:uriString post:uriParameters];
 }
 
 -propfind:(NSString*)uriString data:(NSData*)data parameters:uriParameters
