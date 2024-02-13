@@ -304,8 +304,8 @@
 
 -post:(NSString*)uriString parameters:uriParameters
 {
-    fprintf(stderr,"MPWAbstractStore POST %s %s\n",[uriString UTF8String],[[uriParameters description] UTF8String]);
-    return [self at:uriString post:uriParameters];
+    fprintf(stderr,"MPWAbstractStore POST %s %s->%s\n",[uriString UTF8String],[[uriParameters className] UTF8String],[[uriParameters description] UTF8String]);
+    return [self at:uriString post:[uriParameters values]];
 }
 
 -propfind:(NSString*)uriString data:(NSData*)data parameters:uriParameters
