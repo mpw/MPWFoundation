@@ -38,7 +38,7 @@
 {
     NSRect r=[self frame];
     NSRect defaultRect = [self defaultWindowRect];
-    if ( r.size.width < 20 || r.size.height < 20) {
+    if ( r.size.width < 15 || r.size.height < 5) {
         r.size = defaultRect.size;
     }
     r.size.width += 5;
