@@ -70,13 +70,16 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 -(void)writeFragments:(NSArray*)frags onByteStream:(MPWByteStream*)aStream withBindings:env
 {
+//    NSLog(@"enter writeFragments with frags: %@, bindings: %@",frags,env);
     for (int i=0;i<frags.count;i++ ) {
         id frag = frags[i];
         if ( [frag isKindOfClass:[MPWGenericReference class]]) {
             id value=nil;
             NSString *name=[frag path];
+//            NSLog(@"fragment[%d]=%@ path=%@",i,frag,name);
             if ( [name isEqual:@"."]) {
                 value=env;
+//                NSLog(@"name was period value=%@",value);
             } else if ( [name hasPrefix:@"#"]) {
                 name=[name substringFromIndex:1];
                 NSMutableArray *fragments=[NSMutableArray array];
@@ -92,21 +95,27 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
                 }
                 //              NSLog(@"sub fragments: %@",fragments);
                 id reference = [env referenceForPath:name];
-                id array = [env at:reference];
+                id array = [name isEqual:@"."] ? env : [env at:reference];
                 for (id obj in array ) {
                     //                    NSLog(@"evaluate with %@",obj);
                     [self writeFragments:fragments onByteStream:aStream withBindings:obj];
                 }
-                
+//                NSLog(@"did write sub now at:[%d] %@, next up is [%d] %@",i,frags[i],i+1,frags[i+1]);
+//                NSLog(@"after write sub, result now: %@",[aStream target]);
+
+            } else if ( [name hasPrefix:@"/"]){
+                continue;                           // should be filtered out beforehand...
             } else {
                 id reference = [env referenceForPath:name];
                 value = [env at:reference];
             }
             [aStream writeObject:value];
         } else {
+//            NSLog(@"output frag[%d]: %@",i,frag);
             [aStream outputString:frag];
         }
     }
+//    NSLog(@"return, result now: %@",[aStream target]);
 }
 
 -(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:env
@@ -199,6 +208,14 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( output.target, @"Array: Entry First Entry Second Entry Third After", @"collect over array");
 }
 
++(void)testIterateOverArrayWholeContext
+{
+    MPWStringTemplate *t=[self templateWithString:@"Array: {#.}Entry {.} {/.}After"];
+    MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [t writeOnByteStream:output withBindings:@[ @"First", @"Second", @"Third"  ]];
+    IDEXPECT( output.target, @"Array: Entry First Entry Second Entry Third After", @"collect over array");
+}
+
 +(void)testNonMatchingClosingTagIsCaught
 {
     @try {
@@ -235,6 +252,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testWriteResultWithSubstition",
             @"testParsedFiveFragments",
             @"testSubstituteWholeContext",
+            @"testIterateOverArrayWholeContext",
             @"testIterateOverArrayWithNestedReference",
 //            @"testNonMatchingClosingTagIsCaught",
             @"testEvaluateStringAsTemplateDirectly",
