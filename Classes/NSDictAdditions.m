@@ -46,7 +46,7 @@
 +(instancetype)dictionaryWithObjects:(NSArray*)sourceArray byKey:(NSString*)key
 {
     NSArray *keys=[sourceArray valueForKey:key];
-    return [NSDictionary dictionaryWithObjects:sourceArray forKeys:keys];
+    return [self dictionaryWithObjects:sourceArray forKeys:keys];
 }
 
 @end
@@ -130,4 +130,17 @@
     return self;
 }
 
+@end
+
+@implementation NSArray(dictionaryByKey)
+
+-(NSDictionary*)dictionaryByKey:(NSString*)key
+{
+    return [NSDictionary dictionaryWithObjects:self byKey:key];
+}
+
+-(NSMutableDictionary*)mutableDictionaryByKey:(NSString*)key
+{
+    return [NSMutableDictionary dictionaryWithObjects:self byKey:key];
+}
 @end

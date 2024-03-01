@@ -24,3 +24,10 @@
 
 
 @end
+
+@interface NSArray(dictionaryByKey)
+
+-(NSDictionary*)dictionaryByKey:(NSString*)key;
+-(NSMutableDictionary*)mutableDictionaryByKey:(NSString*)key;
+
+@end
