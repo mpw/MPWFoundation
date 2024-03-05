@@ -140,6 +140,7 @@
 #import <MPWFoundation/MPWInitStore.h>
 #import <MPWFoundation/MPWObjectStore.h>
 #import <MPWFoundation/MPWEnsureNonNilStore.h>
+#import <MPWFoundation/MPWStringTemplate.h>
 //#import <MPWFoundation/MPWPropertyPathStore.h>
 
 #import <MPWFoundation/MPWMAXParser.h>

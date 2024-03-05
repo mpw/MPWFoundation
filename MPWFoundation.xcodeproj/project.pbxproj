@@ -106,7 +106,7 @@
 		1F1E09D8269DB9E700567AF6 /* MPWSQLColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */; };
 		1F1E09D9269DB9E700567AF6 /* MPWSQLColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */; };
 		1F1E09DA269DB9E700567AF6 /* MPWSQLColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */; };
-		1F206E672B6FC94700E4D19E /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; };
+		1F206E672B6FC94700E4D19E /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F206E682B6FC94700E4D19E /* MPWStringTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */; };
 		1F206E692B6FC94B00E4D19E /* MPWStringTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */; };
 		1F206E6A2B6FC94B00E4D19E /* MPWStringTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */; };
@@ -1224,6 +1224,8 @@
 		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; };
 		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; };
 		1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
+		1FFA16712B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFA16722B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFA1B67288D443D0095A876 /* SSHCommandStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFA1B65288D443D0095A876 /* SSHCommandStore.h */; };
 		1FFA1B68288D443D0095A876 /* SSHCommandStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFA1B66288D443D0095A876 /* SSHCommandStore.m */; };
 		1FFA48A51ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFA48A31ACDEA51002FF8EA /* MPWBlockTargetStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2757,6 +2759,7 @@
 				1FE37C381969770E00C9A378 /* NSThreadInterThreadMessaging.h in Headers */,
 				1FED48CD242634CC00AF2FAD /* MPWTagHandler.h in Headers */,
 				1FE37C23196976C500C9A378 /* MPWPoint.h in Headers */,
+				1FFA16712B970E97004E63ED /* MPWStringTemplate.h in Headers */,
 				1FB7B5E11E56E549004CCDCD /* MPWActionStreamAdapter.h in Headers */,
 				1FE37C21196976C500C9A378 /* MPWRuntimeAdditions.h in Headers */,
 				1FB0A8091E520FC500E552A0 /* MPWSocketStream.h in Headers */,
@@ -3035,6 +3038,7 @@
 				1FED48DB242635C500AF2FAD /* MPWXmlElement.h in Headers */,
 				1FCF26391CF3993C00AC64CE /* MPWInteger.h in Headers */,
 				1F080E531E4F13F600B78EF3 /* MPWFDStreamSource.h in Headers */,
+				1FFA16722B970E97004E63ED /* MPWStringTemplate.h in Headers */,
 				1F6A72712673F813003A5B5C /* MPWPrintLiner.h in Headers */,
 				1F6A7279267520B5003A5B5C /* MPWSkipFilter.h in Headers */,
 				1FD7A6A52AE2BE2D0091F9E6 /* MPWAlias.h in Headers */,

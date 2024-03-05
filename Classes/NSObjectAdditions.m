@@ -108,6 +108,37 @@
 
 -(void)assertEqual:other msg:msg  {   IDEXPECT([self value],[other value] , msg ); }
 
++testFixture
+{
+    return self;
+}
+
++testSelectors
+{
+    return [NSArray array];
+}
+
+
++(void)doTest:(NSString*)testName withTest:test
+{
+    SEL testMethod=NSSelectorFromString(testName);
+    if ( testMethod ) {
+        [self performSelector:testMethod];
+    } else {
+        [NSException raise:@"test-inconsistency" format:@"fixture %@ doesn't respond to test message %@ for test %@",self,NSStringFromSelector(testMethod),[test description]];
+    }
+}
+
+-(void)doTest:(NSString*)testName withTest:test
+{
+    SEL testMethod=NSSelectorFromString(testName);
+    if ( testMethod ) {
+        [self performSelector:testMethod];
+    } else {
+        [NSException raise:@"test-inconsistency" format:@"fixture %@ doesn't respond to test message %@ for test %@",self,NSStringFromSelector(testMethod),[test description]];
+    }
+}
+
 
 
 @end
