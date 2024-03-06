@@ -32,6 +32,15 @@
         if ( leftBrace.location == NSNotFound ) {
             break;
         }
+
+        if ( leftBrace.location > 0  ) {
+            unichar previous = [s characterAtIndex:leftBrace.location-1];
+            NSLog(@"previos: '%c'",previous);
+            if( previous == '\\') {
+                curIndex=leftBrace.location+1;
+                continue;
+            }
+        }
         if ( !isascii([s characterAtIndex:leftBrace.location+1]) ) {
             curIndex=leftBrace.location+1;
             continue;
@@ -243,6 +252,11 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( [t evaluateWith:@{  }],@"",@"");
 }
 
++(void)testEscapeCurlyBraces
+{
+    INTEXPECT([self templateWithString:@"\\{var} second"].fragments.count, 1, @"number of fragments parsed");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -257,6 +271,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 //            @"testNonMatchingClosingTagIsCaught",
             @"testEvaluateStringAsTemplateDirectly",
             @"testOnlyCurlyBracktsTriggerEndProcessing",
+            @"testEscapeCurlyBraces",
 			];
 }
 
