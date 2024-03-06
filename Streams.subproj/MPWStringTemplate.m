@@ -35,8 +35,9 @@
 
         if ( leftBrace.location > 0  ) {
             unichar previous = [s characterAtIndex:leftBrace.location-1];
-            NSLog(@"previos: '%c'",previous);
             if( previous == '\\') {
+                [frags addObject:[s substringWithRange:NSMakeRange(curIndex, leftBrace.location-curIndex-1)]];
+                [frags addObject:@"{"];
                 curIndex=leftBrace.location+1;
                 continue;
             }
@@ -254,7 +255,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 +(void)testEscapeCurlyBraces
 {
-    INTEXPECT([self templateWithString:@"\\{var} second"].fragments.count, 1, @"number of fragments parsed");
+    IDEXPECT([[self templateWithString:@"\\{var} second"] evaluateWith:@{}] , @"{var} second", @"escaped");
 }
 
 +(NSArray*)testSelectors
