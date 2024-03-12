@@ -70,6 +70,10 @@ objectAccessor( NSMutableArray*, items, _setItems)
 
 lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
+-(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    [[self items][row] at:tableColumn.identifier put:object];
+}
 
 -(void)commonInit
 {
