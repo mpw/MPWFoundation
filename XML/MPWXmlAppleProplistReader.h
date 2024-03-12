@@ -36,6 +36,8 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	id true_value,false_value;
 }
 
+@property (nonatomic, assign) bool mutable;
+
 
 -realElement:(const char*)start length:(long)len __attribute((ns_returns_retained));
 -integerElement:(id <NSXMLAttributes>)children attributes:(id <NSXMLAttributes>)attrs parser:(MPWMAXParser*)parser __attribute((ns_returns_retained));

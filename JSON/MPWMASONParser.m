@@ -556,6 +556,17 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
     INTEXPECT(array.count,2,@"elements");
 }
 
++(void)testMutableResults
+{
+    MPWMASONParser *parser=[MPWMASONParser parser];
+    NSData *json=[self frameworkResource:@"dict" category:@"json"];
+    NSMutableDictionary *dict=[parser parsedData:json];
+    dict[@"additional"]=@"more stuff addded later";
+    IDEXPECT(dict[@"additional"],@"more stuff addded later",@"hi");
+    NSLog(@"dict: %@",dict);
+    
+}
+
 +testSelectors
 {
 	return @[
@@ -571,7 +582,8 @@ static inline void parsestring( const char *curptr , const char *endptr, const c
 			@"testStringEscapes",
 			@"testUnicodeEscapes",
 //          @"testCommonStrings",
-            @"testSpaceBeforeColon",
+        @"testSpaceBeforeColon",
+        @"testMutableResults",
 			];
 }
 
