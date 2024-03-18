@@ -30,7 +30,7 @@
 -(void)terminate:(id)sender
 {
     self.terminateFlag = YES;
-    NSLog(@"terminate:");
+//    NSLog(@"terminate:");
     [self performSelectorOnMainThread:@selector(tickle) withObject:nil waitUntilDone:NO];
 }
 

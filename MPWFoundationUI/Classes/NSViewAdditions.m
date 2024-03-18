@@ -24,7 +24,19 @@
 
 -(NSRect)defaultWindowRect
 {
-    return NSMakeRect(50, 50, 700, 400);
+    return NSMakeRect( 50,50,700, 400);
+}
+
+-(NSRect)defaultWindowRectForProposedRect:(NSRect)r
+{
+    if ( r.origin.x == 0 || r.origin.y == 0) {
+        NSScreen *current=[NSScreen mainScreen];
+        NSSize s=[current frame].size;
+        
+        r.origin.x = (s.width - r.size.width) / 2;
+        r.origin.y = (s.height - r.size.height) / 2;
+    }
+    return r;
 }
 
 -(NSScrollView*)inScrollView:(NSRect)scrollViewRect
@@ -38,14 +50,12 @@
 {
     NSRect r=[self frame];
     NSRect defaultRect = [self defaultWindowRect];
-    if ( r.size.width < 15 || r.size.height < 5) {
+    if ( r.size.width < 12 || r.size.height < 3) {
         r.size = defaultRect.size;
     }
     r.size.width += 5;
     r.size.height += 5;
-    if ( r.origin.x == 0 || r.origin.y == 0) {
-        r.origin = defaultRect.origin;
-    }
+    r=[self defaultWindowRectForProposedRect:r];
 
     NSWindow *theWindow=[[NSWindow alloc] initWithContentRect:r
                                                     styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable|NSWindowStyleMaskMiniaturizable
@@ -59,9 +69,9 @@
 
 -main:args
 {
-    NSLog(@"-[%@ main:]",[self class]);
+//    NSLog(@"-[%@ main:]",[self class]);
     NSWindow *w=[self openInWindow:@"Window"];
-    NSLog(@"window: %@",w);
+//    NSLog(@"window: %@",w);
     return [w main:args];
 }
 
