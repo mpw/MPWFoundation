@@ -258,6 +258,14 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT([[self templateWithString:@"\\{var} second"] evaluateWith:@{}] , @"{var} second", @"escaped");
 }
 
++(void)testEscapeNestedCurlyBracesCanGenerateTemplates
+{
+    NSString *nested=@"{#.}{field}: \\{{field}} {/.}";
+    NSArray *fields=@[ @{@"field": @"first" },@{ @"field": @"last"}];
+    IDEXPECT([[self templateWithString:nested] evaluateWith:fields] , @"first: {first} last: {last} ", @"escaped");
+}
+
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -273,6 +281,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testEvaluateStringAsTemplateDirectly",
             @"testOnlyCurlyBracktsTriggerEndProcessing",
             @"testEscapeCurlyBraces",
+            @"testEscapeNestedCurlyBracesCanGenerateTemplates",
 			];
 }
 
