@@ -27,6 +27,11 @@ boolAccessor(fancy, setFancy)
     return contents;
 }
 
+-paths
+{
+    return [[[self contents] collect] path];
+}
+
 -dicts
 {
     NSMutableArray *dicts=[NSMutableArray array];

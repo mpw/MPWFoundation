@@ -30,21 +30,28 @@
 
 -(MPWResource*)serialized:json
 {
-    NSData *d=[self.writer process:json];
-    MPWResource *r=[[MPWResource new] autorelease];
-    [r setRawData:d];
-    [r setMIMEType:@"application/json"];
-    return r;
+    NSLog(@"serialized");
+    if ( [json isKindOfClass:[MPWDirectoryBinding class]]) {
+        return json;
+    } else {
+        NSData *d=[self.writer process:json];
+        MPWResource *r=[[MPWResource new] autorelease];
+        [r setRawData:d];
+        [r setMIMEType:@"application/json"];
+        return r;
+    }
 }
 
 -(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
 {
+    NSLog(@"writeStreamAt:");
     [self.writer setByteTarget:[self.source writeStreamAt:aReference]];
     return self.writer;
 }
 
 -(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
 {
+    NSLog(@"at:readToStream:");
     [(MPWFilter*)aStream setFinalTarget:self.reader];
     [[self source] at:aReference readToStream:aStream];
     return ;
@@ -71,11 +78,13 @@
 
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
+    NSLog(@"mapRetrievedObject:");
     return self.up ? [self serialized:anObject] :[self parsedJSON:anObject];
 }
 
 -(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
+    NSLog(@"mapObjectToStore:");
     return self.up ?  [self parsedJSON:anObject] : [self serialized:anObject];
 }
 
