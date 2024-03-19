@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWJSONConverterStore : MPWMappingStore
 
 @property (nonatomic,assign) BOOL up;
-@property (nonatomic, assign) bool mutable;
+@property (nonatomic, assign) bool isMutable;
 @end
 
 NS_ASSUME_NONNULL_END

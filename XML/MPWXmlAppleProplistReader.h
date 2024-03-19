@@ -36,7 +36,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 	id true_value,false_value;
 }
 
-@property (nonatomic, assign) bool mutable;
+@property (nonatomic, assign) bool isMutable;
 
 
 -realElement:(const char*)start length:(long)len __attribute((ns_returns_retained));

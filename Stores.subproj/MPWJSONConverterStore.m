@@ -24,7 +24,7 @@
     self=[super initWithSource:newSource];
     self.writer = [MPWJSONWriter stream];
     self.reader = [MPWMASONParser parser];
-    self.mutable = false;
+    self.isMutable = false;
     return self;
 }
 
@@ -62,7 +62,7 @@
 {
     self.theConverterClass = aClass;
     self.reader = [[[MPWMASONParser alloc] initWithClass:aClass] autorelease];
-    self.reader.mutable = self.mutable;
+    self.reader.isMutable = self.isMutable;
     [self.writer createEncoderMethodForClass:aClass];
 }
 

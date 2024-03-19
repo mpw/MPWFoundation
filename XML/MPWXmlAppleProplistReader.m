@@ -73,7 +73,7 @@ THE POSSIBILITY OF SUCH DAMAGE.  */
 		keys[i]=[NSString stringWithString:objs[i*2]];
 		values[i]=objs[i*2+1];
 	}
-    return [(self.mutable ? [NSMutableDictionary alloc] : [NSDictionary alloc]) initWithObjects:values forKeys:keys count:count/2];
+    return [(self.isMutable ? [NSMutableDictionary alloc] : [NSDictionary alloc]) initWithObjects:values forKeys:keys count:count/2];
 }
 
 -integerElementAtPtr:(const char*)start length:(long)len
