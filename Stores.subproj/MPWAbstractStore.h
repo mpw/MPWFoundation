@@ -44,6 +44,8 @@
 
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference;
 -(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference;
+-(id <MPWReferencing>)rootRef;
+-(MPWBinding*)rootBinding;
 
 @end
 

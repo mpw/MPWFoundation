@@ -228,10 +228,11 @@ R
 
 -(void)replaceRealsAtIndex:(NSUInteger)index withReals:(float*)newReals count:(NSUInteger)realCount
 {
-    if ( index + realCount <= count )
+    if ( index + realCount <= count ) {
         memcpy( &floatStart[index], newReals, realCount*sizeof(float));
-    else
+    } else {
         fprintf(stderr,"MPWRealArray replace not OK\n");
+    }
     return ;
 }
 
@@ -642,6 +643,100 @@ REDUCE_LOOP_OPERATION( max, c=(a>b ? a:b) , YES)
     [aStream printf:@") "];
 }
 
+-(void)writeOnStream:aStream
+{
+    [aStream writeRealArray:self];
+}
+
+//----------- treat array as a matrix, transform points
+
+static inline NSPoint transformPointByMatrix( MPWRealArray *m, NSPoint original )
+{
+    NSPoint result={0,0};
+    
+    result.x    = original.x * m->floatStart[0] + original.y * m->floatStart[2] + m->floatStart[4];
+    result.y    = original.x * m->floatStart[1] + original.y * m->floatStart[3] + m->floatStart[5];
+    return result;
+}
+
+
+
+static inline NSSize transformDistanceByMatrix( MPWRealArray *m, NSSize original )
+{
+    NSSize result={0,0};
+    
+    result.width    = original.width * m->floatStart[0] + original.height * m->floatStart[2];
+    result.height    = original.width * m->floatStart[1] + original.height * m->floatStart[3];
+    return result;
+}
+
+-(NSPoint)transform:(NSPoint)original
+{
+    return transformPointByMatrix( self, original );
+}
+
+-(NSPoint)transformPoint:(NSPoint)original
+{
+    return transformPointByMatrix( self, original );
+}
+
+//-transformPoints:(NSPoint*)original :(unsigned)pointCount
+//{
+//    int i;
+//    for ( i=0; i<pointCount; i++ )
+//        original[i]=transformPointByMatrix( self, original[i] );
+//    return self;
+//}
+
+-(NSSize)dtransform:(NSSize)original
+{
+    return transformDistanceByMatrix( self, original );
+}
+
+-(NSSize)transformSize:(NSSize)original
+{
+    return transformDistanceByMatrix( self, original );
+}
+
+-(NSPoint)relativeTransformPoint:(NSPoint)originalPoint
+{
+    NSSize original={
+        originalPoint.x, originalPoint.y
+    };
+    NSPoint transformed;
+    NSSize s = transformDistanceByMatrix( self, original );
+    transformed.x=s.width;
+    transformed.y=s.height;
+    return transformed;
+}
+
+-dtransformPoints:(NSPoint*)original :(unsigned)pointCount
+{
+    int i;
+    for ( i=0; i<pointCount; i++ ) {
+        NSSize s={ original[i].x, original[i].y };
+        s=transformDistanceByMatrix( self, s );
+        original[i].x=s.width;
+        original[i].y=s.height;
+    }
+    return self;
+}
+
+
+-(instancetype)transformByMatrix:(MPWRealArray*)matrix
+{
+    float *r=floatStart;
+    for ( long i=0,max=self.count; i<max; i+=2 ) {
+        NSPoint p={ r[i], r[i+1] };
+        p=transformPointByMatrix( matrix, p );
+        r[i]=p.x;
+        r[i+1]=p.y;
+    }
+    return self;
+}
+
+
+
 @end
 		
 #import "DebugMacros.h"
@@ -687,15 +782,51 @@ static float add( float a, float b) { return a+b; }
     FLOATEXPECT([[self _testArray] reduce:add], 10, @"");
 }
 
++(void)testTranslate
+{
+    MPWRealArray *matrix=[self arrayWithReals:(float[]){ 1,0,0,1,21,15} count:6];
+    MPWRealArray *points=[self arrayWithReals:(float[]){ 0,0,100,200,-12,2,10,0} count:8];
+    MPWRealArray *result=[self arrayWithReals:(float[]){ 21,15, 121, 215, 9,17,31,15} count:8];
+    [points transformByMatrix:matrix];
+    IDEXPECT( points, result, @"translated");
+}
+
++(void)testScale
+{
+    float translateMatrix[]={ 2,0,0,3,0,0};
+    float coords[]={ 1,1,100,200,-12,2,10,0};
+    float resultCoords[]= { 2,3,200,600,-24,6,20,0 };
+    MPWRealArray *matrix=[self arrayWithReals:translateMatrix count:6];
+    MPWRealArray *points=[self arrayWithReals:coords count:8];
+    MPWRealArray *result=[self arrayWithReals:resultCoords count:8];
+    [points transformByMatrix:matrix];
+    IDEXPECT( points, result, @"scaled");
+}
+
++(void)testRotate90
+{
+    float translateMatrix[]={ 0,1,1,0,0,0};
+    float coords[]={ 2,1,100,200,-12,2,10,0};
+    float resultCoords[]= { 1,2,200,100,2,-12,0,10 };
+    MPWRealArray *matrix=[self arrayWithReals:translateMatrix count:6];
+    MPWRealArray *points=[self arrayWithReals:coords count:8];
+    MPWRealArray *result=[self arrayWithReals:resultCoords count:8];
+    [points transformByMatrix:matrix];
+    IDEXPECT( points, result, @"rotated");
+}
+
 +testSelectors
 {
-    return [NSArray arrayWithObjects:
+    return @[
             @"testReducePlus",
             @"testVecReducePlus",
             @"testReduceMultiply",
             @"testGenerate",
             @"testReduceFun",
-            nil];
+            @"testTranslate",
+            @"testScale",
+            @"testRotate90",
+            ];
 }
 
 @end

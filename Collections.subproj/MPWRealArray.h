@@ -78,6 +78,18 @@ R
 -reduce_operator_plus;
 -(float)reduce:(float(*)(float,float))reduceFun;
 
+//---   transforming coordinates
+
+-(NSPoint)transform:(NSPoint)original;
+-(NSPoint)transformPoint:(NSPoint)original;
+-transformPoints:(NSPoint*)original :(unsigned)count;
+-(NSSize)dtransform:(NSSize)original;
+-(NSSize)transformSize:(NSSize)original;
+-(NSPoint)relativeTransformPoint:(NSPoint)originalPoint;
+-dtransformPoints:(NSPoint*)original :(unsigned)pointCount;
+-(instancetype)transformByMatrix:(MPWRealArray*)matrix;
+
+
 //---	some computation
 
 -interpolate:otherVector into:targetVector weight:(float)weight;

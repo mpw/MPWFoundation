@@ -90,7 +90,7 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 
 -(void)setIMP:(IMP)newImp
 {
-    cached=newImp;
+    cached=(IMP0)newImp;
 }
 
 -(void)setTarget:newTarget

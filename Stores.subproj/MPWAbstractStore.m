@@ -136,7 +136,15 @@
     [self at:(NSString*)key put:theObject];
 }
 
+-(id <MPWReferencing>)rootRef
+{
+    return [self referenceForPath:@"/"];
+}
 
+-(MPWBinding*)rootBinding
+{
+    return [self bindingForReference:[self rootRef]];
+}
 
 
 -(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
@@ -152,6 +160,12 @@
         return nil;
     }
 }
+
+-(NSArray<NSString*>*)pathsAtReference:(id <MPWReferencing>)aReference
+{
+    return (NSArray<NSString*>*)[[[self childrenOfReference:aReference] collect] path];
+}
+
 
 -(MPWReference*)referenceForPath:(NSString*)path
 {
