@@ -30,7 +30,7 @@
 
 -(MPWResource*)serialized:json
 {
-    NSLog(@"serialized");
+//    NSLog(@"serialized");
     if ( [json isKindOfClass:[MPWDirectoryBinding class]]) {
         return json;
     } else {
@@ -78,13 +78,13 @@
 
 -(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    NSLog(@"mapRetrievedObject:");
+//    NSLog(@"mapRetrievedObject:");
     return self.up ? [self serialized:anObject] :[self parsedJSON:anObject];
 }
 
 -(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
 {
-    NSLog(@"mapObjectToStore:");
+//    NSLog(@"mapObjectToStore:");
     return self.up ?  [self parsedJSON:anObject] : [self serialized:anObject];
 }
 
