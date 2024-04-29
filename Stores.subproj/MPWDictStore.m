@@ -11,14 +11,13 @@
 #import <AccessorMacros.h>
 #import "MPWDirectoryBinding.h"
 
-@interface MPWDictStore()
+@interface MPWRawDictStore()
 
 @property (nonatomic, strong) NSMutableDictionary *dict;
 
 @end
 
-
-@implementation MPWDictStore
+@implementation MPWRawDictStore
 
 CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
@@ -47,20 +46,10 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     }
 }
 
--directoryForReference:(MPWGenericReference*)aReference
-{
-    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
-}
-
 
 -at:(id <MPWReferencing>)aReference
 {
-//    if ( [(MPWGenericReference*)aReference isRoot]) {
-//        return [self directoryForReference:aReference];
-//    } else {
-        return self.dict[[self referenceToKey:aReference]];
-//    }
+    return self.dict[[self referenceToKey:aReference]];
 }
 
 -(void)deleteAt:(id <MPWReferencing>)aReference
@@ -77,22 +66,14 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     }
 }
 
--childrenOfReference:aReference
-{
-//    if ( [aReference isRoot]) {
-        return [self.dict allKeys];
-//    } else {
-//        return nil;
-//    }
-}
-
 -(BOOL)hasChildren:(id <MPWReferencing>)aReference
 {
-    if ( [(MPWGenericReference*)aReference isRoot]) {
-        return YES;
-    } else {
-        return NO;
-    }
+    return NO;
+}
+
+-childrenOfReference:aReference
+{
+    return [self.dict allKeys];
 }
 
 -(void)dealloc
@@ -101,11 +82,45 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     [super dealloc];
 }
 
+
+@end
+
+@implementation MPWDictStore
+
+-directoryForReference:(MPWGenericReference*)aReference
+{
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+}
+
+
+-at:(id <MPWReferencing>)aReference
+{
+    if ( [(MPWGenericReference*)aReference isRoot]) {
+        return [self directoryForReference:aReference];
+    } else {
+        return [super at:aReference];
+    }
+}
+
+
+
+-(BOOL)hasChildren:(id <MPWReferencing>)aReference
+{
+    if ( [(MPWGenericReference*)aReference isRoot]) {
+        return YES;
+    } else {
+        return [super hasChildren:aReference];
+    }
+}
+
+
+
 @end
 
 #import "DebugMacros.h"
 
-@implementation MPWDictStore(testing)
+@implementation MPWRawDictStore(testing)
 
 +(void)testStoreAndRetrieve
 {
@@ -157,7 +172,22 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     
 }
 
-+(void)testRootDirectory
++(NSArray<NSString*>*)testSelectors
+{
+    return @[
+        @"testStoreAndRetrieve",
+        @"testStoreAndRetrieveViaReference",
+        @"testSubscripts",
+        @"testDelete",
+        @"testChildrenOfReference",
+    ];
+}
+
+@end
+
+@implementation MPWDictStore(testing)
+
++(void)testRootDirectoryCanBeListed
 {
     id ref=@"World";
     MPWDictStore* store = [self store];
@@ -178,7 +208,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
              @"testSubscripts",
              @"testDelete",
              @"testChildrenOfReference",
-//             @"testRootDirectory",
+             @"testRootDirectoryCanBeListed",
              ];
 }
 

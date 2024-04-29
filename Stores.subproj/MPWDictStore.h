@@ -7,12 +7,18 @@
 
 #import <MPWFoundation/MPWAbstractStore.h>
 
-@interface MPWDictStore : MPWAbstractStore
+@interface MPWRawDictStore: MPWAbstractStore
+
+@property (readonly) NSMutableDictionary *dict;
 
 +(instancetype)storeWithDictionary:(NSMutableDictionary*)newDict;
 -(instancetype)initWithDictionary:(NSMutableDictionary*)newDict;
 
-@property (readonly) NSMutableDictionary *dict;
+@end
+
+@interface MPWDictStore : MPWRawDictStore
+
+
 
 
 @end

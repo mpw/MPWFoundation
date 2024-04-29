@@ -30,17 +30,17 @@ CONVENIENCEANDINIT(store, WithSource:newSource cache:newCache )
 
 CONVENIENCEANDINIT(store, WithSource:newSource )
 {
-    return [self initWithSource:newSource cache:[MPWDictStore store]];
+    return [self initWithSource:newSource cache:[MPWRawDictStore store]];
 }
 
 +(instancetype)memoryStore
 {
-    return [[[self alloc] initWithSource:nil cache:[MPWDictStore store]] autorelease];
+    return [[[self alloc] initWithSource:nil cache:[MPWRawDictStore store]] autorelease];
 }
 
 -(instancetype)init
 {
-    return [self initWithSource:nil cache:[MPWDictStore store]];
+    return [self initWithSource:nil cache:[MPWRawDictStore store]];
 }
 
 -(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
@@ -178,8 +178,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     self=[super init];
     self.key = [MPWGenericReference referenceWithPath:@"aKey"];
     self.value = @"Hello World";
-    self.cache = [MPWDictStore store];
-    self.source = [MPWDictStore store];
+    self.cache = [MPWRawDictStore store];
+    self.source = [MPWRawDictStore store];
     self.store = [testClass storeWithSource:self.source cache:self.cache];
     return self;
 }
