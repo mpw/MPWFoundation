@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)storeWithObject:anObject;
 -(instancetype)initWithObject:anObject;
 
+@property (readonly)  id object;
 -(NSArray*)propertyNames;
 
 @end

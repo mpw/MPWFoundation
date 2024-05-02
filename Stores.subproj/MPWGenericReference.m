@@ -77,6 +77,15 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self.pathComponents.lastObject length]==0;
 }
 
+-fancyPath
+{
+    return [self path];
+}
+
+-fileSize {
+    return @(0);
+}
+
 -(instancetype)referenceByAppendingReference:(MPWGenericReference*)other
 {
     NSArray *compinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];

@@ -131,6 +131,15 @@
     }
 }
 
+-(NSNumber*)fileSize
+{
+    NSFileManager *fm=[NSFileManager defaultManager];
+    NSString *path=(NSString*)[self path];
+    NSDictionary *attributes=[fm attributesOfItemAtPath:path error:NULL];
+    NSNumber *size=[attributes objectForKey:NSFileSize];
+    return size;
+}
+
 -fileSystemValue
 {
     return self;
