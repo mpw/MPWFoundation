@@ -358,6 +358,11 @@
     return [self get:uri parameters:nil];
 }
 
+#ifndef RTLD_DEFAULT
+#define RTLD_DEFAULT 0
+#endif
+
+
 +(void)initializePropertyPathsWithSymbolName:(NSString*)symbolName
 {
 //    NSLog(@"-[%@ initializePropertyPathsWithSymbolName:%@]",self.className,symbolName);

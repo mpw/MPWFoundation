@@ -16,7 +16,7 @@ R
 //---	inheritance chain
 
 #import <MPWFoundation/MPWObject.h>
-
+#import <Foundation/NSGeometry.h>
 
 @interface MPWRealArray : MPWObject
 {
@@ -24,6 +24,7 @@ R
 	NSUInteger	count;
 	float			*floatStart;
 }
+
 
 //---	NSArray compatible
 

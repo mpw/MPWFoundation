@@ -1227,7 +1227,7 @@
 		1FF8FE2309B49D0200652476 /* MPWNamedData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EF94908E5F82B0011386A /* MPWNamedData.m */; };
 		1FF8FE2609B49D0200652476 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
 		1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
-		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; };
+		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; };
 		1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FFA16712B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
