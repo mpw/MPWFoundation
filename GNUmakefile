@@ -83,6 +83,8 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 
 libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWAbstractStore.m \
+	Stores.subproj/MPWEnsureNonNilStore.m \
+	Stores.subproj/MPWPropertyPathStore.m \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWDirectoryBinding.m \
     Stores.subproj/MPWFileBinding.m \
@@ -94,6 +96,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWMappingStore.m \
     Stores.subproj/MPWCachingStore.m \
     Stores.subproj/MPWLoggingStore.m \
+    Stores.subproj/MPWTemplateMatchingStore.m \
     Stores.subproj/MPWJSONConverterStore.m \
     Stores.subproj/MPWMergingStore.m \
     Stores.subproj/MPWPropertyStore.m \
@@ -113,6 +116,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWStreamableBinding.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
+    Streams.subproj/MPWStringTemplate.m \
     Streams.subproj/MPWArrayFlattenStream.m \
     Streams.subproj/MPWFilter.m \
     Streams.subproj/MPWFileChangesStreamLinux.m \
@@ -239,4 +243,4 @@ test    : libMPWFoundation tester
 	LD_LIBRARY_PATH=/usr/GNUstep/Local/Library/Libraries:/usr/local/lib:${HOME}/Build/obj/ ./GNUstep/testmpwfoundation
 
 tester  :
-	$(CC)  -fobjc-runtime=gnustep-2.1 -fblocks  -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L ${HOME}/Build/obj -lMPWFoundation -lgnustep-base -L/usr/local/lib/ -lobjc
+	$(CC)  -fobjc-runtime=gnustep-2.1 -fblocks  -I/usr/GNUstep/Local/Library/Headers/ -I.headers -o GNUstep/testmpwfoundation GNUstep/testmpwfoundation.m -L/usr/GNUstep/Local/Library/Libraries/ -L ${HOME}/Build/obj -lMPWFoundation -lgnustep-base -lgnustep-corebase -L/usr/local/lib/ -lobjc

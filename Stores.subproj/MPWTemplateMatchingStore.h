@@ -26,7 +26,11 @@ extern PropertyPathDefs * _Nonnull  makePropertyPathDefs( MPWRESTVerb verb, int 
 
 @interface MPWTemplateMatchingStore : MPWAbstractStore
 
+#if GNUSTEP
+@property (nonatomic, strong) id _Nullable target;
+#else
 @property (nonatomic, weak) id _Nullable target;
+#endif
 
 -(instancetype _Nullable )initWithPropertyPathDefs:(PropertyPathDef  *_Nullable)newDefs  count:(int)count;
 -(id _Nullable )at:(id<MPWReferencing>_Nullable)aReference for:target with:(_Nullable id *_Nullable)extraParams count:(int)extraParamCount;
