@@ -32,7 +32,7 @@
 	id path = [bundle pathForResource:aPath ofType:category];
 	if ( path ) {
 #ifdef GS_API_LATEST
-        return [NSData dataWithContentsOfFile:path error:nil]; 
+        return [NSData dataWithContentsOfFile:path]; 
 #else
         return [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil]; 
 #endif
