@@ -156,6 +156,7 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWXmlGeneratorStream.m \
     XML/MPWTagHandler.m \
     XML/MPWTagAction.m \
+    Classes/MPWRuntimeAdditions.m \
     Classes/NSStringAdditions.m \
     Classes/NSDictAdditions.m \
     Classes/NSBundleConveniences.m \
