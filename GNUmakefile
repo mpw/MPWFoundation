@@ -158,6 +158,7 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWTagAction.m \
     Classes/NSStringAdditions.m \
     Classes/NSDictAdditions.m \
+    Classes/NSBundleConveniences.m \
     Classes/MPWRusage.m \
     Classes/NSNumberArithmetic.m \
     Classes/MPWInterval.m \

@@ -86,18 +86,23 @@ static id frameworkSearchPaths=nil;
 
 @implementation NSObject(bundleConveniences)
 
--(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType
++(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType
 {
     Class class;
-    for ( class=[self class]; class != (Class)nil; class=[class superclass] ) {
+    for ( class=self; class != (Class)nil; class=[class superclass] ) {
         id data = [NSBundle resourceWithName:aName type:aType forClass:class];
-//        NSLog(@"tried to find %@.%@ in %@'s bundle: %x",aName,aType,class,data);
+        //        NSLog(@"tried to find %@.%@ in %@'s bundle: %x",aName,aType,class,data);
         if ( data ) {
             return data;
         }
     }
-	NSLog(@"failed to find resource '%@.%@'",aName,aType);
+    NSLog(@"failed to find resource '%@.%@'",aName,aType);
     return nil;
+}
+
+-(NSData*)resourceWithName:(NSString*)aName type:(NSString*)aType
+{
+    return [[self class] resourceWithName:aName type:aType];
 }
 
 @end
