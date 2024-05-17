@@ -59,9 +59,9 @@ extern void *objc_msgForward( id target, SEL _cmd, ... );
 
 @implementation NSObject(defaultedVoidMethod)
 
-static void doNothing() { }
-static BOOL returnYes() { return YES; }
-static BOOL returnNo() { return NO; }
+static void doNothing(void) { }
+static BOOL returnYes(void) { return YES; }
+static BOOL returnNo(void) { return NO; }
 
 -(IMP)methodForSelector:(SEL)sel withDefault:(IMP)defaultMethod
 {

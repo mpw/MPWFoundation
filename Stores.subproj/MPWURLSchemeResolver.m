@@ -153,6 +153,15 @@
     return request;
 }
 
+-(void)setAccessToken:(NSString*)token
+{
+    NSMutableDictionary *d=[[@{ @"Authorization": [NSString stringWithFormat:@"Bearer %@",token]} mutableCopy] autorelease];
+    if ( self.headers) {
+        [d addEntriesFromDictionary:self.headers];
+    }
+    [self setHeaders:d];
+}
+
 -atURL:(NSURL*)aURL
 {
     return [self resourceWithRequest:[self requestForURL:aURL]];
@@ -240,13 +249,21 @@
     IDEXPECT( [[self httpsScheme] schemePrefix], @"https",@"secure");
     IDEXPECT( [[(MPWGenericReference*)[[self httpsScheme] referenceForPath:@"localhost"] URL] absoluteString], @"https://localhost",@"secure");
     IDEXPECT( [[(MPWGenericReference*)[[[[self alloc] initWithSchemePrefix:@"ftp" ] autorelease] referenceForPath:@"localhost"] URL] absoluteString], @"ftp://localhost" ,@"ftp");
-    
+}
+
++(void)testSetAccessToken
+{
+    MPWURLSchemeResolver *s=[self httpScheme];
+    EXPECTNIL([s headers][@"Authorization"],@"Auth header before setting access token");
+    [s setAccessToken:@"12345"];
+    IDEXPECT([s headers][@"Authorization"],@"Bearer 12345",@"Auth header after setting access token");
 }
 
 +(NSArray*)testSelectors
 {
     return @[
-//             @"testScuritySetting",
+        //             @"testScuritySetting",
+                 @"testSetAccessToken",
              ];
 }
 
