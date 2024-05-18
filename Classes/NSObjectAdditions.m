@@ -15,6 +15,7 @@
 
 #import <AccessorMacros.h>
 #import "MPWByteStream.h"
+#import "MPWInstanceVarStore.h"
 
 //#import "Foundation/NSDebug.h"
 
@@ -47,10 +48,6 @@
     return [[self class] frameworkResource:aPath category:category];
 }
 
-
-@end
-
-@implementation NSObject(initializationHelpers)
 
 -(instancetype)initWithDictionary:(NSDictionary *)dict
 {
@@ -146,6 +143,10 @@
 
 @implementation NSObject(ivarAccess)
 
+-rowStore
+{
+    return [MPWInstanceVarStore storeWithObject:self];
+}
 
 +(void)addIvarNamesForCurrentClassToArray:(NSMutableArray*)names
 {

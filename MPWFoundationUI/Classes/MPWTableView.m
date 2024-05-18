@@ -11,7 +11,7 @@
 
 @interface MPWTableView()
 
-
+@property (nonatomic,strong) MPWAbstractStore *rowStore;
 
 @end
 
@@ -28,10 +28,17 @@ objectAccessor( NSMutableArray*, items, _setItems)
 
 -(void)setItems:(NSMutableArray*)newItems
 {
-    if ( self.tableColumns.count == 0 && [newItems.firstObject respondsToSelector:@selector(allKeys)]) {
-        [self setKeys:[newItems.firstObject allKeys]];
+    id firstObject = newItems.firstObject;
+    if ( self.tableColumns.count == 0 && [firstObject respondsToSelector:@selector(rowStore)]) {
+        self.rowStore = [firstObject rowStore];
+        [self setKeys:[[self.rowStore at:@"/"] paths]];
     }
     [self _setItems:newItems];
+}
+
+-rowAt:(long)row
+{
+    return [[self items][row] rowStore];
 }
 
 -(void)writeObject:anObject
@@ -72,7 +79,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    [[self items][row] at:tableColumn.identifier put:object];
+    [[self rowAt:row] at:tableColumn.identifier put:object];
 }
 
 -(void)commonInit
@@ -202,7 +209,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    return [[self objectAtRow:row] valueForKey:[tableColumn identifier]];
+    return [[self rowAt:row] at:[tableColumn identifier]];
 }
 
 - selectedObject

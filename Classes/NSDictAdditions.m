@@ -3,11 +3,17 @@
 
 
 #import "NSDictAdditions.h"
+#import "MPWDictStore.h"
 
 @implementation NSDictionary(Additions)
 /*"
     Convenience methods for using #NSDictionary with plain C data type #float, #int, and #BOOL.
 "*/
+
+-rowStore
+{
+    return [MPWDictStore storeWithDictionary:self];
+}
 
 - (int)integerForKey:(NSString *)key
 /*"
