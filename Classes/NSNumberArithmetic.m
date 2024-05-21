@@ -212,7 +212,7 @@ defineArithOp( div, / )
 	return [[self numberWithInt:0] retain];
 }
 
-static int fib( int n) {
+static long  fib(  long n) {
     if ( n <= 1 ) {
         return n;
     } else {
@@ -222,17 +222,16 @@ static int fib( int n) {
 
 -fib
 {
-    return [NSNumber numberWithInt:fib([self intValue])];
-    
+    return [NSNumber numberWithLong:fib([self longValue])];
 }
 
 
 -fastfib
 {
-    int c;
-    int n=[self intValue];
-    int first=0,second=1,next=0;
-    for ( c = 0 ; c < n ; c++ )
+    long c;
+    long n=[self longValue];
+    long first=0,second=1,next=0;
+    for ( c = 0 ; c <= n ; c++ )
     {
         if ( c <= 1 )
             next = c;
@@ -243,7 +242,7 @@ static int fib( int n) {
             second = next;
         }
     }
-    return [NSNumber numberWithInt:next];
+    return [NSNumber numberWithLong:next];
 
 }
 
