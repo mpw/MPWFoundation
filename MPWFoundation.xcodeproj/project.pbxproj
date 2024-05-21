@@ -170,6 +170,8 @@
 		1F3F7F332A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
 		1F3F7F342A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
 		1F3F7F352A2F2B01000857B0 /* MPWPropertyPathStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */; };
+		1F417B9F2BFA253A00DB5DB5 /* MPWTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F417B9E2BFA253A00DB5DB5 /* MPWTableColumn.m */; };
+		1F417BA02BFA253A00DB5DB5 /* MPWTableColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F417B9D2BFA253A00DB5DB5 /* MPWTableColumn.h */; };
 		1F45AA8C29F9912800FB1C4E /* MPWKeychainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45AA8A29F9912700FB1C4E /* MPWKeychainStore.h */; };
 		1F45AA8D29F9912800FB1C4E /* MPWKeychainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45AA8A29F9912700FB1C4E /* MPWKeychainStore.h */; };
 		1F45AA8E29F9912800FB1C4E /* MPWKeychainStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F45AA8A29F9912700FB1C4E /* MPWKeychainStore.h */; };
@@ -1474,6 +1476,8 @@
 		1F3F678E2085B452001B80D9 /* NSObject+MPWNotificationProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MPWNotificationProtocol.m"; sourceTree = "<group>"; };
 		1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWPropertyPathStore.h; sourceTree = "<group>"; };
 		1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWPropertyPathStore.m; sourceTree = "<group>"; };
+		1F417B9D2BFA253A00DB5DB5 /* MPWTableColumn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTableColumn.h; sourceTree = "<group>"; };
+		1F417B9E2BFA253A00DB5DB5 /* MPWTableColumn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableColumn.m; sourceTree = "<group>"; };
 		1F45AA8A29F9912700FB1C4E /* MPWKeychainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWKeychainStore.h; sourceTree = "<group>"; };
 		1F45AA8B29F9912700FB1C4E /* MPWKeychainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWKeychainStore.m; sourceTree = "<group>"; };
 		1F49BBB520BBCE6B00405432 /* MPWMappingStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWMappingStore.h; sourceTree = "<group>"; };
@@ -2338,6 +2342,8 @@
 				1F7045D7223131C2005ED7FB /* MPWBrowser.m */,
 				1F7045E8223134F7005ED7FB /* MPWTableView.h */,
 				1F7045E9223134F7005ED7FB /* MPWTableView.m */,
+				1F417B9D2BFA253A00DB5DB5 /* MPWTableColumn.h */,
+				1F417B9E2BFA253A00DB5DB5 /* MPWTableColumn.m */,
 				1F1BE5E3224BD57D002D58AC /* NSViewAdditions.h */,
 				1F1BE5E4224BD57D002D58AC /* NSViewAdditions.m */,
 				1F854E6328A02C420085034C /* NSWindowAdditions.h */,
@@ -2702,6 +2708,7 @@
 				1F4D4413261591960023C2C5 /* MPWWindowController.h in Headers */,
 				1F34669F28B0D1F3003257CB /* CLIApp.h in Headers */,
 				1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */,
+				1F417BA02BFA253A00DB5DB5 /* MPWTableColumn.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3808,6 +3815,7 @@
 				1F7045EB223134F7005ED7FB /* MPWTableView.m in Sources */,
 				1F7045D9223131C2005ED7FB /* MPWBrowser.m in Sources */,
 				1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */,
+				1F417B9F2BFA253A00DB5DB5 /* MPWTableColumn.m in Sources */,
 				1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */,
 				1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */,
 				1F854E6628A02C420085034C /* NSWindowAdditions.m in Sources */,

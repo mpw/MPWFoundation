@@ -220,11 +220,13 @@
 
 -atURL:(NSURL*)aURL postDictionary:(NSDictionary*)dict
 {
+    NSData *encodedData = [self formEncodeDictionary:dict];
     NSMutableURLRequest *request=[self requestForURL:aURL];
-    NSString *boundary=@"0xKhTmLbOuNdArY";
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%ld",encodedData.length] forHTTPHeaderField:@"Content-Length"];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [self formEncodeDictionary:dict];
+    request.HTTPBody = encodedData;
+    NSLog(@"post %@ headers:\n%@\n body: \n%@",request,request.allHTTPHeaderFields,request.HTTPBody.stringValue);
     return [self resourceWithRequest:request];
 }
 

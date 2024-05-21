@@ -21,21 +21,28 @@
             (id)kSecAttrServer: [server retain],
             (id)kSecAttrAccount: [account retain],
         };
-        return [[query mutableCopy] autorelease];
+        return [query mutableCopy];
     } else {
-        @throw [NSException exceptionWithName:@"keychainError" reason:@"invalid path error" userInfo:nil];
+        @throw [NSException exceptionWithName:@"keychainError" reason:@"invalid path error, password/<server>/<account>" userInfo:nil];
     }
     return nil;
 }
 
 -(void)at:(id<MPWReferencing>)aReference put:(id)theObject
 {
-    NSMutableDictionary *addQuery=[self queryDictForReference:aReference];
-    addQuery[(id)kSecValueData]=[theObject asData];
-    OSStatus status = SecItemAdd((__bridge CFDictionaryRef)addQuery, NULL);
+    NSMutableDictionary *theQuery=[self queryDictForReference:aReference];
+    NSString *valueDataRef=(NSString*)kSecValueData;
+    NSDictionary *valueDict =@{ valueDataRef: [theObject asData] };
+    NSMutableDictionary *queryForAdding = [[valueDict mutableCopy] autorelease];
+    [queryForAdding addEntriesFromDictionary:theQuery];
+    OSStatus status = SecItemAdd((__bridge CFDictionaryRef)queryForAdding, NULL);
     if (status != errSecSuccess) {
-        NSLog(@"status: %d",status);
-        @throw [NSException exceptionWithName:@"keychainWriteError" reason:@"keychain error" userInfo:nil];
+        if ( status ==  -25299) {
+            status =SecItemUpdate((__bridge CFDictionaryRef)theQuery,  (__bridge CFDictionaryRef)valueDict);
+            if (status != errSecSuccess) {
+                @throw [NSException exceptionWithName:@"keychainWriteError" reason:[NSString stringWithFormat:@"keychain error %ld",(long)status] userInfo:nil];
+            }
+        }
     }
 }
 

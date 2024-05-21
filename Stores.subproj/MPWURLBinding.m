@@ -133,9 +133,9 @@ objectAccessor(NSError*, error, setError)
     [STORE at:self.reference put:data];
 }
 
--(void)post:(NSData*)data
+-post:(NSData*)data
 {
-    [STORE at:self.reference post:data];
+    return [STORE at:self.reference post:data];
 }
 
 //

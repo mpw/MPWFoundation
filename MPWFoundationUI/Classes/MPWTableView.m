@@ -6,6 +6,7 @@
 //
 #import "MPWTableView.h"
 #import <MPWFoundation/MPWFoundation.h>
+#import "MPWTableColumn.h"
 
 #import <DrawingContext/MPWCGDrawingContext.h>
 
@@ -49,7 +50,7 @@ objectAccessor( NSMutableArray*, items, _setItems)
 -(void)setKeys:(NSArray*)keys
 {
     for (NSString *key in keys) {
-        NSTableColumn *column=[[[NSTableColumn alloc] initWithIdentifier:key] autorelease];
+        MPWTableColumn *column=[[[MPWTableColumn alloc] initWithIdentifier:key] autorelease];
         column.width=150;
         [column setTitle:[key capitalizedString]];
         [self addTableColumn:column];
