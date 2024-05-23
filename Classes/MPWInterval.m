@@ -14,11 +14,12 @@
 #import "CodingAdditions.h"
 #import "NSObjectFiltering.h"
 
+
 @interface NSObject(value)
 -value:arg;
 @end
 
-@interface MPWIntervalEnumerator : MPWInterval
+@interface MPWIntervalEnumerator : MPWLongInterval
 {
     long current;
 }
@@ -33,26 +34,20 @@ longAccessor_h( current, setCurrent )
 
 @implementation MPWInterval
 
+
 #define FROM	range.location
 
-#define INTATINDEX( anIndex )   ((FROM + (anIndex))*step)
+#define INTATINDEX( anIndex )   ((FROM + (anIndex))*_step)
 #define TO		((range.location + range.length-1))
 
-
--(long)from {  return FROM; }
--(long)to   {  return TO; }
--(void)setFrom:(long)newFrom { range.location=newFrom; }
--(void)setTo:(long)newTo { range.length = newTo - range.location + 1; }
-
--(NSNumber*)random
+-(long)step
 {
-    double weight=drand48();
-    return [NSNumber numberWithInt:[self from] * weight + (1-weight) * [self to]];
+    return 1;
 }
+
 
 //scalarAccessor( int, from, setFrom )
 //scalarAccessor( int, to, setTo )
-longAccessor( step, _setStep )
 
 -(void)setStep:(long)newVar
 {
@@ -98,74 +93,15 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 
 +intervalFromInt:(long)newFrom toInt:(long)newTo step:(long)newStep
 {
-	return [[[self alloc] initFromInt:newFrom toInt:newTo step:newStep numberClass:[NSNumber class]] autorelease];
-}
-
-
--asArray
-{
-    return [[[MPWIntArray alloc] initFromInt:range.location toInt:range.location+range.length step:step] autorelease];
+	return [[[MPWLongInterval alloc] initFromInt:newFrom toInt:newTo step:newStep numberClass:[NSNumber class]] autorelease];
 }
 
 +intervalFromInt:(long)newFrom toInt:(long)newTo
 {
-	return [self intervalFromInt:newFrom toInt:newTo step:1];
-}
-
--initFromInt:(long)newFrom toInt:(long)newTo step:(long)newStep numberClass:(Class)newNumberClass
-{
-	self=[super init];
-	[self setFrom:newFrom];
-	[self setTo:newTo];
-	[self setStep:newStep];
-	[self setNumberClass:newNumberClass];
-	return self;
-}
-
--initFromInt:(long)newFrom toInt:(long)newTo  numberClass:(Class)newNumberClass
-{
-	return [self initFromInt:newFrom toInt:newTo step:1 numberClass:newNumberClass];
+    return [self intervalFromInt:newFrom toInt:newTo step:1];
 }
 
 
--initFromInt:(long)newFrom toInt:(long)newTo
-{
-	return [self initFromInt:newFrom toInt:newTo numberClass:[NSNumber class]];
-}
-
-
-
--initFrom:newFrom to:newTo step:newStep
-{
-	return [self initFromInt:[newFrom intValue] toInt:[newTo intValue] step:[newStep intValue] numberClass:[newFrom class]];
-}
-
--initFrom:newFrom to:newTo
-{
-	return [self initFromInt:[newFrom intValue] toInt:[newTo intValue] step:1 numberClass:[newFrom class]];
-}
-
--(instancetype)init
-{
-    return [self initFrom:0 to:0];
-}
-
-
--do:aBlock with:target
-{
-	id value=nil;
-	id pool=[NSAutoreleasePool new];
-	for (long i=FROM;i<=TO;i+=step ) {
-        value = [aBlock value:[numberClass numberWithLong:i]];
-		if ( i % 100 == 0 ) {
-			[pool release];
-			pool=[NSAutoreleasePool new];
-		}
-		[target addObject:value];
-	}
-	[pool release];
-	return target ? target : value;
-}
 
 -collect:aBlock
 {
@@ -175,11 +111,6 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 -(void)do:aBlock
 {
 	[self do:aBlock with:nil];
-}
-
--(BOOL)containsInteger:(int)anInt
-{
-    return FROM <= anInt && anInt <= TO;
 }
 
 -(BOOL)containsObject:anObject
@@ -198,55 +129,139 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
     return [self objectEnumerator];
 }
 
--(NSUInteger)count
+
+-(void)writeOnShellPrinter:aPrinter
 {
-    return range.length / step;
+    [aPrinter writeObject:[self description]];
 }
 
 
--(long)integerAtIndex:(NSUInteger)anIndex
+-(void)writeOnStream:aStream
 {
-	if ( anIndex >= [self count] ) {
-		@throw [NSException
-				exceptionWithName:@"RangeException"
-				reason:[NSString stringWithFormat:@"-[%@ integerAtIndex:%ld] out of bounds(%ld)",[self class],(long)anIndex,(long)[self count]]
-				userInfo:nil];
-	}
-	return INTATINDEX( anIndex );
+    [aStream writeEnumerator:self];
 }
 
--objectAtIndex:(NSUInteger)anIndex
+@end
+
+@implementation MPWDoubleInterval
 {
-	return [numberClass numberWithLong:[self integerAtIndex:anIndex]];
+    double from,to,step;
 }
 
--description 
++(instancetype)intervalFromDouble:(double)newFrom toDouble:(double)newTo
 {
-	return [NSString stringWithFormat:@"<%@:%p from %ld to %ld>",[self class],self,[self from],[self to]];
+    return [[[self alloc] initFromDouble:newFrom toDouble:newTo step:1.0 numberClass:[NSNumber class]] autorelease];
 }
+
+
+-(instancetype)initFromDouble:(double)newFrom toDouble:(double)newTo step:(double)newStep numberClass:(Class)newNumberClass
+{
+    if (self=[super init] ) {
+        from=newFrom;
+        to=newTo;
+        step=newStep;
+    }
+    return self;
+}
+
+scalarAccessor( double, from, setFrom )
+scalarAccessor( double, to, setTo )
+scalarAccessor( double, step, setStep )
+
+-(instancetype)initFrom:newFrom to:newTo step:newStep
+{
+    return [self initFromDouble:[newFrom doubleValue] toDouble:[newTo doubleValue] step:[newStep doubleValue] numberClass:[newFrom class]];
+}
+
+-(instancetype)initFrom:newFrom to:newTo
+{
+    return [self initFromDouble:[newFrom intValue] toDouble:[newTo intValue] step:1.0 numberClass:[newFrom class]];
+}
+
+-(NSNumber*)random
+{
+    double weight=drand48();
+    return [NSNumber numberWithDouble:from * weight + (1-weight) * to];
+}
+
+-description
+{
+    return [NSString stringWithFormat:@"<%@:%p from %g to %g>",[self class],self,[self from],[self to]];
+}
+
+
+@end
+
+@implementation MPWLongInterval
+
+
+-initFromInt:(long)newFrom toInt:(long)newTo step:(long)newStep numberClass:(Class)newNumberClass
+{
+    self=[super init];
+    [self setFrom:newFrom];
+    [self setTo:newTo];
+    [self setStep:newStep];
+    [self setNumberClass:newNumberClass];
+    return self;
+}
+
+-initFromInt:(long)newFrom toInt:(long)newTo  numberClass:(Class)newNumberClass
+{
+    return [self initFromInt:newFrom toInt:newTo step:1 numberClass:newNumberClass];
+}
+
+
+-initFromInt:(long)newFrom toInt:(long)newTo
+{
+    return [self initFromInt:newFrom toInt:newTo numberClass:[NSNumber class]];
+}
+
+
+
+-initFrom:newFrom to:newTo step:newStep
+{
+    return [self initFromInt:[newFrom intValue] toInt:[newTo intValue] step:[newStep intValue] numberClass:[newFrom class]];
+}
+
+-initFrom:newFrom to:newTo
+{
+    return [self initFromInt:[newFrom intValue] toInt:[newTo intValue] step:1 numberClass:[newFrom class]];
+}
+
+
+-(long)from {  return FROM; }
+-(long)to   {  return TO; }
+-(void)setFrom:(long)newFrom { range.location=newFrom; }
+-(void)setTo:(long)newTo { range.length = newTo - range.location + 1; }
+
+-asArray
+{
+    return [[[MPWIntArray alloc] initFromInt:range.location toInt:range.location+range.length step:_step] autorelease];
+}
+
 
 -(NSRange)asNSRange {
-	return range;
+    return range;
 }
 
 -(NSRange)rangeValue {
-	return range;
+    return range;
 }
 
 -(NSRangePointer)rangePointer {
-	return &range;
+    return &range;
 }
 
 #define defineArithOp( opName , adjustStep ) \
 -(id)opName:other {\
-   NSNumber *from1=[@(FROM) opName: other];\
-   NSNumber *to1=[@(TO) opName: other];\
-   NSNumber *step1=@([self step]);\
-   if ( adjustStep ) { \
-      step1 = [step1 opName: other]; \
-    } \
-   MPWInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:step1];\
-   return newInterval;\
+NSNumber *from1=[@(FROM) opName: other];\
+NSNumber *to1=[@(TO) opName: other];\
+NSNumber *step1=@([self step]);\
+if ( adjustStep ) { \
+step1 = [step1 opName: other]; \
+} \
+MPWInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:step1];\
+return newInterval;\
 }\
 
 
@@ -256,38 +271,75 @@ defineArithOp( sub, false)
 defineArithOp( div, true )
 
 
-
--(void)encodeWithCoder:aCoder
+-(NSNumber*)random
 {
-	long from=FROM,to=TO;
-	encodeVar( aCoder, from );
-	encodeVar( aCoder, to );
+    double weight=drand48();
+    return [NSNumber numberWithInt:[self from] * weight + (1-weight) * [self to]];
+}
+-(NSUInteger)count
+{
+    return range.length / _step;
 }
 
--initWithCoder:aCoder
+-(long)integerAtIndex:(NSUInteger)anIndex
 {
-	self=[super initWithCoder:aCoder];
-	int from,to;
-	decodeVar( aCoder, from );
-	decodeVar( aCoder, to );
-	[self setFrom:from];
-	[self setTo:to];
-	return self;
+    if ( anIndex >= [self count] ) {
+        @throw [NSException
+                exceptionWithName:@"RangeException"
+                reason:[NSString stringWithFormat:@"-[%@ integerAtIndex:%ld] out of bounds(%ld)",[self class],(long)anIndex,(long)[self count]]
+                userInfo:nil];
+    }
+    return INTATINDEX( anIndex );
 }
 
--(void)writeOnStream:aStream
+-(BOOL)containsInteger:(int)anInt
 {
-    [aStream writeEnumerator:self];
+    return FROM <= anInt && anInt <= TO;
 }
 
+-objectAtIndex:(NSUInteger)anIndex
+{
+    return [numberClass numberWithLong:[self integerAtIndex:anIndex]];
+}
+
+-description
+{
+    return [NSString stringWithFormat:@"<%@:%p from %ld to %ld>",[self class],self,[self from],[self to]];
+}
+
+
+-do:aBlock with:target
+{
+    id value=nil;
+    for (long i=FROM;i<=TO;i+=_step ) {
+        @autoreleasepool {
+            value = [aBlock value:[numberClass numberWithLong:i]];
+            [target addObject:value];
+        }
+    }
+    return target ? target : value;
+}
 @end
+
 
 @implementation NSNumber(intervals)
 
 
--to:otherNumber
+-to:other
 {
-    return [MPWInterval intervalFrom:self to:otherNumber];
+    const char *type1s=[self objCType];
+    const char *type2s=[other objCType];
+    
+    if ( type1s && type2s ) {
+        char type1=*type1s;
+        char type2=*type2s;
+        if ( (type1=='i' || type1=='q' ) && (type2=='i' || type2=='q' ) ) {
+            return [MPWLongInterval intervalFromInt:[self intValue] toInt:[other intValue]];
+        } else {
+            return [MPWDoubleInterval intervalFromDouble:[self doubleValue] toDouble:[other doubleValue]];
+        }
+    }
+    return nil;
 }
 
 
@@ -329,13 +381,14 @@ defineArithOp( div, true )
 
 @end
 
+
 #import "DebugMacros.h"
 
 @implementation MPWInterval(testing)
 
 +(void)testBasicInterval
 {
-	MPWInterval *one_to_ten=[MPWInterval intervalFromInt:1 toInt:10];
+	MPWLongInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10];
 	INTEXPECT( [one_to_ten integerAtIndex:0], 1, @"first of [1-10]");
 	INTEXPECT( [one_to_ten integerAtIndex:1], 2, @"second of [1-10]");
 	INTEXPECT( [one_to_ten integerAtIndex:9], 10, @"last of [1-10]");
@@ -343,7 +396,7 @@ defineArithOp( div, true )
 
 +(void)testIntervalRespectsRange
 {
-	MPWInterval *one_to_ten=[MPWInterval intervalFromInt:1 toInt:10];
+	MPWInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10];
 	BOOL failedToRaise=NO;
 	@try {
 		[one_to_ten integerAtIndex:10];
@@ -356,7 +409,7 @@ defineArithOp( div, true )
 
 +(void)testIntervalWithStep
 {
-	MPWInterval *one_to_ten=[MPWInterval intervalFromInt:1 toInt:10 step:2];
+	MPWInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10 step:2];
 	INTEXPECT( [one_to_ten count] ,5, @"count");
 	INTEXPECT( [one_to_ten integerAtIndex:0], 2, @"first of [1-10]");
 	INTEXPECT( [one_to_ten integerAtIndex:1], 4, @"second of [1-10]");
@@ -365,7 +418,7 @@ defineArithOp( div, true )
 
 +(void)testIntervalArithmetic
 {
-    MPWInterval *five_to_ten=[MPWInterval intervalFromInt:4 toInt:10];
+    MPWInterval *five_to_ten=[MPWLongInterval intervalFromInt:4 toInt:10];
     INTEXPECT( [[five_to_ten add:@2] from], 6, @"add 2 to interval -> from");
     INTEXPECT( [[five_to_ten add:@2] to], 12, @"add 2 to interval -> to");
     INTEXPECT( [[five_to_ten mul:@3] from], 12, @"mul interval by 3 -> from");
@@ -377,6 +430,11 @@ defineArithOp( div, true )
 +(void)testNumberIntervalConveniences
 {
     IDEXPECT( ([@(1) to:@(10)]), [MPWInterval intervalFromInt:1 toInt:10], @"to: on number");
+}
+
++(void)testNumberIntervalConveniencesWithLongs
+{
+    IDEXPECT( ([[NSNumber numberWithLong:1] to:@(10)]), [MPWInterval intervalFromInt:1 toInt:10], @"to: on number");
 }
 
 +(void)testIntervalCollect
@@ -395,6 +453,7 @@ defineArithOp( div, true )
 			@"testIntervalRespectsRange",
             @"testIntervalWithStep",
             @"testIntervalArithmetic",
+            @"testNumberIntervalConveniencesWithLongs",
             @"testNumberIntervalConveniences",
             @"testIntervalCollect",
         nil];
@@ -427,6 +486,7 @@ longAccessor( current, setCurrent )
 {
     return [[[self alloc] initWithInterval:interval] autorelease];
 }
+
 -(BOOL)isAtEnd
 {
     return current > TO;
@@ -437,7 +497,7 @@ longAccessor( current, setCurrent )
     id retval=nil;
     if ( ![self isAtEnd] ) {
         retval=[numberClass numberWithLong:current];
-        current+=step;
+        current+=self.step;
     }
     return retval;
 }

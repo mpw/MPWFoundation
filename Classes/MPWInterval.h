@@ -9,28 +9,52 @@
 #import <Foundation/Foundation.h>
 
 @interface MPWInterval : NSArray {
-	NSRange range;
-	long	step;
 	Class numberClass;
 }
 
-@property (assign) long from,to,step;
 
+
+-initFrom:newFrom to:newTo;
+-objectEnumerator;
+-(void)do:aBlock;
+-(id)add:aNumber;
+-(id)sub:aNumber;
+-(id)mul:aNumber;
+-(id)div:aNumber;
+-(NSNumber*)random;
+
+@end
+
+@interface MPWDoubleInterval : MPWInterval
+{
+    
+}
+
+
+@end
+
+@interface MPWLongInterval : MPWInterval
+{
+    NSRange range;
+}
 
 +intervalFromInt:(long)newFrom toInt:(long)newTo;
 +intervalFrom:newFrom to:newTo step:newStep;
 
 +intervalFrom:newFrom to:newTo;
 -initFromInt:(long)newFrom toInt:(long)newTo;
--initFrom:newFrom to:newTo;
--objectEnumerator;
+
+@property (assign) long from,to,step;
+
 -(NSRange)asNSRange;
 -(NSRange)rangeValue;
 -(NSRangePointer)rangePointer;
--(void)do:aBlock;
--(id)add:aNumber;
--(id)sub:aNumber;
--(id)mul:aNumber;
--(id)div:aNumber;
+
+@end
+
+@interface NSNumber(intervals)
+
+-(MPWInterval*)to:(NSNumber*)other;
+-(MPWInterval*)to:(NSNumber*)otherNumber by:(NSNumber*)stepNumber;
 
 @end

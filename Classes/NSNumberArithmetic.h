@@ -13,10 +13,13 @@ NSNumber* MPWCreateInteger( long theInteger );
 
 @interface NSNumber(Arithmetic)
 
--add:other;
--mul:other;
--sub:other;
--div:other;
+-(instancetype)add:other;
+-(instancetype)mul:other;
+-(instancetype)sub:other;
+-(instancetype)div:other;
 -(double)log;
 -(double)log10;
+-(instancetype)abs;
+-fib;
+-fastfib;
 @end

@@ -136,13 +136,23 @@ defineArithOp( div, / )
     return self;
 }
 
--negated
+-(instancetype)negated
 {
-	const char *type1=[self objCType];
+    const char *type1=[self objCType];
     if ( type1 && *type1 == 'i' ){
         return [NSNumber numberWithInt:-[self intValue]];
     } else {
         return [NSNumber numberWithDouble:-[self doubleValue]];
+    }
+}
+
+-(instancetype)abs
+{
+    const char *type1=[self objCType];
+    if ( type1 && *type1 == 'i' ){
+        return [NSNumber numberWithInt:abs([self intValue])];
+    } else {
+        return [NSNumber numberWithDouble:fabs([self doubleValue])];
     }
 }
 
