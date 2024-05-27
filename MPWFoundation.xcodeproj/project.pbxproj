@@ -1288,6 +1288,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		1F4981272C036B0D006A6D18 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1F4981232C036B0C006A6D18 /* ObjectiveQueue.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1F4981172C036B0C006A6D18;
+			remoteInfo = ObjectiveQueue;
+		};
 		1F7045C622313099005ED7FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 07DF1931006686DDC35ADD82 /* Project object */;
@@ -1486,6 +1493,7 @@
 		1F417B9E2BFA253A00DB5DB5 /* MPWTableColumn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableColumn.m; sourceTree = "<group>"; };
 		1F45AA8A29F9912700FB1C4E /* MPWKeychainStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWKeychainStore.h; sourceTree = "<group>"; };
 		1F45AA8B29F9912700FB1C4E /* MPWKeychainStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWKeychainStore.m; sourceTree = "<group>"; };
+		1F4981232C036B0C006A6D18 /* ObjectiveQueue.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ObjectiveQueue.xcodeproj; path = ../ObjectiveQueue/ObjectiveQueue.xcodeproj; sourceTree = "<group>"; };
 		1F49BBB520BBCE6B00405432 /* MPWMappingStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWMappingStore.h; sourceTree = "<group>"; };
 		1F49BBB620BBCE6B00405432 /* MPWMappingStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWMappingStore.m; sourceTree = "<group>"; };
 		1F4D4411261591960023C2C5 /* MPWWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWWindowController.h; sourceTree = "<group>"; };
@@ -1908,6 +1916,7 @@
 		07DF1932006686DDC35ADD82 /* MPWFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				1F4981232C036B0C006A6D18 /* ObjectiveQueue.xcodeproj */,
 				1FAB9ACD193F663600927665 /* MPWFoundation.map */,
 				07DF1933006686DDC35ADD82 /* Classes */,
 				07DF1966006686DDC35ADD82 /* Comm */,
@@ -2258,6 +2267,14 @@
 			);
 			name = SQLite;
 			path = StreamQLite;
+			sourceTree = "<group>";
+		};
+		1F4981242C036B0C006A6D18 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1F4981282C036B0D006A6D18 /* ObjectiveQueue.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		1F4FC9741DF818AE00B35D27 /* TestMPWFoundation */ = {
@@ -3532,6 +3549,12 @@
 			mainGroup = 07DF1932006686DDC35ADD82 /* MPWFoundation */;
 			productRefGroup = 07DF19B6006686DDC35ADD82 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 1F4981242C036B0C006A6D18 /* Products */;
+					ProjectRef = 1F4981232C036B0C006A6D18 /* ObjectiveQueue.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1FF8FDB309B49D0100652476 /* MPWFoundationFramework */,
@@ -3545,6 +3568,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		1F4981282C036B0D006A6D18 /* ObjectiveQueue.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ObjectiveQueue.framework;
+			remoteRef = 1F4981272C036B0D006A6D18 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1F4FC9711DF818AE00B35D27 /* Resources */ = {

@@ -93,6 +93,15 @@ CACHING_ALLOC( _mpwPoint, 20, NO )
     };
     return [self pointWithNSPoint:p];
 }
+
++(instancetype)x:(float)x y:(float)y
+{
+    NSPoint p={
+        x,y
+    };
+    return [self pointWithNSPoint:p];
+}
+
 #if ! TARGET_OS_IPHONE
 +pointWithNSString:(NSString*)string
 {
@@ -113,6 +122,26 @@ CACHING_ALLOC( _mpwPoint, 20, NO )
 {
     return self;
 }
+
+-(instancetype)initWithArray:(NSArray*)array
+{
+    if (self=[super init] ) {
+        int count=MIN((int)array.count,2);
+        double coords[2]={0,0};
+        for (int i=0;i<count;i++) {
+            coords[i]=[array[i] doubleValue];
+        }
+        switch (count) {
+            case 1:
+                coords[1]=coords[0];
+                // fall through
+        }
+        point.x=coords[0];
+        point.y=coords[1];
+    }
+    return self;
+}
+
 -(MPWRect*)extent:otherPoint
 {
 	NSPoint origin=[self point];

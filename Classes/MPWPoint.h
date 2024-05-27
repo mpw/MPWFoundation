@@ -24,6 +24,7 @@ scalarAccessor_h( NSPoint, point, setPoint )
 #if ! TARGET_OS_IPHONE
 +pointWithNSString:(NSString*)string;
 #endif
++(instancetype)x:(float)x y:(float)y;
 +pointWithX:(float)x y:(float)y;
 -(double)x;
 -(double)y;

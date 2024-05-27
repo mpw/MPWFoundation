@@ -19,6 +19,36 @@ scalarAccessor( NSRect, rect, setRect )
     return self;
 }
 
+-(instancetype)initWithArray:(NSArray*)array
+{
+    if (self=[super init] ) {
+        int count=MIN((int)array.count,4);
+        double coords[4]={0,0,0,0};
+        for (int i=0;i<count;i++) {
+            coords[i]=[array[i] doubleValue];
+        }
+        switch (count) {
+            case 1:
+                coords[1]=coords[0];
+                // fall through
+            case 2:
+                coords[3]=coords[1];
+                coords[2]=coords[0];
+                coords[0]=coords[1]=0;
+            case 4:
+                break; // nothing to do
+            default:
+                // yell
+                break;
+        }
+        rect.origin.x=coords[0];
+        rect.origin.y=coords[1];
+        rect.size.width=coords[2];
+        rect.size.height=coords[3];
+   }
+    return self;
+}
+
 +rectWithRect:(NSRect)aRect
 {
     return [[[self alloc] initWithRect:aRect] autorelease];
@@ -29,7 +59,7 @@ scalarAccessor( NSRect, rect, setRect )
 	rect.origin=[aPoint point];
 }
 
--(void)setMpwSize:aPoint
+-(void)setSize:aPoint
 {
 	rect.size=[aPoint asSize];
 }
@@ -59,16 +89,16 @@ scalarAccessor( NSRect, rect, setRect )
     return [MPWPoint pointWithNSPoint:rect.origin];
 }
 
--mpwSize
+-size
 {
     return [MPWPoint pointWithNSPoint:(NSPoint){
         rect.size.width,rect.size.height
     }];
 }
 
--size
+-mpwSize
 {
-    return [self mpwSize];
+    return [self size];
 }
 
 -(instancetype)asRect

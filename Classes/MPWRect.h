@@ -21,8 +21,8 @@ scalarAccessor_h( NSRect, rect, setRect )
 +rectWithNSString:(NSString*)string;
 #endif
 -initWithRect:(NSRect)aRect;
--origin;
--mpwSize;
+-(MPWPoint*)origin;
+-(MPWPoint*)size;
 -(instancetype)asRect;
 
 
