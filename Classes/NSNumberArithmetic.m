@@ -65,12 +65,30 @@ NSNumber* MPWCreateInteger( long theInteger )
     return [self boolValue] ^ [other boolValue] ? @true : @false;
 }
 
+static bool isIntType( const char *typep )
+{
+    if ( typep  ) {
+        char type=*typep;
+        return type=='i' || type=='q';
+    }
+    return false;
+}
+
+static bool isFloatType( const char *typep )
+{
+    if ( typep  ) {
+        char type=*typep;
+        return type=='f' || type=='d';
+    }
+    return false;
+}
+
 #define defineArithOp( opName, op ) \
 -opName:other {\
 	const char *type1=[self objCType];\
         const char *type2=[other objCType];\
-            if ( type1 && type2 && *type1=='i' && *type2=='i' ) {\
-                return [NSNumber numberWithInt:[self intValue] op [other intValue]];\
+            if ( isIntType(type1) && isIntType(type2) ) {\
+                return [NSNumber numberWithLong:[self longValue] op [other longValue]];\
             } else {\
                 return [NSNumber numberWithDouble:[self doubleValue] op [other doubleValue]];\
             }\
@@ -78,9 +96,9 @@ NSNumber* MPWCreateInteger( long theInteger )
 
 -mod:other
 {
-    int otherInt=[other intValue];
+    long otherInt=[other longValue];
     if ( otherInt != 0) {
-        return [NSNumber numberWithInt:[self intValue] % otherInt];
+        return [NSNumber numberWithLong:[self longValue] % otherInt];
     } else {
         [NSException raise:@"division by zero" format:@"arithmetic exception dividing %@ by 0",self];
         return 0;
@@ -139,7 +157,7 @@ defineArithOp( div, / )
 -(instancetype)negated
 {
     const char *type1=[self objCType];
-    if ( type1 && *type1 == 'i' ){
+    if ( isIntType(type1)){
         return [NSNumber numberWithInt:-[self intValue]];
     } else {
         return [NSNumber numberWithDouble:-[self doubleValue]];
@@ -149,7 +167,7 @@ defineArithOp( div, / )
 -(instancetype)abs
 {
     const char *type1=[self objCType];
-    if ( type1 && *type1 == 'i' ){
+    if ( isIntType(type1) ){
         return [NSNumber numberWithInt:abs([self intValue])];
     } else {
         return [NSNumber numberWithDouble:fabs([self doubleValue])];
@@ -211,8 +229,8 @@ defineArithOp( div, / )
 -coerceToDecimalNumber
 {
     const char *objcType=[self objCType];
-    if ( *objcType == 'i' ) {
-        return [NSDecimalNumber numberWithInt:[self intValue]];
+    if ( isIntType(objcType)) {
+        return [NSDecimalNumber numberWithLong:[self intValue]];
     } else {
         return [NSDecimalNumber numberWithDouble:[self doubleValue]];
     }
