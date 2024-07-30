@@ -14,8 +14,8 @@
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;
 +(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;
 
--(id <MPWReferencing>)mapReference:(id <MPWReferencing>)aReference;
--mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference;
--mapObjectToStore:anObject forReference:(id <MPWReferencing>)aReference;
+-(id <MPWIdentifying>)mapReference:(id <MPWIdentifying>)aReference;
+-mapRetrievedObject:anObject forReference:(id <MPWIdentifying>)aReference;
+-mapObjectToStore:anObject forReference:(id <MPWIdentifying>)aReference;
 
 @end

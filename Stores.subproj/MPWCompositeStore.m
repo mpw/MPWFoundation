@@ -8,7 +8,7 @@
 #import "MPWCompositeStore.h"
 #import <MPWByteStream.h>
 #import "MPWDiskStore.h"
-#import "MPWReference.h"
+#import "MPWIdentifier.h"
 
 @implementation MPWCompositeStore
 
@@ -19,22 +19,22 @@
     return store;
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     return [self.stores.firstObject at:aReference];
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     [self.stores.firstObject at:aReference put:(id)theObject];
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [self.stores.firstObject deleteAt:aReference];
 }
 
--(void)merge:(id)theObject at:(id<MPWReferencing>)aReference
+-(void)merge:(id)theObject at:(id<MPWIdentifying>)aReference
 {
     [self.stores.firstObject merge:(id)theObject at:aReference];
 }

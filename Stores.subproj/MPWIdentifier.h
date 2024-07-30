@@ -7,19 +7,19 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MPWReferencing 
+@protocol MPWIdentifying 
 
 @property (readonly) NSArray<NSString*> *pathComponents;
 @property (readonly) NSArray<NSString*> *relativePathComponents;
 @property (nonatomic, strong) NSString *schemeName;
 @property (readonly) NSString *path;
 
--(BOOL)isAffectedBy:(id <MPWReferencing>)other;
--(instancetype)referenceByAppendingReference:(id<MPWReferencing>)other;
+-(BOOL)isAffectedBy:(id <MPWIdentifying>)other;
+-(instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other;
 
 @end
 
-@protocol MPWReferenceCreation
+@protocol MPWIdentifierCreation
 
 -(instancetype)initWithPathComponents:(NSArray*)pathComponents scheme:(NSString*)scheme;
 -(instancetype)initWithPath:(NSString*)pathName;
@@ -28,7 +28,7 @@
 
 @end
 
-@interface MPWReference : NSObject <MPWReferencing>
+@interface MPWIdentifier : NSObject <MPWIdentifying>
 
 -(NSURL*)URL;
 
@@ -37,7 +37,7 @@
 @end
 
 
-@interface NSString(referencing) <MPWReferencing>
+@interface NSString(referencing) <MPWIdentifying>
 
 
 @end

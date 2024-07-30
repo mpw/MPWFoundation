@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MPWReferencing;
-@class MPWRESTOperation<T: id <MPWReferencing>>;
+@protocol MPWIdentifying;
+@class MPWRESTOperation<T: id <MPWIdentifying>>;
 
-@interface MPWURLCall<T: id <MPWReferencing>> : NSObject
+@interface MPWURLCall<T: id <MPWIdentifying>> : NSObject
 
 -(id)processed;
 -(instancetype)initWithRESTOperation:(MPWRESTOperation<T>*)op;

@@ -22,7 +22,7 @@
 
 lazyAccessor(NSArray*, formalParameters, setFormalParamters, createFormalParameters)
 
-ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )
+ReferenceTemplateComponents* componentsFromReference( id <MPWIdentifying> ref )
 {
     NSArray *pathComponents=ref.pathComponents;
     long count=pathComponents.count;
@@ -62,14 +62,14 @@ ReferenceTemplateComponents* componentsFromReference( id <MPWReferencing> ref )
     return self;
 }
 
-CONVENIENCEANDINIT( template, WithReference:(id <MPWReferencing>)ref)
+CONVENIENCEANDINIT( template, WithReference:(id <MPWIdentifying>)ref)
 {
     return [self initWithComponents:componentsFromReference(ref)];
 }
 
 CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:path];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:path];
 
     return [self initWithReference:ref];
 }
@@ -97,7 +97,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 
 
 
--(BOOL)getParameters:(NSString **)params  forMatchedReference:(id <MPWReferencing>)ref
+-(BOOL)getParameters:(NSString **)params  forMatchedReference:(id <MPWIdentifying>)ref
 {
 //    NSLog(@"getParameters:forMatchedReference: %@/%@",[ref class],ref);
     int currentParam=0;
@@ -164,7 +164,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     }
 }
 
--(NSArray*)parametersForMatchedReference:(id <MPWReferencing>)ref
+-(NSArray*)parametersForMatchedReference:(id <MPWIdentifying>)ref
 {
     NSString *params[parameterCount+1];
     if ( [self getParameters:params forMatchedReference:ref] ) {
@@ -175,7 +175,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
     
 }
 
--(NSDictionary*)bindingsForMatchedReference:(id <MPWReferencing>)ref
+-(NSDictionary*)bindingsForMatchedReference:(id <MPWIdentifying>)ref
 {
     NSArray *matches = [self parametersForMatchedReference:ref];
     if ( matches ) {
@@ -204,7 +204,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 
 -(NSDictionary*)bindingsForMatchedPath:(NSString*)path
 {
-    return [self bindingsForMatchedReference:[MPWGenericReference referenceWithPath:path]];
+    return [self bindingsForMatchedReference:[MPWGenericIdentifier referenceWithPath:path]];
 }
 
 -(NSString*)parameterNameAtIndex:(int)i
@@ -290,7 +290,7 @@ CONVENIENCEANDINIT( template, WithString:(NSString*)path)
 @end
 
 
-@implementation MPWReference(asReferenceTemplate)
+@implementation MPWIdentifier(asReferenceTemplate)
 
 -asReferenceTemplate
 {

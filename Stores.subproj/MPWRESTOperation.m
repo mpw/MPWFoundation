@@ -12,7 +12,7 @@
 
 @implementation MPWRESTOperation
 
-CONVENIENCEANDINIT( operation, WithReference:(id <MPWReferencing>)reference verb:(MPWRESTVerb)verb)
+CONVENIENCEANDINIT( operation, WithReference:(id <MPWIdentifying>)reference verb:(MPWRESTVerb)verb)
 {
     self=[super init];
     self.reference=reference;

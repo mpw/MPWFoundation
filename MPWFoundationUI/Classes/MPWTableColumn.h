@@ -9,7 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPWPropertyBinding;
+
 @interface MPWTableColumn : NSTableColumn
+
+@property (nonatomic, strong)  MPWPropertyBinding *binding;
+
+-(id)valueForTarget:(id)anObject;
 
 @end
 

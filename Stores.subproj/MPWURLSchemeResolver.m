@@ -49,7 +49,7 @@
     }
     NSURL *u=[NSURL URLWithString:combined];
     return [MPWURLReference referenceWithURL:u];
-//    id <MPWReferencing> reference=[super referenceForPath:name];
+//    id <MPWIdentifying> reference=[super referenceForPath:name];
 //    reference.schemeName=[self schemePrefix];
 //    return reference;
 }
@@ -249,8 +249,8 @@
 {
     IDEXPECT( [[self httpScheme] schemePrefix], @"http",@"insecure");
     IDEXPECT( [[self httpsScheme] schemePrefix], @"https",@"secure");
-    IDEXPECT( [[(MPWGenericReference*)[[self httpsScheme] referenceForPath:@"localhost"] URL] absoluteString], @"https://localhost",@"secure");
-    IDEXPECT( [[(MPWGenericReference*)[[[[self alloc] initWithSchemePrefix:@"ftp" ] autorelease] referenceForPath:@"localhost"] URL] absoluteString], @"ftp://localhost" ,@"ftp");
+    IDEXPECT( [[(MPWGenericIdentifier*)[[self httpsScheme] referenceForPath:@"localhost"] URL] absoluteString], @"https://localhost",@"secure");
+    IDEXPECT( [[(MPWGenericIdentifier*)[[[[self alloc] initWithSchemePrefix:@"ftp" ] autorelease] referenceForPath:@"localhost"] URL] absoluteString], @"ftp://localhost" ,@"ftp");
 }
 
 +(void)testSetAccessToken

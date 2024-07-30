@@ -9,7 +9,7 @@
 
 @interface MPWMergingStore : MPWMappingStore
 
--mergeNew:(nonnull)newObject into:(nonnull)existingObject forReference:(id <MPWReferencing>)aReference;
+-mergeNew:(nonnull)newObject into:(nonnull)existingObject forReference:(id <MPWIdentifying>)aReference;
 
 
 @end

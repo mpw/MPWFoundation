@@ -45,14 +45,14 @@
     return self;
 }
 
--(void)writeToSource:newObject at:(id <MPWReferencing>)aReference
+-(void)writeToSource:newObject at:(id <MPWIdentifying>)aReference
 {
     if (!self.readOnlySource) {
         [self.queue writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
     }
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [self.cache deleteAt:aReference];
     if (!self.readOnlySource) {
@@ -131,7 +131,7 @@
 {
     self.store[self.key] = self.value;
     [(MPWWriteBackCache*)self.store makeAsynchronous];
-    [self.store deleteAt:(id <MPWReferencing>)self.key];
+    [self.store deleteAt:(id <MPWIdentifying>)self.key];
     IDEXPECT( self.source[self.key], self.value, @"deleteing source is not synchronous");
     EXPECTNIL( self.cache[self.key], @"deleteing cache is synchronous");
     [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{

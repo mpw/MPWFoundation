@@ -5,9 +5,9 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import <MPWReference.h>
+#import <MPWIdentifier.h>
 
-@implementation MPWReference
+@implementation MPWIdentifier
 
 -(NSURL *)URL {     return nil;  }
 -(BOOL)hasTrailingSlash  {     return NO; }
@@ -44,7 +44,7 @@
     return [self isEqual:other];
 }
 
--(instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
+-(instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other {
     return nil;
 }
 
@@ -116,13 +116,13 @@
     return self.length == 0 || [self isEqual:@"/"];
 }
 
--(id<MPWReferencing>)asReference
+-(id<MPWIdentifying>)asReference
 {
     return self;
 }
 
 
-- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other { 
+- (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other { 
     return [self stringByAppendingPathComponent:[other path]];
 }
 
@@ -141,11 +141,11 @@
 
 #import "DebugMacros.h"
 
-@implementation MPWReference(testing)
+@implementation MPWIdentifier(testing)
 
 +(void)testIsAffectedBySelf
 {
-    MPWReference *r=[self new];
+    MPWIdentifier *r=[self new];
     EXPECTTRUE([r isAffectedBy:r],@"ref is affected by itself" );
 }
 

@@ -6,8 +6,14 @@
 //
 
 #import "MPWTableColumn.h"
+#import <MPWFoundation/MPWFoundation.h>
 
 @implementation MPWTableColumn
+
+-(id)valueForTarget:(id)anObject
+{
+    return [self.binding valueForTarget:anObject];
+}
 
 @end
 

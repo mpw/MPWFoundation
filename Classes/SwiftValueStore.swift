@@ -31,7 +31,7 @@ public func check(_ condition: @autoclosure () -> Bool, _ message: @autoclosure 
     @objc public func setVal(_ newVal:Any ) {
         val=newVal
     }
-    override public func at(_ ref:MPWReferencing) -> Any? {
+    override public func at(_ ref:MPWIdentifying) -> Any? {
         if let val = val {
             let path=ref.path!
             let m=Mirror(reflecting: val)
@@ -53,14 +53,14 @@ public func check(_ condition: @autoclosure () -> Bool, _ message: @autoclosure 
         }
     }
 
-    override public func at(_ ref:MPWReferencing, put newVal:Any)  {
+    override public func at(_ ref:MPWIdentifying, put newVal:Any)  {
         val = newVal
     }
 
     @objc public class func testAtDotReturnsIvarNames() {
         let store=SwiftValueStore.init()
         store.val=ValueStoreTestStruct()
-        let result=store.at( MPWGenericReference.init(path: ".") ) as! Array<String>
+        let result=store.at( MPWGenericIdentifier.init(path: ".") ) as! Array<String>
         check(result.count==3)
         check(result[0]=="firstIvar")
         check(result[1]=="secondIvar")
@@ -71,9 +71,9 @@ public func check(_ condition: @autoclosure () -> Bool, _ message: @autoclosure 
     @objc public class func testAtOfKeysReturnsValues() {
         let store=SwiftValueStore.init()
         store.val=ValueStoreTestStruct()
-        let result1=store.at( MPWGenericReference.init(path: "firstIvar") ) as! Int
+        let result1=store.at( MPWGenericIdentifier.init(path: "firstIvar") ) as! Int
         check(result1==2)
-        let result2=store.at( MPWGenericReference.init(path: "secondIvar") ) as! String
+        let result2=store.at( MPWGenericIdentifier.init(path: "secondIvar") ) as! String
         check(result2=="Hello")
 
     }

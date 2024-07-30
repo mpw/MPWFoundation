@@ -13,7 +13,7 @@
 -(instancetype)initWithStoreDictionary:(NSDictionary*)newDict;
 
 
--referenceToKey:(MPWGenericReference*)ref;          // override this in subclasses
+-referenceToKey:(MPWGenericIdentifier*)ref;          // override this in subclasses
 
 
 @end

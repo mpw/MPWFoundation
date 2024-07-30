@@ -6,7 +6,7 @@
 //
 
 #import "MPWAbstractStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "NSNil.h"
 #import "MPWByteStream.h"
 #import "MPWWriteStream.h"
@@ -95,33 +95,33 @@
     return [[[self class] stores:stores] retain];
 }
 
--at:(MPWReference*)aReference
+-at:(MPWIdentifier*)aReference
 {
     return nil;
 }
 
--(void)at:(MPWReference*)aReference put:theObject
+-(void)at:(MPWIdentifier*)aReference put:theObject
 {
     return ;
 }
 
--(id)at:(MPWReference*)aReference post:theObject
+-(id)at:(MPWIdentifier*)aReference post:theObject
 {
     NSLog(@"MPWAbstractStore(%@) at: %@ post: %@/%@",self,aReference,[theObject class],theObject);
     return nil;
 }
 
--(void)merge:theObject at:(id <MPWReferencing>)aReference
+-(void)merge:theObject at:(id <MPWIdentifying>)aReference
 {
     [self at:aReference put:theObject];
 }
 
--(void)deleteAt:(MPWReference*)aReference
+-(void)deleteAt:(MPWIdentifier*)aReference
 {
     return ;
 }
 
--(BOOL)hasChildren:(id <MPWReferencing>)aReference
+-(BOOL)hasChildren:(id <MPWIdentifying>)aReference
 {
     return NO;
 }
@@ -136,7 +136,7 @@
     [self at:(NSString*)key put:theObject];
 }
 
--(id <MPWReferencing>)rootRef
+-(id <MPWIdentifying>)rootRef
 {
     return [self referenceForPath:@"/"];
 }
@@ -147,7 +147,7 @@
 }
 
 
--(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
+-(NSArray<MPWIdentifying>*)childrenOfReference:(id <MPWIdentifying>)aReference
 {
 //    NSLog(@"-childrenOfReference: %@ %@/'%@'",[self class],[(NSObject*)aReference class],aReference);
     id maybeChildren = [self at:aReference];
@@ -155,31 +155,31 @@
     if ( [maybeChildren respondsToSelector:@selector(objectAtIndex:)]) {
         return maybeChildren;
     } else if ( [maybeChildren respondsToSelector:@selector(contents)]) {
-        return (NSArray<MPWReferencing>*)[maybeChildren contents];
+        return (NSArray<MPWIdentifying>*)[maybeChildren contents];
     } else {
         return nil;
     }
 }
 
--(NSArray<NSString*>*)pathsAtReference:(id <MPWReferencing>)aReference
+-(NSArray<NSString*>*)pathsAtReference:(id <MPWIdentifying>)aReference
 {
     return (NSArray<NSString*>*)[[[self childrenOfReference:aReference] collect] path];
 }
 
 
--(MPWReference*)referenceForPath:(NSString*)path
+-(MPWIdentifier*)referenceForPath:(NSString*)path
 {
-    return [MPWGenericReference referenceWithPath:path];
+    return [MPWGenericIdentifier referenceWithPath:path];
 }
 
--(NSURL*)URLForReference:(MPWGenericReference*)aReference
+-(NSURL*)URLForReference:(MPWGenericIdentifier*)aReference
 {
     return [aReference URL];
 }
 
 -(MPWDirectoryBinding*)listForNames:(NSArray*)nameList
 {
-    MPWDirectoryBinding *binding = [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericReference collect] referenceWithPath:[nameList each]]] autorelease];
+    MPWDirectoryBinding *binding = [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericIdentifier collect] referenceWithPath:[nameList each]]] autorelease];
     [binding setStore:self];
     return binding;
 }
@@ -242,12 +242,12 @@
 {
 }
 
--(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+-(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference
 {
     return nil;
 }
 
--(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+-(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream
 {
     return ;
 }
@@ -269,12 +269,12 @@
     return [self bindingForReference:[self referenceForPath:path]];
 }
 
--(id<MPWStorage>)relativeStoreAt:(id <MPWReferencing>)reference
+-(id<MPWStorage>)relativeStoreAt:(id <MPWIdentifying>)reference
 {
     return [MPWPathRelativeStore storeWithSource:self reference:reference];
 }
 
--(void)mkdirAt:(id <MPWReferencing>)reference
+-(void)mkdirAt:(id <MPWIdentifying>)reference
 {
     [self at:reference put:nil];
 }
@@ -417,14 +417,14 @@
 +(void)testConstructingReferences
 {
     MPWAbstractStore *store=[MPWAbstractStore store];
-    id <MPWReferencing> r1=[store referenceForPath:@"somePath"];
+    id <MPWIdentifying> r1=[store referenceForPath:@"somePath"];
     IDEXPECT(r1.path, @"somePath", @"can construct a reference");
 }
 
 +(void)testGettingURLs
 {
     MPWAbstractStore *store=[MPWAbstractStore store];
-    id <MPWReferencing> r1=[store referenceForPath:@"somePath"];
+    id <MPWIdentifying> r1=[store referenceForPath:@"somePath"];
     IDEXPECT([[store URLForReference:r1] absoluteString] , @"somePath", @"can get a URL from a reference");
 }
 

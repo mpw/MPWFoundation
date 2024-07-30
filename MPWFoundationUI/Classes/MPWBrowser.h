@@ -10,16 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MPWStorage,MPWHierarchicalStorage,MPWReferencing;
+@protocol MPWStorage,MPWHierarchicalStorage,MPWIdentifying;
 
 @interface MPWBrowser : NSBrowser
 
 +(instancetype)on:aStore;
 
 @property (nonatomic, strong) id <MPWHierarchicalStorage> store;
-@property (readonly)          id <MPWReferencing> currentReference;
-@property (nonatomic, strong) id <MPWReferencing> rootReference;
-@property (readonly)          id <MPWReferencing> defaultRootReference;
+@property (readonly)          id <MPWIdentifying> currentReference;
+@property (nonatomic, strong) id <MPWIdentifying> rootReference;
+@property (readonly)          id <MPWIdentifying> defaultRootReference;
 @property (nonatomic, weak)   IBOutlet id browserDelegate;
 
 -(IBAction)dumpGraphivViz:sender;

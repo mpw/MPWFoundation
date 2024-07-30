@@ -6,7 +6,7 @@
 //
 
 #import "MPWDictStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "NSStringAdditions.h"
 #import <AccessorMacros.h>
 #import "MPWDirectoryBinding.h"
@@ -31,7 +31,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     return [self initWithDictionary:[NSMutableDictionary dictionary]];
 }
 
--referenceToKey:(id <MPWReferencing>)ref
+-referenceToKey:(id <MPWIdentifying>)ref
 {
     NSArray *components=[ref relativePathComponents];
     return [components componentsJoinedByString:@"/"];
@@ -39,7 +39,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -(NSArray*)childNamesOfReference:aReference
 {
-    if ( [(MPWGenericReference*)aReference isRoot]) {
+    if ( [(MPWGenericIdentifier*)aReference isRoot]) {
         return [[self dict] allKeys];
     } else {
         return @[];
@@ -47,17 +47,17 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 }
 
 
--at:(id <MPWReferencing>)aReference
+-at:(id <MPWIdentifying>)aReference
 {
     return self.dict[[self referenceToKey:aReference]];
 }
 
--(void)deleteAt:(id <MPWReferencing>)aReference
+-(void)deleteAt:(id <MPWIdentifying>)aReference
 {
     [self.dict removeObjectForKey:[self referenceToKey:aReference]];
 }
 
--(void)at:(id <MPWReferencing>)aReference put:theObject
+-(void)at:(id <MPWIdentifying>)aReference put:theObject
 {
     if ( theObject != nil ) {
         self.dict[[self referenceToKey:aReference]]=theObject;
@@ -66,7 +66,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
     }
 }
 
--(BOOL)hasChildren:(id <MPWReferencing>)aReference
+-(BOOL)hasChildren:(id <MPWIdentifying>)aReference
 {
     return NO;
 }
@@ -87,16 +87,16 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 @implementation MPWDictStore
 
--directoryForReference:(MPWGenericReference*)aReference
+-directoryForReference:(MPWGenericIdentifier*)aReference
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
 }
 
 
--at:(id <MPWReferencing>)aReference
+-at:(id <MPWIdentifying>)aReference
 {
-    if ( [(MPWGenericReference*)aReference isRoot]) {
+    if ( [(MPWGenericIdentifier*)aReference isRoot]) {
         return [self directoryForReference:aReference];
     } else {
         return [super at:aReference];
@@ -105,9 +105,9 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 
 
--(BOOL)hasChildren:(id <MPWReferencing>)aReference
+-(BOOL)hasChildren:(id <MPWIdentifying>)aReference
 {
-    if ( [(MPWGenericReference*)aReference isRoot]) {
+    if ( [(MPWGenericIdentifier*)aReference isRoot]) {
         return YES;
     } else {
         return [super hasChildren:aReference];

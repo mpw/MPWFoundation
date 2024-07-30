@@ -28,7 +28,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 , created  on Sun 05-Sep-1999 */
 
-#import "MPWMAXParser.h"
+#import <MPWFoundation/MPWMAXParser.h>
 
 @interface MPWSAXParser : MPWMAXParser  
 {

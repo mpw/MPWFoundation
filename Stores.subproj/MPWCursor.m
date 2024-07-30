@@ -42,7 +42,6 @@
 
 -(instancetype)copyWithZone:(NSZone*)aZone
 {
-//    NSLog(@"who is copying me?  %@",[NSThread callStackSymbols]);
     return [[[self class] allocWithZone:aZone] initWithBinding:self.base offset:self.offset];
 }
 

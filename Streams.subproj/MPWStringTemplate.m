@@ -8,7 +8,7 @@
 #import "MPWStringTemplate.h"
 #import "MPWByteStream.h"
 #import "MPWAbstractStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 
 @interface MPWStringTemplate()
 
@@ -57,7 +57,7 @@
         curIndex = rightBrace.location + rightBrace.length;
         NSRange varRange=NSMakeRange( leftBrace.location+1, rightBrace.location-leftBrace.location-1);
         NSString *varName=[s substringWithRange:varRange];
-        [frags addObject:[MPWGenericReference referenceWithPath:varName]];
+        [frags addObject:[MPWGenericIdentifier referenceWithPath:varName]];
 //        [self outputString:[s         curIndex = rightBrace.location+1;
     }
     if ( curIndex <= maxIndex ) {
@@ -83,7 +83,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 //    NSLog(@"enter writeFragments with frags: %@, bindings: %@",frags,env);
     for (int i=0;i<frags.count;i++ ) {
         id frag = frags[i];
-        if ( [frag isKindOfClass:[MPWGenericReference class]]) {
+        if ( [frag isKindOfClass:[MPWGenericIdentifier class]]) {
             id value=nil;
             NSString *name=[frag path];
 //            NSLog(@"fragment[%d]=%@ path=%@",i,frag,name);
@@ -96,7 +96,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
                 for (int j=i+1;i<frags.count;j++) {
                     //bug: since this steps by one, it also catches string content (non-template) with a / prefix
                     id nestedFrag=frags[j];
-                    if ( [nestedFrag isKindOfClass:[MPWGenericReference class]] && [[nestedFrag path] hasPrefix:@"/"] ) {
+                    if ( [nestedFrag isKindOfClass:[MPWGenericIdentifier class]] && [[nestedFrag path] hasPrefix:@"/"] ) {
                         NSAssert2( [[[nestedFrag path] substringFromIndex:1] isEqual:name],@"closing tag '%@' must match opening tag '%@'",frags[j],name);
                         i=j-1;
                         break;
@@ -179,12 +179,12 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 +(void)testParsedFragments
 {
-    IDEXPECT([self templateWithString:@"first{var}second"].fragments, (@[@"first",[MPWGenericReference referenceWithPath:@"var"],@"second"]), @"ragments parsed");
+    IDEXPECT([self templateWithString:@"first{var}second"].fragments, (@[@"first",[MPWGenericIdentifier referenceWithPath:@"var"],@"second"]), @"ragments parsed");
 }
 
 +(void)testParsedFiveFragments
 {
-    IDEXPECT([self templateWithString:@"Hello {var} {var2}!"].fragments, (@[@"Hello ",[MPWGenericReference referenceWithPath:@"var"],@" ", [MPWGenericReference referenceWithPath:@"var2"],@"!"]), @"ragments parsed");
+    IDEXPECT([self templateWithString:@"Hello {var} {var2}!"].fragments, (@[@"Hello ",[MPWGenericIdentifier referenceWithPath:@"var"],@" ", [MPWGenericIdentifier referenceWithPath:@"var2"],@"!"]), @"ragments parsed");
 }
 
 

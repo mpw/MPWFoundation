@@ -41,30 +41,30 @@
     return self.target ?: self;
 }
 
--(id)at:(id<MPWReferencing>)aReference verb:(MPWRESTVerb)verb for:target with:(id*)args count:(int)count
+-(id)at:(id<MPWIdentifying>)aReference verb:(MPWRESTVerb)verb for:target with:(id*)args count:(int)count
 {
     return [stores[verb] at:aReference for:target with:args count:count];
 }
 
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     return [self at:aReference verb:MPWRESTVerbGET for:self.theTarget with:&aReference count:1];
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     id extras[]={theObject,aReference};
     [self at:aReference verb:MPWRESTVerbPUT for:self.theTarget with:extras count:2];
 }
 
--(void)at:(id<MPWReferencing>)aReference post:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference post:(id)theObject
 {
     id extras[]={theObject,aReference};
     [self at:aReference verb:MPWRESTVerbPOST for:self.theTarget with:extras count:2];
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [self at:aReference verb:MPWRESTVerbDELETE for:self.theTarget with:&aReference count:1];
 }

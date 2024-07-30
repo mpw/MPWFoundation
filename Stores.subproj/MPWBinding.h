@@ -5,12 +5,12 @@
 //  Created by Marcel Weiher on 5/21/18.
 //
 
-#import <MPWFoundation/MPWReference.h>
+#import <MPWFoundation/MPWIdentifier.h>
 #import <MPWFoundation/MPWWriteStream.h>
 #import <MPWFoundation/MPWAbstractStore.h>
 
-@class MPWReference,MPWAbstractStore;
-@protocol MPWReferencing,MPWStorage;
+@class MPWIdentifier,MPWAbstractStore;
+@protocol MPWIdentifying,MPWStorage;
 
 @protocol MPWBinding
 
@@ -34,13 +34,17 @@
 
 
 
-@interface MPWBinding : NSObject<MPWBinding,MPWReferencing,Streaming>
+@interface MPWBinding : NSObject<MPWBinding,MPWIdentifying,Streaming>
 
-@property (nonatomic, strong) id <MPWReferencing> reference;
+@property (nonatomic, strong) id <MPWIdentifying> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;
 
 -(NSString*)path;
--(id <MPWReferencing>)asReference;
+-(id <MPWIdentifying>)asReference;
 -(BOOL)isBound;
+
+
+-(id)ifBound:aBlock;
+-(id)ifNotBound:aBlock;
 
 @end

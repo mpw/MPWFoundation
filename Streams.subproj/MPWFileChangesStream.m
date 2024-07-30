@@ -33,7 +33,7 @@
     //                                kFSEventStreamCreateFlagWatchRoot);
 }
 
--(void)setReference:(id <MPWReferencing>)reference
+-(void)setReference:(id <MPWIdentifying>)reference
 {
     [self setPath:reference.path];
 }

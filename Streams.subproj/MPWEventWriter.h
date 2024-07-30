@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWWriteStream.h>
 
-@interface MPWNotificationStream : MPWWriteStream
+@interface MPWEventWriter : MPWWriteStream
 
 -(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
 -(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;

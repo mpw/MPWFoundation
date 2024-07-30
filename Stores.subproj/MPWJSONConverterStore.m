@@ -42,14 +42,14 @@
     }
 }
 
--(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+-(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference
 {
     NSLog(@"writeStreamAt:");
     [self.writer setByteTarget:[self.source writeStreamAt:aReference]];
     return self.writer;
 }
 
--(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+-(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream
 {
     NSLog(@"at:readToStream:");
     [(MPWFilter*)aStream setFinalTarget:self.reader];
@@ -76,13 +76,13 @@
     return [self.reader process:anObject];
 }
 
--(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
+-(id)mapRetrievedObject:(id)anObject forReference:(id<MPWIdentifying>)aReference
 {
 //    NSLog(@"mapRetrievedObject:");
     return self.up ? [self serialized:anObject] :[self parsedJSON:anObject];
 }
 
--(id)mapObjectToStore:(id)anObject forReference:(id<MPWReferencing>)aReference
+-(id)mapObjectToStore:(id)anObject forReference:(id<MPWIdentifying>)aReference
 {
 //    NSLog(@"mapObjectToStore:");
     return self.up ?  [self parsedJSON:anObject] : [self serialized:anObject];

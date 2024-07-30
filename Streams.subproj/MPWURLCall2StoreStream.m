@@ -8,7 +8,7 @@
 #import "MPWURLCall2StoreStream.h"
 #import "MPWURLCall.h"
 #import "MPWDictStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "MPWRESTOperation.h"
 #import <AccessorMacros.h>
 
@@ -41,7 +41,7 @@
 
 +(void)testCallsObjectEndsUpInStore
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"hi"];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"hi"];
     MPWDictStore *store=[MPWDictStore store];
     MPWURLCall2StoreStream *s=[self stream];
     s.store=store;

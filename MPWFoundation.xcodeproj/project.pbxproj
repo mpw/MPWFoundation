@@ -654,6 +654,8 @@
 		1FC70F8620CE8770008718B2 /* MPWURLBasedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70F8220CE8770008718B2 /* MPWURLBasedStore.m */; };
 		1FC70F8720CE8770008718B2 /* MPWURLBasedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70F8220CE8770008718B2 /* MPWURLBasedStore.m */; };
 		1FC70F8820CE8770008718B2 /* MPWURLBasedStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC70F8220CE8770008718B2 /* MPWURLBasedStore.m */; };
+		1FC7E2D82C08E63400637768 /* MPWEventReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC7E2D72C08E63400637768 /* MPWEventReceiver.m */; };
+		1FC7E2D92C08E63400637768 /* MPWEventReceiver.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC7E2D62C08E63400637768 /* MPWEventReceiver.h */; };
 		1FC97CDD0BB0A8B900F8CB51 /* MPWNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC97CDB0BB0A8B900F8CB51 /* MPWNumber.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FC97CDE0BB0A8B900F8CB51 /* MPWNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FC97CDC0BB0A8B900F8CB51 /* MPWNumber.m */; };
 		1FC97CF00BB0A9B200F8CB51 /* MPWInteger.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FC97CEE0BB0A9B200F8CB51 /* MPWInteger.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -814,6 +816,9 @@
 		1FCF26861CF39CE600AC64CE /* NSThreadInterThreadMessaging.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF19AC006686DDC35ADD82 /* NSThreadInterThreadMessaging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FCF26881CF39CF900AC64CE /* MPWFuture.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F07CDA007F8E1EA00C389FA /* MPWFuture.m */; };
 		1FD64E5D158A181800D96811 /* MPWObject_fastrc.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD6BCD72C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD6BCD62C577CDA009FEA38 /* MPWPropertyPathDefs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD6BCD82C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD6BCD62C577CDA009FEA38 /* MPWPropertyPathDefs.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD6BCD92C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD6BCD62C577CDA009FEA38 /* MPWPropertyPathDefs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD7A6A32AE2BE2D0091F9E6 /* MPWAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7A6A12AE2BE2D0091F9E6 /* MPWAlias.h */; };
 		1FD7A6A42AE2BE2D0091F9E6 /* MPWAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7A6A12AE2BE2D0091F9E6 /* MPWAlias.h */; };
 		1FD7A6A52AE2BE2D0091F9E6 /* MPWAlias.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD7A6A12AE2BE2D0091F9E6 /* MPWAlias.h */; };
@@ -1126,12 +1131,12 @@
 		1FEFBD682428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
 		1FEFBD692428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
 		1FEFBD6A2428C8AB001E44B2 /* empty_elements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1FEFBD672428C8AA001E44B2 /* empty_elements.plist */; };
-		1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWNotificationStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
-		1FF08F691D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
-		1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWNotificationStream.m */; };
+		1FF08F651D7061C400C6273F /* MPWEventWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWEventWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FF08F661D7061C400C6273F /* MPWEventWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWEventWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FF08F671D7061C400C6273F /* MPWEventWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF08F631D7061C400C6273F /* MPWEventWriter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FF08F681D7061C400C6273F /* MPWEventWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWEventWriter.m */; };
+		1FF08F691D7061C400C6273F /* MPWEventWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWEventWriter.m */; };
+		1FF08F6A1D7061C400C6273F /* MPWEventWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF08F641D7061C400C6273F /* MPWEventWriter.m */; };
 		1FF4538C247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
 		1FF4538D247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
 		1FF4538E247EA74300B909B3 /* filmliste.json in Resources */ = {isa = PBXBuildFile; fileRef = 1FF4538B247EA74200B909B3 /* filmliste.json */; };
@@ -1252,12 +1257,12 @@
 		1FFE3A9320B30A2400E65B93 /* MPWAbstractStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A8F20B30A2400E65B93 /* MPWAbstractStore.m */; };
 		1FFE3A9420B30A2400E65B93 /* MPWAbstractStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A8F20B30A2400E65B93 /* MPWAbstractStore.m */; };
 		1FFE3A9520B30A2400E65B93 /* MPWAbstractStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A8F20B30A2400E65B93 /* MPWAbstractStore.m */; };
-		1FFE3AA020B3285C00E65B93 /* MPWReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AA120B3285C00E65B93 /* MPWReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AA220B3285C00E65B93 /* MPWReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AA320B3285C00E65B93 /* MPWReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWReference.m */; };
-		1FFE3AA420B3285C00E65B93 /* MPWReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWReference.m */; };
-		1FFE3AA520B3285C00E65B93 /* MPWReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWReference.m */; };
+		1FFE3AA020B3285C00E65B93 /* MPWIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AA120B3285C00E65B93 /* MPWIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AA220B3285C00E65B93 /* MPWIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3A9E20B3285C00E65B93 /* MPWIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AA320B3285C00E65B93 /* MPWIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWIdentifier.m */; };
+		1FFE3AA420B3285C00E65B93 /* MPWIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWIdentifier.m */; };
+		1FFE3AA520B3285C00E65B93 /* MPWIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3A9F20B3285C00E65B93 /* MPWIdentifier.m */; };
 		1FFE3AA820B3296800E65B93 /* MPWBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3AA620B3296800E65B93 /* MPWBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFE3AA920B3296800E65B93 /* MPWBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3AA620B3296800E65B93 /* MPWBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFE3AAA20B3296800E65B93 /* MPWBinding.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3AA620B3296800E65B93 /* MPWBinding.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1276,12 +1281,12 @@
 		1FFE3AC220B34D2000E65B93 /* MPWDiskStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ABE20B34D2000E65B93 /* MPWDiskStore.m */; };
 		1FFE3AC320B34D2000E65B93 /* MPWDiskStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ABE20B34D2000E65B93 /* MPWDiskStore.m */; };
 		1FFE3AC420B34D2000E65B93 /* MPWDiskStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ABE20B34D2000E65B93 /* MPWDiskStore.m */; };
-		1FFE3ACF20B4310C00E65B93 /* MPWGenericReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AD020B4310C00E65B93 /* MPWGenericReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AD120B4310C00E65B93 /* MPWGenericReference.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FFE3AD220B4310C00E65B93 /* MPWGenericReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */; };
-		1FFE3AD320B4310C00E65B93 /* MPWGenericReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */; };
-		1FFE3AD420B4310C00E65B93 /* MPWGenericReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */; };
+		1FFE3ACF20B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AD020B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AD120B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFE3ACD20B4310C00E65B93 /* MPWGenericIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FFE3AD220B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericIdentifier.m */; };
+		1FFE3AD320B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericIdentifier.m */; };
+		1FFE3AD420B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FFE3ACE20B4310C00E65B93 /* MPWGenericIdentifier.m */; };
 		4372650B1F56B455006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		4372650C1F56B45A006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		43AE45B11F55C6A50048A79E /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
@@ -1707,6 +1712,8 @@
 		1FC70F7A20CD98B5008718B2 /* MPWURLReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWURLReference.m; sourceTree = "<group>"; };
 		1FC70F8120CE8770008718B2 /* MPWURLBasedStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWURLBasedStore.h; sourceTree = "<group>"; };
 		1FC70F8220CE8770008718B2 /* MPWURLBasedStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWURLBasedStore.m; sourceTree = "<group>"; };
+		1FC7E2D62C08E63400637768 /* MPWEventReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWEventReceiver.h; sourceTree = "<group>"; };
+		1FC7E2D72C08E63400637768 /* MPWEventReceiver.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWEventReceiver.m; sourceTree = "<group>"; };
 		1FC9240705C597EF008047EB /* MPWObjectReference.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObjectReference.m; sourceTree = "<group>"; };
 		1FC9240C05C5980E008047EB /* MPWObjectReference.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWObjectReference.h; sourceTree = "<group>"; };
 		1FC9241B05C5982A008047EB /* MPWIdentityDictionary.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWIdentityDictionary.h; sourceTree = "<group>"; };
@@ -1727,6 +1734,7 @@
 		1FCF25D61CF3983C00AC64CE /* MPWFoundationWatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFoundationWatch.h; sourceTree = "<group>"; };
 		1FCF25D81CF3983C00AC64CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FD64E5C158A181700D96811 /* MPWObject_fastrc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWObject_fastrc.h; sourceTree = "<group>"; };
+		1FD6BCD62C577CDA009FEA38 /* MPWPropertyPathDefs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWPropertyPathDefs.h; sourceTree = "<group>"; };
 		1FD7A6A12AE2BE2D0091F9E6 /* MPWAlias.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAlias.h; sourceTree = "<group>"; };
 		1FD7A6A22AE2BE2D0091F9E6 /* MPWAlias.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAlias.m; sourceTree = "<group>"; };
 		1FD7B37A2195C9A100046BBE /* MPWCompositeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCompositeStore.h; sourceTree = "<group>"; };
@@ -1812,8 +1820,8 @@
 		1FEFBD562428C85E001E44B2 /* dictAfterNumber.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictAfterNumber.json; sourceTree = "<group>"; };
 		1FEFBD632428C887001E44B2 /* Itunes_info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Itunes_info.plist; sourceTree = "<group>"; };
 		1FEFBD672428C8AA001E44B2 /* empty_elements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = empty_elements.plist; sourceTree = "<group>"; };
-		1FF08F631D7061C400C6273F /* MPWNotificationStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWNotificationStream.h; sourceTree = "<group>"; };
-		1FF08F641D7061C400C6273F /* MPWNotificationStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWNotificationStream.m; sourceTree = "<group>"; };
+		1FF08F631D7061C400C6273F /* MPWEventWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWEventWriter.h; sourceTree = "<group>"; };
+		1FF08F641D7061C400C6273F /* MPWEventWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWEventWriter.m; sourceTree = "<group>"; };
 		1FF4538B247EA74200B909B3 /* filmliste.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = filmliste.json; sourceTree = "<group>"; };
 		1FF6590824957007002371E9 /* MPWStreamQLite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWStreamQLite.h; sourceTree = "<group>"; };
 		1FF6590924957007002371E9 /* MPWStreamQLite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStreamQLite.m; sourceTree = "<group>"; };
@@ -1828,16 +1836,16 @@
 		1FFA48A41ACDEA51002FF8EA /* MPWBlockTargetStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBlockTargetStream.m; sourceTree = "<group>"; };
 		1FFE3A8E20B30A2400E65B93 /* MPWAbstractStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAbstractStore.h; sourceTree = "<group>"; };
 		1FFE3A8F20B30A2400E65B93 /* MPWAbstractStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAbstractStore.m; sourceTree = "<group>"; };
-		1FFE3A9E20B3285C00E65B93 /* MPWReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWReference.h; sourceTree = "<group>"; };
-		1FFE3A9F20B3285C00E65B93 /* MPWReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWReference.m; sourceTree = "<group>"; };
+		1FFE3A9E20B3285C00E65B93 /* MPWIdentifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWIdentifier.h; sourceTree = "<group>"; };
+		1FFE3A9F20B3285C00E65B93 /* MPWIdentifier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWIdentifier.m; sourceTree = "<group>"; };
 		1FFE3AA620B3296800E65B93 /* MPWBinding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWBinding.h; sourceTree = "<group>"; };
 		1FFE3AA720B3296800E65B93 /* MPWBinding.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWBinding.m; sourceTree = "<group>"; };
 		1FFE3AAE20B32C6C00E65B93 /* MPWDictStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWDictStore.h; sourceTree = "<group>"; };
 		1FFE3AAF20B32C6C00E65B93 /* MPWDictStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWDictStore.m; sourceTree = "<group>"; };
 		1FFE3ABD20B34D2000E65B93 /* MPWDiskStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWDiskStore.h; sourceTree = "<group>"; };
 		1FFE3ABE20B34D2000E65B93 /* MPWDiskStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWDiskStore.m; sourceTree = "<group>"; };
-		1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWGenericReference.h; sourceTree = "<group>"; };
-		1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWGenericReference.m; sourceTree = "<group>"; };
+		1FFE3ACD20B4310C00E65B93 /* MPWGenericIdentifier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWGenericIdentifier.h; sourceTree = "<group>"; };
+		1FFE3ACE20B4310C00E65B93 /* MPWGenericIdentifier.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWGenericIdentifier.m; sourceTree = "<group>"; };
 		66DC619C01393D22005ADD88 /* NSObjectFiltering.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSObjectFiltering.m; sourceTree = "<group>"; };
 		66DC619D01393D22005ADD88 /* NSObjectFiltering.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSObjectFiltering.h; sourceTree = "<group>"; };
 		66DC61A301397F05005ADD88 /* NSArrayFiltering.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSArrayFiltering.m; sourceTree = "<group>"; };
@@ -2172,8 +2180,10 @@
 				07DF1996006686DDC35ADD82 /* MPWFlattenStream.m */,
 				1F6244B5214835EF00BB00C4 /* MPWMapFilter.h */,
 				1F6244B6214835EF00BB00C4 /* MPWMapFilter.m */,
-				1FF08F631D7061C400C6273F /* MPWNotificationStream.h */,
-				1FF08F641D7061C400C6273F /* MPWNotificationStream.m */,
+				1FF08F631D7061C400C6273F /* MPWEventWriter.h */,
+				1FF08F641D7061C400C6273F /* MPWEventWriter.m */,
+				1FC7E2D62C08E63400637768 /* MPWEventReceiver.h */,
+				1FC7E2D72C08E63400637768 /* MPWEventReceiver.m */,
 				1F313D601CE9DE00002104E4 /* MPWObjectCreatorStream.h */,
 				1F313D611CE9DE00002104E4 /* MPWObjectCreatorStream.m */,
 				1F7FCD36264ECE24008B6D1A /* MPWPathMapper.h */,
@@ -2645,8 +2655,8 @@
 				1F89EB93223FE7E4000A82D6 /* MPWFileBinding.m */,
 				1F02B997288EC5EE0023588A /* MPWStreamableBinding.h */,
 				1F02B998288EC5EE0023588A /* MPWStreamableBinding.m */,
-				1FFE3ACD20B4310C00E65B93 /* MPWGenericReference.h */,
-				1FFE3ACE20B4310C00E65B93 /* MPWGenericReference.m */,
+				1FFE3ACD20B4310C00E65B93 /* MPWGenericIdentifier.h */,
+				1FFE3ACE20B4310C00E65B93 /* MPWGenericIdentifier.m */,
 				1FA869CC20EBC01500920279 /* MPWLoggingStore.h */,
 				1FA869CD20EBC01500920279 /* MPWLoggingStore.m */,
 				1F5EE32625D518C600C7C71C /* MPWNameRemappingStore.h */,
@@ -2665,8 +2675,8 @@
 				1F575D8420BBDBC500B6C1A9 /* MPWPathRelativeStore.m */,
 				1F846B4E29D6D00F001BAC41 /* MPWExtensionStore.h */,
 				1F846B4F29D6D00F001BAC41 /* MPWExtensionStore.m */,
-				1FFE3A9E20B3285C00E65B93 /* MPWReference.h */,
-				1FFE3A9F20B3285C00E65B93 /* MPWReference.m */,
+				1FFE3A9E20B3285C00E65B93 /* MPWIdentifier.h */,
+				1FFE3A9F20B3285C00E65B93 /* MPWIdentifier.m */,
 				1FA8FC2627347E5C005E2824 /* MPWExtensionMapper.h */,
 				1FA8FC2727347E5C005E2824 /* MPWExtensionMapper.m */,
 				1FA869D420EBC7FC00920279 /* MPWRESTOperation.h */,
@@ -2698,6 +2708,7 @@
 				1FEBBC4A2A2DF9B60007567F /* MPWTemplateMatchingStore.h */,
 				1FEBBC4B2A2DF9B60007567F /* MPWTemplateMatchingStore.m */,
 				1F3F7F2E2A2F2B01000857B0 /* MPWPropertyPathStore.h */,
+				1FD6BCD62C577CDA009FEA38 /* MPWPropertyPathDefs.h */,
 				1F3F7F2F2A2F2B01000857B0 /* MPWPropertyPathStore.m */,
 				1F78CB242AE19E5800B6458E /* MPWCursor.h */,
 				1F78CB252AE19E5800B6458E /* MPWCursor.m */,
@@ -2759,7 +2770,7 @@
 				1FEFBD2B2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */,
 				1FE37C481969773C00C9A378 /* NSObjectFiltering.h in Headers */,
 				1F3F7F312A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */,
-				1FF08F661D7061C400C6273F /* MPWNotificationStream.h in Headers */,
+				1FF08F661D7061C400C6273F /* MPWEventWriter.h in Headers */,
 				1F8671FD22397C14006510FB /* MPWDirectoryBinding.h in Headers */,
 				1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */,
 				1FE37C1A196976C500C9A378 /* NSStringAdditions.h in Headers */,
@@ -2848,7 +2859,7 @@
 				1F185B90265D0FA700BA8219 /* MPWJSONConverterStore.h in Headers */,
 				1FE85E35285FA38200A0EDD3 /* MPWSFTPStore.h in Headers */,
 				1FE37C301969770000C9A378 /* MPWNeXTPListWriter.h in Headers */,
-				1FFE3AD020B4310C00E65B93 /* MPWGenericReference.h in Headers */,
+				1FFE3AD020B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */,
 				1FE37C29196976C500C9A378 /* bytecoding.h in Headers */,
 				1FFE3AB120B32C6C00E65B93 /* MPWDictStore.h in Headers */,
 				1F185BEE26622CA800BA8219 /* MPWResource.h in Headers */,
@@ -2874,7 +2885,7 @@
 				1F7FCD0E264BBCA6008B6D1A /* MPWFileChangesStream.h in Headers */,
 				1F9726A61D00397800D76F3A /* MPWURLCall.h in Headers */,
 				1F81BF9719698E940066DF43 /* MPWASCII85Stream.h in Headers */,
-				1FFE3AA120B3285C00E65B93 /* MPWReference.h in Headers */,
+				1FFE3AA120B3285C00E65B93 /* MPWIdentifier.h in Headers */,
 				1F5EE32925D518C600C7C71C /* MPWNameRemappingStore.h in Headers */,
 				1FE37C4F196978CA00C9A378 /* MPWPListBuilder.h in Headers */,
 				1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
@@ -2934,6 +2945,7 @@
 				1F1BEDC9213FC8E4004B4947 /* MPWRESTCopyStream.h in Headers */,
 				1FFE3A9120B30A2400E65B93 /* MPWAbstractStore.h in Headers */,
 				1F54A15C209C71A4003113E0 /* MPWArrayFlattenStream.h in Headers */,
+				1FD6BCD72C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */,
 				1FED48D0242634CC00AF2FAD /* MPWTagAction.h in Headers */,
 				1FEFBD282427F88E001E44B2 /* MPWMASONParser.h in Headers */,
 				1FE37C3A1969773C00C9A378 /* MPWSmallStringTable.h in Headers */,
@@ -3040,7 +3052,7 @@
 				1FCF26681CF39B4E00AC64CE /* MPWASCII85Stream.h in Headers */,
 				1FCF26721CF39BB700AC64CE /* MPWEnumFilter.h in Headers */,
 				1F5BBA2F2943801700C3D345 /* MPWBlock.h in Headers */,
-				1FF08F671D7061C400C6273F /* MPWNotificationStream.h in Headers */,
+				1FF08F671D7061C400C6273F /* MPWEventWriter.h in Headers */,
 				1F9F8D6D263F387B003019DC /* MPWFixedValueSource.h in Headers */,
 				1FCF262F1CF3993C00AC64CE /* DebugMacros.h in Headers */,
 				1F3F7F322A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */,
@@ -3052,7 +3064,7 @@
 				1FCF26451CF3993C00AC64CE /* NSStringAdditions.h in Headers */,
 				1F185B91265D0FA700BA8219 /* MPWJSONConverterStore.h in Headers */,
 				1FE85E36285FA38200A0EDD3 /* MPWSFTPStore.h in Headers */,
-				1FFE3AD120B4310C00E65B93 /* MPWGenericReference.h in Headers */,
+				1FFE3AD120B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */,
 				1FCF260C1CF3990400AC64CE /* MPWBlockTargetStream.h in Headers */,
 				1FFE3AB220B32C6C00E65B93 /* MPWDictStore.h in Headers */,
 				1FA869D020EBC01500920279 /* MPWLoggingStore.h in Headers */,
@@ -3060,6 +3072,7 @@
 				1FED492824263BF800AF2FAD /* MPWXmlParserTesting.h in Headers */,
 				1F04A53A21D2E01500E19C3F /* MPWInterval.h in Headers */,
 				1FCF26461CF3993C00AC64CE /* NSInvocationAdditions_lookup.h in Headers */,
+				1FD6BCD82C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */,
 				1FB6EB6D1DDA31CD002B82A5 /* MPWStreamCompositionTests.h in Headers */,
 				1F74D048299D09B7004A3DF0 /* MPWTCPStore.h in Headers */,
 				1FCF263C1CF3993C00AC64CE /* MPWIgnoreUnknownTrampoline.h in Headers */,
@@ -3071,7 +3084,7 @@
 				1FCF26821CF39CE600AC64CE /* MPWFuture.h in Headers */,
 				1FCF266D1CF39BB700AC64CE /* MPWCaseInsensitiveSmallStringTable.h in Headers */,
 				1F7FCD0F264BBCA6008B6D1A /* MPWFileChangesStream.h in Headers */,
-				1FFE3AA220B3285C00E65B93 /* MPWReference.h in Headers */,
+				1FFE3AA220B3285C00E65B93 /* MPWIdentifier.h in Headers */,
 				1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
 				1FCF263A1CF3993C00AC64CE /* MPWDirectForwardingTrampoline.h in Headers */,
 				1F8574AA2ACD8E1300283E7A /* MPWObjectStore.h in Headers */,
@@ -3218,6 +3231,7 @@
 				1FF8FDD009B49D0100652476 /* MPWUShortArray.h in Headers */,
 				1FA8FC3D273E4D1A005E2824 /* MPWDirectoryStore.h in Headers */,
 				1F7FCD05264570E6008B6D1A /* NSRunLoopAdditions.h in Headers */,
+				1FD6BCD92C577CDA009FEA38 /* MPWPropertyPathDefs.h in Headers */,
 				1FF8FDD109B49D0100652476 /* MPWSubData.h in Headers */,
 				1FF8FDD309B49D0100652476 /* MPWEnumeratorEnumerator.h in Headers */,
 				1FED48DD2426361F00AF2FAD /* XmlCommonMacros.h in Headers */,
@@ -3252,7 +3266,7 @@
 				1FA1593C17EEF05500BF8F6F /* MPWDelimitedTable.h in Headers */,
 				1F45AA8C29F9912800FB1C4E /* MPWKeychainStore.h in Headers */,
 				1F2DCFDF1ACB50F3004A39FB /* MPWURLFetchStream.h in Headers */,
-				1FF08F651D7061C400C6273F /* MPWNotificationStream.h in Headers */,
+				1FF08F651D7061C400C6273F /* MPWEventWriter.h in Headers */,
 				1F3D01FE1D702902001A9732 /* MPWScatterStream.h in Headers */,
 				1FF8FDE109B49D0100652476 /* NSThreadInterThreadMessaging.h in Headers */,
 				1FF8FDE209B49D0100652476 /* NSObjectFiltering.h in Headers */,
@@ -3274,6 +3288,7 @@
 				1FFA48A51ACDEA51002FF8EA /* MPWBlockTargetStream.h in Headers */,
 				1F080E591E50515700B78EF3 /* MPWStreamSource.h in Headers */,
 				1F32EC932146AB710074C15A /* MPWQueue.h in Headers */,
+				1FC7E2D92C08E63400637768 /* MPWEventReceiver.h in Headers */,
 				1F3F7F302A2F2B01000857B0 /* MPWPropertyPathStore.h in Headers */,
 				1FF8FDED09B49D0100652476 /* MPWFuture.h in Headers */,
 				1FCBEDDD1CFC2DA800F2EE0E /* NSThreadWaiting.h in Headers */,
@@ -3284,7 +3299,7 @@
 				1FF8FDEF09B49D0100652476 /* MPWNamedData.h in Headers */,
 				1F05F69D0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h in Headers */,
 				1F74D051299D0A75004A3DF0 /* MPWTCPBinding.h in Headers */,
-				1FFE3ACF20B4310C00E65B93 /* MPWGenericReference.h in Headers */,
+				1FFE3ACF20B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */,
 				1FE006030AFC4E7800F4542F /* MPWEnumSelectFilter.h in Headers */,
 				1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */,
 				1FB2C88C217760DF0061C3F9 /* MPWJSONWriter.h in Headers */,
@@ -3310,7 +3325,7 @@
 				1F5335FB2A1D284600AA1754 /* html_blocks.h in Headers */,
 				1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */,
 				1F821AB72BFCEB0B00D936E3 /* MPWMatrix.h in Headers */,
-				1FFE3AA020B3285C00E65B93 /* MPWReference.h in Headers */,
+				1FFE3AA020B3285C00E65B93 /* MPWIdentifier.h in Headers */,
 				1F1BEDB0213BE769004B4947 /* MPWFilter.h in Headers */,
 				1F32EC8421456B800074C15A /* MPWWriteBackCache.h in Headers */,
 				1F1BEDC0213DD199004B4947 /* MPWSequentialStore.h in Headers */,
@@ -3491,8 +3506,9 @@
 		07DF1931006686DDC35ADD82 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				DefaultBuildSystemTypeForWorkspace = Latest;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					1F3AC607143EB3D9009B8504 = {
 						DevelopmentTeam = PE4436LT5M;
@@ -3805,6 +3821,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		1F7045D52231311C005ED7FB /* Test */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -3950,13 +3967,13 @@
 				1F575D8920BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */,
 				1F840DE5193F50B900589595 /* MPWASCII85Stream.m in Sources */,
 				1FE85E38285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */,
-				1FFE3AA420B3285C00E65B93 /* MPWReference.m in Sources */,
+				1FFE3AA420B3285C00E65B93 /* MPWIdentifier.m in Sources */,
 				1F74D04A299D09B7004A3DF0 /* MPWTCPStore.m in Sources */,
 				1F840DE6193F50B900589595 /* MPWFilterStream.m in Sources */,
 				1F840DE7193F50B900589595 /* MPWLZWStream.m in Sources */,
 				1FD7B3802195C9A100046BBE /* MPWCompositeStore.m in Sources */,
 				1FED48B8242634CC00AF2FAD /* MPWMAXParser.m in Sources */,
-				1FF08F691D7061C400C6273F /* MPWNotificationStream.m in Sources */,
+				1FF08F691D7061C400C6273F /* MPWEventWriter.m in Sources */,
 				1F0200BD1D8BF836009538C5 /* MPWCombinerStream.m in Sources */,
 				1F840DC3193F50AC00589595 /* MPWMessageCatcher.m in Sources */,
 				1FFE3AAC20B3296800E65B93 /* MPWBinding.m in Sources */,
@@ -3973,7 +3990,7 @@
 				1F45AA9029F9912800FB1C4E /* MPWKeychainStore.m in Sources */,
 				1FEFBD2E2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1F840DC7193F50AC00589595 /* NSInvocationAdditions.m in Sources */,
-				1FFE3AD320B4310C00E65B93 /* MPWGenericReference.m in Sources */,
+				1FFE3AD320B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */,
 				1F7078A61F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */,
 				1F6D21F12BDFD46A006DD0C9 /* MPWInstanceVarStore.m in Sources */,
 				1F7A22881B786F9200FF6C03 /* MPWRect.m in Sources */,
@@ -4084,7 +4101,7 @@
 			files = (
 				1F02B9AD28913CA90023588A /* MPWUnixDomainHTTPStore.m in Sources */,
 				1FCF261B1CF3990400AC64CE /* MPWFlattenStream.m in Sources */,
-				1FF08F6A1D7061C400C6273F /* MPWNotificationStream.m in Sources */,
+				1FF08F6A1D7061C400C6273F /* MPWEventWriter.m in Sources */,
 				1F3D02031D702902001A9732 /* MPWScatterStream.m in Sources */,
 				1FCF25EC1CF398F400AC64CE /* CodingAdditions.m in Sources */,
 				1FCF26071CF398F400AC64CE /* MPWPropertyBinding.m in Sources */,
@@ -4227,10 +4244,10 @@
 				1FCBEDE21CFC2DA800F2EE0E /* NSThreadWaiting.m in Sources */,
 				1FD7B3812195C9A100046BBE /* MPWCompositeStore.m in Sources */,
 				1FB6EB701DDA31CD002B82A5 /* MPWStreamCompositionTests.m in Sources */,
-				1FFE3AA520B3285C00E65B93 /* MPWReference.m in Sources */,
+				1FFE3AA520B3285C00E65B93 /* MPWIdentifier.m in Sources */,
 				1FA869DB20EBC7FC00920279 /* MPWRESTOperation.m in Sources */,
 				1F575D8A20BBDBC500B6C1A9 /* MPWPathRelativeStore.m in Sources */,
-				1FFE3AD420B4310C00E65B93 /* MPWGenericReference.m in Sources */,
+				1FFE3AD420B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */,
 				1FA74A2225F64A54001AA6A8 /* MPWDistributedNotificationReceiver.m in Sources */,
 				1F74D04B299D09B7004A3DF0 /* MPWTCPStore.m in Sources */,
 				1FFE3A9520B30A2400E65B93 /* MPWAbstractStore.m in Sources */,
@@ -4291,10 +4308,10 @@
 				1FF8FE0909B49D0100652476 /* MPWASCII85Stream.m in Sources */,
 				1FED48B7242634CC00AF2FAD /* MPWMAXParser.m in Sources */,
 				1FCBEDE01CFC2DA800F2EE0E /* NSThreadWaiting.m in Sources */,
-				1FFE3AD220B4310C00E65B93 /* MPWGenericReference.m in Sources */,
+				1FFE3AD220B4310C00E65B93 /* MPWGenericIdentifier.m in Sources */,
 				1FB561FA2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */,
 				1FA869D920EBC7FC00920279 /* MPWRESTOperation.m in Sources */,
-				1FF08F681D7061C400C6273F /* MPWNotificationStream.m in Sources */,
+				1FF08F681D7061C400C6273F /* MPWEventWriter.m in Sources */,
 				1F89EB9E22401FB8000A82D6 /* MPWXArgsFilter.m in Sources */,
 				1F5BBA302943801700C3D345 /* MPWBlock.m in Sources */,
 				1FB6EB5C1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
@@ -4334,7 +4351,7 @@
 				1FF8FE1A09B49D0200652476 /* MPWKVCSoftPointer.m in Sources */,
 				1FF8FE1B09B49D0200652476 /* MPWSoftPointerProxy.m in Sources */,
 				1FCF26581CF39A9B00AC64CE /* MPWFakedReturnMethodSignature.m in Sources */,
-				1FFE3AA320B3285C00E65B93 /* MPWReference.m in Sources */,
+				1FFE3AA320B3285C00E65B93 /* MPWIdentifier.m in Sources */,
 				1FF8FE1C09B49D0200652476 /* MPWIntArray.m in Sources */,
 				1FF8FE1D09B49D0200652476 /* MPWObjectReference.m in Sources */,
 				1F02B99C288EC5EE0023588A /* MPWStreamableBinding.m in Sources */,
@@ -4389,6 +4406,7 @@
 				1F6244CA2148557D00BB00C4 /* MPWMergingStore.m in Sources */,
 				1F5335F72A1D284600AA1754 /* markdown.c in Sources */,
 				1F1BEDB3213BE769004B4947 /* MPWFilter.m in Sources */,
+				1FC7E2D82C08E63400637768 /* MPWEventReceiver.m in Sources */,
 				1F6A726A2673E352003A5B5C /* MPWBytesToLines.m in Sources */,
 				1F5335F52A1D284600AA1754 /* houdini_href_e.c in Sources */,
 				1F5336092A1D284600AA1754 /* houdini_html_e.c in Sources */,
@@ -4490,6 +4508,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -4510,6 +4529,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 			};
 			name = Core;
@@ -4529,6 +4549,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -4550,6 +4571,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4599,6 +4621,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -4619,6 +4642,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 			};
 			name = Nightly;
@@ -4638,6 +4662,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -4659,6 +4684,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4724,6 +4750,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -4742,6 +4769,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -4790,6 +4818,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -4810,6 +4839,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 			};
 			name = Beta;
@@ -4829,6 +4859,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -4850,6 +4881,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -4915,6 +4947,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -4933,6 +4966,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -5032,7 +5066,6 @@
 		1F4FC9921DF818AF00B35D27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5093,7 +5126,6 @@
 		1F4FC9931DF818AF00B35D27 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5138,7 +5170,6 @@
 		1F4FC9941DF818AF00B35D27 /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5183,7 +5214,6 @@
 		1F4FC9951DF818AF00B35D27 /* Nightly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5228,7 +5258,6 @@
 		1F4FC9961DF818AF00B35D27 /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5273,7 +5302,6 @@
 		1F4FC9971DF818AF00B35D27 /* Weekly */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5318,7 +5346,6 @@
 		1F4FC9981DF818AF00B35D27 /* Core */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -5386,6 +5413,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -5406,6 +5434,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -5441,6 +5470,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5456,6 +5486,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5490,6 +5521,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5505,6 +5537,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5539,6 +5572,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5554,6 +5588,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5588,6 +5623,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5603,6 +5639,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5637,6 +5674,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5652,6 +5690,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5686,6 +5725,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				FRAMEWORK_VERSION = A;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -5701,6 +5741,7 @@
 					"@loader_path/Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUI;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -5734,6 +5775,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -5751,6 +5793,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -5788,6 +5831,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -5800,6 +5844,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -5838,6 +5883,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -5850,6 +5896,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -5888,6 +5935,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -5900,6 +5948,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -5938,6 +5987,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -5950,6 +6000,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -5988,6 +6039,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -6000,6 +6052,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -6038,6 +6091,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -6050,6 +6104,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
@@ -6091,6 +6146,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -6116,6 +6172,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6159,6 +6216,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -6177,6 +6235,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6221,6 +6280,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -6239,6 +6299,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6275,6 +6336,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6286,6 +6348,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -6316,6 +6379,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6343,6 +6407,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6354,6 +6419,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6379,6 +6445,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6406,6 +6473,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6417,6 +6485,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6442,6 +6511,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6469,6 +6539,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6480,6 +6551,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6505,6 +6577,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6532,6 +6605,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6543,6 +6617,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6568,6 +6643,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6595,6 +6671,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6606,6 +6683,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6631,6 +6709,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6658,6 +6737,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -6669,6 +6749,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				EXCLUDED_ARCHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -6694,6 +6775,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++17";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -6735,6 +6817,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -6759,6 +6842,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -6801,6 +6885,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -6815,6 +6900,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6856,6 +6942,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -6870,6 +6957,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6911,6 +6999,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -6925,6 +7014,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -6966,6 +7056,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -6980,6 +7071,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7021,6 +7113,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -7035,6 +7128,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7080,6 +7174,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
@@ -7100,6 +7195,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -7131,6 +7227,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -7151,6 +7248,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
@@ -7171,6 +7269,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -7192,6 +7291,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7230,6 +7330,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_TESTABILITY = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
@@ -7252,6 +7353,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7300,6 +7402,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -7320,6 +7423,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 			};
 			name = AppStore;
@@ -7339,6 +7443,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -7360,6 +7465,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7425,6 +7531,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -7443,6 +7550,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7491,6 +7599,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = PE4436LT5M;
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXPANDED_CODE_SIGN_IDENTITY = "-";
 				EXPANDED_CODE_SIGN_IDENTITY_NAME = "-";
@@ -7511,6 +7620,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				SDKROOT = macosx;
 			};
 			name = Weekly;
@@ -7530,6 +7640,7 @@
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_MODULE_VERIFIER = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_OPTIMIZATION_LEVEL = fast;
@@ -7551,6 +7662,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++14";
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7616,6 +7728,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXCLUDED_ARCHS = armv7;
@@ -7634,6 +7747,7 @@
 				MACH_O_TYPE = mh_dylib;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = (
 					"-fpie",
@@ -7678,6 +7792,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -7692,6 +7807,7 @@
 					"@loader_path/Frameworks",
 				);
 				MODULEMAP_FILE = MPWFoundation.map;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-fpie",

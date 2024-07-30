@@ -57,7 +57,7 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 }
 
 
--(id)at:(id<MPWReferencing>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
+-(id)at:(id<MPWIdentifying>)aReference for:target with:(id*)extraParams count:(int)extraParamCount
 {
     id params[100]={nil,nil,nil,nil,nil,nil};
 //    NSLog(@"at: %@ for: %@ with %d exptra params",aReference,target,extraParamCount);
@@ -106,13 +106,13 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 }
 
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     id extraParams[1]={NULL};
     return [self at:aReference for:self.target with:extraParams count:0];
  }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     MPWReferenceTemplate *template = (MPWReferenceTemplate*)aReference;
     if ( ![template isKindOfClass:[MPWReferenceTemplate class]]) {
@@ -168,7 +168,7 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 {
     MPWTemplateMatchingStore *store=[self store];
     store[@"key/"]=@"value";
-    IDEXPECT((store[([MPWGenericReference referenceWithPath:@"key/"])]), @"value",@"simple lookup");
+    IDEXPECT((store[([MPWGenericIdentifier referenceWithPath:@"key/"])]), @"value",@"simple lookup");
 }
 
 +(void)testWildcardMatchesRoot

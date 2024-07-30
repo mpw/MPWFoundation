@@ -7,18 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MPWReferencing,Streaming;
-@class MPWReference,MPWGenericReference,MPWByteStream,MPWDirectoryBinding,MPWBinding,MPWPathRelativeStore;
+@protocol MPWIdentifying,Streaming;
+@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryBinding,MPWBinding,MPWPathRelativeStore;
 
 
 @protocol MPWStorage <NSObject>
 
--at:(id <MPWReferencing>)aReference;
--(void)at:(id <MPWReferencing>)aReference put:theObject;
--(void)merge:theObject at:(id <MPWReferencing>)aReference;
--(void)deleteAt:(id <MPWReferencing>)aReference;
--(void)mkdirAt:(id <MPWReferencing>)reference;
--(id <MPWReferencing>)referenceForPath:(NSString*)path;
+-at:(id <MPWIdentifying>)aReference;
+-(void)at:(id <MPWIdentifying>)aReference put:theObject;
+-(void)merge:theObject at:(id <MPWIdentifying>)aReference;
+-(void)deleteAt:(id <MPWIdentifying>)aReference;
+-(void)mkdirAt:(id <MPWIdentifying>)reference;
+-(id <MPWIdentifying>)referenceForPath:(NSString*)path;
 
 @optional
 -(NSString*)graphVizName;
@@ -26,25 +26,25 @@
 -(void)graphViz:(MPWByteStream*)aStream;
 -objectForKeyedSubscript:key;
 -(void)setObject:theObject forKeyedSubscript:key;
--(BOOL)hasChildren:(id <MPWReferencing>)aReference;
+-(BOOL)hasChildren:(id <MPWIdentifying>)aReference;
 
 -(MPWBinding*)bindingForReference:aReference inContext:aContext;
--(id<MPWStorage>)relativeStoreAt:(id <MPWReferencing>)reference;
+-(id<MPWStorage>)relativeStoreAt:(id <MPWIdentifying>)reference;
 
 @end
 
 @protocol StreamStorage
 
--(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference;
--(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream;
+-(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference;
+-(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream;
 
 @end
 
 @protocol MPWHierarchicalStorage <MPWStorage>
 
--(BOOL)hasChildren:(id <MPWReferencing>)aReference;
--(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference;
--(id <MPWReferencing>)rootRef;
+-(BOOL)hasChildren:(id <MPWIdentifying>)aReference;
+-(NSArray<MPWIdentifying>*)childrenOfReference:(id <MPWIdentifying>)aReference;
+-(id <MPWIdentifying>)rootRef;
 -(MPWBinding*)rootBinding;
 
 @end
@@ -69,7 +69,7 @@
 -(void)setSourceStores:(NSArray <MPWStorage>*)stores;
 -(void)setStoreDict:(NSDictionary*)storeDict;
 -(MPWDirectoryBinding*)listForNames:(NSArray*)nameList;
--(MPWPathRelativeStore*)relativeStoreAt:(id <MPWReferencing>)reference;
+-(MPWPathRelativeStore*)relativeStoreAt:(id <MPWIdentifying>)reference;
 
 
 -(void)graphViz:(MPWByteStream*)aStream;

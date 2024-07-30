@@ -11,7 +11,7 @@
 
 @implementation MPWExtensionStore
 
--(id<MPWReferencing>)mapReference:(id<MPWReferencing>)aReference
+-(id<MPWIdentifying>)mapReference:(id<MPWIdentifying>)aReference
 {
     NSString *r=aReference.path;
     id ref = [[aReference class] referenceWithPath:[r stringByAppendingPathExtension:self.extension]];
@@ -19,7 +19,7 @@
     return ref;
 }
 
--(id<MPWReferencing>)reverseMapReference:(id<MPWReferencing>)aReference
+-(id<MPWIdentifying>)reverseMapReference:(id<MPWIdentifying>)aReference
 {
     return [[aReference class] referenceWithPath:[[aReference path] stringByDeletingPathExtension]];
 }

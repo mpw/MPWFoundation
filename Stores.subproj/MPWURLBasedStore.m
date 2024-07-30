@@ -13,13 +13,13 @@
 
 +(id <MPWStorage>)storeAtURL:(NSURL *)url
 {
-    MPWGenericReference *baseRef=[MPWGenericReference referenceWithPath:url.path];
+    MPWGenericIdentifier *baseRef=[MPWGenericIdentifier referenceWithPath:url.path];
     MPWPathRelativeStore *rel=[MPWPathRelativeStore storeWithSource:[self store] reference:baseRef];
     return rel;
 }
 
 
--(MPWReference*)referenceForPath:(NSString*)path
+-(MPWIdentifier*)referenceForPath:(NSString*)path
 {
     return [MPWURLReference referenceWithPath:path];
 }

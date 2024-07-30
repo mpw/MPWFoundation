@@ -10,7 +10,7 @@
 
 @implementation MPWSysctlStore
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     NSString *name = [[[aReference path] componentsSeparatedByString:@"/"] componentsJoinedByString:@"."];
     char buffer[1024]={0};

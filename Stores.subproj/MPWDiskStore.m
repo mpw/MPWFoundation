@@ -6,7 +6,7 @@
 //
 
 #import "MPWDiskStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "MPWGenericReference.h"
 #import "MPWDirectoryBinding.h"
 #import "NSStringAdditions.h"
@@ -20,7 +20,7 @@
 
 
 
--(NSURL*)fileURLForReference:(MPWGenericReference*)ref
+-(NSURL*)fileURLForReference:(MPWGenericIdentifier*)ref
 {
     @try {
         NSURL *url =  [NSURL fileURLWithPath:[ref path]];              //  [ref URL] doesn't work
@@ -48,7 +48,7 @@
     return data;
 }
 
--directoryForReference:(MPWGenericReference*)aReference
+-directoryForReference:(MPWGenericIdentifier*)aReference
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
@@ -56,7 +56,7 @@
 }
 
 
--(NSData*)at:(MPWGenericReference*)aReference
+-(NSData*)at:(MPWGenericIdentifier*)aReference
 {
     BOOL isDirectory=NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
@@ -68,7 +68,7 @@
     return nil;
 }
 
--(void)at:(MPWGenericReference*)aReference put:(NSData*)theObject
+-(void)at:(MPWGenericIdentifier*)aReference put:(NSData*)theObject
 {
     NSError *error=nil;
     BOOL success=NO;
@@ -85,13 +85,13 @@
     }
 }
 
--(void)deleteAt:(MPWGenericReference*)aReference
+-(void)deleteAt:(MPWGenericIdentifier*)aReference
 {
     NSString *path = [[self fileURLForReference:aReference] path];
     unlink([path fileSystemRepresentation]);
 }
 
--(BOOL)exists:(id <MPWReferencing>)aReference isDirectory:(BOOL*)isDirectory
+-(BOOL)exists:(id <MPWIdentifying>)aReference isDirectory:(BOOL*)isDirectory
 {
     BOOL    exists=NO;
     NSURL   *url=[self fileURLForReference:aReference];
@@ -100,26 +100,26 @@
 
 }
 
--(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+-(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference
 {
     NSURL *url = [self fileURLForReference:aReference];
     NSString *path = [url path];
     return [MPWByteStream fileName:path];
 }
 
--(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+-(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream
 {
     [aStream writeObject:[self at:aReference]];
 }
 
--(BOOL)hasChildren:(MPWGenericReference *)aReference
+-(BOOL)hasChildren:(MPWGenericIdentifier *)aReference
 {
     BOOL isDirectory = NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
     return exists && isDirectory;
 }
 
--(NSArray*)childNamesOfReference:(id <MPWReferencing>)aReference
+-(NSArray*)childNamesOfReference:(id <MPWIdentifying>)aReference
 {
     NSError *error=nil;
     NSArray *childNames = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[aReference path] error:&error];
@@ -135,7 +135,7 @@
 }
 
 
-//-(NSArray*)childrenOfReference:(id <MPWReferencing>)aReference
+//-(NSArray*)childrenOfReference:(id <MPWIdentifying>)aReference
 //{
 //    NSArray *childNames = [self childNamesOfReference:aReference];;
 //    return (NSArray*)[[self collect] referenceForPath:[childNames each]];
@@ -155,7 +155,7 @@
     NSArray *errors=[NSMutableArray array];
     d.errors = (NSObject<Streaming>*)errors;
     INTEXPECT(errors.count, 0, @"no errors before write attempt");
-    d[[MPWGenericReference referenceWithPath:@"/tmp_doesnt_exist/hi"]] = [@"there" asData];
+    d[[MPWGenericIdentifier referenceWithPath:@"/tmp_doesnt_exist/hi"]] = [@"there" asData];
     INTEXPECT(errors.count, 1, @"should have gotten an error");
     NSError *error=errors.firstObject;
     INTEXPECT(error.code,NSFileNoSuchFileError,@"code should be file not found");
@@ -167,7 +167,7 @@
     NSArray *errors=[NSMutableArray array];
     d.errors = (NSObject<Streaming>*)errors;
     INTEXPECT(errors.count, 0, @"no errors before write attempt");
-    id result = d[[MPWGenericReference referenceWithPath:@"/tmp_doesnt_exist/doesnotexisteither"]];
+    id result = d[[MPWGenericIdentifier referenceWithPath:@"/tmp_doesnt_exist/doesnotexisteither"]];
     EXPECTNIL(result,@"should not get a result reading");
     INTEXPECT(errors.count, 1, @"should have gotten an error");
     NSError *error=errors.firstObject;

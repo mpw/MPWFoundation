@@ -7,7 +7,7 @@
 
 #import "MPWSwitchingStore.h"
 #import <AccessorMacros.h>
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 
 @implementation MPWSwitchingStore
 
@@ -17,32 +17,32 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
 }
 
 
--referenceToKey:(MPWGenericReference*)ref
+-referenceToKey:(MPWGenericIdentifier*)ref
 {
     return [ref pathComponents][0];
 }
 
--(MPWAbstractStore*)storeForReference:(MPWGenericReference*)aReference
+-(MPWAbstractStore*)storeForReference:(MPWGenericIdentifier*)aReference
 {
     return [super at:aReference];
 }
 
--at:(MPWGenericReference*)aReference
+-at:(MPWGenericIdentifier*)aReference
 {
     return [[self storeForReference:aReference] at:aReference];
 }
 
--(void)at:(MPWGenericReference*)aReference put:theObject
+-(void)at:(MPWGenericIdentifier*)aReference put:theObject
 {
     [[self storeForReference:aReference] at:aReference put:theObject];
 }
 
--(void)merge:theObject at:(MPWGenericReference*)aReference
+-(void)merge:theObject at:(MPWGenericIdentifier*)aReference
 {
     [[self storeForReference:aReference] merge:theObject at:aReference];
 }
 
--(void)deleteAt:(MPWGenericReference*)aReference
+-(void)deleteAt:(MPWGenericIdentifier*)aReference
 {
     [[self storeForReference:aReference] deleteAt:aReference];
 }
@@ -58,8 +58,8 @@ CONVENIENCEANDINIT( store, WithStoreDictionary:(NSDictionary*)newDict)
 {
     MPWDictStore *store1=[MPWDictStore store];
     MPWDictStore *store2=[MPWDictStore store];
-    MPWGenericReference *ref1=[MPWGenericReference referenceWithPath:@"hi/there"];
-    MPWGenericReference *ref2=[MPWGenericReference referenceWithPath:@"hey/there"];
+    MPWGenericIdentifier *ref1=[MPWGenericIdentifier referenceWithPath:@"hi/there"];
+    MPWGenericIdentifier *ref2=[MPWGenericIdentifier referenceWithPath:@"hey/there"];
 
     store1[ref1]=@"value1";
     store2[ref2]=@"value2";

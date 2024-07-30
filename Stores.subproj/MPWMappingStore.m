@@ -6,7 +6,7 @@
 //
 
 #import "MPWMappingStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 #import <MPWByteStream.h>
 #import "MPWDirectoryBinding.h"
@@ -26,75 +26,75 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self initWithSource:nil];
 }
 
--(id <MPWReferencing>)mapReference:(id <MPWReferencing>)aReference
+-(id <MPWIdentifying>)mapReference:(id <MPWIdentifying>)aReference
 {
     return aReference;
 }
 
--(NSURL*)URLForReference:(MPWGenericReference*)aReference
+-(NSURL*)URLForReference:(MPWGenericIdentifier*)aReference
 {
     return [self.source URLForReference:[self mapReference:aReference]];
 }
 
 
--mapRetrievedObject:anObject forReference:(id <MPWReferencing>)aReference
+-mapRetrievedObject:anObject forReference:(id <MPWIdentifying>)aReference
 {
     return anObject;
 }
 
--mapObjectToStore:anObject forReference:(id <MPWReferencing>)aReference
+-mapObjectToStore:anObject forReference:(id <MPWIdentifying>)aReference
 {
     return anObject;
 }
 
--at:(id <MPWReferencing>)aReference
+-at:(id <MPWIdentifying>)aReference
 {
     return [self mapRetrievedObject:[self.source at:[self mapReference:aReference]] forReference:aReference];
 }
 
--(void)at:(id <MPWReferencing>)aReference put:theObject
+-(void)at:(id <MPWIdentifying>)aReference put:theObject
 {
     [self.source at:[self mapReference:aReference] put:[self mapObjectToStore:theObject forReference:aReference]];
 }
 
--at:(id <MPWReferencing>)aReference post:(id)theObject
+-at:(id <MPWIdentifying>)aReference post:(id)theObject
 {
     return [self.source at:[self mapReference:aReference] post:[self mapObjectToStore:theObject forReference:aReference]];
 }
 
--(void)merge:theObject at:(id <MPWReferencing>)aReference
+-(void)merge:theObject at:(id <MPWIdentifying>)aReference
 {
     [self.source merge:[self mapObjectToStore:theObject forReference:aReference] at:[self mapReference:aReference]];
 }
 
--(void)deleteAt:(id <MPWReferencing>)aReference
+-(void)deleteAt:(id <MPWIdentifying>)aReference
 {
     [self.source deleteAt:[self mapReference:aReference]];
 }
 
--(id <Streaming>)writeStreamAt:(id <MPWReferencing>)aReference
+-(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference
 {
     return [self.source writeStreamAt:[self mapReference:aReference]];
 }
 
--(void)at:(id <MPWReferencing>)aReference readToStream:(id <Streaming>)aStream
+-(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream
 {
     [[self source] at:[self mapReference:aReference] readToStream:aStream];
     return ;
 }
 
 
--(BOOL)hasChildren:(id<MPWReferencing>)aReference
+-(BOOL)hasChildren:(id<MPWIdentifying>)aReference
 {
     return [self.source hasChildren:[self mapReference:aReference]];
 }
 
-//-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWReferencing>)aReference
+//-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWIdentifying>)aReference
 //{
 //    return [[self mapRetrievedObject:[[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
 //}
 
--(MPWReference*)referenceForPath:(NSString*)path
+-(MPWIdentifier*)referenceForPath:(NSString*)path
 {
 //    NSLog(@"referenceForPath: %@ source store: %@",path,self.source);
     id result = self.source ? [self.source referenceForPath:path] : [super referenceForPath:path];
@@ -103,7 +103,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 }
 
--(id <MPWReferencing>)reverseMapReference:(id <MPWReferencing>)aReference
+-(id <MPWIdentifying>)reverseMapReference:(id <MPWIdentifying>)aReference
 {
     return aReference;
 }
@@ -114,7 +114,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     id mappedReference = [self mapReference:aReference];
     NSArray *refs=[self.source childrenOfReference:mappedReference];
     NSMutableArray *result = [NSMutableArray array];
-    for ( id<MPWReferencing> ref in refs ) {
+    for ( id<MPWIdentifying> ref in refs ) {
         [result addObject:[self reverseMapReference:ref]];
     }
     return result;

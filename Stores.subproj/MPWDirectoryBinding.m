@@ -35,7 +35,7 @@ boolAccessor(fancy, setFancy)
 -dicts
 {
     NSMutableArray *dicts=[NSMutableArray array];
-    for ( id <MPWReferencing> ref in self.contents) {
+    for ( id <MPWIdentifying> ref in self.contents) {
         [dicts addObject:@{ @"name": ref.path , @"value": self.store[ref] }];
     }
     return dicts;

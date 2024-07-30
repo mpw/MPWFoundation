@@ -47,7 +47,7 @@
 #import <MPWFoundation/MPWURLStreamingStream.h>
 #import <MPWFoundation/MPWASCII85Stream.h>
 #import <MPWFoundation/MPWURLCall2StoreStream.h>
-#import <MPWFoundation/MPWNotificationStream.h>
+#import <MPWFoundation/MPWEventWriter.h>
 #import <MPWFoundation/MPWDistributedNotificationStream.h>
 #import <MPWFoundation/MPWDistributedNotificationReceiver.h>
 #import <MPWFoundation/MPWMapFilter.h>
@@ -115,13 +115,13 @@
 #import <MPWFoundation/MPWCompositeStore.h>
 #import <MPWFoundation/MPWDictStore.h>
 #import <MPWFoundation/MPWDiskStore.h>
-#import <MPWFoundation/MPWGenericReference.h>
+#import <MPWFoundation/MPWGenericIdentifier.h>
 #import <MPWFoundation/MPWLoggingStore.h>
 #import <MPWFoundation/MPWMappingStore.h>
 #import <MPWFoundation/MPWMergingStore.h>
 #import <MPWFoundation/MPWNameRemappingStore.h>
 #import <MPWFoundation/MPWPathRelativeStore.h>
-#import <MPWFoundation/MPWReference.h>
+#import <MPWFoundation/MPWIdentifier.h>
 #import <MPWFoundation/MPWSequentialStore.h>
 #import <MPWFoundation/MPWSwitchingStore.h>
 #import <MPWFoundation/MPWURLBasedStore.h>
@@ -142,7 +142,7 @@
 #import <MPWFoundation/MPWObjectStore.h>
 #import <MPWFoundation/MPWEnsureNonNilStore.h>
 #import <MPWFoundation/MPWStringTemplate.h>
-//#import <MPWFoundation/MPWPropertyPathStore.h>
+#import <MPWFoundation/MPWPropertyPathStore.h>
 
 #import <MPWFoundation/MPWMAXParser.h>
 #import <MPWFoundation/MPWXmlParser.h>

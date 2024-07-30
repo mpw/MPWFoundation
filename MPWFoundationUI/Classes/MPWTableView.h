@@ -8,7 +8,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ModelDidChangeNotification.h"
 
-@protocol MPWStorage,MPWReferencing;
+@protocol MPWStorage,MPWIdentifying;
 @class MPWBinding;
 
 @interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange,NSTableViewDelegate>

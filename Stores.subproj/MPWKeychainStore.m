@@ -10,7 +10,7 @@
 
 @implementation MPWKeychainStore
 
--(NSMutableDictionary*)queryDictForReference:(id<MPWReferencing>)aReference
+-(NSMutableDictionary*)queryDictForReference:(id<MPWIdentifying>)aReference
 {
     NSArray *path=[aReference relativePathComponents];
     if ( [path.firstObject isEqual:@"password"] && path.count==3) {
@@ -28,7 +28,7 @@
     return nil;
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     NSMutableDictionary *theQuery=[self queryDictForReference:aReference];
     NSString *valueDataRef=(NSString*)kSecValueData;
@@ -46,7 +46,7 @@
     }
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     NSMutableDictionary *query=[self queryDictForReference:aReference];
     query[(id)kSecReturnData]=@(true);
@@ -59,7 +59,7 @@
     return retval;
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     OSStatus status = SecItemDelete((CFDictionaryRef)[self queryDictForReference:aReference]);
     if (status != errSecSuccess &&  status != -25300) {

@@ -12,7 +12,7 @@
 
 @implementation MPWObjectStore
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     NSString *path=[aReference path];
     if ( [aReference isRoot] || [path isEqual:@"."]) {
@@ -24,7 +24,7 @@
     if ( components.count > 1 ) {
         components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
         NSString *remainderRef=[components componentsJoinedByString:@"/"];
-        //        MPWReference *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
+        //        MPWIdentifier *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
 //        NSLog(@"initial result: %@",result);
 //        NSLog(@"remainder path: '%@'",remainderRef);
         result = [result at:remainderRef];
@@ -35,7 +35,7 @@
     
 }
 
--(void)at:(id<MPWReferencing>)aReference put:theObject
+-(void)at:(id<MPWIdentifying>)aReference put:theObject
 {
 //    NSLog(@"ObjectStore at:'%@' put:'%@'",aReference,theObject);
     NSArray *components=[aReference relativePathComponents];
@@ -46,7 +46,7 @@
 //        NSLog(@"got the next level store: %@",theStore);
         components=[components subarrayWithRange:NSMakeRange(1,components.count-1)];
         NSString *remainderRef=[components componentsJoinedByString:@"/"];
-        //        MPWReference *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
+        //        MPWIdentifier *remainderRef = [[[[aReference class] alloc] initWithPathComponents:components scheme:[aReference scheme]] autorelease];
 //        theStore = [super at:remainderRef];
 //        NSLog(@"got initial now doing reminder: '%@' <- '%@'",remainderRef,theObject);
         [theStore at:remainderRef put:theObject];

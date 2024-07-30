@@ -10,7 +10,7 @@
 @implementation MPWPlistStore
 
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
 //    NSLog(@"at: %@",aReference);
     id tempResult=self.dict;
@@ -27,18 +27,18 @@
         return tempResult;
 }
 
--(NSArray<MPWReferencing> *)childrenOfReference:(id<MPWReferencing>)aReference
+-(NSArray<MPWIdentifying> *)childrenOfReference:(id<MPWIdentifying>)aReference
 {
 //    NSLog(@"childrenOfReference: %@",aReference);
     id base =  [self at:aReference];
     NSString *path=[aReference path];
     path = [path hasPrefix:@"/"] ? [path substringFromIndex:1] : path;
-    NSArray<MPWReferencing> *retval=nil;
+    NSArray<MPWIdentifying> *retval=nil;
     if ( [base isKindOfClass:[NSDictionary class]] ) {
 //        return [[path collect] stringByAppendingPathComponent:[[base allKeys] each]];
-        retval = (NSArray<MPWReferencing>*)[base allKeys];
+        retval = (NSArray<MPWIdentifying>*)[base allKeys];
     } else {
-        NSMutableArray<MPWReferencing> * _Nonnull result=(NSMutableArray<MPWReferencing> * _Nonnull)[NSMutableArray arrayWithCapacity:[base count]+1];
+        NSMutableArray<MPWIdentifying> * _Nonnull result=(NSMutableArray<MPWIdentifying> * _Nonnull)[NSMutableArray arrayWithCapacity:[base count]+1];
         for ( long i=0,max=[base count];i<max;i++) {
             [result addObject:[NSString stringWithFormat:@"%ld",i]];
         }
@@ -48,7 +48,7 @@
     return retval;
 }
 
--(BOOL)hasChildren:(id<MPWReferencing>)aReference
+-(BOOL)hasChildren:(id<MPWIdentifying>)aReference
 {
     id element = [self at:aReference];
     BOOL hasChildren = [element isKindOfClass:[NSArray class]] || [element isKindOfClass:[NSDictionary class]];

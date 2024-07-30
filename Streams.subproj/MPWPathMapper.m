@@ -28,7 +28,7 @@
 }
 
 
--(id <MPWReferencing>)mapReference:(id <MPWReferencing>)reference
+-(id <MPWIdentifying>)mapReference:(id <MPWIdentifying>)reference
 {
     NSString *mappedPath=[self mapPath:reference.path];
     if ( mappedPath) {
@@ -37,9 +37,9 @@
     return nil;
 }
 
--(void)writeReference:(MPWReference*)reference
+-(void)writeReference:(MPWIdentifier*)reference
 {
-    id <MPWReferencing> mappedReference=[self mapReference:reference];
+    id <MPWIdentifying> mappedReference=[self mapReference:reference];
     if ( mappedReference) {
         FORWARD( mappedReference);
     }
@@ -47,7 +47,7 @@
 
 -(void)writeRESTOperation:(MPWRESTOperation*)op
 {
-    id <MPWReferencing> mappedReference=[self mapReference:op.reference];
+    id <MPWIdentifying> mappedReference=[self mapReference:op.reference];
     if ( mappedReference) {
         FORWARD( [MPWRESTOperation operationWithReference:mappedReference verb:op.verb]);
     }
@@ -56,7 +56,7 @@
 @end
 
 
-@implementation MPWReference(pathMapper)
+@implementation MPWIdentifier(pathMapper)
 
 -(void)writeOnPathMapper:(MPWPathMapper*)mapper
 {
@@ -89,21 +89,21 @@
 
 +(void)testRemovePrefixFromReference
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"/private/tmp/hello.txt"];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"/private/tmp/hello.txt"];
     MPWPathMapper *mapper=[[self new] autorelease];
-    mapper.prefix=[MPWGenericReference referenceWithPath:@"/private/tmp/"];
-    MPWGenericReference* result = [mapper processObject:ref];
-    IDEXPECT( result, [MPWGenericReference referenceWithPath:@"hello.txt"], @"prefix removed");
+    mapper.prefix=[MPWGenericIdentifier referenceWithPath:@"/private/tmp/"];
+    MPWGenericIdentifier* result = [mapper processObject:ref];
+    IDEXPECT( result, [MPWGenericIdentifier referenceWithPath:@"hello.txt"], @"prefix removed");
 }
 
 +(void)testRemovePrefixFromRESTOp
 {
-    MPWRESTOperation *ref=[MPWRESTOperation operationWithReference:[MPWGenericReference referenceWithPath:@"/private/tmp/hello.txt"] verb:MPWRESTVerbPUT];
+    MPWRESTOperation *ref=[MPWRESTOperation operationWithReference:[MPWGenericIdentifier referenceWithPath:@"/private/tmp/hello.txt"] verb:MPWRESTVerbPUT];
     MPWPathMapper *mapper=[[self new] autorelease];
-    mapper.prefix=[MPWGenericReference referenceWithPath:@"/private/tmp/"];
+    mapper.prefix=[MPWGenericIdentifier referenceWithPath:@"/private/tmp/"];
     MPWRESTOperation* resultOp = [mapper processObject:ref];
     IDEXPECT( resultOp.HTTPVerb, @"PUT",@"verb");
-    IDEXPECT( resultOp.reference, [MPWGenericReference referenceWithPath:@"hello.txt"], @"prefix removed");
+    IDEXPECT( resultOp.reference, [MPWGenericIdentifier referenceWithPath:@"hello.txt"], @"prefix removed");
 }
 
 +(NSArray*)testSelectors

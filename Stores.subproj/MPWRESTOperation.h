@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 
-@protocol MPWReferencing;
+@protocol MPWIdentifying;
 
-@interface MPWRESTOperation<T: id <MPWReferencing>> : NSObject
+@interface MPWRESTOperation<T: id <MPWIdentifying>> : NSObject
 
 typedef NS_ENUM(int, MPWRESTVerb) {
     MPWRESTVerbGET,

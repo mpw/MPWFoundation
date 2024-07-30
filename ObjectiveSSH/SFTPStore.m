@@ -161,7 +161,7 @@ end:
     return result;
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
      if ( theObject ) {
         [self writeData:[theObject asData] toRemoteFile:[aReference path]];
@@ -175,7 +175,7 @@ end:
     return [[[SSHCommandStream alloc] initWithSSHConnection:self.connection command:command] autorelease];
 }
 
--(NSArray*)childNamesOfReference:(id<MPWReferencing>)aReference
+-(NSArray*)childNamesOfReference:(id<MPWIdentifying>)aReference
 {
     NSMutableArray *names=[NSMutableArray array];
     sftp_dir dir = sftp_opendir(sftp, [[aReference path] UTF8String]);
@@ -189,7 +189,7 @@ end:
 }
 
 
--directoryForReference:(id<MPWReferencing>)aReference
+-directoryForReference:(id<MPWIdentifying>)aReference
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
@@ -197,7 +197,7 @@ end:
 }
 
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     if ([self openSFTP] < 0) {
         printf("couldn't open dest\n");
@@ -211,14 +211,14 @@ end:
     }
 }
 
--(void)mkdir:(id<MPWReferencing>)aReference
+-(void)mkdir:(id<MPWIdentifying>)aReference
 {
     if ([self openSFTP] >= 0) {
         sftp_mkdir(sftp, [[aReference path] UTF8String], self.directoryUMask );
     }
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     if ([self openSFTP] >= 0) {
         const char *path = [[aReference path] UTF8String];

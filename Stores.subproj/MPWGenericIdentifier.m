@@ -5,17 +5,17 @@
 //  Created by Marcel Weiher on 5/22/18.
 //
 
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 
-@interface MPWGenericReference()
+@interface MPWGenericIdentifier()
 
 @property (nonatomic, strong) NSArray *myPathComponents;
 
 
 @end
 
-@implementation MPWGenericReference
+@implementation MPWGenericIdentifier
 
 @synthesize schemeName;
 
@@ -86,7 +86,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return @(0);
 }
 
--(instancetype)referenceByAppendingReference:(MPWGenericReference*)other
+-(instancetype)referenceByAppendingReference:(MPWGenericIdentifier*)other
 {
     NSArray *compinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];
     return [[[[self class] alloc] initWithPathComponents:compinedPath scheme:self.schemeName] autorelease];
@@ -94,7 +94,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(instancetype)referenceByAppendingPath:(NSString*)path
 {
-    MPWGenericReference *otherRef=[[[[self class] alloc] initWithPath:path] autorelease];
+    MPWGenericIdentifier *otherRef=[[[[self class] alloc] initWithPath:path] autorelease];
     return [self referenceByAppendingReference:otherRef];
 }
 
@@ -200,12 +200,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 #import "DebugMacros.h"
 
 
-@implementation MPWReferenceTests
+@implementation MPWIdentifierTests
 
 
 +classUnderTest
 {
-    return [MPWGenericReference class];
+    return [MPWGenericIdentifier class];
 }
 
 +ref:(NSString*)path
@@ -274,17 +274,17 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 +(void)testAppendPath
 {
-    MPWGenericReference *base=[self ref:@"base"];
-    MPWGenericReference *relative=[self ref:@"relative"];
-    MPWGenericReference *composite=[base referenceByAppendingReference:relative];
+    MPWGenericIdentifier *base=[self ref:@"base"];
+    MPWGenericIdentifier *relative=[self ref:@"relative"];
+    MPWGenericIdentifier *composite=[base referenceByAppendingReference:relative];
     IDEXPECT([composite path], @"base/relative", @"simplest composition");
 }
 
 +(void)testAppendPathWithSpaces
 {
-    MPWGenericReference *base=[self ref:@"base with space"];
-    MPWGenericReference *relative=[self ref:@"relative with space"];
-    MPWGenericReference *composite=[base referenceByAppendingReference:relative];
+    MPWGenericIdentifier *base=[self ref:@"base with space"];
+    MPWGenericIdentifier *relative=[self ref:@"relative with space"];
+    MPWGenericIdentifier *composite=[base referenceByAppendingReference:relative];
     IDEXPECT([composite path], @"base with space/relative with space", @"simplest composition");
 }
 

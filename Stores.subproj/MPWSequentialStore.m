@@ -7,7 +7,7 @@
 
 #import "MPWSequentialStore.h"
 #import <AccessorMacros.h>
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import <MPWByteStream.h>
 
 @implementation MPWSequentialStore
@@ -24,7 +24,7 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return result != nil;
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     for ( MPWAbstractStore *s in self.stores) {
         id result=[s at:aReference];
@@ -35,17 +35,17 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
     return nil;
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     self.stores.firstObject[aReference]=theObject;
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [self.stores.firstObject deleteAt:aReference];
 }
 
--(void)merge:(id)theObject at:(id<MPWReferencing>)aReference
+-(void)merge:(id)theObject at:(id<MPWIdentifying>)aReference
 {
     [self at:aReference put:[self at:aReference]];
     [self.stores.firstObject merge:theObject at:aReference];
@@ -83,10 +83,10 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 
 +(void)testBasicAccessCombinations
 {
-    MPWGenericReference *r1=[MPWGenericReference referenceWithPath:@"key1"];
-    MPWGenericReference *r2=[MPWGenericReference referenceWithPath:@"key2"];
-    MPWGenericReference *r3=[MPWGenericReference referenceWithPath:@"key3"];
-    MPWGenericReference *r4=[MPWGenericReference referenceWithPath:@"key4"];
+    MPWGenericIdentifier *r1=[MPWGenericIdentifier referenceWithPath:@"key1"];
+    MPWGenericIdentifier *r2=[MPWGenericIdentifier referenceWithPath:@"key2"];
+    MPWGenericIdentifier *r3=[MPWGenericIdentifier referenceWithPath:@"key3"];
+    MPWGenericIdentifier *r4=[MPWGenericIdentifier referenceWithPath:@"key4"];
 
     MPWDictStore *d1=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)
                       @{
@@ -126,8 +126,8 @@ CONVENIENCEANDINIT( store, WithStores:(NSArray*)newStores)
 
 +(void)testStoreOnlyAffectsFirst
 {
-    MPWGenericReference *r1=[MPWGenericReference referenceWithPath:@"key1"];
-    MPWGenericReference *r2=[MPWGenericReference referenceWithPath:@"key2"];
+    MPWGenericIdentifier *r1=[MPWGenericIdentifier referenceWithPath:@"key1"];
+    MPWGenericIdentifier *r2=[MPWGenericIdentifier referenceWithPath:@"key2"];
 
     MPWDictStore *d1=[MPWDictStore store];
     MPWDictStore *d2=[MPWDictStore storeWithDictionary:(NSMutableDictionary*)

@@ -32,7 +32,7 @@
     return binding;
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     SSHCommandBinding *binding = [self bindingForReference:aReference inContext:nil];
     return [binding value];

@@ -132,7 +132,13 @@ static void installDistributedNotificationProtocol( Protocol *self , id aHandler
 -(void)notify:anObject
 {
     sendProtocolNotification((Protocol*)self, anObject);
+    
+}
 
+-(void)writeObject:anObject
+{
+    sendProtocolNotification((Protocol*)self, anObject);
+    
 }
 
 -(void)notify

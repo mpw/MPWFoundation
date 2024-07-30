@@ -16,12 +16,12 @@
 -(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;
 +(instancetype)storeWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage>*)newSource;
 
--(void)invalidate:(id <MPWReferencing>)aRef;
+-(void)invalidate:(id <MPWIdentifying>)aRef;
 
 @property (readonly) id <MPWStorage> cache;
 @property (nonatomic) BOOL readOnlySource;
 
--(void)writeToSource:newObject at:(id <MPWReferencing>)aReference;
+-(void)writeToSource:newObject at:(id <MPWIdentifying>)aReference;
 
 -(void)setStoreDict:(NSDictionary*)storeDict;
 
@@ -34,7 +34,7 @@
 
 @interface MPWCachingStoreTests : NSObject
 
-@property (nonatomic, strong)  MPWGenericReference *key;
+@property (nonatomic, strong)  MPWGenericIdentifier *key;
 @property (nonatomic, strong)  NSString *value;
 @property (nonatomic, strong)  MPWDictStore *cache,*source;
 @property (nonatomic, strong)  MPWCachingStore *store;

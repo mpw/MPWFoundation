@@ -530,6 +530,12 @@ typedef void (^FileBlock)(FILE *f);
 	return [NSString stringWithFormat:@"<%@/%p: byteTarget %@/%p",[self class],self,[self.target class],byteTarget];
 }
 
+-(void)flush
+{
+    [super flush];
+    [[self byteTarget] flush];
+}
+
 
 -(void)dealloc
 {

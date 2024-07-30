@@ -5,9 +5,9 @@
 //  Created by Marcel Weiher on 5/22/18.
 //
 
-#import <MPWFoundation/MPWReference.h>
+#import <MPWFoundation/MPWIdentifier.h>
 
-@interface MPWGenericReference : MPWReference <MPWReferencing,MPWReferenceCreation,NSCopying>
+@interface MPWGenericIdentifier : MPWIdentifier <MPWIdentifying,MPWIdentifierCreation,NSCopying>
 
 -(void)setPath:(NSString*)path;         // legacy/compatibility
 -(NSString*)identifierName;
@@ -17,6 +17,6 @@
 @end
 
 
-@interface MPWReferenceTests : NSObject {}
+@interface MPWIdentifierTests : NSObject {}
 @end
 

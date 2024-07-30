@@ -32,7 +32,7 @@ objectAccessor( NSMutableArray*, items, _setItems)
     id firstObject = newItems.firstObject;
     if ( self.tableColumns.count == 0 && [firstObject respondsToSelector:@selector(rowStore)]) {
         self.rowStore = [firstObject rowStore];
-        [self setKeys:[[self.rowStore at:@"/"] paths]];
+        [self setKeys:[[self.rowStore at:@"/"] paths] target:firstObject];
     }
     [self _setItems:newItems];
 }
@@ -47,10 +47,12 @@ objectAccessor( NSMutableArray*, items, _setItems)
     [[self items] addObject:anObject];
 }
 
--(void)setKeys:(NSArray*)keys
+-(void)setKeys:(NSArray*)keys target:aTarget
 {
     for (NSString *key in keys) {
         MPWTableColumn *column=[[[MPWTableColumn alloc] initWithIdentifier:key] autorelease];
+        column.binding = [MPWPropertyBinding valueForName:key];
+        [column.binding bindToTarget:aTarget];
         column.width=150;
         [column setTitle:[key capitalizedString]];
         [self addTableColumn:column];
@@ -78,9 +80,10 @@ objectAccessor( NSMutableArray*, items, _setItems)
 
 lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
--(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+-(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-    [[self rowAt:row] at:tableColumn.identifier put:object];
+    [tableColumn.binding setValue:object forTarget:[self items][row]];
+//    [[self rowAt:row] at:tableColumn.identifier put:object];
 }
 
 -(void)commonInit
@@ -102,7 +105,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)modelDidChange:(NSNotification *)notification
 {
-//    id <MPWReferencing> changedRef=[notification object];
+//    id <MPWIdentifying> changedRef=[notification object];
 //
 //    if ( self.binding) {
 //        id newItems = self.binding.value;
@@ -208,9 +211,10 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 
-- tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+- tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-    return [[self rowAt:row] at:[tableColumn identifier]];
+    id rowValue = [self items][row];        // can't use rowAt: for now because that return a store
+    return [tableColumn.binding valueForTarget:rowValue];
 }
 
 - selectedObject
@@ -250,7 +254,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 @end
 
 
-@implementation MPWGenericReference(allKeys)
+@implementation MPWGenericIdentifier(allKeys)
 
 -(NSArray*)allKeys
 {

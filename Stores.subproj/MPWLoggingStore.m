@@ -6,7 +6,7 @@
 //
 
 #import "MPWLoggingStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 #import "MPWRESTOperation.h"
 #import <MPWByteStream.h>
@@ -20,19 +20,19 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     return self;
 }
 
--(void)at:(id<MPWReferencing>)aReference put:anObject
+-(void)at:(id<MPWIdentifying>)aReference put:anObject
 {
     [super at:aReference put:anObject];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
 }
 
--(void)merge:anObject at:(id<MPWReferencing>)aReference
+-(void)merge:anObject at:(id<MPWIdentifying>)aReference
 {
     [super merge:anObject at:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPATCH]];
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [super deleteAt:aReference];
     [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbDELETE]];
@@ -82,15 +82,15 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 
 @implementation MPWLoggingStore(tests)
 
-+(MPWGenericReference*)ref
++(MPWGenericIdentifier*)ref
 {
-    return [MPWGenericReference referenceWithPath:@"somePath"];
+    return [MPWGenericIdentifier referenceWithPath:@"somePath"];
 }
 
 +(void)testWriteIsLogged
 {
     NSMutableArray *theLog=[NSMutableArray array];
-    MPWGenericReference *ref=[self ref];
+    MPWGenericIdentifier *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store at:ref put:@"hi"];
     INTEXPECT(theLog.count,1,@"should have logged write");
@@ -101,7 +101,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 +(void)testDeleteIsLogged
 {
     NSMutableArray *theLog=[NSMutableArray array];
-    MPWGenericReference *ref=[self ref];
+    MPWGenericIdentifier *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store deleteAt:ref];
     INTEXPECT(theLog.count,1,@"should have logged delete");
@@ -112,7 +112,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
 +(void)testMergeIsLogged
 {
     NSMutableArray *theLog=[NSMutableArray array];
-    MPWGenericReference *ref=[self ref];
+    MPWGenericIdentifier *ref=[self ref];
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store merge:@"hi" at:ref];
     INTEXPECT(theLog.count,1,@"should have logged merge");

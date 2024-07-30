@@ -7,7 +7,7 @@
 
 #import "MPWPropertyStore.h"
 #import "AccessorMacros.h"
-#import "MPWReference.h"
+#import "MPWIdentifier.h"
 #import "MPWDirectoryBinding.h"
 #import "NSObjectFiltering.h"
 #import <objc/runtime.h>
@@ -65,7 +65,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
 }
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     NSString *path=aReference.path;
     if ( [path isEqual:@"."] || path.length==0 || [aReference isRoot] ) {
@@ -75,7 +75,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     }
 }
 
--(void)at:(id<MPWReferencing>)aReference put:anObject
+-(void)at:(id<MPWIdentifying>)aReference put:anObject
 {
     return [self.object setValue:anObject forKey:aReference.path];
 }
@@ -121,7 +121,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
     MPWPropertyStore *store=[self storeWithObject:tester];
-    id <MPWReferencing> ref=[store referenceForPath:@"hi"];
+    id <MPWIdentifying> ref=[store referenceForPath:@"hi"];
     EXPECTNIL( store[ref],@"nothing there yet");
     tester.hi=@"there";
     IDEXPECT( store[ref], @"there", @"present in store after we put it in object");
@@ -142,7 +142,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
     MPWPropertyStore *store=[self storeWithObject:tester];
-    id <MPWReferencing> ref=[store referenceForPath:@"hi"];
+    id <MPWIdentifying> ref=[store referenceForPath:@"hi"];
     tester.hi=@"there";
     MPWBinding *binding=[store bindingForReference:ref inContext:nil];
     NSLog(@"binding: %@",binding);

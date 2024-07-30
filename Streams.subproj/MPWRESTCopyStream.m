@@ -7,7 +7,7 @@
 
 #import "MPWRESTCopyStream.h"
 #import <AccessorMacros.h>
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "MPWDictStore.h"
 #import "MPWRESTOperation.h"
 
@@ -30,7 +30,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 -(void)writeObject:(MPWRESTOperation*)anObject sender:aSender
 {
 //    NSLog(@"-[%@ %@ %@]",[self className],NSStringFromSelector(_cmd),anObject);
-    id <MPWReferencing> ref=anObject.reference;
+    id <MPWIdentifying> ref=anObject.reference;
     switch (anObject.verb) {
         case MPWRESTVerbGET:
             self.source[ref]=self.target[ref];
@@ -77,7 +77,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 +(void)testGet
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"hi"];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"hi"];
     MPWRESTCopyStream *s=[self _streamForTesting];
     s.target[ref]=@"value1";
     EXPECTNIL( s.source[ref],@"not yet");
@@ -87,7 +87,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 +(void)testPut
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"hi"];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"hi"];
     MPWRESTCopyStream *s=[self _streamForTesting];
     s.source[ref]=@"value1";
     EXPECTNIL( s.target[ref],@"not yet");
@@ -97,7 +97,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 +(void)testDelete
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"hi"];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"hi"];
     MPWRESTCopyStream *s=[self _streamForTesting];
     s.target[ref]=@"value1";
     IDEXPECT( s.target[ref], @"value1",@"should have gotten");

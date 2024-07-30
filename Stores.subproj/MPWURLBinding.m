@@ -9,7 +9,7 @@
 #import "MPWURLBinding.h"
 #import <MPWFoundation/MPWSocketStream.h>
 #import "MPWDirectForwardingTrampoline.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "MPWURLFetchStream.h"
 #import "MPWURLCall.h"
 #import "MPWURLReference.h"
@@ -204,7 +204,7 @@ objectAccessor(NSError*, error, setError)
 
 +(void)testURLArgsFromSelectorAndArgs
 {
-    MPWGenericReference *ref=[MPWGenericReference referenceWithPath:@"//ajax.googleapis.com/ajax/services/language/translate" ];
+    MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"//ajax.googleapis.com/ajax/services/language/translate" ];
     ref.schemeName=@"http";
     MPWURLBinding *binding=[self bindingWithReference:ref inStore:nil];
     

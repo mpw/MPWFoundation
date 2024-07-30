@@ -8,7 +8,7 @@
 #import "MPWEnsureNonNilStore.h"
 @implementation MPWEnsureNonNilStore
 
--(id)mapRetrievedObject:(id)anObject forReference:(id<MPWReferencing>)aReference
+-(id)mapRetrievedObject:(id)anObject forReference:(id<MPWIdentifying>)aReference
 {
     if (anObject == nil ) {
         NSString *reason=[NSString stringWithFormat:@"%@ was nil but should not have been",[aReference path]];

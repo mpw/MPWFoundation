@@ -6,7 +6,7 @@
 //
 
 #import "MPWSFTPStore.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 
 
 @implementation MPWSFTPStore
@@ -43,20 +43,20 @@
     return [[self connectionForURL:connectionURL] store];
 }
 
--(id<MPWStorage>)relativeStoreAt:(id <MPWReferencing>)reference
+-(id<MPWStorage>)relativeStoreAt:(id <MPWIdentifying>)reference
 {
     NSURL *connectionURL=[self URLForReference:reference];
     NSString *relativePath = [connectionURL path];
     if ( [relativePath hasPrefix:@"/"]) {
         relativePath=[relativePath substringFromIndex:1];
     }
-    MPWGenericReference *pathRef=[MPWGenericReference referenceWithPath:relativePath];
+    MPWGenericIdentifier *pathRef=[MPWGenericReference referenceWithPath:relativePath];
     return [(MPWAbstractStore*)[self storeForURL:connectionURL] relativeStoreAt:pathRef];
 }
 
 
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
     NSURL *connectionURL=[self URLForReference:aReference];
     NSString *relativePath = [connectionURL path];
@@ -66,7 +66,7 @@
     return [[self storeForURL:connectionURL] at:[MPWGenericReference referenceWithPath:relativePath]];
 }
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     
 }

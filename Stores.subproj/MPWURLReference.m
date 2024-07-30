@@ -115,7 +115,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return components;
 }
 
-- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other
+- (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other
 {
     NSURL *u1=[self URL];
     NSURL *u2=[u1 URLByAppendingPathComponent:[other path]];
@@ -186,9 +186,9 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 @end
 
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 
-@interface MPWURLReferenceTests : MPWReferenceTests {}
+@interface MPWURLReferenceTests : MPWIdentifierTests {}
 @end
 
 @implementation MPWURLReferenceTests

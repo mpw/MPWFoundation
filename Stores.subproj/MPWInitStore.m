@@ -9,7 +9,7 @@
 
 @implementation MPWInitStore
 
--(void)at:(id<MPWReferencing>)aReference put:(id)theObject
+-(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     if ( ![self at:aReference]) {
         [super at:aReference put:theObject];

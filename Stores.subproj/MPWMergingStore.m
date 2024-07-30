@@ -12,7 +12,7 @@
 
 #define BOTHOFCLASS( c )  ([existingObject isKindOfClass:[c class]] && [newObject isKindOfClass:[c class]])
 
--mergeNew:newObject into:existingObject forReference:(id <MPWReferencing>)aReference
+-mergeNew:newObject into:existingObject forReference:(id <MPWIdentifying>)aReference
 {
     if ( BOTHOFCLASS(NSArray)) {
         return [(NSArray*)existingObject arrayByAddingObjectsFromArray:(NSArray*)newObject];
@@ -24,7 +24,7 @@
 }
 
 
--(void)merge:theObject at:(id <MPWReferencing>)aReference
+-(void)merge:theObject at:(id <MPWIdentifying>)aReference
 {
     id source=[self at:aReference];
     id merged=theObject ? theObject : source;
@@ -46,7 +46,7 @@
 +(void)testNSArrayMerge
 {
     MPWDictStore *source=[MPWDictStore store];
-    id <MPWReferencing> r=[source referenceForPath:@"hi"];
+    id <MPWIdentifying> r=[source referenceForPath:@"hi"];
     MPWMergingStore *merger=[self storeWithSource:source];
     [merger merge:@[ @(1)] at:r];
     IDEXPECT( merger[r],@[ @(1)], @"merge onto empty is new");

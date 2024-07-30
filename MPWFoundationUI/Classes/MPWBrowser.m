@@ -62,12 +62,12 @@
     [super setDelegate:newDelegate];
 }
 
--(id<MPWReferencing>)defaultRootReference
+-(id<MPWIdentifying>)defaultRootReference
 {
     return [self.store referenceForPath:@"."];
 }
 
--(id<MPWReferencing>)currentReference
+-(id<MPWIdentifying>)currentReference
 {
     return [self itemAtIndexPath:[self selectionIndexPath]];
 }
@@ -81,7 +81,7 @@
 
 -(MPWBinding*)rootBinding
 {
-    id <MPWReferencing> ref = self.rootReference;
+    id <MPWIdentifying> ref = self.rootReference;
     if ( !ref ) {
         ref=self.defaultRootReference;
     }
@@ -112,7 +112,7 @@
     return ![item hasChildren];
 }
 
--(NSString*)objectValueForReference:(id <MPWReferencing>)item
+-(NSString*)objectValueForReference:(id <MPWIdentifying>)item
 {
 //    NSLog(@"item: %@",item);
     return [[item relativePathComponents] lastObject];
@@ -138,9 +138,9 @@
     NSData *contents = [NSData dataWithContentsOfURL:url];
     NSString *name=[[url path] lastPathComponent];
 //    NSLog(@"local file: %@ (%@  → '%@') with data of length: %ld",name,urlstring,[url path],(long)[contents length]);
-    id <MPWReferencing> root=[self rootReference];
+    id <MPWIdentifying> root=[self rootReference];
     NSString *path=[[root path] stringByAppendingPathComponent:name];
-    id <MPWReferencing> newRef = [[self store] referenceForPath:path];
+    id <MPWIdentifying> newRef = [[self store] referenceForPath:path];
     [[self store] at:newRef put:contents];
     [self reloadColumn:0];
     return YES;}

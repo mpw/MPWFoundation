@@ -8,7 +8,7 @@
 #import <MPWWriteStream.h>
 #import "MPWBinding.h"
 #import <MPWAbstractStore.h>
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 #import "MPWPathRelativeStore.h"
 #import "NSObjectFiltering.h"
@@ -16,7 +16,7 @@
 @implementation MPWBinding
 
 
-CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MPWAbstractStore*)aStore)
+CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(MPWAbstractStore*)aStore)
 {
     self=[super init];
     self.reference=[ref asReference];
@@ -62,10 +62,10 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 
 -(NSString*)path
 {
-    return [(MPWGenericReference*)self.reference path];
+    return [(MPWGenericIdentifier*)self.reference path];
 }
 
--(id <MPWReferencing>)asReference
+-(id <MPWIdentifying>)asReference
 {
     return [self reference];
 }
@@ -95,8 +95,8 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
     self.reference.schemeName=newName;
 }
 
-- (instancetype)referenceByAppendingReference:(id<MPWReferencing>)other {
-    return [[self class] bindingWithReference:[(MPWGenericReference*)[self reference] referenceByAppendingReference:(MPWGenericReference*)other] inStore:self.store];
+- (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other {
+    return [[self class] bindingWithReference:[(MPWGenericIdentifier*)[self reference] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
 }
 
 -(instancetype)div:(MPWBinding*)other
@@ -137,6 +137,16 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericReference*)ref inStore:(MP
 -(BOOL)isBound
 {
     return self.value != nil;
+}
+
+-ifBound:aBlock
+{
+    return [self isBound] ? [aBlock value] : nil;
+}
+
+-ifNotBound:aBlock
+{
+    return ![self isBound] ? [aBlock value] : nil;
 }
 
 -(BOOL)isAffectedBy:(MPWBinding*)other

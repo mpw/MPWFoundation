@@ -8,7 +8,7 @@
 #import "MPWCachingStore.h"
 #import "MPWDictStore.h"
 #import <AccessorMacros.h>
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "DebugMacros.h"
 #import "MPWMergingStore.h"
 #import <MPWByteStream.h>
@@ -43,14 +43,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return [self initWithSource:nil cache:[MPWRawDictStore store]];
 }
 
--(id)doCopyFromSourceToCache:(id <MPWReferencing>)aReference
+-(id)doCopyFromSourceToCache:(id <MPWIdentifying>)aReference
 {
     id result=[self.source at:aReference];
     [self.cache at:aReference put:result];
     return result;
 }
 
--at:(id <MPWReferencing>)aReference
+-at:(id <MPWIdentifying>)aReference
 {
     id result=[self.cache at:aReference];
     if (!result ) {
@@ -59,28 +59,28 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     return result;
 }
 
--(void)writeToSource:newObject at:(id <MPWReferencing>)aReference
+-(void)writeToSource:newObject at:(id <MPWIdentifying>)aReference
 {
     if (!self.readOnlySource) {
         [self.source at:aReference put:newObject];
     }
 }
 
--(void)at:(id <MPWReferencing>)aReference put:newObject
+-(void)at:(id <MPWIdentifying>)aReference put:newObject
 {
     [self.cache at:aReference put:newObject];
     [self writeToSource:newObject at:aReference];
 }
 
 
--(void)merge:newObject at:(id <MPWReferencing>)aReference
+-(void)merge:newObject at:(id <MPWIdentifying>)aReference
 {
     [self doCopyFromSourceToCache:aReference];
     [self.cache merge:newObject at:aReference];
     [self writeToSource:[self.cache at:aReference] at:aReference];
 }
 
--(void)deleteAt:(id<MPWReferencing>)aReference
+-(void)deleteAt:(id<MPWIdentifying>)aReference
 {
     [self.cache deleteAt:aReference];
     [self.source deleteAt:aReference];
@@ -106,14 +106,14 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     self.source=storeDict[@"source"];
 }
 
--(NSArray<MPWReferencing>*)childrenOfReference:(id <MPWReferencing>)aReference
+-(NSArray<MPWIdentifying>*)childrenOfReference:(id <MPWIdentifying>)aReference
 {
-    NSArray<MPWReferencing>* sourceRefs = [super childrenOfReference:aReference];
-//    NSArray<MPWReferencing>* cacheRefs = [(id <MPWHierarchicalStorage>)self.cache childrenOfReference:aReference];
-//    NSMutableSet<MPWReferencing> *allRefs=(NSMutableSet<MPWReferencing> *)[NSMutableSet setWithArray:sourceRefs];
+    NSArray<MPWIdentifying>* sourceRefs = [super childrenOfReference:aReference];
+//    NSArray<MPWIdentifying>* cacheRefs = [(id <MPWHierarchicalStorage>)self.cache childrenOfReference:aReference];
+//    NSMutableSet<MPWIdentifying> *allRefs=(NSMutableSet<MPWIdentifying> *)[NSMutableSet setWithArray:sourceRefs];
 //    [allRefs addObjectsFromArray:cacheRefs];
 //    NSLog(@"allRefs: %@",allRefs);
-//    NSArray<MPWReferencing>* sortedRefs= (NSArray<MPWReferencing>*)([allRefs.allObjects sortedArrayUsingSelector:@selector(compare:)]);
+//    NSArray<MPWIdentifying>* sortedRefs= (NSArray<MPWIdentifying>*)([allRefs.allObjects sortedArrayUsingSelector:@selector(compare:)]);
 //    NSLog(@"sortedRefs: %@",sortedRefs);
 //    return sortedRefs;
     return sourceRefs;
@@ -176,7 +176,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 -(instancetype)initWithTestClass:(Class)testClass
 {
     self=[super init];
-    self.key = [MPWGenericReference referenceWithPath:@"aKey"];
+    self.key = [MPWGenericIdentifier referenceWithPath:@"aKey"];
     self.value = @"Hello World";
     self.cache = [MPWRawDictStore store];
     self.source = [MPWRawDictStore store];

@@ -43,7 +43,7 @@ lazyAccessor( MPWFileChangesStream*, loggingSource, setLoggingSource, createLogg
 @implementation MPWDiskStore(directoryStore)
 
 
--(MPWDirectoryStore*)relativeStoreAt:(id <MPWReferencing>)reference
+-(MPWDirectoryStore*)relativeStoreAt:(id <MPWIdentifying>)reference
 {
     return [MPWDirectoryStore storeWithSource:self reference:reference];
 }

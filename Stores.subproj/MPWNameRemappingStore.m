@@ -9,9 +9,9 @@
 
 @implementation MPWNameRemappingStore
 
--(id)at:(id<MPWReferencing>)aReference
+-(id)at:(id<MPWIdentifying>)aReference
 {
-    id<MPWReferencing> mapped=self.nameMap[aReference];
+    id<MPWIdentifying> mapped=self.nameMap[aReference];
     if ( mapped ) {
         return [self.source at:mapped];
     } else {
