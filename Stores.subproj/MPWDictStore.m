@@ -9,7 +9,7 @@
 #import "MPWGenericIdentifier.h"
 #import "NSStringAdditions.h"
 #import <AccessorMacros.h>
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 
 @interface MPWRawDictStore()
 
@@ -90,7 +90,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 -directoryForReference:(MPWGenericIdentifier*)aReference
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+    return [[[MPWDirectoryReference alloc] initWithContents:refs] autorelease];
 }
 
 
@@ -191,10 +191,10 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
     id ref=@"World";
     MPWDictStore* store = [self store];
-    MPWDirectoryBinding *dir1=store[@"/"];
+    MPWDirectoryReference *dir1=store[@"/"];
     INTEXPECT(dir1.count, 0, @"empty directory");
     store[ref]=@"Hello";
-    MPWDirectoryBinding *dir2=store[@"/"];
+    MPWDirectoryReference *dir2=store[@"/"];
     INTEXPECT(dir2.count, 1, @"directory no longer empty");
     IDEXPECT(dir2.contents.firstObject, [store referenceForPath:ref],@"contents");
 }

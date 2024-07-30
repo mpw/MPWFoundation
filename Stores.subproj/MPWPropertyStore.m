@@ -8,7 +8,7 @@
 #import "MPWPropertyStore.h"
 #import "AccessorMacros.h"
 #import "MPWIdentifier.h"
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 #import "NSObjectFiltering.h"
 #import <objc/runtime.h>
 #import "MPWPropertyBinding.h"
@@ -23,10 +23,10 @@
 
 @implementation MPWPropertyStore
 {
-    MPWDirectoryBinding *listOfProperties;
+    MPWDirectoryReference *listOfProperties;
 }
 
-lazyAccessor(MPWDirectoryBinding*, listOfProperties, setListOfProperties, computeListOfProperties)
+lazyAccessor(MPWDirectoryReference*, listOfProperties, setListOfProperties, computeListOfProperties)
 
 CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
@@ -59,10 +59,10 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return propertyNames;
 }
 
--(MPWDirectoryBinding*)computeListOfProperties
+-(MPWDirectoryReference*)computeListOfProperties
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self propertyNames] each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+    return [[[MPWDirectoryReference alloc] initWithContents:refs] autorelease];
 }
 
 -(id)at:(id<MPWIdentifying>)aReference
@@ -133,7 +133,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
     MPWObjectStoreSampleTestClass *tester=[[MPWObjectStoreSampleTestClass new] autorelease];
     MPWPropertyStore *store=[self storeWithObject:tester];
-    MPWDirectoryBinding *proplist=[store at:[store referenceForPath:@"."]];
+    MPWDirectoryReference *proplist=[store at:[store referenceForPath:@"."]];
     INTEXPECT( proplist.contents.count,1,@"");
 
 }

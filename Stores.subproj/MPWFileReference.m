@@ -1,12 +1,12 @@
 //
-//  MPWFileBinding.m
+//  MPWFileReference.m
 //  MPWShellScriptKit
 //
 //  Created by Marcel Weiher on 6/11/08.
 //  Copyright 2008 Apple. All rights reserved.
 //
 
-#import "MPWFileBinding.h"
+#import "MPWFileReference.h"
 #import <MPWFoundation/AccessorMacros.h>
 #import <MPWFoundation/MPWFoundation.h>
 #import "MPWBytesToLines.h"
@@ -21,7 +21,7 @@
 
 @end
 
-@implementation MPWFileBinding
+@implementation MPWFileReference
 
 
 -(NSTimeInterval)lastWritten
@@ -44,7 +44,7 @@
     return [self lastModifiedTime] > [self lastRead];
 }
 
--(BOOL)isEqual:(MPWFileBinding*)object
+-(BOOL)isEqual:(MPWFileReference*)object
 {
     return self.store == object.store &&
     [(NSObject*)(self.reference) isEqual:object.reference];

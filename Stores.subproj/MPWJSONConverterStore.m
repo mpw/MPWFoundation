@@ -31,7 +31,7 @@
 -(MPWResource*)serialized:json
 {
 //    NSLog(@"serialized");
-    if ( [json isKindOfClass:[MPWDirectoryBinding class]]) {
+    if ( [json isKindOfClass:[MPWDirectoryReference class]]) {
         return json;
     } else {
         NSData *d=[self.writer process:json];

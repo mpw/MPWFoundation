@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MPWStreamSource;
 
-@interface MPWStreamableBinding : MPWReference
+@interface MPWStreamableReference : MPWReference
 
 -source;
 -(MPWByteStream*)writeStream;

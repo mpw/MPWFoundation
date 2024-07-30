@@ -86,8 +86,8 @@ libMPWFoundation_OBJC_FILES = \
 	Stores.subproj/MPWEnsureNonNilStore.m \
 	Stores.subproj/MPWPropertyPathStore.m \
     Stores.subproj/MPWDictStore.m \
-    Stores.subproj/MPWDirectoryBinding.m \
-    Stores.subproj/MPWFileBinding.m \
+    Stores.subproj/MPWDirectoryReference.m \
+    Stores.subproj/MPWFileReference.m \
     Stores.subproj/MPWExtensionStore.m \
     Stores.subproj/MPWReference.m \
     Stores.subproj/MPWGenericIdentifier.m \
@@ -111,9 +111,9 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWDiskStore.m \
     Stores.subproj/MPWWriteBackCache.m \
     Stores.subproj/MPWURLSchemeResolver.m \
-    Stores.subproj/MPWURLBinding.m \
+    Stores.subproj/MPWURLReference.m \
     Stores.subproj/MPWReferenceTemplate.m \
-    Stores.subproj/MPWStreamableBinding.m \
+    Stores.subproj/MPWStreamableReference.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWStringTemplate.m \

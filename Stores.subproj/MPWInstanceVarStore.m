@@ -9,11 +9,11 @@
 
 @implementation MPWInstanceVarStore
 
--(MPWDirectoryBinding*)computeListOfProperties
+-(MPWDirectoryReference*)computeListOfProperties
 {
     NSArray *names = (NSArray*)[[[[self.object class] instanceVariables] collect] name];
     NSArray *refs=(NSArray*)[[self collect] referenceForPath:[names each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:refs] autorelease];
+    return [[[MPWDirectoryReference alloc] initWithContents:refs] autorelease];
 }
 
 @end

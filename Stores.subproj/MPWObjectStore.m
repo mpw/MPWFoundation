@@ -95,10 +95,10 @@
 +(void)testGetDirectory
 {
     MPWObjectStore *store=[self store];
-    MPWDirectoryBinding *b1=[store at:@"."];
+    MPWDirectoryReference *b1=[store at:@"."];
     INTEXPECT( b1.count, 0,@"empty");
     store[@"hi"]=@"there";
-    MPWDirectoryBinding *b2=[store at:@"."];
+    MPWDirectoryReference *b2=[store at:@"."];
     INTEXPECT( b2.count, 1,@"1 entry");
     IDEXPECT( [b2.children[0] path],@"hi",@"entry" );
 }

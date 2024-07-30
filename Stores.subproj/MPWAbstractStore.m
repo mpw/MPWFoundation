@@ -10,7 +10,7 @@
 #import "NSNil.h"
 #import "MPWByteStream.h"
 #import "MPWWriteStream.h"
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 #import "NSObjectFiltering.h"
 #import "NSDictAdditions.h"
 #import "MPWPathRelativeStore.h"
@@ -177,9 +177,9 @@
     return [aReference URL];
 }
 
--(MPWDirectoryBinding*)listForNames:(NSArray*)nameList
+-(MPWDirectoryReference*)listForNames:(NSArray*)nameList
 {
-    MPWDirectoryBinding *binding = [[[MPWDirectoryBinding alloc] initWithContents:[[MPWGenericIdentifier collect] referenceWithPath:[nameList each]]] autorelease];
+    MPWDirectoryReference *binding = [[[MPWDirectoryReference alloc] initWithContents:[[MPWGenericIdentifier collect] referenceWithPath:[nameList each]]] autorelease];
     [binding setStore:self];
     return binding;
 }

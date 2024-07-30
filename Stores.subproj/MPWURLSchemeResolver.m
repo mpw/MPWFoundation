@@ -7,7 +7,7 @@
 //
 
 #import "MPWURLSchemeResolver.h"
-#import "MPWURLBinding.h"
+#import "MPWURLReference.h"
 #import "MPWResource.h"
 
 @interface MPWURLSchemeResolver ()
@@ -55,9 +55,9 @@
 }
 
 
--(MPWURLBinding*)bindingForReference:aReference inContext:aContext
+-(MPWURLReference*)bindingForReference:aReference inContext:aContext
 {
-    return [MPWURLBinding bindingWithReference:aReference inStore:self];
+    return [MPWURLReference bindingWithReference:aReference inStore:self];
 }
 
 -(id)at:(id)aReference

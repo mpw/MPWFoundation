@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWIdentifying,Streaming;
-@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryBinding,MPWReference,MPWPathRelativeStore;
+@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryReference,MPWReference,MPWPathRelativeStore;
 
 
 @protocol MPWStorage <NSObject>
@@ -68,7 +68,7 @@
 
 -(void)setSourceStores:(NSArray <MPWStorage>*)stores;
 -(void)setStoreDict:(NSDictionary*)storeDict;
--(MPWDirectoryBinding*)listForNames:(NSArray*)nameList;
+-(MPWDirectoryReference*)listForNames:(NSArray*)nameList;
 -(MPWPathRelativeStore*)relativeStoreAt:(id <MPWIdentifying>)reference;
 
 

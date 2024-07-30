@@ -8,7 +8,7 @@
 #import "MPWDiskStore.h"
 #import "MPWGenericIdentifier.h"
 #import "MPWGenericIdentifier.h"
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 #import "NSStringAdditions.h"
 #import "NSObjectFiltering.h"
 #import "MPWByteStream.h"
@@ -52,7 +52,7 @@
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:combinedRefs] autorelease];
+    return [[[MPWDirectoryReference alloc] initWithContents:combinedRefs] autorelease];
 }
 
 

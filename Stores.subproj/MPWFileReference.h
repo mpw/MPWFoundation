@@ -1,16 +1,16 @@
 //
-//  MPWFileBinding.h
+//  MPWFileReference.h
 //  MPWShellScriptKit
 //
 //  Created by Marcel Weiher on 6/11/08.
 //  Copyright 2008 Apple. All rights reserved.
 //
 
-#import <MPWFoundation/MPWStreamableBinding.h>
+#import <MPWFoundation/MPWStreamableReference.h>
 
 @class MPWStreamSource;
 
-@interface MPWFileBinding : MPWStreamableBinding {
+@interface MPWFileReference : MPWStreamableReference {
     BOOL ignoreChanges;
     NSTimeInterval lastRead,lastWritten;
 }

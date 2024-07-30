@@ -9,7 +9,7 @@
 #import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 #import <MPWByteStream.h>
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 
 @implementation MPWMappingStore
 
@@ -91,7 +91,7 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
 
 //-(NSArray<MPWReference*>*)childrenOfReference:(id <MPWIdentifying>)aReference
 //{
-//    return [[self mapRetrievedObject:[[[MPWDirectoryBinding alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
+//    return [[self mapRetrievedObject:[[[MPWDirectoryReference alloc] initWithContents:[self.source childrenOfReference:[self mapReference:aReference]]] autorelease] forReference:aReference] contents];
 //}
 
 -(MPWIdentifier*)referenceForPath:(NSString*)path

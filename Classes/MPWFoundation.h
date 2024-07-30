@@ -127,14 +127,14 @@
 #import <MPWFoundation/MPWURLBasedStore.h>
 #import <MPWFoundation/MPWURI.h>
 #import <MPWFoundation/MPWWriteBackCache.h>
-#import <MPWFoundation/MPWDirectoryBinding.h>
-#import <MPWFoundation/MPWFileBinding.h>
+#import <MPWFoundation/MPWDirectoryReference.h>
+#import <MPWFoundation/MPWFileReference.h>
 #import <MPWFoundation/MPWPropertyStore.h>
 #import <MPWFoundation/MPWTCPStore.h>
 #import <MPWFoundation/MPWTCPBinding.h>
 #import <MPWFoundation/MPWURLSchemeResolver.h>
 #import <MPWFoundation/MPWSFTPStore.h>
-#import <MPWFoundation/MPWStreamableBinding.h>
+#import <MPWFoundation/MPWStreamableReference.h>
 #import <MPWFoundation/MPWReferenceTemplate.h>
 #import <MPWFoundation/MPWTemplateMatchingStore.h>
 #import <MPWFoundation/MPWCursor.h>

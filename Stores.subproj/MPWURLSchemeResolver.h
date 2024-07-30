@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWURLBasedStore.h>
 
-@class MPWURLBinding,MPWResource,MPWURI;
+@class MPWURLReference,MPWResource,MPWURI;
 
 @interface MPWURLSchemeResolver : MPWURLBasedStore {
 }

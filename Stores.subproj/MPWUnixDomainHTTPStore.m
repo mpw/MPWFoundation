@@ -98,7 +98,7 @@
 @end
 
 
-@implementation MPWFileBinding(UnixSocket)
+@implementation MPWFileReference(UnixSocket)
 
 -asUnixSocketStore
 {

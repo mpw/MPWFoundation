@@ -1,16 +1,16 @@
 //
-//  MPWDirectoryBinding.m
+//  MPWDirectoryReference.m
 //  ObjectiveSmalltalk
 //
 //  Created by Marcel Weiher on 5/24/14.
 //
 //
 
-#import "MPWDirectoryBinding.h"
+#import "MPWDirectoryReference.h"
 #import <AccessorMacros.h>
 
 
-@implementation MPWDirectoryBinding
+@implementation MPWDirectoryReference
 
 objectAccessor(NSArray*, contents, setContents)
 boolAccessor(fancy, setFancy)
@@ -63,7 +63,7 @@ boolAccessor(fancy, setFancy)
 
 -(id)l
 {
-    MPWDirectoryBinding *d=[[[[self class] alloc] initWithContents:[self contents]] autorelease];
+    MPWDirectoryReference *d=[[[[self class] alloc] initWithContents:[self contents]] autorelease];
     [d setFancy:YES];
     return d;
 }

@@ -193,7 +193,7 @@ end:
 {
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
-    return [[[MPWDirectoryBinding alloc] initWithContents:combinedRefs] autorelease];
+    return [[[MPWDirectoryReference alloc] initWithContents:combinedRefs] autorelease];
 }
 
 

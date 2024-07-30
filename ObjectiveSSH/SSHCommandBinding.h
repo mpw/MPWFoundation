@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SSHConnection;
 
-@interface SSHCommandBinding : MPWStreamableBinding
+@interface SSHCommandBinding : MPWStreamableReference
 
 @property (nonatomic, strong)  SSHConnection *connection;
 

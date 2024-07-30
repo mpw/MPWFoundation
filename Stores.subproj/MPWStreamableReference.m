@@ -5,13 +5,13 @@
 //  Created by Marcel Weiher on 25.07.22.
 //
 
-#import "MPWStreamableBinding.h"
+#import "MPWStreamableReference.h"
 #import "MPWFDStreamSource.h"
 #import "MPWByteStream.h"
 #import "MPWSkipFilter.h"
 #import "MPWBytesToLines.h"
 
-@implementation MPWStreamableBinding
+@implementation MPWStreamableReference
 
 
 -(MPWFDStreamSource*)source

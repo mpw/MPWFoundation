@@ -1,12 +1,12 @@
 //
-//  MPWURLBinding.m
+//  MPWURLReference.m
 //  MPWShellScriptKit
 //
 //  Created by Marcel Weiher on 20.1.10.
 //  Copyright 2010 Marcel Weiher. All rights reserved.
 //
 
-#import "MPWURLBinding.h"
+#import "MPWURLReference.h"
 #import <MPWFoundation/MPWSocketStream.h>
 #import "MPWDirectForwardingTrampoline.h"
 #import "MPWGenericIdentifier.h"
@@ -63,7 +63,7 @@ idAccessor( target, setTarget )
 }
 @end
 
-@implementation MPWURLBinding
+@implementation MPWURLReference
 
 objectAccessor(NSError*, error, setError)
 
@@ -200,13 +200,13 @@ objectAccessor(NSError*, error, setError)
 
 #import "DebugMacros.h"
 
-@implementation MPWURLBinding(testing)
+@implementation MPWURLReference(testing)
 
 +(void)testURLArgsFromSelectorAndArgs
 {
     MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"//ajax.googleapis.com/ajax/services/language/translate" ];
     ref.schemeName=@"http";
-    MPWURLBinding *binding=[self bindingWithReference:ref inStore:nil];
+    MPWURLReference *binding=[self bindingWithReference:ref inStore:nil];
     
 	NSString *pathArgs=[binding urlWithArgsFromSelectorString:@"v:langpair:q:" 
 													 args:[NSArray arrayWithObjects:@"1.0",@"en|de",@"Delete",nil]];

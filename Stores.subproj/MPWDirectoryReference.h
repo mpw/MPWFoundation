@@ -1,5 +1,5 @@
 //
-//  MPWDirectoryBinding.h
+//  MPWDirectoryReference.h
 //  ObjectiveSmalltalk
 //
 //  Created by Marcel Weiher on 5/24/14.
@@ -17,7 +17,7 @@
 @end
 
 
-@interface MPWDirectoryBinding : MPWReference
+@interface MPWDirectoryReference : MPWReference
 {
     NSArray *contents;
     BOOL    fancy;
