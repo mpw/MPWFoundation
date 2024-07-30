@@ -7,7 +7,7 @@
 
 #import "MPWDiskStore.h"
 #import "MPWGenericIdentifier.h"
-#import "MPWGenericReference.h"
+#import "MPWGenericIdentifier.h"
 #import "MPWDirectoryBinding.h"
 #import "NSStringAdditions.h"
 #import "NSObjectFiltering.h"

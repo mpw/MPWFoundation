@@ -9,7 +9,7 @@
 #import "MPWURLCall.h"
 #import "NSStringAdditions.h"
 #import "MPWRESTOperation.h"
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 #import <AccessorMacros.h>
 
 @interface MPWURLCall()
@@ -25,8 +25,8 @@ CONVENIENCEANDINIT( call, WithRESTOperation:(MPWRESTOperation*)op)
 {
     self=[super init];
     self.operation=op;
-    if ( [op.reference isKindOfClass:[MPWURLReference class]]) {
-        self.baseURL=[(MPWURLReference*)(op.reference) URL];
+    if ( [op.reference isKindOfClass:[MPWURI class]]) {
+        self.baseURL=[(MPWURI*)(op.reference) URL];
     }
     return self;
 }

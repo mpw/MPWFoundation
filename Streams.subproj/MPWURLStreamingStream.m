@@ -9,7 +9,7 @@
 #import "MPWURLStreamingStream.h"
 #import <MPWByteStream.h>
 #import "MPWURLCall.h"
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 #import "MPWRESTOperation.h"
 
 @interface MPWURLStreamingFetchHelper : MPWFilter <NSURLSessionDelegate>
@@ -49,8 +49,8 @@
 
 -(void)streamingGet:(NSURL *)theURL
 {
-    MPWURLReference *ref=[MPWURLReference referenceWithURL:theURL];
-    MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
+    MPWURI *ref=[MPWURI referenceWithURL:theURL];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;
     [self executeRequest:request];

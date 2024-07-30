@@ -1,5 +1,5 @@
 //
-//  MPWBinding.h
+//  MPWReference.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/21/18.
@@ -12,10 +12,10 @@
 @class MPWIdentifier,MPWAbstractStore;
 @protocol MPWIdentifying,MPWStorage;
 
-@protocol MPWBinding
+@protocol MPWReferencing
 
-+(instancetype)bindingWithReference:aReference inStore:aStore;
--(instancetype)initWithReference:aReference inStore:aStore;
++(instancetype)referenceWithIdentifier:anIdentifier inStore:aStore;
+-(instancetype)initWithIdentifer:anIdentifier inStore:aStore;
 
 @property (nonatomic, retain) id value;
 
@@ -34,7 +34,7 @@
 
 
 
-@interface MPWBinding : NSObject<MPWBinding,MPWIdentifying,Streaming>
+@interface MPWReference : NSObject<MPWReferencing,MPWIdentifying,Streaming>
 
 @property (nonatomic, strong) id <MPWIdentifying> reference;
 @property (nonatomic, strong) MPWAbstractStore *store;

@@ -110,7 +110,7 @@
 #import <MPWFoundation/NSObject+MPWNotificationProtocol.h>
 
 #import <MPWFoundation/MPWAbstractStore.h>
-#import <MPWFoundation/MPWBinding.h>
+#import <MPWFoundation/MPWReference.h>
 #import <MPWFoundation/MPWCachingStore.h>
 #import <MPWFoundation/MPWCompositeStore.h>
 #import <MPWFoundation/MPWDictStore.h>
@@ -125,7 +125,7 @@
 #import <MPWFoundation/MPWSequentialStore.h>
 #import <MPWFoundation/MPWSwitchingStore.h>
 #import <MPWFoundation/MPWURLBasedStore.h>
-#import <MPWFoundation/MPWURLReference.h>
+#import <MPWFoundation/MPWURI.h>
 #import <MPWFoundation/MPWWriteBackCache.h>
 #import <MPWFoundation/MPWDirectoryBinding.h>
 #import <MPWFoundation/MPWFileBinding.h>

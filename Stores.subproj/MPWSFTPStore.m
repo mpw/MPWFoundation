@@ -50,7 +50,7 @@
     if ( [relativePath hasPrefix:@"/"]) {
         relativePath=[relativePath substringFromIndex:1];
     }
-    MPWGenericIdentifier *pathRef=[MPWGenericReference referenceWithPath:relativePath];
+    MPWGenericIdentifier *pathRef=[MPWGenericIdentifier referenceWithPath:relativePath];
     return [(MPWAbstractStore*)[self storeForURL:connectionURL] relativeStoreAt:pathRef];
 }
 
@@ -63,7 +63,7 @@
     if ( [relativePath hasPrefix:@"/"]) {
         relativePath=[relativePath substringFromIndex:1];
     }
-    return [[self storeForURL:connectionURL] at:[MPWGenericReference referenceWithPath:relativePath]];
+    return [[self storeForURL:connectionURL] at:[MPWGenericIdentifier referenceWithPath:relativePath]];
 }
 
 -(void)at:(id<MPWIdentifying>)aReference put:(id)theObject

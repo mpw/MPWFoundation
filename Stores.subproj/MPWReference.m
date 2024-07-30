@@ -1,19 +1,19 @@
 //
-//  MPWBinding.h
+//  MPWReference.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/21/18.
 //
 
 #import <MPWWriteStream.h>
-#import "MPWBinding.h"
+#import "MPWReference.h"
 #import <MPWAbstractStore.h>
 #import "MPWGenericIdentifier.h"
 #import <AccessorMacros.h>
 #import "MPWPathRelativeStore.h"
 #import "NSObjectFiltering.h"
 
-@implementation MPWBinding
+@implementation MPWReference
 
 
 CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(MPWAbstractStore*)aStore)
@@ -99,7 +99,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     return [[self class] bindingWithReference:[(MPWGenericIdentifier*)[self reference] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
 }
 
--(instancetype)div:(MPWBinding*)other
+-(instancetype)div:(MPWReference*)other
 {
     return [self referenceByAppendingReference:other];
 }
@@ -149,7 +149,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     return ![self isBound] ? [aBlock value] : nil;
 }
 
--(BOOL)isAffectedBy:(MPWBinding*)other
+-(BOOL)isAffectedBy:(MPWReference*)other
 {
     return [[self asReference] isAffectedBy:[other asReference]];
 }
@@ -170,12 +170,12 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 
 #import "DebugMacros.h"
 
-@implementation MPWBinding(tests)
+@implementation MPWReference(tests)
 
 +(void)testAsScheme
 {
     MPWAbstractStore *s=[MPWAbstractStore store];
-    MPWBinding *binding=[s bindingForReference:@"hello/world" inContext:nil];
+    MPWReference *binding=[s bindingForReference:@"hello/world" inContext:nil];
     MPWPathRelativeStore* relativeStore = (MPWPathRelativeStore*)[binding asScheme];
 
     IDEXPECT( [relativeStore mapReference:@"base"], @"hello/world/base", @"mapped from scheme");

@@ -90,7 +90,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWFileBinding.m \
     Stores.subproj/MPWExtensionStore.m \
     Stores.subproj/MPWReference.m \
-    Stores.subproj/MPWGenericReference.m \
+    Stores.subproj/MPWGenericIdentifier.m \
     Stores.subproj/MPWTCPStore.m \
     Stores.subproj/MPWSFTPStore.m \
     Stores.subproj/MPWMappingStore.m \
@@ -102,12 +102,12 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWPropertyStore.m \
     Stores.subproj/MPWRESTOperation.m \
     Stores.subproj/MPWSequentialStore.m \
-    Stores.subproj/MPWBinding.m \
+    Stores.subproj/MPWReference.m \
     Stores.subproj/MPWPropertyBinding.m \
     Stores.subproj/MPWTCPBinding.m \
     Stores.subproj/MPWPathRelativeStore.m \
     Stores.subproj/MPWURLBasedStore.m \
-    Stores.subproj/MPWURLReference.m \
+    Stores.subproj/MPWURI.m \
     Stores.subproj/MPWDiskStore.m \
     Stores.subproj/MPWWriteBackCache.m \
     Stores.subproj/MPWURLSchemeResolver.m \

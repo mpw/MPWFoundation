@@ -8,7 +8,7 @@
 
 #import <MPWFoundation/MPWURLBasedStore.h>
 
-@class MPWURLBinding,MPWResource,MPWURLReference;
+@class MPWURLBinding,MPWResource,MPWURI;
 
 @interface MPWURLSchemeResolver : MPWURLBasedStore {
 }
@@ -21,7 +21,7 @@
 
 -(NSString*)schemePrefix;
 -(MPWResource*)resourceWithRequest:(NSURLRequest*)request;
--(id)at:(MPWURLReference*)aReference post:(id)theObject;
+-(id)at:(MPWURI*)aReference post:(id)theObject;
 
 @property (nonatomic, strong ) NSDictionary *headers;
 

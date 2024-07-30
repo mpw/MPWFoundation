@@ -88,7 +88,7 @@
 
 @end
 
-@implementation MPWBinding(writeOnXArgsFilter)
+@implementation MPWReference(writeOnXArgsFilter)
 
 -(void)writeOnXArgsFilter:aFilter
 {

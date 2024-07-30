@@ -65,7 +65,7 @@
 
 @end
 
-//@implementation MPWBinding(pathMapper)
+//@implementation MPWReference(pathMapper)
 //
 //-(void)writeOnPathMapper:(MPWPathMapper*)mapper
 //{

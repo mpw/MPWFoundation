@@ -50,9 +50,9 @@
 
 }
 
--(MPWBinding*)currrentBinding
+-(MPWReference*)currrentBinding
 {
-    return (MPWBinding*)[self.browser currentReference];
+    return (MPWReference*)[self.browser currentReference];
 }
 
 -(IBAction)didSelect:(MPWBrowser*)sender

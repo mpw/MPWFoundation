@@ -6,7 +6,7 @@
 //
 //
 
-#import <MPWFoundation/MPWBinding.h>
+#import <MPWFoundation/MPWReference.h>
 
 @protocol DirectoryPrinting
 
@@ -17,7 +17,7 @@
 @end
 
 
-@interface MPWDirectoryBinding : MPWBinding
+@interface MPWDirectoryBinding : MPWReference
 {
     NSArray *contents;
     BOOL    fancy;

@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWAlias : NSObject
 
-@property (nonatomic, strong) MPWBinding *base;
+@property (nonatomic, strong) MPWReference *base;
 
 @end
 

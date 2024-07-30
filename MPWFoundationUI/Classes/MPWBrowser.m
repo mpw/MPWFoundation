@@ -33,7 +33,7 @@
     return browser;
 }
 
--(void)setRef:(MPWBinding*)aBinding
+-(void)setRef:(MPWReference*)aBinding
 {
     self.store = aBinding.store;
     self.rootReference = aBinding.reference;
@@ -79,7 +79,7 @@
     return NO;
 }
 
--(MPWBinding*)rootBinding
+-(MPWReference*)rootBinding
 {
     id <MPWIdentifying> ref = self.rootReference;
     if ( !ref ) {
@@ -88,7 +88,7 @@
     return [self.store bindingForReference:ref inContext:nil];
 }
 
--(NSArray*)listForItem:(MPWBinding*)binding
+-(NSArray*)listForItem:(MPWReference*)binding
 {
     if ( !binding ) {
         binding = [self rootBinding];
@@ -107,7 +107,7 @@
     return [[self listForItem:item] objectAtIndex:index];
 }
 
-- (BOOL)browser:(NSBrowser *)browser isLeafItem:(MPWBinding*)item
+- (BOOL)browser:(NSBrowser *)browser isLeafItem:(MPWReference*)item
 {
     return ![item hasChildren];
 }
@@ -185,7 +185,7 @@
 {
     MPWBrowser *browser = [[[MPWBrowser alloc] initWithFrame:NSMakeRect(0,0,500,500)] autorelease];
     MPWDictStore *store=[MPWDictStore store];
-    MPWBinding *binding=[MPWBinding bindingWithReference:@"" inStore:store];
+    MPWReference *binding=[MPWReference bindingWithReference:@"" inStore:store];
     [browser setRef:binding];
     char filenametemplate[80]="/tmp/browserdroptest.XXXXXX";
     int fd = mkstemp( filenametemplate );

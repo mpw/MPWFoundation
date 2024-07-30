@@ -1,13 +1,13 @@
 //
-//  MPWURLReference.m
+//  MPWURI.m
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 6/10/18.
 //
 
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 
-@interface MPWURLReference()
+@interface MPWURI()
 
 @property (nonatomic,strong) NSString *scheme,*host;
 @property (nonatomic,strong) NSArray *myPathComponents;
@@ -17,7 +17,7 @@
 @end
 
 
-@implementation MPWURLReference
+@implementation MPWURI
 
 static NSURL *url( NSString *scheme, NSString* host1, int port1, NSString *path1, NSString *path2 ) {
     NSMutableString *s=[NSMutableString string];
@@ -49,7 +49,7 @@ static NSURL *url( NSString *scheme, NSString* host1, int port1, NSString *path1
 
 CONVENIENCEANDINIT( reference, WithURL:(NSURL*)newURL )
 {
-    MPWURLReference *r = [self initWithPathComponents:[newURL.path componentsSeparatedByString:@"/"] host:newURL.host scheme:newURL.scheme];
+    MPWURI *r = [self initWithPathComponents:[newURL.path componentsSeparatedByString:@"/"] host:newURL.host scheme:newURL.scheme];
     r.port = newURL.port.intValue;
     return r;
 }
@@ -165,7 +165,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return [self.URL hash];
 }
 
--(BOOL)isEqual:(MPWURLReference*)other
+-(BOOL)isEqual:(MPWURI*)other
 {
     return [other.URL isEqual:self.URL];
 }
@@ -188,27 +188,27 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 
 #import "MPWGenericIdentifier.h"
 
-@interface MPWURLReferenceTests : MPWIdentifierTests {}
+@interface MPWURITests : MPWIdentifierTests {}
 @end
 
-@implementation MPWURLReferenceTests
+@implementation MPWURITests
 
 +classUnderTest
 {
-    return [MPWURLReference class];
+    return [MPWURI class];
 }
 
 +(void)testURL
 {
     NSString *urlString=@"http://www.metaobject.com/";
     NSURL *sourceURL=[NSURL URLWithString:urlString];
-    MPWURLReference *ref=[[[[self classUnderTest] alloc] initWithURL:sourceURL] autorelease];
+    MPWURI *ref=[[[[self classUnderTest] alloc] initWithURL:sourceURL] autorelease];
     IDEXPECT( [[ref URL] host], @"www.metaobject.com", @"host ");
     IDEXPECT( [ref URL], sourceURL, @"urls");
     
     NSString *fileURLString=@"file:/hi";
     NSURL *fileURL=[NSURL URLWithString:fileURLString];
-    MPWURLReference *fileRef=[[[[self classUnderTest] alloc] initWithURL:fileURL] autorelease];
+    MPWURI *fileRef=[[[[self classUnderTest] alloc] initWithURL:fileURL] autorelease];
     IDEXPECT( [fileRef path], @"/hi", @"path");
 //    IDEXPECT( [fileRef URL], fileURL, @"urls");
     
@@ -218,7 +218,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSString *urlString=@"http://www.metaobject.com:50001/";
     NSURL *sourceURL=[NSURL URLWithString:urlString];
-    MPWURLReference *ref=[[[[self classUnderTest] alloc] initWithURL:sourceURL] autorelease];
+    MPWURI *ref=[[[[self classUnderTest] alloc] initWithURL:sourceURL] autorelease];
     ref.port=50001;
     IDEXPECT( [[ref URL] host], @"www.metaobject.com", @"host ");
     IDEXPECT( [[ref URL] port], @50001, @"port ");
@@ -226,7 +226,7 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     
     NSString *fileURLString=@"file:/hi";
     NSURL *fileURL=[NSURL URLWithString:fileURLString];
-    MPWURLReference *fileRef=[[[[self classUnderTest] alloc] initWithURL:fileURL] autorelease];
+    MPWURI *fileRef=[[[[self classUnderTest] alloc] initWithURL:fileURL] autorelease];
     IDEXPECT( [fileRef path], @"/hi", @"path");
 //    IDEXPECT( [fileRef URL], fileURL, @"urls");
     
@@ -236,10 +236,10 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSURL *url1=[NSURL URLWithString:@"http://localhost:50001/"];
     NSString *url2 = @"hi.txt";
-    MPWURLReference *baseRef = [[MPWURLReference alloc] initWithURL:url1];
-    MPWURLReference *additionalRef = [[MPWURLReference alloc] initWithPath:url2];
+    MPWURI *baseRef = [[MPWURI alloc] initWithURL:url1];
+    MPWURI *additionalRef = [[MPWURI alloc] initWithPath:url2];
     
-    MPWURLReference *result = [baseRef referenceByAppendingReference:additionalRef];
+    MPWURI *result = [baseRef referenceByAppendingReference:additionalRef];
     IDEXPECT( [result stringValue], @"http://localhost:50001/hi.txt", @"concatenated URL ref");
 }
 

@@ -9,7 +9,7 @@
 
 @interface MPWCursor()
 
-@property (nonatomic, strong) MPWBinding *base;
+@property (nonatomic, strong) MPWReference *base;
 @property (nonatomic, assign) long offset;
 
 
@@ -17,7 +17,7 @@
 
 @implementation MPWCursor
 
--(instancetype)initWithBinding:(MPWBinding*)aBinding offset:(long)newOffset
+-(instancetype)initWithBinding:(MPWReference*)aBinding offset:(long)newOffset
 {
     self=[super init];
     self.base=aBinding;
@@ -64,7 +64,7 @@
     NSArray *testArray=@[ @"a", @"b"];
     MPWDictStore *store=[MPWDictStore store];
     store[@"array"]=testArray;
-    MPWBinding *base=[store bindingForReference:@"array" inContext:nil];
+    MPWReference *base=[store bindingForReference:@"array" inContext:nil];
     IDEXPECT( [base value], testArray, @"base binding works");
     MPWCursor *cursor1=[self cursorWithBinding:base offset:0];
     IDEXPECT( [cursor1 value], @"a", @"offset 0");
@@ -77,7 +77,7 @@
     NSArray *testArray=[[@[ @"a", @"b"] mutableCopy] autorelease];
     MPWDictStore *store=[MPWDictStore store];
     store[@"array"]=testArray;
-    MPWBinding *base=[store bindingForReference:@"array" inContext:nil];
+    MPWReference *base=[store bindingForReference:@"array" inContext:nil];
     MPWCursor *cursor1=[self cursorWithBinding:base offset:0];
     IDEXPECT( [cursor1 value], @"a", @"offset 0");
     cursor1.value = @"new value";

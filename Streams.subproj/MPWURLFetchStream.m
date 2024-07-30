@@ -12,7 +12,7 @@
 #import "NSThreadWaiting.h"
 #import "NSStringAdditions.h"
 #import "MPWRESTOperation.h"
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 
 @interface MPWURLFetchStream()
 
@@ -299,8 +299,8 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb body:(NSData *)body
 {
-    MPWURLReference *ref=[MPWURLReference referenceWithURL:theURL];
-    MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
+    MPWURI *ref=[MPWURI referenceWithURL:theURL];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=NO;
     [self executeRequest:request];

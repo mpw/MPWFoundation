@@ -89,7 +89,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 -(void)commonInit
 {
     self.dataSource = self;
-    self.binding = (MPWBinding*)self;
+    self.binding = (MPWReference*)self;
     [self setItems:[NSMutableArray array]];
     [self installProtocolNotifications];
     self.delegate = self;

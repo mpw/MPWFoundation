@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWIdentifying,Streaming;
-@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryBinding,MPWBinding,MPWPathRelativeStore;
+@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryBinding,MPWReference,MPWPathRelativeStore;
 
 
 @protocol MPWStorage <NSObject>
@@ -28,7 +28,7 @@
 -(void)setObject:theObject forKeyedSubscript:key;
 -(BOOL)hasChildren:(id <MPWIdentifying>)aReference;
 
--(MPWBinding*)bindingForReference:aReference inContext:aContext;
+-(MPWReference*)bindingForReference:aReference inContext:aContext;
 -(id<MPWStorage>)relativeStoreAt:(id <MPWIdentifying>)reference;
 
 @end
@@ -45,7 +45,7 @@
 -(BOOL)hasChildren:(id <MPWIdentifying>)aReference;
 -(NSArray<MPWIdentifying>*)childrenOfReference:(id <MPWIdentifying>)aReference;
 -(id <MPWIdentifying>)rootRef;
--(MPWBinding*)rootBinding;
+-(MPWReference*)rootBinding;
 
 @end
 

@@ -48,7 +48,7 @@
         combined = [NSString stringWithFormat:@"%@:%@",[self schemePrefix],name];
     }
     NSURL *u=[NSURL URLWithString:combined];
-    return [MPWURLReference referenceWithURL:u];
+    return [MPWURI referenceWithURL:u];
 //    id <MPWIdentifying> reference=[super referenceForPath:name];
 //    reference.schemeName=[self schemePrefix];
 //    return reference;
@@ -83,18 +83,18 @@
     return result;
 }
 
--(void)at:(MPWURLReference*)aReference put:(id)theObject
+-(void)at:(MPWURI*)aReference put:(id)theObject
 {
     //    NSLog(@"PUT, ref: %@ - url: %@",aReference,[aReference URL]);
     [self atURL:[aReference URL] put:[theObject asData]];
 }
 
--(void)deleteAt:(MPWURLReference*)aReference
+-(void)deleteAt:(MPWURI*)aReference
 {
     [self deleteAtURL:[aReference URL]];
 }
 
--(id)at:(MPWURLReference*)aReference post:(id)theObject
+-(id)at:(MPWURI*)aReference post:(id)theObject
 {
     if ( [theObject isKindOfClass:[NSDictionary class]]) {
         return [self atURL:[aReference URL] postDictionary:theObject];

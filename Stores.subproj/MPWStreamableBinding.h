@@ -5,13 +5,13 @@
 //  Created by Marcel Weiher on 25.07.22.
 //
 
-#import <MPWFoundation/MPWBinding.h>
+#import <MPWFoundation/MPWReference.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class MPWStreamSource;
 
-@interface MPWStreamableBinding : MPWBinding
+@interface MPWStreamableBinding : MPWReference
 
 -source;
 -(MPWByteStream*)writeStream;

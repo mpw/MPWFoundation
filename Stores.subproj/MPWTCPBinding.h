@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWTCPBinding : MPWBinding
+@interface MPWTCPBinding : MPWReference
 
 @property (readonly) int port;
 

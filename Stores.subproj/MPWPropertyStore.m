@@ -81,11 +81,11 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 }
 
 
--(MPWBinding*)bindingForReference:(id)aReference inContext:(id)aContext
+-(MPWReference*)bindingForReference:(id)aReference inContext:(id)aContext
 {
     MPWPropertyBinding *accessor=[[[MPWPropertyBinding alloc] initWithName:[aReference path]] autorelease];
     [accessor bindToTarget:self.object];
-    return (MPWBinding*)accessor;
+    return (MPWReference*)accessor;
 }
 
 -(void)dealloc
@@ -144,7 +144,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     MPWPropertyStore *store=[self storeWithObject:tester];
     id <MPWIdentifying> ref=[store referenceForPath:@"hi"];
     tester.hi=@"there";
-    MPWBinding *binding=[store bindingForReference:ref inContext:nil];
+    MPWReference *binding=[store bindingForReference:ref inContext:nil];
     NSLog(@"binding: %@",binding);
     IDEXPECT( [binding value], @"there",@"read via binding");
 

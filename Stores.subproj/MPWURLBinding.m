@@ -12,7 +12,7 @@
 #import "MPWGenericIdentifier.h"
 #import "MPWURLFetchStream.h"
 #import "MPWURLCall.h"
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 #import "MPWBytesToLines.h"
 #import "MPWSkipFilter.h"
 
@@ -164,7 +164,7 @@ objectAccessor(NSError*, error, setError)
 
 -stream
 {
-    MPWRESTOperation<MPWURLReference*>* op=[MPWRESTOperation operationWithReference:self.reference verb:MPWRESTVerbGET];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:self.reference verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;
     MPWURLStreamingStream *s=[MPWURLStreamingStream streamWithTarget:nil];

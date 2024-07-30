@@ -6,7 +6,7 @@
 //
 
 #import "MPWURLBasedStore.h"
-#import "MPWURLReference.h"
+#import "MPWURI.h"
 #import "MPWPathRelativeStore.h"
 
 @implementation MPWURLBasedStore
@@ -21,7 +21,7 @@
 
 -(MPWIdentifier*)referenceForPath:(NSString*)path
 {
-    return [MPWURLReference referenceWithPath:path];
+    return [MPWURI referenceWithPath:path];
 }
 
 @end

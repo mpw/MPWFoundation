@@ -141,7 +141,7 @@
     return [self referenceForPath:@"/"];
 }
 
--(MPWBinding*)rootBinding
+-(MPWReference*)rootBinding
 {
     return [self bindingForReference:[self rootRef]];
 }
@@ -254,17 +254,17 @@
 
 
 
--(MPWBinding*)bindingForReference:aReference inContext:aContext
+-(MPWReference*)bindingForReference:aReference inContext:aContext
 {
-    return [MPWBinding bindingWithReference:aReference inStore:self];
+    return [MPWReference bindingWithReference:aReference inStore:self];
 }
 
--(MPWBinding*)bindingForReference:aReference
+-(MPWReference*)bindingForReference:aReference
 {
     return [self bindingForReference:aReference inContext:nil];
 }
 
--(MPWBinding*)bindingForPath:(NSString*)path
+-(MPWReference*)bindingForPath:(NSString*)path
 {
     return [self bindingForReference:[self referenceForPath:path]];
 }

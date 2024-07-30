@@ -1,5 +1,5 @@
 //
-//  MPWGenericReference.m
+//  MPWGenericIdentifier.m
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 5/22/18.
@@ -109,13 +109,13 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
 
 -(NSUInteger)length
 {
-    NSLog(@"-[MPWGenericReference length] on %@ -> %@",self,[NSThread callStackSymbols]);
+    NSLog(@"-[MPWGenericIdentifier length] on %@ -> %@",self,[NSThread callStackSymbols]);
     return [[self name] length];
 }
 
 -(int)characterAtIndex:(NSUInteger)theIndex
 {
-    NSLog(@"-[MPWGenericReference characterAtIndex:%ld] on %@ -> %@",theIndex,self,[NSThread callStackSymbols]);
+    NSLog(@"-[MPWGenericIdentifier characterAtIndex:%ld] on %@ -> %@",theIndex,self,[NSThread callStackSymbols]);
     return [[self name] characterAtIndex:theIndex];
 }
 
