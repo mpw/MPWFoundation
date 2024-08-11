@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong)            IBOutlet MPWBrowser   *browser;
 @property (assign)                      BOOL     continuous;
 @property (assign,getter=isEditable)    BOOL     editable;
+@property (weak, nonatomic)             id       delegate;
 
 
 @end

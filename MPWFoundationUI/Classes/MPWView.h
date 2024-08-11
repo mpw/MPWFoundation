@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Cocoa/Cocoa.h>
 
-#import <DrawingContext/MPWCGDrawingContext.h>
-
+@protocol MPWDrawingContext;
 
 @interface MPWView : NSView {
     id drawingBlock;

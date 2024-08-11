@@ -73,6 +73,7 @@
         [self.text setNeedsLayout:YES];
         [self.text setNeedsDisplay:YES];
     }
+    [[self.delegate ifResponds] didSelect:self];
 }
 
 -(void)saveFileContents

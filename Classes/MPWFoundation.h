@@ -139,6 +139,7 @@
 #import <MPWFoundation/MPWTemplateMatchingStore.h>
 #import <MPWFoundation/MPWCursor.h>
 #import <MPWFoundation/MPWInitStore.h>
+#import <MPWFoundation/MPWKeychainStore.h>
 #import <MPWFoundation/MPWObjectStore.h>
 #import <MPWFoundation/MPWEnsureNonNilStore.h>
 #import <MPWFoundation/MPWStringTemplate.h>

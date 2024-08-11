@@ -248,13 +248,13 @@ static long  fib(  long n) {
     }
 }
 
--fib
+-slowfib
 {
     return [NSNumber numberWithLong:fib([self longValue])];
 }
 
 
--fastfib
+-fib
 {
     long c;
     long n=[self longValue];
