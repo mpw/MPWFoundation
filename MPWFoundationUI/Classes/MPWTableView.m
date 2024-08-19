@@ -47,8 +47,16 @@ objectAccessor( NSMutableArray*, items, _setItems)
     [[self items] addObject:anObject];
 }
 
+-(void)removeCurrentColumns
+{
+    while ( self.tableColumns.count ) {
+        [self removeTableColumn:self.tableColumns.firstObject];
+    }
+}
+
 -(void)setKeys:(NSArray*)keys target:aTarget
 {
+    [self removeCurrentColumns];
     for (NSString *key in keys) {
         MPWTableColumn *column=[[[MPWTableColumn alloc] initWithIdentifier:key] autorelease];
         column.binding = [MPWPropertyBinding valueForName:key];
@@ -94,6 +102,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     [self installProtocolNotifications];
     self.delegate = self;
     [self registerForDraggedTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData]];
+    self.dataSource = self;
 }
 
 
@@ -197,7 +206,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-//    NSLog(@"numberOfRows: %d",(int)[[self objects] count]);
+    NSLog(@"numberOfRows: %@ %d",self,(int)[[self objects] count]);
     return [[self objects] count];
 }
 
@@ -213,8 +222,16 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-    id rowValue = [self items][row];        // can't use rowAt: for now because that return a store
-    return [tableColumn.binding valueForTarget:rowValue];
+    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
+    if (  [tableColumn respondsToSelector:@selector(binding)]) {
+        id rowValue = [self items][row];        // can't use rowAt: for now because that return a store
+        id value = [tableColumn.binding valueForTarget:rowValue];
+        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
+        return value;
+    } else {
+        NSLog(@"don't have data");
+        return nil;
+    }
 }
 
 - selectedObject
@@ -231,6 +248,9 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     if ( [self.items respondsToSelector:@selector(setOffset:)] ) {
         [self.items setOffset:[self selectedRow]];
         [@protocol(ModelDidChange) notify];
+    }
+    if ( [self.mpwDelegate respondsToSelector:@selector(tableViewSelectionDidChange:)] && self.mpwDelegate != self) {
+        [self.mpwDelegate tableViewSelectionDidChange:notification];
     }
 }
 
