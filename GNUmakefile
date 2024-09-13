@@ -125,7 +125,7 @@ libMPWFoundation_OBJC_FILES = \
     Streams.subproj/MPWRESTCopyStream.m \
     Streams.subproj/MPWCombinerStream.m \
     Streams.subproj/MPWMapFilter.m \
-    Streams.subproj/MPWNotificationStream.m \
+    Streams.subproj/MPWEventWriter.m \
     Streams.subproj/MPWPipeline.m \
     Streams.subproj/MPWScatterStream.m \
     Streams.subproj/MPWActionStreamAdapter.m \

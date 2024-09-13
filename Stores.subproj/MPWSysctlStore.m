@@ -19,10 +19,12 @@
     if ( retval < 0) {
         perror("sysctl failed");
     }
-//    NSLog(@"at: %@ -> %@ -> %d bytes returned",aReference.path,name,(int)size);
+    //    NSLog(@"at: %@ -> %@ -> %d bytes returned",aReference.path,name,(int)size);
     buffer[size]=0;
     return @(buffer);
 }
+
+
 
 @end
 

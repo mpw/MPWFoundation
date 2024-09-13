@@ -47,3 +47,22 @@ NSString *notificatioNameFromProtocol(Protocol *aProtocol );
 
 @end
 #endif
+
+@protocol ModelDidChange<MPWNotificationProtocol>
+
+-(void)modelDidChange:(NSNotification*)notification;
+
+@end
+
+@protocol SelectionDidChange<MPWNotificationProtocol>
+
+-(void)selectionDidChange:(NSNotification*)notification;
+
+@end
+
+@protocol ValidationDidChange<MPWNotificationProtocol>
+
+-(void)validationDidChange:(NSNotification*)notification;
+
+@end
+

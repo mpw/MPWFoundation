@@ -137,7 +137,7 @@
 #import <MPWFoundation/MPWStreamableReference.h>
 #import <MPWFoundation/MPWReferenceTemplate.h>
 #import <MPWFoundation/MPWTemplateMatchingStore.h>
-#import <MPWFoundation/MPWCursor.h>
+#import <MPWFoundation/MPWArrayCursor.h>
 #import <MPWFoundation/MPWInitStore.h>
 #import <MPWFoundation/MPWKeychainStore.h>
 #import <MPWFoundation/MPWObjectStore.h>

@@ -10,16 +10,4 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@protocol ModelDidChange<MPWNotificationProtocol>
-
--(void)modelDidChange:(NSNotification*)notification;
-
-@end
-
-@protocol ValidationDidChange<MPWNotificationProtocol>
-
--(void)validationDidChange:(NSNotification*)notification;
-
-@end
-
 #endif /* ModelDidChangeNotification_h */

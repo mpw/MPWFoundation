@@ -241,14 +241,13 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
-    if (self.cursorRef && self.binding) {
-        MPWCursor *cursor=[MPWCursor cursorWithBinding:self.binding offset:[self selectedRow]];
-        self.cursorRef.value = cursor;
+    if (self.cursor ) {
+        self.cursor.offset = [self selectedRow];
     }
-    if ( [self.items respondsToSelector:@selector(setOffset:)] ) {
-        [self.items setOffset:[self selectedRow]];
-        [@protocol(ModelDidChange) notify];
-    }
+//    if ( [self.items respondsToSelector:@selector(setOffset:)] ) {
+//        [self.items setOffset:[self selectedRow]];
+//        [@protocol(ModelDidChange) notify];
+//    }
     if ( [self.mpwDelegate respondsToSelector:@selector(tableViewSelectionDidChange:)] && self.mpwDelegate != self) {
         [self.mpwDelegate tableViewSelectionDidChange:notification];
     }
@@ -268,7 +267,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
         [c nsrect:NSMakeRect(0, 0, [[self tableColumnWithIdentifier:columnName] width], 100000 )];
     }];
     CGRect r = [[self context] boundingRectForText:value inPath:path];
-    return r.size.height+10;
+    return r.size.height+12;
 }
 
 @end

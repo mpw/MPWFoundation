@@ -265,6 +265,13 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT([[self templateWithString:nested] evaluateWith:fields] , @"first: {first} last: {last} ", @"escaped");
 }
 
++(void)testTemplatingPreservesUnicode
+{
+    NSString *umlauts=@"Ähnlich → usw.";
+    NSArray *emptyFields=@[ ];
+    IDEXPECT([[self templateWithString:umlauts] evaluateWith:emptyFields] , @"Ähnlich → usw.", @"escaped");
+}
+
 
 +(NSArray*)testSelectors
 {
@@ -282,6 +289,8 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testOnlyCurlyBracktsTriggerEndProcessing",
             @"testEscapeCurlyBraces",
             @"testEscapeNestedCurlyBracesCanGenerateTemplates",
+            @"testEscapeNestedCurlyBracesCanGenerateTemplates",
+//            @"testTemplatingPreservesUnicode"
 			];
 }
 
