@@ -11,7 +11,7 @@
 @protocol MPWStorage,MPWIdentifying;
 @class MPWReference;
 
-@interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange,NSTableViewDelegate>
+@interface MPWTableView : NSTableView <NSTableViewDataSource,ModelDidChange,SelectionDidChange,NSTableViewDelegate>
 
 @property (nonatomic, strong, nullable) MPWReference *binding;
 @property (nonatomic, strong, nullable) MPWArrayCursor *cursor;

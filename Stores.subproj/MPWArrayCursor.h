@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 -initWithArray:anArray;
 
 @property (nonatomic, assign) long offset;
+@property (nonatomic, weak) id <Streaming> selectionChanges;
+@property (readonly) NSArray *base;
 
 
 

@@ -15,6 +15,22 @@
 @end
 
 @implementation MPWArrayCursor
+{
+    long offset;
+}
+
+@dynamic offset;
+
+-(long)offset
+{
+    return offset;
+}
+
+-(void)setOffset:(long)newOffset
+{
+    offset=newOffset;
+    [self.selectionChanges writeObject:self];
+}
 
 +(instancetype)cursorWithArray:(NSMutableArray*)newarray
 {
@@ -86,29 +102,46 @@
 
 @implementation MPWArrayCursor(testing)
 
-+(void)testCanGetValueAtTheInitialisedOffset
++(instancetype)_testCursor
 {
-    NSArray *testArray=@[ @"a", @"b"];
+    NSMutableArray *testArray=[[@[ @"a", @"b"] mutableCopy] autorelease];
     MPWArrayCursor *cursor1=[self cursorWithArray:testArray];
+    return cursor1;
+}
+
++(void)testCanGetValueAtOffset
+{
+    MPWArrayCursor *cursor1=[self _testCursor];
     IDEXPECT( [cursor1 value], @"a", @"offset 0");
     cursor1.offset=1;
     IDEXPECT( [cursor1 value], @"b", @"offset 1");
 }
 
-+(void)testCanSetValueAtTheInitialisedOffset
++(void)testCanSetValueAtOffset
 {
-    NSMutableArray *testArray=[[@[ @"a", @"b"] mutableCopy] autorelease];
-    MPWArrayCursor *cursor1=[self cursorWithArray:testArray];
+    MPWArrayCursor *cursor1=[self _testCursor];
     IDEXPECT( [cursor1 value], @"a", @"offset 0");
     cursor1.value = @"new value";
-    IDEXPECT( [testArray firstObject], @"new value", @"did set");
+    IDEXPECT( cursor1.value, @"new value", @"did set");
+}
+
++(void)testCanBeNotified
+{
+    MPWArrayCursor *cursor1=[self _testCursor];
+    NSMutableArray *notifications=[NSMutableArray array];
+    cursor1.selectionChanges=notifications;
+    INTEXPECT(notifications.count,0,@"no notifications");
+    cursor1.offset = 1;
+    INTEXPECT(notifications.count,1,@"got a notification");
+
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-       @"testCanGetValueAtTheInitialisedOffset",
-       @"testCanSetValueAtTheInitialisedOffset",
+       @"testCanGetValueAtOffset",
+       @"testCanSetValueAtOffset",
+       @"testCanBeNotified",
 			];
 }
 

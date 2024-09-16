@@ -239,6 +239,13 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     return [self objects][[self selectedRow]];
 }
 
+-(void)selectionDidChange:something
+{
+    if ( self.cursor && self.cursor.offset != [self selectedRow]) {
+        [self selectRow:self.cursor.offset byExtendingSelection:NO];
+    }
+}
+
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     if (self.cursor ) {
