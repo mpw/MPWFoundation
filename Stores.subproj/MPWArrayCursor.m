@@ -26,10 +26,16 @@
     return offset;
 }
 
+-(void)notifyClients
+{
+    [self.selectionChanges writeObject:self.reference ?: self];
+    [self.modelChanges writeObject:self.reference ?: self];
+}
+
 -(void)setOffset:(long)newOffset
 {
     offset=newOffset;
-    [self.selectionChanges writeObject:self];
+    [self notifyClients];
 }
 
 +(instancetype)cursorWithArray:(NSMutableArray*)newarray
@@ -128,11 +134,16 @@
 +(void)testCanBeNotified
 {
     MPWArrayCursor *cursor1=[self _testCursor];
-    NSMutableArray *notifications=[NSMutableArray array];
-    cursor1.selectionChanges=notifications;
-    INTEXPECT(notifications.count,0,@"no notifications");
+    NSMutableArray *selectionNotifications=[NSMutableArray array];
+    NSMutableArray *modelfNotifications=[NSMutableArray array];
+    cursor1.selectionChanges=selectionNotifications;
+    INTEXPECT(selectionNotifications.count,0,@"no notifications");
     cursor1.offset = 1;
-    INTEXPECT(notifications.count,1,@"got a notification");
+    INTEXPECT(selectionNotifications.count,1,@"got a notification");
+    cursor1.modelChanges=modelfNotifications;
+    INTEXPECT(modelfNotifications.count,0,@"no notifications");
+    cursor1.offset = 0;
+    INTEXPECT(modelfNotifications.count,1,@"got a notification");
 
 }
 

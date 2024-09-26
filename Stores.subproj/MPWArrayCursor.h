@@ -9,14 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWArrayCursor : NSObject <MPWReferencing>
+@interface MPWArrayCursor : MPWReference
 
 -initWithArray:anArray;
 
 @property (nonatomic, assign) long offset;
 @property (nonatomic, weak) id <Streaming> selectionChanges;
+@property (nonatomic, weak) id <Streaming> modelChanges;
 @property (readonly) NSArray *base;
-
 
 
 @end

@@ -16,7 +16,7 @@
 
 @interface MPWPropertyStore()
 
-@property (strong, nonatomic)  id object;
+//@property (strong, nonatomic)  id object;
 
 
 @end
@@ -26,12 +26,17 @@
     MPWDirectoryReference *listOfProperties;
 }
 
+-(id)object
+{
+    return self.baseObject;
+}
+
 lazyAccessor(MPWDirectoryReference*, listOfProperties, setListOfProperties, computeListOfProperties)
 
 CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 {
     self=[super init];
-    self.object=anObject;
+    self.baseObject=anObject;
     return self;
 }
 

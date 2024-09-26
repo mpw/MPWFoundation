@@ -19,11 +19,23 @@
 
 @implementation MPWRawDictStore
 
+@dynamic dict;
+
 CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 {
     self=[super init];
     self.dict = newDict;
     return self;
+}
+
+-(void)setDict:(NSMutableDictionary *)dict
+{
+    [self setBaseObject:dict];
+}
+
+-dict
+{
+    return self.baseObject;
 }
 
 -(instancetype)init
@@ -78,7 +90,6 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 -(void)dealloc
 {
-    [_dict release];
     [super dealloc];
 }
 

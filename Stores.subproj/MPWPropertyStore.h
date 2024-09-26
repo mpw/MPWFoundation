@@ -5,11 +5,11 @@
 //  Created by Marcel Weiher on 22.11.20.
 //
 
-#import <MPWFoundation/MPWAbstractStore.h>
+#import <MPWFoundation/MPWBasedStore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWPropertyStore : MPWAbstractStore
+@interface MPWPropertyStore : MPWBasedStore
 
 +(instancetype)storeWithObject:anObject;
 -(instancetype)initWithObject:anObject;
