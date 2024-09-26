@@ -34,8 +34,23 @@
 
 -(void)setOffset:(long)newOffset
 {
-    offset=newOffset;
+    offset=MIN(MAX(newOffset,0),self.base.count);
     [self notifyClients];
+}
+
+-(BOOL)atEnd
+{
+    return offset >= self.base.count-1;
+}
+
+-(void)next
+{
+    [self setOffset:offset+1];
+}
+
+-(void)previous
+{
+    [self setOffset:offset-1];
 }
 
 +(instancetype)cursorWithArray:(NSMutableArray*)newarray
