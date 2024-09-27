@@ -86,7 +86,7 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
 }
 
 
--(MPWReference*)bindingForReference:(id)aReference inContext:(id)aContext
+-(MPWReference*)bindingForReference_disabled:(id)aReference inContext:(id)aContext
 {
     MPWPropertyBinding *accessor=[[[MPWPropertyBinding alloc] initWithName:[aReference path]] autorelease];
     [accessor bindToTarget:self.object];
