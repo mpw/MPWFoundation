@@ -21,6 +21,15 @@
 
 @dynamic offset;
 
+-(instancetype)initWithIdentifer:(id)anIdentifier inStore:(id)aStore
+{
+    if(self=[super initWithIdentifer:anIdentifier inStore:aStore]) {
+        offset=-1;
+    }
+    return self;
+}
+
+
 -(long)offset
 {
     return offset;
@@ -34,7 +43,7 @@
 
 -(void)setOffset:(long)newOffset
 {
-    offset=MIN(MAX(newOffset,0),self.base.count);
+    offset=MIN(MAX(newOffset,-1),self.base.count);      // allow -1 for "not currently set"
     [self notifyClients];
 }
 
@@ -42,6 +51,7 @@
 {
     return offset >= self.base.count-1;
 }
+
 
 -(void)next
 {
@@ -66,14 +76,23 @@
     return self;
 }
 
+#define INRANGE() (offset >=0 && offset < self.base.count)
+
 -(id)value
 {
-    return [self.base objectAtIndex:self.offset];
+    return INRANGE() ? [self.base objectAtIndex:offset] : nil;
 }
 
 -(void)setValue:newValue
 {
-    [self.base  replaceObjectAtIndex:self.offset withObject:newValue];
+    if ( INRANGE() ) {
+        [self.base  replaceObjectAtIndex:offset withObject:newValue];
+    }
+}
+
+-(BOOL)isBound
+{
+    return INRANGE();
 }
 
 -(instancetype)copyWithZone:(NSZone*)aZone
@@ -108,13 +127,6 @@
     return YES;
 }
 
-- (instancetype)initWithIdentifer:(id)anIdentifier inStore:(id)aStore { 
-    return nil;
-}
-
-+ (instancetype)referenceWithIdentifier:(id)anIdentifier inStore:(id)aStore { 
-    return nil;
-}
 
 @end
 
