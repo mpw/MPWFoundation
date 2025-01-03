@@ -16,7 +16,6 @@
 
 @interface MPWPropertyStore()
 
-//@property (strong, nonatomic)  id object;
 
 
 @end

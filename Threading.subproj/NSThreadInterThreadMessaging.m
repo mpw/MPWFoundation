@@ -154,3 +154,15 @@ HOM_METHOD1( asyncOnOperationQueue , id , arg )
 
 @end
 
+#import <MPWFoundation/MPWWriteStream.h>
+
+@implementation MPWWriteStream(sendmsg)
+
+
+HOM_METHOD(sendmsg)
+{
+    NSLog(@"sendmsg with invocation: %@",invocation);
+    [self writeObject:invocation];
+}
+
+@end

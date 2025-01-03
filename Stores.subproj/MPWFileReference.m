@@ -108,6 +108,8 @@
     return [[self lastModifiedDate] timeIntervalSinceReferenceDate];
 }
 
+// this supports symlinking
+
 -(BOOL)writeToURL:(NSURL*)targetURL atomically:(BOOL)atomically
 {
     NSString *sourcePath=[self path];
@@ -116,6 +118,23 @@
         symlink([sourcePath fileSystemRepresentation], [targetPath fileSystemRepresentation]);
     }
     return YES;
+}
+
+// this supports writing a file to a directly
+// it is a bit odd that these very similar methods
+// support different actions...need to investiage
+
+-(BOOL)writeToURL:(NSURL*)targetURL  options:(NSDataWritingOptions)writeOptionsMask error:(NSError * _Nullable * _Nullable)errorPtr
+{
+    NSError *error=nil;
+    NSURL *sourceURL = [self URL];
+    NSString *sourceName = [sourceURL lastPathComponent];
+    targetURL = [targetURL URLByAppendingPathComponent:sourceName];
+    BOOL didCopy = [[NSFileManager defaultManager] copyItemAtURL:sourceURL toURL:targetURL error:&error];
+    if (!didCopy){
+        NSLog(@"error copying from '%@' to '%@': %@",sourceURL,targetURL,error);
+    }
+    return didCopy;
 }
 
 -(NSString*)fancyPath
@@ -130,6 +149,7 @@
         return [[self path] lastPathComponent];
     }
 }
+
 
 -(NSNumber*)fileSize
 {

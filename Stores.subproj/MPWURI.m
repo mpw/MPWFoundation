@@ -11,6 +11,7 @@
 
 @property (nonatomic,strong) NSString *scheme,*host;
 @property (nonatomic,strong) NSArray *myPathComponents;
+@property (nonatomic,strong) NSURL *storedBasePath;
 
 
 
@@ -80,6 +81,12 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
     return self;
 }
 
+-(NSURL *)basePath
+{
+    return self.storedBasePath ?: [[NSFileManager defaultManager] currentDirectoryPath];
+}
+
+
 -(NSString*)urlPath
 {
     return [self.pathComponents componentsJoinedByString:@"/"] ?: @"";
@@ -100,7 +107,17 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)pathName )
 {
     NSURL *resultURL =  url(self.scheme, self.host, self.port, self.urlPath, nil);
     if ( ! resultURL || (self.path.length >0 &&  [resultURL.path length]==0)  ) {
-        NSLog(@"Trouble converting components: scheme: %@ host: %@ urlPath: %@ result URL: %@ resultURL path: %@\nstack:\n%@",self.scheme,self.host,self.urlPath,resultURL,resultURL.path,[NSThread callStackSymbols]);
+        
+        //--- try adding the current directory to what might have been a relative
+        //--- path.  This works, but should probably be done earlir if possible,
+        //--- for exmaple by storing the base directory when the MPWURI is created
+        
+        NSString *path = [[self basePath] stringByAppendingPathComponent:self.urlPath];
+        
+        resultURL =  url(self.scheme, self.host, self.port, path, nil);
+        if ( ! resultURL || (self.path.length >0 &&  [resultURL.path length]==0)  ) {
+            NSLog(@"Trouble converting components: scheme: %@ host: %@ urlPath: %@ result URL: %@ resultURL path: %@\nstack:\n%@",self.scheme,self.host,self.urlPath,resultURL,resultURL.path,[NSThread callStackSymbols]);
+        }
 //        @throw [NSException exceptionWithName:@"nourl" reason:[resultURL description] userInfo:@{ @"url": resultURL }];
     }
     return resultURL;
