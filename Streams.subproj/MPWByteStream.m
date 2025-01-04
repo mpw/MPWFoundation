@@ -619,28 +619,51 @@ typedef void (^FileBlock)(FILE *f);
     return [self length];
 }
 
-
 -(void)flush
 {
 }
+
+@end
+
+@implementation NSMutableData(ByteStreaming)
+
+-(void)writeObject:(id)someObject
+{
+    [self appendData:[someObject asData]];
+}
+
+
+
 @end
 
 @implementation NSString(ByteStreaming)
 
 -(void)writeOnByteStream:(MPWByteStream*)aStream
 {
-	[aStream writeString:self];
-//    [aStream appendBytes:[self lossyCString] length:[self length]];
+    [aStream writeString:self];
+    //    [aStream appendBytes:[self lossyCString] length:[self length]];
 }
 
 -(void)flush
 {
 }
 
+
+
 -(long)targetLength
 {
     return [self length];
 }
+
+@end
+
+@implementation NSMutableString(ByteStreaming)
+
+-(void)writeObject:(id)someObject
+{
+    [self appendString:[someObject stringValue]];
+}
+
 
 @end
 
