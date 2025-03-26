@@ -46,5 +46,6 @@
 
 -(id)ifBound:aBlock;
 -(id)ifNotBound:aBlock;
+-(BOOL)hasTrailingSlash;
 
 @end

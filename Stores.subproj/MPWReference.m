@@ -153,6 +153,10 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 {
     return [[self asReference] isAffectedBy:[other asReference]];
 }
+-(BOOL)hasTrailingSlash
+{
+    return [self.reference hasTrailingSlash];
+}
 
 -(void)dealloc
 {
