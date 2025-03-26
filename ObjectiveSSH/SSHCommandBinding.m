@@ -12,7 +12,7 @@
 
 -(SSHCommandStream*)stream
 {
-    NSArray *components = [self.reference pathComponents];
+    NSArray *components = [self.identifier pathComponents];
     NSString *cmdAndArgs = [components componentsJoinedByString:@" "];
     SSHCommandStream *s=[[[SSHCommandStream alloc] initWithSSHConnection:self.connection command:cmdAndArgs] autorelease];
     [[self connection] openSSH];

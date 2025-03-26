@@ -115,7 +115,7 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
     }];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     INTEXPECT(result.count,1,@"should have gotten a change");
-    IDEXPECT([result.firstObject reference],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
+    IDEXPECT([result.firstObject identifier],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
     IDEXPECT([result.firstObject HTTPVerb],@"PUT",@"change");
     [result removeAllObjects];
     [NSTimer scheduledTimerWithTimeInterval:0.00001 repeats:NO block:^(NSTimer * _Nonnull timer) {
@@ -129,7 +129,7 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
     }];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:.1]];
     INTEXPECT(result.count,1,@"atomically is 3 changes instead of 1");
-    IDEXPECT([result.firstObject reference],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
+    IDEXPECT([result.firstObject identifier],@"/private/tmp/MPWFileChangesStream_test.txt",@"change");
     IDEXPECT([result.firstObject HTTPVerb],@"DELETE",@"change");
 }
 

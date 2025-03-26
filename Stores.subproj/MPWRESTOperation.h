@@ -23,7 +23,7 @@ typedef NS_ENUM(int, MPWRESTVerb) {
 };
 
 @property (nonatomic,assign) MPWRESTVerb verb;
-@property (nonatomic,strong) T reference;
+@property (nonatomic,strong) T identifier;
 @property (readonly) NSString *HTTPVerb;
 
 +(instancetype)operationWithReference:(T)reference verb:(MPWRESTVerb)verb;

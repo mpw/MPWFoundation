@@ -37,8 +37,8 @@
 
 -(void)notifyClients
 {
-    [self.selectionChanges writeObject:self.reference ?: self];
-    [self.modelChanges writeObject:self.reference ?: self];
+    [self.selectionChanges writeObject:self.identifier ?: self];
+    [self.modelChanges writeObject:self.identifier ?: self];
 }
 
 -(void)setOffset:(long)newOffset

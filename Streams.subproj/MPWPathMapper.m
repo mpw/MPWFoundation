@@ -47,7 +47,7 @@
 
 -(void)writeRESTOperation:(MPWRESTOperation*)op
 {
-    id <MPWIdentifying> mappedReference=[self mapReference:op.reference];
+    id <MPWIdentifying> mappedReference=[self mapReference:op.identifier];
     if ( mappedReference) {
         FORWARD( [MPWRESTOperation operationWithReference:mappedReference verb:op.verb]);
     }
@@ -103,7 +103,7 @@
     mapper.prefix=[MPWGenericIdentifier referenceWithPath:@"/private/tmp/"];
     MPWRESTOperation* resultOp = [mapper processObject:ref];
     IDEXPECT( resultOp.HTTPVerb, @"PUT",@"verb");
-    IDEXPECT( resultOp.reference, [MPWGenericIdentifier referenceWithPath:@"hello.txt"], @"prefix removed");
+    IDEXPECT( resultOp.identifier, [MPWGenericIdentifier referenceWithPath:@"hello.txt"], @"prefix removed");
 }
 
 +(NSArray*)testSelectors

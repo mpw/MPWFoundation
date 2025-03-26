@@ -47,12 +47,12 @@
 -(BOOL)isEqual:(MPWFileReference*)object
 {
     return self.store == object.store &&
-    [(NSObject*)(self.reference) isEqual:object.reference];
+    [(NSObject*)(self.identifier) isEqual:object.identifier];
 }
 
 -(NSUInteger)hash
 {
-    return (NSUInteger)[(NSObject*)(self.reference) hash];
+    return (NSUInteger)[(NSObject*)(self.identifier) hash];
 }
 
 //-(void)startWatching
@@ -196,7 +196,7 @@
 
 -(NSString*)urlPath
 {
-    return [(id)[self reference] urlPath];
+    return [(id)[self identifier] urlPath];
 }
 
 -(MPWFDStreamSource*)source

@@ -25,15 +25,15 @@ CONVENIENCEANDINIT( call, WithRESTOperation:(MPWRESTOperation*)op)
 {
     self=[super init];
     self.operation=op;
-    if ( [op.reference isKindOfClass:[MPWURI class]]) {
-        self.baseURL=[(MPWURI*)(op.reference) URL];
+    if ( [op.identifier isKindOfClass:[MPWURI class]]) {
+        self.baseURL=[(MPWURI*)(op.identifier) URL];
     }
     return self;
 }
 
 -reference
 {
-    return self.operation.reference;
+    return self.operation.identifier;
 }
 
 -(NSString*)verb

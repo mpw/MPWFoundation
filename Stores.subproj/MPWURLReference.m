@@ -130,12 +130,12 @@ objectAccessor(NSError*, error, setError)
 
 -(void)put:(NSData*)data
 {
-    [STORE at:self.reference put:data];
+    [STORE at:self.identifier put:data];
 }
 
 -post:(NSData*)data
 {
-    return [STORE at:self.reference post:data];
+    return [STORE at:self.identifier post:data];
 }
 
 //
@@ -164,7 +164,7 @@ objectAccessor(NSError*, error, setError)
 
 -stream
 {
-    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:self.reference verb:MPWRESTVerbGET];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:self.identifier verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;
     MPWURLStreamingStream *s=[MPWURLStreamingStream streamWithTarget:nil];

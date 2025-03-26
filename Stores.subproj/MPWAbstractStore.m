@@ -296,7 +296,7 @@
 
 -evaluateIdentifier:anIdentifier withContext:aContext
 {
-    id value = [self at:[anIdentifier reference]];
+    id value = [self at:[anIdentifier identifier]];
     
     if ( [value respondsToSelector:@selector(isNotNil)]  && ![value isNotNil] ) {
         value=nil;

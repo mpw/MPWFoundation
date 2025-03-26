@@ -36,7 +36,7 @@
 
 @interface MPWReference : NSObject<MPWReferencing,MPWIdentifying,Streaming>
 
-@property (nonatomic, strong) id <MPWIdentifying> reference;
+@property (nonatomic, strong) id <MPWIdentifying> identifier;
 @property (nonatomic, strong) MPWAbstractStore *store;
 
 -(NSString*)path;

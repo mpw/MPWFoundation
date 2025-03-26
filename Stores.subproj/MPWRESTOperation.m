@@ -15,10 +15,15 @@
 CONVENIENCEANDINIT( operation, WithReference:(id <MPWIdentifying>)reference verb:(MPWRESTVerb)verb)
 {
     self=[super init];
-    self.reference=reference;
+    self.identifier=reference;
     self.verb=verb;
     return self;
 }
+
+//-reference
+//{
+//    return self.identifier;
+//}
 
 +(NSString*)HTTPVerb:(MPWRESTVerb)verb
 {
@@ -45,32 +50,32 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWIdentifying>)reference verb
 
 -(NSUInteger)hash
 {
-    return [self.reference hash] + self.verb;
+    return [self.identifier hash] + self.verb;
 }
 
 -(BOOL)isEqual:(MPWRESTOperation*)object
 {
     return self.verb == object.verb &&
-    [self.reference isEqual:object.reference];
+    [self.identifier isEqual:object.identifier];
 }
 
 -(void)dealloc
 {
-    [(NSObject*)_reference release];
+    [(NSObject*)_identifier release];
     [super dealloc];
 }
 
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@ %@>\n",[self HTTPVerb],self.reference];
+    return [NSString stringWithFormat:@"<%@ %@>\n",[self HTTPVerb],self.identifier];
 }
 
 -(void)writeOnJSONStream:(MPWJSONWriter *)aStream
 {
     [aStream writeDictionaryLikeObject:self withContentBlock:^(id object, MPWJSONWriter *writer) {
         [writer writeString:self.HTTPVerb forKey:@"verb"];
-        [writer writeString:self.reference forKey:@"reference"];
+        [writer writeString:self.identifier forKey:@"reference"];
     }];
 }
 

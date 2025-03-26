@@ -30,7 +30,7 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 -(void)writeObject:(MPWRESTOperation*)anObject sender:aSender
 {
 //    NSLog(@"-[%@ %@ %@]",[self className],NSStringFromSelector(_cmd),anObject);
-    id <MPWIdentifying> ref=anObject.reference;
+    id <MPWIdentifying> ref=anObject.identifier;
     switch (anObject.verb) {
         case MPWRESTVerbGET:
             self.source[ref]=self.target[ref];

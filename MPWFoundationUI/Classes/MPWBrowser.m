@@ -36,7 +36,7 @@
 -(void)setRef:(MPWReference*)aBinding
 {
     self.store = aBinding.store;
-    self.rootReference = aBinding.reference;
+    self.rootReference = aBinding.identifier;
     [self loadColumnZero];
 }
 

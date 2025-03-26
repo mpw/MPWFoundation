@@ -19,84 +19,84 @@
 CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(MPWAbstractStore*)aStore)
 {
     self=[super init];
-    self.reference=[ref asReference];
+    self.identifier=[ref asReference];
     self.store=aStore;
     return self;
 }
 
 -value
 {
-    return [self.store at:self.reference];
+    return [self.store at:self.identifier];
 }
 
 -(void)setValue:newValue
 {
-    [self.store at:self.reference put:newValue];
+    [self.store at:self.identifier put:newValue];
 }
 
 -post:newValue
 {
-    return [self.store at:self.reference post:newValue];
+    return [self.store at:self.identifier post:newValue];
 }
 
 
 -(void)delete
 {
-    [self.store deleteAt:self.reference];
+    [self.store deleteAt:self.identifier];
 }
 
 -(BOOL)hasChildren
 {
-    return [self.store hasChildren:self.reference];
+    return [self.store hasChildren:self.identifier];
 }
 
 -(NSArray*)children
 {
-    return [[[self class] collect] bindingWithReference:[[self.store childrenOfReference:self.reference] each] inStore:self.store];
+    return [[[self class] collect] bindingWithReference:[[self.store childrenOfReference:self.identifier] each] inStore:self.store];
 }
 
 -(NSURL*)URL
 {
-    return [self.store URLForReference:self.reference];
+    return [self.store URLForReference:self.identifier];
 }
 
 -(NSString*)path
 {
-    return [(MPWGenericIdentifier*)self.reference path];
+    return [(MPWGenericIdentifier*)self.identifier path];
 }
 
 -(id <MPWIdentifying>)asReference
 {
-    return [self reference];
+    return [self identifier];
 }
 
 -(MPWPathRelativeStore*)asScheme
 {
-    return [self.store relativeStoreAt:self.reference];
+    return [self.store relativeStoreAt:self.identifier];
 }
 
 -(NSArray*)pathComponents
 {
-    return self.reference.pathComponents;
+    return self.identifier.pathComponents;
 }
 
 -(NSArray*)relativePathComponents
 {
-    return self.reference.pathComponents;
+    return self.identifier.pathComponents;
 }
 
 -(NSString*)schemeName
 {
-    return self.reference.schemeName;
+    return self.identifier.schemeName;
 }
 
 -(void)setSchemeName:(NSString*)newName
 {
-    self.reference.schemeName=newName;
+    self.identifier.schemeName=newName;
 }
 
 - (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other {
-    return [[self class] bindingWithReference:[(MPWGenericIdentifier*)[self reference] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
+    return [[self class] bindingWithReference:[(MPWGenericIdentifier*)[self identifier] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
 }
 
 -(instancetype)div:(MPWReference*)other
@@ -117,7 +117,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 
 -writeStream
 {
-    return [self.store writeStreamAt:self.reference];
+    return [self.store writeStreamAt:self.identifier];
 }
 
 
@@ -131,7 +131,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 
 -copyWithZone:(NSZone*)aZone
 {
-    return [[[self class] allocWithZone:aZone] initWithReference:[[(id <NSCopying>)(self.reference) copyWithZone:aZone] autorelease] inStore:self.store];
+    return [[[self class] allocWithZone:aZone] initWithReference:[[(id <NSCopying>)(self.identifier) copyWithZone:aZone] autorelease] inStore:self.store];
 }
 
 -(BOOL)isBound
@@ -155,19 +155,19 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 }
 -(BOOL)hasTrailingSlash
 {
-    return [self.reference hasTrailingSlash];
+    return [self.identifier hasTrailingSlash];
 }
 
 -(void)dealloc
 {
-    [(id)_reference release];
+    [(id)_identifier release];
     [_store release];
     [super dealloc];
 }
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: reference: '%@' store: %@>",[self className],self,self.reference,self.store];
+    return [NSString stringWithFormat:@"<%@:%p: reference: '%@' store: %@>",[self className],self,self.identifier,self.store];
 }
 
 @end

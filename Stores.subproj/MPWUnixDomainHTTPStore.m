@@ -102,7 +102,7 @@
 
 -asUnixSocketStore
 {
-    return [[[MPWUnixDomainHTTPStore alloc] initWithSocketPath:self.reference.path] autorelease];
+    return [[[MPWUnixDomainHTTPStore alloc] initWithSocketPath:self.identifier.path] autorelease];
 }
 
 @end

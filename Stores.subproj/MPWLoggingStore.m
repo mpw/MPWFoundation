@@ -94,7 +94,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store at:ref put:@"hi"];
     INTEXPECT(theLog.count,1,@"should have logged write");
-    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject identifier],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"PUT",@"got the verb");
 }
 
@@ -105,7 +105,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store deleteAt:ref];
     INTEXPECT(theLog.count,1,@"should have logged delete");
-    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject identifier],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"DELETE",@"got the verb");
 }
 
@@ -116,7 +116,7 @@ CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStor
     MPWLoggingStore *store=[self storeWithSource:nil loggingTo:theLog];
     [store merge:@"hi" at:ref];
     INTEXPECT(theLog.count,1,@"should have logged merge");
-    IDEXPECT([theLog.firstObject reference],ref,@"got the reference");
+    IDEXPECT([theLog.firstObject identifier],ref,@"got the reference");
     IDEXPECT([theLog.firstObject HTTPVerb],@"PATCH",@"got the verb");
 }
 
