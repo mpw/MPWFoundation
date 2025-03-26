@@ -8,6 +8,7 @@
 //#import <MPWFoundation/bytecoding.h>
 #import "DebugMacros.h"
 #include <objc/runtime.h>
+#import <strings.h>
 
 @interface NSObject(validate)
 
@@ -194,7 +195,7 @@ boolAccessor( mustUnique, setMustUnique )
 		long otherLen=[other length];
 		const void *otherBytes=[other bytes];
 		return otherLen==myLength &&
-		((otherBytes==myBytes) || !bcmp( [other bytes],myBytes, myLength ));
+		((otherBytes==myBytes) || !memcmp( [other bytes],myBytes, myLength ));
 	}
 	if ( [other respondsToSelector:@selector(length)] &&  myLength == [other length] ) {
 		return [self compare:other] == 0;

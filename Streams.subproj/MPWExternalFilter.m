@@ -55,7 +55,9 @@
 
 -(BOOL)runCommand:(NSString *)theCommand
 {
-    extern char *environ[];
+#ifndef environ
+    extern char * _Nullable * _Nullable environ;
+#endif
     const char *s=[theCommand fileSystemRepresentation];
     NSArray *myArrags=[self allArgs];
     long numCommands=[myArrags count];

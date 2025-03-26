@@ -9,6 +9,7 @@
 #import <MPWSmallStringTable.h>
 #import "DebugMacros.h"
 #import "MPWSubData.h"
+#import <strings.h>
 #if !WINDOWS && !LINUX
 #import "MPWRusage.h"
 #endif

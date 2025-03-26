@@ -17,6 +17,8 @@
 -(BOOL)isAffectedBy:(id <MPWIdentifying>)other;
 -(instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other;
 
+-(BOOL)hasTrailingSlash;
+
 @end
 
 @protocol MPWIdentifierCreation
@@ -33,6 +35,7 @@
 -(NSURL*)URL;
 
 @property (readonly) NSArray<NSString*> *relativePathComponents;
+
 
 @end
 
