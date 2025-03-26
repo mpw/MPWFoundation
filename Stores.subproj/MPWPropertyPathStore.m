@@ -8,6 +8,7 @@
 #import "MPWPropertyPathStore.h"
 #import "MPWRESTOperation.h"
 #import "NSObjectAdditions.h"
+#import <strings.h>
 
 @interface MPWPropertyPathStore()
 

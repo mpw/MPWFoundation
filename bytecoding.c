@@ -10,6 +10,7 @@ R
 #include <ctype.h>
 #include <stdio.h>
 #include <string.h>
+#include <strings.h>
 
 void
 limited_rle_decode( unsigned char *out, unsigned char **outendp, const unsigned char *in, const unsigned char **inendp )

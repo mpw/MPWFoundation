@@ -124,7 +124,7 @@
 // it is a bit odd that these very similar methods
 // support different actions...need to investiage
 
--(BOOL)writeToURL:(NSURL*)targetURL  options:(NSDataWritingOptions)writeOptionsMask error:(NSError * _Nullable * _Nullable)errorPtr
+-(BOOL)writeToURL:(NSURL*)targetURL  options:(int)writeOptionsMask error:(NSError * _Nullable * _Nullable)errorPtr
 {
     NSError *error=nil;
     NSURL *sourceURL = [self URL];
