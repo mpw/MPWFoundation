@@ -185,10 +185,17 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     IDEXPECT( [relativeStore mapReference:@"base"], @"hello/world/base", @"mapped from scheme");
 }
 
++(void)testCanSetIdentifier
+{
+    MPWReference *ref=[self new];
+    [ref setIdentifier:@"someIdentifier"];
+}
+
 +(NSArray<NSString*>*)testSelectors
 {
     return @[
         @"testAsScheme",
+        @"testCanSetIdentifier",
     ];
 }
 

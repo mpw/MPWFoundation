@@ -44,6 +44,7 @@ MPWFoundation_HEADER_FILES = \
 	MPWLZWStream.h			\
 	MPWMsgExpression.h		\
 	MPWObject.h			\
+	MPWValueReference.h			\
 	MPWObjectReference.h			\
 	MPWObjectCache.h		\
 	MPWPSByteStream.h		\
@@ -89,7 +90,9 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWDirectoryReference.m \
     Stores.subproj/MPWFileReference.m \
     Stores.subproj/MPWExtensionStore.m \
+    Stores.subproj/MPWIdentifier.m \
     Stores.subproj/MPWReference.m \
+    Stores.subproj/MPWValueReference.m \
     Stores.subproj/MPWGenericIdentifier.m \
     Stores.subproj/MPWTCPStore.m \
     Stores.subproj/MPWSFTPStore.m \
@@ -100,6 +103,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWJSONConverterStore.m \
     Stores.subproj/MPWMergingStore.m \
     Stores.subproj/MPWPropertyStore.m \
+    Stores.subproj/MPWInstanceVarStore.m \
     Stores.subproj/MPWRESTOperation.m \
     Stores.subproj/MPWSequentialStore.m \
     Stores.subproj/MPWReference.m \
@@ -114,6 +118,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWURLReference.m \
     Stores.subproj/MPWReferenceTemplate.m \
     Stores.subproj/MPWStreamableReference.m \
+    Stores.subproj/MPWBasedStore.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWStringTemplate.m \
