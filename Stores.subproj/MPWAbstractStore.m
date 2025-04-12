@@ -375,7 +375,7 @@
 
 +(void)initializePropertyPaths
 {
-    [self initializePropertyPathsWithSymbolName:[NSString stringWithFormat:@"%@_PropertyPaths_get",self.className]];
+    [self initializePropertyPathsWithSymbolName:[NSString stringWithFormat:@"%@_PropertyPaths_get",[self className]]];
 }
 
 

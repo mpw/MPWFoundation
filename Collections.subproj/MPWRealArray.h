@@ -16,7 +16,7 @@ R
 //---	inheritance chain
 
 #import <MPWFoundation/MPWObject.h>
-#import <Foundation/NSGeometry.h>
+#import <MPWFoundation/PhoneGeometry.h>
 
 @interface MPWRealArray : MPWObject
 {

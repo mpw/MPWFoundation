@@ -3,6 +3,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/PhoneGeometry.h>
 
 typedef struct
 {

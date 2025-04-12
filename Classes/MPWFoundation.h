@@ -102,7 +102,7 @@
 
 #import <MPWFoundation/NSThreadInterThreadMessaging.h>
 #import <MPWFoundation/bytecoding.h>
-#import <MPWFoundation/NSRectAdditions.h>
+//#import <MPWFoundation/NSRectAdditions.h>
 #import <MPWFoundation/NSBundleConveniences.h>
 #import <MPWFoundation/MPWIntArray.h>
 #import <MPWFoundation/NSNumberArithmetic.h>

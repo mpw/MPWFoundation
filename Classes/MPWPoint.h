@@ -12,6 +12,7 @@
 @class MPWRect;
 
 
+
 @interface MPWPoint : MPWObject
 {
     NSPoint	point;

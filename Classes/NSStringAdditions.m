@@ -4,7 +4,7 @@
 
 #import "NSStringAdditions.h"
 #import <MPWFoundation/DebugMacros.h>
-#import "PhoneGeometry.h"
+#import <MPWFoundation/PhoneGeometry.h>
 
 @implementation NSString(Additions)
 
