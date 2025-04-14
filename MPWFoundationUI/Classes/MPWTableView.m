@@ -222,14 +222,14 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
+//    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
     if (  [tableColumn respondsToSelector:@selector(binding)]) {
         id rowValue = [self items][row];        // can't use rowAt: for now because that return a store
         id value = [tableColumn.binding valueForTarget:rowValue];
-        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
+//        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
         return value;
     } else {
-        NSLog(@"don't have data");
+//        NSLog(@"don't have data");
         return nil;
     }
 }

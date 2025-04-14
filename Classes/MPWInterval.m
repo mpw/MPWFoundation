@@ -13,7 +13,7 @@
 #import "MPWIntArray.h"
 #import "CodingAdditions.h"
 #import "NSObjectFiltering.h"
-
+#include <pthread.h>
 
 @interface NSObject(value)
 -value:arg;
@@ -319,7 +319,73 @@ defineArithOp( div, true )
     }
     return target ? target : value;
 }
+
+static void* runBlock( void *blockAndArgAsVoid ){
+    NSArray* blockAndArg=(NSArray*)blockAndArgAsVoid;
+    @autoreleasepool {
+        [blockAndArg[0] value:blockAndArg[1]];
+    }
+    [blockAndArg release];
+    pthread_exit(NULL);
+    return NULL;
+}
+
+-(void)pthreads:aBlock
+{
+    long maxThreads=(TO+1-FROM)/_step;
+    pthread_t threads[maxThreads + 10];
+    int numThreads=0;
+    for (long i=FROM;i<=TO;i+=_step ) {
+        
+        @autoreleasepool {
+            pthread_create(threads+numThreads++, NULL, runBlock, [@[ aBlock, @(i)] retain]);
+        }
+    }
+    for (int i=0;i<numThreads;i++) {
+        pthread_join( threads[i], NULL );
+    }
+}
+
+
+-(void)parallel_group:workBlock
+{
+    dispatch_group_t aGroup = dispatch_group_create();
+    //    VoidBlock aBlock = ^{
+    //        [workBlock value];
+    //        dispatch_group_leave(aGroup);
+    //    };
+    for (long i=FROM;i<=TO;i+=_step ) {
+        dispatch_group_enter(aGroup);
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            [workBlock value:@(i)];
+            dispatch_group_leave(aGroup);
+        });
+    }
+    dispatch_group_wait(aGroup, DISPATCH_TIME_FOREVER);
+}
+
+-(void)parallel:workBlock
+{
+    dispatch_apply((TO+1-FROM)/_step, dispatch_get_global_queue(0, 0), ^(size_t i){
+        [workBlock value:@(FROM+i*_step)];
+    });
+}
+
 @end
+
+@implementation NSArray(parallel)
+
+-(void)parallel
+{
+    dispatch_apply(self.count, dispatch_get_global_queue(0, 0), ^(size_t i){
+        [self[i] value];
+    });
+}
+
+
+@end
+
+
 
 
 @implementation NSNumber(intervals)
