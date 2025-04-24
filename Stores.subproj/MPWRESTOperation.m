@@ -68,7 +68,7 @@ CONVENIENCEANDINIT( operation, WithReference:(id <MPWIdentifying>)reference verb
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@ %@>\n",[self HTTPVerb],self.identifier];
+    return [NSString stringWithFormat:@"%@ %@",[self HTTPVerb],[self.identifier path]];
 }
 
 -(void)writeOnJSONStream:(MPWJSONWriter *)aStream

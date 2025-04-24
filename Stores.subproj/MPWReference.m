@@ -115,6 +115,16 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     [self writeObject:[sender objectValue]];
 }
 
+-(void)sendValueTo:aStream
+{
+    [aStream writeObject:[self value]];
+}
+
+-(void)asyncSendValueTo:aStream
+{
+    [[self async] sendValueTo:aStream];
+}
+
 -writeStream
 {
     return [self.store writeStreamAt:self.identifier];

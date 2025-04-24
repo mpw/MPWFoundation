@@ -13,12 +13,14 @@
 @interface MPWRESTOperation<T: id <MPWIdentifying>> : NSObject
 
 typedef NS_ENUM(int, MPWRESTVerb) {
-    MPWRESTVerbGET,
-    MPWRESTVerbPUT,
-    MPWRESTVerbPATCH,
-    MPWRESTVerbDELETE,
-    MPWRESTVerbPOST,
-    MPWRESTVerbMAX,
+    MPWRESTVerbGET = 1,
+    MPWRESTVerbPUT = 2,
+    MPWRESTVerbPATCH= 4,
+    MPWRESTVerbDELETE = 8,
+    MPWRESTVerbPOST = 16,
+    MPWRESTVerbsWrite = MPWRESTVerbPUT|MPWRESTVerbPATCH|MPWRESTVerbDELETE|MPWRESTVerbPOST,
+    MPWRESTVerbsRead = MPWRESTVerbGET,
+    MPWRESTVerbMAX = 256,
     MPWRESTVerbInvalid = -1
 };
 

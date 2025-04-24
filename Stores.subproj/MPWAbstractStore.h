@@ -15,6 +15,7 @@
 
 -at:(id <MPWIdentifying>)aReference;
 -(void)at:(id <MPWIdentifying>)aReference put:theObject;
+-(id)at:(MPWIdentifier*)aReference post:theObject;
 -(void)merge:theObject at:(id <MPWIdentifying>)aReference;
 -(void)deleteAt:(id <MPWIdentifying>)aReference;
 -(void)mkdirAt:(id <MPWIdentifying>)reference;

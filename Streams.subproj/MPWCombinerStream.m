@@ -135,6 +135,7 @@
     INTEXPECT( testTarget.count, 0, @"still haven't written to both yet");
     [source1 writeObject:@"test1 from source 1"];
     INTEXPECT( testTarget.count, 1, @"now written to both");
+    IDEXPECT( testTarget.firstObject, (@[@"test1 from source 1",@"test2 from source 2"]), @"result of combining");
     EXPECTFALSE(gotNil, @"should not be passing nils");
 }
 

@@ -192,8 +192,6 @@ CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
     return [self path];
 }
 
-
-
 @end
 
 

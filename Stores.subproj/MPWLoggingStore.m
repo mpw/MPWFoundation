@@ -13,17 +13,44 @@
 
 @implementation MPWLoggingStore
 
+
+-(instancetype)initWithSource:(NSObject<MPWStorage,MPWHierarchicalStorage> *)newSource
+{
+    self=[super initWithSource:newSource];
+    self.loggingFlags = MPWRESTVerbsWrite;
+    return self;
+}
+
 CONVENIENCEANDINIT( store , WithSource:(NSObject <MPWStorage,MPWHierarchicalStorage>*)aSource loggingTo:(id <Streaming>)log )
 {
-    self=[super initWithSource:aSource];
+    self=[self initWithSource:aSource];
     self.log=(NSObject <Streaming>*)log;
     return self;
+}
+
+-(id)at:(id<MPWIdentifying>)aReference
+{
+    if ( self.loggingFlags & MPWRESTVerbGET) {
+        [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbGET]];
+    }
+    return [super at:aReference];
 }
 
 -(void)at:(id<MPWIdentifying>)aReference put:anObject
 {
     [super at:aReference put:anObject];
-    [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
+    if ( self.loggingFlags & MPWRESTVerbPUT) {
+        [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPUT]];
+    }
+}
+
+-(id)at:(id<MPWIdentifying>)aReference post:anObject
+{
+    id returnValue = [super at:aReference post:anObject];
+    if ( self.loggingFlags & MPWRESTVerbPOST) {
+        [self.log writeObject:[MPWRESTOperation operationWithReference:aReference verb:MPWRESTVerbPOST]];
+    }
+    return returnValue;
 }
 
 -(void)merge:anObject at:(id<MPWIdentifying>)aReference

@@ -41,7 +41,7 @@
 
 -(void)awaitResultForSeconds:(NSTimeInterval)seconds
 {
-    // is current synchronous
+    // is currently synchronous
 }
 
 
