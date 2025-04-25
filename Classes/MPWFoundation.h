@@ -83,6 +83,7 @@
 #import <MPWFoundation/MPWKVCSoftPointer.h>
 #import <MPWFoundation/MPWSoftPointerProxy.h>
 #import <MPWFoundation/NSArrayFiltering.h>
+#import <MPWFoundation/MPWPOSTProcessor.h>
 
 #if !__has_feature(objc_arc)
 #import <MPWFoundation/MPWObjectCache.h>

@@ -100,6 +100,16 @@
 			<key>orderHint</key>
 			<integer>4</integer>
 		</dict>
+		<key>WKStoreAdapter.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>86</integer>
+		</dict>
+		<key>WKStoreAdapterTouch.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>87</integer>
+		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -143,6 +153,16 @@
 			<true/>
 		</dict>
 		<key>1F4FC98A1DF818AF00B35D27</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F61ADFF2DBBBFD6003E8229</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1F61AE112DBBBFF3003E8229</key>
 		<dict>
 			<key>primary</key>
 			<true/>
