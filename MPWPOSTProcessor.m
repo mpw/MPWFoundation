@@ -14,7 +14,7 @@
 objectAccessor(NSMutableDictionary*,values, setValues )
 objectAccessor(NSMutableDictionary*,filenames, setFilenames )
 objectAccessor(NSMutableDictionary*,contentTypes, setContentTypes )
-//scalarAccessor( void*, processor, setProcessor )
+scalarAccessor( void*, processor, setProcessor )
 scalarAccessor( id, lastKey, setLastKey )
 
 -init
