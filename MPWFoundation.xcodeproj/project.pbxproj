@@ -1919,10 +1919,21 @@
 			);
 			target = 1F61AE112DBBBFF3003E8229 /* WKStoreAdapterTouch */;
 		};
+		1F61AE762DBBFD9D003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				MPWStoreURLSchemeHandler.h,
+				MPWStoreURLSchemeHandler.m,
+			);
+			publicHeaders = (
+				MPWStoreURLSchemeHandler.h,
+			);
+			target = 1F61AE112DBBBFF3003E8229 /* WKStoreAdapterTouch */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		1F61AE012DBBBFD6003E8229 /* WKStoreAdapter */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1F61AE042DBBBFD6003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WKStoreAdapter; sourceTree = "<group>"; };
+		1F61AE012DBBBFD6003E8229 /* WKStoreAdapter */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1F61AE042DBBBFD6003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, 1F61AE762DBBFD9D003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WKStoreAdapter; sourceTree = "<group>"; };
 		1F61AE132DBBBFF3003E8229 /* WKStoreAdapterTouch */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (1F61AE162DBBBFF3003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WKStoreAdapterTouch; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
