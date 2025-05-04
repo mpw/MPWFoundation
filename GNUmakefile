@@ -181,6 +181,7 @@ libMPWFoundation_OBJC_FILES = \
     Classes/MPWPoint.m \
     Classes/MPWRect.m \
     Classes/MPWBlock.m \
+    Classes/MPWCFunction.m \
     Classes/MPWBlockInvocable.m \
     Classes/MPWBoxerUnboxer.m \
     Classes/NSNil.m \

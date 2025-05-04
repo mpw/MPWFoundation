@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>MPWDuckDB.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>89</integer>
+		</dict>
 		<key>MPWFoundation (Framework).xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
@@ -198,6 +203,11 @@
 			<true/>
 		</dict>
 		<key>1FCF25D31CF3983B00AC64CE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1FEB28E02DC7E00000E37021</key>
 		<dict>
 			<key>primary</key>
 			<true/>
