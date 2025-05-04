@@ -74,7 +74,7 @@
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>80</integer>
+			<integer>81</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>
@@ -103,12 +103,12 @@
 		<key>WKStoreAdapter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>86</integer>
+			<integer>77</integer>
 		</dict>
 		<key>WKStoreAdapterTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>87</integer>
+			<integer>78</integer>
 		</dict>
 		<key>show-build-dir.xcscheme</key>
 		<dict>

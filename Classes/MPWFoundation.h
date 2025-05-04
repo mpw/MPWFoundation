@@ -152,6 +152,7 @@
 #import <MPWFoundation/MPWXmlGeneratorStream.h>
 #import <MPWFoundation/MPWMASONParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
+#import <MPWFoundation/MPWCFunction.h>
 
 #if !GS_API_LATEST
 #import <MPWFoundation/MPWStreamQLite.h>

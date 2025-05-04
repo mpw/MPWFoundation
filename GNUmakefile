@@ -120,7 +120,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWStreamableReference.m \
     Stores.subproj/MPWBasedStore.m \
     Streams.subproj/MPWByteStream.m \
-    Streams.subproj/MPWLockedtream.m \
+    Streams.subproj/MPWLockedFilter.m \
     Streams.subproj/MPWFlattenStream.m \
     Streams.subproj/MPWStringTemplate.m \
     Streams.subproj/MPWArrayFlattenStream.m \

@@ -50,16 +50,25 @@
 
 -directoryForReference:(MPWGenericIdentifier*)aReference
 {
-    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[[self childNamesOfReference:aReference] each]];
+    NSLog(@"directoryForReference: %@",[aReference path]);
+    id childNames = [self childNamesOfReference:aReference];
+    NSLog(@"childNames: %@",childNames);
+    NSArray *refs = (NSArray*)[[self collect] referenceForPath:[childNames each]];
+    NSLog(@"references: %@",refs);
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
-    return [[[MPWDirectoryReference alloc] initWithContents:combinedRefs] autorelease];
+    NSLog(@"combined references: %@",combinedRefs);
+    id dir = [[[MPWDirectoryReference alloc] initWithContents:combinedRefs] autorelease];
+    NSLog(@"dir=%@",dir);
+    return dir;
 }
 
 
 -(NSData*)at:(MPWGenericIdentifier*)aReference
 {
+    NSLog(@"%@ at:%@",[self className],[aReference path]);
     BOOL isDirectory=NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
+    NSLog(@"exists: %d isDirectory: %d",exists,isDirectory);
     if ( exists && isDirectory){
         return [self directoryForReference:aReference];
     } else {
@@ -97,7 +106,6 @@
     NSURL   *url=[self fileURLForReference:aReference];
     exists=[[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:isDirectory];
     return exists;
-
 }
 
 -(id <Streaming>)writeStreamAt:(id <MPWIdentifying>)aReference

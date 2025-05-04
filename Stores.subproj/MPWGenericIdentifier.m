@@ -46,9 +46,14 @@
     return self;
 }
 
-CONVENIENCEANDINIT( reference, WithPath:(NSString*)path )
+CONVENIENCEANDINIT( identifier, WithPath:(NSString*)path )
 {
     return [self initWithPathComponents:[self componentsOfPath:path] scheme:nil];
+}
+
++(instancetype)referenceWithPath:(NSString*)path                // legacy/compatibility
+{
+    return [self identifierWithPath:path];
 }
 
 - (id)asReference {

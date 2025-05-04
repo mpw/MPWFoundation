@@ -16,7 +16,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1F61AE112DBBBFF3003E8229"
-               BuildableName = "WKStoreAdapterTouch.framework"
+               BuildableName = "WKStoreAdapter.framework"
                BlueprintName = "WKStoreAdapterTouch"
                ReferencedContainer = "container:MPWFoundation.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1F61AE112DBBBFF3003E8229"
-            BuildableName = "WKStoreAdapterTouch.framework"
+            BuildableName = "WKStoreAdapter.framework"
             BlueprintName = "WKStoreAdapterTouch"
             ReferencedContainer = "container:MPWFoundation.xcodeproj">
          </BuildableReference>
