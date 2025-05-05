@@ -9,7 +9,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol MPWPlistStreaming;
+
+
+
 @interface MPWDuckDBStream : MPWObject
+
+@property (nonatomic, strong) id <MPWPlistStreaming> builder;
+
+
++(instancetype)open:(NSString*)newpath;
+-(instancetype)initWithPath:(NSString*)dbPath;
+
 
 @end
 
