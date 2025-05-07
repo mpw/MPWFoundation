@@ -9,9 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol MPWPlistStreaming;
-
-
 
 @interface MPWDuckDBStream : MPWObject
 

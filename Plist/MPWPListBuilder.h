@@ -10,21 +10,21 @@
 
 @protocol Streaming;
 
-@protocol MPWPlistStreaming
+@protocol MPWPlistStreaming<Streaming>
 
 -(void)beginArray;
 -(void)endArray;
 -(void)beginDictionary;
 -(void)endDictionary;
--(void)writeKey:aKey;
+-(void)writeObject:anObject forKey:aKey;
+
 -(void)writeString:aString;
 -(void)writeNumber:aNumber;
--(void)writeObject:anObject forKey:aKey;
+-(void)writeInteger:(long)number;
+
+-(void)writeKey:aKey;
 -(void)pushContainer:anObject;
 -(void)pushObject:anObject;
--(void)writeInteger:(long)number;
-@optional 
--(void)writeObject:(id)anObject;
 
 -result;
 

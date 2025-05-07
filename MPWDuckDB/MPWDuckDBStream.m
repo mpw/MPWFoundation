@@ -15,7 +15,12 @@
     duckdb_result result;
 }
 
--initWithPath:(NSString*)path
++(instancetype)open:(NSString*)newpath
+{
+    return [[[self alloc] initWithPath:newpath] autorelease];
+}
+
+-(instancetype)initWithPath:(NSString*)path
 {
     self=[super init];
     if ( self ) {
@@ -79,6 +84,16 @@
 
 @end
 
+@interface MPWDuckDBBbankTestClass : NSObject
+
+@property (nonatomic, strong ) id c1,Bank,City,State,Date;
+
+@end
+
+@implementation MPWDuckDBBankTestClass
+
+
+@end
 
 #import <MPWFoundation/DebugMacros.h>
 

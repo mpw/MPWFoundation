@@ -56,16 +56,29 @@
     return [[[self alloc] initWithFilename:filename] autorelease];
 }
 
--(void)readFromStreamAndWriteToTarget
+-(id)nextObject
 {
     char buffer[self.bufferSize+10];
     long actual=0;
+    if ( ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) ) {
+        return [NSData dataWithBytes:buffer length:actual];
+    } else {
+        return nil;
+    }
+}
+
+-(void)readFromStreamAndWriteToTarget
+{
+    BOOL hasData=YES;
 //    NSLog(@"buffersize: %d",self.bufferSize);
-    while ( (actual=read(self.fdin, buffer, self.bufferSize)) > 0 ) {
+    while ( hasData) {
         @autoreleasepool {
-            NSData *dataToWrite=[NSData dataWithBytes:buffer length:actual];
-            [(id)(self.target) writeObject:dataToWrite sender:self];
-            
+            NSData *dataToWrite=[self nextObject];
+            if ( dataToWrite) {
+                [(id)(self.target) writeObject:dataToWrite sender:self];
+            } else {
+                hasData = NO;
+            }
         }
     }
     if (self.closeWhenDone) {

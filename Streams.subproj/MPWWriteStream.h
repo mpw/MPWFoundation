@@ -15,7 +15,13 @@
 
 @class MPWByteStream;
 
-@protocol StreamSource
+@protocol SimpleStreamSource
+
+-nextObject;
+
+@end
+
+@protocol StreamSource<SimpleStreamSource>
 
 @property (nonatomic, strong) IBOutlet NSObject <Streaming> *target;
 
