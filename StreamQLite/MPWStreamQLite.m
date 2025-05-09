@@ -9,7 +9,7 @@
 #import "MPWPListBuilder.h"
 #import "MPWFlattenStream.h"
 #import "MPWObjectBuilder.h"
-#import "MPWSQLTable.h"
+#import "MPWSQLiteTable.h"
 
 #include <sqlite3.h>
 
@@ -24,7 +24,7 @@
 @implementation MPWStreamQLite
 {
     sqlite3 *db;
-    NSDictionary <NSString*,MPWSQLTable*>* tables;
+    NSDictionary <NSString*,MPWSQLiteTable*>* tables;
 }
 
 lazyAccessor(NSDictionary*, tables, setTables, getTables )
@@ -114,11 +114,11 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
     return names;
 }
 
--(NSArray<MPWSQLTable*>*)getTablesList
+-(NSArray<MPWSQLiteTable*>*)getTablesList
 {
     NSMutableArray *computedTables=[NSMutableArray array];
     for ( NSString *name in [self dbTableNames]){
-        MPWSQLTable *table=[[MPWSQLTable new] autorelease];
+        MPWSQLiteTable *table=[[MPWSQLiteTable new] autorelease];
         table.name=name;
         [table setSourceDB:self];
         [computedTables addObject:table];
@@ -126,7 +126,7 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
     return computedTables;
 }
 
--(NSDictionary<NSString*,MPWSQLTable*>*)getTables
+-(NSDictionary<NSString*,MPWSQLiteTable*>*)getTables
 {
     return [NSDictionary dictionaryWithObjects:[self getTablesList] byKey:@"name"];
 }
@@ -206,7 +206,7 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
 +(void)testInsert
 {
     MPWStreamQLite *db=[self _testerDB];
-    MPWSQLTable *writer=[db tables][@"Tester"];
+    MPWSQLiteTable *writer=[db tables][@"Tester"];
     [writer beginDictionary];
     [writer writeInteger:2 forKey:@"a"];
     [writer writeInteger:3 forKey:@"b"];
@@ -234,7 +234,7 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
 +(void)testInsertDict
 {
     MPWStreamQLite *db=[self _testerDB];
-    MPWSQLTable *writer=[db tables][@"Tester"];
+    MPWSQLiteTable *writer=[db tables][@"Tester"];
 
     [writer writeObject:@{ @"a": @(2), @"b": @(4), @"c": @"More"  }];
 
@@ -259,9 +259,9 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
 {
     MPWStreamQLite *db=[self _chinookDB];
     [db open];
-    NSDictionary<NSString*,MPWSQLTable*> *tables=[db getTables];
+    NSDictionary<NSString*,MPWSQLiteTable*> *tables=[db getTables];
     INTEXPECT(tables.count, 13, @"number of tables");
-    MPWSQLTable *albums=tables[@"albums"];
+    MPWSQLiteTable *albums=tables[@"albums"];
     IDEXPECT( [albums name],@"albums",@"name of first table");
     NSArray *albumsScheme=albums.schema;
     INTEXPECT([albumsScheme count], 3, @"number of columns");

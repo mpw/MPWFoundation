@@ -25,11 +25,12 @@ R
     IMP		eval;
 }
 
+-receiver;
+
 
 @end
 
 @interface NSObject(expressionCreation)
-
 -quote;
 
 @end

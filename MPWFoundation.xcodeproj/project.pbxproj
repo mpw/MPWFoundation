@@ -94,12 +94,12 @@
 		1F1BEDCB213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */; };
 		1F1BEDCC213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */; };
 		1F1BEDCD213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */; };
-		1F1E09CD269D968200567AF6 /* MPWSQLTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLTable.h */; };
-		1F1E09CE269D968200567AF6 /* MPWSQLTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLTable.h */; };
-		1F1E09CF269D968200567AF6 /* MPWSQLTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLTable.h */; };
-		1F1E09D0269D968200567AF6 /* MPWSQLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLTable.m */; };
-		1F1E09D1269D968200567AF6 /* MPWSQLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLTable.m */; };
-		1F1E09D2269D968200567AF6 /* MPWSQLTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLTable.m */; };
+		1F1E09CD269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1E09CE269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; };
+		1F1E09CF269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; };
+		1F1E09D0269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
+		1F1E09D1269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
+		1F1E09D2269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
 		1F1E09D5269DB9E700567AF6 /* MPWSQLColumnInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09D3269DB9E700567AF6 /* MPWSQLColumnInfo.h */; };
 		1F1E09D6269DB9E700567AF6 /* MPWSQLColumnInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09D3269DB9E700567AF6 /* MPWSQLColumnInfo.h */; };
 		1F1E09D7269DB9E700567AF6 /* MPWSQLColumnInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09D3269DB9E700567AF6 /* MPWSQLColumnInfo.h */; };
@@ -1518,8 +1518,8 @@
 		1F1BEDBF213DD199004B4947 /* MPWSequentialStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWSequentialStore.m; sourceTree = "<group>"; };
 		1F1BEDC6213FC8E4004B4947 /* MPWRESTCopyStream.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWRESTCopyStream.h; sourceTree = "<group>"; };
 		1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWRESTCopyStream.m; sourceTree = "<group>"; };
-		1F1E09CB269D968200567AF6 /* MPWSQLTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWSQLTable.h; sourceTree = "<group>"; };
-		1F1E09CC269D968200567AF6 /* MPWSQLTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWSQLTable.m; sourceTree = "<group>"; };
+		1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWSQLiteTable.h; sourceTree = "<group>"; };
+		1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWSQLiteTable.m; sourceTree = "<group>"; };
 		1F1E09D3269DB9E700567AF6 /* MPWSQLColumnInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWSQLColumnInfo.h; sourceTree = "<group>"; };
 		1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWSQLColumnInfo.m; sourceTree = "<group>"; };
 		1F1E2215072C5C00007DCDB1 /* MPWMessageCatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWMessageCatcher.h; sourceTree = "<group>"; };
@@ -2420,8 +2420,8 @@
 			children = (
 				1FF6590824957007002371E9 /* MPWStreamQLite.h */,
 				1FF6590924957007002371E9 /* MPWStreamQLite.m */,
-				1F1E09CB269D968200567AF6 /* MPWSQLTable.h */,
-				1F1E09CC269D968200567AF6 /* MPWSQLTable.m */,
+				1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */,
+				1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */,
 				1F1E09D3269DB9E700567AF6 /* MPWSQLColumnInfo.h */,
 				1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */,
 			);
@@ -2965,7 +2965,7 @@
 				1F49BBB820BBCE6B00405432 /* MPWMappingStore.h in Headers */,
 				1F1E09D6269DB9E700567AF6 /* MPWSQLColumnInfo.h in Headers */,
 				1FE37C0D196976C500C9A378 /* NSNumberArithmetic.h in Headers */,
-				1F1E09CE269D968200567AF6 /* MPWSQLTable.h in Headers */,
+				1F1E09CE269D968200567AF6 /* MPWSQLiteTable.h in Headers */,
 				1FE37C4C1969784B00C9A378 /* MPWBlockInvocable.h in Headers */,
 				1FE37C09196976C500C9A378 /* PhoneGeometry.h in Headers */,
 				1FED48BE242634CC00AF2FAD /* MPWXmlAttributes.h in Headers */,
@@ -3176,7 +3176,7 @@
 				1F1E09D7269DB9E700567AF6 /* MPWSQLColumnInfo.h in Headers */,
 				1F8679932AE5454200849711 /* MPWArrayWithCursor.h in Headers */,
 				1FCF26351CF3993C00AC64CE /* MPWFastInvocation.h in Headers */,
-				1F1E09CF269D968200567AF6 /* MPWSQLTable.h in Headers */,
+				1F1E09CF269D968200567AF6 /* MPWSQLiteTable.h in Headers */,
 				1FCF26421CF3993C00AC64CE /* NSNil.h in Headers */,
 				1FCF26771CF39BB700AC64CE /* MPWEnumeratorSource.h in Headers */,
 				1FED48BF242634CC00AF2FAD /* MPWXmlAttributes.h in Headers */,
@@ -3501,7 +3501,7 @@
 				1FA1D4580BBAAD520097A924 /* MPWRusage.h in Headers */,
 				1FA74A0525F642DC001AA6A8 /* MPWDistributedNotificationStream.h in Headers */,
 				1FD7B37C2195C9A100046BBE /* MPWCompositeStore.h in Headers */,
-				1F1E09CD269D968200567AF6 /* MPWSQLTable.h in Headers */,
+				1F1E09CD269D968200567AF6 /* MPWSQLiteTable.h in Headers */,
 				1FEB28C92DC67C9B00E37021 /* MPWCFunction.h in Headers */,
 				1F766F6E0BBC5F410038DA7D /* MPWSmallStringTable.h in Headers */,
 				1FCAD0FB29BA072B00228DB3 /* MPWSysctlStore.h in Headers */,
@@ -4299,7 +4299,7 @@
 				1F2C24DF2ACB109A002993B3 /* MPWInitStore.m in Sources */,
 				1F1BEDCC213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */,
 				1F5336122A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */,
-				1F1E09D1269D968200567AF6 /* MPWSQLTable.m in Sources */,
+				1F1E09D1269D968200567AF6 /* MPWSQLiteTable.m in Sources */,
 				1FB561FB2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */,
 				1F840DFD193F50E400589595 /* MPWWriteStream.m in Sources */,
 				1FA869D220EBC01500920279 /* MPWLoggingStore.m in Sources */,
@@ -4567,7 +4567,7 @@
 				1FFE3AAD20B3296800E65B93 /* MPWReference.m in Sources */,
 				1F5BBA322943801700C3D345 /* MPWBlock.m in Sources */,
 				1FA2969B1CF74A6500F19039 /* MPWPipeline.m in Sources */,
-				1F1E09D2269D968200567AF6 /* MPWSQLTable.m in Sources */,
+				1F1E09D2269D968200567AF6 /* MPWSQLiteTable.m in Sources */,
 				1FFE3AC420B34D2000E65B93 /* MPWDiskStore.m in Sources */,
 				1FCF25F51CF398F400AC64CE /* MPWTrampoline.m in Sources */,
 				1FE85E39285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */,
@@ -4777,7 +4777,7 @@
 				1FC35CCE254BF05B005D04F7 /* MPWValueArray.m in Sources */,
 				1FE85E37285FA38200A0EDD3 /* MPWSFTPStore.m in Sources */,
 				1F766F6F0BBC5F410038DA7D /* MPWSmallStringTable.m in Sources */,
-				1F1E09D0269D968200567AF6 /* MPWSQLTable.m in Sources */,
+				1F1E09D0269D968200567AF6 /* MPWSQLiteTable.m in Sources */,
 				1F2DCFDC1ACB50F3004A39FB /* MPWThreadSwitchStream.m in Sources */,
 				1FA74A2025F64A54001AA6A8 /* MPWDistributedNotificationReceiver.m in Sources */,
 				1F8574AB2ACD8E1300283E7A /* MPWObjectStore.m in Sources */,

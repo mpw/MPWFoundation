@@ -5,13 +5,15 @@
 //  Created by Marcel Weiher on 13.07.21.
 //
 
-#import "MPWSQLTable.h"
+#import "MPWSQLiteTable.h"
 #import "AccessorMacros.h"
 #import "MPWByteStream.h"
 #import "MPWStreamQLite.h"
 #import "MPWObjectBuilder.h"
 #import "MPWSQLColumnInfo.h"
 #import <sqlite3.h>
+
+
 
 @interface NSString(getISOLatinCharacters)
 -(NSInteger)getISOLatinCharacters:(char*)buffer;
@@ -35,7 +37,7 @@
 
 
 
-@implementation MPWSQLTable {
+@implementation MPWSQLiteTable {
     NSString *sqlForInsert;
     NSString *sqlForCreate;
     sqlite3_stmt *insert_stmt;
@@ -89,6 +91,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     sqlite3_step(end_transaction);
     sqlite3_reset(end_transaction);
 }
+
 
 -(int)paramIndexForKey:(NSString*)aKey
 {
@@ -258,11 +261,11 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 
 @end
 
-@implementation MPWSQLTable(testing)
+@implementation MPWSQLiteTable(testing)
 
 +(void)testSQLForInsert
 {
-    MPWSQLTable *table=[[MPWSQLTable new] autorelease];
+    MPWSQLiteTable *table=[[MPWSQLiteTable new] autorelease];
     table.name=@"tasks";
     NSString *insertSQL=[table computeSQLForInsertWithKeys:@[ @"id", @"title", @"completed"]];
     IDEXPECT(insertSQL,@"INSERT INTO tasks (id, title, completed) VALUES (:id, :title, :completed);",@"SQL for insert");
@@ -271,7 +274,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 +(void)testGetTableSchema
 {
     MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
-    MPWSQLTable *artists=[db tables][@"artists"];
+    MPWSQLiteTable *artists=[db tables][@"artists"];
     NSArray *schema=[artists schema];
     INTEXPECT(schema.count,2,@"columns");
     MPWSQLColumnInfo *nameColumn=schema.lastObject;
@@ -289,7 +292,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 +(void)testCount
 {
     MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
-    MPWSQLTable *artists=[db tables][@"artists"];
+    MPWSQLiteTable *artists=[db tables][@"artists"];
     INTEXPECT( artists.count, 275, @"number of artists");
 }
 

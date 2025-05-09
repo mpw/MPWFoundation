@@ -156,4 +156,5 @@
 
 #if !GS_API_LATEST
 #import <MPWFoundation/MPWStreamQLite.h>
+#import <MPWFoundation/MPWSQLiteTable.h>
 #endif
