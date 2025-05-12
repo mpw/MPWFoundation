@@ -95,8 +95,8 @@
 		1F1BEDCC213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */; };
 		1F1BEDCD213FC8E4004B4947 /* MPWRESTCopyStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1BEDC7213FC8E4004B4947 /* MPWRESTCopyStream.m */; };
 		1F1E09CD269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F1E09CE269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; };
-		1F1E09CF269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; };
+		1F1E09CE269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F1E09CF269D968200567AF6 /* MPWSQLiteTable.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F1E09D0269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
 		1F1E09D1269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
 		1F1E09D2269D968200567AF6 /* MPWSQLiteTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09CC269D968200567AF6 /* MPWSQLiteTable.m */; };
