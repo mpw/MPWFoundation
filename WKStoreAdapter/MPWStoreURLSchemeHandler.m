@@ -33,6 +33,7 @@
     NSURL *url=urlSchemeTask.request.URL;
     NSString *verb = urlSchemeTask.request.HTTPMethod;
     NSString *path=url.resourceSpecifier;
+    NSLog(@"URL handler: %@ %@ %@",verb,path,urlSchemeTask.request);
     MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:path];
     MPWResource *resource = nil;
     NSString *mimetype=@"text/html";
@@ -40,6 +41,7 @@
         if ( [verb isEqual:@"GET"]) {
             resource = [self.store at:ref];
         } else if ( [verb isEqual:@"PUT"]) {
+            NSLog(@"PUT %@",urlSchemeTask.request.HTTPBody);
             self.store[ref] = urlSchemeTask.request.HTTPBody;
             resource = self.store[ref];
         } else if ( [verb isEqual:@"POST"]) {
@@ -60,13 +62,13 @@
             NSLog(@"unknown verb: '%@'",verb);
         }
     } @catch ( NSException *exception ) {
+        NSLog(@"got exception: %@",exception);
         NSString *errorDescription = [NSString stringWithFormat:@"<html><head></head><body><p>Exception: %@<p><hr><pre>%@\n%@</pre></body</html>",exception.name,exception.reason,exception.callStackSymbols];
         resource=[MPWResource new];
         resource.rawData = [errorDescription asData];
         resource.MIMEType = @"text/html";
         mimetype = @"text/html";
         [self.requestLog writeObject:exception];
-//        NSLog(@"got exception: %@",exception);
 //        NSRunCriticalAlertPanel(@"runtime error", @"Error: %@\n\nDetail: %@", @"ok", nil, nil,exception.name,exception.reason);
     }
 //    NSLog(@"== after forwarding request to store ==");
@@ -125,7 +127,7 @@
         [self.responseLog writeObject:[NSString stringWithFormat:@"\n -- response: '%@' %ld bytes: \n%@%@\n",response.MIMEType,data.length, [s substringToIndex:MIN(s.length,100)],s.length > 100 ? @"...":@""]];
         [urlSchemeTask didReceiveData:data];
     } else {
-        [self.responseLog writeObject:[NSString stringWithFormat:@"no response\n"]];
+        [self.responseLog writeObject:[NSString stringWithFormat:@"\n\n== no response ==\n"]];
     }
     [urlSchemeTask didFinish];
 }

@@ -7,7 +7,7 @@
 		<key>MPWDuckDB.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>89</integer>
+			<integer>80</integer>
 		</dict>
 		<key>MPWFoundation (Framework).xcscheme_^#shared#^_</key>
 		<dict>
@@ -79,7 +79,7 @@
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>81</integer>
+			<integer>82</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>

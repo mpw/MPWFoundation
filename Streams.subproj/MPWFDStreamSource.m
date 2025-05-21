@@ -67,24 +67,6 @@
     }
 }
 
--(void)readFromStreamAndWriteToTarget
-{
-    BOOL hasData=YES;
-//    NSLog(@"buffersize: %d",self.bufferSize);
-    while ( hasData) {
-        @autoreleasepool {
-            NSData *dataToWrite=[self nextObject];
-            if ( dataToWrite) {
-                [(id)(self.target) writeObject:dataToWrite sender:self];
-            } else {
-                hasData = NO;
-            }
-        }
-    }
-    if (self.closeWhenDone) {
-        [self close];
-    }
-}
 
 -(void)close
 {
@@ -92,11 +74,6 @@
         close(self.fdin);
         self.fdin=-1;
     }
-}
-
--(void)run
-{
-    [self readFromStreamAndWriteToTarget];
 }
 
 -(void)dealloc

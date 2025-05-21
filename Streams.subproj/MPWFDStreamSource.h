@@ -12,7 +12,6 @@
 @interface MPWFDStreamSource : MPWStreamSource
 
 @property (nonatomic, assign) int fdin;
-@property (nonatomic, assign) int closeWhenDone;
 @property (nonatomic, assign) int bufferSize;
 
 -initWithFilename:(NSString *)filename;

@@ -90,6 +90,10 @@
 	return [self existsAndIsDirectory:NULL];;
 }
 
+-(id)directoryStream
+{
+    return [[[MPWDirectoryEnumerationStream alloc] initWithPath:[self path]] autorelease];
+}
 
 -(NSDate *)lastModifiedDate
 {

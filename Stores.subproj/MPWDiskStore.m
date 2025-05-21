@@ -50,25 +50,25 @@
 
 -directoryForReference:(MPWGenericIdentifier*)aReference
 {
-    NSLog(@"directoryForReference: %@",[aReference path]);
+//    NSLog(@"directoryForReference: %@",[aReference path]);
     id childNames = [self childNamesOfReference:aReference];
-    NSLog(@"childNames: %@",childNames);
+//    NSLog(@"childNames: %@",childNames);
     NSArray *refs = (NSArray*)[[self collect] referenceForPath:[childNames each]];
-    NSLog(@"references: %@",refs);
+//    NSLog(@"references: %@",refs);
     NSArray* combinedRefs = [[aReference collect] referenceByAppendingReference:[refs each]];
-    NSLog(@"combined references: %@",combinedRefs);
+//    NSLog(@"combined references: %@",combinedRefs);
     id dir = [[[MPWDirectoryReference alloc] initWithContents:combinedRefs] autorelease];
-    NSLog(@"dir=%@",dir);
+//    NSLog(@"dir=%@",dir);
     return dir;
 }
 
 
 -(NSData*)at:(MPWGenericIdentifier*)aReference
 {
-    NSLog(@"%@ at:%@",[self className],[aReference path]);
+//    NSLog(@"%@ at:%@",[self className],[aReference path]);
     BOOL isDirectory=NO;
     BOOL exists=[self exists:aReference isDirectory:&isDirectory];
-    NSLog(@"exists: %d isDirectory: %d",exists,isDirectory);
+//    NSLog(@"exists: %d isDirectory: %d",exists,isDirectory);
     if ( exists && isDirectory){
         return [self directoryForReference:aReference];
     } else {

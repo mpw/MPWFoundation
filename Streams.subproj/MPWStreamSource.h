@@ -12,6 +12,8 @@
 
 @interface MPWStreamSource : NSObject <StreamSource>
 
+@property (nonatomic, assign) bool stop;
+@property (nonatomic, assign) int closeWhenDone;
 
 -(void)run;
 -(void)runInThread;

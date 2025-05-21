@@ -15,10 +15,31 @@
 
 @synthesize  target;
 
+
+-(void)readFromStreamAndWriteToTarget
+{
+    BOOL hasData=YES;
+    //    NSLog(@"buffersize: %d",self.bufferSize);
+    while ( hasData && !self.stop) {
+        @autoreleasepool {
+            NSData *dataToWrite=[self nextObject];
+            if ( dataToWrite) {
+                [(id)(self.target) writeObject:dataToWrite sender:self];
+            } else {
+                hasData = NO;
+            }
+        }
+    }
+    if (self.closeWhenDone) {
+        [self close];
+    }
+}
+
 -(void)run
 {
-    ;
+    [self readFromStreamAndWriteToTarget];
 }
+
 -(void)setFinalTarget:newTarget
 {
 //    NSLog(@"setFinalTarget: %@",newTarget);
@@ -29,6 +50,11 @@
 //        NSLog(@"target %@ does not have finalTarget",[self target]);
         [self setTarget:newTarget];
     }
+}
+
+-(id)nextObject
+{
+    return nil;
 }
 
 -finalTarget
