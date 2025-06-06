@@ -88,6 +88,7 @@ libMPWFoundation_OBJC_FILES = \
 	Stores.subproj/MPWPropertyPathStore.m \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWDirectoryReference.m \
+    Stores.subproj/MPWDirectoryEnumerationStream.m \
     Stores.subproj/MPWFileReference.m \
     Stores.subproj/MPWExtensionStore.m \
     Stores.subproj/MPWIdentifier.m \

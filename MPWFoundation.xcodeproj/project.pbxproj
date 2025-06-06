@@ -298,9 +298,9 @@
 		1F6A726A2673E352003A5B5C /* MPWBytesToLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A72662673E352003A5B5C /* MPWBytesToLines.m */; };
 		1F6A726B2673E352003A5B5C /* MPWBytesToLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A72662673E352003A5B5C /* MPWBytesToLines.m */; };
 		1F6A726C2673E352003A5B5C /* MPWBytesToLines.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A72662673E352003A5B5C /* MPWBytesToLines.m */; };
-		1F6A726F2673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; };
-		1F6A72702673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; };
-		1F6A72712673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; };
+		1F6A726F2673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F6A72702673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F6A72712673F813003A5B5C /* MPWPrintLiner.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6A726D2673F813003A5B5C /* MPWPrintLiner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F6A72722673F813003A5B5C /* MPWPrintLiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A726E2673F813003A5B5C /* MPWPrintLiner.m */; };
 		1F6A72732673F813003A5B5C /* MPWPrintLiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A726E2673F813003A5B5C /* MPWPrintLiner.m */; };
 		1F6A72742673F813003A5B5C /* MPWPrintLiner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A726E2673F813003A5B5C /* MPWPrintLiner.m */; };

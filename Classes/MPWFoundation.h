@@ -54,6 +54,7 @@
 #import <MPWFoundation/MPWQueue.h>
 
 #import <MPWFoundation/MPWBlockTargetStream.h>
+#import <MPWFoundation/MPWPrintLiner.h>
 #import <MPWFoundation/MPWCombinerStream.h>
 #import <MPWFoundation/MPWDelayStream.h>
 #import <MPWFoundation/MPWURLCall.h>

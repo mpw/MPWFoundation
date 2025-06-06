@@ -125,6 +125,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     [[self async] sendValueTo:aStream];
 }
 
+-nextObject
+{
+    return self.value;
+}
+
 -writeStream
 {
     return [self.store writeStreamAt:self.identifier];
