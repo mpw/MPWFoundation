@@ -297,6 +297,12 @@ static NSURLSession *_defaultURLSession=nil;
     }];
 }
 
+-(void)run:(NSTimeInterval)seconds
+{
+    [self run];
+    [self awaitResultForSeconds:seconds];
+}
+
 -(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb body:(NSData *)body
 {
     MPWURI *ref=[MPWURI referenceWithURL:theURL];

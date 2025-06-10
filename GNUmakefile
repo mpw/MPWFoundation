@@ -88,7 +88,6 @@ libMPWFoundation_OBJC_FILES = \
 	Stores.subproj/MPWPropertyPathStore.m \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWDirectoryReference.m \
-    Stores.subproj/MPWDirectoryEnumerationStream.m \
     Stores.subproj/MPWFileReference.m \
     Stores.subproj/MPWExtensionStore.m \
     Stores.subproj/MPWIdentifier.m \
@@ -120,6 +119,8 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWReferenceTemplate.m \
     Stores.subproj/MPWStreamableReference.m \
     Stores.subproj/MPWBasedStore.m \
+    Streams.subproj/MPWDirectoryEnumerationStream.m \
+    Streams.subproj/MPWPrintLiner.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWLockedFilter.m \
     Streams.subproj/MPWFlattenStream.m \

@@ -40,6 +40,12 @@
     [self readFromStreamAndWriteToTarget];
 }
 
+-(void)run:(NSTimeInterval)seconds
+{
+    [self run];
+    [self awaitResultForSeconds:seconds];
+}
+
 -(void)setFinalTarget:newTarget
 {
 //    NSLog(@"setFinalTarget: %@",newTarget);

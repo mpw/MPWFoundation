@@ -16,6 +16,7 @@
 @property (nonatomic, assign) int closeWhenDone;
 
 -(void)run;
+-(void)run:(NSTimeInterval)seconds;
 -(void)runInThread;
 -(void)setFinalTarget:newTarget;
 -(void)awaitResultForSeconds:(NSTimeInterval)seconds;
