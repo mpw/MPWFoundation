@@ -14,7 +14,7 @@
 
 -(MPWTCPBinding*)bindingForReference:aReference inContext:aContext
 {
-    return [MPWTCPBinding bindingWithReference:aReference inStore:self];
+    return [MPWTCPBinding referenceWithIdentifier:aReference inStore:self];
 }
 
 

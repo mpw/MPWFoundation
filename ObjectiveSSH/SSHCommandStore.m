@@ -27,7 +27,7 @@
 
 -(SSHCommandBinding *)bindingForReference:(id)aReference inContext:(id)aContext
 {
-    SSHCommandBinding *binding = [SSHCommandBinding bindingWithReference:aReference inStore:self];
+    SSHCommandBinding *binding = [SSHCommandBinding referenceWithIdentifier:aReference inStore:self];
     binding.connection = self.connection;
     return binding;
 }

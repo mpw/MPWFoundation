@@ -16,7 +16,7 @@
 @implementation MPWReference
 
 
-CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(MPWAbstractStore*)aStore)
+CONVENIENCEANDINIT( reference, WithIdentifier:(MPWGenericIdentifier*)ref inStore:(MPWAbstractStore*)aStore)
 {
     self=[super init];
     self.identifier=[ref asReference];
@@ -52,7 +52,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 
 -(NSArray*)children
 {
-    return [[[self class] collect] bindingWithReference:[[self.store childrenOfReference:self.identifier] each] inStore:self.store];
+    return [[[self class] collect] referenceWithIdentifier:[[self.store childrenOfReference:self.identifier] each] inStore:self.store];
 }
 
 -(NSURL*)URL
@@ -75,6 +75,11 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
     return [self.store relativeStoreAt:self.identifier];
 }
 
+
+
+
+
+
 -(NSArray*)pathComponents
 {
     return self.identifier.pathComponents;
@@ -96,7 +101,7 @@ CONVENIENCEANDINIT( binding, WithReference:(MPWGenericIdentifier*)ref inStore:(M
 }
 
 - (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other {
-    return [[self class] bindingWithReference:[(MPWGenericIdentifier*)[self identifier] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
+    return [[self class] referenceWithIdentifier:[(MPWGenericIdentifier*)[self identifier] referenceByAppendingReference:(MPWGenericIdentifier*)other] inStore:self.store];
 }
 
 -(instancetype)div:(MPWReference*)other

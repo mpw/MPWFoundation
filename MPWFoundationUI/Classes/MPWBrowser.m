@@ -185,7 +185,7 @@
 {
     MPWBrowser *browser = [[[MPWBrowser alloc] initWithFrame:NSMakeRect(0,0,500,500)] autorelease];
     MPWDictStore *store=[MPWDictStore store];
-    MPWReference *binding=[MPWReference bindingWithReference:@"" inStore:store];
+    MPWReference *binding=[MPWReference referenceWithIdentifier:@"" inStore:store];
     [browser setRef:binding];
     char filenametemplate[80]="/tmp/browserdroptest.XXXXXX";
     int fd = mkstemp( filenametemplate );

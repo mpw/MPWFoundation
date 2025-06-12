@@ -256,7 +256,7 @@
 
 -(MPWReference*)bindingForReference:aReference inContext:aContext
 {
-    return [MPWReference bindingWithReference:aReference inStore:self];
+    return [MPWReference referenceWithIdentifier:aReference inStore:self];
 }
 
 -(MPWReference*)bindingForReference:aReference

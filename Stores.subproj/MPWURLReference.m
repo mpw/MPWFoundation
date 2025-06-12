@@ -206,7 +206,7 @@ objectAccessor(NSError*, error, setError)
 {
     MPWGenericIdentifier *ref=[MPWGenericIdentifier referenceWithPath:@"//ajax.googleapis.com/ajax/services/language/translate" ];
     ref.schemeName=@"http";
-    MPWURLReference *binding=[self bindingWithReference:ref inStore:nil];
+    MPWURLReference *binding=[self referenceWithIdentifier:ref inStore:nil];
     
 	NSString *pathArgs=[binding urlWithArgsFromSelectorString:@"v:langpair:q:" 
 													 args:[NSArray arrayWithObjects:@"1.0",@"en|de",@"Delete",nil]];

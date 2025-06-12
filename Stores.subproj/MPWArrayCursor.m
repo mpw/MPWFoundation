@@ -21,9 +21,9 @@
 
 @dynamic offset;
 
--(instancetype)initWithIdentifer:(id)anIdentifier inStore:(id)aStore
+-(instancetype)initWithIdentifier:(id)anIdentifier inStore:(id)aStore
 {
-    if(self=[super initWithIdentifer:anIdentifier inStore:aStore]) {
+    if(self=[super initWithIdentifier:anIdentifier inStore:aStore]) {
         offset=-1;
     }
     return self;

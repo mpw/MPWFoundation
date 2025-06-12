@@ -57,7 +57,7 @@
 
 -(MPWURLReference*)bindingForReference:aReference inContext:aContext
 {
-    return [MPWURLReference bindingWithReference:aReference inStore:self];
+    return [MPWURLReference referenceWithIdentifier:aReference inStore:self];
 }
 
 -(id)at:(id)aReference

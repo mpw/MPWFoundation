@@ -15,10 +15,10 @@
 
 @implementation MPWTCPBinding
 
--(instancetype)initWithReference:aReference inStore:aStore
+-(instancetype)initWithIdentifier:(id)anIdentifier inStore:(id)aStore
 {
-    self=[super initWithReference:aReference inStore:aStore];
-    self.port = [[aReference stringValue] intValue];
+    self=[super initWithIdentifier:anIdentifier inStore:aStore];
+    self.port = [[anIdentifier stringValue] intValue];
     return self;
 }
 
@@ -32,7 +32,7 @@
 
 +(void)testHasPort
 {
-    MPWTCPBinding *binding = [self bindingWithReference:@"80" inStore:nil];
+    MPWTCPBinding *binding = [self referenceWithIdentifier:@"80" inStore:nil];
     INTEXPECT( binding.port, 80, @"port");
 }
 

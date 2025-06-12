@@ -15,7 +15,7 @@
 @protocol MPWReferencing
 
 +(instancetype)referenceWithIdentifier:anIdentifier inStore:aStore;
--(instancetype)initWithIdentifer:anIdentifier inStore:aStore;
+-(instancetype)initWithIdentifier:anIdentifier inStore:aStore;
 
 @property (nonatomic, retain) id value;
 
