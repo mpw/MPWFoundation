@@ -92,7 +92,7 @@
 
 -(id)directoryStream
 {
-    return [[[MPWDirectoryEnumerationStream alloc] initWithPath:[self path]] autorelease];
+    return [[[MPWDirectoryEnumerationStream alloc] initWithPath:self.path] autorelease];
 }
 
 -(NSDate *)lastModifiedDate

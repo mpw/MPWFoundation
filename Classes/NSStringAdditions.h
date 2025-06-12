@@ -9,6 +9,7 @@
 -(NSString*)uniquedByNumberingInPool:(NSSet*)otherStrings;
 -(NSString*)uniquedByNumberingInUpdatingPool:(NSMutableSet*)otherStrings;
 -(int)countOccurencesOfCharacter:(int)c;
+-(NSArray<NSString*>*)resultsOfCommand;
 
 @end
 
@@ -20,7 +21,6 @@
 @property (readonly)  NSString *stringValue;
 
 -(NSData*)asData;
--(NSArray<NSString*>*)resultsOfCommand;
 
 @end
 

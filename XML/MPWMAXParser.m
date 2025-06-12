@@ -27,9 +27,9 @@
 #endif
 
 
-static void doNothing() { }
-static BOOL returnYes() { return YES; }
-static BOOL returnNo() { return NO; }
+static void doNothing(void ) { }
+static BOOL returnYes(void) { return YES; }
+static BOOL returnNo(void) { return NO; }
 
 #if 0
 NSString *MPWXMLCDataKey=@"MPWXMLCDataKey";
@@ -66,7 +66,7 @@ objectAccessor(NSURL*, url, setUrl )
 
 -parseResult
 {
-    return [[self target] lastObject];
+    return [(NSArray*)[self target] lastObject];
 }
 
 -(void)setParseResult:newParseResult

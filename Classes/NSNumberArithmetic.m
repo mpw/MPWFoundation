@@ -9,6 +9,8 @@
 #import "NSNumberArithmetic.h"
 #import "MPWObject.h"
 #import "MPWRect.h"
+#import "MPWBlock.h"
+#import "MPWInterval.h"
 
 NSNumber* MPWCreateInteger( long theInteger )
 {
@@ -74,14 +76,6 @@ static bool isIntType( const char *typep )
     return false;
 }
 
-static bool isFloatType( const char *typep )
-{
-    if ( typep  ) {
-        char type=*typep;
-        return type=='f' || type=='d';
-    }
-    return false;
-}
 
 #define defineArithOp( opName, op ) \
 -opName:other {\

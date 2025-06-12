@@ -37,5 +37,9 @@ struct Block_struct
     char *typeSignature;
 }
 
+-value;
+-value:arg;
+-value:arg with:arg2;
+
 @end
 

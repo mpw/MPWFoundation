@@ -71,7 +71,6 @@
     [t writeObject:@"*Emphasized* text\n"];
     [t writeObject:@"\nHeadline\n-------\n\n"];
     [t writeObject:@"\n[Link](http://example.com)\n"];
-    [t.target writeToFile:@"/tmp/incremental-markdown.html" atomically:YES];
     IDEXPECT(t.target.stringValue, @"<p>Some plain text</p>\n<p><em>Emphasized</em> text</p>\n<h2>Headline</h2>\n<p><a href=\"http://example.com\">Link</a></p>\n",@"incremental");
 }
 

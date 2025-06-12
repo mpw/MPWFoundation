@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long offset;
 @property (nonatomic, weak) id <Streaming> selectionChanges;
 @property (nonatomic, weak) id <Streaming> modelChanges;
-@property (readonly) NSArray *base;
+@property (readonly) NSMutableArray *base;
 
 
 @end

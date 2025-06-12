@@ -21,5 +21,5 @@ NSNumber* MPWCreateInteger( long theInteger );
 -(double)log10;
 -(instancetype)abs;
 -fib;
--fastfib;
+-slowfib;
 @end

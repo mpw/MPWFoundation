@@ -15,9 +15,9 @@
 
 
 -invokeWithTarget:target args:(va_list)args;
--(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
+//-(Method)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
 -(void)installInClass:(Class)aClass withSignature:(const char*)signature selector:(SEL)aSelector;
--(void)installInClass:(Class)aClass withSignatureString:(NSString*)signature selectorString:(NSString*)selectorName;
+//-(void)installInClass:(Class)aClass withSignatureString:(NSString*)signature selectorString:(NSString*)selectorName;
 -(IMP)stub;
 
 

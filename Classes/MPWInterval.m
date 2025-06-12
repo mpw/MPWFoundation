@@ -101,6 +101,15 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
     return [self intervalFromInt:newFrom toInt:newTo step:1];
 }
 
+-do:aBlok with:collection
+{
+    return nil;
+}
+
+-add:other { return nil; }
+-sub:other { return nil; }
+-mul:other { return nil; }
+-div:other { return nil; }
 
 
 -collect:aBlock
@@ -253,15 +262,15 @@ scalarAccessor( double, step, setStep )
 }
 
 #define defineArithOp( opName , adjustStep ) \
--(id)opName:other {\
-NSNumber *from1=[@(FROM) opName: other];\
-NSNumber *to1=[@(TO) opName: other];\
-NSNumber *step1=@([self step]);\
-if ( adjustStep ) { \
-step1 = [step1 opName: other]; \
-} \
-MPWInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:step1];\
-return newInterval;\
+-(instancetype)opName:other {\
+    NSNumber *from1=[@(FROM) opName: other];\
+    NSNumber *to1=[@(TO) opName: other];\
+    NSNumber *step1=@([self step]);\
+    if ( adjustStep ) { \
+        step1 = [step1 opName: other]; \
+    } \
+    MPWLongInterval *newInterval=[[self class] intervalFrom:from1 to:to1 step:step1];\
+    return newInterval;\
 }\
 
 
@@ -462,7 +471,7 @@ static void* runBlock( void *blockAndArgAsVoid ){
 
 +(void)testIntervalRespectsRange
 {
-	MPWInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10];
+    MPWLongInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10];
 	BOOL failedToRaise=NO;
 	@try {
 		[one_to_ten integerAtIndex:10];
@@ -475,7 +484,7 @@ static void* runBlock( void *blockAndArgAsVoid ){
 
 +(void)testIntervalWithStep
 {
-	MPWInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10 step:2];
+    MPWLongInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10 step:2];
 	INTEXPECT( [one_to_ten count] ,5, @"count");
 	INTEXPECT( [one_to_ten integerAtIndex:0], 2, @"first of [1-10]");
 	INTEXPECT( [one_to_ten integerAtIndex:1], 4, @"second of [1-10]");
@@ -484,7 +493,7 @@ static void* runBlock( void *blockAndArgAsVoid ){
 
 +(void)testIntervalArithmetic
 {
-    MPWInterval *five_to_ten=[MPWLongInterval intervalFromInt:4 toInt:10];
+    MPWLongInterval *five_to_ten=[MPWLongInterval intervalFromInt:4 toInt:10];
     INTEXPECT( [[five_to_ten add:@2] from], 6, @"add 2 to interval -> from");
     INTEXPECT( [[five_to_ten add:@2] to], 12, @"add 2 to interval -> to");
     INTEXPECT( [[five_to_ten mul:@3] from], 12, @"mul interval by 3 -> from");
@@ -538,7 +547,7 @@ longAccessor( current, setCurrent )
     return self;
 }
 
--initWithInterval:(MPWInterval*)interval
+-initWithInterval:(MPWLongInterval*)interval
 {
     self=[super init];
     [self setFrom:[interval from]];

@@ -178,8 +178,8 @@ CONVENIENCEANDINIT(store, WithSource:newSource )
     self=[super init];
     self.key = [MPWGenericIdentifier referenceWithPath:@"aKey"];
     self.value = @"Hello World";
-    self.cache = [MPWRawDictStore store];
-    self.source = [MPWRawDictStore store];
+    self.cache = [MPWDictStore store];
+    self.source = [MPWDictStore store];
     self.store = [testClass storeWithSource:self.source cache:self.cache];
     return self;
 }

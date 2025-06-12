@@ -13,14 +13,19 @@
 }
 
 
++(instancetype)intervalFrom:newFrom to:newTo;
++(instancetype)intervalFrom:newFrom to:newTo step:newStep;
++(instancetype)intervalFromInt:(long)newFrom toInt:(long)newTo step:(long)newStep;
++(instancetype)intervalFromInt:(long)newFrom toInt:(long)newTo;
 
--initFrom:newFrom to:newTo;
+-(instancetype)initFrom:newFrom to:newTo;
 -objectEnumerator;
+-collect:aBlock;
 -(void)do:aBlock;
--(id)add:aNumber;
--(id)sub:aNumber;
--(id)mul:aNumber;
--(id)div:aNumber;
+-(instancetype)add:aNumber;
+-(instancetype)sub:aNumber;
+-(instancetype)mul:aNumber;
+-(instancetype)div:aNumber;
 -(NSNumber*)random;
 
 @end

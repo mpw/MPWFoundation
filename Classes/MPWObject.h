@@ -11,6 +11,8 @@ typedef id (*IMPINT1)(id, SEL, long);
 typedef id (*IMP2)(id, SEL, void*,void*);
 typedef id (*IMP3)(id, SEL, void*,void*,void*);
 typedef id (*IMP4)(id, SEL, void*,void*,void*,void*);
+typedef id (*IMP5)(id, SEL, void*,void*,void*,void*,void*);
+typedef id (*IMP6)(id, SEL, void*,void*,void*,void*,void*,void*);
 
 @interface MPWObject : NSObject
 {

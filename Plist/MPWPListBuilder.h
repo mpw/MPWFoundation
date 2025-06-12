@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWWriteStream.h>
 
 @protocol Streaming;
 

@@ -12,7 +12,7 @@
 
 -rowStore
 {
-    return [MPWDictStore storeWithDictionary:self];
+    return [MPWDictStore storeWithDictionary:(NSMutableDictionary*)self];
 }
 
 - (int)integerForKey:(NSString *)key

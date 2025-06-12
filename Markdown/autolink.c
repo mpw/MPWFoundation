@@ -52,9 +52,8 @@ static size_t
 autolink_delim(uint8_t *data, size_t link_end, size_t max_rewind, size_t size)
 {
 	uint8_t cclose, copen = 0;
-	size_t i;
 
-	for (i = 0; i < link_end; ++i)
+	for (size_t i = 0; i < link_end; ++i)
 		if (data[i] == '<') {
 			link_end = i;
 			break;

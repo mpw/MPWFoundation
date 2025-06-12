@@ -140,8 +140,8 @@ PropertyPathDefs *makePropertyPathDefs( MPWRESTVerb verb, int count, PropertyPat
 {
     if ( defs ) {
         for (int i=0;i<count;i++) {
-            [defs[i].propertyPath release];
-            [defs[i].method release];
+            [(id)defs[i].propertyPath release];
+            [(id)defs[i].method release];
         }
         free(defs);
     }

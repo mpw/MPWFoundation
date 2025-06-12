@@ -72,7 +72,7 @@ scalarAccessor( id, key , setKey )
 }
 
 
-static id returnNil() {  return nil; }
+static id returnNil(void) {  return nil; }
 
 -(void)setInvocation:(NSInvocation*)invocationToForward
 {
@@ -183,8 +183,8 @@ static id returnNil() {  return nil; }
 #if FAST_MSG_LOOKUPS
         CACHED_LOOKUP_WITH_CACHE(tempTarget,targetSelector,targetFilterImp,targetClass );
         arguments[0] = targetFilterImp( tempTarget, targetSelector, arguments[2],arguments[3],arguments[4],arguments[5]);
-#elsif !LINUX
-        arguments[0] =((IMP)objc_msg_lookup( tempTarget, targetSelector))( tempTarget ,targetSelector ,arguments[2] ,arguments[3] ,arguments[4], arguments[5]);
+#elif !LINUX
+        arguments[0] =((IMP4)objc_msg_lookup( tempTarget, targetSelector))( tempTarget ,targetSelector ,arguments[2] ,arguments[3] ,arguments[4], arguments[5]);
 #else
 //#warning slow path!
         targetFilterImp = (IMP0)[tempTarget methodForSelector:targetSelector];

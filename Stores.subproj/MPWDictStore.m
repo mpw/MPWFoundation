@@ -10,6 +10,7 @@
 #import "NSStringAdditions.h"
 #import <AccessorMacros.h>
 #import "MPWDirectoryReference.h"
+#import "MPWEnumFilter.h"
 
 @interface MPWRawDictStore()
 
@@ -135,7 +136,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 +(void)testStoreAndRetrieve
 {
-    MPWDictStore* store = [self store];
+    MPWRawDictStore* store = [self store];
     NSString *ref=@"World";
     EXPECTNIL([store at:ref], @"shouldn't be there before I store it");
     [store at:ref put:@"Hello"];
@@ -145,7 +146,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testStoreAndRetrieveViaReference
 {
     NSString *path=@"World";
-    MPWDictStore* store = [self store];
+    MPWRawDictStore* store = [self store];
     EXPECTNIL([store at:path], @"shouldn't be there before I store it");
     [store at:path put:@"Hello"];
     IDEXPECT([store at:path], @"Hello", @"should be there after I store it");
@@ -153,7 +154,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 +(void)testSubscripts
 {
-    MPWDictStore* store = [self store];
+    MPWRawDictStore* store = [self store];
     EXPECTNIL(store[@"World"], @"shouldn't be there before I store it");
     store[@"World"]=@"Hello";
     IDEXPECT(store[@"World"], @"Hello", @"should be there after I store it");
@@ -161,7 +162,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 
 +(void)testDelete
 {
-    MPWDictStore* store = [self store];
+    MPWRawDictStore* store = [self store];
     id ref=@"World";
     EXPECTNIL(store[ref], @"shouldn't be there before I store it");
     store[ref]=@"Hello";
@@ -173,7 +174,7 @@ CONVENIENCEANDINIT( store, WithDictionary:(NSMutableDictionary*)newDict)
 +(void)testChildrenOfReference
 {
     id ref=@"World";
-    MPWDictStore* store = [self store];
+    MPWRawDictStore* store = [self store];
     NSArray *refs=[store childrenOfReference:@""];
     INTEXPECT( refs.count, 0, @"empty");
     store[ref]=@"Hello";

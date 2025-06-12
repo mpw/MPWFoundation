@@ -38,9 +38,9 @@ const char *blocksig( void *block_arg )
 
 @implementation MPWBlockInvocable
 
-static struct Block_descriptor sdescriptor= {
-		0, 64, NULL, NULL
-};
+//static struct Block_descriptor sdescriptor= {
+//		0, 64, NULL, NULL
+//};
 
 -(id)invokeWithArgs:(va_list)args
 {

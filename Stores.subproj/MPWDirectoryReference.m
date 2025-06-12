@@ -8,7 +8,7 @@
 
 #import "MPWDirectoryReference.h"
 #import <AccessorMacros.h>
-
+#import "NSObjectFiltering.h"
 
 @implementation MPWDirectoryReference
 

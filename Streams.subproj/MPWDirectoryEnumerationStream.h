@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWDirectoryEnumerationStream : MPWStreamSource
 
+-(instancetype)initWithPath:(NSString*)aPath;
+
 @end
 
 NS_ASSUME_NONNULL_END

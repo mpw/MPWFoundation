@@ -255,7 +255,7 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
     for (int i=0;i<maxElements;i++) {
         stringTableOffsets[i]=[theDict offsetForKey:headerArray[i]];
     }
-    [self inRange:range withContainer:theDict offsets:stringTableOffsets maxElements:maxElements indexes:indexes do:block];
+    [self inRange:range withContainer:theDict offsets:stringTableOffsets maxElements:(int)maxElements indexes:indexes do:block];
 }
 
 

@@ -138,6 +138,10 @@ idAccessor( plist , setPlist )
 	[super dealloc];
 }
 	 
+- (void)writeObject:(id)anObject {
+    [anObject writeOnMPWStream:(MPWWriteStream*)self];
+}
+
 @end
 
 #import "DebugMacros.h"

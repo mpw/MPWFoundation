@@ -18,13 +18,6 @@
     return "@";
 }
 
-#if 0
-//#if Darwin
--(const char*)types
-{
-    return _types;
-}
-#endif 
 
 @end
 
@@ -37,20 +30,20 @@
 	class_addMethod((Class)self ,selector,method,types);
 }
 
-+(void)aliasInstanceMethod:(SEL)old to:(SEL)new in:(Class)newClass
-{
-	[newClass addMethod:[self instanceMethodForSelector:old] forSelector:new types:(char*)[[self instanceMethodSignatureForSelector:old] types]];
-}
-
-+(void)aliasMethod:(SEL)old to:(SEL)new in:(Class)newClass
-{
-	[newClass addMethod:[self methodForSelector:old] forSelector:new types:(char*)[[self methodSignatureForSelector:old] types]];
-}
-
-+(void)aliasInstanceMethod:(SEL)old to:(SEL)new
-{
-    [self aliasInstanceMethod:old to:new in:self];
-}
+//+(void)aliasInstanceMethod:(SEL)old to:(SEL)new in:(Class)newClass
+//{
+//	[newClass addMethod:[self instanceMethodForSelector:old] forSelector:new types:(char*)[[self instanceMethodSignatureForSelector:old] types]];
+//}
+//
+//+(void)aliasMethod:(SEL)old to:(SEL)new in:(Class)newClass
+//{
+//	[newClass addMethod:[self methodForSelector:old] forSelector:new types:(char*)[[self methodSignatureForSelector:old] types]];
+//}
+//
+//+(void)aliasInstanceMethod:(SEL)old to:(SEL)new
+//{
+//    [self aliasInstanceMethod:old to:new in:self];
+//}
 
 @end
 

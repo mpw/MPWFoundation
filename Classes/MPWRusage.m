@@ -23,11 +23,11 @@ static long long getNanoseconds(int which) {
 
     return ts.tv_sec * 1000000000 + ts.tv_nsec;
 }
-static long long getRealNanoseconds() {
+static long long getRealNanoseconds(void) {
     return getNanoseconds(CLOCK_REALTIME);
 }
 
-static long long getCPUNanoseconds() {
+static long long getCPUNanoseconds(void) {
     return getNanoseconds(CLOCK_PROCESS_CPUTIME_ID);
 }
 

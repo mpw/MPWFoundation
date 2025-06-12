@@ -11,6 +11,7 @@
 #import "html.h"
 
 #import "NSDataMarkdown.h"
+#import "NSStringAdditions.h"
 
 @implementation NSData(Markdown)
 
