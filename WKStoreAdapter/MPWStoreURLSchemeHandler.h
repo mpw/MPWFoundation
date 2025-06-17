@@ -18,4 +18,6 @@
 @property (nonatomic,strong) id <Streaming> requestLog;
 @property (nonatomic,strong) id <Streaming> responseLog;
 
+-(WKWebView*)setupWebViewWithFrame:(NSRect)viewFrame;
+
 @end

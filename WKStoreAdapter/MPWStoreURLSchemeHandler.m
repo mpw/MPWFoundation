@@ -137,4 +137,78 @@
     return ;
 }
 
+- (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
+{
+    NSRunAlertPanel(@"Alert", @"JavaScript: %@", @"OK", nil,nil,message);
+    completionHandler();
+}
+
+- (void) userContentController:(WKUserContentController *) userContentController
+       didReceiveScriptMessage:(WKScriptMessage *) message {
+    
+    if ( [message.name isEqual:@"jsLogger"]) {
+        NSLog(@"jsconsole: %@",message.body);
+    }
+}
+
+- (void) userContentController:(WKUserContentController *) userContentController
+       didReceiveScriptMessage:(WKScriptMessage *) message replyHandler:(nonnull WK_SWIFT_UI_ACTOR void (^)(id _Nullable, NSString * _Nullable))replyHandler
+{
+    
+    if ( [message.name isEqual:@"request"]) {
+        NSArray *request = message.body;
+        NSLog(@"request: %@",message.body);
+        NSString *verb=request[0];
+        NSLog(@"verb: %@",verb);
+        NSString *uristring=request[1] ;
+        uristring=[[uristring componentsSeparatedByString:@":"] lastObject];
+        MPWGenericIdentifier *ref = [MPWGenericIdentifier referenceWithPath:uristring];
+        id data=[NSString stringWithFormat:@"unknown verb %@",verb];
+        if ( [[verb uppercaseString] isEqualToString:@"GET"])  {
+            data = [self.store at:ref];
+        } else if ( [[verb uppercaseString] isEqualToString:@"PUT"]) {
+            NSLog(@"PUT");
+            NSLog(@"PUT with data:\n'%@'\n",request[2]);
+            NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
+            NSArray *components = [request[2] componentsSeparatedByString:@"&"];
+            for ( NSString *comp in components ) {
+                NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
+                formDict[keyval[0]]=keyval[1];
+            }
+            [self.store at:ref put:formDict];
+            data = [self.store at:ref];
+        } else {
+            NSLog(@"unknown verb: %@",verb);
+        }
+        NSLog(@"store: %@ uri: '%@'",self.store,ref);
+        id resultString = [data stringValue];
+        NSLog(@"resultString: '%@'",resultString);
+        resultString = resultString ?: @"NULL";
+        replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
+        NSLog(@"did send reply");
+    }
+}
+
+
+-(WKWebView*)setupWebViewWithFrame:(NSRect)viewFrame
+{
+    WKWebViewConfiguration *config=[WKWebViewConfiguration new];
+    [config setURLSchemeHandler:self forURLScheme:@"special"];
+    
+    WKUserContentController *bridge = [[WKUserContentController alloc] init];
+    [bridge addScriptMessageHandlerWithReply:self contentWorld:[WKContentWorld pageWorld]
+                                        name:@"request"];
+    [bridge addScriptMessageHandler:self contentWorld:[WKContentWorld pageWorld]
+                               name:@"sendRequest"];
+    [bridge addScriptMessageHandler:self contentWorld:[WKContentWorld pageWorld]
+                               name:@"jsLogger"];
+    NSString *js=[[self frameworkResource:@"inject" category:@"js"] stringValue];
+    [bridge addUserScript:[[WKUserScript alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO]];
+    [config setUserContentController:bridge];
+    id view = [[WKWebView alloc] initWithFrame:viewFrame configuration:config];
+    
+    return view;
+}
+
+
 @end

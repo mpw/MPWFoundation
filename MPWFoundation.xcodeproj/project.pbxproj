@@ -1963,6 +1963,7 @@
 		1F61AE762DBBFD9D003E8229 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				inject.js,
 				MPWStoreURLSchemeHandler.h,
 				MPWStoreURLSchemeHandler.m,
 			);
