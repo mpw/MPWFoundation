@@ -8,6 +8,8 @@
 #import "MPWStoreURLSchemeHandler.h"
 #import <MPWFoundation/MPWFoundation.h>
 //#import <ObjectiveHTTPD/MPWPOSTProcessor.h>
+#import <MPWFoundation/PhoneGeometry.h>
+
 
 @import ObjectiveSmalltalk;
 
@@ -139,7 +141,9 @@
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler
 {
+#if !TARGET_OS_IPHONE
     NSRunAlertPanel(@"Alert", @"JavaScript: %@", @"OK", nil,nil,message);
+#endif
     completionHandler();
 }
 
@@ -194,7 +198,8 @@
 {
     WKWebViewConfiguration *config=[WKWebViewConfiguration new];
     [config setURLSchemeHandler:self forURLScheme:@"special"];
-    
+    [config setURLSchemeHandler:self forURLScheme:@"site"];
+
     WKUserContentController *bridge = [[WKUserContentController alloc] init];
     [bridge addScriptMessageHandlerWithReply:self contentWorld:[WKContentWorld pageWorld]
                                         name:@"request"];
@@ -210,5 +215,24 @@
     return view;
 }
 
+#if TARGET_OS_IPHONE
+#define RESIZABLE (UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight)
+#define View UIView
+#else
+#define RESIZABLE (NSViewWidthSizable|NSViewHeightSizable)
+#define View NSView
+#endif
+
+
+-(WKWebView*)setupWebViewRelativeToPlaceholder:(View*)placeHolder
+{
+    NSRect viewFrame = [placeHolder frame];
+    viewFrame.origin = CGPointZero;
+    WKWebView *wv = [self setupWebViewWithFrame:viewFrame];
+    
+    [wv setAutoresizingMask:RESIZABLE];
+    [placeHolder addSubview:wv];
+    return wv;
+}
 
 @end

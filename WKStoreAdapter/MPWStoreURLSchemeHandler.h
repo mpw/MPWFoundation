@@ -19,5 +19,6 @@
 @property (nonatomic,strong) id <Streaming> responseLog;
 
 -(WKWebView*)setupWebViewWithFrame:(NSRect)viewFrame;
+-(WKWebView*)setupWebViewRelativeToPlaceholder:(id)placeHolder;
 
 @end
