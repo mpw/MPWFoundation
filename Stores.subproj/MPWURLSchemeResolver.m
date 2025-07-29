@@ -222,6 +222,9 @@
 {
     NSData *encodedData = [self formEncodeDictionary:dict];
     NSMutableURLRequest *request=[self requestForURL:aURL];
+    
+    
+//    [request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setValue:[NSString stringWithFormat:@"%ld",encodedData.length] forHTTPHeaderField:@"Content-Length"];
     request.HTTPMethod = @"POST";

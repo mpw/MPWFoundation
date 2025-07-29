@@ -9,12 +9,17 @@
 #import "MPWStreamSource.h"
 #import <MPWWriteStream.h>
 #import "MPWBlockTargetStream.h"
-
+#import "MPWFilter.h"
 
 @implementation MPWStreamSource
 
 @synthesize  target;
 
+-(instancetype)init {
+    self=[super init];
+    self.closeWhenDone=YES;
+    return self;
+}
 
 -(void)readFromStreamAndWriteToTarget
 {
@@ -30,9 +35,20 @@
             }
         }
     }
-    if (self.closeWhenDone) {
+    if ( self.closeWhenDone ) {
         [self close];
     }
+}
+
+-(void)closeLocal
+{
+    // override if needed
+}
+
+-(void)close
+{
+    [self closeLocal];
+    [(MPWFilter*)(self.target) close];
 }
 
 -(void)run
@@ -66,7 +82,7 @@
 -finalTarget
 {
     if ( [self target]) {
-        return [[self target] finalTarget];
+        return [(MPWFilter*)[self target] finalTarget];
     }
     return self;
 }
