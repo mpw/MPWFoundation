@@ -120,6 +120,7 @@ libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWStreamableReference.m \
     Stores.subproj/MPWBasedStore.m \
     Streams.subproj/MPWDirectoryEnumerationStream.m \
+    Streams.subproj/MPWIOURing.m \
     Streams.subproj/MPWPrintLiner.m \
     Streams.subproj/MPWByteStream.m \
     Streams.subproj/MPWLockedFilter.m \
