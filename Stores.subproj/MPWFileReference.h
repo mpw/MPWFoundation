@@ -19,5 +19,6 @@
 
 -(NSString*)fancyPath;
 -source;
+-(NSNumber*)fileSize;
 
 @end
