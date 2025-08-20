@@ -10,6 +10,6 @@
 }
 
 
--(int)run:(int)argc args:(char **)argv;
+-(int)run;
 
 @end
