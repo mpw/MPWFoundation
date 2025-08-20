@@ -59,5 +59,5 @@ after-clean ::
 
 
 webview  : webview.m
-	$(CC) -g -fobjc-runtime=gnustep-2.1  -fblocks -IClasses -I/usr/GNUstep/Local/Library/Headers/  -I../../.headers/ -I.headers `pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.1`  -o webview webview.m -L ${HOME}/Build/obj -L/usr/GNUstep/Local/Library/Libraries -lMPWFoundation -lgnustep-base -lgnustep-corebase -L/usr/local/lib/ -lobjc  -lgtk-3 -lgobject-2.0 -lwebkit2gtk-4.1  
+	$(CC) -g -fobjc-runtime=gnustep-2.1  -fblocks -I/usr/GNUstep/Local/Library/Headers/  -I../../.headers/ -I.headers `pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.1`  -o webview webview.m -L ${HOME}/Build/obj -L/usr/GNUstep/Local/Library/Libraries -linterscript -lMPWFoundation -lgnustep-base -lgnustep-corebase -L/usr/local/lib/ -lobjc  -lgtk-3 -lgobject-2.0 -lwebkit2gtk-4.1  
 

@@ -24,7 +24,7 @@
     WebKitWebView *web_view = WEBKIT_WEB_VIEW(webkit_web_view_new());
 
     // Load a webpage
-    gchar *html="<html><body>Hello embedded</body></html>";
+    gchar *html="<html><body>Hello embedded from framework!</body></html>";
     webkit_web_view_load_html (web_view, html , "file:///hello.html" );
 //    webkit_web_view_load_uri(web_view, "file:///hello.html");
 

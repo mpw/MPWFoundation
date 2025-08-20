@@ -1,7 +1,11 @@
-#include <gtk/gtk.h>
-#include <webkit2/webkit2.h>
+//#include <gtk/gtk.h>
+//#include <webkit2/webkit2.h>
+
+#import <Interscript/Interscript.h>
+
 
 int main(int argc, char *argv[]) {
+#if 0
     gtk_init(&argc, &argv);
 
     // Create main window
@@ -23,6 +27,9 @@ int main(int argc, char *argv[]) {
     gtk_widget_show_all(window);
     gtk_main();
 
+#endif
+    ISWebRunner *runner=[ISWebRunner new];
+    [runner run:argc args:argv];
     return 0;
 }
 
