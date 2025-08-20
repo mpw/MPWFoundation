@@ -16,7 +16,7 @@ include $(GNUSTEP_MAKEFILES)/common.make
 LIBRARY_NAME = interscript
 
 
-OBJCFLAGS += -g -Os -Wno-import 
+OBJCFLAGS += -g -Os -Wno-import `pkg-config --cflags --libs gtk+-3.0 webkit2gtk-4.1` 
 
 
 interscript_HEADER_FILES = \
@@ -26,9 +26,10 @@ interscript_HEADER_FILES_INSTALL_DIR = /stsh
 
 
 interscript_OBJC_FILES = \
+	Classes/ISWebRunner.m \
 
 
-interscrtipt_C_FILES = \
+interscript_C_FILES = \
 
 
 
