@@ -11,19 +11,18 @@
 @implementation ISWebRunner
 
 
-static void
-custom_scheme_handler(WebKitURISchemeRequest *request, gpointer user_data)
+-(void)webkitRequest:(WebKitURISchemeRequest *)request
 {
     const char *uri = webkit_uri_scheme_request_get_uri(request);
     const char *method = webkit_uri_scheme_request_get_http_method(request);
     SoupMessageHeaders *headers = webkit_uri_scheme_request_get_http_headers(request);
     GInputStream *body_stream = webkit_uri_scheme_request_get_http_body(request);
-    
+    NSString *uristring = @(uri);
     g_print("Intercepted request: %s %s\n", method, uri);
     
     // Handle different HTTP methods
     if (g_strcmp0(method, "GET") == 0) {
-        handle_get_request(request, uri);
+        [self get:request uri:uristring];
     }
     else if (g_strcmp0(method, "POST") == 0) {
         handle_post_request(request, uri, body_stream);
@@ -38,27 +37,19 @@ custom_scheme_handler(WebKitURISchemeRequest *request, gpointer user_data)
 }
 
 static void
-handle_get_request(WebKitURISchemeRequest *request, const char *uri)
+custom_scheme_handler(WebKitURISchemeRequest *request, gpointer user_data)
+{
+    [(ISWebRunner*)user_data webkitRequest:request];
+}
+
+-(void)get:(WebKitURISchemeRequest *)request uri:(NSString*)uristring
 {
     const char *response_data;
     const char *content_type;
-    
-#if 0
-    // Parse the URI path to determine response
-    if (g_str_has_suffix(uri, "/api/users")) {
-        response_data = "[{\"id\": 1, \"name\": \"John\"}, {\"id\": 2, \"name\": \"Jane\"}]";
-        content_type = "application/json";
-    }
-    else if (g_str_has_suffix(uri, "/api/status")) {
-        response_data = "{\"status\": \"OK\", \"timestamp\": 1640995200}";
-        content_type = "application/json";
-    }
-    else {
-        send_error_response(request, 404, "Not Found");
-        return;
-    }
-#endif
-    response_data="<html><body>GET scheme handler</body></html>";
+ 
+    NSString *resultstring = [self.store get:uristring];
+
+    response_data=[resultstring UTF8String];
         content_type = "text/html";
 
     
@@ -153,7 +144,7 @@ send_error_response(WebKitURISchemeRequest *request, int status_code, const char
         context,
         "myapp",                    // scheme name
         custom_scheme_handler,      // callback function
-        NULL,                       // user_data
+        self,                       // user_data
         NULL                        // destroy_notify
     );
 

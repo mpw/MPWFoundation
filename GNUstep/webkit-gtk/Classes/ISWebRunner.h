@@ -9,6 +9,7 @@
 
 }
 
+@property (nonatomic, strong) id <MPWStorage> store;
 
 -(int)run;
 
