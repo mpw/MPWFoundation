@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *host;
 @property (nonatomic,strong) NSString *user;
+@property (nonatomic, assign) int port;
 @property (nonatomic,assign) int verbosity;
 @property (nonatomic, strong) NSDictionary *env;
 
