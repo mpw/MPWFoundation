@@ -7627,8 +7627,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -7693,8 +7693,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -7759,8 +7759,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -7825,8 +7825,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -7891,8 +7891,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -7957,8 +7957,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;
@@ -8023,8 +8023,8 @@
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/opt/homebrew/Cellar/libssh/0.11.1/lib/,
 					/usr/local/lib,
+					/opt/homebrew/Cellar/libssh/0.11.2/lib/,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.3;
 				MARKETING_VERSION = 1.0;

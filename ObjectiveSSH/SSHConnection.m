@@ -20,55 +20,55 @@
 }
 
 
-static ssh_session connect_ssh_local(const char *host, const char *user,int verbosity, int port ){
-    ssh_session session;
+-(ssh_session)connectHost:(const char *)host user:(const char *)user verbosity:(int)verbosity port:(int)port {
+    ssh_session localSsession;
     int auth=0;
     
-    session=ssh_new();
-    if (session == NULL) {
+    localSsession=ssh_new();
+    if (localSsession == NULL) {
         return NULL;
     }
     
     if(user != NULL){
-        if (ssh_options_set(session, SSH_OPTIONS_USER, user) < 0) {
-            ssh_free(session);
+        if (ssh_options_set(localSsession, SSH_OPTIONS_USER, user) < 0) {
+            ssh_free(localSsession);
             return NULL;
         }
     }
 
     if(port != 0 && port != 22){
-        if (ssh_options_set(session, SSH_OPTIONS_PORT, &port ) < 0) {
-            ssh_free(session);
+        if (ssh_options_set(localSsession, SSH_OPTIONS_PORT, &port ) < 0) {
+            ssh_free(localSsession);
             return NULL;
         }
     }
 
-    if (ssh_options_set(session, SSH_OPTIONS_HOST, host) < 0) {
-        ssh_free(session);
+    if (ssh_options_set(localSsession, SSH_OPTIONS_HOST, host) < 0) {
+        ssh_free(localSsession);
         return NULL;
     }
-    ssh_options_set(session, SSH_OPTIONS_LOG_VERBOSITY, &verbosity);
-    if(ssh_connect(session)){
-        fprintf(stderr,"Connection failed : %s\n",ssh_get_error(session));
-        ssh_disconnect(session);
-        ssh_free(session);
+    ssh_options_set(localSsession, SSH_OPTIONS_LOG_VERBOSITY, &verbosity);
+    if(ssh_connect(localSsession)){
+        fprintf(stderr,"Connection failed : %s\n",ssh_get_error(localSsession));
+        ssh_disconnect(localSsession);
+        ssh_free(localSsession);
         return NULL;
     }
-    if(verify_knownhost(session)<0){
-        ssh_disconnect(session);
-        ssh_free(session);
+    if(verify_knownhost(localSsession)<0){
+        ssh_disconnect(localSsession);
+        ssh_free(localSsession);
         return NULL;
     }
-    auth=authenticate_console(session);
+    auth=authenticate_console(localSsession);
     if(auth==SSH_AUTH_SUCCESS){
-        return session;
+        return localSsession;
     } else if(auth==SSH_AUTH_DENIED){
         fprintf(stderr,"Authentication failed\n");
     } else {
-        fprintf(stderr,"Error while authenticating : %s\n",ssh_get_error(session));
+        fprintf(stderr,"Error while authenticating : %s\n",ssh_get_error(localSsession));
     }
-    ssh_disconnect(session);
-    ssh_free(session);
+    ssh_disconnect(localSsession);
+    ssh_free(localSsession);
     return NULL;
 }
 
@@ -76,7 +76,7 @@ static ssh_session connect_ssh_local(const char *host, const char *user,int verb
 -(int)openSSH
 {
     if ( !session ) {
-        session = connect_ssh_local([[self host] UTF8String], [[self user] UTF8String], self.verbosity, self.port );
+        session = [self connectHost:[[self host] UTF8String] user:[[self user] UTF8String] verbosity:self.verbosity port:self.port];
         if (!session) {
             fprintf(stderr, "Couldn't connect to %s\n", [[self host] UTF8String]);
             return -1;
