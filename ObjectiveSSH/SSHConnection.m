@@ -20,7 +20,7 @@
 }
 
 
--(ssh_session)connectHost:(const char *)host user:(const char *)user verbosity:(int)verbosity port:(int)port {
+-(ssh_session)connect {
     ssh_session localSsession;
     int auth=0;
     
@@ -29,25 +29,41 @@
         return NULL;
     }
     
-    if(user != NULL){
-        if (ssh_options_set(localSsession, SSH_OPTIONS_USER, user) < 0) {
+    if(self.user != NULL){
+        if (ssh_options_set(localSsession, SSH_OPTIONS_USER, [self.user UTF8String]) < 0) {
             ssh_free(localSsession);
             return NULL;
         }
     }
 
-    if(port != 0 && port != 22){
-        if (ssh_options_set(localSsession, SSH_OPTIONS_PORT, &port ) < 0) {
+    if(self.port != 0 && self.port != 22){
+        int localPort=self.port;
+        if (ssh_options_set(localSsession, SSH_OPTIONS_PORT, &localPort ) < 0) {
             ssh_free(localSsession);
             return NULL;
         }
     }
 
-    if (ssh_options_set(localSsession, SSH_OPTIONS_HOST, host) < 0) {
+    if (ssh_options_set(localSsession, SSH_OPTIONS_HOST, [self.host UTF8String]) < 0) {
         ssh_free(localSsession);
         return NULL;
     }
-    ssh_options_set(localSsession, SSH_OPTIONS_LOG_VERBOSITY, &verbosity);
+    int localVerbosity=self.verbosity;
+    ssh_options_set(localSsession, SSH_OPTIONS_LOG_VERBOSITY, &localVerbosity);
+    ssh_key privkey=NULL;
+    ssh_key pubkey=NULL;
+    if ( self.identityKeyPath) {
+        int rc = ssh_pki_import_privkey_file([self.identityKeyPath UTF8String], NULL, NULL, NULL, &privkey);
+        if (rc != SSH_OK) {
+            fprintf(stderr, "Key load failed\n");
+            privkey=NULL;
+        }
+        if ( privkey ) {
+            ssh_pki_export_privkey_to_pubkey(privkey, &pubkey);
+        }
+    }
+    
+    
     if(ssh_connect(localSsession)){
         fprintf(stderr,"Connection failed : %s\n",ssh_get_error(localSsession));
         ssh_disconnect(localSsession);
@@ -59,13 +75,22 @@
         ssh_free(localSsession);
         return NULL;
     }
-    auth=authenticate_console(localSsession);
+    auth=-1;
+    if ( pubkey) {
+        auth=ssh_userauth_publickey(localSsession, NULL, privkey);
+        if ( auth != SSH_AUTH_SUCCESS) {
+            fprintf(stderr,"auth with privkey %p failed: %d, continuing\n",pubkey,auth);
+        }
+    }
+    if (auth != SSH_AUTH_SUCCESS)  {
+        auth=authenticate_console(localSsession);
+    }
     if(auth==SSH_AUTH_SUCCESS){
         return localSsession;
     } else if(auth==SSH_AUTH_DENIED){
-        fprintf(stderr,"Authentication failed\n");
+        fprintf(stderr,"Authentication failed (DENIED)\n");
     } else {
-        fprintf(stderr,"Error while authenticating : %s\n",ssh_get_error(localSsession));
+        fprintf(stderr,"Error while authenticatin %d\n",auth);
     }
     ssh_disconnect(localSsession);
     ssh_free(localSsession);
@@ -76,7 +101,7 @@
 -(int)openSSH
 {
     if ( !session ) {
-        session = [self connectHost:[[self host] UTF8String] user:[[self user] UTF8String] verbosity:self.verbosity port:self.port];
+        session = [self connect];
         if (!session) {
             fprintf(stderr, "Couldn't connect to %s\n", [[self host] UTF8String]);
             return -1;

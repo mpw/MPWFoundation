@@ -30,8 +30,10 @@
         channel = ssh_channel_new([connection sshSession]);
         if ( !channel ) {
             NSLog(@"couldn't create channel from connection %p",connection);
-            NSLog(@"couldn't create channel from connection %@",connection);
-            NSLog(@"couldn't create channel from sesion %p: %s",[connection sshSession],ssh_get_error([connection sshSession]));
+            NSLog(@"couldn't create channel from session %@",[connection sshSession]);
+            if ([connection sshSession] ) {
+                NSLog(@"couldn't create channel from sesion %p: %s",[connection sshSession],ssh_get_error([connection sshSession]));
+            }
         }
     }
     return self;

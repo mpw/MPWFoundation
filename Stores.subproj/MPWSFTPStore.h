@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol SSHConnection<NSObject>
 
-@property (nonatomic, strong) NSString *host, *user;
+@property (nonatomic, strong) NSString *host, *user, *identityKeyPath;
 @property (nonatomic, assign) int port;
 
 -(int)openConnection;
