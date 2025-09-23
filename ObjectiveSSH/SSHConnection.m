@@ -51,15 +51,11 @@
     int localVerbosity=self.verbosity;
     ssh_options_set(localSsession, SSH_OPTIONS_LOG_VERBOSITY, &localVerbosity);
     ssh_key privkey=NULL;
-    ssh_key pubkey=NULL;
     if ( self.identityKeyPath) {
         int rc = ssh_pki_import_privkey_file([self.identityKeyPath UTF8String], NULL, NULL, NULL, &privkey);
         if (rc != SSH_OK) {
             fprintf(stderr, "Key load failed\n");
             privkey=NULL;
-        }
-        if ( privkey ) {
-            ssh_pki_export_privkey_to_pubkey(privkey, &pubkey);
         }
     }
     
@@ -70,19 +66,22 @@
         ssh_free(localSsession);
         return NULL;
     }
-    if(verify_knownhost(localSsession)<0){
-        ssh_disconnect(localSsession);
-        ssh_free(localSsession);
-        return NULL;
-    }
+//    if(verify_knownhost(localSsession)<0){
+//        ssh_disconnect(localSsession);
+//        ssh_free(localSsession);
+//        return NULL;
+//    }
     auth=-1;
-    if ( pubkey) {
+    if ( privkey ) {
         auth=ssh_userauth_publickey(localSsession, NULL, privkey);
         if ( auth != SSH_AUTH_SUCCESS) {
-            fprintf(stderr,"auth with privkey %p failed: %d, continuing\n",pubkey,auth);
+            fprintf(stderr,"auth with privkey %p failed: %d, continuing\n",privkey,auth);
         }
     }
-    if (auth != SSH_AUTH_SUCCESS)  {
+    if (auth != SSH_AUTH_SUCCESS && self.password )  {
+        auth=ssh_userauth_password(localSsession, NULL, [self.password UTF8String]);
+    }
+   if (auth != SSH_AUTH_SUCCESS)  {
         auth=authenticate_console(localSsession);
     }
     if(auth==SSH_AUTH_SUCCESS){

@@ -14,7 +14,6 @@
 #import <sqlite3.h>
 
 
-
 @interface NSString(getISOLatinCharacters)
 -(NSInteger)getISOLatinCharacters:(char*)buffer;
 @end
@@ -258,6 +257,8 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 {
     return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
 }
+
+
 
 @end
 

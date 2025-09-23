@@ -11,10 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SFTPStore,SSHCommandStream;
 
-@interface SSHConnection : NSObject
+@interface SSHConnection : NSObject <SSHConnection>
 
 @property (nonatomic,strong) NSString *host;
 @property (nonatomic,strong) NSString *user;
+@property (nonatomic,strong) NSString *password;
 @property (nonatomic,strong) NSString *identityKeyPath;
 @property (nonatomic, assign) int port;
 @property (nonatomic,assign) int verbosity;
