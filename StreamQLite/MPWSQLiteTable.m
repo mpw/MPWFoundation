@@ -258,7 +258,16 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
 }
 
+-selectPredicate:(NSPredicate*)predicate
+{
+    return [self selectWhere:[predicate predicateFormat]];
+}
 
+
+-evaluateQuery:aQuery inContext:aContext
+{
+    return [self selectPredicate:[[aQuery predicate] asNSPredicate]];
+}
 
 @end
 
