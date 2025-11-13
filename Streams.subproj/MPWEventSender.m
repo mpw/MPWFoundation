@@ -6,11 +6,11 @@
 //
 //
 
-#import "MPWEventWriter.h"
+#import "MPWEventSender.h"
 #import "NSObject+MPWNotificationProtocol.h"
 #import "NSThreadInterThreadMessaging.h"
 
-@interface MPWEventWriter ()
+@interface MPWEventSender ()
 
 @property (nonatomic, strong) NSString *notificationName;
 @property (nonatomic, assign) BOOL     shouldPostOnMainThread;
@@ -18,7 +18,7 @@
 @end
 
 
-@implementation MPWEventWriter
+@implementation MPWEventSender
 
 -(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
 {
@@ -26,6 +26,11 @@
     self.notificationName=name;
     self.shouldPostOnMainThread=shouldPostOnMainThread;
     return self;
+}
+
+-(void)setName:aName
+{
+    self.notificationName = aName;
 }
 
 -(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread
@@ -71,7 +76,7 @@
 @property (nonatomic,strong) id result;
 @end
 
-@implementation MPWEventWriter(testing)
+@implementation MPWEventSender(testing)
 
 +testFixture
 {
@@ -101,7 +106,7 @@
 -(void)testNotifyWhenSetupViaString
 {
     [self installProtocolNotifications];
-    MPWEventWriter *s=[[[MPWEventWriter alloc] initWithNotificationName:@"MPWNotificationStreamTesterProtocol"  shouldPostOnMainThread:NO] autorelease];
+    MPWEventSender *s=[[[MPWEventSender alloc] initWithNotificationName:@"MPWNotificationStreamTesterProtocol"  shouldPostOnMainThread:NO] autorelease];
     EXPECTNIL(self.result,@"nothing yet");
     [s writeObject:@"hello"];
     IDEXPECT(self.result,@"hello",@"notification was received");
@@ -110,7 +115,7 @@
 -(void)testNotifyWhenSetupViaProtocol
 {
     [self installProtocolNotifications];
-    MPWEventWriter *s=[[[MPWEventWriter alloc] initWithNotificationProtocol:@protocol(MPWNotificationStreamTesterProtocol)  shouldPostOnMainThread:NO] autorelease];
+    MPWEventSender *s=[[[MPWEventSender alloc] initWithNotificationProtocol:@protocol(MPWNotificationStreamTesterProtocol)  shouldPostOnMainThread:NO] autorelease];
     EXPECTNIL(self.result,@"nothing yet");
     [s writeObject:@"protocol"];
     IDEXPECT(self.result,@"protocol",@"notification was received");

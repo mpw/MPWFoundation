@@ -47,7 +47,7 @@
 #import <MPWFoundation/MPWURLStreamingStream.h>
 #import <MPWFoundation/MPWASCII85Stream.h>
 #import <MPWFoundation/MPWURLCall2StoreStream.h>
-#import <MPWFoundation/MPWEventWriter.h>
+#import <MPWFoundation/MPWEventSender.h>
 #import <MPWFoundation/MPWDistributedNotificationStream.h>
 #import <MPWFoundation/MPWDistributedNotificationReceiver.h>
 #import <MPWFoundation/MPWMapFilter.h>

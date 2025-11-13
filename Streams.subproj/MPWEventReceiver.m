@@ -43,7 +43,6 @@ objectAccessor(NSString*, name, _setName)
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [name release];
-    [_target release];
     [super dealloc];
 }
 

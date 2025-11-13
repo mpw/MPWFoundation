@@ -61,7 +61,7 @@
 	MPWNamedData,
 	MPWNeXTPListWriter,
 	"MPWNotificationProtocolTests",
-	MPWEventWriter,
+	MPWEventSender,
 	"MPWNotificationStreamTester",
 	MPWNullTarget,
 	MPWNumber,

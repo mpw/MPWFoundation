@@ -5,13 +5,13 @@
 //  Created by Marcel Weiher on 30.05.24.
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWStreamSource.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWEventReceiver : NSObject
+@interface MPWEventReceiver : MPWStreamSource
 
-@property (nonatomic,strong) id  target;
+// @property (nonatomic,strong) id  target;
 
 @end
 

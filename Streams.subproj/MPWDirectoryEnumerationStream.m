@@ -22,6 +22,11 @@
     return self;
 }
 
+-(void)setPath:aPath
+{
+    self.direnum =[[NSFileManager defaultManager] enumeratorAtPath:aPath];
+}
+
 -(instancetype)initWithPath:(NSString*)aPath
 {
     return [self initWithDirectoryEnumerator:[[NSFileManager defaultManager] enumeratorAtPath:aPath]];

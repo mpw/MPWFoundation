@@ -376,3 +376,29 @@ NSString *MPWConvertToString( void* any, char *typeencoding ) {
 }
 
 @end
+
+#import "MPWInterval.h"
+#import "MPWBlock.h"
+
+@implementation NSAttributedString(MPWFoundationAdditions)
+
+-(NSDictionary*)attributesAtIndex:(NSUInteger)anIndex
+{
+    NSRange effectiveRange;
+    NSDictionary *attrs = [self attributesAtIndex:anIndex effectiveRange:&effectiveRange];
+    NSLog(@"attrs %@ effectiveRange: %@",attrs,NSStringFromRange(effectiveRange));
+    return attrs;
+    
+}
+
+
+
+-(void)enumerateAttribute:(NSString*)attrName inRange:(NSRange)r placeholder:placeholder usingBlock:aBlock
+{
+    [self enumerateAttribute:attrName inRange:r options:nil usingBlock:^( id value, NSRange effectiveRange, BOOL *stop) {
+//        NSLog(@"enumerated: %@ = %@ %@",attrName,value,NSStringFromRange(effectiveRange));
+        [aBlock value:value ?: placeholder with:[MPWInterval intervalFromInt:effectiveRange.location toInt:effectiveRange.location + effectiveRange.length-1]];
+    }];
+}
+
+@end
