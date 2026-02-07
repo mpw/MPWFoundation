@@ -11,5 +11,6 @@
 @class STCompiler;
 
 @interface MPWProgramTextView : NSTextView
+-(void)setDefaultAttributes;
 
 @end

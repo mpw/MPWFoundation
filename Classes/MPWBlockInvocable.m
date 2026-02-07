@@ -265,6 +265,12 @@ static NSString *extractStructType( char *s )
 	return returnVal;
 }
 
+-(NSTimeInterval)millisecondsToRun {
+    NSTimeInterval start=[NSDate timeIntervalSinceReferenceDate];
+    [self value];
+    return ([NSDate timeIntervalSinceReferenceDate]-start) * 1000;
+}
+
 @end
 
 // #if NS_BLOCKS_AVAILABLE

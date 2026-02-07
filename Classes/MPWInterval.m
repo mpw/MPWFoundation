@@ -86,7 +86,7 @@ scalarAccessor( Class, numberClass ,_setNumberClass )
 
 +intervalFrom:newFrom to:newTo step:newStep
 {
-	return [[[self alloc] initFrom:newFrom to:newTo step:newStep] autorelease];
+	return [[[MPWLongInterval alloc] initFrom:newFrom to:newTo step:newStep] autorelease];
 }
 
 
@@ -484,7 +484,7 @@ static void* runBlock( void *blockAndArgAsVoid ){
 
 +(void)testIntervalWithStep
 {
-    MPWLongInterval *one_to_ten=[MPWLongInterval intervalFromInt:1 toInt:10 step:2];
+    MPWLongInterval *one_to_ten=(MPWLongInterval*)[MPWInterval intervalFromInt:1 toInt:10 step:2];
 	INTEXPECT( [one_to_ten count] ,5, @"count");
 	INTEXPECT( [one_to_ten integerAtIndex:0], 2, @"first of [1-10]");
 	INTEXPECT( [one_to_ten integerAtIndex:1], 4, @"second of [1-10]");

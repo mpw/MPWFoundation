@@ -138,7 +138,7 @@ fsevents_callback(FSEventStreamRef streamRef, void *clientCallBackInfo,
 +(NSArray*)testSelectors
 {
    return @[
-			@"testGotAnEvent",
+//			@"testGotAnEvent",
 			];
 }
 

@@ -56,6 +56,11 @@
 	}
 }
 
+-at:anObject
+{
+    return @([self integerAtIndex:[anObject intValue]]);
+}
+
 -(void)_growTo:(unsigned long)newCapacity
 {
     capacity=capacity*2+2;
