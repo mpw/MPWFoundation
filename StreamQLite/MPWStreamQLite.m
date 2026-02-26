@@ -76,12 +76,24 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
                             [self.builder writeObject:@(value) forKey:keys[i]];
                             break;
                         }
+                        case SQLITE_BLOB:
+                        {
+                            const char *dataBytes=(const char*)sqlite3_column_blob(res, i);
+                            if ( dataBytes ) {
+                                int dataLen=sqlite3_column_bytes(res,i);
+                                NSData *data=[NSData dataWithBytes:dataBytes length:dataLen];
+                                [self.builder writeObject:data forKey:keys[i]];
+                            }
+                            break;
+                        }
                         default:
                         {
                             const char *text=(const char*)sqlite3_column_text(res, i);
                             if (text) {
                                 NSString *value=@(text);
-                                [self.builder writeObject:value forKey:keys[i]];
+                                if ( value && keys[i] ) {
+                                    [self.builder writeObject:value forKey:keys[i]];
+                                }
                             }
                         }
                     }
