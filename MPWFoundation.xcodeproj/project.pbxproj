@@ -535,6 +535,12 @@
 		1F9726A81D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9726A91D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
 		1F9726AA1D00397800D76F3A /* MPWURLCall.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9726A41D00397800D76F3A /* MPWURLCall.m */; };
+		1F9975CD2F506F7F007A1324 /* SQLiteStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9975CB2F506F7F007A1324 /* SQLiteStore.h */; };
+		1F9975CE2F506F7F007A1324 /* SQLiteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9975CC2F506F7F007A1324 /* SQLiteStore.m */; };
+		1F9975CF2F506F7F007A1324 /* SQLiteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9975CC2F506F7F007A1324 /* SQLiteStore.m */; };
+		1F9975D02F506F7F007A1324 /* SQLiteStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9975CB2F506F7F007A1324 /* SQLiteStore.h */; };
+		1F9975D12F506F7F007A1324 /* SQLiteStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9975CB2F506F7F007A1324 /* SQLiteStore.h */; };
+		1F9975D22F506F7F007A1324 /* SQLiteStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F9975CC2F506F7F007A1324 /* SQLiteStore.m */; };
 		1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
 		1F9F8D6B263F387A003019DC /* MPWFixedValueSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F8D69263F387A003019DC /* MPWFixedValueSource.h */; };
 		1F9F8D6C263F387A003019DC /* MPWFixedValueSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9F8D69263F387A003019DC /* MPWFixedValueSource.h */; };
@@ -1734,6 +1740,8 @@
 		1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelDidChangeNotification.h; sourceTree = "<group>"; };
 		1F9726A31D00397800D76F3A /* MPWURLCall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLCall.h; sourceTree = "<group>"; };
 		1F9726A41D00397800D76F3A /* MPWURLCall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWURLCall.m; sourceTree = "<group>"; };
+		1F9975CB2F506F7F007A1324 /* SQLiteStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SQLiteStore.h; sourceTree = "<group>"; };
+		1F9975CC2F506F7F007A1324 /* SQLiteStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SQLiteStore.m; sourceTree = "<group>"; };
 		1F9D63CA1F601E1900DA9514 /* MPWTest (iOS).framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MPWTest (iOS).framework"; path = "../../Build/Development-iphoneos/MPWTest (iOS).framework"; sourceTree = "<group>"; };
 		1F9D63CC1F601F1500DA9514 /* MPWTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MPWTest.framework; path = "../../Build/Development-iphoneos/MPWTest.framework"; sourceTree = "<group>"; };
 		1F9F8D69263F387A003019DC /* MPWFixedValueSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWFixedValueSource.h; sourceTree = "<group>"; };
@@ -2441,6 +2449,8 @@
 		1F1E09C2269D933300567AF6 /* SQLite */ = {
 			isa = PBXGroup;
 			children = (
+				1F9975CB2F506F7F007A1324 /* SQLiteStore.h */,
+				1F9975CC2F506F7F007A1324 /* SQLiteStore.m */,
 				1FF6590824957007002371E9 /* MPWStreamQLite.h */,
 				1FF6590924957007002371E9 /* MPWStreamQLite.m */,
 				1F1E09CB269D968200567AF6 /* MPWSQLiteTable.h */,
@@ -3055,6 +3065,7 @@
 				1F821AB92BFCEB0B00D936E3 /* MPWMatrix.h in Headers */,
 				1F7078A31F6AA5140080E166 /* MPWURLStreamingStream.h in Headers */,
 				1F185B90265D0FA700BA8219 /* MPWJSONConverterStore.h in Headers */,
+				1F9975CD2F506F7F007A1324 /* SQLiteStore.h in Headers */,
 				1FE85E35285FA38200A0EDD3 /* MPWSFTPStore.h in Headers */,
 				1FE37C301969770000C9A378 /* MPWNeXTPListWriter.h in Headers */,
 				1FFE3AD020B4310C00E65B93 /* MPWGenericIdentifier.h in Headers */,
@@ -3183,6 +3194,7 @@
 				1FCF262E1CF3993C00AC64CE /* MPWPropertyBinding.h in Headers */,
 				1FEBBC4E2A2DF9B60007567F /* MPWTemplateMatchingStore.h in Headers */,
 				1FCAD0FD29BA072B00228DB3 /* MPWSysctlStore.h in Headers */,
+				1F9975D02F506F7F007A1324 /* SQLiteStore.h in Headers */,
 				1F9726A71D00397800D76F3A /* MPWURLCall.h in Headers */,
 				1F846B5229D6D00F001BAC41 /* MPWExtensionStore.h in Headers */,
 				1FA869C820E8E01200920279 /* MPWCachingStore.h in Headers */,
@@ -3521,6 +3533,7 @@
 				1FAABE2A0BA242DD00938299 /* NSNumberArithmetic.h in Headers */,
 				1FB2C88C217760DF0061C3F9 /* MPWJSONWriter.h in Headers */,
 				1FC97CDD0BB0A8B900F8CB51 /* MPWNumber.h in Headers */,
+				1F9975D12F506F7F007A1324 /* SQLiteStore.h in Headers */,
 				1FC97CF00BB0A9B200F8CB51 /* MPWInteger.h in Headers */,
 				1F5336032A1D284600AA1754 /* stack.h in Headers */,
 				1FC97D010BB0AB8B00F8CB51 /* MPWFloat.h in Headers */,
@@ -4296,6 +4309,7 @@
 				1F840DE9193F50E400589595 /* MPWCaseInsensitiveSmallStringTable.m in Sources */,
 				1FC35CCF254BF05B005D04F7 /* MPWValueArray.m in Sources */,
 				1F840DEA193F50E400589595 /* MPWEnumSelectFilter.m in Sources */,
+				1F9975CE2F506F7F007A1324 /* SQLiteStore.m in Sources */,
 				1FA869DA20EBC7FC00920279 /* MPWRESTOperation.m in Sources */,
 				1F5335F62A1D284600AA1754 /* houdini_href_e.c in Sources */,
 				1F840DEB193F50E400589595 /* MPWIdentityDictionary.m in Sources */,
@@ -4507,6 +4521,7 @@
 				1FEFBD2F2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1FC70F8820CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
 				1FB6EB5E1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
+				1F9975CF2F506F7F007A1324 /* SQLiteStore.m in Sources */,
 				1FCF265A1CF39ABD00AC64CE /* MPWCaseInsensitiveSmallStringTable.m in Sources */,
 				1FCF265B1CF39ABD00AC64CE /* MPWEnumSelectFilter.m in Sources */,
 				1F04A53D21D2E01500E19C3F /* MPWInterval.m in Sources */,
@@ -4746,6 +4761,7 @@
 				1FF8FE1209B49D0100652476 /* MPWByteStream.m in Sources */,
 				1F5336112A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */,
 				1FF8FE1409B49D0100652476 /* MPWNeXTPListWriter.m in Sources */,
+				1F9975D22F506F7F007A1324 /* SQLiteStore.m in Sources */,
 				1FF6590D24957007002371E9 /* MPWStreamQLite.m in Sources */,
 				1F78CB292AE19E5800B6458E /* MPWArrayCursor.m in Sources */,
 				1FF8FE1509B49D0100652476 /* MPWFlattenStream.m in Sources */,

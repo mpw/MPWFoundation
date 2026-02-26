@@ -462,6 +462,21 @@ static int compareIntegerPointers(const void *va , const void *vb )
     }
 }
 
+-(long)capacity
+{
+    return capacity;
+}
+
+-(instancetype)collect:(int(^)(int))block
+{
+    MPWIntArray *result=[[[[self class] alloc] initWithCapacity:[self capacity]] autorelease];
+    for (int i=0;i<count;i++) {
+        int tempResult = block(data[i]);
+        [result addInteger:tempResult];
+    }
+    return result;
+}
+
 
 -(instancetype)select:(BOOL(^)(int))block
 {

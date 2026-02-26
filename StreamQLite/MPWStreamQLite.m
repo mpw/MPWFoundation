@@ -27,7 +27,7 @@
     NSDictionary <NSString*,MPWSQLiteTable*>* tables;
 }
 
-lazyAccessor(NSDictionary*, tables, setTables, getTables )
+lazyAccessor(NSDictionary*, tables, setTables, computeTables )
 
 +(instancetype)open:(NSString*)newpath
 {
@@ -110,6 +110,7 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
     [self setBuilder:[MPWPListBuilder builder]];
     [self query:@"select name from sqlite_master where [type] = \"table\""];
     NSMutableArray *names=[[[[[self.builder result] collect] objectForKey:@"name"] mutableCopy] autorelease];
+    NSLog(@"table names: %@",names);
     [names removeObject:@"schema"];
     return names;
 }
@@ -117,18 +118,24 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
 -(NSArray<MPWSQLiteTable*>*)getTablesList
 {
     NSMutableArray *computedTables=[NSMutableArray array];
-    for ( NSString *name in [self dbTableNames]){
-        MPWSQLiteTable *table=[[MPWSQLiteTable new] autorelease];
-        table.name=name;
-        [table setSourceDB:self];
-        [computedTables addObject:table];
+    @autoreleasepool {
+        NSArray *tableNames = [self dbTableNames];
+        for ( NSString *name in tableNames){
+            MPWSQLiteTable *table=[[MPWSQLiteTable new] autorelease];
+            table.name=name;
+            [table setSourceDB:self];
+            [computedTables addObject:table];
+        }
     }
+//    NSLog(@"computedTables: %@",computedTables);
     return computedTables;
 }
 
--(NSDictionary<NSString*,MPWSQLiteTable*>*)getTables
+-(NSDictionary<NSString*,MPWSQLiteTable*>*)computeTables
 {
-    return [NSDictionary dictionaryWithObjects:[self getTablesList] byKey:@"name"];
+    NSDictionary *tableDict =  [NSDictionary dictionaryWithObjects:[self getTablesList] byKey:@"name"];
+//    NSLog(@"tableDict: %@",tableDict);
+    return tableDict;
 }
 
 -(void)enableWAL
@@ -259,7 +266,7 @@ lazyAccessor(NSDictionary*, tables, setTables, getTables )
 {
     MPWStreamQLite *db=[self _chinookDB];
     [db open];
-    NSDictionary<NSString*,MPWSQLiteTable*> *tables=[db getTables];
+    NSDictionary<NSString*,MPWSQLiteTable*> *tables=[db computeTables];
     INTEXPECT(tables.count, 13, @"number of tables");
     MPWSQLiteTable *albums=tables[@"albums"];
     IDEXPECT( [albums name],@"albums",@"name of first table");

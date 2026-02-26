@@ -45,8 +45,8 @@
     sqlite3 *sqlitedb;
     NSMutableDictionary<NSString*,NSNumber*> *insertParams;
     NSMutableArray<NSMutableData*>* buffers;
-    char *bufferpointers[20];
-    id keys[20];
+    char *bufferpointers[100];
+    id keys[100];
     int numKeys;
 }
 
@@ -57,7 +57,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 {
     self.db = sourceDB;
     sqlitedb = [sourceDB sqliteDB];
-    [self createInsertStatement];
+//    [self createInsertStatement];
     [self createBuffers];
 }
 
@@ -104,6 +104,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
     int paramIndexInt=paramIndex.intValue;
     if (!paramIndex) {
         NSString *sql_key=[@":" stringByAppendingString:aKey];
+        [self createInsertStatement];
         paramIndexInt=sqlite3_bind_parameter_index(insert_stmt, [sql_key UTF8String]);
         if ( !insertParams) {
             insertParams=[[NSMutableDictionary alloc] init];
@@ -120,6 +121,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
     if ( anObject ) {
+        [self createInsertStatement];
         int keyIndex=[self paramIndexForKey:aKey];
         char *buffer=bufferpointers[keyIndex];
         NSInteger len = [[anObject stringValue] getISOLatinCharacters:buffer];
@@ -132,6 +134,7 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 {
 //    NSLog(@"MPWSQLiteWriter writeInteger: %ld forKey: %@",anInt,aKey);
 //    NSLog(@"index for key '%@' -> '%@' is %d",aKey,sql_key,paramIndex);
+    [self createInsertStatement];
     sqlite3_bind_int64(insert_stmt, [self paramIndexForKey:aKey], anInt);
 }
 
@@ -152,12 +155,16 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 {
     if ( !insert_stmt) {
         int rc1,rc2=0,rc3=0;
-        rc1 = sqlite3_prepare_v2(sqlitedb, [[self computeSQLForInsert] UTF8String], -1, &insert_stmt, 0);
+        NSString *sqlForInsertComputed=[self computeSQLForInsert];
         rc2 = sqlite3_prepare_v2(sqlitedb, "BEGIN TRANSACTION", -1, &begin_transaction, 0);
+        rc1 = sqlite3_prepare_v2(sqlitedb, [sqlForInsertComputed UTF8String], -1, &insert_stmt, 0);
+        NSString *error = @(sqlite3_errmsg(sqlitedb));
         rc3 = sqlite3_prepare_v2(sqlitedb, "END TRANSACTION", -1, &end_transaction, 0);
         if ( !(rc1==0 && rc2==0 && rc3==0)) {
-            NSLog(@"preparing INSERT statments failed rc1=%d rc2=%d rc3=%d",rc1,rc2,rc3);
-            NSLog(@"error: %s",(sqlite3_errmsg(sqlitedb)));
+            NSLog(@"preparing INSERT statments for table '%@' failed rc1=%d rc2=%d rc3=%d",self.name,rc1,rc2,rc3);
+            NSLog(@"error: %@",error);
+            NSLog(@"computed SQL for insert: %@",sqlForInsertComputed);
+            [NSException raise:@"sqllite" format:@"creating insert failed"];
         }
     }
     
@@ -267,6 +274,11 @@ lazyAccessor(NSString*, sqlForCreate, setSqlForCreate, computeSQLForCreate )
 -evaluateQuery:aQuery inContext:aContext
 {
     return [self selectPredicate:[[aQuery predicate] asNSPredicate]];
+}
+
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: name: %@ columns: %@>",self.className,self,self.name,self.schema];
 }
 
 @end

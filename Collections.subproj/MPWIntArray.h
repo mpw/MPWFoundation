@@ -18,6 +18,7 @@
 	unsigned long count,capacity;
 }
 
+-(long)capacity;
 +array;
 -(int)integerAtIndex:(unsigned)index;
 -(instancetype)initFromInt:(long)start toInt:(long)stop step:(long)step;
