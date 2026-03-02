@@ -225,7 +225,7 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
 +(void)testInsert
 {
     MPWStreamQLite *db=[self _testerDB];
-    MPWSQLiteTable *writer=[db tables][@"Tester"];
+    MPWSQLiteTable *writer=[[db tables][@"Tester"] writer];
     [writer beginDictionary];
     [writer writeInteger:2 forKey:@"a"];
     [writer writeInteger:3 forKey:@"b"];
@@ -253,7 +253,7 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
 +(void)testInsertDict
 {
     MPWStreamQLite *db=[self _testerDB];
-    MPWSQLiteTable *writer=[db tables][@"Tester"];
+    MPWSQLiteTable *writer=[[db tables][@"Tester"] writer];
 
     [writer writeObject:@{ @"a": @(2), @"b": @(4), @"c": @"More"  }];
 

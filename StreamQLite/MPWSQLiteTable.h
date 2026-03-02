@@ -11,10 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MPWStreamQLite,MPWSQLColumnInfo;
 
-@interface MPWSQLiteTable : MPWFlattenStream
+@interface MPWSQLiteTable : NSObject
 
 @property (nonatomic,assign) Class tableClass;
 @property (nonatomic,weak) MPWStreamQLite *db;
+@property (nonatomic, strong) NSString *name;
 
 -(NSArray<MPWSQLColumnInfo*>*)schema;
 -(void)setSourceDB:(MPWStreamQLite*)sourceDB;
