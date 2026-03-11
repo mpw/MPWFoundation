@@ -16,6 +16,19 @@
 #import "MPWPlistBuilder.h"
 
 @implementation MPWDelimitedTable
+{
+    NSData  *data;
+    const char *bytes;
+    NSArray *headerKeys;
+    NSString *fieldDelimiter;
+    MPWIntArray *lineOffsets;
+    int eolLength;
+    char fieldDelimiterBytes[20];
+    int  fieldDelimiterLength;
+    MPWObjectCache *subdatas;
+    NSArray   *keysOfInterest;
+    MPWIntArray *indexesOfInterest;
+}
 
 objectAccessor(NSData*, data, _setData)
 lazyAccessor(NSArray*, headerKeys, setHeaderKeys, computeHeaderKeys)

@@ -181,7 +181,7 @@ scalarAccessor( NSRect, rect, setRect )
     return [[self  class] rectWithRect:r];
 }
 
--(MPWRect*)inset:anObject
+-(instancetype)inset:anObject
 {
     float x=0,y=0;
     if ( [anObject respondsToSelector:@selector(x)] && [anObject respondsToSelector:@selector(y)] ) {
@@ -197,6 +197,11 @@ scalarAccessor( NSRect, rect, setRect )
 -(NSRect)rectValue
 {
     return rect;
+}
+
+-(instancetype)union:(MPWRect*)otherRect
+{
+    return [[self class] rectWithNSRect:NSUnionRect( [self rectValue], [otherRect rectValue])];
 }
 
 @end

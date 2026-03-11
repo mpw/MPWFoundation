@@ -82,6 +82,16 @@ static id frameworkSearchPaths=nil;
 	return bundle;
 }
 
+-(NSError*)loadReturningError
+{
+    NSError *error=nil;
+    if ( ![self loadAndReturnError:&error]) {
+        return error;
+    }
+    return nil;
+}
+
+
 @end
 
 @implementation NSObject(bundleConveniences)
@@ -104,6 +114,7 @@ static id frameworkSearchPaths=nil;
 {
     return [[self class] resourceWithName:aName type:aType];
 }
+
 
 @end
 

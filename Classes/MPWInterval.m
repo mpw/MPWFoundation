@@ -442,15 +442,18 @@ static void* runBlock( void *blockAndArgAsVoid ){
     }
 }
 
--(void)do:aBlock
-{
-    [[@(0) to:[self sub:@(1)]] do:aBlock];
-}
+
+//    currently taken by the boolean "do:"
+//
+//-(void)do:aBlock
+//{
+//    [[@(0) to:[self sub:@(1)]] do:aBlock];
+//}
 
 
 -(void)repeat:aBlock
 {
-    [self do:aBlock];
+    [[@(0) to:[self sub:@(1)]] do:aBlock];
 }
 
 

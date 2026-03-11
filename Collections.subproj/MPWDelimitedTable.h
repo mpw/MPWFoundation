@@ -6,25 +6,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWTable.h>
 
-@class MPWIntArray,MPWObjectCache;
 @protocol MPWPlistStreaming;
 
-@interface MPWDelimitedTable : NSObject
-{
-    NSData  *data;
-    const char *bytes;
-    NSArray *headerKeys;
-    NSString *fieldDelimiter;
-    MPWIntArray *lineOffsets;
-    int eolLength;
-    char fieldDelimiterBytes[20];
-    int  fieldDelimiterLength;
-    MPWObjectCache *subdatas;
-    NSArray   *keysOfInterest;
-    MPWIntArray *indexesOfInterest;
-}
+@interface MPWDelimitedTable : MPWTable
+
 
 -initWithData:(NSData*)newTableData delimiter:(NSString*)newFieldDelimiter;
 -initWithTabSeparatedData:(NSData*)newTableData;

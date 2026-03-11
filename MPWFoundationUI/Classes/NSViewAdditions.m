@@ -46,7 +46,12 @@
     return sv;
 }
 
--openInWindow:(NSString*)windowName
+-(NSScrollView*)inScrollView
+{
+    return [self inScrollView:[self frame]];
+}
+
+-(NSRect)windowRect
 {
     NSRect r=[self frame];
     NSRect defaultRect = [self defaultWindowRect];
@@ -56,7 +61,11 @@
     r.size.width += 5;
     r.size.height += 5;
     r=[self defaultWindowRectForProposedRect:r];
-
+    return r;
+}
+-openInWindow:(NSString*)windowName
+{
+    NSRect r = [self windowRect];
     NSWindow *theWindow=[[NSWindow alloc] initWithContentRect:r
                                                     styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskResizable|NSWindowStyleMaskMiniaturizable
                                                       backing:NSBackingStoreBuffered defer:NO];
