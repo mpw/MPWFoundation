@@ -62,13 +62,13 @@
 
 @interface MPWFileTarget : MPWFileDescriptorTarget
 {
-    int bufferSize;
+    long bufferSize;
     char buffer[LARGEBUFSIZE];
-    int  written;
+    long written;
 }
 
--(int)bufferSize;
--(void)setBufferSize:(int)newSize;
+-(long)bufferSize;
+-(void)setBufferSize:(long)newSize;
 
 @end
 
@@ -929,12 +929,12 @@ intAccessor( fd, setFd )
 
 @implementation MPWFileTarget
 
--(int)bufferSize
+-(long)bufferSize
 {
     return bufferSize;
 }
 
--(void)setBufferSize:(int)newSize
+-(void)setBufferSize:(long)newSize
 {
     bufferSize = MAX(MIN( newSize, LARGEBUFSIZE), 0);
 }

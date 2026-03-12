@@ -1,20 +1,20 @@
 //
-//  MPWTableColumn.m
+//  MPWTableColumnInfo.m
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 11.03.26.
 //
 
-#import "MPWTableColumn.h"
+#import "MPWTableColumnInfo.h"
 
-@implementation MPWTableColumn
+@implementation MPWTableColumnInfo
 
 @end
 
 
 #import <MPWFoundation/DebugMacros.h>
 
-@implementation MPWTableColumn(testing) 
+@implementation MPWTableColumnInfo(testing) 
 
 +(void)someTest
 {
