@@ -12,7 +12,7 @@
 
 @interface MPWProgramTextView ()
 
-@property (nonatomic, strong) NSSliderTouchBarItem*  sliderTouchBarItem;
+// @property (nonatomic, strong) NSSliderTouchBarItem*  sliderTouchBarItem;
 
 @end
 
@@ -40,6 +40,9 @@
     [self setAutomaticSpellingCorrectionEnabled:NO];
     [self setRichText:NO];
     [self setAllowsUndo:YES];
+    [self setEditable:YES];
+    [self setSelectable:YES];
+    [self setUsesFindPanel:YES];
 }
 
 -(instancetype)initWithFrame:(NSRect)frameRect
@@ -375,7 +378,28 @@
 }
 
 
+-(NSString*)selectedTextOrCurrentLine
+{
+    NSString *result=@"";
+    NSRange selected=self.selectedRange;
+    if ( selected.length == 0) {
+        NSRange beginningOfLine=[[self string] rangeOfString:@"\n" options:NSBackwardsSearch range:NSMakeRange(0,selected.location)];
+        if ( beginningOfLine.location == NSNotFound ) {
+            beginningOfLine=NSMakeRange(0, 0);
+        }
+        if (beginningOfLine.location != NSNotFound) {
+            NSRange lineRange = NSMakeRange( beginningOfLine.location, selected.location - beginningOfLine.location);
+            result = [[self string] substringWithRange:lineRange];
+        }
+    } else {
+        result = [self selectedText];
+    }
+    return result;
+}
+
+
 //---- Touch Bar
+#if 0
 
 static BOOL fromTouchBar=NO;
 
@@ -504,25 +528,8 @@ static NSString *SliderItemIdentifier=@"com.metaobject.CodeDraw.Slider";
 }
 
 
--(NSString*)selectedTextOrCurrentLine
-{
-    NSString *result=@"";
-    NSRange selected=self.selectedRange;
-    if ( selected.length == 0) {
-        NSRange beginningOfLine=[[self string] rangeOfString:@"\n" options:NSBackwardsSearch range:NSMakeRange(0,selected.location)];
-        if ( beginningOfLine.location == NSNotFound ) {
-            beginningOfLine=NSMakeRange(0, 0);
-        }
-        if (beginningOfLine.location != NSNotFound) {
-            NSRange lineRange = NSMakeRange( beginningOfLine.location, selected.location - beginningOfLine.location);
-            result = [[self string] substringWithRange:lineRange];
-        }
-    } else {
-        result = [self selectedText];
-    }
-    return result;
-}
 
+#endif
 
 @end
 

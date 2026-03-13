@@ -139,7 +139,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: name: %@ columns: %@>",self.className,self,self.name,self.schema];
+    return [NSString stringWithFormat:@"<%@:%p: name: %@ columns: %@>",[self className],self,self.name,self.schema];
 }
 
 @end

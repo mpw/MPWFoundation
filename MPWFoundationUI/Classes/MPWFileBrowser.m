@@ -45,6 +45,7 @@
     [text setAutomaticDashSubstitutionEnabled:NO];
     [text setAutomaticTextReplacementEnabled:NO];
     [text setAutomaticSpellingCorrectionEnabled:NO];
+    [text setUsesFindPanel:YES];
 //    [image setImageScaling:NSImageScaleProportionallyUpOrDown];
 //    [text setFont:[NSFont fontWithName:@"Menlo Regular" size:11]];
 

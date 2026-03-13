@@ -30,7 +30,7 @@
 
 -(id)at:(id<MPWIdentifying>)aReference
 {
-    
+    return nil;
 }
 
 @end
