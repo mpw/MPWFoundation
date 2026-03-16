@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(IBAction)triggerRedisplay:(id)sender;
 
-@property (nonatomic, strong ) NSTextView *logView;
+@property (nonatomic, strong ) IBOutlet NSTextView *logView;
 @property (nonatomic, strong ) IBOutlet NSView *slotForContentView;
 
 @end

@@ -8,6 +8,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MPWViewHarness">
             <connections>
+                <outlet property="logView" destination="qvl-9L-WNc" id="3Lu-Wf-Xfd"/>
                 <outlet property="slotForContentView" destination="NQw-Ot-PSB" id="hiE-d6-tsh"/>
                 <outlet property="view" destination="c22-O7-iKe" id="jGK-2z-TVT"/>
             </connections>
@@ -25,7 +26,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="511" height="22"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qvl-9L-WNc">
+                            <textView wantsLayer="YES" editable="NO" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="qvl-9L-WNc">
                                 <rect key="frame" x="0.0" y="0.0" width="511" height="22"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
