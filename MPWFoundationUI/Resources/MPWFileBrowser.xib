@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="24506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="24506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MPWFileBrowser">
             <connections>
                 <outlet property="browser" destination="8fz-EP-imc" id="RcR-7r-JHa"/>
-                <outlet property="contentView" destination="6ym-CX-YUe" id="3AI-E2-A6E"/>
+                <outlet property="contentView" destination="I3M-Iu-CS3" id="S4D-NV-lTm"/>
+                <outlet property="errorView" destination="HTZ-8r-yud" id="aHJ-GZ-Co5"/>
                 <outlet property="image" destination="ySW-yG-BSI" id="VnZ-w4-qzE"/>
                 <outlet property="text" destination="kDE-sf-eZ0" id="1x3-qM-h40"/>
                 <outlet property="textScrollView" destination="NcK-2k-awf" id="N4K-e8-Ean"/>
@@ -23,15 +24,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <splitView fixedFrame="YES" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="lB7-Aq-U4W">
-                    <rect key="frame" x="0.0" y="-11" width="460" height="385"/>
+                    <rect key="frame" x="0.0" y="0.0" width="460" height="374"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <customView fixedFrame="YES" id="ALO-Hw-76z">
-                            <rect key="frame" x="0.0" y="0.0" width="460" height="278"/>
+                            <rect key="frame" x="0.0" y="0.0" width="460" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <browser verticalHuggingPriority="750" fixedFrame="YES" allowsExpansionToolTips="YES" enabled="YES" hasHorizontalScroller="YES" allowsEmptySelection="YES" defaultColumnWidth="100" minColumnWidth="100" maxVisibleColumns="2" titled="YES" separatesColumns="YES" allowsTypeSelect="YES" columnResizingType="auto" translatesAutoresizingMaskIntoConstraints="NO" id="8fz-EP-imc" customClass="MPWBrowser">
-                                    <rect key="frame" x="0.0" y="0.0" width="460" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="460" height="292"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <connections>
                                         <action selector="didSelect:" target="-2" id="A9Z-SU-c5H"/>
@@ -40,8 +41,55 @@
                             </subviews>
                         </customView>
                         <customView fixedFrame="YES" id="6ym-CX-YUe" userLabel="Detail Content View">
-                            <rect key="frame" x="0.0" y="288" width="460" height="97"/>
+                            <rect key="frame" x="0.0" y="280" width="460" height="94"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <subviews>
+                                <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="jKt-RA-no8">
+                                    <rect key="frame" x="0.0" y="-3" width="460" height="96"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <customView fixedFrame="YES" id="I3M-Iu-CS3">
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="42"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </customView>
+                                        <customView fixedFrame="YES" id="cjv-8s-pYW" customClass="NSTextView">
+                                            <rect key="frame" x="0.0" y="52" width="460" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <scrollView fixedFrame="YES" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ayx-O3-1BC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="460" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <clipView key="contentView" drawsBackground="NO" id="Prk-fw-Qcm">
+                                                        <rect key="frame" x="0.0" y="0.0" width="443" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <textView wantsLayer="YES" importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="HTZ-8r-yud">
+                                                                <rect key="frame" x="0.0" y="0.0" width="443" height="44"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                                <size key="minSize" width="443" height="44"/>
+                                                                <size key="maxSize" width="443" height="10000000"/>
+                                                            </textView>
+                                                        </subviews>
+                                                    </clipView>
+                                                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Kcf-QN-PS3">
+                                                        <rect key="frame" x="-100" y="-100" width="223" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="i2i-8j-dFd">
+                                                        <rect key="frame" x="443" y="0.0" width="17" height="44"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
+                                            </subviews>
+                                        </customView>
+                                    </subviews>
+                                    <holdingPriorities>
+                                        <real value="250"/>
+                                        <real value="250"/>
+                                    </holdingPriorities>
+                                </splitView>
+                            </subviews>
                         </customView>
                     </subviews>
                     <holdingPriorities>
@@ -56,14 +104,15 @@
             <rect key="frame" x="0.0" y="0.0" width="53" height="0.0"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <clipView key="contentView" drawsBackground="NO" id="uqQ-pI-pCX">
-                <rect key="frame" x="0.0" y="0.0" width="38" height="0.0"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <rect key="frame" x="0.0" y="0.0" width="36" height="0.0"/>
+                <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="kDE-sf-eZ0">
-                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="14"/>
+                        <rect key="frame" x="0.0" y="0.0" width="36" height="14"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        <size key="minSize" width="36" height="0.0"/>
                         <size key="maxSize" width="460" height="10000000"/>
                         <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                         <connections>
@@ -77,7 +126,7 @@
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <scroller key="verticalScroller" verticalHuggingPriority="750" horizontal="NO" id="tyS-Ae-nhe">
-                <rect key="frame" x="38" y="0.0" width="15" height="0.0"/>
+                <rect key="frame" x="36" y="0.0" width="17" height="0.0"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
             <point key="canvasLocation" x="-396.5" y="-189"/>
@@ -88,5 +137,25 @@
             <imageCell key="cell" selectable="YES" editable="YES" alignment="left" imageScaling="proportionallyDown" id="NYr-Er-M2l"/>
             <point key="canvasLocation" x="-63" y="-131"/>
         </imageView>
+        <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" id="cMB-O5-Pbe">
+            <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <customView fixedFrame="YES" id="BXp-jT-JMF">
+                    <rect key="frame" x="0.0" y="0.0" width="163" height="96"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <subviews>
+                        <customView id="1g9-2k-LjU">
+                            <rect key="frame" x="0.0" y="-7" width="163" height="44"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </customView>
+                    </subviews>
+                </customView>
+            </subviews>
+            <holdingPriorities>
+                <real value="250"/>
+            </holdingPriorities>
+            <point key="canvasLocation" x="-139" y="425"/>
+        </splitView>
     </objects>
 </document>

@@ -181,6 +181,8 @@ scalarAccessor( NSRect, rect, setRect )
     return [[self  class] rectWithRect:r];
 }
 
+
+
 -(instancetype)inset:anObject
 {
     float x=0,y=0;
@@ -202,6 +204,16 @@ scalarAccessor( NSRect, rect, setRect )
 -(instancetype)union:(MPWRect*)otherRect
 {
     return [[self class] rectWithNSRect:NSUnionRect( [self rectValue], [otherRect rectValue])];
+}
+
+-(instancetype)intersection:(MPWRect*)otherRect
+{
+    return [[self class] rectWithNSRect:NSIntersectionRect( [self rectValue], [otherRect rectValue])];
+}
+
+-(BOOL)intersects:(MPWRect*)otherRect
+{
+    return NSIntersectsRect( [self rectValue], [otherRect rectValue]);
 }
 
 @end
@@ -283,6 +295,12 @@ scalarAccessor( NSRect, rect, setRect )
     
 }
 
++(void)testIntersects
+{
+    EXPECTTRUE( [[self rectWithRect:NSMakeRect( 0,0,10,10)] intersects: [self rectWithRect:NSMakeRect( 5,4,10,10)]],@"overlapping");
+    EXPECTFALSE( [[self rectWithRect:NSMakeRect( 0,0,10,10)]intersects:  [self rectWithRect:NSMakeRect( 15,14,10,10)]],@"no overlap");
+}
+
 
 +testSelectors
 {
@@ -291,6 +309,7 @@ scalarAccessor( NSRect, rect, setRect )
             @"testXYWidthHeight",
             @"testCenter",
             @"testInset",
+            @"testIntersects",
             nil];
 }
 

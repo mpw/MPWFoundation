@@ -16,6 +16,7 @@
 @property (nonatomic,strong)            IBOutlet NSScrollView *textScrollView;
 @property (nonatomic,strong)            IBOutlet NSImageView  *image;
 @property (nonatomic,strong)            IBOutlet NSView       *contentView;
+@property (nonatomic,strong)            IBOutlet NSTextView   *errorView;
 
 -(IBAction)didSelect:sender;
 
@@ -132,6 +133,24 @@
 -(NSDragOperation)browser:(NSBrowser *)browser validateDrop:(id<NSDraggingInfo>)info proposedRow:(NSInteger *)row column:(NSInteger *)column dropOperation:(NSBrowserDropOperation *)dropOperation
 {
     return NSDragOperationCopy;
+}
+
+-(void)replaceLogMessage:(NSString*)msg color:(NSColor*)aColor
+{
+    [self.errorView setString:msg];
+    [self.errorView setTextColor:aColor range:NSMakeRange(0, msg.length)];
+
+}
+
+-(void)reportError:(NSString*)error{
+    
+    [self replaceLogMessage:error color:[NSColor redColor]];
+    NSLog(@"error view storage: %@ error: %@",self.errorView.textStorage,error);
+}
+
+-(void)reportMessage:(NSString*)message{
+    [self replaceLogMessage:message color:[NSColor blackColor]];
+    NSLog(@"error view storage: %@ message: %@",self.errorView.textStorage,message);
 }
 
 -(void)dealloc
