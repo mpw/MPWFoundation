@@ -19,5 +19,6 @@
 -(void)drawRect:(NSRect)rect onContext:(id <MPWDrawingContext>)context;
 
 @property(nonatomic,retain) id drawingBlock;
+@property(nonatomic,retain) NSException *lastException;
 
 @end

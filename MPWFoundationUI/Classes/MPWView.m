@@ -67,6 +67,7 @@
 
 -(void)drawRect:(NSRect)rect
 {
+    self.lastException = nil;
     if ([self logDrawRect] ) {
         NSLog(@"-[%@ drawRect:%@]",[self class],NSStringFromRect(rect));
     }
@@ -78,12 +79,19 @@
     //    NSLog(@"context: %@",context);
     @try {
         [self drawRect:rect onContext:context];
-    } @catch ( id e ) {
-        NSLog(@"exception while drawing");
+    } @catch ( NSException *e ) {
+        NSLog(@"exception while drawing: %@",e);
+        self.lastException=e;
     }
     if ([self logDrawRect] ) {
         NSLog(@"finished drawing");
     }
+}
+
+-(NSException*)redisplay
+{
+    [self display];
+    return self.lastException;
 }
 
 
