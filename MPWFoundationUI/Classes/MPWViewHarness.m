@@ -25,7 +25,7 @@
     @try {
         [self.contentView display];
         if ( [self.contentView respondsToSelector:@selector(lastException)] ) {
-            error = [self.contentView lastException];
+            error = [(MPWView*)self.contentView lastException];
         }
     } @catch ( NSException *e ) {
         error = e;
@@ -44,7 +44,7 @@
 
 -(instancetype)initWithView:newContentView
 {
-    self = [super initWithNibName:@"MPWHarness" bundle:[NSBundle bundleForClass:[self class]]];
+    self = [super initWithNibName:@"MPWViewHarness" bundle:[NSBundle bundleForClass:[self class]]];
     self.contentView = newContentView;
     [self view];
     NSLog(@"MPWViewHarness: %p",self);
@@ -54,6 +54,7 @@
 -(void)awakeFromNib
 {
     [super awakeFromNib];
+    self.view.autoresizingMask = self.slotForContentView.autoresizingMask;
     [self.slotForContentView addSubview:self.contentView];
 }
 

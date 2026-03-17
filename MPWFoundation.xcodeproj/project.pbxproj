@@ -241,7 +241,7 @@
 		1F5620A72F61BD7500D998EF /* MPWTableColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumnInfo.m */; };
 		1F5620A82F61BD7500D998EF /* MPWTableColumnInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620A22F61BD7500D998EF /* MPWTableColumnInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F5620A92F61BD7500D998EF /* MPWTableColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumnInfo.m */; };
-		1F5620AF2F6867E300D998EF /* MPWHarness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5620AE2F6867E300D998EF /* MPWHarness.xib */; };
+		1F5620AF2F6867E300D998EF /* MPWViewHarness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */; };
 		1F5620B22F68685200D998EF /* MPWViewHarness.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620B02F68685200D998EF /* MPWViewHarness.h */; };
 		1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620B12F68685200D998EF /* MPWViewHarness.m */; };
 		1F575D8520BBDBC500B6C1A9 /* MPWPathRelativeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1645,7 +1645,7 @@
 		1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWArrayFlattenStream.m; sourceTree = "<group>"; };
 		1F5620A22F61BD7500D998EF /* MPWTableColumnInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTableColumnInfo.h; sourceTree = "<group>"; };
 		1F5620A32F61BD7500D998EF /* MPWTableColumnInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableColumnInfo.m; sourceTree = "<group>"; };
-		1F5620AE2F6867E300D998EF /* MPWHarness.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWHarness.xib; sourceTree = "<group>"; };
+		1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWViewHarness.xib; sourceTree = "<group>"; };
 		1F5620B02F68685200D998EF /* MPWViewHarness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWViewHarness.h; sourceTree = "<group>"; };
 		1F5620B12F68685200D998EF /* MPWViewHarness.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWViewHarness.m; sourceTree = "<group>"; };
 		1F575D8320BBDBC500B6C1A9 /* MPWPathRelativeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWPathRelativeStore.h; sourceTree = "<group>"; };
@@ -2740,7 +2740,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA8F31F24DCB27000CD69D0 /* MPWFileBrowser.xib */,
-				1F5620AE2F6867E300D998EF /* MPWHarness.xib */,
+				1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -4060,7 +4060,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA8F32024DCB27000CD69D0 /* MPWFileBrowser.xib in Resources */,
-				1F5620AF2F6867E300D998EF /* MPWHarness.xib in Resources */,
+				1F5620AF2F6867E300D998EF /* MPWViewHarness.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
