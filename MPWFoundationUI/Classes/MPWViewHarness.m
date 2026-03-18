@@ -41,12 +41,18 @@
     [self redisplayDisplayingErrors];
 }
 
+-(void)didCompileClass:className
+{
+    NSLog(@"didCompileClass: %@",className);
+    [self redisplayDisplayingErrors];
+}
 
 -(instancetype)initWithView:newContentView
 {
     self = [super initWithNibName:@"MPWViewHarness" bundle:[NSBundle bundleForClass:[self class]]];
     self.contentView = newContentView;
     [self view];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didCompileClass:) name:@"ClassCompiled" object:nil];
     NSLog(@"MPWViewHarness: %p",self);
     return self;
 }

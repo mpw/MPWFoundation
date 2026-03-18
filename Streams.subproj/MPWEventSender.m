@@ -51,6 +51,7 @@
     } else {
         [self postNotificationObject:anObject];
     }
+    FORWARD( anObject );
 }
 
 -(void)dealloc

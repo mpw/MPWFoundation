@@ -6,9 +6,9 @@
 //
 //
 
-#import <MPWFoundation/MPWWriteStream.h>
+#import <MPWFoundation/MPWFilterStream.h>
 
-@interface MPWEventSender : MPWWriteStream
+@interface MPWEventSender : MPWFilterStream
 
 -(id)initWithNotificationName:(NSString *)name shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
 -(id)initWithNotificationProtocol:(Protocol *)protocol shouldPostOnMainThread:(BOOL)shouldPostOnMainThread;
