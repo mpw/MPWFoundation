@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MPWViewHarness">
+        <customObject id="-2" userLabel="File's Owner" customClass="STViewHarness">
             <connections>
                 <outlet property="logView" destination="qvl-9L-WNc" id="3Lu-Wf-Xfd"/>
                 <outlet property="slotForContentView" destination="NQw-Ot-PSB" id="hiE-d6-tsh"/>

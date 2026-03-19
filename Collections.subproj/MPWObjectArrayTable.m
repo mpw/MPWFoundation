@@ -1,19 +1,19 @@
 //
-//  MPWArrayTable.m
+//  MPWObjectArrayTable.m
 //  MPWFoundationUI
 //
 //  Created by Marcel Weiher on 18.03.26.
 //
 
-#import "MPWArrayTable.h"
+#import "MPWObjectArrayTable.h"
 
-@interface MPWArrayTable ()
+@interface MPWObjectArrayTable ()
 
 @property (nonatomic,strong) NSMutableArray *array;
 
 @end
 
-@implementation MPWArrayTable
+@implementation MPWObjectArrayTable
 
 
 
@@ -22,7 +22,7 @@
 
 #import <MPWFoundation/DebugMacros.h>
 
-@implementation MPWArrayTable(testing) 
+@implementation MPWObjectArrayTable(testing) 
 
 +(void)someTest
 {

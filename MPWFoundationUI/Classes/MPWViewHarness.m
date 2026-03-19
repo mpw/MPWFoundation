@@ -77,14 +77,3 @@
 
 
 @end
-
-
-@implementation NSView(inHarness)
-
--inHarness
-{
-    MPWViewHarness *harness = [[[MPWViewHarness alloc] initWithView:self] autorelease];
-    return harness;
-}
-
-@end

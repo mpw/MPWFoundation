@@ -1,5 +1,5 @@
 //
-//  MPWArrayTable.h
+//  MPWObjectArrayTable.h
 //  MPWFoundationUI
 //
 //  Created by Marcel Weiher on 18.03.26.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWArrayTable : MPWTable
+@interface MPWObjectArrayTable : MPWTable
 
 @end
 
