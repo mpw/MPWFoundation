@@ -22,29 +22,35 @@
 @implementation MPWTableView
 {
     MPWCGDrawingContext *context;
-    NSMutableArray *items;
+    MPWDictArrayTable *table;
 }
 
-objectAccessor( NSMutableArray*, items, _setItems)
+objectAccessor( MPWDictArrayTable*, table, _setTable)
 
--(void)setItems:(NSMutableArray*)newItems
+-(void)setTable:(NSMutableArray*)newItems
 {
     id firstObject = newItems.firstObject;
     if ( self.tableColumns.count == 0 && [firstObject respondsToSelector:@selector(rowStore)]) {
         self.rowStore = [firstObject rowStore];
         [self setKeys:[[self.rowStore at:@"/"] paths] target:firstObject];
     }
-    [self _setItems:newItems];
+    [self _setTable:newItems];
 }
+
+-(void)setDicts:dictArray
+{
+    [self setTable:[[[MPWDictArrayTable alloc] initWithArray:dictArray] autorelease]];
+}
+
 
 -rowAt:(long)row
 {
-    return [[self items][row] rowStore];
+    return [[[self objects] objectAtIndex:row] rowStore];
 }
 
 -(void)writeObject:anObject
 {
-    [[self items] addObject:anObject];
+    [[self objects] addObject:anObject];
 }
 
 -(void)removeCurrentColumns
@@ -90,7 +96,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-    [tableColumn.binding setValue:object forTarget:[self items][row]];
+    [tableColumn.binding setValue:object forTarget:[self table][row]];
 //    [[self rowAt:row] at:tableColumn.identifier put:object];
 }
 
@@ -98,7 +104,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 {
     self.dataSource = self;
     self.binding = (MPWReference*)self;
-    [self setItems:[NSMutableArray array]];
+    [self setDicts:[NSMutableArray array]];
     [self installProtocolNotifications];
     self.delegate = self;
     [self registerForDraggedTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData]];
@@ -159,16 +165,16 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     
     
     if (dragRow < row) {
-        [self.items insertObject:[self.items objectAtIndex:dragRow] atIndex:row];
-        [self.items removeObjectAtIndex:dragRow];
+        [self.table insertObject:[self.table objectAtIndex:dragRow] atIndex:row];
+        [self.table removeObjectAtIndex:dragRow];
         
         [aTableView noteNumberOfRowsChanged];
         [aTableView moveRowAtIndex:dragRow toIndex:row-1];
         
     } else {
-        id obj = [[[self.items objectAtIndex:dragRow] retain] autorelease];
-        [self.items removeObjectAtIndex:dragRow];
-        [self.items insertObject:obj atIndex:row];
+        id obj = [[[self.table objectAtIndex:dragRow] retain] autorelease];
+        [self.table removeObjectAtIndex:dragRow];
+        [self.table insertObject:obj atIndex:row];
         [aTableView noteNumberOfRowsChanged];
         [aTableView moveRowAtIndex:dragRow toIndex:row];
     }
@@ -179,7 +185,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 //----- data source
 
 -value {
-    return self.items;
+    return self.table;
 }
 
 -(NSArray *)unorderedObjects
@@ -213,7 +219,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 - objectAtRow:(NSUInteger)row;
 {
     if ( row >= 0 && row < [self objects].count){
-        return [self objects][row];
+        return [[self objects] objectAtIndex:row];
     } else {
         return nil;
     }
@@ -222,14 +228,14 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
 {
-//    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
+    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
     if (  [tableColumn respondsToSelector:@selector(binding)]) {
-        id rowValue = [self items][row];        // can't use rowAt: for now because that return a store
+        id rowValue = [[self objects] objectAtIndex:row];        // can't use rowAt: for now because that return a store
         id value = [tableColumn.binding valueForTarget:rowValue];
-//        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
+        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
         return value;
     } else {
-//        NSLog(@"don't have data");
+        NSLog(@"don't have data");
         return nil;
     }
 }
@@ -251,10 +257,6 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     if (self.cursor ) {
         self.cursor.offset = [self selectedRow];
     }
-//    if ( [self.items respondsToSelector:@selector(setOffset:)] ) {
-//        [self.items setOffset:[self selectedRow]];
-//        [@protocol(ModelDidChange) notify];
-//    }
     if ( [self.mpwDelegate respondsToSelector:@selector(tableViewSelectionDidChange:)] && self.mpwDelegate != self) {
         [self.mpwDelegate tableViewSelectionDidChange:notification];
     }

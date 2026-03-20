@@ -10,6 +10,7 @@
 #import "MPWFlattenStream.h"
 #import "MPWObjectBuilder.h"
 #import "MPWSQLiteTable.h"
+#import "MPWSQLiteTableWriter.h"
 
 #include <sqlite3.h>
 
@@ -225,7 +226,7 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
 +(void)testInsert
 {
     MPWStreamQLite *db=[self _testerDB];
-    MPWSQLiteTable *writer=[[db tables][@"Tester"] writer];
+    MPWSQLiteTableWriter *writer=[[db tables][@"Tester"] writer];
     [writer beginDictionary];
     [writer writeInteger:2 forKey:@"a"];
     [writer writeInteger:3 forKey:@"b"];

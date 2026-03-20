@@ -103,6 +103,8 @@
 #import <MPWFoundation/MPWIdentityDictionary.h>
 #import <MPWFoundation/MPWObjectReference.h>
 #import <MPWFoundation/MPWTable.h>
+#import <MPWFoundation/MPWObjectArrayTable.h>
+#import <MPWFoundation/MPWDictArrayTable.h>
 #import <MPWFoundation/MPWTableColumnInfo.h>
 
 #import <MPWFoundation/NSThreadInterThreadMessaging.h>

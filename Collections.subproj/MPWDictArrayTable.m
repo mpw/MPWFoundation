@@ -1,8 +1,8 @@
 //
 //  MPWDictArrayTable.m
-//  MPWFoundationUI
+//  MPWFoundation
 //
-//  Created by Marcel Weiher on 19.03.26.
+//  Created by Marcel Weiher on 20.03.26.
 //
 
 #import "MPWDictArrayTable.h"

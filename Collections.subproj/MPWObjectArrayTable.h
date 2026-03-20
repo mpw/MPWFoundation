@@ -1,15 +1,19 @@
 //
 //  MPWObjectArrayTable.h
-//  MPWFoundationUI
+//  MPWFoundation
 //
-//  Created by Marcel Weiher on 18.03.26.
+//  Created by Marcel Weiher on 20.03.26.
 //
 
-#import <MPWFoundation/MPWFoundation.h>
+#import <MPWFoundation/MPWTable.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWObjectArrayTable : MPWTable
+
+-(id)firstObject;
+-(NSUInteger)count;
+-(id)objectAtIndexedSubscript:(NSUInteger)anIndex;
 
 @end
 
