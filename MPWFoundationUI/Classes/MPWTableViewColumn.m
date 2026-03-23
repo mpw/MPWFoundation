@@ -10,10 +10,6 @@
 
 @implementation MPWTableViewColumn
 
--(id)valueForTarget:(id)anObject
-{
-    return [self.binding valueForTarget:anObject];
-}
 
 @end
 

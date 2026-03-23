@@ -30,6 +30,11 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey)
     return _objects[anIndex][_key];
 }
 
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject
+{
+    _objects[anIndex][_key]=newObject;
+}
+
 
 @end
 

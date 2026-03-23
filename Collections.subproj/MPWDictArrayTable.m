@@ -36,8 +36,7 @@
     MPWDictArrayTable *table=[MPWDictArrayTable tableWithObjects:names];
     NSArray *columns=[table computedColumns];
     NSDictionary *columnsByKey=[columns dictionaryByKey:@"key"];
-    
-    
+
     MPWDictColumn *first=columnsByKey[@"first"];
     IDEXPECT( [first objectAtIndex:0], @"Marcel", @"first name of first row");
     IDEXPECT( [first objectAtIndex:1], @"John", @"first name of second row");

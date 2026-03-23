@@ -107,11 +107,11 @@
 		1F1E09D9269DB9E700567AF6 /* MPWSQLColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */; };
 		1F1E09DA269DB9E700567AF6 /* MPWSQLColumnInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F1E09D4269DB9E700567AF6 /* MPWSQLColumnInfo.m */; };
 		1F20188B2F712712006AF357 /* MPWDictColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F20188A2F712712006AF357 /* MPWDictColumn.m */; };
-		1F20188C2F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; };
-		1F20188D2F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; };
+		1F20188C2F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F20188D2F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F20188E2F712712006AF357 /* MPWDictColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F20188A2F712712006AF357 /* MPWDictColumn.m */; };
 		1F20188F2F712712006AF357 /* MPWDictColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F20188A2F712712006AF357 /* MPWDictColumn.m */; };
-		1F2018902F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; };
+		1F2018902F712712006AF357 /* MPWDictColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F2018892F712712006AF357 /* MPWDictColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F206E672B6FC94700E4D19E /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F206E682B6FC94700E4D19E /* MPWStringTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */; };
 		1F206E692B6FC94B00E4D19E /* MPWStringTemplate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */; };

@@ -12,7 +12,6 @@
 
 @interface MPWTableView()
 
-@property (nonatomic,strong) MPWAbstractStore *rowStore;
 
 @end
 
@@ -29,23 +28,22 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 
 -(void)setTable:(MPWDictArrayTable*)newItems
 {
-    id firstObject = newItems.firstObject;
-    if ( self.tableColumns.count == 0 && [firstObject respondsToSelector:@selector(rowStore)]) {
-        self.rowStore = [firstObject rowStore];
-        [self setKeys:[[self.rowStore at:@"/"] paths] target:firstObject];
+    NSArray *tableColumns = [newItems computedColumns];
+    [self removeCurrentColumns];
+    for ( MPWDictColumn *tableColumn in tableColumns ) {
+        NSString *key = [tableColumn key];
+        MPWTableViewColumn *c=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
+        c.tableColumn = tableColumn;
+        c.width=150;
+        [c setTitle:[key capitalizedString]];
+        [self addTableColumn:c];
     }
     [self _setTable:newItems];
 }
 
 -(void)setDicts:dictArray
 {
-    [self setTable:[[[MPWDictArrayTable alloc] initWithArray:dictArray] autorelease]];
-}
-
-
--rowAt:(long)row
-{
-    return [[[self objects] objectAtIndex:row] rowStore];
+    [self setTable:[[[MPWDictArrayTable alloc] initWithObjects:dictArray] autorelease]];
 }
 
 -(void)writeObject:anObject
@@ -60,18 +58,18 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     }
 }
 
--(void)setKeys:(NSArray*)keys target:aTarget
-{
-    [self removeCurrentColumns];
-    for (NSString *key in keys) {
-        MPWTableViewColumn *column=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
-        column.binding = [MPWPropertyBinding valueForName:key];
-        [column.binding bindToTarget:aTarget];
-        column.width=150;
-        [column setTitle:[key capitalizedString]];
-        [self addTableColumn:column];
-    }
-}
+//-(void)setKeys:(NSArray*)keys target:aTarget
+//{
+//    [self removeCurrentColumns];
+//    for (NSString *key in keys) {
+//        MPWTableViewColumn *column=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
+//        column.binding = [MPWPropertyBinding valueForName:key];
+//        [column.binding bindToTarget:aTarget];
+//        column.width=150;
+//        [column setTitle:[key capitalizedString]];
+//        [self addTableColumn:column];
+//    }
+//}
 
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
@@ -94,7 +92,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(MPWTableViewColumn *)tableColumn row:(NSInteger)row
 {
-    [tableColumn.binding setValue:object forTarget:[self table][row]];
+    [tableColumn.tableColumn replaceObjectAtIndex:row withObject:object];
 }
 
 -(void)commonInit
@@ -161,10 +159,8 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableViewColumn *)tableColumn row:(NSInteger)row
 {
-    if (  [tableColumn respondsToSelector:@selector(binding)]) {
-        id rowValue = [[self objects] objectAtIndex:row];        // can't use rowAt: for now because that return a store
-        id value = [tableColumn.binding valueForTarget:rowValue];
-        return value;
+    if (  [tableColumn respondsToSelector:@selector(tableColumn)]) {
+        return [[tableColumn tableColumn] objectAtIndex:row];
     } else {
         return nil;
     }
