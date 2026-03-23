@@ -33,6 +33,11 @@
     return _objects[anIndex];
 }
 
+-(void)setObject:anObject atIndexedSubscript:(NSUInteger)anIndex
+{
+     [_objects setObject:anObject atIndexedSubscript:anIndex];
+}
+
 
 -(NSUInteger)count
 {
@@ -46,6 +51,15 @@
 
 -(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject{
     [self.objects replaceObjectAtIndex:anIndex withObject:newObject];
+}
+
+-(void)insertObject:(NSUInteger)anIndex withObject:newObject{
+    [self.objects insertObject:newObject atIndex:anIndex];
+}
+
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: objects: %@>",self.className,self,self.objects];
 }
 
 -(void)dealloc

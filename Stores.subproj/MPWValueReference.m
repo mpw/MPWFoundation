@@ -26,6 +26,12 @@ objectAccessor(id, value, setValue)
     return [[[self alloc] initWithValue:newValue] autorelease];
 }
 
+-(void)dealloc
+{
+    [value release];
+    [super dealloc];
+}
+
 @end
 
 

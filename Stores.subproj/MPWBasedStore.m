@@ -33,6 +33,12 @@
     return [self.baseReference value];
 }
 
+-(void)dealloc
+{
+    [(NSObject*)_baseReference release];
+    [super dealloc];
+}
+
 @end
 
 

@@ -1,14 +1,14 @@
 //
-//  MPWTableColumn.m
+//  MPWTableViewColumn.m
 //  MPWFoundationUI
 //
 //  Created by Marcel Weiher on 19.05.24.
 //
 
-#import "MPWTableColumn.h"
+#import "MPWTableViewColumn.h"
 #import <MPWFoundation/MPWFoundation.h>
 
-@implementation MPWTableColumn
+@implementation MPWTableViewColumn
 
 -(id)valueForTarget:(id)anObject
 {
@@ -20,7 +20,7 @@
 
 #import <MPWFoundation/DebugMacros.h>
 
-@implementation MPWTableColumn(testing) 
+@implementation MPWTableViewColumn(testing) 
 
 +(void)someTest
 {

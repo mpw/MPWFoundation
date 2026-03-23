@@ -1,5 +1,5 @@
 //
-//  MPWTableColumn.h
+//  MPWTableViewColumn.h
 //  MPWFoundationUI
 //
 //  Created by Marcel Weiher on 19.05.24.
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MPWPropertyBinding;
 
-@interface MPWTableColumn : NSTableColumn
+@interface MPWTableViewColumn : NSTableColumn
 
 @property (nonatomic, strong)  MPWPropertyBinding *binding;
 

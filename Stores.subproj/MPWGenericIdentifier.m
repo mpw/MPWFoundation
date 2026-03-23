@@ -93,8 +93,8 @@ CONVENIENCEANDINIT( identifier, WithPath:(NSString*)path )
 
 -(instancetype)referenceByAppendingReference:(MPWGenericIdentifier*)other
 {
-    NSArray *compinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];
-    return [[[[self class] alloc] initWithPathComponents:compinedPath scheme:self.schemeName] autorelease];
+    NSArray *combinedPath=[[self pathComponents] arrayByAddingObjectsFromArray:[other relativePathComponents]];
+    return [[[[self class] alloc] initWithPathComponents:combinedPath scheme:self.schemeName] autorelease];
 }
 
 -(instancetype)referenceByAppendingPath:(NSString*)path

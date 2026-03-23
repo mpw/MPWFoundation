@@ -6,7 +6,7 @@
 //
 #import "MPWTableView.h"
 #import <MPWFoundation/MPWFoundation.h>
-#import "MPWTableColumn.h"
+#import "MPWTableViewColumn.h"
 
 #import <DrawingContext/MPWCGDrawingContext.h>
 
@@ -27,7 +27,7 @@
 
 objectAccessor( MPWDictArrayTable*, table, _setTable)
 
--(void)setTable:(NSMutableArray*)newItems
+-(void)setTable:(MPWDictArrayTable*)newItems
 {
     id firstObject = newItems.firstObject;
     if ( self.tableColumns.count == 0 && [firstObject respondsToSelector:@selector(rowStore)]) {
@@ -50,7 +50,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 
 -(void)writeObject:anObject
 {
-    [[self objects] addObject:anObject];
+    [(NSMutableArray*)[self objects] addObject:anObject];
 }
 
 -(void)removeCurrentColumns
@@ -64,7 +64,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 {
     [self removeCurrentColumns];
     for (NSString *key in keys) {
-        MPWTableColumn *column=[[[MPWTableColumn alloc] initWithIdentifier:key] autorelease];
+        MPWTableViewColumn *column=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
         column.binding = [MPWPropertyBinding valueForName:key];
         [column.binding bindToTarget:aTarget];
         column.width=150;
@@ -80,7 +80,6 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     return self;
 }
 
-
 -(MPWCGDrawingContext*)createContext
 {
     if ( [NSGraphicsContext currentContext] ) {
@@ -89,15 +88,13 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
         return aContext;
     }
     return nil;
-    
 }
 
 lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
--(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
+-(void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(MPWTableViewColumn *)tableColumn row:(NSInteger)row
 {
     [tableColumn.binding setValue:object forTarget:[self table][row]];
-//    [[self rowAt:row] at:tableColumn.identifier put:object];
 }
 
 -(void)commonInit
@@ -111,7 +108,6 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     self.dataSource = self;
 }
 
-
 -(void)awakeFromNib
 {
     [super awakeFromNib];
@@ -120,66 +116,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)modelDidChange:(NSNotification *)notification
 {
-//    id <MPWIdentifying> changedRef=[notification object];
-//
-//    if ( self.binding) {
-//        id newItems = self.binding.value;
-//        NSLog(@"binding: %@",self.binding);
-//        NSLog(@"newItems: %@",newItems);
-//        if ( self.valueFilter ) {
-//            NSLog(@"will filter");
-//            newItems=self.valueFilter( newItems );
-//            NSLog(@"did filter: %@",newItems);
-//        }
-//        [self setItems:newItems];
         [self reloadData];
-//    }
-}
-
-
-// drag operation stuff
-- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
-    // Copy the row numbers to the pasteboard.
-    NSData *zNSIndexSetData = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
-    
-    [pboard declareTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData] owner:self];
-    
-    [pboard setData:zNSIndexSetData forType:MPWPrivateTableViewRowDragOperationData];
-    
-    return YES;
-}
-
-- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id )info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op {
-    // Add code here to validate the drop
-    return NSDragOperationEvery;
-}
-
-- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id )info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-    
-    NSPasteboard* pboard = [info draggingPasteboard];
-    NSData* rowData = [pboard dataForType:MPWPrivateTableViewRowDragOperationData];
-    NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
-    NSInteger dragRow = rowIndexes.firstIndex;
-    
-    [self beginUpdates];
-    
-    
-    if (dragRow < row) {
-        [self.table insertObject:[self.table objectAtIndex:dragRow] atIndex:row];
-        [self.table removeObjectAtIndex:dragRow];
-        
-        [aTableView noteNumberOfRowsChanged];
-        [aTableView moveRowAtIndex:dragRow toIndex:row-1];
-        
-    } else {
-        id obj = [[[self.table objectAtIndex:dragRow] retain] autorelease];
-        [self.table removeObjectAtIndex:dragRow];
-        [self.table insertObject:obj atIndex:row];
-        [aTableView noteNumberOfRowsChanged];
-        [aTableView moveRowAtIndex:dragRow toIndex:row];
-    }
-    [self endUpdates];
-    return YES;
 }
 
 //----- data source
@@ -202,13 +139,10 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     return objects;
 }
 
-
-
 -(NSArray *)objects
 {
     return [self orderObjects:[self unorderedObjects]];
 }
-
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -225,17 +159,13 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     }
 }
 
-
-- tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableColumn *)tableColumn row:(NSInteger)row
+- tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableViewColumn *)tableColumn row:(NSInteger)row
 {
-    NSLog(@"table[%ld] column[%@]",row,tableColumn.title);
     if (  [tableColumn respondsToSelector:@selector(binding)]) {
         id rowValue = [[self objects] objectAtIndex:row];        // can't use rowAt: for now because that return a store
         id value = [tableColumn.binding valueForTarget:rowValue];
-        NSLog(@"rowValue: %@ → value: %@",rowValue,value);
         return value;
     } else {
-        NSLog(@"don't have data");
         return nil;
     }
 }
@@ -263,12 +193,6 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
-}
-
 -(CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName
 {
     NSString *value=[[self objectAtRow:row] valueForKey:columnName];
@@ -279,8 +203,50 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     return r.size.height+12;
 }
 
-@end
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
+    NSData *zNSIndexSetData = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard declareTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData] owner:self];
+    [pboard setData:zNSIndexSetData forType:MPWPrivateTableViewRowDragOperationData];
+    return YES;
+}
 
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id )info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op {
+    return NSDragOperationEvery;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id )info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    
+    NSPasteboard* pboard = [info draggingPasteboard];
+    NSData* rowData = [pboard dataForType:MPWPrivateTableViewRowDragOperationData];
+    NSIndexSet* rowIndexes = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+    NSInteger dragRow = rowIndexes.firstIndex;
+    
+    [self beginUpdates];
+    if (dragRow < row) {
+        [self.table insertObject:[self.table objectAtIndex:dragRow] atIndex:row];
+        [self.table removeObjectAtIndex:dragRow];
+        
+        [aTableView noteNumberOfRowsChanged];
+        [aTableView moveRowAtIndex:dragRow toIndex:row-1];
+        
+    } else {
+        id obj = [[[self.table objectAtIndex:dragRow] retain] autorelease];
+        [self.table removeObjectAtIndex:dragRow];
+        [self.table insertObject:obj atIndex:row];
+        [aTableView noteNumberOfRowsChanged];
+        [aTableView moveRowAtIndex:dragRow toIndex:row];
+    }
+    [self endUpdates];
+    return YES;
+}
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
+}
+
+@end
 
 @implementation MPWGenericIdentifier(allKeys)
 
@@ -298,4 +264,3 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 @end
-

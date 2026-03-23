@@ -105,7 +105,7 @@
 #import <MPWFoundation/MPWTable.h>
 #import <MPWFoundation/MPWObjectArrayTable.h>
 #import <MPWFoundation/MPWDictArrayTable.h>
-#import <MPWFoundation/MPWTableColumnInfo.h>
+#import <MPWFoundation/MPWTableColumn.h>
 
 #import <MPWFoundation/NSThreadInterThreadMessaging.h>
 #import <MPWFoundation/bytecoding.h>

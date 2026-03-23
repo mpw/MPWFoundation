@@ -1,5 +1,5 @@
 //
-//  MPWTableColumnInfo.h
+//  MPWTableColumn.h
 //  MPWFoundation
 //
 //  Created by Marcel Weiher on 11.03.26.
@@ -9,7 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWTableColumnInfo : NSObject
+@interface MPWTableColumn : NSObject
+
 
 @end
 
