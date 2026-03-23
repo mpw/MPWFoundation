@@ -6,6 +6,8 @@
 //
 
 #import "MPWObjectArrayTable.h"
+#import "AccessorMacros.h"
+
 
 @interface MPWObjectArrayTable ()
 
@@ -16,7 +18,7 @@
 
 @implementation MPWObjectArrayTable
 
--(instancetype)initWithArray:(NSMutableArray*)newArray
+CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 {
     self = [super init];
     self.objects = newArray;
