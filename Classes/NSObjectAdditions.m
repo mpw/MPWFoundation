@@ -38,7 +38,7 @@
         return [NSData dataWithContentsOfFile:path options:NSDataReadingMapped error:nil]; 
 #endif
 	} else {
-		[NSException raise:@"ResourceUnavailable" format:@"Couldn't find resource '%@' of type '%@' (nil path) for bundle '%@' class %@",aPath,category,bundle,self];
+//		[NSException raise:@"ResourceUnavailable" format:@"Couldn't find resource '%@' of type '%@' (nil path) for bundle '%@' class %@",aPath,category,bundle,self];
 		return nil;
 	}
 }

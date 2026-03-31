@@ -29,6 +29,26 @@
     return stats.bytes_used;
 }
 
++(long)bytesUsed
+{
+    struct mstats stats=mstats();
+    return stats.bytes_used;
+}
+
+static long peak=0;
+
++(long)peak
+{
+    long current=[self bytesUsed];
+    peak=MAX(peak,current);
+    return peak;
+}
+
++(void)resetPeak
+{
+    peak=0;
+}
+
 @end
 
 

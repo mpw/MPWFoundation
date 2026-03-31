@@ -26,7 +26,7 @@
 
 objectAccessor( MPWDictArrayTable*, table, _setTable)
 
--(void)setTable:(MPWDictArrayTable*)newItems
+-(void)setTable:(MPWTable*)newItems
 {
     NSArray *tableColumns = [newItems computedColumns];
     [self removeCurrentColumns];
@@ -44,6 +44,11 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 -(void)setDicts:dictArray
 {
     [self setTable:[[[MPWDictArrayTable alloc] initWithObjects:dictArray] autorelease]];
+}
+
+-(void)setObjects:objectArray
+{
+    [self setTable:[[[MPWObjectArrayTable alloc] initWithObjects:objectArray] autorelease]];
 }
 
 -(void)writeObject:anObject
@@ -139,7 +144,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(NSArray *)objects
 {
-    return [self orderObjects:[self unorderedObjects]];
+    return self.table;
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView

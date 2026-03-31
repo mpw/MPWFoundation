@@ -9,8 +9,6 @@
 
 @interface MPWDictColumn ()
 
-@property (nonatomic, weak) NSArray *objects;
-@property (nonatomic, weak) NSString *key;
 
 @end
 
@@ -23,7 +21,12 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey)
     self.key=newKey;
     return self;
 }
-                
+   
+
+-(NSUInteger)count
+{
+    return _objects.count;
+}
 
 -(id)objectAtIndex:(NSUInteger)anIndex
 {

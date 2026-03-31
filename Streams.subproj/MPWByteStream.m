@@ -171,9 +171,14 @@ static void atexit_b( void *a ) {}
     return [self streamWithTarget:isatty(fd) ? [MPWFileDescriptorTarget fd:fd] : [MPWFileTarget fd:fd]];
 }
 
-+file:(FILE*)file
++stdfile:(FILE*)file
 {
     return [self streamWithTarget:[MPWStdioTarget fileTarget:file]];
+}
+
++(instancetype)file:(id <MPWIdentifying>)file
+{
+    return [self fileName:[file path]];
 }
 
 +null

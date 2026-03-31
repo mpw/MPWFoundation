@@ -12,9 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWDictColumn : MPWTableColumn
 
 +(instancetype)columnWithArray:(NSArray*)array key:(NSString*)aKey;
--(instancetype)intWithArray:(NSArray*)array key:(NSString*)aKey;
+-(instancetype)initWithArray:(NSArray*)array key:(NSString*)aKey;
 
 -(id)objectAtIndex:(NSUInteger)anIndex;
+
+@property (nonatomic, weak) NSArray *objects;
+@property (nonatomic, weak) NSString *key;
+
 
 @end
 

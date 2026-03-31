@@ -9,6 +9,12 @@
 
 @implementation MPWTable
 
+-(NSArray*)computedColumns
+{
+    [NSException raise:@"unimplemnted" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
+    return nil;
+}
+
 @end
 
 

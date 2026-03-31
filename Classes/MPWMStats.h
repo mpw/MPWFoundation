@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 +stats;
 -(long)bytesUsed;
++(long)bytesUsed;
++(long)peak;
++(void)resetPeak;
 
 @end
 

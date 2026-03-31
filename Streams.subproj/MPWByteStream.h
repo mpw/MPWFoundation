@@ -8,8 +8,9 @@
 
 @class MPWAbstractStore;
 
-@protocol ByteStreaming
+@protocol MPWIdentifying;
 
+@protocol ByteStreaming
 
 -(void)appendBytes:(const void*)data length:(NSUInteger)count;
 -(void)appendBytesAsHex:(const void*)data length:(NSUInteger)count;
@@ -41,7 +42,8 @@ typedef id (*APPENDIMP)(id, SEL, char *, long);
 +(NSString*)makeString:anObject;
 +(instancetype)Stdout;
 +(instancetype)Stderr;
-+(instancetype)file:(FILE*)file;
++(instancetype)stdfile:(FILE*)file;
++(instancetype)file:(id <MPWIdentifying>)file;
 +fd:(int)fd;
 +(instancetype)fileName:(NSString*)fileName;
 +fileName:(NSString*)fileName mode:(NSString*)mode atomically:(BOOL)atomic;

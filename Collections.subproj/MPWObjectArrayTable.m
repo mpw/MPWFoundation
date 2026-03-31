@@ -7,7 +7,7 @@
 
 #import "MPWObjectArrayTable.h"
 #import "AccessorMacros.h"
-
+#import "MPWObjectColumn.h"
 
 @interface MPWObjectArrayTable ()
 
@@ -39,6 +39,23 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 {
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
+
+-(NSArray*)computedColumns
+{
+    NSObject *sampleObject = self.firstObject;
+    NSArray *keys=[[[[sampleObject class] instanceVariables] collect] name];
+    keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];
+    NSLog(@"instance variables: %@",keys);
+    NSMutableArray *columns = [NSMutableArray array];
+    for ( NSString *key in keys ) {
+        MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key];
+        [columns addObject:column];
+    }
+    NSLog(@"columns variables: %@",columns);
+
+    return columns;
+}
+
 
 
 -(NSUInteger)count
