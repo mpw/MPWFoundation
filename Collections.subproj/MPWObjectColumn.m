@@ -16,7 +16,7 @@
 
 -(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject
 {
-    [self.objects[anIndex] setValue:newObject valueForKey:self.key];
+    [self.objects[anIndex] setValue:newObject forKey:self.key];
 }
 
 

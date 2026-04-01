@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWObjectArrayTable : MPWTable
 
 @property (readonly)   NSMutableArray *objects;
+@property (readonly)   Class          itemClass;
 
 +(instancetype)tableWithObjects:(NSArray*)newObjects;
 -(instancetype)initWithObjects:(NSArray*)newObjects;

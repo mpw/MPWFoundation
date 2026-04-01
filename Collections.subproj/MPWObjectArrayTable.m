@@ -12,15 +12,24 @@
 @interface MPWObjectArrayTable ()
 
 @property (nonatomic, strong)   NSMutableArray *objects;
+@property (nonatomic, assign)   Class itemClass;
 
 @end
 
 
 @implementation MPWObjectArrayTable
 
+CONVENIENCEANDINIT( table,  WithClass:(Class)newClass )
+{
+    self=[super init];
+    self.itemClass = newClass;
+    return self;
+}
+
+
 CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 {
-    self = [super init];
+    self = [self initWithClass:[newArray.firstObject class]];
     self.objects = newArray;
     return self;
 }
@@ -42,16 +51,13 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 
 -(NSArray*)computedColumns
 {
-    NSObject *sampleObject = self.firstObject;
-    NSArray *keys=[[[[sampleObject class] instanceVariables] collect] name];
+    NSArray *keys=[[[self.itemClass instanceVariables] collect] name];
     keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];
-    NSLog(@"instance variables: %@",keys);
     NSMutableArray *columns = [NSMutableArray array];
     for ( NSString *key in keys ) {
         MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key];
         [columns addObject:column];
     }
-    NSLog(@"columns variables: %@",columns);
 
     return columns;
 }
@@ -72,8 +78,12 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
     [self.objects replaceObjectAtIndex:anIndex withObject:newObject];
 }
 
--(void)insertObject:(NSUInteger)anIndex withObject:newObject{
+-(void)insertObject:newObject  atIndex:(NSUInteger)anIndex {
     [self.objects insertObject:newObject atIndex:anIndex];
+}
+
+-(void)removeObjectAtIndex:(NSUInteger)anIndex {
+    [self.objects removeObjectAtIndex:anIndex];
 }
 
 -(NSString*)description

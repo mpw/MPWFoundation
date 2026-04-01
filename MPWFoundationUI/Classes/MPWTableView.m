@@ -128,20 +128,6 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     return self.table;
 }
 
--(NSArray *)unorderedObjects
-{
-    id newItems = [self.binding value];
-    if ( self.valueFilter) {
-        newItems = self.valueFilter( newItems );
-    }
-    return newItems;
-}
-
--(NSArray *)orderObjects:(NSArray*)objects
-{
-    return objects;
-}
-
 -(NSArray *)objects
 {
     return self.table;
@@ -149,14 +135,13 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    NSLog(@"numberOfRows: %@ %d",self,(int)[[self objects] count]);
-    return [[self objects] count];
+    return [self.table count];
 }
 
 - objectAtRow:(NSUInteger)row;
 {
-    if ( row >= 0 && row < [self objects].count){
-        return [[self objects] objectAtIndex:row];
+    if ( row >= 0 && row < self.table.count){
+        return [self.table objectAtIndex:row];
     } else {
         return nil;
     }
@@ -164,7 +149,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - tableView:(NSTableView *)tableView objectValueForTableColumn:(MPWTableViewColumn *)tableColumn row:(NSInteger)row
 {
-    if (  [tableColumn respondsToSelector:@selector(tableColumn)]) {
+    if (  [tableColumn respondsToSelector:@selector(tableColumn)] && row < self.table.count ) {
         return [[tableColumn tableColumn] objectAtIndex:row];
     } else {
         return nil;
@@ -173,7 +158,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 - selectedObject
 {
-    return [self objects][[self selectedRow]];
+    return [self.table objectAtIndex:self.selectedRow];
 }
 
 -(void)selectionDidChange:something
