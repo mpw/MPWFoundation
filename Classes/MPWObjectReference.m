@@ -58,7 +58,7 @@ idAccessor( targetObject, setTargetObject )
 
 @end
 
-@implementation NSObject(referecing)
+@implementation NSObject(referencing)
 
 -referenceToSelf
 {

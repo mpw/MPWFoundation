@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWSQLColumnInfo : MPWTableColumn
+@interface MPWSQLColumnInfo : NSObject
 
 @property (nonatomic, assign)  BOOL pk;
 @property (nonatomic, assign)  BOOL notnull;
