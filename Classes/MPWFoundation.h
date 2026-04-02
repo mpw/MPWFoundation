@@ -28,6 +28,7 @@
 #import <MPWFoundation/MPWObject_fastrc.h>
 #import <MPWFoundation/MPWResource.h>
 #import <MPWFoundation/MPWTypeDefinition.h>
+#import <MPWFoundation/MPWVariableDefinition.h>
 
 #import <MPWFoundation/MPWBlockInvocable.h>
 #import <MPWFoundation/NSNil.h>

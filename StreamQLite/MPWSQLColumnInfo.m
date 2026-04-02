@@ -21,8 +21,6 @@
 
 -(void)dealloc
 {
-    [_name release];
-    [_type release];
     [super dealloc];
 }
 

@@ -5,16 +5,14 @@
 //  Created by Marcel Weiher on 13.07.21.
 //
 
-#import <MPWFoundation/MPWTableColumn.h>
+#import <MPWFoundation/MPWVariableDefinition.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWSQLColumnInfo : NSObject
+@interface MPWSQLColumnInfo : MPWVariableDefinition
 
 @property (nonatomic, assign)  BOOL pk;
 @property (nonatomic, assign)  BOOL notnull;
-@property (nonatomic, strong)  NSString *name;
-@property (nonatomic, strong)  NSString *type;
 @property (readonly) NSString *objcType;
 
 @end
