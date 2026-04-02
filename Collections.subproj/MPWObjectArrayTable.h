@@ -6,6 +6,9 @@
 //
 
 #import <MPWFoundation/MPWTable.h>
+#import <MPWFoundation/MPWTableColumn.h>
+
+@class MPWPropertyBinding;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +24,21 @@ NS_ASSUME_NONNULL_BEGIN
 -(id)firstObject;
 -(NSUInteger)count;
 -(id)objectAtIndexedSubscript:(NSUInteger)anIndex;
+
+@end
+
+
+@interface MPWObjectColumn : MPWTableColumn
+
++(instancetype)columnWithArray:(NSArray*)array key:(NSString*)aKey class:(Class)itemClass;
+-(instancetype)initWithArray:(NSArray*)array key:(NSString*)aKey class:(Class)itemClass;
+
+-(id)objectAtIndex:(NSUInteger)anIndex;
+
+@property (nonatomic, weak) NSArray *objects;
+@property (nonatomic, weak) NSString *key;
+@property (nonatomic, strong)   MPWPropertyBinding *binding;
+
 
 @end
 

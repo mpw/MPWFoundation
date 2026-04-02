@@ -7,7 +7,7 @@
 
 #import "MPWObjectArrayTable.h"
 #import "AccessorMacros.h"
-#import "MPWObjectColumn.h"
+#import "MPWPropertyBinding.h"
 
 @interface MPWObjectArrayTable ()
 
@@ -15,6 +15,7 @@
 @property (nonatomic, assign)   Class itemClass;
 
 @end
+
 
 
 @implementation MPWObjectArrayTable
@@ -55,7 +56,7 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
     keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];
     NSMutableArray *columns = [NSMutableArray array];
     for ( NSString *key in keys ) {
-        MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key];
+        MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
         [columns addObject:column];
     }
 
@@ -100,6 +101,46 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 @end
 
 
+@interface MPWObjectColumn ()
+
+
+
+@end
+
+@implementation MPWObjectColumn
+
+CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  class:(Class)itemClass)
+{
+    self=[super init];
+    self.objects=anArray;
+    self.key=newKey;
+    self.binding = [MPWPropertyBinding valueForName:newKey];
+    [self.binding bindToClass:itemClass];
+    return self;
+}
+
+-(NSUInteger)count
+{
+    return _objects.count;
+}
+
+-(id)objectAtIndex:(NSUInteger)anIndex
+{
+    return [_binding valueForTarget:_objects[anIndex]];
+}
+
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject
+{
+    [_binding setValue:newObject forTarget:_objects[anIndex]];
+//    [_objects[anIndex] setValue:newObject forKey:_key];
+}
+
+
+
+@end
+
+
+
 #import <MPWFoundation/DebugMacros.h>
 
 @implementation MPWObjectArrayTable(testing) 
@@ -114,6 +155,25 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
    return @[
 //			@"someTest",
 			];
+}
+
+@end
+
+
+
+
+@implementation MPWObjectColumn(testing)
+
++(void)someTest
+{
+    EXPECTTRUE(false, @"implemented");
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+        //            @"someTest",
+    ];
 }
 
 @end

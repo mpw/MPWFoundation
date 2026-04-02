@@ -6,7 +6,6 @@
 //
 
 #import "MPWDictArrayTable.h"
-#import "MPWDictColumn.h"
 
 @implementation MPWDictArrayTable
 
@@ -16,11 +15,17 @@
     NSArray *keys=sampleDict.allKeys;
     NSMutableArray *columns = [NSMutableArray array];
     for ( NSString *key in keys ) {
-        MPWDictColumn *column = [MPWDictColumn columnWithArray:self.objects key:key];
+        MPWDictColumn *column = [MPWDictColumn columnWithArray:self.objects key:key class:self.itemClass];
         [columns addObject:column];
     }
     return columns;
 }
+
+
+@end
+
+
+@implementation MPWDictColumn
 
 
 @end
@@ -51,6 +56,31 @@
    return @[
 			@"basicAccess",
 			];
+}
+
+@end
+
+@implementation MPWDictColumn(testing)
+
+
+
+
++(void)testBasicAccess
+{
+    NSArray *names = @[ @{ @"first": @"Marcel", @"last": @"Weiher" }, @{@"first": @"John", @"last": @"Doe" }];
+    MPWDictColumn *first=[MPWDictColumn columnWithArray:names key:@"first" class:[names.firstObject class]];
+    IDEXPECT( [first objectAtIndex:0], @"Marcel", @"first name of first row");
+    IDEXPECT( [first objectAtIndex:1], @"John", @"first name of second row");
+    MPWDictColumn *last=[MPWDictColumn columnWithArray:names key:@"last" class:[names.firstObject class]];
+    IDEXPECT( [last objectAtIndex:0], @"Weiher", @"last name of first row");
+    IDEXPECT( [last objectAtIndex:1], @"Doe", @"last name of second row");
+}
+
++(NSArray*)testSelectors
+{
+    return @[
+        @"testBasicAccess",
+    ];
 }
 
 @end

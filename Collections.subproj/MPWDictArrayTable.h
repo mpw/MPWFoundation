@@ -16,4 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface MPWDictColumn : MPWObjectColumn
+
+
+@end
+
+
 NS_ASSUME_NONNULL_END
