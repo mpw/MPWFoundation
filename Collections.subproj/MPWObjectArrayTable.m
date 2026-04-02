@@ -132,7 +132,6 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
 -(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject
 {
     [_binding setValue:newObject forTarget:_objects[anIndex]];
-//    [_objects[anIndex] setValue:newObject forKey:_key];
 }
 
 
@@ -164,15 +163,22 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
 
 @implementation MPWObjectColumn(testing)
 
-+(void)someTest
+
++(void)testBasicAccess
 {
-    EXPECTTRUE(false, @"implemented");
+    NSArray *names = @[ @{ @"first": @"Marcel", @"last": @"Weiher" }, @{@"first": @"John", @"last": @"Doe" }];
+    MPWObjectColumn *first=[MPWObjectColumn columnWithArray:names key:@"first" class:[names.firstObject class]];
+    IDEXPECT( [first objectAtIndex:0], @"Marcel", @"first name of first row");
+    IDEXPECT( [first objectAtIndex:1], @"John", @"first name of second row");
+    MPWObjectColumn *last=[MPWObjectColumn columnWithArray:names key:@"last" class:[names.firstObject class]];
+    IDEXPECT( [last objectAtIndex:0], @"Weiher", @"last name of first row");
+    IDEXPECT( [last objectAtIndex:1], @"Doe", @"last name of second row");
 }
 
 +(NSArray*)testSelectors
 {
     return @[
-        //            @"someTest",
+            @"testBasicAccess",
     ];
 }
 
