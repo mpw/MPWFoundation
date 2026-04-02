@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPWStructureDefinition;
+
 @interface MPWTable : NSObject
 
 -(NSArray*)computedColumns;

@@ -41,7 +41,7 @@
 
 -(void)createBuffers
 {
-    int numBuffers=(int)[[self schema] count];
+    int numBuffers=(int)[[[self schema] fields] count];
     buffers=[[NSMutableArray alloc] init];
     for (int i=0;i<numBuffers+1;i++) {
         [buffers addObject:[NSMutableData dataWithCapacity:8192]];
@@ -175,7 +175,7 @@
 -(NSArray*)insertKeys
 {
     NSMutableArray *insertKeys=[NSMutableArray array];
-    for ( MPWSQLColumnInfo *column in [self schema]) {
+    for ( MPWSQLColumnInfo *column in [[self schema] fields]) {
         if ( !([column.type isEqual:@"INTEGER"] && column.pk) ) {
             [insertKeys addObject:column.name];
         }

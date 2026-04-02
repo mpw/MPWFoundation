@@ -49,7 +49,7 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
 
--(NSArray*)computedColumns
+-(MPWStructureDefinition*)computedColumns
 {
     NSArray *keys=[[[self.itemClass instanceVariables] collect] name];
     keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];

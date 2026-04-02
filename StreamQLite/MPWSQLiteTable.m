@@ -110,10 +110,10 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 }
 
 
--(NSArray<MPWSQLColumnInfo*>*)getSchema
+-(MPWStructureDefinition*)getSchema
 {
     NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class]] autorelease]];
-    return resultSet;
+    return [MPWStructureDefinition structureWithFields:resultSet];
 }
 
 -select
@@ -151,7 +151,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 {
     MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
     MPWSQLiteTable *artists=[db tables][@"artists"];
-    NSArray *schema=[artists schema];
+    NSArray *schema=[[artists schema] fields];
     INTEXPECT(schema.count,2,@"columns");
     MPWSQLColumnInfo *nameColumn=schema.lastObject;
     MPWSQLColumnInfo *idColumn=schema.firstObject;

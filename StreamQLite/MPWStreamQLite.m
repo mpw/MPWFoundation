@@ -11,6 +11,7 @@
 #import "MPWObjectBuilder.h"
 #import "MPWSQLiteTable.h"
 #import "MPWSQLiteTableWriter.h"
+#import "MPWStructureDefinition.h"
 
 #include <sqlite3.h>
 
@@ -283,7 +284,7 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
     INTEXPECT(tables.count, 13, @"number of tables");
     MPWSQLiteTable *albums=tables[@"albums"];
     IDEXPECT( [albums name],@"albums",@"name of first table");
-    NSArray *albumsScheme=albums.schema;
+    NSArray *albumsScheme=albums.schema.fields;
     INTEXPECT([albumsScheme count], 3, @"number of columns");
 }
 
