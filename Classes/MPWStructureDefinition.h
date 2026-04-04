@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWStructureDefinition : MPWTypeDefinition
 
-+(instancetype)structureWithFields:fieldDefs;
--(instancetype)initWithFields:fieldDefs;
++(instancetype)structureWithName:(NSString*)name fields:fieldDefs;
+-(instancetype)initWithName:(NSString*)name fields:fieldDefs;
 
 
 @property (nonatomic, strong) NSArray<MPWVariableDefinition*>* fields;

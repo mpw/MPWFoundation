@@ -113,7 +113,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 -(MPWStructureDefinition*)getSchema
 {
     NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class]] autorelease]];
-    return [MPWStructureDefinition structureWithFields:resultSet];
+    return [MPWStructureDefinition structureWithName:self.name fields:resultSet];
 }
 
 -select

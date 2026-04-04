@@ -16,6 +16,7 @@
 #import <AccessorMacros.h>
 #import "MPWByteStream.h"
 #import "MPWInstanceVarStore.h"
+#import "MPWStructureDefinition.h"
 
 //#import "Foundation/NSDebug.h"
 
@@ -219,13 +220,13 @@
 
 
 
-static void __collectInstanceVariables( Class aClass, NSMutableArray *varNames )
+static void __collectInstanceVariablesUntil( Class aClass, NSMutableArray *varNames, Class stopClass )
 {
     int i;
-    if ( aClass ) {
+    if ( aClass && aClass != stopClass ) {
         unsigned int ivarCount=0;
         Ivar  *ivars=NULL;
-        __collectInstanceVariables( [aClass superclass], varNames );
+        __collectInstanceVariablesUntil( [aClass superclass], varNames ,stopClass );
         
         ivars = class_copyIvarList(aClass, &ivarCount);
         if ( ivars  && ivarCount > 0) {
@@ -243,6 +244,10 @@ static void __collectInstanceVariables( Class aClass, NSMutableArray *varNames )
     }
 }
 
+static void __collectInstanceVariables( Class aClass, NSMutableArray *varNames )
+{
+    return __collectInstanceVariablesUntil(aClass, varNames, nil);
+}
 
 
 static id ivarNameCache=nil;
@@ -266,6 +271,19 @@ static id ivarsByClassAndName=nil;
     return varNames;
 }
 
++structure
+{
+    NSMutableArray *vars=[NSMutableArray array];
+    __collectInstanceVariablesUntil( self, vars, [NSObject class] );
+    return [MPWStructureDefinition structureWithName:NSStringFromClass(self)  fields:vars];
+}
+
++structureOfThisClass
+{
+    NSMutableArray *vars=[NSMutableArray array];
+    __collectInstanceVariablesUntil( self, vars, [self superclass] );
+    return [MPWStructureDefinition structureWithName:NSStringFromClass(self)  fields:vars];
+}
 
 
 static BOOL CreateClassDefinition( const char * name,

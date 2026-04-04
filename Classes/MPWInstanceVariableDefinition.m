@@ -66,8 +66,10 @@
     return [self.type name];
 }
 
-
-
+-(NSString*)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: name: %@ offset: %ld type: %@>",[self className],self,self.name,self.offset,self.type];
+}
 @end
 
 

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWTypeDefinition : NSObject
 
 @property (nonatomic, assign, readonly) unsigned char objcTypeCode;
-@property (nonatomic, strong, readonly) NSString *name;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) NSString *cName;
 
 +(instancetype)descritptorForObjcCode:(unsigned char)typeCode;

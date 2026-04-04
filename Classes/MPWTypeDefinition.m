@@ -10,7 +10,6 @@
 @interface MPWTypeDefinition ()
 
 @property (nonatomic, assign) unsigned char objcTypeCode;
-@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *cName;
 
 @end
@@ -91,6 +90,11 @@ static STTypeDescriptorStruct definedTypes[]={
 +(instancetype)idType
 {
     return [self descritptorForObjcCode:'@'];
+}
+
+-(NSString *)description
+{
+    return self.name;
 }
 
 @end

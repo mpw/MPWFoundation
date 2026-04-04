@@ -10,11 +10,18 @@
 
 @implementation MPWStructureDefinition
 
-CONVENIENCEANDINIT( structure, WithFields:newFields )
+CONVENIENCEANDINIT( structure, WithName:(NSString*)newName fields:newFields )
 {
     self=[super init];
+    self.name = newName;
     self.fields = newFields;
     return self;
+}
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@:%p: name: %@ fields: %@>",
+            [self className],self,self.name,self.fields];
 }
 
 -(void)dealloc
