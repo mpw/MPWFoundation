@@ -51,11 +51,14 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
 
+-(MPWStructureDefinition*)itemStructure
+{
+    return [self.itemClass structure];
+}
+
 -(NSArray*)rowKeys
 {
-    NSArray *keys=[[[self.itemClass instanceVariables] collect] name];
-    keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];
-    return keys;
+    return [[[[self itemStructure] fields] collect] name];
 }
 
 -(NSArray*)computeColumns

@@ -9,6 +9,7 @@
 
 @implementation MPWVariableDefinition
 
+
 -initWithName:(NSString*)newName type:(MPWTypeDefinition*)newType
 {
     self=[super init];

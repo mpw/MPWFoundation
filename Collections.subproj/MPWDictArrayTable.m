@@ -10,11 +10,9 @@
 @implementation MPWDictArrayTable
 
 
--rowKeys
+-itemStructure
 {
-    NSDictionary *sampleDict = self.firstObject;
-    NSArray *keys=sampleDict.allKeys;
-    return keys;
+    return [MPWStructureDefinition structureWithName:@"dict" dict:self.firstObject];
 }
 
 

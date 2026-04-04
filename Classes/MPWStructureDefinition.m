@@ -18,6 +18,18 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName fields:newFields )
     return self;
 }
 
+CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)dict )
+{
+    NSArray *allKeys=[dict allKeys];
+    NSMutableArray *fields=[NSMutableArray array];
+    for (NSString *key in allKeys) {
+        MPWVariableDefinition *def=[[[MPWVariableDefinition alloc] initWithName:key type:[MPWTypeDefinition idType]] autorelease];
+        [fields addObject:def];
+    }
+    return [self initWithName:newName fields:fields];
+}
+
+
 -(NSString *)description
 {
     return [NSString stringWithFormat:@"<%@:%p: name: %@ fields: %@>",
