@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWDictArrayTable : MPWObjectArrayTable
 
--(NSArray*)computedColumns;
 
 
 @end

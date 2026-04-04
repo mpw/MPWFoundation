@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/AccessorMacros.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -13,8 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWTable : NSObject
 
--(NSArray*)computedColumns;
-
+objectAccessor_h(NSArray*, columns, setColumns )
 @end
 
 NS_ASSUME_NONNULL_END

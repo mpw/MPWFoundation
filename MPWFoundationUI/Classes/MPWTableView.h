@@ -22,7 +22,6 @@
 - objectAtRow:(NSUInteger)row;
 
 -(CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName;
--(NSArray *)unorderedObjects;
 
 
 @end

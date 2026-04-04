@@ -9,16 +9,12 @@
 
 @implementation MPWDictArrayTable
 
--(NSArray*)computedColumns
+
+-rowKeys
 {
     NSDictionary *sampleDict = self.firstObject;
     NSArray *keys=sampleDict.allKeys;
-    NSMutableArray *columns = [NSMutableArray array];
-    for ( NSString *key in keys ) {
-        MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
-        [columns addObject:column];
-    }
-    return columns;
+    return keys;
 }
 
 
@@ -32,7 +28,7 @@
 {
     NSArray *names = @[ @{ @"first": @"Marcel", @"last": @"Weiher" }, @{@"first": @"John", @"last": @"Doe" }];
     MPWDictArrayTable *table=[MPWDictArrayTable tableWithObjects:names];
-    NSArray *columns=[table computedColumns];
+    NSArray *columns=[table columns];
     NSDictionary *columnsByKey=[columns dictionaryByKey:@"key"];
 
     MPWObjectColumn *first=columnsByKey[@"first"];

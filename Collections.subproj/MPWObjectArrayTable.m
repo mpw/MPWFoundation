@@ -8,6 +8,7 @@
 #import "MPWObjectArrayTable.h"
 #import "AccessorMacros.h"
 #import "MPWPropertyBinding.h"
+#import "MPWStructureDefinition.h"
 
 @interface MPWObjectArrayTable ()
 
@@ -50,16 +51,23 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
 
--(MPWStructureDefinition*)computedColumns
+-(NSArray*)rowKeys
 {
     NSArray *keys=[[[self.itemClass instanceVariables] collect] name];
     keys = [keys subarrayWithRange:NSMakeRange(1, keys.count-1)];
+    return keys;
+}
+
+-(NSArray*)computeColumns
+{
     NSMutableArray *columns = [NSMutableArray array];
-    for ( NSString *key in keys ) {
+    for ( NSString *key in [self rowKeys] ) {
+        if ( [key hasPrefix:@"_"]) {
+            key=[key substringFromIndex:1];
+        }
         MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
         [columns addObject:column];
     }
-
     return columns;
 }
 
@@ -89,7 +97,7 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 
 -(NSString*)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: objects: %@>",self.className,self,self.objects];
+    return [NSString stringWithFormat:@"<%@:%p: objects: %@>",[self className],self,self.objects];
 }
 
 -(void)dealloc

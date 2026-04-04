@@ -206,6 +206,8 @@ scalarAccessor( NSRect, rect, setRect )
     return [[self class] rectWithNSRect:NSUnionRect( [self rectValue], [otherRect rectValue])];
 }
 
+#if ! TARGET_OS_IPHONE
+
 -(instancetype)intersection:(MPWRect*)otherRect
 {
     return [[self class] rectWithNSRect:NSIntersectionRect( [self rectValue], [otherRect rectValue])];
@@ -215,6 +217,7 @@ scalarAccessor( NSRect, rect, setRect )
 {
     return NSIntersectsRect( [self rectValue], [otherRect rectValue]);
 }
+#endif 
 
 @end
 

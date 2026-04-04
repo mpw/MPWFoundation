@@ -28,9 +28,9 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 
 -(void)setTable:(MPWTable*)newItems
 {
-    NSArray *tableColumns = [newItems computedColumns];
+    NSArray *tableColumns = [newItems columns];
     [self removeCurrentColumns];
-    for ( MPWDictColumn *tableColumn in tableColumns ) {
+    for ( MPWObjectColumn *tableColumn in tableColumns ) {
         NSString *key = [tableColumn key];
         MPWTableViewColumn *c=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
         c.tableColumn = tableColumn;

@@ -29,6 +29,7 @@
 #import <MPWFoundation/MPWResource.h>
 #import <MPWFoundation/MPWTypeDefinition.h>
 #import <MPWFoundation/MPWVariableDefinition.h>
+#import <MPWFoundation/MPWInstanceVariableDefinition.h>
 
 #import <MPWFoundation/MPWBlockInvocable.h>
 #import <MPWFoundation/NSNil.h>
