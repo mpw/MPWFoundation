@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/MPWRESTOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) MPWTypeDefinition *type;
-
+@property (nonatomic,assign) MPWRESTVerb operations;
 
 @end
 

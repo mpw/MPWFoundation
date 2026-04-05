@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWTableColumn : NSObject
 
+@property (nonatomic, assign) bool editable;
+
 
 @end
 

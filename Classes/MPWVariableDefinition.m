@@ -15,6 +15,7 @@
     self=[super init];
     self.name = newName;
     self.type = newType;
+    self.operations = MPWRESTVerbsReadWrite;
     return self;
 }
 

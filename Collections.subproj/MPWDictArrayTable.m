@@ -10,7 +10,7 @@
 @implementation MPWDictArrayTable
 
 
--itemStructure
+-computeItemStructure
 {
     return [MPWStructureDefinition structureWithName:@"dict" dict:self.firstObject];
 }

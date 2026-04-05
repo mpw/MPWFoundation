@@ -18,6 +18,13 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName fields:newFields )
     return self;
 }
 
+-concat:anItem
+{
+    [self.fields addObject:anItem];
+    return self;
+}
+
+
 CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)dict )
 {
     NSArray *allKeys=[dict allKeys];

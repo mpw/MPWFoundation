@@ -9,6 +9,7 @@
 #import "AccessorMacros.h"
 #import "MPWPropertyBinding.h"
 #import "MPWStructureDefinition.h"
+#import "MPWVariableDefinition.h"
 
 @interface MPWObjectArrayTable ()
 
@@ -20,6 +21,10 @@
 
 
 @implementation MPWObjectArrayTable
+{
+    MPWStructureDefinition *itemStructure;
+}
+
 
 CONVENIENCEANDINIT( table,  WithClass:(Class)newClass )
 {
@@ -51,7 +56,9 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
 
--(MPWStructureDefinition*)itemStructure
+lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeItemStructure )
+
+-(MPWStructureDefinition*)computeItemStructure
 {
     return [self.itemClass structure];
 }
@@ -64,11 +71,15 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 -(NSArray*)computeColumns
 {
     NSMutableArray *columns = [NSMutableArray array];
-    for ( NSString *key in [self rowKeys] ) {
+    for ( MPWVariableDefinition *def in [[self itemStructure] fields] ){
+        NSString *key=def.name;
         if ( [key hasPrefix:@"_"]) {
             key=[key substringFromIndex:1];
         }
         MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
+        if ( def.operations ==  0) {
+            column.editable = NO;
+        }
         [columns addObject:column];
     }
     return columns;

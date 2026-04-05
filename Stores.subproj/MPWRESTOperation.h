@@ -20,6 +20,7 @@ typedef NS_ENUM(int, MPWRESTVerb) {
     MPWRESTVerbPOST = 16,
     MPWRESTVerbsWrite = MPWRESTVerbPUT|MPWRESTVerbPATCH|MPWRESTVerbDELETE|MPWRESTVerbPOST,
     MPWRESTVerbsRead = MPWRESTVerbGET,
+    MPWRESTVerbsReadWrite = MPWRESTVerbsRead | MPWRESTVerbsWrite,
     MPWRESTVerbMAX = 256,
     MPWRESTVerbInvalid = -1
 };

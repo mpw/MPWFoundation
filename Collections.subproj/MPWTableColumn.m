@@ -9,6 +9,13 @@
 
 @implementation MPWTableColumn
 
+-(instancetype)init
+{
+    self=[super init];
+    self.editable=true;
+    return self;
+}
+
 @end
 
 

@@ -35,6 +35,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
         MPWTableViewColumn *c=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
         c.tableColumn = tableColumn;
         c.width=150;
+        c.editable = tableColumn.editable;
         [c setTitle:[key capitalizedString]];
         [self addTableColumn:c];
     }
@@ -63,18 +64,6 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     }
 }
 
-//-(void)setKeys:(NSArray*)keys target:aTarget
-//{
-//    [self removeCurrentColumns];
-//    for (NSString *key in keys) {
-//        MPWTableViewColumn *column=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
-//        column.binding = [MPWPropertyBinding valueForName:key];
-//        [column.binding bindToTarget:aTarget];
-//        column.width=150;
-//        [column setTitle:[key capitalizedString]];
-//        [self addTableColumn:column];
-//    }
-//}
 
 -(instancetype)initWithFrame:(NSRect)frameRect
 {
