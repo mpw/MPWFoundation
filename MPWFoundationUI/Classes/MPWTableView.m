@@ -28,14 +28,17 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 
 -(void)setTable:(MPWTable*)newItems
 {
-    NSArray *tableColumns = [newItems columns];
+    NSArray *columns = [newItems columns];
     [self removeCurrentColumns];
-    for ( MPWObjectColumn *tableColumn in tableColumns ) {
-        NSString *key = [tableColumn key];
+    double width = self.frame.size.width-40;
+    width = MAX( 400, width);
+    double perColumn = width / columns.count;
+    for ( MPWObjectColumn *column in columns ) {
+        NSString *key = [column key];
         MPWTableViewColumn *c=[[[MPWTableViewColumn alloc] initWithIdentifier:key] autorelease];
-        c.tableColumn = tableColumn;
-        c.width=150;
-        c.editable = tableColumn.editable;
+        c.tableColumn = column;
+        c.width=perColumn;
+        c.editable = column.editable;
         [c setTitle:[key capitalizedString]];
         [self addTableColumn:c];
     }
@@ -91,13 +94,13 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 
 -(void)commonInit
 {
-    self.dataSource = self;
     self.binding = (MPWReference*)self;
-    [self setDicts:[NSMutableArray array]];
     [self installProtocolNotifications];
     self.delegate = self;
     [self registerForDraggedTypes:[NSArray arrayWithObject:MPWPrivateTableViewRowDragOperationData]];
+    NSRect savedFrameBecauseSettingDataSourceResetsFrame = self.frame;
     self.dataSource = self;
+    self.frame = savedFrameBecauseSettingDataSourceResetsFrame;
 }
 
 -(void)awakeFromNib
