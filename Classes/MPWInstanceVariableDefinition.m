@@ -28,6 +28,12 @@
 
 #define pointerToVarInObject( anObject )  ((id*)(((char*)anObject) + _offset))
 
+-(void*)pointerToVarRelativeToBase:(void*)base
+{
+    return pointerToVarInObject(base);
+}
+
+
 -valueInContext:anObject
 {
     id result=nil;

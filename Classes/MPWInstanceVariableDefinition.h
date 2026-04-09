@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) long offset;
 
 -initWithName:(NSString*)newName offset:(long)newOffset type:(MPWTypeDefinition*)newType;
+-(void*)pointerToVarRelativeToBase:(void*)base;
 
 
 @end

@@ -233,7 +233,7 @@ static void __collectInstanceVariablesUntil( Class aClass, NSMutableArray *varNa
             for (i=0;i < ivarCount; i++ ){
                 Ivar ivar=ivars[i];
                 MPWInstanceVariableDefinition *varDescription;
-                MPWTypeDefinition *type=[MPWTypeDefinition descritptorForObjcCode:ivar_getTypeEncoding(ivar)[0]];
+                MPWTypeDefinition *type=[MPWTypeDefinition descriptorForObjcCode:ivar_getTypeEncoding(ivar)[0]];
                 varDescription = [[[MPWInstanceVariableDefinition alloc] initWithName:[NSString stringWithCString:ivar_getName(ivar) encoding:NSASCIIStringEncoding]
                                                                                offset:(int)ivar_getOffset(ivar)
                                                                                  type:type]
@@ -316,7 +316,7 @@ static BOOL CreateClassDefinition( const char * name,
     NSArray *varNames=[varsAsString componentsSeparatedByString:@" "];\
     NSMutableArray *variableDefinitions=[NSMutableArray array];
     for ( NSString *name in varNames ) {
-        MPWInstanceVariableDefinition *theVar=[[[MPWInstanceVariableDefinition alloc] initWithName:name offset:0 type:[MPWTypeDefinition descritptorForObjcCode:'@']] autorelease];
+        MPWInstanceVariableDefinition *theVar=[[[MPWInstanceVariableDefinition alloc] initWithName:name offset:0 type:[MPWTypeDefinition descriptorForObjcCode:'@']] autorelease];
         [variableDefinitions addObject:theVar];
     }
     return [self createSubclassWithName:className instanceVariableArray:variableDefinitions];

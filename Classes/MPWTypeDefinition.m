@@ -19,7 +19,7 @@
 static MPWTypeDefinition* typesByObjCCode[256];
 static NSDictionary *typesBySTName;
 
-+(instancetype)descritptorForObjcCode:(unsigned char)typeCode
++(instancetype)descriptorForObjcCode:(unsigned char)typeCode
 {
     return typesByObjCCode[typeCode];
 }
@@ -84,12 +84,12 @@ static STTypeDescriptorStruct definedTypes[]={
 
 +(instancetype)voidType
 {
-    return [self descritptorForObjcCode:'v'];
+    return [self descriptorForObjcCode:'v'];
 }
 
 +(instancetype)idType
 {
-    return [self descritptorForObjcCode:'@'];
+    return [self descriptorForObjcCode:'@'];
 }
 
 -(NSString *)description
@@ -106,7 +106,7 @@ static STTypeDescriptorStruct definedTypes[]={
 
 +(void)testKnowsAboutID
 {
-    MPWTypeDefinition *idDescriptor=[self descritptorForObjcCode:'@'];
+    MPWTypeDefinition *idDescriptor=[self descriptorForObjcCode:'@'];
     
     IDEXPECT( idDescriptor.name, @"id", @"stName");
     IDEXPECT( idDescriptor.cName, @"id", @"stName");
