@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 -(id)firstObject;
 -(NSUInteger)count;
 -(id)objectAtIndexedSubscript:(NSUInteger)anIndex;
+-(void)setObject:anObject atIndexedSubscript:(NSUInteger)anIndex;
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:newObject;
+-(void)insertObject:newObject  atIndex:(NSUInteger)anIndex;
+-(void)removeObjectAtIndex:(NSUInteger)anIndex;
+-(void)addObject:newObject;
 
 @end
 

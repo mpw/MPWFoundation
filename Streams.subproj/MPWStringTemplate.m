@@ -9,6 +9,7 @@
 #import "MPWByteStream.h"
 #import "MPWAbstractStore.h"
 #import "MPWGenericIdentifier.h"
+#import "MPWSequentialStore.h"
 
 @interface MPWStringTemplate()
 
@@ -78,7 +79,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     return [self initWithFragments:[[self class] parseString:aString]];
 }
 
--(void)writeFragments:(NSArray*)frags onByteStream:(MPWByteStream*)aStream withBindings:env
+-(void)writeFragments:(NSArray*)frags onByteStream:(MPWByteStream*)aStream withBindings:env  index:(long)anIndex
 {
 //    NSLog(@"enter writeFragments with frags: %@, bindings: %@",frags,env);
     for (int i=0;i<frags.count;i++ ) {
@@ -89,7 +90,9 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 //            NSLog(@"fragment[%d]=%@ path=%@",i,frag,name);
             if ( [name isEqual:@"."]) {
                 value=env;
-//                NSLog(@"name was period value=%@",value);
+                //                NSLog(@"name was period value=%@",value);
+            } else if ( [name isEqual:@":index"]) {
+                value=@(anIndex);
             } else if ( [name hasPrefix:@"#"]) {
                 name=[name substringFromIndex:1];
                 NSMutableArray *fragments=[NSMutableArray array];
@@ -105,10 +108,11 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
                 }
                 //              NSLog(@"sub fragments: %@",fragments);
                 id reference = [env referenceForPath:name];
-                id array = [name isEqual:@"."] ? env : [env at:reference];
-                for (id obj in array ) {
-                    //                    NSLog(@"evaluate with %@",obj);
-                    [self writeFragments:fragments onByteStream:aStream withBindings:obj];
+                NSArray* array = [name isEqual:@"."] ? env : [env at:reference];
+                for (long arrayIndex=0,arrayMax=array.count;arrayIndex<arrayMax;arrayIndex++ ) {
+                    id obj=array[arrayIndex];
+                    MPWSequentialStore *store;
+                    [self writeFragments:fragments onByteStream:aStream withBindings:obj index:arrayIndex];
                 }
 //                NSLog(@"did write sub now at:[%d] %@, next up is [%d] %@",i,frags[i],i+1,frags[i+1]);
 //                NSLog(@"after write sub, result now: %@",[aStream target]);
@@ -130,7 +134,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
 
 -(void)writeOnByteStream:(MPWByteStream*)aStream withBindings:env
 {
-    [self writeFragments:self.fragments onByteStream:aStream withBindings:env];
+    [self writeFragments:self.fragments onByteStream:aStream withBindings:env index:0];
 }
 
 -(NSString*)evaluateWith:env
@@ -218,6 +222,14 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
     IDEXPECT( output.target, @"Array: Entry First Entry Second Entry Third After", @"collect over array");
 }
 
++(void)testIterateOverArrayWithIndex
+{
+    MPWStringTemplate *t=[self templateWithString:@"Array: {#array}Entry {:index} {a} {/array}After"];
+    MPWByteStream *output=[MPWByteStream streamWithTarget:[NSMutableString string]];
+    [t writeOnByteStream:output withBindings:@{@"array": @[ @{@"a": @"First"} , @{@"a":@"Second"},@{@"a": @"Third" } ]}];
+    IDEXPECT( output.target, @"Array: Entry 0 First Entry 1 Second Entry 2 Third After", @"collect over array");
+}
+
 +(void)testIterateOverArrayWholeContext
 {
     MPWStringTemplate *t=[self templateWithString:@"Array: {#.}Entry {.} {/.}After"];
@@ -284,6 +296,7 @@ CONVENIENCEANDINIT(template, WithString:(NSString*)aString)
             @"testSubstituteWholeContext",
             @"testIterateOverArrayWholeContext",
             @"testIterateOverArrayWithNestedReference",
+            @"testIterateOverArrayWithIndex",
 //            @"testNonMatchingClosingTagIsCaught",
             @"testEvaluateStringAsTemplateDirectly",
             @"testOnlyCurlyBracktsTriggerEndProcessing",

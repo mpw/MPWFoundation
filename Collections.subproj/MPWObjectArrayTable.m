@@ -109,6 +109,11 @@ lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeIt
     [self.objects removeObjectAtIndex:anIndex];
 }
 
+-(void)addObject:newObject
+{
+    [self.objects addObject:newObject];
+}
+
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"<%@:%p: objects: %@>",[self className],self,self.objects];
