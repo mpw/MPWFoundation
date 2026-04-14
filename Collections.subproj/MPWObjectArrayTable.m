@@ -41,6 +41,11 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
     return self;
 }
 
+-initWithArray:anArray
+{
+    return [self initWithObjects:anArray];
+}
+
 -(id)objectAtIndex:(NSUInteger)anIndex
 {
     return _objects[anIndex];
@@ -60,6 +65,7 @@ lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeIt
 
 -(MPWStructureDefinition*)computeItemStructure
 {
+    NSLog(@"computeItemStructure");
     return [self.itemClass structure];
 }
 

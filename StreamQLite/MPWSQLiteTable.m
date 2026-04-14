@@ -81,9 +81,10 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 }
 
 
--(void)insert:array
+-(void)insert:(NSArray*)array
 {
-    [self writeObject:array];
+    NSLog(@"insert: %ld %@ writer: %@",array.count,array.firstObject,self.writer);
+    [self.writer writeObject:array];
 }
 
 -(NSArray*)objectsForQuery:(NSString*)query builder:(MPWPListBuilder*)builder

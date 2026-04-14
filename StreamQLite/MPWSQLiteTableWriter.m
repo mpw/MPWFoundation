@@ -73,6 +73,7 @@
 
 -(void)writeDictionary:(NSDictionary *)dict
 {
+    NSLog(@"writeDictionary");
     [self beginDictionary];
     for ( NSString *key in [dict allKeys]) {
         [self writeObject:dict[key] forKey:key];
@@ -82,15 +83,29 @@
 
 
 -(void)beginArray {
+    NSLog(@"beginArray");
     sqlite3_step(begin_transaction);
     sqlite3_reset(begin_transaction);
 }
 
 -(void)endArray {
+    NSLog(@"endArray");
     sqlite3_step(end_transaction);
     sqlite3_reset(end_transaction);
 }
 
+
+-(void)writeObject:(id)anObject
+{
+    NSLog(@"writeObject");
+    [super writeObject:anObject];
+}
+
+-(void)writeObject:(id)anObject sender:sender
+{
+    NSLog(@"writeObject:sender:");
+    [super writeObject:anObject sender:sender];
+}
 
 -(int)paramIndexForKey:(NSString*)aKey
 {
@@ -120,6 +135,7 @@
 
 -(void)writeObject:anObject forKey:(NSString*)aKey
 {
+    NSLog(@"writeObject:forKey:");
     if ( anObject ) {
         [self createInsertStatement];
         int keyIndex=[self paramIndexForKey:aKey];

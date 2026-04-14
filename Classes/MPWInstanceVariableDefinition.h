@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -initWithName:(NSString*)newName offset:(long)newOffset type:(MPWTypeDefinition*)newType;
 -(void*)pointerToVarRelativeToBase:(void*)base;
+-(NSString*)objcType;
+-(NSString*)typeName;
 
 
 @end

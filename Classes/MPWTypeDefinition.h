@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, readonly) NSString *cName;
 
 +(instancetype)descriptorForObjcCode:(unsigned char)typeCode;
-+(instancetype)descritptorForSTTypeName:(NSString*)typeName;
++(instancetype)descriptorForSTTypeName:(NSString*)typeName;
 +(instancetype)voidType;
 +(instancetype)idType;
 
