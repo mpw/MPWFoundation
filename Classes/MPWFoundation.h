@@ -28,6 +28,7 @@
 #import <MPWFoundation/MPWObject_fastrc.h>
 #import <MPWFoundation/MPWResource.h>
 #import <MPWFoundation/MPWTypeDefinition.h>
+#import <MPWFoundation/MPWStructureDefinition.h>
 #import <MPWFoundation/MPWVariableDefinition.h>
 #import <MPWFoundation/MPWInstanceVariableDefinition.h>
 

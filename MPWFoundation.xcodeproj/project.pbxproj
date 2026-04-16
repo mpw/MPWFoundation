@@ -578,12 +578,12 @@
 		1F94F2CE2F7E77B5006A67C0 /* MPWVariableDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2C92F7E77B5006A67C0 /* MPWVariableDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F94F2CF2F7E77B5006A67C0 /* MPWVariableDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2C92F7E77B5006A67C0 /* MPWVariableDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F94F2D02F7E77B5006A67C0 /* MPWVariableDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F94F2CA2F7E77B5006A67C0 /* MPWVariableDefinition.m */; };
-		1F94F2D32F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; };
+		1F94F2D32F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F94F2D42F7EA3C8006A67C0 /* MPWStructureDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F94F2D22F7EA3C8006A67C0 /* MPWStructureDefinition.m */; };
-		1F94F2D52F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; };
+		1F94F2D52F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F94F2D62F7EA3C8006A67C0 /* MPWStructureDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F94F2D22F7EA3C8006A67C0 /* MPWStructureDefinition.m */; };
 		1F94F2D72F7EA3C8006A67C0 /* MPWStructureDefinition.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F94F2D22F7EA3C8006A67C0 /* MPWStructureDefinition.m */; };
-		1F94F2D82F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; };
+		1F94F2D82F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F94F2D12F7EA3C8006A67C0 /* MPWStructureDefinition.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9584C62AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F9726A51D00397800D76F3A /* MPWURLCall.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F9726A31D00397800D76F3A /* MPWURLCall.h */; settings = {ATTRIBUTES = (Public, ); }; };

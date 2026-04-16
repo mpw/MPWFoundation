@@ -6,6 +6,7 @@
 //
 
 #import "MPWVariableDefinition.h"
+#import "MPWTypeDefinition.h"
 
 @implementation MPWVariableDefinition
 
@@ -18,6 +19,17 @@
     self.operations = MPWRESTVerbsReadWrite;
     return self;
 }
+
++(instancetype)idWithName:(NSString*)newName
+{
+    return [[[self alloc] initWithName:newName type:[MPWTypeDefinition idType]] autorelease];
+}
+
++(instancetype)int64WithName:(NSString*)newName
+{
+    return [[[self alloc] initWithName:newName type:[MPWTypeDefinition int64Type]] autorelease];
+}
+
 
 -(void)dealloc
 {

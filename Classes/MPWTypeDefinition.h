@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)descriptorForSTTypeName:(NSString*)typeName;
 +(instancetype)voidType;
 +(instancetype)idType;
++(instancetype)int64Type;
 
 @end
 

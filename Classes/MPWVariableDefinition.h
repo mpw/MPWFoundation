@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 -initWithName:(NSString*)newName type:(MPWTypeDefinition*)newType;
++(instancetype)idWithName:(NSString*)newName;
++(instancetype)int64WithName:(NSString*)newName;
+
 
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) MPWTypeDefinition *type;

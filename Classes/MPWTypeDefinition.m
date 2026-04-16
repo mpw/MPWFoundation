@@ -92,6 +92,11 @@ static STTypeDescriptorStruct definedTypes[]={
     return [self descriptorForObjcCode:'@'];
 }
 
++(instancetype)int64Type
+{
+    return [self descriptorForObjcCode:'l'];
+}
+
 -(NSString *)description
 {
     return self.name;

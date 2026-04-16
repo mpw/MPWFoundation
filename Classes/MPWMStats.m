@@ -8,7 +8,6 @@
 #import "MPWMStats.h"
 #import <malloc/malloc.h>
 
-
 @implementation MPWMStats
 {
     struct mstats stats;
@@ -69,3 +68,4 @@ static long peak=0;
 }
 
 @end
+
