@@ -35,6 +35,7 @@
 -(NSURL*)URL;
 
 @property (readonly) NSArray<NSString*> *relativePathComponents;
+@property (readonly) NSString *name;
 
 
 @end

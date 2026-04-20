@@ -45,6 +45,11 @@
     return self;
 }
 
+-(void)reallyWriteSource:newObject at:(id <MPWIdentifying>)aReference
+{
+    [super writeToSource:newObject at:aReference];
+}
+
 -(void)writeToSource:newObject at:(id <MPWIdentifying>)aReference
 {
     if (!self.readOnlySource) {

@@ -17,6 +17,7 @@
 @property (nonatomic,strong)            IBOutlet NSImageView  *image;
 @property (nonatomic,strong)            IBOutlet NSView       *contentView;
 @property (nonatomic,strong)            IBOutlet NSTextView   *errorView;
+@property (nonatomic,strong)            IBOutlet NSTextField  *newClassName;
 
 -(IBAction)didSelect:sender;
 
@@ -69,7 +70,7 @@
     } else {
         [[[self.contentView subviews] do] removeFromSuperview];
         [self.contentView addSubview:self.textScrollView];
-        [self.text setString: [value stringValue]];
+        [self.text setString: [value stringValue] ?: @""];
         [self.textScrollView setFrameSize:self.contentView.frame.size];
         [self.textScrollView setNeedsLayout:YES];
         [self.text setNeedsLayout:YES];
@@ -158,6 +159,37 @@
     [_browser release];
     NSLog(@"deallocating MPWFileBrowser: %p",self);
     [super dealloc];
+}
+
+-(IBAction)showNewClassDialogue:(id)sender
+{
+    [self.newClassName.window makeKeyAndOrderFront:nil];
+}
+
+-(IBAction)defineClass:(id)sender
+{
+    NSString *className = [self.newClassName stringValue];
+    NSString *fileName = [className stringByAppendingPathExtension:@"st"];
+    NSString *template = [NSString stringWithFormat:@"class %@ {\n}\n",className];
+    id <MPWHierarchicalStorage> store = [self.browser.store source];
+    NSLog(@"filename: %@",fileName);
+    NSLog(@"template: %@",template);
+    NSLog(@"store before: %@ / %@",store,[store childrenOfReference:@"/"]);
+    id ref = [MPWGenericIdentifier referenceWithPath:fileName];
+    [store at:ref put:template];
+    NSLog(@"Source before: %@ %@",[store source],[[store source] childrenOfReference:@"/"]);
+    [[store source] at:ref put:template];        //  FIXME:  workaround for caching stores not being able to merge source and cache refs
+    NSLog(@"Source after: %@ %@",[store source],[[store source] childrenOfReference:@"/"]);
+    NSLog(@"store after: %@ / %@",store,[store childrenOfReference:@"/"]);
+    [self.newClassName.window orderOut:nil];
+    [self.browser reloadColumn:0];
+}
+
+-(IBAction)delete:(id)sender
+{
+    [self.browser.store deleteAt:[[self currrentBinding] identifier]];
+    [[[self.browser.store source] source] deleteAt:[[self currrentBinding] identifier]];
+    [self.browser reloadColumn:0];
 }
 
 @end

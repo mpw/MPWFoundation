@@ -68,6 +68,16 @@
     return [[self path] compare:[other path]];
 }
 
+-(NSUInteger)hash
+{
+    return [self.path hash];
+}
+
+-(BOOL)isEqual:other
+{
+    return self == other || [self compare:other]==0;
+}
+
 @synthesize path;
 
 @synthesize schemeName;
@@ -136,6 +146,11 @@
     return self;
 }
 
+//-_fastCStringContents:buffer
+//{
+//    return [self.path _fastCStringContents:buffer];
+//}
+//
 
 @end
 
