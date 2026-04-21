@@ -216,12 +216,32 @@ SEL visSel;
     return self.name ?: [super graphVizName];
 }
 
+-(void)writeBlock:aBlock
+{
+    [aBlock value:self];
+}
+
 
 -(void)dealloc
 {
     [_name release];
     [super dealloc];
 }
+
++(void)initialize
+{
+    static int initialized=NO;
+    if  ( !initialized) {
+        Class blockClass=NSClassFromString(@"NSBlock");
+        NSLog(@"installing writeOnMPWStream: on NSBlock");
+        IMP writeOnStreamImp=imp_implementationWithBlock( ^(id blockSelf, id stream){ [stream writeBlock:blockSelf]; } );
+        BOOL success = class_addMethod(blockClass, @selector(writeOnMPWStream:), writeOnStreamImp, "@@:@");
+        success = success && class_addMethod(blockClass, @selector(writeOnByteStream:), writeOnStreamImp, "@@:@");
+        NSLog(@"succes: %d",success);
+        initialized=YES;
+    }
+}
+
 
 @end
 

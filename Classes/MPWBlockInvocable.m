@@ -271,6 +271,11 @@ static NSString *extractStructType( char *s )
     return ([NSDate timeIntervalSinceReferenceDate]-start) * 1000;
 }
 
+-(void)writeOnByteStream:s
+{
+    [s writeBlock:self];
+}
+
 @end
 
 // #if NS_BLOCKS_AVAILABLE

@@ -313,9 +313,8 @@ static inline int ftoa( char *buffer , double a) {
 	return self;
 }
 
--(id)writeElementName:(const char *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
+-(id)writeElementName:(const char *)name len:(long)l attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
-    long l=strlen(name);
     char tagNameBuffer[l+10];
     strncpy( tagNameBuffer+2,name,l);
     tagNameBuffer[l+2]=0;
@@ -326,7 +325,7 @@ static inline int ftoa( char *buffer , double a) {
     }
     if ( content) {
         FORWARDCHARS(">");
-        content(self);
+        [self writeObject:content];
         tagNameBuffer[0]='<';
         tagNameBuffer[1]='/';
         tagNameBuffer[l+2]='>';
@@ -338,6 +337,37 @@ static inline int ftoa( char *buffer , double a) {
     }
     return self;
 }
+
+-(id)writeElementName:(const char *)name  attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
+{
+    [self writeElementName:name len:strlen(name) attributeBlock:attrs contentBlock:content];
+}
+
+-(id)writeElement:(NSString *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
+{
+    return [self writeElementName:[name UTF8String] attributeBlock:attrs contentBlock:content];
+}
+
+-(id)element:(NSString *)name contents:(XmlGeneratorBlock)content
+{
+    return [self writeElementName:[name UTF8String] attributeBlock:nil contentBlock:content];
+}
+
+
+-(id)html:content
+{
+    const char *name=sel_getName(_cmd);
+    return [self writeElementName:name len:strlen(name)-1 attributeBlock:nil contentBlock:content];
+}
+
++(void)installElementNameWriter:(NSString*)elementName
+{
+    IMP base=[self instanceMethodForSelector:@selector(html:)];
+    NSString *msg=[elementName stringByAppendingString:@":"];
+    SEL newSel=NSSelectorFromString(msg);
+    [[self class] installIMP:base withSignature:"@@:@" selector:newSel oldIMP:nil];
+}
+
 
 -writeElementName:(const char*)name contents:contents
 {
@@ -498,4 +528,26 @@ boolAccessor( shouldIndent, setShouldIndent )
 
 @end
 
+#import <MPWFoundation/DebugMacros.h>
 
+@implementation MPWXmlGeneratorStream(testing)
+
+
++(void)testCanUseBlocksAndObjectsInterchangeably
+{
+    MPWXmlGeneratorStream *s=[self stream];
+    [s html:@"Hello World 1!"];
+    IDEXPECT([[[s target] target] stringValue],@"<html>Hello World 1!</html>\n",@"object");
+    s=[self stream];
+    [s html:^{ [s writeObject:@"Hello World 2!"]; }];
+    IDEXPECT([[[s target] target] stringValue],@"<html>Hello World 2!</html>\n",@"block");
+}
+
++testSelectors
+{
+    return @[
+        @"testCanUseBlocksAndObjectsInterchangeably",
+    ];
+}
+
+@end

@@ -47,6 +47,13 @@ static struct Block_descriptor sdescriptor= {
     return ((id (*)(id block,id arg, id arg2 ))invoke)(self,arg,arg2);
 }
 
+
+-(void)writeOnMPWStream:aStream
+{
+    [aStream writeBlock:self];
+}
+
+
 @end
 
 

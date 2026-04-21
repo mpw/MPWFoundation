@@ -8,13 +8,29 @@
 #import "MPWPrintLiner.h"
 #import "MPWByteStream.h"
 
+@interface MPWPrintLiner()
+
+@property (nonatomic, strong) MPWByteStream *temp;
+
+@end
+
+
 @implementation MPWPrintLiner
 
+-(instancetype)initWithTarget:(id)aTarget
+{
+    self = [super initWithTarget:aTarget];
+    Class targetClass = [aTarget class];
+    self.temp  = [[targetClass isKindOfClass:[MPWByteStream class]] ? targetClass : [MPWByteStream class] streamWithTarget:[NSMutableString string]];
+    return self;
+}
 
 -(void)writeNSObject:(id)anObject
 {
-    NSString *s=[anObject stringValue];
-    [(MPWByteStream*)(self.target) println:s];
+    [[self.temp target] setString:@""];
+    [self.temp writeObject:anObject];
+    [(MPWByteStream*)(self.target) println:[self.temp target]];
+    [[self.temp target] setString:@""];
 }
 
 -(void)writeObject:(id)anObject sender:dummy
