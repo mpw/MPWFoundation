@@ -58,6 +58,11 @@ THE POSSIBILITY OF SUCH DAMAGE.
     byteTarget=aTarget;
 }
 
+-(NSData*)generated
+{
+    return [(self.target) target];
+}
+
 -(void)cr
 {
     FORWARDCHARS("\n");
@@ -513,17 +518,14 @@ boolAccessor( shouldIndent, setShouldIndent )
 				continue;
 		}
 		if ( extra ) {
-//			NSLog(@"flush bytes at %d-%d of %d",base,i-base,length);
 			[self appendBytes:utf8bytes+base length: i-base];
 			[self appendBytes:extra length:strlen(extra)];
 			base=i+1;
 		}
 	}
 
-//    NSLog(@"final flush bytes at %d-%d of %d",base,i-base,length);
 	[self appendBytes:utf8bytes+base length:length-base];
 }
-
 
 
 @end
@@ -537,10 +539,10 @@ boolAccessor( shouldIndent, setShouldIndent )
 {
     MPWXmlGeneratorStream *s=[self stream];
     [s html:@"Hello World 1!"];
-    IDEXPECT([[[s target] target] stringValue],@"<html>Hello World 1!</html>\n",@"object");
+    IDEXPECT([[s generated] stringValue],@"<html>Hello World 1!</html>\n",@"object");
     s=[self stream];
     [s html:^{ [s writeObject:@"Hello World 2!"]; }];
-    IDEXPECT([[[s target] target] stringValue],@"<html>Hello World 2!</html>\n",@"block");
+    IDEXPECT([[s generated] stringValue],@"<html>Hello World 2!</html>\n",@"block");
 }
 
 +testSelectors

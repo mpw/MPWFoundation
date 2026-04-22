@@ -10,6 +10,7 @@
 #import "MPWPropertyBinding.h"
 #import "MPWStructureDefinition.h"
 #import "MPWVariableDefinition.h"
+#import "MPWInstanceVarStore.h"
 
 @interface MPWObjectArrayTable ()
 
@@ -60,6 +61,17 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 {
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
+
+-(void)rowsDo:aBlock
+{
+    
+    for ( id object in self.objects ) {
+        MPWInstanceVarStore* store=[MPWInstanceVarStore storeWithObject:object];
+        [aBlock value:store];
+    }
+    
+}
+
 
 lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeItemStructure )
 

@@ -10,11 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MPWStructureDefinition;
+@class MPWStructureDefinition,MPWTableColumn;
 
 @interface MPWTable : NSObject
 
-objectAccessor_h(NSArray*, columns, setColumns )
+objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
+
+-(void)rowsDo:aBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

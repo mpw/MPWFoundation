@@ -238,6 +238,7 @@ SEL visSel;
         BOOL success = class_addMethod(blockClass, @selector(writeOnMPWStream:), writeOnStreamImp, "@@:@");
         success = success && class_addMethod(blockClass, @selector(writeOnByteStream:), writeOnStreamImp, "@@:@");
         NSLog(@"succes: %d",success);
+        [NSClassFromString(@"MPWBlockContext") class];            //
         initialized=YES;
     }
 }

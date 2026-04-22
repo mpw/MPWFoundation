@@ -8,6 +8,12 @@
 #import "MPWTableColumn.h"
 
 @implementation MPWTableColumn
+{
+    NSString *title;
+}
+
+lazyAccessor( NSString*, title, setTitle, key )
+
 
 -(instancetype)init
 {

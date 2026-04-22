@@ -76,6 +76,9 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 -(instancetype)writeElementName:(const char*)name attributes:attrs contents:contents;
 
 
++(void)installElementNameWriter:(NSString*)elementName;
+
+-(NSData*)generated;
 
 @end
 

@@ -16,6 +16,7 @@
 lazyAccessor( NSArray *, columns, setColumns, computeColumns )
 
 
+
 -(NSArray*)computeColumns
 {
     [NSException raise:@"unimplemnted" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];

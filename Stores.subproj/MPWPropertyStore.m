@@ -69,6 +69,16 @@ CONVENIENCEANDINIT( store, WithObject:(id)anObject)
     return [[[MPWDirectoryReference alloc] initWithContents:refs] autorelease];
 }
 
+-(MPWDirectoryReference*)childrenOfReference:(id<MPWIdentifying>)aReference
+{
+    NSString *path=aReference.path;
+    if ( [path isEqual:@"."] || path.length==0 || [aReference isRoot] ) {
+        return [self listOfProperties];
+    } else {
+        return nil;
+    }
+}
+
 -(id)at:(id<MPWIdentifying>)aReference
 {
     NSString *path=aReference.path;
