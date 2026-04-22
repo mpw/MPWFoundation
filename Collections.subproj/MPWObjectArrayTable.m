@@ -64,12 +64,9 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 
 -(void)rowsDo:aBlock
 {
-    
-    for ( id object in self.objects ) {
-        MPWInstanceVarStore* store=[MPWInstanceVarStore storeWithObject:object];
-        [aBlock value:store];
+    for (  long i=0,max=self.count;i<max;i++) {
+        [aBlock value:@(i)];
     }
-    
 }
 
 
@@ -179,6 +176,10 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
     [_binding setValue:newObject forTarget:_objects[anIndex]];
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<column key %@>",self.key];
+}
 
 
 @end
