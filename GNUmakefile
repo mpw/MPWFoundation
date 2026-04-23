@@ -162,7 +162,7 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWXmlParser.m \
     XML/MPWXmlAttributes.m \
     XML/MPWXmlElement.m \
-    XML/MPWXmlGeneratorStream.m \
+    XML/MPWXmlGenerator.m \
     XML/MPWTagHandler.m \
     XML/MPWTagAction.m \
     Classes/MPWRuntimeAdditions.m \

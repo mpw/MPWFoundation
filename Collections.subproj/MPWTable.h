@@ -15,8 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWTable : NSObject
 
 objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
+objectAccessor_h(NSArray<MPWTableColumn*>*, visibleColumns, setVisibleColumns )
 
--(void)rowsDo:aBlock;
+-(void)rowsDo:(void (^)(NSNumber *))block;
 
 @end
 

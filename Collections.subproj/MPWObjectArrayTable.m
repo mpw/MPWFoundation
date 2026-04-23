@@ -92,9 +92,11 @@ lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeIt
             key=[key substringFromIndex:1];
         }
         MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
+        column.type = def.type;
         if ( def.operations ==  0) {
             column.editable = NO;
         }
+        column.visible = def.type.visible;
         [columns addObject:column];
     }
     return columns;

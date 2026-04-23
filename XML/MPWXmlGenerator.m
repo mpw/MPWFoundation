@@ -1,4 +1,4 @@
-/* MPWXmlGeneratorStream.m Copyright (c) Marcel P. Weiher 1999-2006, All Rights Reserved,
+/* MPWXmlGenerator.m Copyright (c) Marcel P. Weiher 1999-2026, All Rights Reserved,
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
 are met:
@@ -28,10 +28,10 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 , created  on Mon 26-Oct-1998 */
 
-#import "MPWXmlGeneratorStream.h"
+#import "MPWXmlGenerator.h"
 #import "MPWSubData.h"
 
-@implementation MPWXmlGeneratorStream
+@implementation MPWXmlGenerator
 
 
 -initWithTarget:aTarget
@@ -113,7 +113,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     [self writeProcessingInstruction:@"xml" attributes:@"version=\"1.0\" encoding=\"UTF-8\""];
 }
 
-static inline void forwardAttributeName( MPWXmlGeneratorStream *self, const char *attributeName) {
+static inline void forwardAttributeName( MPWXmlGenerator *self, const char *attributeName) {
     long len=strlen(attributeName);
     if ( len < 800) {
         char buffer[1000]=" ";
@@ -441,14 +441,14 @@ boolAccessor( shouldIndent, setShouldIndent )
 
 @end
 
-@implementation NSObject(MPWXmlGeneratorStream)
+@implementation NSObject(MPWXmlGenerator)
 
--(void)generateXmlContentOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlContentOnto:(MPWXmlGenerator*)aStream
 {
     [self flattenStructureOntoStream:aStream];
 }
 
--(void)generateXmlOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlOnto:(MPWXmlGenerator*)aStream
 {
     [self generateXmlContentOnto:aStream];
 }
@@ -460,9 +460,9 @@ boolAccessor( shouldIndent, setShouldIndent )
 
 @end
 
-@implementation NSString(MPWXmlGeneratorStream)
+@implementation NSString(MPWXmlGenerator)
 
--(void)generateXmlContentOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlContentOnto:(MPWXmlGenerator*)aStream
 {
     [aStream writeString:self];
 }
@@ -474,9 +474,9 @@ boolAccessor( shouldIndent, setShouldIndent )
 
 @end
 
-@implementation NSData(MPWXmlGeneratorStream)
+@implementation NSData(MPWXmlGenerator)
 
--(void)generateXmlContentOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlContentOnto:(MPWXmlGenerator*)aStream
 {
     [aStream writeNSDataContent:self];
 }
@@ -532,12 +532,12 @@ boolAccessor( shouldIndent, setShouldIndent )
 
 #import <MPWFoundation/DebugMacros.h>
 
-@implementation MPWXmlGeneratorStream(testing)
+@implementation MPWXmlGenerator(testing)
 
 
 +(void)testCanUseBlocksAndObjectsInterchangeably
 {
-    MPWXmlGeneratorStream *s=[self stream];
+    MPWXmlGenerator *s=[self stream];
     [s html:@"Hello World 1!"];
     IDEXPECT([[s generated] stringValue],@"<html>Hello World 1!</html>\n",@"object");
     s=[self stream];

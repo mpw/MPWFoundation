@@ -1079,12 +1079,12 @@
 		1FED48DD2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
 		1FED48DE2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
 		1FED48DF2426361F00AF2FAD /* XmlCommonMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */; };
-		1FED48E12426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FED48E32426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FED48E5242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
-		1FED48E6242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
-		1FED48E7242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */; };
+		1FED48E12426364C00AF2FAD /* MPWXmlGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FED48E22426364C00AF2FAD /* MPWXmlGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FED48E32426364C00AF2FAD /* MPWXmlGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FED48E02426364C00AF2FAD /* MPWXmlGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FED48E5242637A300AF2FAD /* MPWXmlGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGenerator.m */; };
+		1FED48E6242637A300AF2FAD /* MPWXmlGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGenerator.m */; };
+		1FED48E7242637A300AF2FAD /* MPWXmlGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FED48E4242637A300AF2FAD /* MPWXmlGenerator.m */; };
 		1FED48EA242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
 		1FED48EB242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
 		1FED48EC242638D400AF2FAD /* test1.xml in Resources */ = {isa = PBXBuildFile; fileRef = 1FED48E9242638D300AF2FAD /* test1.xml */; };
@@ -1960,8 +1960,8 @@
 		1FED48B0242634CC00AF2FAD /* MPWXmlParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlParser.m; sourceTree = "<group>"; };
 		1FED48D8242635C500AF2FAD /* MPWXmlElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlElement.h; sourceTree = "<group>"; };
 		1FED48DC2426361F00AF2FAD /* XmlCommonMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XmlCommonMacros.h; sourceTree = "<group>"; };
-		1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlGeneratorStream.h; sourceTree = "<group>"; };
-		1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlGeneratorStream.m; sourceTree = "<group>"; };
+		1FED48E02426364C00AF2FAD /* MPWXmlGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWXmlGenerator.h; sourceTree = "<group>"; };
+		1FED48E4242637A300AF2FAD /* MPWXmlGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWXmlGenerator.m; sourceTree = "<group>"; };
 		1FED48E9242638D300AF2FAD /* test1.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test1.xml; sourceTree = "<group>"; };
 		1FED48ED2426392300AF2FAD /* numericEntities.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = numericEntities.xml; sourceTree = "<group>"; };
 		1FED48EE2426392300AF2FAD /* test3.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = test3.xml; sourceTree = "<group>"; };
@@ -2840,8 +2840,8 @@
 				1FED48AF242634CC00AF2FAD /* MPWXmlAttributes.m */,
 				1FED48D8242635C500AF2FAD /* MPWXmlElement.h */,
 				1FED48AB242634CC00AF2FAD /* MPWXmlElement.m */,
-				1FED48E02426364C00AF2FAD /* MPWXmlGeneratorStream.h */,
-				1FED48E4242637A300AF2FAD /* MPWXmlGeneratorStream.m */,
+				1FED48E02426364C00AF2FAD /* MPWXmlGenerator.h */,
+				1FED48E4242637A300AF2FAD /* MPWXmlGenerator.m */,
 				1FED489C242634AD00AF2FAD /* MPWXmlParser.h */,
 				1FED48B0242634CC00AF2FAD /* MPWXmlParser.m */,
 				1FED492524263BF800AF2FAD /* MPWXmlParserTesting.h */,
@@ -3292,7 +3292,7 @@
 				1F5336142A1D284600AA1754 /* markdown.h in Headers */,
 				1FE37C341969770E00C9A378 /* MPWFuture.h in Headers */,
 				1FE37C10196976C500C9A378 /* MPWDirectForwardingTrampoline.h in Headers */,
-				1FED48E22426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
+				1FED48E22426364C00AF2FAD /* MPWXmlGenerator.h in Headers */,
 				1F1BEDB9213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */,
 				1FE37C03196974BC00C9A378 /* MPWFoundation.h in Headers */,
 				1FE37C471969773C00C9A378 /* MPWFakedReturnMethodSignature.h in Headers */,
@@ -3518,7 +3518,7 @@
 				1FCF26561CF3993C00AC64CE /* MPWKVCSoftPointer.h in Headers */,
 				1FCF26731CF39BB700AC64CE /* MPWUShortArray.h in Headers */,
 				1FCF26431CF3993C00AC64CE /* MPWFoundation.h in Headers */,
-				1FED48E32426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
+				1FED48E32426364C00AF2FAD /* MPWXmlGenerator.h in Headers */,
 				1F1BEDBA213DCBC5004B4947 /* MPWSwitchingStore.h in Headers */,
 				1FCF263D1CF3993C00AC64CE /* MPWMessageCatcher.h in Headers */,
 				1FCF26381CF3993C00AC64CE /* MPWNumber.h in Headers */,
@@ -3593,7 +3593,7 @@
 				1FED48B1242634CC00AF2FAD /* SaxDocumentHandler.h in Headers */,
 				1FEFBD2A2427F88E001E44B2 /* MPWObjectBuilder.h in Headers */,
 				1FF6590A24957007002371E9 /* MPWStreamQLite.h in Headers */,
-				1FED48E12426364C00AF2FAD /* MPWXmlGeneratorStream.h in Headers */,
+				1FED48E12426364C00AF2FAD /* MPWXmlGenerator.h in Headers */,
 				1FF8FDC309B49D0100652476 /* NSObjectAdditions.h in Headers */,
 				1FF8FDC409B49D0100652476 /* MPWPoint.h in Headers */,
 				1FA296961CF74A6500F19039 /* MPWPipeline.h in Headers */,
@@ -4547,7 +4547,7 @@
 				1F5335F62A1D284600AA1754 /* houdini_href_e.c in Sources */,
 				1F840DEB193F50E400589595 /* MPWIdentityDictionary.m in Sources */,
 				1FC70F8720CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
-				1FED48E6242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
+				1FED48E6242637A300AF2FAD /* MPWXmlGenerator.m in Sources */,
 				1F840DEC193F50E400589595 /* MPWRealArray.m in Sources */,
 				1FFE3AC320B34D2000E65B93 /* MPWDiskStore.m in Sources */,
 				1F61ADA42DBA7B74003E8229 /* MPWLockedFilter.m in Sources */,
@@ -4768,7 +4768,7 @@
 				1F49BBBC20BBCE6B00405432 /* MPWMappingStore.m in Sources */,
 				1FCF25EF1CF398F400AC64CE /* MPWScanner.m in Sources */,
 				1F8574AD2ACD8E1300283E7A /* MPWObjectStore.m in Sources */,
-				1FED48E7242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
+				1FED48E7242637A300AF2FAD /* MPWXmlGenerator.m in Sources */,
 				1FEFBD2F2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1FC70F8820CE8770008718B2 /* MPWURLBasedStore.m in Sources */,
 				1FB6EB5E1DDA28B1002B82A5 /* MPWDelayStream.m in Sources */,
@@ -5023,7 +5023,7 @@
 				1FFE3AC220B34D2000E65B93 /* MPWDiskStore.m in Sources */,
 				1FF8FE0D09B49D0100652476 /* MPWEnumFilter.m in Sources */,
 				1FF8FE0E09B49D0100652476 /* MPWSubData.m in Sources */,
-				1FED48E5242637A300AF2FAD /* MPWXmlGeneratorStream.m in Sources */,
+				1FED48E5242637A300AF2FAD /* MPWXmlGenerator.m in Sources */,
 				1FF8FE1109B49D0100652476 /* MPWWriteStream.m in Sources */,
 				1FF8FE1209B49D0100652476 /* MPWByteStream.m in Sources */,
 				1F5336112A1D284600AA1754 /* MPWMarkdownTransformer.m in Sources */,

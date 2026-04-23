@@ -10,10 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPWTypeDefinition;
+
 @interface MPWTableColumn : NSObject
 
 @property (nonatomic, assign) bool editable;
+@property (nonatomic, assign) bool visible;
 @property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) MPWTypeDefinition *type;
 
 objectAccessor_h( NSString*, title, setTitle)
 

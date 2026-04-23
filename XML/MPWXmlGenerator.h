@@ -1,4 +1,4 @@
-/* MPWXmlGeneratorStream.h Copyright (c) Marcel P. Weiher 1999-2006, All Rights Reserved,
+/* MPWXmlGenerator.h Copyright (c) Marcel P. Weiher 1999-2006, All Rights Reserved,
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions
 are met:
@@ -32,7 +32,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import <MPWFoundation/MPWFlattenStream.h>
 
 
-@interface MPWXmlGeneratorStream : MPWFlattenStream 
+@interface MPWXmlGenerator : MPWFlattenStream 
 {
     BOOL		atBOL;
     int         indent;
@@ -42,7 +42,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
     id          byteTarget;
 }
 
-typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
+typedef void (^XmlGeneratorBlock)(MPWXmlGenerator* );
 
 
 -writeStartTag:(const char*)name attributes:attrs single:(BOOL)isSingle;
@@ -82,10 +82,10 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGeneratorStream* );
 
 @end
 
-@interface NSObject(MPWXmlGeneratorStream)
+@interface NSObject(MPWXmlGenerator)
 
--(void)generateXmlContentOnto:(MPWXmlGeneratorStream*)aStream;
--(void)generateXmlOnto:(MPWXmlGeneratorStream*)aStream;
+-(void)generateXmlContentOnto:(MPWXmlGenerator*)aStream;
+-(void)generateXmlOnto:(MPWXmlGenerator*)aStream;
 -(BOOL)isSimpleXmlContent;
 @end
 

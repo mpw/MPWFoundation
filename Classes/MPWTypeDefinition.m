@@ -14,7 +14,19 @@
 
 @end
 
+#define TYPE_FLAG_INVISIBLE      1
+
 @implementation MPWTypeDefinition
+{
+    unsigned long flags;
+}
+
+flagAccessor(invisible, setInvisible, flags, TYPE_FLAG_INVISIBLE)
+
+-(BOOL)visible
+{
+    return !(self.invisible || self.objcTypeCode == '#' );
+}
 
 static MPWTypeDefinition* typesByObjCCode[256];
 static NSDictionary *typesBySTName;
@@ -40,13 +52,14 @@ typedef struct {
     unsigned char objcTypeCode;
     char *name;
     char *cName;
+    long flags;
 } STTypeDescriptorStruct;
 
 
 
 static STTypeDescriptorStruct definedTypes[]={
-    { '@', "id", "id" },
-    { 'l', "int", "long" },
+    { '@', "id", "id",0 },
+    { 'l', "int", "long",0 },
     { 'B', "bool", "BOOL" },
     { 'd', "float", "double" },
     

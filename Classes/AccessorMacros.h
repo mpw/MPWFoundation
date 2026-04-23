@@ -42,6 +42,16 @@
 #endif
 #endif
 
+#define flagAccessor( var, setVar, flagVar, flag) \
+-(void)setVar:(BOOL)flagVal { \
+if ( flagVal ) { \
+flagVar |= flag;\
+} else { \
+flagVar &= ~flag; \
+}\
+} \
+-(BOOL)var {  return flagVar & flag ? true : false; }
+
 
 #define	setAccessor( type, var,setVar ) \
 -(void)setVar:(type)newVar { \

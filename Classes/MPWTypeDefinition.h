@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MPWFoundation/AccessorMacros.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign, readonly) unsigned char objcTypeCode;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) NSString *cName;
+@property (readonly) BOOL visible;
+
+boolAccessor_h(invisible, setInvisible)
 
 +(instancetype)descriptorForObjcCode:(unsigned char)typeCode;
 +(instancetype)descriptorForSTTypeName:(NSString*)typeName;

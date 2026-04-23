@@ -29,7 +29,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 , created  on Mon 28-Sep-1998 */
 
 #import "MPWXmlElement.h"
-#import "MPWXmlGeneratorStream.h"
+#import "MPWXmlGenerator.h"
 
 @interface MPWXmlElement(private)
 
@@ -175,7 +175,7 @@ boolAccessor( isIncomplete, setIsIncomplete )
     return [attributes objectForKey:aKey];
 }
 
--(void)generateXmlContentOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlContentOnto:(MPWXmlGenerator*)aStream
 {
 	if ( !isDirty && elementBytes ) {
 		[aStream writeObject:elementBytes];
@@ -183,7 +183,7 @@ boolAccessor( isIncomplete, setIsIncomplete )
 		[super generateXmlContentOnto:aStream];
 	}
 }
--(void)generateXmlOnto:(MPWXmlGeneratorStream*)aStream
+-(void)generateXmlOnto:(MPWXmlGenerator*)aStream
 {
 	if ( !isDirty && elementBytes ) {
 		[aStream writeObject:elementBytes];

@@ -160,7 +160,7 @@
 
 #import <MPWFoundation/MPWMAXParser.h>
 #import <MPWFoundation/MPWXmlParser.h>
-#import <MPWFoundation/MPWXmlGeneratorStream.h>
+#import <MPWFoundation/MPWXmlGenerator.h>
 #import <MPWFoundation/MPWMASONParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
 #import <MPWFoundation/MPWCFunction.h>

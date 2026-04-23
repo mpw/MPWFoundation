@@ -1533,7 +1533,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 @end
 
 
-#import "MPWXmlGeneratorStream.h"
+#import "MPWXmlGenerator.h"
 #import "DebugMacros.h"
 
 @implementation MPWMAXParser(testing)
@@ -1800,7 +1800,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	id parser=[self domParser];
 	id xmlData=[self frameworkResource:@"nested" category:@"xml"];
 	MPWXmlElement* dom;
-	MPWXmlGeneratorStream *writer=[MPWXmlGeneratorStream stream];
+	MPWXmlGenerator *writer=[MPWXmlGenerator stream];
 	[parser parse:xmlData];
 	dom=[parser parseResult];
 	[writer writeObject:dom];
@@ -1812,7 +1812,7 @@ static NSStringEncoding NSStringConvertIANACharSetNameToEncoding(NSString* encod
 	MPWMAXParser* parser=[self domParser];
 	id xmlData=[self frameworkResource:@"nested" category:@"xml"];
 	MPWXmlElement* dom;
-	MPWXmlGeneratorStream *writer=[MPWXmlGeneratorStream stream];
+	MPWXmlGenerator *writer=[MPWXmlGenerator stream];
 	[parser setMaxDepthAllowed:1];
 	[parser parse:xmlData];
 	dom=[parser parseResult];

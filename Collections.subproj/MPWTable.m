@@ -7,20 +7,34 @@
 
 #import "MPWTable.h"
 #import "AccessorMacros.h"
+#import "MPWTableColumn.h"
 
 @implementation MPWTable
 {
-    NSArray *columns;
+    NSArray <MPWTableColumn*> *columns;
+    NSArray <MPWTableColumn*> *visibleColumns;
 }
 
-lazyAccessor( NSArray *, columns, setColumns, computeColumns )
+lazyAccessor( NSArray <MPWTableColumn*>*, columns, setColumns, computeColumns )
+lazyAccessor( NSArray <MPWTableColumn*>*, visibleColumns, setVisibleColumns, computeVisibleColumns )
 
 
 
--(NSArray*)computeColumns
+-(NSArray<MPWTableColumn*>*)computeColumns
 {
     [NSException raise:@"unimplemnted" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
     return nil;
+}
+
+-(NSArray<MPWTableColumn*> *)computeVisibleColumns
+{
+    NSMutableArray *visible = [NSMutableArray array];
+    for ( MPWTableColumn *col  in self.columns) {
+        if ( col.visible ) {
+            [visible addObject:col];
+        }
+    }
+    return visible;
 }
 
 @end
