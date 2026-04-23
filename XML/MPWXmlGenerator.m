@@ -31,6 +31,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 #import "MPWXmlGenerator.h"
 #import "MPWSubData.h"
 
+
 @implementation MPWXmlGenerator
 
 
@@ -288,8 +289,10 @@ static inline int ftoa( char *buffer , double a) {
 	return self;
 }
 
+
 -(void)writeObject:anObject forKey:aKey
 {
+    FORWARDCHARS( " " );
     FORWARD( aKey );
     FORWARDCHARS( "='" );
     FORWARD( anObject );
@@ -326,7 +329,7 @@ static inline int ftoa( char *buffer , double a) {
     tagNameBuffer[1]='<';
     FORWARDCHARS(tagNameBuffer+1);
     if ( attrs ) {
-        attrs(self);
+        [self writeObject:attrs];
     }
     if ( content) {
         FORWARDCHARS(">");
@@ -345,7 +348,7 @@ static inline int ftoa( char *buffer , double a) {
 
 -(id)writeElementName:(const char *)name  attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
-    [self writeElementName:name len:strlen(name) attributeBlock:attrs contentBlock:content];
+   return [self writeElementName:name len:strlen(name) attributeBlock:attrs contentBlock:content];
 }
 
 -(id)writeElement:(NSString *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
@@ -365,12 +368,24 @@ static inline int ftoa( char *buffer , double a) {
     return [self writeElementName:name len:strlen(name)-1 attributeBlock:nil contentBlock:content];
 }
 
+-(id)html:content attributes:attrs
+{
+    const char *name=sel_getName(_cmd);
+    return [self writeElementName:name len:strlen(name)-12 attributeBlock:attrs contentBlock:content];
+}
+
 +(void)installElementNameWriter:(NSString*)elementName
 {
     IMP base=[self instanceMethodForSelector:@selector(html:)];
     NSString *msg=[elementName stringByAppendingString:@":"];
     SEL newSel=NSSelectorFromString(msg);
     [[self class] installIMP:base withSignature:"@@:@" selector:newSel oldIMP:nil];
+
+    IMP attrBase=[self instanceMethodForSelector:@selector(html:attributes:)];
+    NSString *attrMsg=[elementName stringByAppendingString:@":attributes:"];
+    SEL attrSel=NSSelectorFromString(attrMsg);
+    [[self class] installIMP:attrBase withSignature:"@@:@@" selector:attrSel oldIMP:nil];
+
 }
 
 
@@ -545,10 +560,38 @@ boolAccessor( shouldIndent, setShouldIndent )
     IDEXPECT([[s generated] stringValue],@"<html>Hello World 2!</html>\n",@"block");
 }
 
++(void)testCanWriteAttributes
+{
+    MPWXmlGenerator *s=[self stream];
+    [s html:@"Hello World 1!" attributes:@{ @"class": @"mpwtable"}];
+    IDEXPECT([[s generated] stringValue],@"<html class='mpwtable'>Hello World 1!</html>\n",@"object");
+    s=[self stream];
+    [s html:@"Hello World 2!" attributes:^{ [s writeObject:@"blocktable" forKey:@"class"]; }];
+    IDEXPECT([[s generated] stringValue],@"<html class='blocktable'>Hello World 2!</html>\n",@"block");
+}
+
++(void)testCanInstallWriters
+{
+    MPWXmlGenerator *s=[self stream];
+    BOOL didRaise=NO;
+    @try {
+        [s body:@"Hello World 1!" attributes:@{ @"class": @"mpwbody"}];
+        
+    } @catch (id exception  ) {
+        didRaise=YES;
+    }
+    EXPECTTRUE(didRaise,@"should have raised ");
+    [self installElementNameWriter:@"body"];
+    [s body:@"Hello World 1!" attributes:@{ @"class": @"mpwbody"}];
+    IDEXPECT([[s generated] stringValue],@"<body class='mpwbody'>Hello World 1!</body>\n",@"object");
+}
+
 +testSelectors
 {
     return @[
         @"testCanUseBlocksAndObjectsInterchangeably",
+        @"testCanWriteAttributes",
+        @"testCanInstallWriters",
     ];
 }
 
