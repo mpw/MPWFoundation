@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)objectAtIndex:(NSUInteger)anIndex;
 
-@property (nonatomic, weak) NSArray *objects;
+@property (nonatomic, strong) NSArray *objects;
 @property (nonatomic, strong)   MPWPropertyBinding *binding;
 
 

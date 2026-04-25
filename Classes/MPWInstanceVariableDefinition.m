@@ -66,7 +66,6 @@
     //   NSLog(@"ivar %@ set Value: %@ at offset: %ld",name,newValue,offset);
 }
 
-
 -(NSString*)typeName
 {
     return [self.type name];

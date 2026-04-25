@@ -12,7 +12,6 @@
 #import <MPWFoundation/MPWObjectCache.h>
 #import <MPWFoundation/MPWBlockInvocation.h>
 #import <MPWFoundation/MPWRusage.h>
-#import <MPWFoundation/MPWMStats.h>
 #import <MPWFoundation/MPWMessageCatcher.h>
 #import <MPWFoundation/MPWBoxerUnboxer.h>
 #import <MPWFoundation/MPWRuntimeAdditions.h>
@@ -168,6 +167,8 @@
 #if !GS_API_LATEST
 #import <MPWFoundation/MPWStreamQLite.h>
 #import <MPWFoundation/MPWSQLiteTable.h>
+#import <MPWFoundation/MPWMStats.h>
+
 #else
 #import <MPWFoundation/MPWIOURing.h>
 #endif

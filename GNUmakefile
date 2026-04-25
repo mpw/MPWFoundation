@@ -84,8 +84,8 @@ MPWFoundation_HEADER_FILES_INSTALL_DIR = /MPWFoundation
 
 libMPWFoundation_OBJC_FILES = \
     Stores.subproj/MPWAbstractStore.m \
-	Stores.subproj/MPWEnsureNonNilStore.m \
-	Stores.subproj/MPWPropertyPathStore.m \
+    Stores.subproj/MPWEnsureNonNilStore.m \
+    Stores.subproj/MPWPropertyPathStore.m \
     Stores.subproj/MPWDictStore.m \
     Stores.subproj/MPWDirectoryReference.m \
     Stores.subproj/MPWFileReference.m \
@@ -166,6 +166,10 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWTagHandler.m \
     XML/MPWTagAction.m \
     Classes/MPWRuntimeAdditions.m \
+    Classes/MPWInstanceVariableDefinition.m \
+    Classes/MPWTypeDefinition.m \
+    Classes/MPWStructureDefinition.m \
+    Classes/MPWVariableDefinition.m \
     Classes/NSStringAdditions.m \
     Classes/NSDictAdditions.m \
     Classes/NSBundleConveniences.m \
@@ -204,6 +208,9 @@ libMPWFoundation_OBJC_FILES = \
     Collections.subproj/MPWEnumFilter.m \
     Collections.subproj/MPWEnumSelectFilter.m \
     Collections.subproj/NSArrayFiltering.m \
+    Collections.subproj/MPWTable.m \
+    Collections.subproj/MPWTableColumn.m \
+    Collections.subproj/MPWObjectArrayTable.m \
     Markdown/MPWMarkdownTransformer.m \
     Markdown/NSDataMarkdown.m \
     GNUstep/ProtocolExtensions.m \
