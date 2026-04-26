@@ -233,12 +233,17 @@ SEL visSel;
     static int initialized=NO;
     if  ( !initialized) {
         Class blockClass=NSClassFromString(@"NSBlock");
-        NSLog(@"installing writeOnMPWStream: on NSBlock");
+        if (!blockClass) {
+            blockClass=NSClassFromString(@"_NSBlock");   // for GNUstep
+            [blockClass initialize];
+        }
+        NSLog(@"installing writeOnMPWStream: on NSBlock: %p %@",blockClass,blockClass);
         IMP writeOnStreamImp=imp_implementationWithBlock( ^(id blockSelf, id stream){ [stream writeBlock:blockSelf]; } );
         BOOL success = class_addMethod(blockClass, @selector(writeOnMPWStream:), writeOnStreamImp, "@@:@");
         success = success && class_addMethod(blockClass, @selector(writeOnByteStream:), writeOnStreamImp, "@@:@");
-        NSLog(@"succes: %d",success);
+        NSLog(@"success: %d",success);
         [NSClassFromString(@"MPWBlockContext") class];            //
+        [NSClassFromString(@"MPWBlockContext") initialize];            //
         initialized=YES;
     }
 }
