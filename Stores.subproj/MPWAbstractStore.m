@@ -249,6 +249,7 @@
 
 -(void)at:(id <MPWIdentifying>)aReference readToStream:(id <Streaming>)aStream
 {
+    [aStream writeObject:[self at:aReference]];
     return ;
 }
 

@@ -253,6 +253,11 @@ static inline int ftoa( char *buffer , double a) {
 	return self;
 }
 
+-writeStartTagStr:(NSString*)name attributes:attrs single:(BOOL)isSingle
+{
+    return [self writeStartTag:[name UTF8String] attributes:attrs single:isSingle];
+}
+
 
 
 -startTag:(const char*)tag
@@ -321,6 +326,11 @@ static inline int ftoa( char *buffer , double a) {
 	return self;
 }
 
+-(void)closeEmptyElement
+{
+    FORWARDCHARS("/>\n");
+}
+
 -(id)writeElementName:(const char *)name len:(long)l attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
     char tagNameBuffer[l+10];
@@ -329,7 +339,9 @@ static inline int ftoa( char *buffer , double a) {
     tagNameBuffer[1]='<';
     FORWARDCHARS(tagNameBuffer+1);
     if ( attrs ) {
+        NSLog(@"will write attributes: %@",attrs);
         [self writeObject:attrs];
+        NSLog(@"did write attributes");
     }
     if ( content) {
         FORWARDCHARS(">");
@@ -341,7 +353,7 @@ static inline int ftoa( char *buffer , double a) {
         tagNameBuffer[l+4]=0;
         FORWARDCHARS(tagNameBuffer);
     } else {
-        FORWARDCHARS("/>\n");
+        [self closeEmptyElement];
     }
     return self;
 }
@@ -374,6 +386,12 @@ static inline int ftoa( char *buffer , double a) {
     return [self writeElementName:name len:strlen(name)-12 attributeBlock:attrs contentBlock:content];
 }
 
+-(id)link:attrs
+{
+    const char *name=sel_getName(_cmd);
+    return [self writeElementName:name len:strlen(name)-1 attributeBlock:attrs contentBlock:nil];
+}
+
 +(void)installElementNameWriter:(NSString*)elementName
 {
     IMP base=[self instanceMethodForSelector:@selector(html:)];
@@ -385,7 +403,14 @@ static inline int ftoa( char *buffer , double a) {
     NSString *attrMsg=[elementName stringByAppendingString:@":attributes:"];
     SEL attrSel=NSSelectorFromString(attrMsg);
     [[self class] installIMP:attrBase withSignature:"@@:@@" selector:attrSel oldIMP:nil];
+}
 
++(void)installEmptyElementNameWriter:(NSString*)elementName
+{
+    IMP base=[self instanceMethodForSelector:@selector(link:)];
+    NSString *msg=[elementName stringByAppendingString:@":"];
+    SEL newSel=NSSelectorFromString(msg);
+    [[self class] installIMP:base withSignature:"@@:@" selector:newSel oldIMP:nil];
 }
 
 

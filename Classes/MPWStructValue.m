@@ -40,6 +40,7 @@ CONVENIENCEANDINIT(structValue, WithPointer:(void*)newPtr definition:(MPWStructu
         }
     }
     [NSException raise:@"notfound" format:@"key %@ not found",key];
+    return 0.0;
 }
 
 -(void)dealloc{
