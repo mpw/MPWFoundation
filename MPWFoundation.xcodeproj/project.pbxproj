@@ -2239,6 +2239,8 @@
 		07DF1933006686DDC35ADD82 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				1F61ADEF2DBBAB90003E8229 /* MPWPOSTProcessor.h */,
+				1F61ADF02DBBAB90003E8229 /* MPWPOSTProcessor.m */,
 				1F185BEB26622CA800BA8219 /* MPWResource.h */,
 				1F185BEC26622CA800BA8219 /* MPWResource.m */,
 				07DF1947006686DDC35ADD82 /* AccessorMacros.h */,
@@ -2344,8 +2346,6 @@
 		07DF195D006686DDC35ADD82 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1F61ADEF2DBBAB90003E8229 /* MPWPOSTProcessor.h */,
-				1F61ADF02DBBAB90003E8229 /* MPWPOSTProcessor.m */,
 				1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */,
 				07DF195E006686DDC35ADD82 /* bytecoding.c */,
 				1FB4363710BDF6EF00490AA6 /* dllmain.m */,

@@ -166,6 +166,7 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWTagHandler.m \
     XML/MPWTagAction.m \
     Classes/MPWRuntimeAdditions.m \
+    Classes/MPWPOSTProcessor.m \
     Classes/MPWInstanceVariableDefinition.m \
     Classes/MPWTypeDefinition.m \
     Classes/MPWStructureDefinition.m \
