@@ -58,7 +58,7 @@
             }
             id postProcessor = [MPWPOSTProcessor processor];
             [postProcessor addParameters:d];
-            resource = [self.store post:ref parameters:postProcessor];
+            resource = [self.store post:path parameters:postProcessor];
 //            resource = self.store[ref];
         } else {
             NSLog(@"unknown verb: '%@'",verb);
