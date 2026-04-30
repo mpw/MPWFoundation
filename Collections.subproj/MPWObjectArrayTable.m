@@ -43,7 +43,7 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 
 -initWithArray:anArray
 {
-    return [self initWithObjects:anArray];
+    return [self initWithObjects:[[anArray mutableCopy] autorelease]];
 }
 
 -(id)objectAtIndex:(NSUInteger)anIndex

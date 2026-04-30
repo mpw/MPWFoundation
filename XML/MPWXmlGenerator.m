@@ -339,9 +339,9 @@ static inline int ftoa( char *buffer , double a) {
     tagNameBuffer[1]='<';
     FORWARDCHARS(tagNameBuffer+1);
     if ( attrs ) {
-        NSLog(@"will write attributes: %@",attrs);
+//        NSLog(@"will write attributes: %@",attrs);
         [self writeObject:attrs];
-        NSLog(@"did write attributes");
+//        NSLog(@"did write attributes");
     }
     if ( content) {
         FORWARDCHARS(">");
