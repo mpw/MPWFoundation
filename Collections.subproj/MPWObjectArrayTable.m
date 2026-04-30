@@ -23,7 +23,6 @@
 
 @implementation MPWObjectArrayTable
 {
-    MPWStructureDefinition *itemStructure;
 }
 
 
@@ -70,11 +69,9 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
 }
 
 
-lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeItemStructure )
 
 -(MPWStructureDefinition*)computeItemStructure
 {
-    NSLog(@"computeItemStructure");
     return [self.itemClass structure];
 }
 
@@ -83,25 +80,10 @@ lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeIt
     return [[[[self itemStructure] fields] collect] name];
 }
 
--(NSArray*)computeColumns
+-(MPWTableColumn*)createColumnForKey:aKey
 {
-    NSMutableArray *columns = [NSMutableArray array];
-    for ( MPWVariableDefinition *def in [[self itemStructure] fields] ){
-        NSString *key=def.name;
-        if ( [key hasPrefix:@"_"]) {
-            key=[key substringFromIndex:1];
-        }
-        MPWObjectColumn *column = [MPWObjectColumn columnWithArray:self.objects key:key class:self.itemClass];
-        column.type = def.type;
-        if ( def.operations ==  0) {
-            column.editable = NO;
-        }
-        column.visible = def.type.visible;
-        [columns addObject:column];
-    }
-    return columns;
+    return [MPWObjectColumn columnWithArray:self.objects key:aKey class:self.itemClass];
 }
-
 
 
 -(NSUInteger)count
