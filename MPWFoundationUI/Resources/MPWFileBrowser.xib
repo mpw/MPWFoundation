@@ -13,6 +13,7 @@
                 <outlet property="errorView" destination="HTZ-8r-yud" id="aHJ-GZ-Co5"/>
                 <outlet property="image" destination="ySW-yG-BSI" id="VnZ-w4-qzE"/>
                 <outlet property="newClassName" destination="qUM-kQ-1KG" id="AWf-6R-dj6"/>
+                <outlet property="newResourceName" destination="CwH-tP-aOr" id="Pz9-iK-OsY"/>
                 <outlet property="text" destination="kDE-sf-eZ0" id="1x3-qM-h40"/>
                 <outlet property="textScrollView" destination="NcK-2k-awf" id="N4K-e8-Ean"/>
                 <outlet property="view" destination="c22-O7-iKe" id="HLv-UH-600"/>
@@ -193,6 +194,42 @@
                 </subviews>
             </view>
             <point key="canvasLocation" x="-271" y="427"/>
+        </window>
+        <window title="New Reource" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="zfl-st-Hch" userLabel="New Resource Dialogue" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="171" y="114" width="366" height="44"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1710" height="1073"/>
+            <view key="contentView" id="ryy-o4-uhD">
+                <rect key="frame" x="0.0" y="0.0" width="366" height="44"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CwH-tP-aOr">
+                        <rect key="frame" x="0.0" y="20" width="273" height="24"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="4VA-Qm-uPW">
+                            <font key="font" usesAppearanceFont="YES"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="defineClass:" target="-2" id="72e-9P-OVd"/>
+                        </connections>
+                    </textField>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vcP-eF-LAE">
+                        <rect key="frame" x="281" y="20" width="65" height="24"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="push" title="Create" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="GyJ-7C-O1S">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="defineResource:" target="-2" id="M7p-sC-tvz"/>
+                        </connections>
+                    </button>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="-183" y="505"/>
         </window>
     </objects>
 </document>

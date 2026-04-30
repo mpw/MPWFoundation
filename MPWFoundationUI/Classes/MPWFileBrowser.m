@@ -18,6 +18,7 @@
 @property (nonatomic,strong)            IBOutlet NSView       *contentView;
 @property (nonatomic,strong)            IBOutlet NSTextView   *errorView;
 @property (nonatomic,strong)            IBOutlet NSTextField  *newClassName;
+@property (nonatomic,strong)            IBOutlet NSTextField  *newResourceName;
 
 -(IBAction)didSelect:sender;
 
@@ -184,6 +185,25 @@
     [self.newClassName.window orderOut:nil];
     [self.browser reloadColumn:0];
 }
+
+-(IBAction)showNewResourceDialogue:(id)sender
+{
+    [self.newResourceName.window makeKeyAndOrderFront:nil];
+}
+
+
+-(IBAction)defineResource:(id)sender
+{
+    NSString *fileName = [self.newResourceName stringValue];
+    id ref = [MPWGenericIdentifier referenceWithPath:fileName];
+    id <MPWHierarchicalStorage> store = [self.browser.store source];
+    [store at:ref put:@""];
+    NSLog(@"Source before: %@ %@",[store source],[[store source] childrenOfReference:@"/"]);
+    [[store source] at:ref put:@""];        //  FIXME:  workaround for caching stores not being able to merge source and cache refs
+    [self.newResourceName.window orderOut:nil];
+    [self.browser reloadColumn:0];
+}
+
 
 -(IBAction)delete:(id)sender
 {
