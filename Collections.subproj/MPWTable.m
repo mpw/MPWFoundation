@@ -15,18 +15,23 @@
     MPWStructureDefinition *itemStructure;
     NSArray <MPWTableColumn*> *columns;
     NSArray <MPWTableColumn*> *visibleColumns;
+    NSString *tableIdentifier;
 }
 
 lazyAccessor( NSArray <MPWTableColumn*>*, columns, setColumns, computeColumns )
 lazyAccessor( NSArray <MPWTableColumn*>*, visibleColumns, setVisibleColumns, computeVisibleColumns )
 lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeItemStructure )
+lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentifier )
 
-
+-(NSString*)computeTableIdentifier
+{
+    return [[self itemStructure] name];
+}
 
 -(MPWTableColumn*)createColumnForKey:aKey
 {
     [NSException raise:@"unimplemnted" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
-    
+    return nil;
 }
 
 -(NSArray*)computeColumns

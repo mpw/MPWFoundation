@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
 objectAccessor_h(NSArray<MPWTableColumn*>*, visibleColumns, setVisibleColumns )
+objectAccessor_h(NSString*, tableIdentifier, setTableIdentifier )
 
 -(void)rowsDo:(void (^)(NSNumber *))block;
 

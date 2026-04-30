@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 objectAccessor_h( NSString*, title, setTitle)
 
+-(id)objectAtIndex:(NSUInteger)anIndex;
+
 @end
 
 NS_ASSUME_NONNULL_END

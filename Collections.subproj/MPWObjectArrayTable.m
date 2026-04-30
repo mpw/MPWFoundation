@@ -174,15 +174,16 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
 
 @implementation MPWObjectArrayTable(testing) 
 
-+(void)someTest
++(void)testComputedIdentifierIsClassName
 {
-	EXPECTTRUE(false, @"implemented");
+    MPWObjectArrayTable *table=[self tableWithClass:[NSObject class]];
+    IDEXPECT(table.tableIdentifier,@"NSObject",@"computed table identifier");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-//			@"someTest",
+			@"testComputedIdentifierIsClassName",
 			];
 }
 
