@@ -61,7 +61,7 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
      [_objects setObject:anObject atIndexedSubscript:anIndex];
 }
 
--(void)rowsDo:aBlock
+-(void)rowsDo:(void (^)(NSNumber *))aBlock
 {
     for (  long i=0,max=self.count;i<max;i++) {
         [aBlock value:@(i)];
@@ -180,10 +180,23 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
     IDEXPECT(table.tableIdentifier,@"NSObject",@"computed table identifier");
 }
 
++(void)testRowsDo
+{
+    NSArray *names = @[ @{ @"first": @"Marcel", @"last": @"Weiher" }, @{@"first": @"John", @"last": @"Doe" }];
+    MPWObjectArrayTable *table=[[[self alloc] initWithArray:names] autorelease];
+    long __block count=0;
+    [table rowsDo:^(NSNumber * _Nonnull) {
+        count++;
+    }];
+    INTEXPECT(count, 2, @"rowsDo should have been called twice");
+}
+
+
 +(NSArray*)testSelectors
 {
    return @[
 			@"testComputedIdentifierIsClassName",
+            @"testRowsDo",
 			];
 }
 
@@ -206,10 +219,11 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
     IDEXPECT( [last objectAtIndex:1], @"Doe", @"last name of second row");
 }
 
+
 +(NSArray*)testSelectors
 {
     return @[
-            @"testBasicAccess",
+        @"testBasicAccess",
     ];
 }
 

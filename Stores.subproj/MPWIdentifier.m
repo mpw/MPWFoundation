@@ -131,6 +131,10 @@
     return self;
 }
 
+//-(NSString*)stringValue
+//{
+//    return [[self URL] stringValue];
+//}
 
 - (instancetype)referenceByAppendingReference:(id<MPWIdentifying>)other { 
     return [self stringByAppendingPathComponent:[other path]];

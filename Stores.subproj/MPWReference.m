@@ -55,11 +55,11 @@ CONVENIENCEANDINIT( reference, WithIdentifier:(MPWGenericIdentifier*)ref inStore
     return [[[self class] collect] referenceWithIdentifier:[[self.store childrenOfReference:self.identifier] each] inStore:self.store];
 }
 
--(NSURL*)URL
-{
-    return [self.store URLForReference:self.identifier];
-}
-
+//-(NSURL*)URL
+//{
+//    return [self.store URLForReference:self.identifier];
+//}
+//
 -(NSString*)path
 {
     return [(MPWGenericIdentifier*)self.identifier path];
@@ -75,9 +75,15 @@ CONVENIENCEANDINIT( reference, WithIdentifier:(MPWGenericIdentifier*)ref inStore
     return [self.store relativeStoreAt:self.identifier];
 }
 
+-(NSURL*)URL
+{
+    return [[self identifier] URL];
+}
 
-
-
+//-(NSString*)stringValue
+//{
+//    return [[self identifier] stringValue];
+//}
 
 
 -(NSArray*)pathComponents
