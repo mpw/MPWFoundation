@@ -205,10 +205,9 @@
             }
             data = [self.store at:ref post:formDict];
             NSLog(@"did the POST, return value is %@",data);
-            id resultString=@"Redirect";  // FIXME:  doing a redirect on POST in HTMX makes no sense
             if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
-                replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
-                return ;
+                data = [self.store at:data];
+                NSLog(@"redirected the POST, return value is %@",data);
             }
         } else {
             NSLog(@"unknown verb: %@",verb);
