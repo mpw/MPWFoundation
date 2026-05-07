@@ -13,6 +13,12 @@
 
 @import ObjectiveSmalltalk;
 
+@interface MPWStoreURLSchemeHandler()
+
+@property (nonatomic,strong ) WKWebView *theWebView;
+
+@end
+
 @implementation MPWStoreURLSchemeHandler
 {
     int numRedirects;
@@ -29,6 +35,19 @@
 //-store {
 //    return self.theStore;
 //}
+
+-(BOOL)handleRedirectToRef:ref webView:webView originalUrl:url
+{
+    NSString *newLocation = [ref path];
+    [self.requestLog println:@" - redirect"];
+    newLocation=[NSString stringWithFormat:@"special:%@",newLocation];
+    if ( numRedirects++ < 10) {
+        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newLocation]]];
+        return YES;
+    } else {
+        return NO;
+    }
+}
 
 - (void)webView:(WKWebView *)webView startURLSchemeTask:(id <WKURLSchemeTask>)urlSchemeTask
 {
@@ -91,26 +110,20 @@
     NSHTTPURLResponse *response = nil;
     NSData *data=nil;;
     if ( [resource isKindOfClass:[MPWIdentifier class]] || [resource isKindOfClass:[MPWReference class]]) {
-        NSString *newLocation = [resource path];
-        [self.requestLog println:@" - redirect"];
-        newLocation=[NSString stringWithFormat:@"special:%@",newLocation];
-        if ( numRedirects++ < 10) {
-            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newLocation]]];
+        if ( [self handleRedirectToRef:resource webView:webView originalUrl:url] ) {
             return ;
         } else {
-            numRedirects=0;
-            resource = @"Too many redirects";
-            data=[resource asData];
-            response = [[[NSHTTPURLResponse alloc] initWithURL:url MIMEType:mimetype expectedContentLength:[data length] textEncodingName:nil] autorelease];
+                numRedirects=0;
+                id resource = @"Too many redirects";
+                id data=[resource asData];
+                response = [[[NSHTTPURLResponse alloc] initWithURL:url MIMEType:mimetype expectedContentLength:[data length] textEncodingName:nil] autorelease];
         }
-        
         //  instruct the web view to load the new page
         //  returning a redirect does not work
         //  https://bugs.webkit.org/attachment.cgi?id=313649&action=diff
         //
         //  relative URLs also don't seem to work, hence pre-pending special:
         //  manually.
-        
     } else {
         numRedirects=0;
         data=[resource asData];
@@ -181,6 +194,22 @@
             }
             [self.store at:ref put:formDict];
             data = [self.store at:ref];
+        } else if ( [verb isEqual:@"POST"]) {
+            NSLog(@"POST");
+            NSLog(@"POST with data:\n'%@'\n",request[2]);
+            NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
+            NSArray *components = [request[2] componentsSeparatedByString:@"&"];
+            for ( NSString *comp in components ) {
+                NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
+                formDict[keyval[0]]=keyval[1];
+            }
+            data = [self.store at:ref post:formDict];
+            NSLog(@"did the POST, return value is %@",data);
+            id resultString=@"Redirect";  // FIXME:  doing a redirect on POST in HTMX makes no sense
+            if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
+                replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
+                return ;
+            }
         } else {
             NSLog(@"unknown verb: %@",verb);
         }
