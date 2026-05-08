@@ -38,11 +38,14 @@
 
 -(BOOL)handleRedirectToRef:ref webView:webView originalUrl:url
 {
-    NSString *newLocation = [ref path];
     [self.requestLog println:@" - redirect"];
-    newLocation=[NSString stringWithFormat:@"special:%@",newLocation];
+    ref=[ref identifier];
+    NSLog(@"redirect to: %@/%@",[ref class],ref);
+    NSURL *newLocation = [NSURL URLWithString:[ref path] relativeToURL:url];
+    NSLog(@"redirect to: %@/%@",[newLocation class],newLocation);
+    [self.requestLog printFormat:@" - URL: %@",newLocation];
     if ( numRedirects++ < 10) {
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:newLocation]]];
+        [webView loadRequest:[NSURLRequest requestWithURL:newLocation]];
         return YES;
     } else {
         return NO;
