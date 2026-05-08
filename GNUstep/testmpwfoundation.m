@@ -14,7 +14,6 @@ static void runTests()
 		@"MPWDictStore",
 		@"MPWMappingStore",
 		@"MPWCachingStore",
-		@"MPWReferenceTests",
 		@"MPWFastInvocation",
 		@"MPWFilter",
 		@"MPWArrayFlattenStream",

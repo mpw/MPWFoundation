@@ -53,16 +53,16 @@
     return [self at:aReference verb:MPWRESTVerbGET for:self.theTarget with:&aReference count:1];
 }
 
--(void)at:(id<MPWIdentifying>)aReference put:(id)theObject
+-(id)at:(id<MPWIdentifying>)aReference put:(id)theObject
 {
     id extras[]={theObject,aReference};
-    [self at:aReference verb:MPWRESTVerbPUT for:self.theTarget with:extras count:2];
+    return [self at:aReference verb:MPWRESTVerbPUT for:self.theTarget with:extras count:2];
 }
 
--(void)at:(id<MPWIdentifying>)aReference post:(id)theObject
+-(id)at:(id<MPWIdentifying>)aReference post:(id)theObject
 {
     id extras[]={theObject,aReference};
-    [self at:aReference verb:MPWRESTVerbPOST for:self.theTarget with:extras count:2];
+    return [self at:aReference verb:MPWRESTVerbPOST for:self.theTarget with:extras count:2];
 }
 
 -(void)deleteAt:(id<MPWIdentifying>)aReference

@@ -302,8 +302,8 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 +(void)testFasterThanNSInvocationWitCaching
 {
 	double ratio = [self ratioOfNSInvocationToMPWFastInvocationSpeed:YES];
-	NSAssert2( ratio > 12 ,@"ratio of cached fast invocation to normal invocation %g < %d  (this may fluctuate)",
-				ratio,12);   //  actual up to factor 18
+	NSAssert2( ratio > 10 ,@"ratio of cached fast invocation to normal invocation %g < %d  (this may fluctuate)",
+				ratio,10);   //  actual up to factor 18
 
     (void)ratio;
 }

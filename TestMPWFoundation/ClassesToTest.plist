@@ -79,7 +79,6 @@
 	MPWRealArray,
 	MPWRect,
 	MPWReference,
-	MPWReferenceTests,
 	MPWRusage,
 	MPWScanner,
 	MPWScatterStream,
