@@ -32,7 +32,18 @@
 
 -(instancetype)init
 {
-	return [self initWithCapacity:10];
+    return [self initWithCapacity:10];
+}
+
+-(instancetype)initWithArray:(NSArray*)otherArray
+{
+    long otherCount = otherArray.count;
+    self = [self initWithCapacity:otherCount+2];
+    count = otherCount;
+    for (long i=0,max=otherCount; i<max; i++) {
+        data[i]=[otherArray[i] intValue];
+    }
+    return self;
 }
 
 -(instancetype)initFromInt:(long)start toInt:(long)stop step:(long)step
