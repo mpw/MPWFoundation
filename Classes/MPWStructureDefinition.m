@@ -43,6 +43,16 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)d
             [self className],self,self.name,self.fields];
 }
 
+-(instancetype)copyWithFieldIndexes:(NSArray <NSNumber*> *)fieldIndexes
+{
+    NSMutableArray *newFields=[NSMutableArray array];
+    for (long i=0,max=[fieldIndexes count];i<max;i++) {
+        [newFields addObject:[[self.fields[ fieldIndexes[i].intValue ] copy] autorelease]];
+    }
+    return [[[self class] alloc] initWithName:self.name fields:newFields];
+}
+
+
 -(void)dealloc
 {
     [_fields release];

@@ -8,6 +8,14 @@
 
 @implementation NSString(Additions)
 
+-(long)longValue
+{
+    if ( [self isEqual:@"on"] ) {
+        return 1;
+    }
+    return self.integerValue;
+}
+
 -(const void*)bytes
 {
 /*"

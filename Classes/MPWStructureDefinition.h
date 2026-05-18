@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(instancetype)structureWithName:(NSString*)name fields:fieldDefs;
 -(instancetype)initWithName:(NSString*)name fields:fieldDefs;
 
+-(instancetype)copyWithFieldIndexes:(NSArray*)fieldIndexes;
 
 @property (nonatomic, strong) NSArray<MPWVariableDefinition*>* fields;
 

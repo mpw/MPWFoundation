@@ -10,6 +10,7 @@
 -(NSString*)uniquedByNumberingInUpdatingPool:(NSMutableSet*)otherStrings;
 -(int)countOccurencesOfCharacter:(int)c;
 -(NSArray<NSString*>*)resultsOfCommand;
+-(long)longValue;
 
 @end
 

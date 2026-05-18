@@ -1,4 +1,4 @@
-/* MPWFlattenStream.m Copyright (c) 1998-2017 by Marcel Weiher, All Rights Reserved.
+/* MPWFlattenStream.m Copyright (c) 1998-2026 by Marcel Weiher, All Rights Reserved.
 */
 
 

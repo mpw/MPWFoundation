@@ -21,6 +21,8 @@
 - selectedObject;
 - objectAtRow:(NSUInteger)row;
 
+-(void)setTable:(MPWTable*)newItems;
+
 -(CGFloat)calculateHeightForRow:(NSUInteger)row usingColumn:(NSString *)columnName;
 
 

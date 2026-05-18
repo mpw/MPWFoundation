@@ -137,7 +137,7 @@
     self.store[self.key] = self.value;
     [(MPWWriteBackCache*)self.store makeAsynchronous];
     [self.store deleteAt:(id <MPWIdentifying>)self.key];
-    IDEXPECT( self.source[self.key], self.value, @"deleteing source is not synchronous");
+    IDEXPECT( self.source[self.key], self.value, @"deleteing source is not synchronous");   // FIXME: this sometimes fails
     EXPECTNIL( self.cache[self.key], @"deleteing cache is synchronous");
     [NSThread sleepForTimeInterval:2 orUntilConditionIsMet:^NSNumber *{
         return @(self.source[self.key] == nil);

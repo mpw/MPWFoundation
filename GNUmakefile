@@ -167,10 +167,11 @@ libMPWFoundation_OBJC_FILES = \
     XML/MPWTagAction.m \
     Classes/MPWRuntimeAdditions.m \
     Classes/MPWPOSTProcessor.m \
-    Classes/MPWInstanceVariableDefinition.m \
     Classes/MPWTypeDefinition.m \
     Classes/MPWStructureDefinition.m \
     Classes/MPWVariableDefinition.m \
+    Classes/MPWInstanceVariableDefinition.m \
+    Classes/MPWForm.m \
     Classes/NSStringAdditions.m \
     Classes/NSDictAdditions.m \
     Classes/NSBundleConveniences.m \

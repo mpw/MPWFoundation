@@ -30,6 +30,7 @@
 #import <MPWFoundation/MPWStructureDefinition.h>
 #import <MPWFoundation/MPWVariableDefinition.h>
 #import <MPWFoundation/MPWInstanceVariableDefinition.h>
+#import <MPWFoundation/MPWForm.h>
 
 #import <MPWFoundation/MPWBlockInvocable.h>
 #import <MPWFoundation/NSNil.h>

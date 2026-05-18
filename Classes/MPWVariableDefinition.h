@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *name;
 @property (nonatomic,strong) MPWTypeDefinition *type;
 @property (nonatomic,assign) MPWRESTVerb operations;
+@property (nonatomic,assign) NSString *title;
 
 @end
 

@@ -66,6 +66,11 @@
     //   NSLog(@"ivar %@ set Value: %@ at offset: %ld",name,newValue,offset);
 }
 
+-(id)copyWithZone:(NSZone*)aZone
+{
+    return [[[self class] alloc] initWithName:self.name offset:self.offset type:self.type];
+}
+
 -(NSString*)typeName
 {
     return [self.type name];

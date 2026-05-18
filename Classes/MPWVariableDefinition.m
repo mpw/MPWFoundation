@@ -9,7 +9,13 @@
 #import "MPWTypeDefinition.h"
 
 @implementation MPWVariableDefinition
+{
+    NSString *title;
+}
 
+lazyAccessor(NSString*, title, setTitle, computeTitle )
+
+@dynamic title;
 
 -initWithName:(NSString*)newName type:(MPWTypeDefinition*)newType
 {
@@ -28,6 +34,11 @@
 +(instancetype)int64WithName:(NSString*)newName
 {
     return [[[self alloc] initWithName:newName type:[MPWTypeDefinition int64Type]] autorelease];
+}
+
+-(NSString*)computeTitle
+{
+    return [self.name capitalizedString];
 }
 
 

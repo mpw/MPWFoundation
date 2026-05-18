@@ -176,51 +176,59 @@
 {
     
     if ( [message.name isEqual:@"request"]) {
-        NSArray *request = message.body;
-        NSLog(@"request: %@",message.body);
-        NSString *verb=request[0];
-        NSLog(@"verb: %@",verb);
-        NSString *uristring=request[1] ;
-        uristring=[[uristring componentsSeparatedByString:@":"] lastObject];
-        MPWGenericIdentifier *ref = [MPWGenericIdentifier referenceWithPath:uristring];
-        id data=[NSString stringWithFormat:@"unknown verb %@",verb];
-        if ( [[verb uppercaseString] isEqualToString:@"GET"])  {
-            data = [self.store at:ref];
-        } else if ( [[verb uppercaseString] isEqualToString:@"PUT"]) {
-            NSLog(@"PUT");
-            NSLog(@"PUT with data:\n'%@'\n",request[2]);
-            NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
-            NSArray *components = [request[2] componentsSeparatedByString:@"&"];
-            for ( NSString *comp in components ) {
-                NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
-                formDict[keyval[0]]=keyval[1];
+        @try {
+            NSArray *request = message.body;
+            NSLog(@"request: %@",message.body);
+            NSString *verb=request[0];
+            NSLog(@"verb: %@",verb);
+            NSString *uristring=request[1] ;
+            uristring=[[uristring componentsSeparatedByString:@":"] lastObject];
+            MPWGenericIdentifier *ref = [MPWGenericIdentifier referenceWithPath:uristring];
+            id data=[NSString stringWithFormat:@"unknown verb %@",verb];
+            if ( [[verb uppercaseString] isEqualToString:@"GET"])  {
+                data = [self.store at:ref];
+            } else if ( [[verb uppercaseString] isEqualToString:@"PUT"]) {
+                NSLog(@"PUT");
+                NSLog(@"PUT with data:\n'%@'\n",request[2]);
+                NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
+                NSArray *components = [request[2] componentsSeparatedByString:@"&"];
+                for ( NSString *comp in components ) {
+                    NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
+                    formDict[keyval[0]]=keyval[1];
+                }
+                [self.store at:ref put:formDict];
+                data = [self.store at:ref];
+            } else if ( [verb isEqual:@"POST"]) {
+                NSLog(@"POST");
+                NSLog(@"POST with data:\n'%@'\n",request[2]);
+                NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
+                NSArray *components = [request[2] componentsSeparatedByString:@"&"];
+                for ( NSString *comp in components ) {
+                    NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
+                    formDict[keyval[0]]=keyval[1];
+                }
+                data = [self.store at:ref post:formDict];
+                NSLog(@"did the POST, return value is %@",data);
+                if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
+                    data = [self.store at:data];
+                    NSLog(@"redirected the POST, return value is %@",data);
+                }
+            } else {
+                NSLog(@"unknown verb: %@",verb);
             }
-            [self.store at:ref put:formDict];
-            data = [self.store at:ref];
-        } else if ( [verb isEqual:@"POST"]) {
-            NSLog(@"POST");
-            NSLog(@"POST with data:\n'%@'\n",request[2]);
-            NSMutableDictionary *formDict = [NSMutableDictionary dictionary];
-            NSArray *components = [request[2] componentsSeparatedByString:@"&"];
-            for ( NSString *comp in components ) {
-                NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
-                formDict[keyval[0]]=keyval[1];
-            }
-            data = [self.store at:ref post:formDict];
-            NSLog(@"did the POST, return value is %@",data);
-            if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
-                data = [self.store at:data];
-                NSLog(@"redirected the POST, return value is %@",data);
-            }
-        } else {
-            NSLog(@"unknown verb: %@",verb);
+            NSLog(@"store: %@ uri: '%@'",self.store,ref);
+            id resultString = [data stringValue];
+            NSLog(@"resultString: '%@'",resultString);
+            resultString = resultString ?: @"NULL";
+            replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
+            NSLog(@"did send reply");
+        } @catch ( id exception ) {
+            id resultString=[NSString stringWithFormat:@"exception in HTMX callback: %@",exception];
+            NSLog(@"%@",resultString);
+            replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/plain", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
+
         }
-        NSLog(@"store: %@ uri: '%@'",self.store,ref);
-        id resultString = [data stringValue];
-        NSLog(@"resultString: '%@'",resultString);
-        resultString = resultString ?: @"NULL";
-        replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
-        NSLog(@"did send reply");
+        
     }
 }
 
