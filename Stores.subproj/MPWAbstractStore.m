@@ -338,7 +338,7 @@
 -put:(NSString*)uriString data:(NSData*)data parameters:uriParameters
 {
     fprintf(stderr,"PUT %s data: %ld bytes %s\n",[uriString UTF8String],(long)[data length],[[uriParameters description] UTF8String]);
-    return nil;
+    return [self at:uriString];
 }
 
 
