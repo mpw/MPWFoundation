@@ -194,7 +194,11 @@
                 NSArray *components = [request[2] componentsSeparatedByString:@"&"];
                 for ( NSString *comp in components ) {
                     NSArray *keyval=[[comp  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] componentsSeparatedByString:@"="];
-                    formDict[keyval[0]]=keyval[1];
+                    if ( keyval.count > 1) {
+                        formDict[keyval[0]]=keyval[1];
+                    } else {
+                        NSLog(@"malformed query string component: '%@' (of '%@')",comp,request[2]);
+                    }
                 }
                 [self.store at:ref put:formDict];
                 data = [self.store at:ref];
@@ -222,8 +226,8 @@
             resultString = resultString ?: @"NULL";
             replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
             NSLog(@"did send reply");
-        } @catch ( id exception ) {
-            id resultString=[NSString stringWithFormat:@"exception in HTMX callback: %@",exception];
+        } @catch ( NSException* exception ) {
+            NSString *resultString = [NSString stringWithFormat:@"<html><head></head><body><p>Exception in HTMX callback: %@<p><hr><pre>%@\n%@</pre></body</html>",exception.name,exception.reason,exception.callStackSymbols];
             NSLog(@"%@",resultString);
             replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/plain", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
 
