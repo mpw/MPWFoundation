@@ -51,6 +51,11 @@ CONVENIENCEANDINIT( table,  WithObjects:(NSMutableArray*)newArray )
     return _objects[anIndex];
 }
 
+-(id)at:(NSNumber*)aNumber
+{
+    return [self objectAtIndex:aNumber.intValue];
+}
+
 -(id)objectAtIndexedSubscript:(NSUInteger)anIndex
 {
     return _objects[anIndex];
