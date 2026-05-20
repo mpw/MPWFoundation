@@ -202,6 +202,10 @@
                 }
                 [self.store at:ref put:formDict];
                 data = [self.store at:ref];
+                if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
+                    data = [self.store at:[data identifier]];
+                    NSLog(@"redirected the POST, return value is %@",data);
+                }
             } else if ( [verb isEqual:@"POST"]) {
                 NSLog(@"POST");
                 NSLog(@"POST with data:\n'%@'\n",request[2]);
@@ -214,7 +218,7 @@
                 data = [self.store at:ref post:formDict];
                 NSLog(@"did the POST, return value is %@",data);
                 if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
-                    data = [self.store at:data];
+                    data = [self.store at:[data identifier]];
                     NSLog(@"redirected the POST, return value is %@",data);
                 }
             } else {
