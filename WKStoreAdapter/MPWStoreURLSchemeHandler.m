@@ -184,6 +184,7 @@
             NSString *uristring=request[1] ;
             uristring=[[uristring componentsSeparatedByString:@":"] lastObject];
             MPWGenericIdentifier *ref = [MPWGenericIdentifier referenceWithPath:uristring];
+            NSMutableDictionary *headers = [NSMutableDictionary dictionary];
             id data=[NSString stringWithFormat:@"unknown verb %@",verb];
             if ( [[verb uppercaseString] isEqualToString:@"GET"])  {
                 data = [self.store at:ref];
@@ -219,6 +220,7 @@
                 NSLog(@"did the POST, return value is %@",data);
                 if ( [data isKindOfClass:[MPWIdentifier class]] || [data isKindOfClass:[MPWReference class]]) {
                     data = [self.store at:[data identifier]];
+                    [headers addEntriesFromDictionary:@{@"HX-Refresh": @"true"}];
                     NSLog(@"redirected the POST, return value is %@",data);
                 }
             } else {
@@ -227,8 +229,9 @@
             NSLog(@"store: %@ uri: '%@'",self.store,ref);
             id resultString = [data stringValue];
             NSLog(@"resultString: '%@'",resultString);
+            [headers addEntriesFromDictionary:@{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) }];
             resultString = resultString ?: @"NULL";
-            replyHandler( @{ @"Headers": @{ @"Content-Type": @"text/html", @"Content-Length": @([resultString length]) } , @"Body": resultString } , nil);
+            replyHandler( @{ @"Headers": headers , @"Body": resultString } , nil);
             NSLog(@"did send reply");
         } @catch ( NSException* exception ) {
             NSString *resultString = [NSString stringWithFormat:@"<html><head></head><body><p>Exception in HTMX callback: %@<p><hr><pre>%@\n%@</pre></body</html>",exception.name,exception.reason,exception.callStackSymbols];

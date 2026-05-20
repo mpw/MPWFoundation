@@ -338,7 +338,16 @@
 -put:(NSString*)uriString data:(NSData*)data parameters:uriParameters
 {
     fprintf(stderr,"PUT %s data: %ld bytes %s\n",[uriString UTF8String],(long)[data length],[[uriParameters description] UTF8String]);
-    return [self at:uriString];
+    id ref=[self referenceForPath:uriString];
+    [self at:ref put:data];
+    id value = [self at:ref];
+   if ( [value isKindOfClass:[MPWReference class]]) {
+        value=[value identifier];
+    }
+    if ( [value isKindOfClass:[MPWIdentifier class]]) {
+        value=[self at:value];
+    }
+    return value;
 }
 
 
