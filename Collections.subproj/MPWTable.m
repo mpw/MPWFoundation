@@ -15,13 +15,25 @@
     MPWStructureDefinition *itemStructure;
     NSArray <MPWTableColumn*> *columns;
     NSArray <MPWTableColumn*> *visibleColumns;
+    NSDictionary <NSString*, MPWTableColumn*> *columnsByKey;
     NSString *tableIdentifier;
 }
 
 lazyAccessor( NSArray <MPWTableColumn*>*, columns, setColumns, computeColumns )
 lazyAccessor( NSArray <MPWTableColumn*>*, visibleColumns, setVisibleColumns, computeVisibleColumns )
+lazyAccessor( NSDictionary* , columnsByKey, setColumnsByKey, computeColumnsByKey )
 lazyAccessor(MPWStructureDefinition*, itemStructure, setItemStructure, computeItemStructure )
 lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentifier )
+
+-(NSDictionary <NSString*, MPWTableColumn*> *)computeColumnsByKey
+{
+    return [[self columns] dictionaryByKey:@"key"];
+}
+
+-(MPWTableColumn*)columnForKey:(NSString *)aKey
+{
+    return self.columnsByKey[aKey];
+}
 
 -(NSString*)computeTableIdentifier
 {

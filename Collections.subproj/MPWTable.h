@@ -18,6 +18,7 @@ objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
 objectAccessor_h(NSArray<MPWTableColumn*>*, visibleColumns, setVisibleColumns )
 objectAccessor_h(NSString*, tableIdentifier, setTableIdentifier )
 
+-(MPWTableColumn*)columnForKey:(NSString*)aKey;
 -(void)rowsDo:(void (^)(NSNumber *))block;
 
 @end
