@@ -254,8 +254,6 @@
     [bridge addScriptMessageHandlerWithReply:self contentWorld:[WKContentWorld pageWorld]
                                         name:@"request"];
     [bridge addScriptMessageHandler:self contentWorld:[WKContentWorld pageWorld]
-                               name:@"sendRequest"];
-    [bridge addScriptMessageHandler:self contentWorld:[WKContentWorld pageWorld]
                                name:@"jsLogger"];
     NSString *js=[[self frameworkResource:@"inject" category:@"js"] stringValue];
     [bridge addUserScript:[[WKUserScript alloc] initWithSource:js injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:NO]];

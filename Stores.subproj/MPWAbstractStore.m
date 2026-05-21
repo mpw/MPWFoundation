@@ -337,9 +337,21 @@
 
 -put:(NSString*)uriString data:(NSData*)data parameters:uriParameters
 {
-    fprintf(stderr,"PUT %s data: %ld bytes %s\n",[uriString UTF8String],(long)[data length],[[uriParameters description] UTF8String]);
+    fprintf(stderr,"PUT %s data: %ld bytes %s parameters: %s\n",[uriString UTF8String],(long)[data length],[[data stringValue] UTF8String], [[uriParameters description] UTF8String]);
+    NSString *s=[data stringValue];
+    NSDictionary *paramDict = uriParameters;
+    id param = data;
+    if ( s.length) {
+        NSArray *paramArray=[s componentsSeparatedByString:@"="];
+        if (paramArray.count == 2) {
+            param=@{ paramArray[0]: paramArray[1] };
+        }
+    } else {
+        param=paramDict;
+    }
+    NSLog(@"param: '%@'",param);
     id ref=[self referenceForPath:uriString];
-    [self at:ref put:data];
+    [self at:ref put:param];
     id value = [self at:ref];
    if ( [value isKindOfClass:[MPWReference class]]) {
         value=[value identifier];
