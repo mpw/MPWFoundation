@@ -45,6 +45,70 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     [self _setTable:newItems];
 }
 
+- (NSView *) tableView:(MPWTableView *) tableView
+    viewForTableColumn:(MPWTableViewColumn *) tableColumn
+                   row:(NSInteger) row
+{
+    NSLog(@"viewForTableColumn %@",tableColumn);
+//    NSTableCellView* cell = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
+    NSTableCellView *cell = [[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, tableColumn.width, 20)];
+    cell.identifier = tableColumn.identifier;
+    switch ( tableColumn.tableColumn.type.objcTypeCode) {
+        case 'B':
+            NSButton *button=[NSButton checkboxWithTitle:@"" target:nil action:NULL];
+            button.frame = cell.bounds;
+            button.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+            button.target = tableView;
+            button.action = @selector(tableTextFieldChanged:);
+            cell = button;
+            break;
+        default:
+            NSTextField *textField = [NSTextField labelWithString:@""];
+            textField.frame = cell.bounds;
+            textField.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+            textField.editable = YES;
+            textField.target = tableView;
+            textField.action = @selector(tableTextFieldChanged:);
+            cell.textField = textField;
+            [cell addSubview:textField];
+            cell.textField.stringValue = [self tableView:self objectValueForTableColumn:tableColumn row:row];
+    }
+    NSLog(@"cell with value: %@",cell);
+    return cell;
+}
+
+- (void)tableTextFieldChanged:(NSTextField *)sender
+{
+    NSInteger row = [self rowForView:sender];
+    NSInteger column = [self columnForView:sender];
+    
+    if (row >= 0 && column >= 0) {
+        MPWTableViewColumn* tableColumn = [self tableColumns][column];
+        [self tableView:self setObjectValue:sender.objectValue forTableColumn:tableColumn row:row];
+    }
+    NSLog(@"table: %@",self.table);
+}
+
+-(NSView*)rowViewAtRow:(NSInteger) row
+       makeIfNecessary:(BOOL) makeIfNecessary
+{
+    NSLog(@"rowView[%ld]",(long)row);
+    NSView *rowView = [super rowViewAtRow:row makeIfNecessary:makeIfNecessary];
+    NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
+    return rowView;
+}
+
+
+- (NSView *) viewAtColumn:(NSInteger) column
+                      row:(NSInteger) row
+          makeIfNecessary:(BOOL) makeIfNecessary
+{
+    NSLog(@"cellView[%ld][%ld]",(long)row,(long)column);
+    NSView *cellView = [super viewAtColumn:column row:row makeIfNecessary:makeIfNecessary];
+    NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
+    return cellView;
+}
+
 -(void)setDicts:dictArray
 {
     [self setTable:[[[MPWDictArrayTable alloc] initWithObjects:dictArray] autorelease]];
@@ -225,6 +289,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 @end
+
 
 @implementation MPWGenericIdentifier(allKeys)
 

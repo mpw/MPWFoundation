@@ -344,7 +344,7 @@
     if ( s.length) {
         NSArray *paramArray=[s componentsSeparatedByString:@"="];
         if (paramArray.count == 2) {
-            param=@{ paramArray[0] : [paramArray[1] stringByRemovingPercentEncoding] };
+            param=@{ paramArray[0]: [paramArray[1] stringByRemovingPercentEncoding] };
         }
     } else {
         param=paramDict;
