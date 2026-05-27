@@ -7,10 +7,13 @@
 #import "MPWTableView.h"
 #import <MPWFoundation/MPWFoundation.h>
 #import "MPWTableViewColumn.h"
+#import "MPWTypeToControlMapper.h"
 
 #import <DrawingContext/MPWCGDrawingContext.h>
 
 @interface MPWTableView()
+
+@property (nonatomic,strong) MPWTypeToControlMapper *type2Control;
 
 
 @end
@@ -49,23 +52,12 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     viewForTableColumn:(MPWTableViewColumn *) tableColumn
                    row:(NSInteger) row
 {
-    NSControl *cell=nil;
-    switch ( tableColumn.tableColumn.type.objcTypeCode) {
-        case 'B':
-            NSButton *button=[NSButton checkboxWithTitle:@"" target:tableView action:@selector(tableTextFieldChanged:)];
-            cell = button;
-            break;
-        default:
-            NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSZeroRect] autorelease];
-            textField.editable = YES;
-            textField.target = tableView;
-            textField.action = @selector(tableTextFieldChanged:);
-            cell = textField;
-    }
-    cell.frame = NSMakeRect(0, 0, tableColumn.width, 20);
-    cell.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-
-    return cell;
+    NSControl *control=[self.type2Control controlForType:tableColumn.tableColumn.type];
+    control.frame = NSMakeRect(0, 0, tableColumn.width, 20);
+    control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    control.target = tableView;
+    control.action = @selector(tableTextFieldChanged:);
+    return control;
 }
 
 - (void)tableTextFieldChanged:(NSTextField *)sender
@@ -83,7 +75,6 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 -(NSView*)rowViewAtRow:(NSInteger) row
        makeIfNecessary:(BOOL) makeIfNecessary
 {
-    NSLog(@"rowView[%ld]",(long)row);
     NSView *rowView = [super rowViewAtRow:row makeIfNecessary:makeIfNecessary];
     NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
     return rowView;
@@ -94,7 +85,6 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
                       row:(NSInteger) row
           makeIfNecessary:(BOOL) makeIfNecessary
 {
-    NSLog(@"cellView[%ld][%ld]",(long)row,(long)column);
     NSView *cellView = [super viewAtColumn:column row:row makeIfNecessary:makeIfNecessary];
     NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
     return cellView;
@@ -156,6 +146,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     NSRect savedFrameBecauseSettingDataSourceResetsFrame = self.frame;
     self.dataSource = self;
     self.frame = savedFrameBecauseSettingDataSourceResetsFrame;
+    self.type2Control = [[[MPWTypeToControlMapper alloc] init] autorelease];
 }
 
 -(void)awakeFromNib
