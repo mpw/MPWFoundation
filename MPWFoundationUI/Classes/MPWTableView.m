@@ -49,31 +49,25 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     viewForTableColumn:(MPWTableViewColumn *) tableColumn
                    row:(NSInteger) row
 {
-    NSLog(@"viewForTableColumn %@",tableColumn);
-//    NSTableCellView* cell = [tableView makeViewWithIdentifier:tableColumn.identifier owner:self];
-    NSTableCellView *cell = [[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, tableColumn.width, 20)];
-    cell.identifier = tableColumn.identifier;
+    NSControl *cell=nil;
     switch ( tableColumn.tableColumn.type.objcTypeCode) {
         case 'B':
             NSButton *button=[NSButton checkboxWithTitle:@"" target:nil action:NULL];
-            button.frame = cell.bounds;
+            button.frame = NSMakeRect(0, 0, tableColumn.width, 20);
             button.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
             button.target = tableView;
             button.action = @selector(tableTextFieldChanged:);
             cell = button;
             break;
         default:
-            NSTextField *textField = [NSTextField labelWithString:@""];
-            textField.frame = cell.bounds;
+            NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSZeroRect] autorelease];
+            textField.frame = NSMakeRect(0, 0, tableColumn.width, 20);
             textField.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
             textField.editable = YES;
             textField.target = tableView;
             textField.action = @selector(tableTextFieldChanged:);
-            cell.textField = textField;
-            [cell addSubview:textField];
-            cell.textField.stringValue = [self tableView:self objectValueForTableColumn:tableColumn row:row];
+            cell = textField;
     }
-    NSLog(@"cell with value: %@",cell);
     return cell;
 }
 
