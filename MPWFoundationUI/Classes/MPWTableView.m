@@ -85,6 +85,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     if (row >= 0 && column >= 0) {
         MPWTableViewColumn* tableColumn = [self tableColumns][column];
         [self tableView:self setObjectValue:sender.objectValue forTableColumn:tableColumn row:row];
+        [self modelDidChange:nil];
     }
     NSLog(@"table: %@",self.table);
 }
