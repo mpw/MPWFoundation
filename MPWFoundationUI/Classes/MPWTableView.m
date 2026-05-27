@@ -52,22 +52,19 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     NSControl *cell=nil;
     switch ( tableColumn.tableColumn.type.objcTypeCode) {
         case 'B':
-            NSButton *button=[NSButton checkboxWithTitle:@"" target:nil action:NULL];
-            button.frame = NSMakeRect(0, 0, tableColumn.width, 20);
-            button.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-            button.target = tableView;
-            button.action = @selector(tableTextFieldChanged:);
+            NSButton *button=[NSButton checkboxWithTitle:@"" target:tableView action:@selector(tableTextFieldChanged:)];
             cell = button;
             break;
         default:
             NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSZeroRect] autorelease];
-            textField.frame = NSMakeRect(0, 0, tableColumn.width, 20);
-            textField.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
             textField.editable = YES;
             textField.target = tableView;
             textField.action = @selector(tableTextFieldChanged:);
             cell = textField;
     }
+    cell.frame = NSMakeRect(0, 0, tableColumn.width, 20);
+    cell.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+
     return cell;
 }
 
@@ -81,7 +78,6 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
         [self tableView:self setObjectValue:sender.objectValue forTableColumn:tableColumn row:row];
         [self modelDidChange:nil];
     }
-    NSLog(@"table: %@",self.table);
 }
 
 -(NSView*)rowViewAtRow:(NSInteger) row
