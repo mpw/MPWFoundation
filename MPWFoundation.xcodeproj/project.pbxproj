@@ -118,8 +118,8 @@
 		1F224F0C2FB50130001E377F /* MPWForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F072FB50130001E377F /* MPWForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F224F0D2FB50130001E377F /* MPWForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F224F082FB50130001E377F /* MPWForm.m */; };
 		1F224F0E2FB50130001E377F /* MPWForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F072FB50130001E377F /* MPWForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F224F122FBAF2D1001E377F /* MPWAppkitUIGenertor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F224F112FBAF2D1001E377F /* MPWAppkitUIGenertor.m */; };
-		1F224F132FBAF2D1001E377F /* MPWAppkitUIGenertor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F102FBAF2D1001E377F /* MPWAppkitUIGenertor.h */; };
+		1F224F122FBAF2D1001E377F /* MPWAppkitUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F224F112FBAF2D1001E377F /* MPWAppkitUIGenerator.m */; };
+		1F224F132FBAF2D1001E377F /* MPWAppkitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */; };
 		1F22E0151A35FF0C00F664C8 /* MPWBoxerUnboxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0171A35FF0C00F664C8 /* MPWBoxerUnboxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0181A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F22E0141A35FF0C00F664C8 /* MPWBoxerUnboxer.m */; };
@@ -1631,8 +1631,8 @@
 		1F206E662B6FC94700E4D19E /* MPWStringTemplate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStringTemplate.m; sourceTree = "<group>"; };
 		1F224F072FB50130001E377F /* MPWForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWForm.h; sourceTree = "<group>"; };
 		1F224F082FB50130001E377F /* MPWForm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWForm.m; sourceTree = "<group>"; };
-		1F224F102FBAF2D1001E377F /* MPWAppkitUIGenertor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAppkitUIGenertor.h; sourceTree = "<group>"; };
-		1F224F112FBAF2D1001E377F /* MPWAppkitUIGenertor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAppkitUIGenertor.m; sourceTree = "<group>"; };
+		1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAppkitUIGenerator.h; sourceTree = "<group>"; };
+		1F224F112FBAF2D1001E377F /* MPWAppkitUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAppkitUIGenerator.m; sourceTree = "<group>"; };
 		1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBoxerUnboxer.h; sourceTree = "<group>"; };
 		1F22E0141A35FF0C00F664C8 /* MPWBoxerUnboxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWBoxerUnboxer.m; sourceTree = "<group>"; };
 		1F273F3917F554F600F5FF9E /* MPWBinaryPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWBinaryPlist.h; sourceTree = "<group>"; };
@@ -2712,8 +2712,8 @@
 				1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */,
 				1F7045D8223131C2005ED7FB /* MPWBrowser.h */,
 				1F7045D7223131C2005ED7FB /* MPWBrowser.m */,
-				1F224F102FBAF2D1001E377F /* MPWAppkitUIGenertor.h */,
-				1F224F112FBAF2D1001E377F /* MPWAppkitUIGenertor.m */,
+				1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */,
+				1F224F112FBAF2D1001E377F /* MPWAppkitUIGenerator.m */,
 				1F9401472C73534700CD37ED /* MPWProgramTextView.h */,
 				1F9401482C73534700CD37ED /* MPWProgramTextView.m */,
 				1F7045E8223134F7005ED7FB /* MPWTableView.h */,
@@ -3099,7 +3099,7 @@
 			files = (
 				1F9584C62AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 				1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */,
-				1F224F132FBAF2D1001E377F /* MPWAppkitUIGenertor.h in Headers */,
+				1F224F132FBAF2D1001E377F /* MPWAppkitUIGenerator.h in Headers */,
 				1F94014A2C73534700CD37ED /* MPWProgramTextView.h in Headers */,
 				1F7045DA223131C2005ED7FB /* MPWBrowser.h in Headers */,
 				1F7045B322313082005ED7FB /* MPWFoundationUI.h in Headers */,
@@ -4537,7 +4537,7 @@
 				1F1BE5E6224BD57E002D58AC /* NSViewAdditions.m in Sources */,
 				1F9401492C73534700CD37ED /* MPWProgramTextView.m in Sources */,
 				1F417B9F2BFA253A00DB5DB5 /* MPWTableViewColumn.m in Sources */,
-				1F224F122FBAF2D1001E377F /* MPWAppkitUIGenertor.m in Sources */,
+				1F224F122FBAF2D1001E377F /* MPWAppkitUIGenerator.m in Sources */,
 				1F053A932FC71374000DDD92 /* MPWTypeToControlMapper.m in Sources */,
 				1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */,
 				1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */,

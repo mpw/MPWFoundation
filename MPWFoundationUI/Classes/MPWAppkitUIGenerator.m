@@ -5,12 +5,12 @@
 //  Created by Marcel Weiher on 18.05.26.
 //
 
-#import "MPWAppkitUIGenertor.h"
+#import "MPWAppkitUIGenerator.h"
 #import "MPWTableView.h"
 
 @implementation NSObject(AppKitUI)
 
--(void)generateAppKitUI:(MPWAppkitUIGenertor*)stream
+-(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
 {
     [self flattenStructureOntoStream:stream];
 }
@@ -18,7 +18,7 @@
 @end
 
 
-@implementation MPWAppkitUIGenertor
+@implementation MPWAppkitUIGenerator
 
 -(SEL)streamWriterMessage
 {
@@ -38,7 +38,7 @@
 
 @implementation MPWTable(AppKitUI)
 
--(void)generateAppKitUI:(MPWAppkitUIGenertor*)stream
+-(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
 {
     [stream writeTable:self];
 }
@@ -49,7 +49,7 @@
 
 #import <MPWFoundation/DebugMacros.h>
 
-@implementation MPWAppkitUIGenertor(testing) 
+@implementation MPWAppkitUIGenerator(testing) 
 
 
 

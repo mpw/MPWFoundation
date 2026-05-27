@@ -9,11 +9,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class MPWStructureDefintion;
+@class MPWStructureDefinition;
 
 @interface MPWForm : NSObject
 
-@property (nonatomic, strong) MPWStructureDefintion *def;
+@property (nonatomic, strong) MPWStructureDefinition *def;
 @property (nonatomic, strong) NSString *formAction;
 
 

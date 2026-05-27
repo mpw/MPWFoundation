@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWAppkitUIGenertor : MPWFlattenStream
+@interface MPWAppkitUIGenerator : MPWFlattenStream
 
 @end
 
