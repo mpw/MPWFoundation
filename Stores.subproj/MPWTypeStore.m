@@ -12,7 +12,7 @@
 
 -at:identifier
 {
-    return [MPWTypeDefinition descriptorForTypeName:identifier];
+    return [MPWTypeDefinition descriptorForTypeName:[identifier stringValue]];
 }
 
 @end

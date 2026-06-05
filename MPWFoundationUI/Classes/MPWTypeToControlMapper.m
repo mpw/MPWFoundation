@@ -36,8 +36,9 @@
 +(void)testMapTypes
 {
     MPWTypeToControlMapper *mapper=[[self new] autorelease];
-    EXPECTTRUE( [[mapper controlForType:[MPWTypeDefinition idType]] isKindOfClass:[NSTextField class]], @"default text field");
-    EXPECTTRUE( [[mapper controlForType:[MPWTypeDefinition descriptorForTypeName:@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
+    MPWTypeStore *types=[MPWTypeStore store];
+    EXPECTTRUE( [[mapper controlForType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
+    EXPECTTRUE( [[mapper controlForType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
 }
 
 +(NSArray*)testSelectors
