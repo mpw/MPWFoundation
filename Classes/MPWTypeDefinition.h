@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 boolAccessor_h(invisible, setInvisible)
 
 +(instancetype)descriptorForObjcCode:(unsigned char)typeCode;
-+(instancetype)descriptorForSTTypeName:(NSString*)typeName;
++(instancetype)descriptorForTypeName:(NSString*)typeName;
 +(instancetype)voidType;
 +(instancetype)idType;
 +(instancetype)int64Type;

@@ -926,6 +926,12 @@
 		1FD848B72A2BA4830020BCF9 /* MPWReferenceTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD848B32A2BA4820020BCF9 /* MPWReferenceTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD848B82A2BA4830020BCF9 /* MPWReferenceTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD848B32A2BA4820020BCF9 /* MPWReferenceTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FD848B92A2BA4830020BCF9 /* MPWReferenceTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD848B32A2BA4820020BCF9 /* MPWReferenceTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD93E8A2FD2A5F600228D39 /* MPWTypeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD93E892FD2A5F600228D39 /* MPWTypeStore.m */; };
+		1FD93E8B2FD2A5F600228D39 /* MPWTypeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD93E882FD2A5F600228D39 /* MPWTypeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD93E8C2FD2A5F600228D39 /* MPWTypeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD93E882FD2A5F600228D39 /* MPWTypeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FD93E8D2FD2A5F600228D39 /* MPWTypeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD93E892FD2A5F600228D39 /* MPWTypeStore.m */; };
+		1FD93E8E2FD2A5F600228D39 /* MPWTypeStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FD93E892FD2A5F600228D39 /* MPWTypeStore.m */; };
+		1FD93E8F2FD2A5F600228D39 /* MPWTypeStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FD93E882FD2A5F600228D39 /* MPWTypeStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FE006030AFC4E7800F4542F /* MPWEnumSelectFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */; };
 		1FE006040AFC4E7800F4542F /* MPWEnumSelectFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */; };
 		1FE37C03196974BC00C9A378 /* MPWFoundation.h in Headers */ = {isa = PBXBuildFile; fileRef = 07DF194B006686DDC35ADD82 /* MPWFoundation.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1940,6 +1946,8 @@
 		1FD7B37B2195C9A100046BBE /* MPWCompositeStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWCompositeStore.m; sourceTree = "<group>"; };
 		1FD848B22A2BA4820020BCF9 /* MPWReferenceTemplate.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = MPWReferenceTemplate.m; sourceTree = "<group>"; };
 		1FD848B32A2BA4820020BCF9 /* MPWReferenceTemplate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWReferenceTemplate.h; sourceTree = "<group>"; };
+		1FD93E882FD2A5F600228D39 /* MPWTypeStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MPWTypeStore.h; path = Stores.subproj/MPWTypeStore.h; sourceTree = SOURCE_ROOT; };
+		1FD93E892FD2A5F600228D39 /* MPWTypeStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MPWTypeStore.m; path = Stores.subproj/MPWTypeStore.m; sourceTree = SOURCE_ROOT; };
 		1FE006010AFC4E7800F4542F /* MPWEnumSelectFilter.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWEnumSelectFilter.h; sourceTree = "<group>"; };
 		1FE006020AFC4E7800F4542F /* MPWEnumSelectFilter.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWEnumSelectFilter.m; sourceTree = "<group>"; };
 		1FE6BD0F2E39421600E40B6D /* MPWCountingFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCountingFilter.h; sourceTree = "<group>"; };
@@ -2349,6 +2357,8 @@
 				1FEB28C32DC67C9B00E37021 /* MPWCFunction.m */,
 				1F94F2C12F7E6A6B006A67C0 /* MPWTypeDefinition.h */,
 				1F94F2C22F7E6A6B006A67C0 /* MPWTypeDefinition.m */,
+				1FD93E882FD2A5F600228D39 /* MPWTypeStore.h */,
+				1FD93E892FD2A5F600228D39 /* MPWTypeStore.m */,
 				1F94F2C92F7E77B5006A67C0 /* MPWVariableDefinition.h */,
 				1F94F2CA2F7E77B5006A67C0 /* MPWVariableDefinition.m */,
 				1F224F072FB50130001E377F /* MPWForm.h */,
@@ -3264,6 +3274,7 @@
 				1F5EE32925D518C600C7C71C /* MPWNameRemappingStore.h in Headers */,
 				1FE37C4F196978CA00C9A378 /* MPWPListBuilder.h in Headers */,
 				1FC580872136F29D006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
+				1FD93E8F2FD2A5F600228D39 /* MPWTypeStore.h in Headers */,
 				1FE37C2C196976C500C9A378 /* MPWSoftPointerProxy.h in Headers */,
 				1FE37C431969773C00C9A378 /* MPWEnumeratorSource.h in Headers */,
 				1FE37C311969770000C9A378 /* MPWFlattenStream.h in Headers */,
@@ -3391,6 +3402,7 @@
 				1FCF26571CF3993C00AC64CE /* MPWSoftPointerProxy.h in Headers */,
 				1F6A726426735282003A5B5C /* MPWURLReference.h in Headers */,
 				1FCF26371CF3993C00AC64CE /* NSNumberArithmetic.h in Headers */,
+				1FD93E8C2FD2A5F600228D39 /* MPWTypeStore.h in Headers */,
 				1FCF263F1CF3993C00AC64CE /* NSBundleConveniences.h in Headers */,
 				1F49BBB920BBCE6B00405432 /* MPWMappingStore.h in Headers */,
 				1FCF26361CF3993C00AC64CE /* MPWFloat.h in Headers */,
@@ -3709,6 +3721,7 @@
 				1FFE3AA820B3296800E65B93 /* MPWReference.h in Headers */,
 				1F7DEFCC2F5EB8EC008C6B21 /* MPWMStats.h in Headers */,
 				1FF8FDE709B49D0100652476 /* MPWSoftPointerProxy.h in Headers */,
+				1FD93E8B2FD2A5F600228D39 /* MPWTypeStore.h in Headers */,
 				1FF8FDE809B49D0100652476 /* MPWIntArray.h in Headers */,
 				1F5336132A1D284600AA1754 /* markdown.h in Headers */,
 				1FF8FDE909B49D0100652476 /* MPWObjectReference.h in Headers */,
@@ -4590,6 +4603,7 @@
 				1FEB291A2DD4FB3E00E37021 /* MPWDirectoryEnumerationStream.m in Sources */,
 				1F9726A91D00397800D76F3A /* MPWURLCall.m in Sources */,
 				1FED48D3242634CC00AF2FAD /* MPWXmlAttributes.m in Sources */,
+				1FD93E8E2FD2A5F600228D39 /* MPWTypeStore.m in Sources */,
 				1F840DEE193F50E400589595 /* MPWUShortArray.m in Sources */,
 				1F840DEF193F50E400589595 /* MPWSubData.m in Sources */,
 				1FE5B7C52485905F00D86AFD /* MPWStackSaverInvocation.m in Sources */,
@@ -4851,6 +4865,7 @@
 				1FCF26601CF39ABD00AC64CE /* MPWSubData.m in Sources */,
 				1F224F0D2FB50130001E377F /* MPWForm.m in Sources */,
 				1FCF25E81CF398F400AC64CE /* MPWObject.m in Sources */,
+				1FD93E8D2FD2A5F600228D39 /* MPWTypeStore.m in Sources */,
 				1F94F2D42F7EA3C8006A67C0 /* MPWStructureDefinition.m in Sources */,
 				1FB561FC2B3ED658009FC583 /* MPWEnsureNonNilStore.m in Sources */,
 				1F61ADA52DBA7B74003E8229 /* MPWLockedFilter.m in Sources */,
@@ -5127,6 +5142,7 @@
 				1F6244BA214835EF00BB00C4 /* MPWMapFilter.m in Sources */,
 				1F94F2D02F7E77B5006A67C0 /* MPWVariableDefinition.m in Sources */,
 				1FA1D3EA0BB9DACA0097A924 /* MPWFastInvocation.m in Sources */,
+				1FD93E8A2FD2A5F600228D39 /* MPWTypeStore.m in Sources */,
 				1FEFBD2D2427F88E001E44B2 /* MPWMASONParser.m in Sources */,
 				1FB7B5E31E56E549004CCDCD /* MPWActionStreamAdapter.m in Sources */,
 				1FA1D4590BBAAD520097A924 /* MPWRusage.m in Sources */,

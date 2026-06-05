@@ -8,6 +8,7 @@
 #import "MPWAppkitUIGenerator.h"
 #import "MPWTableView.h"
 #import <Cocoa/Cocoa.h>
+#import "MPWTypeToControlMapper.h"
 
 @implementation NSObject(AppKitUI)
 
@@ -25,6 +26,7 @@
 {
     self=[super initWithTarget:aTarget];
     self.rootView = aTarget;
+    self.type2view = [[MPWTypeToControlMapper new] autorelease];
     return self;
 }
 
@@ -51,17 +53,18 @@
 
 -(void)writeAppKitFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
+    NSGridView *grid = [[[NSGridView alloc] initWithFrame:NSZeroRect] autorelease];
     BOOL hasMoreThanOneField = [theStruct fields].count > 1;
     for ( MPWVariableDefinition *aField in theStruct.fields) {
+        NSMutableArray *row=[NSMutableArray array];
         if ( hasMoreThanOneField ) {
-            [self beginHorizontal];
-            [self label:aField.title ];
+            [row addObject:[NSTextField labelWithString:aField.title]];
         }
-        [self textField:aField.name];
-        if ( hasMoreThanOneField ) {
-            [self endView];
-        }
+        
+        ;
+        [grid addRowWithViews:row];
     }
+    FORWARD(grid);
 }
 
 -(void)writeForm:(MPWForm*)aForm

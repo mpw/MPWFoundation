@@ -36,7 +36,7 @@ static NSDictionary *typesBySTName;
     return typesByObjCCode[typeCode];
 }
 
-+(instancetype)descriptorForSTTypeName:(NSString*)typeName
++(instancetype)descriptorForTypeName:(NSString*)typeName
 {
     MPWTypeDefinition *td = typesBySTName[typeName];
     if ( !td ) {
@@ -133,7 +133,7 @@ static STTypeDescriptorStruct definedTypes[]={
 
 +(void)testMapsSTIntNameToLong
 {
-    MPWTypeDefinition *idDescriptor=[self descriptorForSTTypeName:@"int"];
+    MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"int"];
     
     IDEXPECT( idDescriptor.name, @"int", @"stName");
     IDEXPECT( idDescriptor.cName, @"long", @"stName");
@@ -142,7 +142,7 @@ static STTypeDescriptorStruct definedTypes[]={
 
 +(void)testUnknownTypeNamesAreObjects
 {
-    MPWTypeDefinition *idDescriptor=[self descriptorForSTTypeName:@"NSString"];
+    MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"NSString"];
     
     IDEXPECT( idDescriptor.name, @"NSString", @"stName");
     IDEXPECT( idDescriptor.cName, @"NSString*", @"cName");

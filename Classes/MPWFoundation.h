@@ -157,6 +157,7 @@
 #import <MPWFoundation/MPWEnsureNonNilStore.h>
 #import <MPWFoundation/MPWStringTemplate.h>
 #import <MPWFoundation/MPWPropertyPathStore.h>
+#import <MPWFoundation/MPWTypeStore.h>
 
 #import <MPWFoundation/MPWMAXParser.h>
 #import <MPWFoundation/MPWXmlParser.h>
