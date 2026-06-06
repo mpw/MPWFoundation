@@ -18,7 +18,7 @@
 
 @implementation MPWObjectTemplate
 
--(instancetype)initWithClass:(Class)aClass values:(NSDictionary*)params
+CONVENIENCEANDINIT( template, WithClass:(Class)aClass values:(NSDictionary*)params)
 {
     self=[super init];
     self.classToInstantiate = aClass;

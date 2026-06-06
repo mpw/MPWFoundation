@@ -129,6 +129,12 @@ static inline void forwardAttributeName( MPWXmlGenerator *self, const char *attr
     }
 }
 
+-(void)writeDictionary:(NSDictionary *)dict
+{
+    for ( NSString *key in [dict allKeys]) {
+        [self writeObject:dict[key] forKey:key];
+    }
+}
 
 -(void)writeAttribute:(NSString*)attributeName value:(NSString*)attributeValue
 {
@@ -333,38 +339,45 @@ static inline int ftoa( char *buffer , double a) {
 
 -(id)writeElementName:(const char *)name len:(long)l attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
-    char tagNameBuffer[l+10];
-    strncpy( tagNameBuffer+2,name,l);
-    tagNameBuffer[l+2]=0;
-    tagNameBuffer[1]='<';
-    FORWARDCHARS(tagNameBuffer+1);
-    if ( attrs ) {
-//        NSLog(@"will write attributes: %@",attrs);
-        [self writeObject:attrs];
-//        NSLog(@"did write attributes");
-    }
-    if ( content) {
-        FORWARDCHARS(">");
-        [self writeObject:content];
-        tagNameBuffer[0]='<';
-        tagNameBuffer[1]='/';
-        tagNameBuffer[l+2]='>';
-        tagNameBuffer[l+3]='\n';
-        tagNameBuffer[l+4]=0;
-        FORWARDCHARS(tagNameBuffer);
-    } else {
-        [self closeEmptyElement];
+//    NSLog(@"writeElementName:");
+    if ( name ) {
+//        NSLog(@"have a name:");
+        char tagNameBuffer[l+10];
+        strncpy( tagNameBuffer+2,name,l);
+        tagNameBuffer[l+2]=0;
+        tagNameBuffer[1]='<';
+        FORWARDCHARS(tagNameBuffer+1);
+        if ( attrs ) {
+//            NSLog(@"will write attributes: %@",attrs);
+            [self writeObject:attrs];
+            //        NSLog(@"did write attributes");
+        }
+        if ( content) {
+//            NSLog(@"have co content: %@",content);
+            FORWARDCHARS(">");
+            [self writeObject:content];
+            tagNameBuffer[0]='<';
+            tagNameBuffer[1]='/';
+            tagNameBuffer[l+2]='>';
+            tagNameBuffer[l+3]='\n';
+            tagNameBuffer[l+4]=0;
+            FORWARDCHARS(tagNameBuffer);
+        } else {
+            [self closeEmptyElement];
+        }
     }
     return self;
 }
 
 -(id)writeElementName:(const char *)name  attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
+    NSAssert( name != NULL, @"name is null");
    return [self writeElementName:name len:strlen(name) attributeBlock:attrs contentBlock:content];
 }
 
 -(id)writeElement:(NSString *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content
 {
+    NSLog(@"writeElement: %@ %@ %@",name,attrs,content);
     return [self writeElementName:[name UTF8String] attributeBlock:attrs contentBlock:content];
 }
 

@@ -39,7 +39,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 
 @implementation MPWXmlElement
 
-idAccessor( name, setName )
+objectAccessor( NSString* ,name, setName )
 idAccessor( attributes, setAttributes)
 idAccessor( subelements, setSubelements)
 scalarAccessor( id, parent, setParent )
@@ -133,13 +133,18 @@ boolAccessor( isIncomplete, setIsIncomplete )
     [self setName:aName];
     [self setAttributes:attrs];
     [self setSubelements:elements];
-	isDirty=NO;
+	isDirty=YES;
     return self;
 }
 
 -initWithName:aName
 {
-    return [self initWithName:name attributes:nil subelements:nil];
+    return [self initWithName:aName attributes:nil subelements:nil];
+}
+
+-initWithName:aName attributes:(id)attrs
+{
+    return [self initWithName:aName attributes:attrs subelements:nil];
 }
 
 -(void)dealloc
@@ -180,15 +185,16 @@ boolAccessor( isIncomplete, setIsIncomplete )
 	if ( !isDirty && elementBytes ) {
 		[aStream writeObject:elementBytes];
 	} else {
-		[super generateXmlContentOnto:aStream];
+        [aStream writeElement:name attributeBlock:attributes contentBlock:subelements];
 	}
 }
+
 -(void)generateXmlOnto:(MPWXmlGenerator*)aStream
 {
 	if ( !isDirty && elementBytes ) {
 		[aStream writeObject:elementBytes];
 	} else {
-		[super generateXmlOnto:aStream];
+        [aStream writeElement:name attributeBlock:attributes contentBlock:subelements];
 	}
 }
 

@@ -52,7 +52,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     viewForTableColumn:(MPWTableViewColumn *) tableColumn
                    row:(NSInteger) row
 {
-    NSControl *control=[self.type2Control controlForType:tableColumn.tableColumn.type];
+    NSControl *control=[self.type2Control atType:tableColumn.tableColumn.type];
     control.frame = NSMakeRect(0, 0, tableColumn.width, 20);
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.target = tableView;

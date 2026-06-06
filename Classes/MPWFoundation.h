@@ -91,6 +91,8 @@
 #import <MPWFoundation/MPWSoftPointerProxy.h>
 #import <MPWFoundation/NSArrayFiltering.h>
 #import <MPWFoundation/MPWPOSTProcessor.h>
+#import <MPWFoundation/MPWObjectTemplate.h>
+#import <MPWFoundation/MPWTypeToObjectMapper.h>
 
 #if !__has_feature(objc_arc)
 #import <MPWFoundation/MPWObjectCache.h>
@@ -162,6 +164,7 @@
 #import <MPWFoundation/MPWMAXParser.h>
 #import <MPWFoundation/MPWXmlParser.h>
 #import <MPWFoundation/MPWXmlGenerator.h>
+#import <MPWFoundation/MPWXmlElement.h>
 #import <MPWFoundation/MPWMASONParser.h>
 #import <MPWFoundation/MPWObjectBuilder.h>
 #import <MPWFoundation/MPWCFunction.h>

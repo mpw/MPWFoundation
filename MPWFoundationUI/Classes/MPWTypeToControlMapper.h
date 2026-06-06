@@ -11,9 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWTypeToControlMapper : NSObject
+@interface MPWTypeToControlMapper : MPWTypeToObjectMapper
 
--(NSControl*)controlForType:(MPWTypeDefinition*)typeDefinition;
 
 @end
 

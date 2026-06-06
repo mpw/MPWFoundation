@@ -74,6 +74,8 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGenerator* );
 -(BOOL)shouldIndent;
 -(id)writeElementName:(const char *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content;
 -(instancetype)writeElementName:(const char*)name attributes:attrs contents:contents;
+-(id)writeElement:(NSString *)name attributeBlock:(XmlGeneratorBlock)attrs contentBlock:(XmlGeneratorBlock)content;
+-(id)element:(NSString *)name contents:(XmlGeneratorBlock)content;
 
 
 +(void)installElementNameWriter:(NSString*)elementName;

@@ -8,23 +8,20 @@
 #import "MPWTypeToControlMapper.h"
 #import <Cocoa/Cocoa.h>
 
+
+
 @implementation MPWTypeToControlMapper
 
 
 
--(id)controlForType:(MPWTypeDefinition*)typeDefinition
+-(instancetype)init
 {
-    NSControl *control=nil;
-    switch ( typeDefinition.objcTypeCode) {
-        case 'B':
-            control=[[[NSButton alloc] initWithDictionary:@{ @"buttonType": @(NSButtonTypeSwitch) }] autorelease];
-            break;
-        default:
-            control = [[[NSTextField alloc] initWithDictionary:@{ @"bezeled": @(false) }] autorelease];
-            break;
-    }
-    return control;
+    self=[super init];
+    self[@"bool"] = [MPWObjectTemplate templateWithClass:[NSButton class] values:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
+    self[@"id"] = [MPWObjectTemplate templateWithClass:[NSTextField class] values:@{ @"bezeled": @(false) }];
+    return self;
 }
+
 
 @end
 
@@ -37,8 +34,8 @@
 {
     MPWTypeToControlMapper *mapper=[[self new] autorelease];
     MPWTypeStore *types=[MPWTypeStore store];
-    EXPECTTRUE( [[mapper controlForType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
-    EXPECTTRUE( [[mapper controlForType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
+    EXPECTTRUE( [[mapper atType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
+    EXPECTTRUE( [[mapper atType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
 }
 
 +(NSArray*)testSelectors

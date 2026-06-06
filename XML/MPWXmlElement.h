@@ -29,7 +29,7 @@ THE POSSIBILITY OF SUCH DAMAGE.
 , created  on Mon 28-Sep-1998 */
 
 #import <Foundation/Foundation.h>
-#import <AccessorMacros.h>
+#import <MPWFoundation/AccessorMacros.h>
 
 @interface MPWXmlElement : NSObject
 {

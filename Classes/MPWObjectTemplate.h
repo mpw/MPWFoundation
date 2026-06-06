@@ -11,6 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWObjectTemplate : NSObject
 
++(instancetype)templateWithClass:(Class)aClass values:(NSDictionary*)params;
+-(instancetype)initWithClass:(Class)aClass values:(NSDictionary*)params;
+-object;
+
 @end
 
 NS_ASSUME_NONNULL_END
