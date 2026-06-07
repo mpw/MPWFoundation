@@ -79,6 +79,7 @@ typedef void (^XmlGeneratorBlock)(MPWXmlGenerator* );
 
 
 +(void)installElementNameWriter:(NSString*)elementName;
++(void)installEmptyElementNameWriter:(NSString*)elementName;
 
 -(NSData*)generated;
 

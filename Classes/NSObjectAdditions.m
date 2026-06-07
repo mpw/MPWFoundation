@@ -271,7 +271,36 @@ static id ivarsByClassAndName=nil;
     return varNames;
 }
 
+static NSMutableDictionary *structureDefinitions=nil;
+
++structureDefinitions
+{
+    if (!structureDefinitions) {
+        structureDefinitions=[NSMutableDictionary new];
+    }
+    return structureDefinitions;
+}
+
++(void)setStructureDefinition:def
+{
+    NSMutableDictionary *defs=[self structureDefinitions];
+    defs[[self className]]=def;
+}
+
 +structure
+{
+    NSMutableDictionary *defs=[self structureDefinitions];
+    id def=structureDefinitions[[self className]];
+    if (!def ) {
+        def=[self computeStructure];
+        [self setStructureDefinition:def];
+    }
+    return def;
+}
+
+
+
++computeStructure
 {
     NSMutableArray *vars=[NSMutableArray array];
     __collectInstanceVariablesUntil( self, vars, [NSObject class] );
