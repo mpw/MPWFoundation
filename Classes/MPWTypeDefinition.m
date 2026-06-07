@@ -77,8 +77,15 @@ static STTypeDescriptorStruct definedTypes[]={
     { 0, NULL,NULL},
 };
 
+static STTypeDescriptorStruct mdaTypes[]={
+    { '@', "Text" ,"id" , 0 },
+    { 0, NULL , 0},
+};
+
+
 +(void)initialize
 {
+    NSMutableDictionary *st2type=[NSMutableDictionary dictionary];
     for (int i=0; definedTypes[i].objcTypeCode;i++) {
         MPWTypeDefinition *descriptor=[MPWTypeDefinition new];
         descriptor.objcTypeCode=definedTypes[i].objcTypeCode;
@@ -86,8 +93,15 @@ static STTypeDescriptorStruct definedTypes[]={
         descriptor.cName=@(definedTypes[i].cName);
         typesByObjCCode[definedTypes[i].objcTypeCode]=descriptor;
     }
+    //   MDA types are not entered into the objcTypeCode → type map, because they share
+    for (int i=0; mdaTypes[i].objcTypeCode;i++) {
+        MPWTypeDefinition *descriptor=[MPWTypeDefinition new];
+        descriptor.objcTypeCode=mdaTypes[i].objcTypeCode;
+        descriptor.name=@(mdaTypes[i].name);
+        descriptor.cName=@(mdaTypes[i].cName);
+        st2type[descriptor.name]=descriptor;
+    }
     unsigned char sttypes[]="@ldvB";
-    NSMutableDictionary *st2type=[NSMutableDictionary dictionary];
     for (int i=0;sttypes[i];i++) {
         MPWTypeDefinition *t=typesByObjCCode[sttypes[i]];
         st2type[t.name]=t;
@@ -131,6 +145,15 @@ static STTypeDescriptorStruct definedTypes[]={
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
 }
 
++(void)testKnowsAboutMDATextType
+{
+    MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"Text"];
+    
+    IDEXPECT( idDescriptor.name, @"Text", @"stName");
+    IDEXPECT( idDescriptor.cName, @"id", @"stName");
+    INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
+}
+
 +(void)testMapsSTIntNameToLong
 {
     MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"int"];
@@ -153,6 +176,7 @@ static STTypeDescriptorStruct definedTypes[]={
 {
     return @[
         @"testKnowsAboutID",
+        @"testKnowsAboutMDATextType",
         @"testMapsSTIntNameToLong",
         @"testUnknownTypeNamesAreObjects",
     ];
