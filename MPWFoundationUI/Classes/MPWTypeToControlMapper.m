@@ -19,6 +19,7 @@
     self=[super init];
     self[@"bool"] = [MPWObjectTemplate templateWithClass:[NSButton class] values:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
     self[@"id"] = [MPWObjectTemplate templateWithClass:[NSTextField class] values:@{ @"bezeled": @(false) }];
+    self[@"Text"] = [MPWObjectTemplate templateWithClass:[NSTextView class] values:@{  }];
     return self;
 }
 

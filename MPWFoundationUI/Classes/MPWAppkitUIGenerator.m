@@ -60,8 +60,7 @@
         if ( hasMoreThanOneField ) {
             [row addObject:[NSTextField labelWithString:aField.title]];
         }
-        
-        ;
+        [row addObject:[self.type2view at:aField.type.name]];
         [grid addRowWithViews:row];
     }
     FORWARD(grid);
