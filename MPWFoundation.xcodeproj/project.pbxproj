@@ -31,8 +31,6 @@
 		1F04A53B21D2E01500E19C3F /* MPWInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F04A53721D2E01500E19C3F /* MPWInterval.m */; };
 		1F04A53C21D2E01500E19C3F /* MPWInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F04A53721D2E01500E19C3F /* MPWInterval.m */; };
 		1F04A53D21D2E01500E19C3F /* MPWInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F04A53721D2E01500E19C3F /* MPWInterval.m */; };
-		1F053A922FC71374000DDD92 /* MPWTypeToControlMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F053A902FC71374000DDD92 /* MPWTypeToControlMapper.h */; };
-		1F053A932FC71374000DDD92 /* MPWTypeToControlMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F053A912FC71374000DDD92 /* MPWTypeToControlMapper.m */; };
 		1F05F69D0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F05F69B0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h */; };
 		1F05F69E0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F05F69C0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m */; };
 		1F080E511E4F13F600B78EF3 /* MPWFDStreamSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F080E4F1E4F13F600B78EF3 /* MPWFDStreamSource.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1604,8 +1602,6 @@
 		1F04A52F21D10C7300E19C3F /* testmpwfoundation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = testmpwfoundation.m; path = GNUstep/testmpwfoundation.m; sourceTree = "<group>"; };
 		1F04A53621D2E01500E19C3F /* MPWInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWInterval.h; sourceTree = "<group>"; };
 		1F04A53721D2E01500E19C3F /* MPWInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWInterval.m; sourceTree = "<group>"; };
-		1F053A902FC71374000DDD92 /* MPWTypeToControlMapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTypeToControlMapper.h; sourceTree = "<group>"; };
-		1F053A912FC71374000DDD92 /* MPWTypeToControlMapper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTypeToControlMapper.m; sourceTree = "<group>"; };
 		1F05F69B0A8297A200C8C652 /* MPWDirectForwardingTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWDirectForwardingTrampoline.h; sourceTree = "<group>"; };
 		1F05F69C0A8297A200C8C652 /* MPWDirectForwardingTrampoline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWDirectForwardingTrampoline.m; sourceTree = "<group>"; };
 		1F07CD9F07F8E1EA00C389FA /* MPWFuture.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MPWFuture.h; sourceTree = "<group>"; };
@@ -2759,8 +2755,6 @@
 				1F4D4411261591960023C2C5 /* MPWWindowController.h */,
 				1F4D4412261591960023C2C5 /* MPWWindowController.m */,
 				1F5620B02F68685200D998EF /* MPWViewHarness.h */,
-				1F053A902FC71374000DDD92 /* MPWTypeToControlMapper.h */,
-				1F053A912FC71374000DDD92 /* MPWTypeToControlMapper.m */,
 				1F5620B12F68685200D998EF /* MPWViewHarness.m */,
 			);
 			path = Classes;
@@ -3139,7 +3133,6 @@
 				1F4D4413261591960023C2C5 /* MPWWindowController.h in Headers */,
 				1F5620B22F68685200D998EF /* MPWViewHarness.h in Headers */,
 				1F34669F28B0D1F3003257CB /* CLIApp.h in Headers */,
-				1F053A922FC71374000DDD92 /* MPWTypeToControlMapper.h in Headers */,
 				1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */,
 				1F417BA02BFA253A00DB5DB5 /* MPWTableViewColumn.h in Headers */,
 			);
@@ -4577,7 +4570,6 @@
 				1F9401492C73534700CD37ED /* MPWProgramTextView.m in Sources */,
 				1F417B9F2BFA253A00DB5DB5 /* MPWTableViewColumn.m in Sources */,
 				1F224F122FBAF2D1001E377F /* MPWAppkitUIGenerator.m in Sources */,
-				1F053A932FC71374000DDD92 /* MPWTypeToControlMapper.m in Sources */,
 				1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */,
 				1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */,
 				1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */,

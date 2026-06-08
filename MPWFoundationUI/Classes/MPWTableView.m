@@ -7,13 +7,13 @@
 #import "MPWTableView.h"
 #import <MPWFoundation/MPWFoundation.h>
 #import "MPWTableViewColumn.h"
-#import "MPWTypeToControlMapper.h"
+#import "MPWAppkitUIGenerator.h"
 
 #import <DrawingContext/MPWCGDrawingContext.h>
 
 @interface MPWTableView()
 
-@property (nonatomic,strong) MPWTypeToControlMapper *type2Control;
+@property (nonatomic,strong) MPWTypeToObjectMapper *type2Control;
 
 
 @end
@@ -146,7 +146,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     NSRect savedFrameBecauseSettingDataSourceResetsFrame = self.frame;
     self.dataSource = self;
     self.frame = savedFrameBecauseSettingDataSourceResetsFrame;
-    self.type2Control = [[[MPWTypeToControlMapper alloc] init] autorelease];
+    self.type2Control = [MPWAppkitUIGenerator defaultTypes2AppKitMapper];
 }
 
 -(void)awakeFromNib

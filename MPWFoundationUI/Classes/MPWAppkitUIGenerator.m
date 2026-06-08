@@ -8,7 +8,6 @@
 #import "MPWAppkitUIGenerator.h"
 #import "MPWTableView.h"
 #import <Cocoa/Cocoa.h>
-#import "MPWTypeToControlMapper.h"
 
 @implementation NSObject(AppKitUI)
 
@@ -22,11 +21,21 @@
 
 @implementation MPWAppkitUIGenerator
 
++(MPWTypeToObjectMapper*)defaultTypes2AppKitMapper
+{
+    MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
+    type2view[@"bool"] = [NSButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
+    type2view[@"id"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
+    type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
+    type2view[@"Date"] = [NSTextView templateWithValues:@{ }];
+    return type2view;
+}
+
 -(instancetype)initWithTarget:(id)aTarget
 {
     self=[super initWithTarget:aTarget];
     self.rootView = aTarget;
-    self.type2view = [[MPWTypeToControlMapper new] autorelease];
+    self.type2view = [self.class defaultTypes2AppKitMapper];
     return self;
 }
 
@@ -51,6 +60,11 @@
     [self writeObject:[NSTextField textFieldWithString:@"title"]];
 }
 
+-(id)controlForType:(MPWTypeDefinition*)type
+{
+    return [self.type2view at:type.name];
+}
+
 -(void)writeAppKitFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
     NSGridView *grid = [[[NSGridView alloc] initWithFrame:NSZeroRect] autorelease];
@@ -60,7 +74,7 @@
         if ( hasMoreThanOneField ) {
             [row addObject:[NSTextField labelWithString:aField.title]];
         }
-        [row addObject:[self.type2view at:aField.type.name]];
+        [row addObject:[self controlForType:aField.type]];
         [grid addRowWithViews:row];
     }
     FORWARD(grid);
@@ -144,10 +158,21 @@
     EXPECTTRUE( [tableview isKindOfClass:[MPWTableView class]],@"got a table view");
 }
 
++(void)testMapTypes
+{
+    MPWAppkitUIGenerator *generator=[self stream];
+    MPWTypeToObjectMapper *mapper=generator.type2view;
+    MPWTypeStore *types=[MPWTypeStore store];
+    EXPECTTRUE( [[mapper atType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
+    EXPECTTRUE( [[mapper atType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
+}
+
+
 +(NSArray*)testSelectors
 {
    return @[
 			@"testCreateTableViewByWritingTable",
+            @"testMapTypes",
 			];
 }
 

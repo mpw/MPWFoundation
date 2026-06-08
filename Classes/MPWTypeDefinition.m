@@ -79,6 +79,7 @@ static STTypeDescriptorStruct definedTypes[]={
 
 static STTypeDescriptorStruct mdaTypes[]={
     { '@', "Text" ,"id" , 0 },
+    { '@', "Date" ,"id" , 0 },
     { 0, NULL , 0},
 };
 

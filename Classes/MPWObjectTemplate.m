@@ -18,6 +18,7 @@
 
 @implementation MPWObjectTemplate
 
+
 CONVENIENCEANDINIT( template, WithClass:(Class)aClass values:(NSDictionary*)params)
 {
     self=[super init];
@@ -29,6 +30,15 @@ CONVENIENCEANDINIT( template, WithClass:(Class)aClass values:(NSDictionary*)para
 -(id)object
 {
     return [[[self.classToInstantiate alloc] initWithDictionary:self.params] autorelease];
+}
+
+@end
+
+@implementation NSObject(templateCreation)
+
+-(MPWObjectTemplate*)templateWithValues:(NSDictionary*)values
+{
+    return [MPWObjectTemplate templateWithClass:self.class values:values];
 }
 
 @end

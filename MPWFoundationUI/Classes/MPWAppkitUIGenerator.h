@@ -7,14 +7,17 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
-@class NSView,MPWTypeToControlMapper;
+@class NSView;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWAppkitUIGenerator : MPWFlattenStream
 
 @property (nonatomic,strong) NSView *rootView;
-@property (nonatomic,strong) MPWTypeToControlMapper *type2view;
+@property (nonatomic,strong) MPWTypeToObjectMapper *type2view;
+
++(MPWTypeToObjectMapper*)defaultTypes2AppKitMapper;
+
 
 @end
 

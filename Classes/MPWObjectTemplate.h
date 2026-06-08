@@ -17,4 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface NSObject(templateCreation)
+
+-(MPWObjectTemplate*)templateWithValues:(NSDictionary*)values;
+
+@end
+
+
 NS_ASSUME_NONNULL_END
