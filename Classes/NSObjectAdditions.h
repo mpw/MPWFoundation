@@ -5,6 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
 
+@class MPWStructureDefinition;
+
 @interface NSObject(FramweworkPathAdditions)
 
 +(NSString*)frameworkPath:(NSString*)aPath;
@@ -54,6 +56,6 @@
 @interface NSObject(methodInstallation)
 
 +(Method)installIMP:(IMP)newIMP withSignature:(const char*)signature selector:(SEL)aSelector oldIMP:(IMP*)oldImpPtr;
-
++(BOOL)createSubclassWithStructure:(MPWStructureDefinition*)structureDef;
 
 @end

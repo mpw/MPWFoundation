@@ -41,6 +41,16 @@ lazyAccessor(NSString*, title, setTitle, computeTitle )
     return [self.name capitalizedString];
 }
 
+-(NSString*)objcType
+{
+    return [NSString stringWithFormat:@"%c",self.objcTypeCode];
+}
+
+-(unsigned char)objcTypeCode
+{
+    return self.type.objcTypeCode;
+}
+
 
 -(void)dealloc
 {

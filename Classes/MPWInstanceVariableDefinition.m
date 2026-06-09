@@ -16,15 +16,6 @@
     return self;
 }
 
--(NSString*)objcType
-{
-    return [NSString stringWithFormat:@"%c",self.objcTypeCode];
-}
-
--(unsigned char)objcTypeCode
-{
-    return self.type.objcTypeCode;
-}
 
 #define pointerToVarInObject( anObject )  ((id*)(((char*)anObject) + _offset))
 

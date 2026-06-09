@@ -332,30 +332,23 @@ static BOOL CreateClassDefinition( const char * name,
 #ifndef __clang_analyzer__
 // This 'leaks' because we are installing into the runtime, can't remove after
 
-+(BOOL)createSubclassWithName:(NSString*)className instanceVariableArray:(NSArray*)vars
++(BOOL)createSubclassWithStructure:(MPWStructureDefinition*)structureDef
 {
+    NSAssert(structureDef != nil, @"structureDef not nil");
+    NSString *className = structureDef.name;
     int len= (int)[className length]+1;
     char *class_name = malloc( len );
     [className getCString:class_name maxLength:len encoding:NSASCIIStringEncoding];
-    return CreateClassDefinition( class_name, self , vars );
+    return CreateClassDefinition( class_name, self , structureDef.fields );
+//    return [self createSubclassWithName:structureDef.name instanceVariableArray:structureDef.fields];
 }
 
-+(BOOL)createSubclassWithName:(NSString*)className instanceVariables:(NSString*)varsAsString
-{
-    NSArray *varNames=[varsAsString componentsSeparatedByString:@" "];\
-    NSMutableArray *variableDefinitions=[NSMutableArray array];
-    for ( NSString *name in varNames ) {
-        MPWInstanceVariableDefinition *theVar=[[[MPWInstanceVariableDefinition alloc] initWithName:name offset:0 type:[MPWTypeDefinition descriptorForObjcCode:'@']] autorelease];
-        [variableDefinitions addObject:theVar];
-    }
-    return [self createSubclassWithName:className instanceVariableArray:variableDefinitions];
-}
 
 #endif
 
 +(BOOL)createSubclassWithName:(NSString*)className
 {
-    return [self createSubclassWithName:className instanceVariables:@""];
+    return [self createSubclassWithStructure:[[[MPWStructureDefinition alloc] initWithName:className fields:@[]] autorelease]];
 }
 
 
