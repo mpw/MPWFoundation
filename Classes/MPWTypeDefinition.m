@@ -22,6 +22,9 @@
 }
 
 flagAccessor(invisible, setInvisible, flags, TYPE_FLAG_INVISIBLE)
+longAccessor(flags, setFlags)
+
+
 
 -(BOOL)visible
 {
@@ -80,6 +83,7 @@ static STTypeDescriptorStruct definedTypes[]={
 static STTypeDescriptorStruct mdaTypes[]={
     { '@', "Text" ,"id" , 0 },
     { '@', "Date" ,"id" , 0 },
+    { 'q', "oid" ,"long" , TYPE_FLAG_INVISIBLE },
     { 0, NULL , 0},
 };
 
@@ -92,6 +96,7 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.objcTypeCode=definedTypes[i].objcTypeCode;
         descriptor.name=@(definedTypes[i].name);
         descriptor.cName=@(definedTypes[i].cName);
+        descriptor.flags=definedTypes[i].flags;
         typesByObjCCode[definedTypes[i].objcTypeCode]=descriptor;
     }
     //   MDA types are not entered into the objcTypeCode → type map, because they share
@@ -100,7 +105,8 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.objcTypeCode=mdaTypes[i].objcTypeCode;
         descriptor.name=@(mdaTypes[i].name);
         descriptor.cName=@(mdaTypes[i].cName);
-        st2type[descriptor.name]=descriptor;
+        descriptor.flags=definedTypes[i].flags;
+       st2type[descriptor.name]=descriptor;
     }
     unsigned char sttypes[]="@ldvB";
     for (int i=0;sttypes[i];i++) {
@@ -173,11 +179,23 @@ static STTypeDescriptorStruct mdaTypes[]={
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
 }
 
++(void)testKnowsAboutObjectIds
+{
+    MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"oid"];
+    
+    IDEXPECT( idDescriptor.name, @"oid", @"stName");
+    IDEXPECT( idDescriptor.cName, @"long", @"cName");
+    INTEXPECT( idDescriptor.objcTypeCode, 'q', @"type code");
+    EXPECTTRUE(idDescriptor.invisible,@"visibility");
+    EXPECTFALSE(idDescriptor.visible,@"visibility");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testKnowsAboutID",
         @"testKnowsAboutMDATextType",
+        @"testKnowsAboutObjectIds",
         @"testMapsSTIntNameToLong",
         @"testUnknownTypeNamesAreObjects",
     ];

@@ -50,7 +50,7 @@ flagVar |= flag;\
 flagVar &= ~flag; \
 }\
 } \
--(BOOL)var {  return flagVar & flag ? true : false; }
+-(BOOL)var {  return ((flagVar & flag)==flags) ? true : false; }
 
 
 #define	setAccessor( type, var,setVar ) \
