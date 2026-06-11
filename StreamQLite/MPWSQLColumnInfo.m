@@ -6,12 +6,38 @@
 //
 
 #import "MPWSQLColumnInfo.h"
+#import "AccessorMacros.h"
+#import "MPWTypeDefinition.h"
+
 
 @implementation MPWSQLColumnInfo
 
 -(NSString*)description
 {
     return [NSString stringWithFormat:@"<%@:%p: name: '%@' type: '%@' %@ %@",self.class,self,self.name,self.type,self.pk ? @"PRIMARY KEY":@"",self.notnull ? @"NOTNULL":@""];
+}
+
+-(MPWTypeDefinition*)baseType
+{
+    return [super type];
+}
+
+-(MPWTypeDefinition*)computeTypeFromSQL
+{
+    MPWTypeDefinition *computed=[MPWTypeDefinition idType];
+    NSString *sqltype = self.sqlType;
+    if ( self.pk && [sqltype isEqual:@"INTEGER"]) {
+        computed=[MPWTypeDefinition descriptorForTypeName:@"oid"];
+    }
+    return computed;
+}
+
+-(MPWTypeDefinition*)type
+{
+    if ( ![self baseType]) {
+        [self setType:[self computeTypeFromSQL]];
+    }
+    return [self baseType];
 }
 
 

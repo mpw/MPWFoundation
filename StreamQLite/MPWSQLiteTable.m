@@ -124,6 +124,14 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     return resultSet;
 }
 
+-(NSArray*)getForignKeyDicts
+{
+    MPWPListBuilder *builder=[MPWPListBuilder builder];
+    NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA foreign_key_list(%@)",self.name] builder:builder];
+    return resultSet;
+}
+
+
 -select
 {
     return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@",self.name]];
@@ -166,6 +174,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     IDEXPECT(idColumn.name, @"ArtistId", @"name of id column");
     IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
     EXPECTTRUE(idColumn.pk, @"ArtistId is primary key");
+    IDEXPECT( idColumn.type.name, @"oid", @"ObjS type name");
 //    EXPECTFALSE(idColumn.visible, @"ArtistId is primary key");
     EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
     IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
@@ -181,10 +190,46 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     INTEXPECT( artists.count, 275, @"number of artists");
 }
 
++(void)testGetTableForeignKeyDict
+{
+    MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
+    MPWSQLiteTable *albums=[db tables][@"albums"];
+    NSArray *foreignKeys=[albums getForignKeyDicts];
+    INTEXPECT( foreignKeys.count, 1, @"number of foreign key constraints");
+    NSDictionary *foreignKeyConstraints=foreignKeys.firstObject;
+    
+    IDEXPECT( foreignKeyConstraints[@"from"], @"ArtistId", @"from");
+    IDEXPECT( foreignKeyConstraints[@"to"], @"ArtistId", @"to");
+    IDEXPECT( foreignKeyConstraints[@"table"], @"artists", @"table");
+    //    EXPECTFALSE(nameColumn.pk, @"name is primary key");
+    //    EXPECTFALSE(nameColumn.notnull, @"name not null");
+}
+
++(void)testGetTableForeignKeys
+{
+    MPWStreamQLite *db=[MPWStreamQLite _chinookDB];
+    MPWSQLiteTable *albums=[db tables][@"albums"];
+    NSArray *schema=[[albums getSchema] fields];
+    MPWSQLColumnInfo *artistReference=schema[2];
+    MPWSQLColumnInfo *nameColumn=schema[1];
+    MPWSQLColumnInfo *idColumn=schema.firstObject;
+    IDEXPECT(idColumn.name, @"AlbumId", @"name of id column");
+    IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
+    EXPECTTRUE(idColumn.pk, @"AlbumId is primary key");
+    EXPECTTRUE(idColumn.notnull, @"AlbumId not null");
+    //    EXPECTFALSE(idColumn.visible, @"ArtistId is primary key");
+    IDEXPECT(nameColumn.name, @"Title", @"name of 'title' column");
+    IDEXPECT(nameColumn.sqlType, @"NVARCHAR(160)", @"sql type of 'title' column");
+    //    EXPECTFALSE(nameColumn.pk, @"name is primary key");
+    //    EXPECTFALSE(nameColumn.notnull, @"name not null");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testGetTableSchema",
+        @"testGetTableForeignKeyDict",
+        @"testGetTableForeignKeys",
         @"testCount",
     ];
 }

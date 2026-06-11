@@ -7,6 +7,7 @@
 
 #import "MPWStructureDefinition.h"
 #import "AccessorMacros.h"
+#import "MPWVariableDefinition.h"
 
 @implementation MPWStructureDefinition
 
@@ -34,6 +35,16 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)d
         [fields addObject:def];
     }
     return [self initWithName:newName fields:fields];
+}
+
+-(MPWVariableDefinition*)fieldForName:(NSString*)name
+{
+    for ( MPWVariableDefinition *vardef in self.fields) {
+        if ( [vardef.name isEqual:name]) {
+            return vardef;
+        }
+    }
+    return nil;
 }
 
 

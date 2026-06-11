@@ -106,7 +106,7 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.name=@(mdaTypes[i].name);
         descriptor.cName=@(mdaTypes[i].cName);
         descriptor.flags=definedTypes[i].flags;
-       st2type[descriptor.name]=descriptor;
+        st2type[descriptor.name]=descriptor;
     }
     unsigned char sttypes[]="@ldvB";
     for (int i=0;sttypes[i];i++) {

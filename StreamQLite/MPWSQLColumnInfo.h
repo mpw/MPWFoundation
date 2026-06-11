@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)  BOOL pk;
 @property (nonatomic, assign)  BOOL notnull;
+@property (nonatomic, assign)  BOOL isForeignKey;
+@property (nonatomic, strong)  NSString* targetTable;
+@property (nonatomic, assign)  NSString* targetKey;
 @property (nonatomic, strong)  NSString* sqlType;
 @property (readonly) NSString *objcType;
 
