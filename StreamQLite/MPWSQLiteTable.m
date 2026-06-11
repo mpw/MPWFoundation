@@ -114,7 +114,15 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 -(MPWStructureDefinition*)getSchema
 {
     NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class] attributeMap:@{ @"type": @"sqlType" }] autorelease]];
-    return [MPWStructureDefinition structureWithName:self.name fields:resultSet];
+    MPWStructureDefinition *def = [MPWStructureDefinition structureWithName:self.name fields:resultSet];
+    NSArray <NSDictionary*> *foreignKeyConstraints = [self getForignKeyDicts];
+    for ( NSDictionary *constraint in foreignKeyConstraints) {
+        MPWSQLColumnInfo *column=[def fieldForName:constraint[@"from"]];
+        column.targetTable=constraint[@"table"];
+        column.targetKey=constraint[@"to"];
+        column.isForeignKey=true;
+    }
+    return def;
 }
 
 -(NSArray*)getSchemaDicts
@@ -175,7 +183,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
     EXPECTTRUE(idColumn.pk, @"ArtistId is primary key");
     IDEXPECT( idColumn.type.name, @"oid", @"ObjS type name");
-//    EXPECTFALSE(idColumn.visible, @"ArtistId is primary key");
+    EXPECTFALSE(idColumn.type.visible, @"ArtistId is primary key and thus invisble");
     EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
     IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
     IDEXPECT(nameColumn.sqlType, @"NVARCHAR(120)", @"type of 'name' column");
@@ -217,11 +225,17 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
     EXPECTTRUE(idColumn.pk, @"AlbumId is primary key");
     EXPECTTRUE(idColumn.notnull, @"AlbumId not null");
-    //    EXPECTFALSE(idColumn.visible, @"ArtistId is primary key");
+    EXPECTFALSE(idColumn.type.visible, @"ArtistId is primary key and thus invisible");
+    EXPECTFALSE(nameColumn.type.visible, @"Title should be visible");
     IDEXPECT(nameColumn.name, @"Title", @"name of 'title' column");
     IDEXPECT(nameColumn.sqlType, @"NVARCHAR(160)", @"sql type of 'title' column");
     //    EXPECTFALSE(nameColumn.pk, @"name is primary key");
     //    EXPECTFALSE(nameColumn.notnull, @"name not null");
+    EXPECTFALSE(artistReference.type.visible, @"ArtistId is foreign key and thus invisble");
+    IDEXPECT(artistReference.type.name, @"oid",@"INTEGER foreign key should be an oid");
+    IDEXPECT(artistReference.name, @"ArtistId", @"ArtistId column for foreign key");
+    IDEXPECT(artistReference.targetTable, @"artists", @"foreign table");
+    IDEXPECT(artistReference.targetKey, @"ArtistId", @"foreign key in target table");
 }
 
 +(NSArray*)testSelectors

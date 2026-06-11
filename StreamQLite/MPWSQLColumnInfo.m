@@ -26,8 +26,10 @@
 {
     MPWTypeDefinition *computed=[MPWTypeDefinition idType];
     NSString *sqltype = self.sqlType;
-    if ( self.pk && [sqltype isEqual:@"INTEGER"]) {
-        computed=[MPWTypeDefinition descriptorForTypeName:@"oid"];
+    if ( [sqltype isEqual:@"INTEGER"]) {
+        if (  self.pk || self.isForeignKey ) {
+            computed=[MPWTypeDefinition descriptorForTypeName:@"oid"];
+        }
     }
     return computed;
 }
