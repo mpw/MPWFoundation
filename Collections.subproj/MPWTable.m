@@ -51,8 +51,10 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
     NSMutableArray *columns = [NSMutableArray array];
     for ( MPWVariableDefinition *def in [[self itemStructure] fields] ){
         if ( def.type.invisible ) {
-            NSLog(@"def: %@ type: %@ is invisible,skiping %d",def,def.type,def.type.visible);
-            break;
+            NSLog(@"def: %@ type: %@ is invisible,skipping %d",def,def.type,def.type.visible);
+            continue;
+        } else {
+            NSLog(@"def: %@ type: %@ is visible,including",def,def.type);
         }
         NSString *key=def.name;
         if ( [key hasPrefix:@"_"]) {

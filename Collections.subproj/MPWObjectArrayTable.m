@@ -167,7 +167,7 @@ CONVENIENCEANDINIT(column, WithArray:(NSArray*)anArray key:(NSString*)newKey  cl
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<column key %@>",self.key];
+    return [NSString stringWithFormat:@"<%@: key %@ type: %@ visible: %d editable: %d>",self.className,self.key,self.type,self.visible,self.editable];
 }
 
 
