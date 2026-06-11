@@ -183,7 +183,7 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
     EXPECTTRUE(idColumn.pk, @"ArtistId is primary key");
     IDEXPECT( idColumn.type.name, @"oid", @"ObjS type name");
-    EXPECTFALSE(idColumn.type.visible, @"ArtistId is primary key and thus invisble");
+    EXPECTFALSE(idColumn.type.visible, @"ArtistId visibility (primary key)");
     EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
     IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
     IDEXPECT(nameColumn.sqlType, @"NVARCHAR(120)", @"type of 'name' column");
@@ -226,8 +226,9 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     EXPECTTRUE(idColumn.pk, @"AlbumId is primary key");
     EXPECTTRUE(idColumn.notnull, @"AlbumId not null");
     EXPECTFALSE(idColumn.type.visible, @"ArtistId is primary key and thus invisible");
-    EXPECTFALSE(nameColumn.type.visible, @"Title should be visible");
     IDEXPECT(nameColumn.name, @"Title", @"name of 'title' column");
+    IDEXPECT(nameColumn.type.name, @"id", @"type name of 'title' column");
+    EXPECTTRUE(nameColumn.type.visible, @"Title should be visible");
     IDEXPECT(nameColumn.sqlType, @"NVARCHAR(160)", @"sql type of 'title' column");
     //    EXPECTFALSE(nameColumn.pk, @"name is primary key");
     //    EXPECTFALSE(nameColumn.notnull, @"name not null");

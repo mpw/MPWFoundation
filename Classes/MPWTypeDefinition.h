@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong, readonly) NSString *cName;
 @property (readonly) BOOL visible;
+@property (nonatomic, assign) bool invisible;
 
-boolAccessor_h(invisible, setInvisible)
 
 +(instancetype)descriptorForObjcCode:(unsigned char)typeCode;
 +(instancetype)descriptorForTypeName:(NSString*)typeName;

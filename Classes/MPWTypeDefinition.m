@@ -11,18 +11,17 @@
 
 @property (nonatomic, assign) unsigned char objcTypeCode;
 @property (nonatomic, strong) NSString *cName;
-
 @end
 
 #define TYPE_FLAG_INVISIBLE      1
 
 @implementation MPWTypeDefinition
 {
-    unsigned long flags;
+    
 }
 
-flagAccessor(invisible, setInvisible, flags, TYPE_FLAG_INVISIBLE)
-longAccessor(flags, setFlags)
+//flagAccessor(invisible, setInvisible, flags, TYPE_FLAG_INVISIBLE)
+//longAccessor(flags, setFlags)
 
 
 
@@ -55,7 +54,7 @@ typedef struct {
     unsigned char objcTypeCode;
     char *name;
     char *cName;
-    long flags;
+    bool invisible;
 } STTypeDescriptorStruct;
 
 
@@ -63,27 +62,27 @@ typedef struct {
 static STTypeDescriptorStruct definedTypes[]={
     { '@', "id", "id",0 },
     { 'l', "int", "long",0 },
-    { 'B', "bool", "BOOL" },
-    { 'd', "float", "double" },
+    { 'B', "bool", "BOOL",0 },
+    { 'd', "float", "double",0 },
     
-    { 's', "int", "short" },
-    { 'S', "int", "unsigned short" },
-    { 'i', "int", "int" },
-    { 'q', "long", "long long" },
-    { 'I', "int", "unsigned" },
-    { 'Q', "long", "unsigned long long" },
-    { 'L', "long", "unsigned long" },
-    { '*', "str", "char*" },
-    { 'v', "void", "void" },
-    { ':', "SEL", "SEL" },
-    { '#', "class", "Class" },
+    { 's', "int", "short",0 },
+    { 'S', "int", "unsigned short",0 },
+    { 'i', "int", "int",0},
+    { 'q', "long", "long long",0 },
+    { 'I', "int", "unsigned" ,0 },
+    { 'Q', "long", "unsigned long long" ,0 },
+    { 'L', "long", "unsigned long",0 },
+    { '*', "str", "char*",0 },
+    { 'v', "void", "void" ,0 },
+    { ':', "SEL", "SEL", 0 },
+    { '#', "class", "Class", 0 },
     { 0, NULL,NULL},
 };
 
 static STTypeDescriptorStruct mdaTypes[]={
     { '@', "Text" ,"id" , 0 },
     { '@', "Date" ,"id" , 0 },
-    { 'q', "oid" ,"long" , TYPE_FLAG_INVISIBLE },
+    { '@', "oid" ,"id" , true },
     { 0, NULL , 0},
 };
 
@@ -96,7 +95,8 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.objcTypeCode=definedTypes[i].objcTypeCode;
         descriptor.name=@(definedTypes[i].name);
         descriptor.cName=@(definedTypes[i].cName);
-        descriptor.flags=definedTypes[i].flags;
+        descriptor.invisible=definedTypes[i].invisible;
+//        NSLog(@"flags for %@: %x",descriptor.name,descriptor.flags);
         typesByObjCCode[definedTypes[i].objcTypeCode]=descriptor;
     }
     //   MDA types are not entered into the objcTypeCode → type map, because they share
@@ -105,7 +105,7 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.objcTypeCode=mdaTypes[i].objcTypeCode;
         descriptor.name=@(mdaTypes[i].name);
         descriptor.cName=@(mdaTypes[i].cName);
-        descriptor.flags=definedTypes[i].flags;
+        descriptor.invisible=mdaTypes[i].invisible;
         st2type[descriptor.name]=descriptor;
     }
     unsigned char sttypes[]="@ldvB";
@@ -123,7 +123,7 @@ static STTypeDescriptorStruct mdaTypes[]={
 
 +(instancetype)idType
 {
-    return [self descriptorForObjcCode:'@'];
+    return [self descriptorForTypeName:@"id"];
 }
 
 +(instancetype)int64Type
@@ -150,6 +150,8 @@ static STTypeDescriptorStruct mdaTypes[]={
     IDEXPECT( idDescriptor.name, @"id", @"stName");
     IDEXPECT( idDescriptor.cName, @"id", @"stName");
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
+    EXPECTFALSE(idDescriptor.invisible,@"visibility");
+    EXPECTTRUE(idDescriptor.visible,@"visibility");
 }
 
 +(void)testKnowsAboutMDATextType
@@ -184,8 +186,8 @@ static STTypeDescriptorStruct mdaTypes[]={
     MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"oid"];
     
     IDEXPECT( idDescriptor.name, @"oid", @"stName");
-    IDEXPECT( idDescriptor.cName, @"long", @"cName");
-    INTEXPECT( idDescriptor.objcTypeCode, 'q', @"type code");
+    IDEXPECT( idDescriptor.cName, @"id", @"cName");
+    INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
     EXPECTTRUE(idDescriptor.invisible,@"visibility");
     EXPECTFALSE(idDescriptor.visible,@"visibility");
 }
