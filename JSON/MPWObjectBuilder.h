@@ -11,6 +11,7 @@
 @interface MPWObjectBuilder :MPWPListBuilder
 
 -(instancetype)initWithClass:(Class)theClass;
+-(instancetype)initWithClass:(Class)theClass attributeMap:(NSDictionary*)newMap;
 
 @property (nonatomic, strong) MPWObjectCache *cache;
 @property (nonatomic, strong) MPWSmallStringTable *accessorTable;

@@ -124,7 +124,6 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
     [self setBuilder:[MPWPListBuilder builder]];
     [self query:@"select name from sqlite_master where [type] = \"table\""];
     NSMutableArray *names=[[[[[self.builder result] collect] objectForKey:@"name"] mutableCopy] autorelease];
-    NSLog(@"table names: %@",names);
     [names removeObject:@"schema"];
     return names;
 }

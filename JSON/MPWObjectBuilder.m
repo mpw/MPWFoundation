@@ -11,7 +11,11 @@
 #define ARRAYTOS        (NSMutableArray*)(tos->container)
 #define DICTTOS         (NSMutableDictionary*)(tos->container)
 
+@interface MPWObjectBuilder()
 
+@property (nonatomic, strong) NSDictionary *attributeMap;
+
+@end
 
 @implementation MPWObjectBuilder
 
@@ -23,6 +27,10 @@
     }
     NSMutableArray *accessors=[NSMutableArray arrayWithCapacity:ivars.count];
     for (NSString *ivar in ivars) {
+        NSString *replacementName = self.attributeMap[ivar];
+        if ( replacementName ) {
+            ivar=replacementName;
+        }
         MPWPropertyBinding *accessor=[MPWPropertyBinding valueForName:ivar];
         [accessor bindToClass:theClass];
         [accessors addObject:accessor];
@@ -72,13 +80,19 @@
 
 
 
--(instancetype)initWithClass:(Class)theClass
+-(instancetype)initWithClass:(Class)theClass attributeMap:(NSDictionary*)newMap
 {
     self=[super init];
     self.cache=[MPWObjectCache cacheWithCapacity:20 class:theClass];
+    self.attributeMap=newMap;
     [self setupAccessors:theClass];
     [self.cache setUnsafeFastAlloc:YES];
     return self;
+}
+
+-(instancetype)initWithClass:(Class)theClass
+{
+    return [self initWithClass:theClass attributeMap:@{}];
 }
 
 -(void)beginArray

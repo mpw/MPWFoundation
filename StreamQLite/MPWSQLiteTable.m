@@ -113,8 +113,15 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 
 -(MPWStructureDefinition*)getSchema
 {
-    NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class]] autorelease]];
+    NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:[[[MPWObjectBuilder alloc] initWithClass: [MPWSQLColumnInfo class] attributeMap:@{ @"type": @"sqlType" }] autorelease]];
     return [MPWStructureDefinition structureWithName:self.name fields:resultSet];
+}
+
+-(NSArray*)getSchemaDicts
+{
+    MPWPListBuilder *builder=[MPWPListBuilder builder];
+    NSArray *resultSet = [self objectsForQuery:[NSString stringWithFormat:@"PRAGMA table_info(%@)",self.name] builder:builder];
+    return resultSet;
 }
 
 -select
@@ -157,11 +164,12 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     MPWSQLColumnInfo *nameColumn=schema.lastObject;
     MPWSQLColumnInfo *idColumn=schema.firstObject;
     IDEXPECT(idColumn.name, @"ArtistId", @"name of id column");
-    IDEXPECT(idColumn.type, @"INTEGER", @"type of id column");
+    IDEXPECT(idColumn.sqlType, @"INTEGER", @"type of id column");
     EXPECTTRUE(idColumn.pk, @"ArtistId is primary key");
+//    EXPECTFALSE(idColumn.visible, @"ArtistId is primary key");
     EXPECTTRUE(idColumn.notnull, @"ArtistId not null");
     IDEXPECT(nameColumn.name, @"Name", @"name of 'name' column");
-    IDEXPECT(nameColumn.type, @"NVARCHAR(120)", @"type of 'name' column");
+    IDEXPECT(nameColumn.sqlType, @"NVARCHAR(120)", @"type of 'name' column");
 //    EXPECTFALSE(nameColumn.pk, @"name is primary key");
 //    EXPECTFALSE(nameColumn.notnull, @"name not null");
 }

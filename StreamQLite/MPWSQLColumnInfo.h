@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign)  BOOL pk;
 @property (nonatomic, assign)  BOOL notnull;
+@property (nonatomic, strong)  NSString* sqlType;
 @property (readonly) NSString *objcType;
 
 @end
