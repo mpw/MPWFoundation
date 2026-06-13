@@ -107,11 +107,13 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     return [self objectsForQuery:query builder:[self defaultBuilder]];
 }
 
--(NSArray*)tableForQuery:(NSString*)query
+-(MPWTable*)tableForQuery:(NSString*)query
 {
     NSArray *objects = [self objectsForQuery:query];
-    return self.tableClass ? [[[MPWObjectArrayTable alloc] initWithObjects:objects] autorelease] :
+    MPWTable *table = self.tableClass ? [[[MPWObjectArrayTable alloc] initWithObjects:objects] autorelease] :
     [[[MPWDictArrayTable alloc] initWithObjects:objects] autorelease];
+    [table setItemStructure:[self getSchema]];
+    return table;
 }
 
 -(NSInteger)count
