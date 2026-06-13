@@ -125,6 +125,7 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
     [self query:@"select name from sqlite_master where [type] = \"table\""];
     NSMutableArray *names=[[[[[self.builder result] collect] objectForKey:@"name"] mutableCopy] autorelease];
     [names removeObject:@"schema"];
+    [names removeObject:@"sqlite_sequence"];
     return names;
 }
 
@@ -271,8 +272,8 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
 {
     MPWStreamQLite *db=[self _chinookDB];
     NSArray *tableNames = [db dbTableNames];
-    INTEXPECT( tableNames.count, 13, @"number of tables" );
-    IDEXPECT( [tableNames componentsJoinedByString:@","],@"albums,sqlite_sequence,artists,customers,employees,genres,invoices,invoice_items,media_types,playlists,playlist_track,tracks,sqlite_stat1",@"tables");
+    INTEXPECT( tableNames.count, 12, @"number of tables" );
+    IDEXPECT( [tableNames componentsJoinedByString:@","],@"albums,artists,customers,employees,genres,invoices,invoice_items,media_types,playlists,playlist_track,tracks,sqlite_stat1",@"tables");
 }
 
 +(void)testGetTables
@@ -280,7 +281,8 @@ lazyAccessor(NSDictionary*, tables, setTables, computeTables )
     MPWStreamQLite *db=[self _chinookDB];
     [db open];
     NSDictionary<NSString*,MPWSQLiteTable*> *tables=[db computeTables];
-    INTEXPECT(tables.count, 13, @"number of tables");
+    EXPECTNIL( tables[@"sqlite_sequence"],@"remove the sequence table");
+    INTEXPECT(tables.count, 12, @"number of tables");
     MPWSQLiteTable *albums=tables[@"albums"];
     IDEXPECT( [albums name],@"albums",@"name of first table");
     NSArray *albumsScheme=albums.schema.fields;

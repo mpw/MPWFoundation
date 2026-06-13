@@ -48,13 +48,10 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
 
 -(NSArray*)computeColumns
 {
-    NSMutableArray *columns = [NSMutableArray array];
+    NSMutableArray *cols = [NSMutableArray array];
     for ( MPWVariableDefinition *def in [[self itemStructure] fields] ){
         if ( def.type.invisible ) {
-            NSLog(@"def: %@ type: %@ is invisible,skipping %d",def,def.type,def.type.visible);
             continue;
-        } else {
-            NSLog(@"def: %@ type: %@ is visible,including",def,def.type);
         }
         NSString *key=def.name;
         if ( [key hasPrefix:@"_"]) {
@@ -66,9 +63,9 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
             column.editable = NO;
         }
         column.visible = def.type.visible;
-        [columns addObject:column];
+        [cols addObject:column];
     }
-    return columns;
+    return cols;
 }
 
 -(void)rowsDo:(void (^)(NSNumber * _Nonnull))block
@@ -86,6 +83,7 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
     }
     return visible;
 }
+
 
 @end
 

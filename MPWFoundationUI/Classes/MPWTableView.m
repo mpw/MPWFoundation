@@ -15,7 +15,6 @@
 
 @property (nonatomic,strong) MPWTypeToObjectMapper *type2Control;
 
-
 @end
 
 #define MPWPrivateTableViewRowDragOperationData @"MPWPrivateTableViewRowDragOperationData"
@@ -289,3 +288,4 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
 }
 
 @end
+

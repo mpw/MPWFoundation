@@ -13,6 +13,8 @@
 #import "MPWSQLColumnInfo.h"
 #import "MPWSQLiteTableWriter.h"
 #import <sqlite3.h>
+#import "MPWObjectArrayTable.h"
+#import "MPWDictArrayTable.h"
 
 
 @interface NSString(getISOLatinCharacters)
@@ -105,6 +107,13 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
     return [self objectsForQuery:query builder:[self defaultBuilder]];
 }
 
+-(NSArray*)tableForQuery:(NSString*)query
+{
+    NSArray *objects = [self objectsForQuery:query];
+    return self.tableClass ? [[[MPWObjectArrayTable alloc] initWithObjects:objects] autorelease] :
+    [[[MPWDictArrayTable alloc] initWithObjects:objects] autorelease];
+}
+
 -(NSInteger)count
 {
     return [[[[self objectsForQuery:[NSString stringWithFormat:@"select count(*) from %@",self.name] builder:[MPWPListBuilder builder]] firstObject] at:@"count(*)"] longValue];
@@ -142,12 +151,12 @@ lazyAccessor( NSArray<MPWSQLColumnInfo*>*, schema, setSchema, getSchema )
 
 -select
 {
-    return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@",self.name]];
+    return [self tableForQuery:[NSString stringWithFormat:@"select * from %@",self.name]];
 }
 
 -selectWhere:query
 {
-    return [self objectsForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
+    return [self tableForQuery:[NSString stringWithFormat:@"select * from %@ where %@",self.name,query]];
 }
 
 -selectPredicate:(NSPredicate*)predicate
