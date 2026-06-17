@@ -75,7 +75,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
        makeIfNecessary:(BOOL) makeIfNecessary
 {
     NSView *rowView = [super rowViewAtRow:row makeIfNecessary:makeIfNecessary];
-    NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
+//    NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
     return rowView;
 }
 
@@ -85,7 +85,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
           makeIfNecessary:(BOOL) makeIfNecessary
 {
     NSView *cellView = [super viewAtColumn:column row:row makeIfNecessary:makeIfNecessary];
-    NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
+//    NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
     return cellView;
 }
 
@@ -210,8 +210,12 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     if (self.cursor ) {
         self.cursor.offset = [self selectedRow];
     }
-    if ( [self.mpwDelegate respondsToSelector:@selector(tableViewSelectionDidChange:)] && self.mpwDelegate != self) {
-        [self.mpwDelegate tableViewSelectionDidChange:notification];
+    if (  self.mpwDelegate != self) {
+        if ( [self.mpwDelegate respondsToSelector:@selector(tableViewSelectionDidChange:)] ) {
+            [self.mpwDelegate tableViewSelectionDidChange:notification.userInfo];
+        } else if ( [self.mpwDelegate respondsToSelector:@selector(didSelect:)] ) {
+            [self.mpwDelegate didSelect: self.selectedObject];
+        }
     }
 }
 
