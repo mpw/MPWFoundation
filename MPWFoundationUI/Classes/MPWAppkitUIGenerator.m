@@ -27,7 +27,7 @@
     type2view[@"bool"] = [NSButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
     type2view[@"id"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
     type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
-    type2view[@"Date"] = [NSTextView templateWithValues:@{ }];
+    type2view[@"Date"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
     return type2view;
 }
 
@@ -177,3 +177,4 @@
 }
 
 @end
+
