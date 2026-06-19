@@ -57,6 +57,7 @@
 #import <MPWFoundation/MPWDistributedNotificationReceiver.h>
 #import <MPWFoundation/MPWMapFilter.h>
 #import <MPWFoundation/MPWQueue.h>
+#import <MPWFoundation/MPWAbstractUIGenerator.h>
 
 #import <MPWFoundation/MPWBlockTargetStream.h>
 #import <MPWFoundation/MPWPrintLiner.h>

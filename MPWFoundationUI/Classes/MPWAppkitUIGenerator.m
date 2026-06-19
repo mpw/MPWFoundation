@@ -110,6 +110,12 @@
     return [[[NSStackView alloc] initWithDictionary:@{ @"orientation": @(NSUserInterfaceLayoutOrientationVertical) }] autorelease];
 }
 
+-(void)dealloc
+{
+    [_rootView dealloc];
+    [super dealloc];
+}
+
 @end
 
 

@@ -117,7 +117,7 @@
 		1F224F0D2FB50130001E377F /* MPWForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F224F082FB50130001E377F /* MPWForm.m */; };
 		1F224F0E2FB50130001E377F /* MPWForm.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F072FB50130001E377F /* MPWForm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F224F122FBAF2D1001E377F /* MPWAppkitUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F224F112FBAF2D1001E377F /* MPWAppkitUIGenerator.m */; };
-		1F224F132FBAF2D1001E377F /* MPWAppkitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */; };
+		1F224F132FBAF2D1001E377F /* MPWAppkitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0151A35FF0C00F664C8 /* MPWBoxerUnboxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0171A35FF0C00F664C8 /* MPWBoxerUnboxer.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F22E0131A35FF0C00F664C8 /* MPWBoxerUnboxer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F22E0181A35FF0C00F664C8 /* MPWBoxerUnboxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F22E0141A35FF0C00F664C8 /* MPWBoxerUnboxer.m */; };
@@ -363,6 +363,12 @@
 		1F7078A51F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };
 		1F7078A61F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };
 		1F7078A71F6AA5140080E166 /* MPWURLStreamingStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */; };
+		1F7138752FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F7138762FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */; };
+		1F7138772FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F7138782FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */; };
+		1F7138792FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F71387A2FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */; };
 		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
@@ -1769,6 +1775,8 @@
 		1F7045E9223134F7005ED7FB /* MPWTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWTableView.m; sourceTree = "<group>"; };
 		1F7078A01F6AA5140080E166 /* MPWURLStreamingStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWURLStreamingStream.h; sourceTree = "<group>"; };
 		1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWURLStreamingStream.m; sourceTree = "<group>"; };
+		1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAbstractUIGenerator.h; sourceTree = "<group>"; };
+		1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAbstractUIGenerator.m; sourceTree = "<group>"; };
 		1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWExternalFilter.h; sourceTree = "<group>"; };
 		1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWExternalFilter.m; sourceTree = "<group>"; };
 		1F74D044299D09B7004A3DF0 /* MPWTCPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTCPStore.h; sourceTree = "<group>"; };
@@ -2491,6 +2499,8 @@
 			isa = PBXGroup;
 			children = (
 				1FB7B5DE1E56E549004CCDCD /* MPWActionStreamAdapter.h */,
+				1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */,
+				1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */,
 				1FB7B5DF1E56E549004CCDCD /* MPWActionStreamAdapter.m */,
 				1F54A159209C71A4003113E0 /* MPWArrayFlattenStream.h */,
 				1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */,
@@ -2722,6 +2732,7 @@
 			isa = PBXGroup;
 			children = (
 				1F7045C322313099005ED7FB /* MPWFoundationUIKit.h */,
+				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
 				1F7045C422313099005ED7FB /* Info.plist */,
 			);
 			path = MPWFoundationUIKit;
@@ -2731,7 +2742,6 @@
 			isa = PBXGroup;
 			children = (
 				1FF930732AF10B60009B4DC6 /* MPWView.h */,
-				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
 				1FF930722AF10B60009B4DC6 /* MPWView.m */,
 				1F9584C52AE042650058B2B0 /* ModelDidChangeNotification.h */,
 				1FA8F32524DCB4A900CD69D0 /* MPWFileBrowser.h */,
@@ -3323,6 +3333,7 @@
 				1FCBEDDE1CFC2DA800F2EE0E /* NSThreadWaiting.h in Headers */,
 				1F5336102A1D284600AA1754 /* NSDataMarkdown.h in Headers */,
 				1F94F2D82F7EA3C8006A67C0 /* MPWStructureDefinition.h in Headers */,
+				1F7138772FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */,
 				1FB2C88D217760DF0061C3F9 /* MPWJSONWriter.h in Headers */,
 				1FE37C2E1969770000C9A378 /* MPWByteStream.h in Headers */,
 				1FE37C441969773C00C9A378 /* MPWEnumeratorBase.h in Headers */,
@@ -3519,6 +3530,7 @@
 				1FE6BD122E39421600E40B6D /* MPWCountingFilter.h in Headers */,
 				1FC5808A213741FD006E5FCC /* MPWURLCall2StoreStream.h in Headers */,
 				1FCF263A1CF3993C00AC64CE /* MPWDirectForwardingTrampoline.h in Headers */,
+				1F7138792FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */,
 				1F5621002F6D4B3B00D998EF /* MPWObjectArrayTable.h in Headers */,
 				1F8574AA2ACD8E1300283E7A /* MPWObjectStore.h in Headers */,
 				1F5EE32A25D518C600C7C71C /* MPWNameRemappingStore.h in Headers */,
@@ -3621,6 +3633,7 @@
 				1FF8FDB509B49D0100652476 /* AccessorMacros.h in Headers */,
 				1FF8FDB609B49D0100652476 /* DebugMacros.h in Headers */,
 				1FD7A6A32AE2BE2D0091F9E6 /* MPWAlias.h in Headers */,
+				1F7138752FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */,
 				1FF8FDB709B49D0100652476 /* MPWObject.h in Headers */,
 				1F5336012A1D284600AA1754 /* html.h in Headers */,
 				1FF8FDB809B49D0100652476 /* NSNil.h in Headers */,
@@ -4705,6 +4718,7 @@
 				1FA74A0925F642DC001AA6A8 /* MPWDistributedNotificationStream.m in Sources */,
 				1F840DC9193F50AC00589595 /* CodingAdditions.m in Sources */,
 				1F224F0A2FB50130001E377F /* MPWForm.m in Sources */,
+				1F7138782FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */,
 				1F8679952AE5454200849711 /* MPWArrayWithCursor.m in Sources */,
 				1F840DCA193F50AC00589595 /* MPWObjectCache.m in Sources */,
 				1FCAD0FF29BA072B00228DB3 /* MPWSysctlStore.m in Sources */,
@@ -4857,6 +4871,7 @@
 				1FCF26051CF398F400AC64CE /* MPWBlockInvocation.m in Sources */,
 				1FCF26041CF398F400AC64CE /* MPWRusage.m in Sources */,
 				1FCF26591CF39ABD00AC64CE /* MPWBinaryPlist.m in Sources */,
+				1F71387A2FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */,
 				1F846B4B29D6CF19001BAC41 /* MPWExtensionAdder.m in Sources */,
 				1FCF26061CF398F400AC64CE /* MPWBlockInvocable.m in Sources */,
 				1FF058BA2F557BB10038E65E /* MPWSQLiteTableWriter.m in Sources */,
@@ -5038,6 +5053,7 @@
 				1F821AB62BFCEB0B00D936E3 /* MPWMatrix.m in Sources */,
 				1FF8FDFE09B49D0100652476 /* MPWScanner.m in Sources */,
 				1FE6BD162E39421600E40B6D /* MPWCountingFilter.m in Sources */,
+				1F7138762FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */,
 				1FF8FDFF09B49D0100652476 /* NSDictAdditions.m in Sources */,
 				1FF8FE0009B49D0100652476 /* MPWRuntimeAdditions.m in Sources */,
 				1F1BEDC3213DD199004B4947 /* MPWSequentialStore.m in Sources */,
@@ -7370,7 +7386,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7426,7 +7442,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7478,7 +7494,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7530,7 +7546,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7582,7 +7598,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7634,7 +7650,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -7686,7 +7702,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;

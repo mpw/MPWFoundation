@@ -11,10 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MPWAppkitUIGenerator : MPWFlattenStream
+@interface MPWAppkitUIGenerator : MPWAbstractUIGenerator
 
 @property (nonatomic,strong) NSView *rootView;
-@property (nonatomic,strong) MPWTypeToObjectMapper *type2view;
 
 +(MPWTypeToObjectMapper*)defaultTypes2AppKitMapper;
 
