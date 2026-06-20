@@ -369,6 +369,9 @@
 		1F7138782FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */; };
 		1F7138792FE5CD0100F96C88 /* MPWAbstractUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71387A2FE5CD0100F96C88 /* MPWAbstractUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */; };
+		1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */; };
+		1F7138912FE6759000F96C88 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
 		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
@@ -1390,7 +1393,7 @@
 		1FF8FE2609B49D0200652476 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
 		1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; };
+		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FFA16712B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFA16722B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1469,6 +1472,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1F7045C022313099005ED7FB;
 			remoteInfo = MPWFoundationUIKit;
+		};
+		1F7138932FE6759000F96C88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07DF1931006686DDC35ADD82 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1F840DA4193F505700589595;
+			remoteInfo = MPWFoundationTouch;
 		};
 		1F93B91B2855FFEF00455231 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1777,6 +1787,8 @@
 		1F7078A11F6AA5140080E166 /* MPWURLStreamingStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWURLStreamingStream.m; sourceTree = "<group>"; };
 		1F7138732FE5CD0100F96C88 /* MPWAbstractUIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWAbstractUIGenerator.h; sourceTree = "<group>"; };
 		1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAbstractUIGenerator.m; sourceTree = "<group>"; };
+		1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUIKitUIGenerator.h; sourceTree = "<group>"; };
+		1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUIKitUIGenerator.m; sourceTree = "<group>"; };
 		1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWExternalFilter.h; sourceTree = "<group>"; };
 		1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWExternalFilter.m; sourceTree = "<group>"; };
 		1F74D044299D09B7004A3DF0 /* MPWTCPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTCPStore.h; sourceTree = "<group>"; };
@@ -2184,6 +2196,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F7138912FE6759000F96C88 /* MPWFoundation.framework in Frameworks */,
 				1F6B03CF274A50D0004E61A7 /* DrawingContext.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2733,6 +2746,8 @@
 			children = (
 				1F7045C322313099005ED7FB /* MPWFoundationUIKit.h */,
 				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
+				1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */,
+				1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */,
 				1F7045C422313099005ED7FB /* Info.plist */,
 			);
 			path = MPWFoundationUIKit;
@@ -3154,6 +3169,7 @@
 			files = (
 				1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */,
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
+				1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */,
 				1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3948,6 +3964,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				1F7138942FE6759000F96C88 /* PBXTargetDependency */,
 			);
 			name = MPWFoundationUIKit;
 			productName = MPWFoundationUIKit;
@@ -4597,6 +4614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */,
+				1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5251,6 +5269,11 @@
 			target = 1F7045C022313099005ED7FB /* MPWFoundationUIKit */;
 			targetProxy = 1F7045C622313099005ED7FB /* PBXContainerItemProxy */;
 		};
+		1F7138942FE6759000F96C88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1F840DA4193F505700589595 /* MPWFoundationTouch */;
+			targetProxy = 1F7138932FE6759000F96C88 /* PBXContainerItemProxy */;
+		};
 		1F93B91C2855FFEF00455231 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1FF8FDB309B49D0100652476 /* MPWFoundationFramework */;
@@ -5574,7 +5597,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -5773,7 +5796,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7474,6 +7497,7 @@
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++14";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.metaobject.MPWFoundationUIKit;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
@@ -7801,7 +7825,7 @@
 				METAL_ENABLE_DEBUG_INFO = YES;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7865,7 +7889,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -7930,7 +7954,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -10014,7 +10038,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",
@@ -10213,7 +10237,7 @@
 				METAL_ENABLE_DEBUG_INFO = NO;
 				MODULEMAP_FILE = MPWFoundation.map;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
 					"-fpie",
 					"-fstack-protector-strong",

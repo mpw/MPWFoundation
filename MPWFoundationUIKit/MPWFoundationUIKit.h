@@ -15,4 +15,6 @@ FOUNDATION_EXPORT const unsigned char MPWFoundationUIKitVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MPWFoundationUIKit/PublicHeader.h>
 
+//#import <MPWFoundationUIKit/MPWView_iOS.h>
+#import <MPWFoundationUIKit/MPWUIKitUIGenerator.h>
 

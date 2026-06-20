@@ -113,7 +113,7 @@
 -(void)dealloc
 {
     [_rootView dealloc];
-    [super dealloc];
+ //   [super dealloc];
 }
 
 @end

@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class MPWTypeToObjectMapper;
+
 @interface MPWAbstractUIGenerator : MPWFlattenStream
 
 @property (nonatomic,strong) MPWTypeToObjectMapper *type2view;
