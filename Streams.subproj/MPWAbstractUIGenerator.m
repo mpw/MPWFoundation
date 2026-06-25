@@ -7,7 +7,22 @@
 
 #import "MPWAbstractUIGenerator.h"
 
+@implementation NSObject(UIGeneration)
+
+-(void)generateUI:(MPWAbstractUIGenerator*)stream
+{
+    [self flattenStructureOntoStream:stream];
+}
+
+@end
+
+
 @implementation MPWAbstractUIGenerator
+
+-(SEL)streamWriterMessage
+{
+    return @selector(generateUI:);
+}
 
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper
 {
@@ -21,6 +36,12 @@
     self=[super initWithTarget:aTarget];
     self.type2view = [self.class defaultTypes2UIMapper];
     return self;
+}
+
+-(void)beginView:aView
+{
+    FORWARD(aView);
+    self.target=aView;
 }
 
 
@@ -46,6 +67,25 @@
 {
     [_type2view release];
     [super dealloc];
+}
+
+@end
+
+@implementation MPWTable(AppKitUI)
+
+-(void)generateUI:(MPWAbstractUIGenerator*)stream
+{
+    [stream writeTable:self];
+}
+
+@end
+
+
+@implementation MPWForm(AppKitUI)
+
+-(void)generateUI:(MPWAbstractUIGenerator*)stream
+{
+    [stream writeForm:self];
 }
 
 @end

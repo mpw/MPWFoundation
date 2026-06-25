@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) MPWTypeToObjectMapper *type2view;
 
 -(id)controlForType:(MPWTypeDefinition*)type;
+-(void)beginView:aView;
 
 
 @end

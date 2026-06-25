@@ -13,7 +13,7 @@
 
 -(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
 {
-    [self flattenStructureOntoStream:stream];
+    [self generateUI:stream];
 }
 
 @end
@@ -43,12 +43,6 @@
 -(SEL)streamWriterMessage
 {
     return @selector(generateAppKitUI:);
-}
-
--(void)beginView:aView
-{
-    FORWARD(aView);
-    self.target=aView;
 }
 
 -(void)label:(NSString*)title
@@ -81,6 +75,11 @@
     [self beginView:[self.type2view at:@"Horizontal"]];
 }
 
+-(void)beginVertical
+{
+    [self beginView:[self.type2view at:@"Vertical"]];
+}
+
 
 -(void)endView
 {
@@ -111,24 +110,6 @@
 
 
 
-@implementation MPWTable(AppKitUI)
-
--(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
-{
-    [stream writeTable:self];
-}
-
-@end
-
-
-@implementation MPWForm(AppKitUI)
-
--(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
-{
-    [stream writeForm:self];
-}
-
-@end
 
 @implementation NSView(streaming)
 
@@ -193,7 +174,11 @@
     EXPECTTRUE( [formTopLevel isKindOfClass:[NSGridView class]],@"got the containing grid");
     NSArray* formElements = [formTopLevel subviews];
     INTEXPECT( formElements.count, 4, @"form elements");
-    
+    EXPECTTRUE( [formElements[0] isKindOfClass:[NSTextField class]], @"first label is a text field");
+    EXPECTTRUE( [formElements[1] isKindOfClass:[NSTextField class]], @"first field is a text field");
+    EXPECTTRUE( [formElements[2] isKindOfClass:[NSTextField class]], @"second label is a text field");
+    EXPECTTRUE( [formElements[3] isKindOfClass:[NSButton class]], @"second field is a (checkbox) button");
+
 }
 
 +(NSArray*)testSelectors
