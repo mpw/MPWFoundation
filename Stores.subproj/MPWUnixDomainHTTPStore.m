@@ -35,13 +35,9 @@
     char buf[16384];
     memset(&server_sockaddr, 0, sizeof(struct sockaddr_un));
     
-    /**************************************/
-    /* Create a UNIX domain stream socket */
-    /**************************************/
     client_sock = socket(AF_UNIX, SOCK_STREAM, 0);
     if (client_sock == -1) {
-        printf("SOCKET ERROR = %d\n", errno);
-        exit(1);
+        [NSException raise:@"socketerror" format:@"Creating socket at path '%@' failed: '%@'",self.socketPath,@(strerror(errno))];
     }
 
     server_sockaddr.sun_family = AF_UNIX;
@@ -51,8 +47,9 @@
     server_sockaddr.sun_len = strlen(spath)+1;
     rc = connect(client_sock, (struct sockaddr *) &server_sockaddr, sizeof server_sockaddr );
     if(rc == -1){
-        printf("CONNECT ERROR = %d\n", errno);
+        int theError=errno;
         close(client_sock);
+        [NSException raise:@"connecterror" format:@"Connecting to socket at path '%@' failed: '%@'",self.socketPath,@(strerror(theError))];
         return nil;
     }
     
@@ -61,8 +58,9 @@
 
     rc = (int)write(client_sock, request_str, strlen(request_str)+1);
     if (rc == -1) {
-        printf("SEND ERROR = %d\n", errno);
+        int theError=errno;
         close(client_sock);
+        [NSException raise:@"senderror" format:@"Sending request to socket at path '%@' failed: '%@'",self.socketPath,@(strerror(theError))];
     }
     
     memset(buf, 0, sizeof(buf));
@@ -74,8 +72,8 @@
         }
     } while ( rc > 0);
     NSData *body = nil;
-    char *bytes=[result bytes];
-    for (int i=0,max=result.length-3;i<max;i++) {
+    const char *bytes=[result bytes];
+    for (long i=0,max=result.length-3;i<max;i++) {
         if ( bytes[i]=='\r' && bytes[i+1]=='\n' && bytes[i+2]=='\r' && bytes[i+3]=='\n' ) {
             body=[result subdataWithRange:NSMakeRange(i+4,result.length-(i+5))];
 //            NSLog(@"body at %d: '%@'",i,[body stringValue]);
@@ -83,12 +81,11 @@
         }
     }
     if (rc == -1) {
-        printf("RECV ERROR = %d\n", errno);
+        int theError=errno;
+        close(client_sock);
+        [NSException raise:@"receiveerror" format:@"Receiving data from Unix socket at path '%@' failed: '%@'",self.socketPath,@(strerror(theError))];
     }
 
-    /******************************/
-    /* Close the socket and exit. */
-    /******************************/
     close(client_sock);
     
     return body;

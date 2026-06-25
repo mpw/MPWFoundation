@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSView *rootView;
 
-+(MPWTypeToObjectMapper*)defaultTypes2AppKitMapper;
++(MPWTypeToObjectMapper*)defaultTypes2UIMapper;
 
 
 @end

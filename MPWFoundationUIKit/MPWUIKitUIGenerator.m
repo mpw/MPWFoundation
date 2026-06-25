@@ -9,6 +9,12 @@
 
 @implementation MPWUIKitUIGenerator
 
+
+-(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
+{
+    
+}
+
 @end
 
 

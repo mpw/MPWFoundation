@@ -21,13 +21,15 @@
 
 @implementation MPWAppkitUIGenerator
 
-+(MPWTypeToObjectMapper*)defaultTypes2AppKitMapper
++(MPWTypeToObjectMapper*)defaultTypes2UIMapper
 {
     MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
     type2view[@"bool"] = [NSButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
     type2view[@"id"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
     type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
     type2view[@"Date"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
+    type2view[@"Horizontal"] = [NSStackView templateWithValues:@{ @"orientation": @(NSUserInterfaceLayoutOrientationHorizontal) }];
+    type2view[@"Vertical"] = [NSStackView templateWithValues:@{ @"orientation": @(NSUserInterfaceLayoutOrientationVertical) }];
     return type2view;
 }
 
@@ -35,7 +37,6 @@
 {
     self=[super initWithTarget:aTarget];
     self.rootView = aTarget;
-    self.type2view = [self.class defaultTypes2AppKitMapper];
     return self;
 }
 
@@ -60,12 +61,7 @@
     [self writeObject:[NSTextField textFieldWithString:@"title"]];
 }
 
--(id)controlForType:(MPWTypeDefinition*)type
-{
-    return [self.type2view at:type.name];
-}
-
--(void)writeAppKitFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
+-(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
     NSGridView *grid = [[[NSGridView alloc] initWithFrame:NSZeroRect] autorelease];
     BOOL hasMoreThanOneField = [theStruct fields].count > 1;
@@ -80,21 +76,15 @@
     FORWARD(grid);
 }
 
--(void)writeForm:(MPWForm*)aForm
-{
-    [self writeAppKitFormForStruct: aForm.def  postAction: aForm.formAction];
-    
-}
-
 -(void)beginHorizontal
 {
-    [self beginView:[[[NSStackView alloc] initWithDictionary:@{ @"orientation": @(NSUserInterfaceLayoutOrientationHorizontal) }] autorelease]];
+    [self beginView:[self.type2view at:@"Horizontal"]];
 }
 
 
 -(void)endView
 {
-    self.target = [self.target superview];
+    self.target = (id)[(NSView*)(self.target) superview];
 }
 
 
@@ -112,8 +102,9 @@
 
 -(void)dealloc
 {
-    [_rootView dealloc];
- //   [super dealloc];
+    // releasing rootView here crashes, it seems due to overrelease since rootView is an alias for target
+    // but of course since it is strong that should also get an extra retain...weird
+    [super dealloc];
 }
 
 @end
@@ -125,6 +116,16 @@
 -(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
 {
     [stream writeTable:self];
+}
+
+@end
+
+
+@implementation MPWForm(AppKitUI)
+
+-(void)generateAppKitUI:(MPWAppkitUIGenerator*)stream
+{
+    [stream writeForm:self];
 }
 
 @end
@@ -164,21 +165,43 @@
     EXPECTTRUE( [tableview isKindOfClass:[MPWTableView class]],@"got a table view");
 }
 
-+(void)testMapTypes
++(void)testMapAppKitTypes
 {
     MPWAppkitUIGenerator *generator=[self stream];
-    MPWTypeToObjectMapper *mapper=generator.type2view;
     MPWTypeStore *types=[MPWTypeStore store];
-    EXPECTTRUE( [[mapper atType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
-    EXPECTTRUE( [[mapper atType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
+    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
+    EXPECTTRUE( [[generator controlForType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
 }
 
++(void)testCreateForm
+{
+    MPWAppkitUIGenerator *generator=[self stream];
+    MPWTypeStore *types=[MPWTypeStore store];
+
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"todo" fields:@[
+        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Title" type:types[@"id"]] autorelease],
+        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Done" type:types[@"bool"]] autorelease],
+    ]] autorelease];
+    MPWForm *form=[[[MPWForm alloc] initWithDictionary:@{ @"def": structure, @"formAction": @"/newTask"}] autorelease];
+
+    NSStackView *container = [generator process:form];
+    EXPECTTRUE( [container isKindOfClass:[NSStackView class]],@"got the containing stack");
+    INTEXPECT( [container orientation], NSUserInterfaceLayoutOrientationVertical,@"vertical");
+    NSArray *formviews = [container subviews];
+    INTEXPECT( formviews.count, 1, @"form elements");
+    NSView* formTopLevel = [formviews lastObject];
+    EXPECTTRUE( [formTopLevel isKindOfClass:[NSGridView class]],@"got the containing grid");
+    NSArray* formElements = [formTopLevel subviews];
+    INTEXPECT( formElements.count, 4, @"form elements");
+    
+}
 
 +(NSArray*)testSelectors
 {
    return @[
-			@"testCreateTableViewByWritingTable",
-            @"testMapTypes",
+       @"testCreateTableViewByWritingTable",
+       @"testCreateForm",
+       @"testMapAppKitTypes",
 			];
 }
 

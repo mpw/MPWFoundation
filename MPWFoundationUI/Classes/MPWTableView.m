@@ -145,7 +145,7 @@ lazyAccessor(MPWCGDrawingContext*, context, setContext, createContext )
     NSRect savedFrameBecauseSettingDataSourceResetsFrame = self.frame;
     self.dataSource = self;
     self.frame = savedFrameBecauseSettingDataSourceResetsFrame;
-    self.type2Control = [MPWAppkitUIGenerator defaultTypes2AppKitMapper];
+    self.type2Control = [MPWAppkitUIGenerator defaultTypes2UIMapper];
 }
 
 -(void)awakeFromNib
