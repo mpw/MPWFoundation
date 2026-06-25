@@ -32,8 +32,9 @@
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper
 {
     MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
-//    type2view[@"bool"] = [UIButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
-    type2view[@"id"] = [UITextField templateWithValues:@{ }];
+    type2view[@"bool"] = [UISwitch templateWithValues:@{ }];
+    type2view[@"id"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
+    type2view[@"Date"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
     type2view[@"Text"] = [UITextView templateWithValues:@{ }];
     type2view[@"Horizontal"] = [UIStackView templateWithValues:@{ @"axis": @(UILayoutConstraintAxisHorizontal) }];
     type2view[@"Vertical"] = [UIStackView templateWithValues:@{ @"axis": @(UILayoutConstraintAxisVertical) }];
@@ -53,11 +54,12 @@
     for ( MPWVariableDefinition *aField in theStruct.fields) {
         [self beginView:self.type2view[@"Horizontal"]];
         if ( hasMoreThanOneField ) {
-            [self writeObject:[[[UILabel alloc] initWithDictionary: @{ @"text": aField.title }] autorelease]];
+            [self writeObject:[[[UILabel alloc] initWithDictionary: @{ @"text": aField.title}] autorelease]];
         }
         [self writeObject:[self controlForType:aField.type]];
         [self endView];
     }
+    [self writeObject:[UIView new]];
     [self endView];
 }
 
