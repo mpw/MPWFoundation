@@ -7,9 +7,13 @@
 
 #import <MPWFoundation/MPWFoundation.h>
 
+@class UIView;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWUIKitUIGenerator : MPWAbstractUIGenerator
+
+-(UIView*)rootView;
 
 @end
 

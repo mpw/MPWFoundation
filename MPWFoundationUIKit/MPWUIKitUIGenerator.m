@@ -83,7 +83,10 @@
     return [[[UIStackView alloc] initWithDictionary:@{ @"axis": @(UILayoutConstraintAxisVertical) }] autorelease];
 }
 
-
+-(UIView*)rootView
+{
+    return (UIView*)self.target;
+}
 
 @end
 
