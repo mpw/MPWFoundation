@@ -372,6 +372,8 @@
 		1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */; };
 		1F7138912FE6759000F96C88 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
+		1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138BB2FEEABF700F96C88 /* MPWTableView.h */; };
+		1F7138BE2FEEABF700F96C88 /* MPWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138BC2FEEABF700F96C88 /* MPWTableView.m */; };
 		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A61E3E54FE00D6A9E0 /* MPWExternalFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */; };
@@ -1781,6 +1783,8 @@
 		1F7138742FE5CD0100F96C88 /* MPWAbstractUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWAbstractUIGenerator.m; sourceTree = "<group>"; };
 		1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUIKitUIGenerator.h; sourceTree = "<group>"; };
 		1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUIKitUIGenerator.m; sourceTree = "<group>"; };
+		1F7138BB2FEEABF700F96C88 /* MPWTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTableView.h; sourceTree = "<group>"; };
+		1F7138BC2FEEABF700F96C88 /* MPWTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableView.m; sourceTree = "<group>"; };
 		1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPWExternalFilter.h; sourceTree = "<group>"; };
 		1F71B6A31E3E54FE00D6A9E0 /* MPWExternalFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPWExternalFilter.m; sourceTree = "<group>"; };
 		1F74D044299D09B7004A3DF0 /* MPWTCPStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTCPStore.h; sourceTree = "<group>"; };
@@ -2729,6 +2733,8 @@
 				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
 				1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */,
 				1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */,
+				1F7138BB2FEEABF700F96C88 /* MPWTableView.h */,
+				1F7138BC2FEEABF700F96C88 /* MPWTableView.m */,
 				1F7045C422313099005ED7FB /* Info.plist */,
 			);
 			path = MPWFoundationUIKit;
@@ -3150,6 +3156,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */,
 				1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */,
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
 				1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */,
@@ -3943,6 +3950,7 @@
 				1F7045BD22313099005ED7FB /* Sources */,
 				1F7045BE22313099005ED7FB /* Frameworks */,
 				1F7045BF22313099005ED7FB /* Resources */,
+				1F6A45152FF649C100E2B283 /* Sign */,
 			);
 			buildRules = (
 			);
@@ -3962,6 +3970,7 @@
 				1F840DA0193F505700589595 /* Sources */,
 				1F840DA1193F505700589595 /* Frameworks */,
 				1F840DA3193F505700589595 /* Resources */,
+				1F6A45162FF64A4500E2B283 /* Sign */,
 			);
 			buildRules = (
 			);
@@ -4437,6 +4446,42 @@
 			shellPath = /bin/sh;
 			shellScript = "tester=/usr/local/bin/testlogger\nframework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\nbinary=`basename ${FULL_PRODUCT_NAME} .framework`\nsuccessfile=${DERIVED_FILE_DIR}/test.success\ncodesign -s - $framework/`basename $framework .framework`\nif test ${successfile} -nt ${OBJECT_FILE_DIR_normal}/arm64/Binary/$binary  ; then\n    echo No changes, tests skipped\n    exit 0\nfi\nif [ -x  ${tester}  ] ; then\n     if $tester ${framework}  ; then\n         touch ${successfile}\n     else\n         rm ${successfile}\n         exit 1\n     fi\nelse\n   echo \"projectfile:0:1: warning: $tester or  $framework  not found, tests not run\"\nfi\n";
 		};
+		1F6A45152FF649C100E2B283 /* Sign */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Sign;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "framework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s ED79D979AD823C2F4FC7407F9669EE13986F36D4 $framework/`basename $framework .framework`\n";
+		};
+		1F6A45162FF64A4500E2B283 /* Sign */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Sign;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "framework=${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\ncodesign -s ED79D979AD823C2F4FC7407F9669EE13986F36D4 $framework/`basename $framework .framework`\n";
+		};
 		1F7045D52231311C005ED7FB /* Test */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -4582,6 +4627,7 @@
 			files = (
 				1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */,
 				1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */,
+				1F7138BE2FEEABF700F96C88 /* MPWTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7020,6 +7066,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7077,6 +7124,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7128,6 +7176,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7179,6 +7228,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7230,6 +7280,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7281,6 +7332,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
@@ -7332,6 +7384,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;

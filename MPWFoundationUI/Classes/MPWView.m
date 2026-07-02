@@ -69,7 +69,7 @@
 {
     self.lastException = nil;
     if ([self logDrawRect] ) {
-        NSLog(@"-[%@ drawRect:%@]",[self class],NSStringFromRect(rect));
+        NSLog(@"-[%@ drawRect:(%g,%g - %g, %g)]",[self class],rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
     }
     MPWCGDrawingContext* context = [MPWCGDrawingContext currentContext];
 #if TARGET_OS_IPHONE

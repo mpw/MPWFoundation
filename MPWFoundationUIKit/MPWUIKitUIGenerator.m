@@ -47,7 +47,7 @@
 }
 
 
--(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
+-(void)writeUIFormForStructVH:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
     [self beginView:self.type2view[@"Vertical"]];
     BOOL hasMoreThanOneField = [theStruct fields].count > 1;
@@ -61,6 +61,21 @@
     }
     [self writeObject:[UIView new]];
     [self endView];
+}
+
+
+-(void)writeUIFormForStructVV:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
+{
+    for ( MPWVariableDefinition *aField in theStruct.fields) {
+        [self writeObject:[[[UILabel alloc] initWithDictionary: @{ @"text": aField.title}] autorelease]];
+        [self writeObject:[self controlForType:aField.type]];
+    }
+    [self writeObject:[UIView new]];
+}
+
+-(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
+{
+    [self writeUIFormForStructVV:theStruct postAction:actionString];
 }
 
 +(id)defaultTarget
