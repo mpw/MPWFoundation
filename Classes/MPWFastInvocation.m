@@ -355,7 +355,6 @@ lazyAccessor( NSMethodSignature*, methodSignature, setMethodSignature, getSignat
 	[invocation setSelector:@selector(characterAtIndex:)];
 	[invocation setTarget:@"Hello World!"];
 	[invocation setArgument:&positionArg atIndex:2];
-//	charAtThree=(NSInteger)[invocation resultOfInvoking];
     INTEXPECT( (NSInteger)[invocation resultOfInvoking], 'l', @"character at three");
     positionArg=4;
     [invocation setArgument:&positionArg atIndex:2];

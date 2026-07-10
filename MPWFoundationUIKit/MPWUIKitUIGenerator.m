@@ -114,16 +114,45 @@
 
 @implementation MPWUIKitUIGenerator(testing) 
 
-+(void)someTest
++(void)testMapUIKitTypes
 {
-	EXPECTTRUE(false, @"implemented");
+    MPWUIKitUIGenerator *generator=[self stream];
+    MPWTypeStore *types=[MPWTypeStore store];
+    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[UITextField class]], @"default text field");
+    EXPECTTRUE( [[generator controlForType:types[@"bool"]] isKindOfClass:[UIButton class]], @"bool to checkbox");
+}
+
++(void)testCreateForm
+{
+    MPWUIKitUIGenerator *generator=[self stream];
+    MPWTypeStore *types=[MPWTypeStore store];
+    
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"todo" fields:@[
+        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Title" type:types[@"id"]] autorelease],
+        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Done" type:types[@"bool"]] autorelease],
+    ]] autorelease];
+    MPWForm *form=[[[MPWForm alloc] initWithDictionary:@{ @"def": structure, @"formAction": @"/newTask"}] autorelease];
+    
+    UIStackView *container = [generator process:form];
+    EXPECTTRUE( [container isKindOfClass:[UIStackView class]],@"got the containing stack");
+    INTEXPECT( [container axis], UILayoutConstraintAxisVertical,@"vertical");
+    UIView* formTopLevel = [container lastObject];
+    EXPECTTRUE( [formTopLevel isKindOfClass:[UIStackView class]],@"got the containing grid");
+    NSArray* formElements = [formTopLevel subviews];
+    INTEXPECT( formElements.count, 4, @"form elements");
+    EXPECTTRUE( [formElements[0] isKindOfClass:[UITextField class]], @"first label is a text field");
+    EXPECTTRUE( [formElements[1] isKindOfClass:[UITextField class]], @"first field is a text field");
+    EXPECTTRUE( [formElements[2] isKindOfClass:[UITextField class]], @"second label is a text field");
+    EXPECTTRUE( [formElements[3] isKindOfClass:[UIButton class]], @"second field is a (checkbox) button");
+    
 }
 
 +(NSArray*)testSelectors
 {
-   return @[
-			@"someTest",
-			];
+    return @[
+        @"testCreateForm",
+        @"testMapUIKitTypes",
+    ];
 }
 
 @end
