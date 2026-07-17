@@ -73,6 +73,18 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
     [NSException raise:@"unimplemnted" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
 }
 
+-(NSUInteger)count
+{
+    [NSException raise:@"unimplemented" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
+    return 0;
+}
+
+-(id)objectAtIndex:(NSUInteger)index
+{
+    [NSException raise:@"unimplemented" format:@"Subclass responsibility %@ does not implement %@",[self className],NSStringFromSelector(_cmd)];
+    return nil;
+}
+
 -(NSArray<MPWTableColumn*> *)computeVisibleColumns
 {
     NSMutableArray *visible = [NSMutableArray array];
@@ -82,6 +94,27 @@ lazyAccessor(NSString*, tableIdentifier, setTableIdentifier, computeTableIdentif
         }
     }
     return visible;
+}
+
+-(NSArray<MPWTable*>*)componentTables
+{
+    return @[ self ];
+}
+
+-(MPWTable*)componentTableAtIndex:(NSUInteger)index
+{
+    return index == 0 ? self : nil;
+}
+
+-(void)dealloc
+{
+    [itemStructure release];
+    [columns release];
+    [visibleColumns release];
+    [columnsByKey release];
+    [tableIdentifier release];
+    [_presentationMetadata release];
+    [super dealloc];
 }
 
 

@@ -28,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) MPWTypeDefinition *type;
 @property (nonatomic,assign) MPWRESTVerb operations;
 @property (nonatomic,assign) NSString *title;
+/// Presentation-neutral hints such as grouping, allowed values, placeholder,
+/// units or multiline intent.  Renderers may use the hints they understand.
+@property (nonatomic,copy,nullable) NSDictionary *presentationMetadata;
 
 @end
 

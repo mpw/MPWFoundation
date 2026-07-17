@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2F000202F90000100000001 /* MPWFoundationUIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -249,6 +250,18 @@
 		1F5620A72F61BD7500D998EF /* MPWTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumn.m */; };
 		1F5620A82F61BD7500D998EF /* MPWTableColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620A22F61BD7500D998EF /* MPWTableColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F5620A92F61BD7500D998EF /* MPWTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumn.m */; };
+		A2F000012F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000022F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000032F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000042F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000052F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000062F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000102F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000112F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
+		A2F000122F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000132F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
+		A2F000142F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000152F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
 		1F5620AF2F6867E300D998EF /* MPWViewHarness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */; };
 		1F5620B22F68685200D998EF /* MPWViewHarness.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620B02F68685200D998EF /* MPWViewHarness.h */; };
 		1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620B12F68685200D998EF /* MPWViewHarness.m */; };
@@ -372,7 +385,7 @@
 		1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */; };
 		1F7138912FE6759000F96C88 /* MPWFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F840DA5193F505700589595 /* MPWFoundation.framework */; };
-		1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138BB2FEEABF700F96C88 /* MPWTableView.h */; };
+		1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F7138BB2FEEABF700F96C88 /* MPWTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F7138BE2FEEABF700F96C88 /* MPWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F7138BC2FEEABF700F96C88 /* MPWTableView.m */; };
 		1F71B6A41E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F71B6A51E3E54FE00D6A9E0 /* MPWExternalFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F71B6A21E3E54FE00D6A9E0 /* MPWExternalFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1510,6 +1523,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1F23AE0025C15C0400F51B6F /* MPWFoundation.framework in CopyFiles */,
+				A2F000202F90000100000001 /* MPWFoundationUIKit.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1727,6 +1741,10 @@
 		1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWArrayFlattenStream.m; sourceTree = "<group>"; };
 		1F5620A22F61BD7500D998EF /* MPWTableColumn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTableColumn.h; sourceTree = "<group>"; };
 		1F5620A32F61BD7500D998EF /* MPWTableColumn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableColumn.m; sourceTree = "<group>"; };
+		A2F000072F90000100000001 /* MPWStructureTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWStructureTable.h; sourceTree = "<group>"; };
+		A2F000082F90000100000001 /* MPWStructureTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStructureTable.m; sourceTree = "<group>"; };
+		A2F000162F90000100000001 /* MPWCompositeTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCompositeTable.h; sourceTree = "<group>"; };
+		A2F000172F90000100000001 /* MPWCompositeTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWCompositeTable.m; sourceTree = "<group>"; };
 		1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWViewHarness.xib; sourceTree = "<group>"; };
 		1F5620B02F68685200D998EF /* MPWViewHarness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWViewHarness.h; sourceTree = "<group>"; };
 		1F5620B12F68685200D998EF /* MPWViewHarness.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWViewHarness.m; sourceTree = "<group>"; };
@@ -2158,7 +2176,6 @@
 			files = (
 				1F7045C822313099005ED7FB /* MPWFoundationUIKit.framework in Frameworks */,
 				1F9D63AF1F601D6900DA9514 /* MPWFoundation.framework in Frameworks */,
-				1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2193,7 +2210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F7138912FE6759000F96C88 /* MPWFoundation.framework in Frameworks */,
-				1F6B03CF274A50D0004E61A7 /* DrawingContext.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2450,6 +2466,10 @@
 				1F5621032F6D4B9C00D998EF /* MPWDictArrayTable.m */,
 				1F5620A22F61BD7500D998EF /* MPWTableColumn.h */,
 				1F5620A32F61BD7500D998EF /* MPWTableColumn.m */,
+				A2F000072F90000100000001 /* MPWStructureTable.h */,
+				A2F000082F90000100000001 /* MPWStructureTable.m */,
+				A2F000162F90000100000001 /* MPWCompositeTable.h */,
+				A2F000172F90000100000001 /* MPWCompositeTable.m */,
 				1F9403670C6811BA00E189FC /* MPWCaseInsensitiveSmallStringTable.m */,
 				1FA1593A17EEF05500BF8F6F /* MPWDelimitedTable.h */,
 				1FA1593B17EEF05500BF8F6F /* MPWDelimitedTable.m */,
@@ -3157,7 +3177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */,
-				1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */,
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
 				1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */,
 				1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
@@ -3168,6 +3187,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000102F90000100000001 /* MPWCompositeTable.h in Headers */,
+				A2F000012F90000100000001 /* MPWStructureTable.h in Headers */,
 				1FD7B37D2195C9A100046BBE /* MPWCompositeStore.h in Headers */,
 				1FA8FC3E273E4D1A005E2824 /* MPWDirectoryStore.h in Headers */,
 				1FE37C22196976C500C9A378 /* NSObjectAdditions.h in Headers */,
@@ -3407,6 +3428,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000122F90000100000001 /* MPWCompositeTable.h in Headers */,
+				A2F000032F90000100000001 /* MPWStructureTable.h in Headers */,
 				1F829B362F80E488003CB97B /* MPWInstanceVariableDefinition.h in Headers */,
 				1FD7B37E2195C9A100046BBE /* MPWCompositeStore.h in Headers */,
 				1FA8FC3F273E4D1A005E2824 /* MPWDirectoryStore.h in Headers */,
@@ -3621,6 +3644,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000142F90000100000001 /* MPWCompositeTable.h in Headers */,
+				A2F000052F90000100000001 /* MPWStructureTable.h in Headers */,
 				1F846B4829D6B7DF001BAC41 /* MPWExtensionAdder.h in Headers */,
 				1F75FA6817E4908E00D43D15 /* MPWBinaryPListWriter.h in Headers */,
 				1FA74A1D25F64A54001AA6A8 /* MPWDistributedNotificationReceiver.h in Headers */,
@@ -4586,7 +4611,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */,
 				1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */,
 				1F7138BE2FEEABF700F96C88 /* MPWTableView.m in Sources */,
 			);
@@ -4596,6 +4620,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000112F90000100000001 /* MPWCompositeTable.m in Sources */,
+				A2F000022F90000100000001 /* MPWStructureTable.m in Sources */,
 				1FC70F7F20CD98B5008718B2 /* MPWURI.m in Sources */,
 				1F840E05193F527300589595 /* bytecoding.c in Sources */,
 				1F185BF126622CA800BA8219 /* MPWResource.m in Sources */,
@@ -4825,6 +4851,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000132F90000100000001 /* MPWCompositeTable.m in Sources */,
+				A2F000042F90000100000001 /* MPWStructureTable.m in Sources */,
 				1F02B9AD28913CA90023588A /* MPWUnixDomainHTTPStore.m in Sources */,
 				1FCF261B1CF3990400AC64CE /* MPWFlattenStream.m in Sources */,
 				1FF08F6A1D7061C400C6273F /* MPWEventSender.m in Sources */,
@@ -5021,6 +5049,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2F000152F90000100000001 /* MPWCompositeTable.m in Sources */,
+				A2F000062F90000100000001 /* MPWStructureTable.m in Sources */,
 				1FF8FDF709B49D0100652476 /* NSThreadInterThreadMessaging.m in Sources */,
 				1F8671F922397C14006510FB /* MPWDirectoryReference.m in Sources */,
 				1F2C24DE2ACB109A002993B3 /* MPWInitStore.m in Sources */,

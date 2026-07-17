@@ -6,6 +6,7 @@
 //
 
 #import "MPWTableColumn.h"
+#import "MPWTypeDefinition.h"
 
 @implementation MPWTableColumn
 {
@@ -22,6 +23,34 @@ lazyAccessor( NSString*, title, setTitle, key )
     return self;
 }
 
+-(id)objectAtIndex:(NSUInteger)anIndex
+{
+    [NSException raise:@"unimplemented"
+                format:@"Subclass responsibility %@ does not implement %@",NSStringFromClass(self.class),NSStringFromSelector(_cmd)];
+    return nil;
+}
+
+-(void)replaceObjectAtIndex:(NSUInteger)anIndex withObject:(id)object
+{
+    [NSException raise:@"unimplemented"
+                format:@"Subclass responsibility %@ does not implement %@",NSStringFromClass(self.class),NSStringFromSelector(_cmd)];
+}
+
+-(MPWTypeDefinition*)typeAtIndex:(NSUInteger)anIndex
+{
+    return self.type;
+}
+
+-(NSDictionary*)presentationMetadataAtIndex:(NSUInteger)anIndex
+{
+    return @{};
+}
+
+-(BOOL)isEditableAtIndex:(NSUInteger)anIndex
+{
+    return self.editable;
+}
+
 @end
 
 
@@ -29,15 +58,19 @@ lazyAccessor( NSString*, title, setTitle, key )
 
 @implementation MPWTableColumn(testing) 
 
-+(void)someTest
++(void)testIndexedTypeDefaultsToHomogeneousColumnType
 {
-	EXPECTTRUE(false, @"implemented");
+    MPWTableColumn *column=[[[MPWTableColumn alloc] init] autorelease];
+    MPWTypeDefinition *type=[MPWTypeDefinition descriptorForTypeName:@"Text"];
+    column.type=type;
+    IDEXPECT([column typeAtIndex:0],type,@"indexed type uses ordinary column type");
+    IDEXPECT([column typeAtIndex:100],type,@"ordinary type does not vary by row");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-//			@"someTest",
+			@"testIndexedTypeDefaultsToHomogeneousColumnType",
 			];
 }
 

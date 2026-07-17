@@ -312,7 +312,9 @@ scalarAccessor( NSRect, rect, setRect )
             @"testXYWidthHeight",
             @"testCenter",
             @"testInset",
+#if ! TARGET_OS_IPHONE
             @"testIntersects",
+#endif
             nil];
 }
 

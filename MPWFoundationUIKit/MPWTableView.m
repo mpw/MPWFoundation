@@ -17,6 +17,7 @@
 
 static NSString * const MPWTableRowCellIdentifier = @"MPWTableRowCell";
 static NSString * const MPWTableHeaderIdentifier  = @"MPWTableHeader";
+static NSString * const MPWTableFooterIdentifier  = @"MPWTableFooter";
 
 static const CGFloat MPWTableRowHeight    = 44;
 static const CGFloat MPWTableHeaderHeight  = 34;
@@ -150,6 +151,8 @@ static NSString *MPWStringValue(id value)
 @property (nonatomic, assign) MPWTableView *tableView;   // not retained: it owns the cell tree
 @property (nonatomic, retain) MPWTableColumn *column;
 @property (nonatomic, assign) NSUInteger row;
+@property (nonatomic, retain) id rowObject;
+@property (nonatomic, copy) NSDictionary *metadata;
 
 - (void)connectControl:(UIView *)control;
 - (void)controlValueChanged:(id)sender;
@@ -161,12 +164,20 @@ static NSString *MPWStringValue(id value)
 
 - (void)connectControl:(UIView *)control
 {
+    BOOL buttonUsesMenu = NO;
+    if ([control isKindOfClass:[UIButton class]]) {
+        if (@available(iOS 14.0, *)) {
+            buttonUsesMenu = [(UIButton *)control showsMenuAsPrimaryAction];
+        }
+    }
     if ([control isKindOfClass:[UITextField class]]) {
         UITextField *field = (UITextField *)control;
         [field addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
         [field addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventEditingDidEndOnExit];
     } else if ([control isKindOfClass:[UITextView class]]) {
         [(UITextView *)control setDelegate:self];
+    } else if ([control isKindOfClass:[UIButton class]] && !buttonUsesMenu) {
+        [(UIButton *)control addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventTouchUpInside];
     } else if ([control isKindOfClass:[UIControl class]]) {
         [(UIControl *)control addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
     }
@@ -175,8 +186,15 @@ static NSString *MPWStringValue(id value)
 - (void)controlValueChanged:(id)sender
 {
     id value = [sender objectValue];
-    if (value && self.column.editable) {
+    if (self.metadata[MPWPresentationActionKey]) {
+        if (self.tableView.activationHandler) {
+            self.tableView.activationHandler(self.rowObject, self.metadata);
+        }
+    } else if (value && [self.column isEditableAtIndex:self.row]) {
         [self.column replaceObjectAtIndex:self.row withObject:value];
+        if (self.tableView.valueChangeHandler) {
+            self.tableView.valueChangeHandler(self.rowObject, value, self.metadata);
+        }
     }
 }
 
@@ -188,6 +206,8 @@ static NSString *MPWStringValue(id value)
 - (void)dealloc
 {
     [_column release];
+    [_rowObject release];
+    [_metadata release];
     [super dealloc];
 }
 
@@ -217,6 +237,7 @@ static NSString *MPWStringValue(id value)
 
 @interface MPWTableHeaderView : UICollectionReusableView
 - (void)configureWithColumns:(NSArray<MPWTableColumn *> *)columns;
+- (void)configureWithText:(nullable NSString*)text footer:(BOOL)isFooter;
 @end
 
 @implementation MPWTableHeaderView
@@ -257,6 +278,18 @@ static NSString *MPWStringValue(id value)
     }
 }
 
+- (void)configureWithText:(NSString*)text footer:(BOOL)isFooter
+{
+    MPWRemoveArrangedSubviews(_columnStack);
+    UILabel *label=[[[UILabel alloc] init] autorelease];
+    label.font=[UIFont preferredFontForTextStyle:isFooter ? UIFontTextStyleFootnote : UIFontTextStyleCaption1];
+    label.adjustsFontForContentSizeCategory=YES;
+    label.textColor=[UIColor secondaryLabelColor];
+    label.numberOfLines=isFooter ? 0 : 1;
+    label.text=text;
+    [_columnStack addArrangedSubview:label];
+}
+
 - (void)prepareForReuse
 {
     [super prepareForReuse];
@@ -278,6 +311,11 @@ static NSString *MPWStringValue(id value)
 @property (nonatomic, retain) UIStackView *columnStack;
 @property (nonatomic, retain) UIView *separator;
 @property (nonatomic, retain) NSMutableArray<MPWTableControlBinding *> *bindings;
+- (void)configureWithColumns:(NSArray<MPWTableColumn*>*)columns
+                         row:(NSUInteger)row
+                   rowObject:(id)rowObject
+                  typeMapper:(MPWTypeToObjectMapper*)typeMapper
+                   tableView:(MPWTableView*)tableView;
 @end
 
 @implementation MPWTableRowCell
@@ -325,11 +363,29 @@ static NSString *MPWStringValue(id value)
                   typeMapper:(MPWTypeToObjectMapper *)typeMapper
                    tableView:(MPWTableView *)tableView
 {
+    [self configureWithColumns:columns row:row rowObject:nil typeMapper:typeMapper tableView:tableView];
+}
+
+- (void)configureWithColumns:(NSArray<MPWTableColumn *> *)columns
+                         row:(NSUInteger)row
+                   rowObject:(id)rowObject
+                  typeMapper:(MPWTypeToObjectMapper *)typeMapper
+                   tableView:(MPWTableView *)tableView
+{
     MPWRemoveArrangedSubviews(self.columnStack);
     [self.bindings removeAllObjects];
+    MPWTableColumn *spanningColumn=nil;
+    for (MPWTableColumn *column in columns) {
+        if ([[column presentationMetadataAtIndex:row][@"spansColumns"] boolValue]) {
+            spanningColumn=column;
+            break;
+        }
+    }
+    if (spanningColumn) { columns=@[spanningColumn]; }
     for (MPWTableColumn *column in columns) {
         UIView *presentation = [self presentationForColumn:column
                                                        row:row
+                                                 rowObject:rowObject
                                                 typeMapper:typeMapper
                                                  tableView:tableView];
         [self.columnStack addArrangedSubview:presentation];
@@ -338,27 +394,27 @@ static NSString *MPWStringValue(id value)
 
 - (UIView *)presentationForColumn:(MPWTableColumn *)column
                               row:(NSUInteger)row
+                        rowObject:(id)rowObject
                        typeMapper:(MPWTypeToObjectMapper *)typeMapper
                         tableView:(MPWTableView *)tableView
 {
     id value = [column objectAtIndex:row];        // read through the column abstraction
 
-    UIView *presentation = column.type ? [typeMapper atType:column.type] : nil;
-    if (!presentation) {
-        UILabel *label = [[[UILabel alloc] init] autorelease];
-        label.numberOfLines = 1;
-        label.adjustsFontForContentSizeCategory = YES;
-        presentation = label;
-    }
+    NSDictionary *metadata=[column presentationMetadataAtIndex:row];
+    MPWTypeDefinition *type=[column typeAtIndex:row];
+    UIView *presentation=[MPWUIKitUIGenerator controlForType:type presentationMetadata:metadata typeMapper:typeMapper];
     presentation.translatesAutoresizingMaskIntoConstraints = NO;
 
     MPWTableControlBinding *binding = [[[MPWTableControlBinding alloc] init] autorelease];
     binding.tableView = tableView;
     binding.column    = column;
     binding.row       = row;
+    binding.rowObject = rowObject;
+    binding.metadata  = metadata;
     [presentation setObjectValue:value];
-    [presentation setValueEditable:column.editable];
-    if (column.editable) {
+    BOOL editable=[column isEditableAtIndex:row];
+    [presentation setValueEditable:editable || metadata[MPWPresentationActionKey] != nil];
+    if (editable || metadata[MPWPresentationActionKey]) {
         [binding connectControl:presentation];
     }
     [self.bindings addObject:binding];            // keeps the binding alive for the cell's lifetime
@@ -391,6 +447,7 @@ static NSString *MPWStringValue(id value)
 @property (nonatomic, retain) MPWTypeToObjectMapper *type2Control;
 @property (nonatomic, retain) MPWTableCursorSelectionSink *cursorSelectionSink;
 @property (nonatomic, retain) UILongPressGestureRecognizer *reorderGesture;
+- (MPWTable*)componentTableAtSection:(NSUInteger)section;
 @end
 
 @implementation MPWTableView
@@ -452,11 +509,15 @@ static NSString *MPWStringValue(id value)
     self.allowsMultipleSelection = NO;
     self.backgroundColor = [UIColor systemBackgroundColor];
     self.alwaysBounceVertical = YES;
+    self.presentationStyle = MPWTablePresentationStyleAutomatic;
 
     [self registerClass:[MPWTableRowCell class] forCellWithReuseIdentifier:MPWTableRowCellIdentifier];
     [self registerClass:[MPWTableHeaderView class]
             forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
                    withReuseIdentifier:MPWTableHeaderIdentifier];
+    [self registerClass:[MPWTableHeaderView class]
+            forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                   withReuseIdentifier:MPWTableFooterIdentifier];
 
     self.type2Control = [MPWUIKitUIGenerator defaultTypes2UIMapper];
 
@@ -475,6 +536,37 @@ static NSString *MPWStringValue(id value)
 - (NSUInteger)rowCount
 {
     return [self.table respondsToSelector:@selector(count)] ? [self.table count] : 0;
+}
+
+- (MPWTable*)componentTableAtSection:(NSUInteger)section
+{
+    return [self.table componentTableAtIndex:section];
+}
+
+- (BOOL)usesFormPresentation
+{
+    if (self.presentationStyle == MPWTablePresentationStyleForm) { return YES; }
+    if (self.presentationStyle == MPWTablePresentationStyleTabular) { return NO; }
+    return [self.table.presentationMetadata[MPWPresentationStyleKey] isEqual:@"form"];
+}
+
+- (NSUInteger)globalRowForIndexPath:(NSIndexPath*)indexPath
+{
+    NSUInteger row=indexPath.item;
+    for (NSUInteger section=0; section<indexPath.section; section++) {
+        row += [self componentTableAtSection:section].count;
+    }
+    return row;
+}
+
+- (NSIndexPath*)indexPathForGlobalRow:(NSUInteger)row
+{
+    for (NSUInteger section=0; section<self.table.componentTables.count; section++) {
+        NSUInteger count=[self componentTableAtSection:section].count;
+        if (row < count) { return [NSIndexPath indexPathForItem:row inSection:section]; }
+        row -= count;
+    }
+    return nil;
 }
 
 - (void)setTable:(MPWTable *)newTable
@@ -501,7 +593,7 @@ static NSString *MPWStringValue(id value)
 - (id)selectedObject
 {
     NSIndexPath *selection = self.indexPathsForSelectedItems.firstObject;
-    return selection ? [self objectAtRow:selection.item] : nil;
+    return selection ? [[self componentTableAtSection:selection.section] objectAtIndex:selection.item] : nil;
 }
 
 #pragma mark cursor / selection
@@ -528,12 +620,12 @@ static NSString *MPWStringValue(id value)
 
     NSInteger row = self.cursor.offset;
     for (NSIndexPath *selected in self.indexPathsForSelectedItems) {
-        if (selected.item != row) {
+        if ([self globalRowForIndexPath:selected] != row) {
             [self deselectItemAtIndexPath:selected animated:NO];
         }
     }
     if (row >= 0 && (NSUInteger)row < [self rowCount]) {
-        NSIndexPath *path = [NSIndexPath indexPathForItem:row inSection:0];
+        NSIndexPath *path = [self indexPathForGlobalRow:row];
         [self selectItemAtIndexPath:path animated:NO scrollPosition:UICollectionViewScrollPositionNone];
         if (self.window) {   // scrolling offscreen without a window can assert in tests
             [self scrollToItemAtIndexPath:path
@@ -548,9 +640,10 @@ static NSString *MPWStringValue(id value)
 // notification does not bounce back into a selection update).
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.cursor && !_synchronizingSelection && self.cursor.offset != (long)indexPath.item) {
+    NSUInteger globalRow=[self globalRowForIndexPath:indexPath];
+    if (self.cursor && !_synchronizingSelection && self.cursor.offset != (long)globalRow) {
         _synchronizingSelection = YES;
-        self.cursor.offset = indexPath.item;
+        self.cursor.offset = globalRow;
         _synchronizingSelection = NO;
     }
 }
@@ -571,22 +664,46 @@ static NSString *MPWStringValue(id value)
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    return self.table.componentTables.count;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [self rowCount];
+    return [self componentTableAtSection:section].count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MPWTableRowCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:MPWTableRowCellIdentifier
                                                                      forIndexPath:indexPath];
-    [cell configureWithColumns:self.tableColumns
+    MPWTable *component=[self componentTableAtSection:indexPath.section];
+    [cell configureWithColumns:component.columns
                            row:indexPath.item
+                     rowObject:[component objectAtIndex:indexPath.item]
                     typeMapper:self.type2Control
                      tableView:self];
+    BOOL form=[self usesFormPresentation];
+    NSDictionary *valueMetadata=component.columns.count > 1
+        ? [component.columns[1] presentationMetadataAtIndex:indexPath.item] : @{};
+    NSString *controlKind=valueMetadata[MPWPresentationControlKey];
+    BOOL controlPrefersStack=[controlKind isEqual:@"segmented"] || [controlKind isEqual:@"multiline"];
+    BOOL stacked=form && (CGRectGetWidth(collectionView.bounds) < 350 || controlPrefersStack);
+    BOOL first=indexPath.item == 0;
+    BOOL last=indexPath.item + 1 == component.count;
+    cell.columnStack.axis=stacked ? UILayoutConstraintAxisVertical : UILayoutConstraintAxisHorizontal;
+    cell.columnStack.distribution=form ? UIStackViewDistributionFill : UIStackViewDistributionFillEqually;
+    cell.columnStack.alignment=stacked ? UIStackViewAlignmentFill : UIStackViewAlignmentCenter;
+    collectionView.backgroundColor=form ? [UIColor systemGroupedBackgroundColor] : [UIColor systemBackgroundColor];
+    cell.backgroundColor=form ? [UIColor secondarySystemGroupedBackgroundColor] : [UIColor systemBackgroundColor];
+    cell.separator.hidden=form && last;
+    cell.layer.cornerRadius=form && (first || last) ? 10 : 0;
+    cell.layer.masksToBounds=form && (first || last);
+    if (form) {
+        CACornerMask corners=0;
+        if (first) { corners |= kCALayerMinXMinYCorner | kCALayerMaxXMinYCorner; }
+        if (last) { corners |= kCALayerMinXMaxYCorner | kCALayerMaxXMaxYCorner; }
+        cell.layer.maskedCorners=corners;
+    }
     return cell;
 }
 
@@ -594,10 +711,21 @@ static NSString *MPWStringValue(id value)
            viewForSupplementaryElementOfKind:(NSString *)kind
                                  atIndexPath:(NSIndexPath *)indexPath
 {
+    NSString *identifier=[kind isEqual:UICollectionElementKindSectionFooter] ? MPWTableFooterIdentifier : MPWTableHeaderIdentifier;
     MPWTableHeaderView *header = [collectionView dequeueReusableSupplementaryViewOfKind:kind
-                                                                   withReuseIdentifier:MPWTableHeaderIdentifier
+                                                                   withReuseIdentifier:identifier
                                                                           forIndexPath:indexPath];
-    [header configureWithColumns:self.tableColumns];
+    MPWTable *component=[self componentTableAtSection:indexPath.section];
+    if ([self usesFormPresentation]) {
+        header.backgroundColor=[UIColor clearColor];
+        NSString *text=[kind isEqual:UICollectionElementKindSectionFooter]
+            ? component.presentationMetadata[MPWPresentationSectionFooterKey]
+            : component.presentationMetadata[MPWPresentationSectionTitleKey];
+        [header configureWithText:text footer:[kind isEqual:UICollectionElementKindSectionFooter]];
+    } else {
+        header.backgroundColor=[UIColor systemBackgroundColor];
+        [header configureWithColumns:component.columns];
+    }
     return header;
 }
 
@@ -607,16 +735,43 @@ static NSString *MPWStringValue(id value)
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(MAX(0, CGRectGetWidth(collectionView.bounds)), MPWTableRowHeight);
+    CGFloat width=MAX(0, CGRectGetWidth(collectionView.bounds));
+    if ([self usesFormPresentation]) {
+        width=MAX(0,width-40);
+        MPWTable *component=[self componentTableAtSection:indexPath.section];
+        NSDictionary *metadata=component.columns.count > 1 ? [component.columns[1] presentationMetadataAtIndex:indexPath.item] : @{};
+        NSString *kind=metadata[MPWPresentationControlKey];
+        BOOL tall=width < 310 || [kind isEqual:@"segmented"] || [kind isEqual:@"multiline"];
+        return CGSizeMake(width,tall ? 86 : 52);
+    }
+    return CGSizeMake(width, MPWTableRowHeight);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
  referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return self.tableColumns.count
-        ? CGSizeMake(CGRectGetWidth(collectionView.bounds), MPWTableHeaderHeight)
-        : CGSizeZero;
+    if (![self usesFormPresentation]) {
+        return self.tableColumns.count ? CGSizeMake(CGRectGetWidth(collectionView.bounds), MPWTableHeaderHeight) : CGSizeZero;
+    }
+    NSString *title=[self componentTableAtSection:section].presentationMetadata[MPWPresentationSectionTitleKey];
+    return CGSizeMake(CGRectGetWidth(collectionView.bounds),title.length ? 32 : 12);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+ referenceSizeForFooterInSection:(NSInteger)section
+{
+    if (![self usesFormPresentation]) { return CGSizeZero; }
+    NSString *footer=[self componentTableAtSection:section].presentationMetadata[MPWPresentationSectionFooterKey];
+    return footer.length ? CGSizeMake(CGRectGetWidth(collectionView.bounds),56) : CGSizeZero;
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView
+                        layout:(UICollectionViewLayout *)collectionViewLayout
+        insetForSectionAtIndex:(NSInteger)section
+{
+    return [self usesFormPresentation] ? UIEdgeInsetsMake(0,20,0,20) : UIEdgeInsetsZero;
 }
 
 #pragma mark reordering
@@ -681,6 +836,8 @@ static NSString *MPWStringValue(id value)
     [_binding release];
     [_cursor release];
     [_valueFilter release];
+    [_valueChangeHandler release];
+    [_activationHandler release];
     [_table release];
     [_tableColumns release];
     [_type2Control release];
@@ -899,6 +1056,161 @@ static NSString *MPWStringValue(id value)
     IDEXPECT(table.rows[1], @"row0", @"moved row inserted at the destination");
 }
 
++ (MPWStructureTable *)formTestTable
+{
+    MPWVariableDefinition *name = [[[MPWVariableDefinition alloc]
+                                     initWithName:@"name" type:[MPWTypeDefinition idType]] autorelease];
+    name.title = @"Name";
+    name.operations = MPWRESTVerbsReadWrite;
+    name.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main",
+                                   MPWPresentationSectionTitleKey: @"MAIN" };
+
+    MPWVariableDefinition *enabled = [[[MPWVariableDefinition alloc]
+                                        initWithName:@"enabled"
+                                        type:[MPWTypeDefinition descriptorForObjcCode:'B']] autorelease];
+    enabled.title = @"Enabled";
+    enabled.operations = MPWRESTVerbsReadWrite;
+    enabled.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main" };
+
+    MPWVariableDefinition *choice = [[[MPWVariableDefinition alloc]
+                                       initWithName:@"choice"
+                                       type:[MPWTypeDefinition descriptorForTypeName:@"int"]] autorelease];
+    choice.title = @"Choice";
+    choice.operations = MPWRESTVerbsReadWrite;
+    choice.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main",
+                                     MPWPresentationAllowedValuesKey: @[ @0, @1 ],
+                                     MPWPresentationDisplayValuesKey: @[ @"First", @"Second" ] };
+
+    MPWStructureDefinition *definition = [MPWStructureDefinition structureWithName:@"FormTest"
+                                                                             fields:@[ name, enabled, choice ]];
+    MPWRawDictStore *store = [MPWRawDictStore storeWithDictionary:
+                              [[@{ @"name": @"Ada", @"enabled": @YES, @"choice": @1 } mutableCopy] autorelease]];
+    return [MPWStructureTable tableWithStructureDefinition:definition store:store];
+}
+
++ (MPWTableRowCell *)formCellForTable:(MPWStructureTable *)table row:(NSUInteger)row tableView:(MPWTableView *)tableView
+{
+    MPWTable *component = [table componentTableAtIndex:0];
+    MPWTableRowCell *cell = [[[MPWTableRowCell alloc] initWithFrame:CGRectMake(0, 0, 390, 52)] autorelease];
+    [cell configureWithColumns:component.columns
+                           row:row
+                    typeMapper:[MPWUIKitUIGenerator defaultTypes2UIMapper]
+                     tableView:tableView];
+    return cell;
+}
+
+// 11. Composite tables are rendered as collection-view sections, while each
+// component remains a normal table with local rows and columns.
++ (void)testCompositeTableComponentsBecomeSections
+{
+    MPWStructureTable *table = [self formTestTable];
+    MPWTableView *view = [[[MPWTableView alloc] initWithFrame:CGRectMake(0, 0, 390, 700)] autorelease];
+    [view setTable:table];
+    INTEXPECT([view numberOfSectionsInCollectionView:view], table.componentTables.count, @"one section per component table");
+    INTEXPECT([view collectionView:view numberOfItemsInSection:0], 3, @"one item per structure field");
+}
+
+// 12 & 13. Declared per-row type and metadata select the control even though
+// every value is exposed through the same heterogeneous value column.
++ (void)testFormRowsUseExpectedLabelsAndControlCategories
+{
+    MPWStructureTable *table = [self formTestTable];
+    MPWTableRowCell *name = [self formCellForTable:table row:0 tableView:nil];
+    MPWTableRowCell *enabled = [self formCellForTable:table row:1 tableView:nil];
+    MPWTableRowCell *choice = [self formCellForTable:table row:2 tableView:nil];
+
+    IDEXPECT([(UILabel *)name.presentations[0] text], @"Name", @"field title appears in label column");
+    EXPECTTRUE([name.presentations[1] isKindOfClass:[UITextField class]], @"string field uses text editor");
+    EXPECTTRUE([enabled.presentations[1] isKindOfClass:[UISwitch class]], @"boolean field uses switch");
+    EXPECTTRUE([choice.presentations[1] isKindOfClass:[UISegmentedControl class]], @"allowed values use segmented control");
+}
+
+// 14. Every supported editable control writes through its actual table-column
+// binding.  There are no integer tags or field-name switches in this path.
++ (void)testGeneratedControlsWriteBackThroughStructureValueColumn
+{
+    MPWStructureTable *table = [self formTestTable];
+    MPWTableView *view = [[[MPWTableView alloc] initWithFrame:CGRectMake(0, 0, 390, 700)] autorelease];
+    [view setTable:table];
+    MPWTableColumn *value = [[table componentTableAtIndex:0] columnForKey:@"value"];
+
+    MPWTableRowCell *nameCell = [self formCellForTable:table row:0 tableView:view];
+    UITextField *field = (id)nameCell.presentations[1];
+    field.text = @"Grace";
+    [[field.allTargets anyObject] performSelector:@selector(controlValueChanged:) withObject:field];
+    IDEXPECT([value objectAtIndex:0], @"Grace", @"text editor writes store value");
+
+    MPWTableRowCell *switchCell = [self formCellForTable:table row:1 tableView:view];
+    UISwitch *toggle = (id)switchCell.presentations[1];
+    toggle.on = NO;
+    [[toggle.allTargets anyObject] performSelector:@selector(controlValueChanged:) withObject:toggle];
+    IDEXPECT([value objectAtIndex:1], @NO, @"switch writes store value");
+
+    MPWTableRowCell *choiceCell = [self formCellForTable:table row:2 tableView:view];
+    UISegmentedControl *segments = (id)choiceCell.presentations[1];
+    segments.selectedSegmentIndex = 0;
+    [[segments.allTargets anyObject] performSelector:@selector(controlValueChanged:) withObject:segments];
+    IDEXPECT([value objectAtIndex:2], @0, @"segmented control writes store value");
+}
+
+// 15. A reload reconstructs presentations from the store instead of retaining
+// a copied form value.
++ (void)testReloadReadsUpdatedStoreValue
+{
+    MPWStructureTable *table = [self formTestTable];
+    MPWTableColumn *value = [[table componentTableAtIndex:0] columnForKey:@"value"];
+    [value replaceObjectAtIndex:0 withObject:@"Katherine"];
+    MPWTableView *view = [[[MPWTableView alloc] initWithFrame:CGRectMake(0, 0, 390, 700)] autorelease];
+    [view setTable:table];
+    [view modelDidChange:nil];
+    MPWTableRowCell *cell = (id)[view collectionView:view
+                                  cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    IDEXPECT([(UITextField *)cell.presentations[1] text], @"Katherine", @"reload reads current store value");
+}
+
+// 16. Reconfiguration removes the old control tree and bindings before adding
+// presentations for the new row.
++ (void)testCellReuseDropsOldPresentationsAndValues
+{
+    MPWStructureTable *table = [self formTestTable];
+    MPWTable *component = [table componentTableAtIndex:0];
+    MPWTableRowCell *cell = [self formCellForTable:table row:0 tableView:nil];
+    NSArray *oldPresentations = [[cell.presentations copy] autorelease];
+    [cell configureWithColumns:component.columns
+                           row:1
+                    typeMapper:[MPWUIKitUIGenerator defaultTypes2UIMapper]
+                     tableView:nil];
+    INTEXPECT(cell.presentations.count, 2, @"reuse has only the current row presentations");
+    EXPECTNIL([oldPresentations[0] superview], @"old label removed from cell hierarchy");
+    EXPECTNIL([oldPresentations[1] superview], @"old editor removed from cell hierarchy");
+    IDEXPECT([(UILabel *)cell.presentations[0] text], @"Enabled", @"reused label contains new row value");
+    EXPECTTRUE([cell.presentations[1] isKindOfClass:[UISwitch class]], @"reused editor has new row type");
+}
+
+// 18. The generic form policy switches between horizontal and stacked rows;
+// both stacks remain fully constrained.
++ (void)testWideAndNarrowFormLayoutsAreUnambiguous
+{
+    MPWStructureTable *table = [self formTestTable];
+    for (NSNumber *widthValue in @[ @430, @300 ]) {
+        CGFloat width = widthValue.doubleValue;
+        MPWTableView *view = [[[MPWTableView alloc] initWithFrame:CGRectMake(0, 0, width, 700)] autorelease];
+        view.presentationStyle = MPWTablePresentationStyleForm;
+        [view setTable:table];
+        NSIndexPath *path = [NSIndexPath indexPathForItem:0 inSection:0];
+        MPWTableRowCell *cell = (id)[view collectionView:view cellForItemAtIndexPath:path];
+        CGSize size = [view collectionView:view layout:view.collectionViewLayout sizeForItemAtIndexPath:path];
+        cell.frame = CGRectMake(0, 0, size.width, size.height);
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
+        BOOL shouldStack = width < 350;
+        INTEXPECT(cell.columnStack.axis,
+                  shouldStack ? UILayoutConstraintAxisVertical : UILayoutConstraintAxisHorizontal,
+                  @"axis follows available width");
+        EXPECTFALSE(cell.columnStack.hasAmbiguousLayout, @"form row stack has unambiguous constraints");
+    }
+}
+
 + (NSArray *)testSelectors
 {
     return @[
@@ -911,6 +1223,12 @@ static NSString *MPWStringValue(id value)
         @"testCursorChangeSelectsRow",
         @"testModelChangeReloadsData",
         @"testReorderingMutatesTable",
+        @"testCompositeTableComponentsBecomeSections",
+        @"testFormRowsUseExpectedLabelsAndControlCategories",
+        @"testGeneratedControlsWriteBackThroughStructureValueColumn",
+        @"testReloadReadsUpdatedStoreValue",
+        @"testCellReuseDropsOldPresentationsAndValues",
+        @"testWideAndNarrowFormLayoutsAreUnambiguous",
     ];
 }
 

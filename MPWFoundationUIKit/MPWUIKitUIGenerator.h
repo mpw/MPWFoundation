@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// +[MPWAppkitUIGenerator defaultTypes2UIMapper].  Shared by the form generator
 /// and by MPWTableView so column/field presentations stay consistent.
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper;
++(UIView*)controlForType:(nullable MPWTypeDefinition*)type
+    presentationMetadata:(nullable NSDictionary*)metadata
+              typeMapper:(MPWTypeToObjectMapper*)typeMapper;
 -(UIView*)rootView;
 
 @end

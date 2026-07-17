@@ -18,8 +18,16 @@ objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
 objectAccessor_h(NSArray<MPWTableColumn*>*, visibleColumns, setVisibleColumns )
 objectAccessor_h(NSString*, tableIdentifier, setTableIdentifier )
 
+@property (nonatomic,copy,nullable) NSDictionary *presentationMetadata;
+@property (nonatomic,readonly) NSArray<MPWTable*> *componentTables;
+
 -(MPWTableColumn*)columnForKey:(NSString*)aKey;
 -(void)rowsDo:(void (^)(NSNumber *))block;
+-(NSUInteger)count;
+-(nullable id)objectAtIndex:(NSUInteger)index;
+
+/// An ordinary table is the one-element degenerate composite.
+-(nullable MPWTable*)componentTableAtIndex:(NSUInteger)index;
 
 @end
 

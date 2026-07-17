@@ -56,6 +56,7 @@ lazyAccessor(NSString*, title, setTitle, computeTitle )
 {
     [_name release];
     [_type release];
+    [_presentationMetadata release];
     [super dealloc];
 }
 

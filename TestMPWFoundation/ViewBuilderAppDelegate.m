@@ -8,9 +8,12 @@
 
 #import "ViewBuilderAppDelegate.h"
 #import <Foundation/Foundation.h>
-#import <MPWTest/MPWTestSuite.h>
-#import <MPWTest/MPWLoggingTester.h>
-#import <MPWTest/MPWClassMirror.h>
+#import <objc/message.h>
+
+@interface NSObject (MPWEmbeddedTests)
++ (NSArray *)testSelectors;
++ (id)testFixture;
+@end
 
 @interface ViewBuilderAppDelegate ()
 
@@ -20,59 +23,47 @@
 
 
 int runTests( NSArray *testSuiteNames , NSArray *testTypeNames,  BOOL verbose ,BOOL veryVerbose ) {
-    NSLog(@"will run tests");
-    MPWTestSuite* test;
-    MPWLoggingTester* results;
-    int exitCode=0;
-    
     NSString *testListPath=[[NSBundle mainBundle] pathForResource:@"ClassesToTest"
                                                            ofType:@"plist"];
     NSData *namePlist=[NSData dataWithContentsOfFile:testListPath];
-
     NSArray *classNamesToTest=[NSPropertyListSerialization propertyListWithData:namePlist options:0 format:0 error:nil];
-
-//    NSArray *classNamesToTest = @[ @"MPWFastInvocation" ];
-
-    NSMutableArray *mirrors=[NSMutableArray array];
+    NSArray *arguments=NSProcessInfo.processInfo.arguments;
+    NSUInteger classArgument=[arguments indexOfObject:@"--classes"];
+    if (classArgument != NSNotFound && classArgument + 1 < arguments.count) {
+        classNamesToTest=[arguments[classArgument + 1] componentsSeparatedByString:@","];
+    }
+    NSUInteger total=0;
+    NSUInteger failures=0;
     for ( NSString *className in classNamesToTest ) {
-        id mirror=[MPWClassMirror mirrorWithClass:NSClassFromString( className)];
-        if (mirror) {
-            [mirrors addObject:mirror];
-        } else {
-            NSLog(@"Couldn't create mirror for %@",className);
+        Class testClass=NSClassFromString(className);
+        if (!testClass) {
+            fprintf(stderr,"MPW TEST FAILURE: missing class %s\n",className.UTF8String);
+            failures++;
+            continue;
+        }
+        NSArray *selectors=[testClass respondsToSelector:@selector(testSelectors)] ? [testClass testSelectors] : @[];
+        for (NSString *selectorName in selectors) {
+            total++;
+            id fixture=[testClass respondsToSelector:@selector(testFixture)] ? [testClass testFixture] : testClass;
+            @try {
+                SEL selector=NSSelectorFromString(selectorName);
+                ((void (*)(id,SEL))objc_msgSend)(fixture,selector);
+            } @catch (NSException *exception) {
+                failures++;
+                fprintf(stderr,"MPW TEST FAILURE: %s.%s: %s\n",
+                        className.UTF8String,selectorName.UTF8String,exception.reason.UTF8String);
+            }
         }
     }
-    
-    test=[MPWTestSuite testSuiteWithName:@"all" classMirrors:mirrors testTypes:@[ @"testSelectors"]];
-
-    
-    
-//    test=[MPWTestSuite testSuiteWithName:@"all" testCases:@[]];
-    //	NSLog(@"test: %@",test);
-    results=[[MPWLoggingTester alloc] init];
-    [results setVerbose:veryVerbose];
-    fprintf(stderr,"Will run %d tests\n",[test numberOfTests]);
-    [results addToTotalTests:[test numberOfTests]];
-    [test runTest:results];
-    if ( !veryVerbose ){
-        if ( verbose) {
-            [results printAllResults];
-        } else {
-            [results printResults];
-        }
-    }
-    if ( [results failureCount] >0 ) {
-        exitCode=1;
-    }
-    exit(0);
-    return exitCode;
-
+    fprintf(stderr,"MPW TEST RESULT: %lu tests, %lu failures\n",(unsigned long)total,(unsigned long)failures);
+    return failures ? 1 : 0;
 }
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    runTests( @[ @"MPWFoundation"], @[] , NO, NO);
+    int result=runTests( @[ @"MPWFoundation"], @[] , NO, NO);
+    exit(result);
     return YES;
 }
 

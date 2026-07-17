@@ -12,6 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class MPWArrayCursor, MPWReference, MPWTable, MPWTableColumn, MPWTypeToObjectMapper, MPWTableView;
 
+typedef NS_ENUM(NSUInteger, MPWTablePresentationStyle) {
+    MPWTablePresentationStyleAutomatic,
+    MPWTablePresentationStyleTabular,
+    MPWTablePresentationStyleForm,
+};
+
+typedef void (^MPWTableValueChangeHandler)(id rowObject, id value, NSDictionary *metadata);
+typedef void (^MPWTableActivationHandler)(id rowObject, NSDictionary *metadata);
+
 /// One collection-view item == one table row.  The cell lays its column
 /// presentations out in a horizontal stack; it is the only cell class the table
 /// needs, since the concrete controls are chosen by the type-to-control mapper.
@@ -39,6 +48,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong, nullable) MPWReference *binding;
 @property (nonatomic, strong, nullable) MPWArrayCursor *cursor;
 @property (nonatomic, copy, nullable) NSArray *(^valueFilter)(id object);
+@property (nonatomic, assign) MPWTablePresentationStyle presentationStyle;
+@property (nonatomic, copy, nullable) MPWTableValueChangeHandler valueChangeHandler;
+@property (nonatomic, copy, nullable) MPWTableActivationHandler activationHandler;
 
 - (void)setTable:(MPWTable *)table;
 - (nullable id)objectAtRow:(NSUInteger)row;
