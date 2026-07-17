@@ -13,6 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPWUIKitUIGenerator : MPWAbstractUIGenerator
 
+/// Type-name → UIKit-control mapper, analogous to
+/// +[MPWAppkitUIGenerator defaultTypes2UIMapper].  Shared by the form generator
+/// and by MPWTableView so column/field presentations stay consistent.
++(MPWTypeToObjectMapper*)defaultTypes2UIMapper;
 -(UIView*)rootView;
 
 @end
