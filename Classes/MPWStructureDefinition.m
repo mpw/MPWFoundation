@@ -60,13 +60,16 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)d
     for (long i=0,max=[fieldIndexes count];i<max;i++) {
         [newFields addObject:[[self.fields[ fieldIndexes[i].intValue ] copy] autorelease]];
     }
-    return [[[self class] alloc] initWithName:self.name fields:newFields];
+    MPWStructureDefinition *copy=[[[self class] alloc] initWithName:self.name fields:newFields];
+    copy.documentation=self.documentation;
+    return copy;
 }
 
 
 -(void)dealloc
 {
     [_fields release];
+    [_documentation release];
     [super dealloc];
 }
 

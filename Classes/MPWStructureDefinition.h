@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(instancetype)copyWithFieldIndexes:(NSArray*)fieldIndexes;
 
 @property (nonatomic, strong) NSArray<MPWVariableDefinition*>* fields;
+/// Human-readable documentation describing this structure.
+@property (nonatomic, copy, nullable) NSString *documentation;
 
 @end
 

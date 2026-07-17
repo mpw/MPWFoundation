@@ -18,9 +18,6 @@ NSString * const MPWPresentationMultilineKey = @"multiline";
 NSString * const MPWPresentationKeyboardKey = @"keyboard";
 NSString * const MPWPresentationActionKey = @"action";
 NSString * const MPWPresentationDestructiveKey = @"destructive";
-NSString * const MPWPresentationSectionIdentifierKey = @"sectionIdentifier";
-NSString * const MPWPresentationSectionTitleKey = @"sectionTitle";
-NSString * const MPWPresentationSectionFooterKey = @"sectionFooter";
 NSString * const MPWPresentationStyleKey = @"presentationStyle";
 
 @interface MPWStructureLabelColumn ()
@@ -76,6 +73,30 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
     value.fields=fields;
     value.store=store;
     return @[ label, value ];
+}
+
+static BOOL MPWStructureFieldIsVisible(MPWVariableDefinition *field)
+{
+    return field.type.visible && ![field.presentationMetadata[@"hidden"] boolValue];
+}
+
+static void MPWAppendVisibleLeafFields(MPWStructureDefinition *definition, NSMutableArray *result)
+{
+    for (MPWVariableDefinition *field in definition.fields) {
+        if (!MPWStructureFieldIsVisible(field)) { continue; }
+        if ([field.type isKindOfClass:[MPWStructureDefinition class]]) {
+            MPWAppendVisibleLeafFields((MPWStructureDefinition*)field.type,result);
+        } else {
+            [result addObject:field];
+        }
+    }
+}
+
+static NSArray *MPWVisibleLeafFields(MPWStructureDefinition *definition)
+{
+    NSMutableArray *result=[NSMutableArray array];
+    MPWAppendVisibleLeafFields(definition,result);
+    return result;
 }
 
 @implementation MPWStructureComponentTable
@@ -179,13 +200,7 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
     if (self) {
         self.structureDefinition=definition;
         self.store=store;
-        NSMutableArray *fields=[NSMutableArray array];
-        for (MPWVariableDefinition *field in definition.fields) {
-            if (field.type.visible && ![field.presentationMetadata[@"hidden"] boolValue]) {
-                [fields addObject:field];
-            }
-        }
-        self.visibleFields=fields;
+        self.visibleFields=MPWVisibleLeafFields(definition);
         self.presentationMetadata=@{ MPWPresentationStyleKey: @"form" };
         self.columns=MPWStructureColumns(self.visibleFields, self.store);
         [self buildComponentTables];
@@ -193,49 +208,54 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
     return self;
 }
 
--(MPWTable*)componentWithFields:(NSArray*)fields metadata:(NSDictionary*)metadata
+-(MPWTable*)componentWithDefinition:(MPWStructureDefinition*)definition title:(NSString*)title
 {
     MPWStructureComponentTable *component=[[[MPWStructureComponentTable alloc] init] autorelease];
+    NSArray *fields=MPWVisibleLeafFields(definition);
     component.fields=fields;
     component.store=self.store;
     component.columns=MPWStructureColumns(fields, self.store);
-    component.presentationMetadata=metadata;
+    component.itemStructure=definition;
+    component.tableIdentifier=title ?: definition.name;
     return component;
+}
+
+-(void)addFlatFields:(NSArray*)fields toComponents:(NSMutableArray*)components
+{
+    if (!fields.count) { return; }
+    MPWStructureDefinition *flat=[MPWStructureDefinition structureWithName:@"" fields:fields];
+    [components addObject:[self componentWithDefinition:flat title:@""]];
 }
 
 -(void)buildComponentTables
 {
     NSMutableArray *components=[NSMutableArray array];
-    if (!self.visibleFields.count) {
-        [components addObject:[self componentWithFields:@[] metadata:@{ MPWPresentationStyleKey: @"form" }]];
+    BOOL containsNestedStructure=NO;
+    for (MPWVariableDefinition *field in self.structureDefinition.fields) {
+        if (MPWStructureFieldIsVisible(field) && [field.type isKindOfClass:[MPWStructureDefinition class]]) {
+            containsNestedStructure=YES;
+            break;
+        }
+    }
+    if (!containsNestedStructure) {
+        [components addObject:[self componentWithDefinition:self.structureDefinition title:@""]];
         self.componentTables=components;
         return;
     }
-    NSString *currentIdentifier=nil;
-    NSMutableArray *currentFields=nil;
-    NSDictionary *currentMetadata=nil;
-    for (MPWVariableDefinition *field in self.visibleFields) {
-        NSDictionary *fieldMetadata=field.presentationMetadata ?: @{};
-        NSString *identifier=fieldMetadata[MPWPresentationSectionIdentifierKey] ?: @"";
-        if (!currentIdentifier || ![identifier isEqual:currentIdentifier]) {
-            if (currentIdentifier) {
-                [components addObject:[self componentWithFields:currentFields metadata:currentMetadata ?: @{}]];
-            }
-            currentIdentifier=identifier;
-            currentFields=[NSMutableArray array];
-            NSMutableDictionary *section=[NSMutableDictionary dictionary];
-            section[MPWPresentationStyleKey]=@"form";
-            if (fieldMetadata[MPWPresentationSectionTitleKey]) {
-                section[MPWPresentationSectionTitleKey]=fieldMetadata[MPWPresentationSectionTitleKey];
-            }
-            if (fieldMetadata[MPWPresentationSectionFooterKey]) {
-                section[MPWPresentationSectionFooterKey]=fieldMetadata[MPWPresentationSectionFooterKey];
-            }
-            currentMetadata=section;
+
+    NSMutableArray *flatFields=[NSMutableArray array];
+    for (MPWVariableDefinition *field in self.structureDefinition.fields) {
+        if (!MPWStructureFieldIsVisible(field)) { continue; }
+        if ([field.type isKindOfClass:[MPWStructureDefinition class]]) {
+            [self addFlatFields:flatFields toComponents:components];
+            [flatFields removeAllObjects];
+            [components addObject:[self componentWithDefinition:(MPWStructureDefinition*)field.type
+                                                           title:field.title]];
+        } else {
+            [flatFields addObject:field];
         }
-        [currentFields addObject:field];
     }
-    [components addObject:[self componentWithFields:currentFields metadata:currentMetadata ?: @{}]];
+    [self addFlatFields:flatFields toComponents:components];
     self.componentTables=components;
 }
 
@@ -269,16 +289,22 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
     MPWVariableDefinition *name=[[[MPWVariableDefinition alloc] initWithName:@"firstName" type:[MPWTypeDefinition idType]] autorelease];
     name.title=@"First name";
     name.operations=MPWRESTVerbsReadWrite;
-    name.presentationMetadata=@{ MPWPresentationSectionIdentifierKey: @"identity", MPWPresentationSectionTitleKey: @"IDENTITY" };
     MPWVariableDefinition *enabled=[[[MPWVariableDefinition alloc] initWithName:@"enabled" type:[MPWTypeDefinition descriptorForObjcCode:'B']] autorelease];
     enabled.title=@"Enabled";
     enabled.operations=MPWRESTVerbsReadWrite;
-    enabled.presentationMetadata=@{ MPWPresentationSectionIdentifierKey: @"options" };
     MPWVariableDefinition *notes=[[[MPWVariableDefinition alloc] initWithName:@"notes" type:[MPWTypeDefinition descriptorForTypeName:@"Text"]] autorelease];
     notes.title=@"Notes";
     notes.operations=MPWRESTVerbsRead;
-    notes.presentationMetadata=@{ MPWPresentationSectionIdentifierKey: @"options", MPWPresentationMultilineKey: @YES };
-    return [MPWStructureDefinition structureWithName:@"Example" fields:@[name,enabled,notes]];
+    notes.presentationMetadata=@{ MPWPresentationMultilineKey: @YES };
+
+    MPWStructureDefinition *identity=[MPWStructureDefinition structureWithName:@"Identity" fields:@[name]];
+    MPWStructureDefinition *options=[MPWStructureDefinition structureWithName:@"Options" fields:@[enabled,notes]];
+    options.documentation=@"Configuration options.";
+    MPWVariableDefinition *identitySection=[[[MPWVariableDefinition alloc] initWithName:@"identity" type:identity] autorelease];
+    identitySection.title=@"IDENTITY";
+    MPWVariableDefinition *optionsSection=[[[MPWVariableDefinition alloc] initWithName:@"options" type:options] autorelease];
+    optionsSection.title=@"OPTIONS";
+    return [MPWStructureDefinition structureWithName:@"Example" fields:@[identitySection,optionsSection]];
 }
 
 +(MPWStructureTable*)testTable
@@ -291,8 +317,8 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
 {
     MPWStructureTable *table=[self testTable];
     INTEXPECT(table.count,3,@"one row per field");
-    IDEXPECT([table objectAtIndex:0],table.structureDefinition.fields[0],@"row object is first definition");
-    IDEXPECT([table objectAtIndex:2],table.structureDefinition.fields[2],@"field ordering preserved");
+    IDEXPECT([table objectAtIndex:0],table.visibleFields[0],@"row object is first leaf definition");
+    IDEXPECT([table objectAtIndex:2],table.visibleFields[2],@"nested field ordering preserved");
 }
 
 +(void)testLabelAndValueColumnsProjectDefinitionAndStore
@@ -334,10 +360,24 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
     MPWRawDictStore *other=[MPWRawDictStore storeWithDictionary:[[@{ @"firstName": @"Lin" } mutableCopy] autorelease]];
     MPWStructureTable *table=[self tableWithStructureDefinition:definition store:other];
     IDEXPECT([table.columns[1] objectAtIndex:0],@"Lin",@"same definition works with another store");
-    INTEXPECT(table.componentTables.count,2,@"metadata produces component tables");
+    INTEXPECT(table.componentTables.count,2,@"nested structures produce component tables");
     INTEXPECT([table componentTableAtIndex:0].count,1,@"first component table");
     INTEXPECT([table componentTableAtIndex:1].count,2,@"second component table");
-    IDEXPECT([table componentTableAtIndex:0].presentationMetadata[MPWPresentationSectionTitleKey],@"IDENTITY",@"group title belongs to component table");
+    IDEXPECT([table componentTableAtIndex:0].tableIdentifier,@"IDENTITY",@"member title names the component table");
+    IDEXPECT([table componentTableAtIndex:0].itemStructure,
+             definition.fields[0].type,@"component retains its nested structure definition");
+    IDEXPECT([table componentTableAtIndex:1].itemStructure.documentation,
+             @"Configuration options.",@"nested structure carries its own documentation");
+}
+
++(void)testFlatDefinitionIsDegenerateComposite
+{
+    MPWVariableDefinition *field=[MPWVariableDefinition idWithName:@"value"];
+    MPWStructureDefinition *definition=[MPWStructureDefinition structureWithName:@"Flat" fields:@[field]];
+    MPWStructureTable *table=[self tableWithStructureDefinition:definition
+                                                          store:[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionary]]];
+    INTEXPECT(table.componentTables.count,1,@"flat structure has one component");
+    IDEXPECT([table componentTableAtIndex:0].itemStructure,definition,@"flat component is the root structure");
 }
 
 +(NSArray*)testSelectors
@@ -348,6 +388,7 @@ static NSArray *MPWStructureColumns(NSArray<MPWVariableDefinition*> *fields, id<
         @"testDeclaredTypesAndNilValuesRemainIndependent",
         @"testReadOnlyFieldRejectsWrite",
         @"testGenericStoreAndSections",
+        @"testFlatDefinitionIsDegenerateComposite",
     ];
 }
 

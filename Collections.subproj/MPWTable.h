@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 objectAccessor_h(NSArray<MPWTableColumn*>*, columns, setColumns )
 objectAccessor_h(NSArray<MPWTableColumn*>*, visibleColumns, setVisibleColumns )
 objectAccessor_h(NSString*, tableIdentifier, setTableIdentifier )
+objectAccessor_h(MPWStructureDefinition*, itemStructure, setItemStructure )
 
 @property (nonatomic,copy,nullable) NSDictionary *presentationMetadata;
 @property (nonatomic,readonly) NSArray<MPWTable*> *componentTables;

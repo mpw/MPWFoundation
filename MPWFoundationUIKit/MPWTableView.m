@@ -719,8 +719,8 @@ static NSString *MPWStringValue(id value)
     if ([self usesFormPresentation]) {
         header.backgroundColor=[UIColor clearColor];
         NSString *text=[kind isEqual:UICollectionElementKindSectionFooter]
-            ? component.presentationMetadata[MPWPresentationSectionFooterKey]
-            : component.presentationMetadata[MPWPresentationSectionTitleKey];
+            ? component.itemStructure.documentation
+            : component.tableIdentifier;
         [header configureWithText:text footer:[kind isEqual:UICollectionElementKindSectionFooter]];
     } else {
         header.backgroundColor=[UIColor systemBackgroundColor];
@@ -754,7 +754,7 @@ static NSString *MPWStringValue(id value)
     if (![self usesFormPresentation]) {
         return self.tableColumns.count ? CGSizeMake(CGRectGetWidth(collectionView.bounds), MPWTableHeaderHeight) : CGSizeZero;
     }
-    NSString *title=[self componentTableAtSection:section].presentationMetadata[MPWPresentationSectionTitleKey];
+    NSString *title=[self componentTableAtSection:section].tableIdentifier;
     return CGSizeMake(CGRectGetWidth(collectionView.bounds),title.length ? 32 : 12);
 }
 
@@ -763,7 +763,7 @@ static NSString *MPWStringValue(id value)
  referenceSizeForFooterInSection:(NSInteger)section
 {
     if (![self usesFormPresentation]) { return CGSizeZero; }
-    NSString *footer=[self componentTableAtSection:section].presentationMetadata[MPWPresentationSectionFooterKey];
+    NSString *footer=[self componentTableAtSection:section].itemStructure.documentation;
     return footer.length ? CGSizeMake(CGRectGetWidth(collectionView.bounds),56) : CGSizeZero;
 }
 
@@ -1062,27 +1062,27 @@ static NSString *MPWStringValue(id value)
                                      initWithName:@"name" type:[MPWTypeDefinition idType]] autorelease];
     name.title = @"Name";
     name.operations = MPWRESTVerbsReadWrite;
-    name.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main",
-                                   MPWPresentationSectionTitleKey: @"MAIN" };
 
     MPWVariableDefinition *enabled = [[[MPWVariableDefinition alloc]
                                         initWithName:@"enabled"
                                         type:[MPWTypeDefinition descriptorForObjcCode:'B']] autorelease];
     enabled.title = @"Enabled";
     enabled.operations = MPWRESTVerbsReadWrite;
-    enabled.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main" };
 
     MPWVariableDefinition *choice = [[[MPWVariableDefinition alloc]
                                        initWithName:@"choice"
                                        type:[MPWTypeDefinition descriptorForTypeName:@"int"]] autorelease];
     choice.title = @"Choice";
     choice.operations = MPWRESTVerbsReadWrite;
-    choice.presentationMetadata = @{ MPWPresentationSectionIdentifierKey: @"main",
-                                     MPWPresentationAllowedValuesKey: @[ @0, @1 ],
+    choice.presentationMetadata = @{ MPWPresentationAllowedValuesKey: @[ @0, @1 ],
                                      MPWPresentationDisplayValuesKey: @[ @"First", @"Second" ] };
 
+    MPWStructureDefinition *main = [MPWStructureDefinition structureWithName:@"Main"
+                                                                        fields:@[ name, enabled, choice ]];
+    MPWVariableDefinition *section = [[[MPWVariableDefinition alloc] initWithName:@"main" type:main] autorelease];
+    section.title = @"MAIN";
     MPWStructureDefinition *definition = [MPWStructureDefinition structureWithName:@"FormTest"
-                                                                             fields:@[ name, enabled, choice ]];
+                                                                             fields:@[ section ]];
     MPWRawDictStore *store = [MPWRawDictStore storeWithDictionary:
                               [[@{ @"name": @"Ada", @"enabled": @YES, @"choice": @1 } mutableCopy] autorelease]];
     return [MPWStructureTable tableWithStructureDefinition:definition store:store];

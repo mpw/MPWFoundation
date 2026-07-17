@@ -21,9 +21,6 @@ FOUNDATION_EXPORT NSString * const MPWPresentationMultilineKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationKeyboardKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationActionKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationDestructiveKey;
-FOUNDATION_EXPORT NSString * const MPWPresentationSectionIdentifierKey;
-FOUNDATION_EXPORT NSString * const MPWPresentationSectionTitleKey;
-FOUNDATION_EXPORT NSString * const MPWPresentationSectionFooterKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationStyleKey;
 
 @interface MPWStructureTable : MPWCompositeTable
