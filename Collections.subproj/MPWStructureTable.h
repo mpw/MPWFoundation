@@ -17,8 +17,6 @@ FOUNDATION_EXPORT NSString * const MPWPresentationControlKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationAllowedValuesKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationDisplayValuesKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationPlaceholderKey;
-FOUNDATION_EXPORT NSString * const MPWPresentationMultilineKey;
-FOUNDATION_EXPORT NSString * const MPWPresentationKeyboardKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationActionKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationDestructiveKey;
 FOUNDATION_EXPORT NSString * const MPWPresentationStyleKey;

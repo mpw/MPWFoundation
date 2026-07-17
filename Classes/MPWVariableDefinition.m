@@ -56,6 +56,7 @@ lazyAccessor(NSString*, title, setTitle, computeTitle )
 {
     [_name release];
     [_type release];
+    [_defaultValue release];
     [_presentationMetadata release];
     [super dealloc];
 }
@@ -67,16 +68,18 @@ lazyAccessor(NSString*, title, setTitle, computeTitle )
 
 @implementation MPWVariableDefinition(testing) 
 
-+(void)someTest
++(void)testRetainsDefaultValueAsFieldSemantics
 {
-	EXPECTTRUE(false, @"implemented");
+    MPWVariableDefinition *field=[self idWithName:@"greeting"];
+    field.defaultValue=@"hello";
+    IDEXPECT(field.defaultValue,@"hello",@"default belongs to the field definition");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-//			@"someTest",
-			];
+            @"testRetainsDefaultValueAsFieldSemantics",
+            ];
 }
 
 @end

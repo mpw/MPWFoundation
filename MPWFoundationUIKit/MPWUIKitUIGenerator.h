@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 +(UIView*)controlForType:(nullable MPWTypeDefinition*)type
     presentationMetadata:(nullable NSDictionary*)metadata
               typeMapper:(MPWTypeToObjectMapper*)typeMapper;
++(UIView*)controlForType:(nullable MPWTypeDefinition*)type
+    presentationMetadata:(nullable NSDictionary*)metadata
+       representedObject:(nullable id)representedObject
+              typeMapper:(MPWTypeToObjectMapper*)typeMapper;
 -(UIView*)rootView;
 
 @end

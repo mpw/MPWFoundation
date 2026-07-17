@@ -81,6 +81,7 @@ static STTypeDescriptorStruct definedTypes[]={
 
 static STTypeDescriptorStruct mdaTypes[]={
     { '@', "Text" ,"id" , 0 },
+    { '@', "EmailAddress" ,"id" , 0 },
     { '@', "Date" ,"id" , 0 },
     { '@', "oid" ,"id" , true },
     { 0, NULL , 0},
@@ -163,6 +164,13 @@ static STTypeDescriptorStruct mdaTypes[]={
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
 }
 
++(void)testKnowsAboutEmailAddressType
+{
+    MPWTypeDefinition *email=[self descriptorForTypeName:@"EmailAddress"];
+    IDEXPECT(email.name,@"EmailAddress",@"semantic email type");
+    INTEXPECT(email.objcTypeCode,'@',@"email uses object representation");
+}
+
 +(void)testMapsSTIntNameToLong
 {
     MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"int"];
@@ -197,6 +205,7 @@ static STTypeDescriptorStruct mdaTypes[]={
     return @[
         @"testKnowsAboutID",
         @"testKnowsAboutMDATextType",
+        @"testKnowsAboutEmailAddressType",
         @"testKnowsAboutObjectIds",
         @"testMapsSTIntNameToLong",
         @"testUnknownTypeNamesAreObjects",

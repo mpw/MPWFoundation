@@ -8,6 +8,30 @@
 #import "MPWUIKitUIGenerator.h"
 #import <UIKit/UIKit.h>
 
+@interface MPWUIKitEmailField : UITextField
+@end
+
+@implementation MPWUIKitEmailField
+/// FIXME:
+///  this only exists because the templating mechanism apparently cannot set the keyboardType
+///    KVC fails, says that this is an unknown key
+
+-(instancetype)init
+{
+    self=[super init];
+    if (self) {
+        self.borderStyle=UITextBorderStyleBezel;
+        self.keyboardType=UIKeyboardTypeEmailAddress;
+        self.textContentType=UITextContentTypeEmailAddress;
+        self.autocapitalizationType=UITextAutocapitalizationTypeNone;
+        self.autocorrectionType=UITextAutocorrectionTypeNo;
+    }
+    return self;
+}
+
+@end
+
+
 @interface MPWUIKitValueButton : UIButton
 @property (nonatomic,retain) id representedValue;
 @property (nonatomic,assign) BOOL appendsDisclosureIndicator;
@@ -55,6 +79,29 @@
 
 @end
 
+// Type mapping is another stream stage: the mapped object is written back to
+// the generator so it may itself participate in polymorphic UI generation.
+@implementation MPWTypeDefinition(UIKitUI)
+
+-(void)generateUIKitUI:(MPWUIKitUIGenerator*)stream
+{
+    id mapped=[stream.type2view atType:self];
+    if (mapped) { [stream writeObject:mapped]; }
+}
+
+@end
+
+// A concrete view is an override and therefore terminates mapping.  Forward it
+// unchanged to the current target instead of flattening its object structure.
+@implementation UIView(UIKitUI)
+
+-(void)generateUIKitUI:(MPWUIKitUIGenerator*)stream
+{
+    [stream forward:self];
+}
+
+@end
+
 
 @implementation MPWUIKitUIGenerator
 
@@ -71,6 +118,7 @@
     MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
     type2view[@"bool"] = [UISwitch templateWithValues:@{ }];
     type2view[@"id"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
+    type2view[@"EmailAddress"] = [MPWUIKitEmailField templateWithValues:@{ }];
     type2view[@"Date"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
     type2view[@"Text"] = [UITextView templateWithValues:@{ }];
     type2view[@"int"] = [UITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeNumberPad) }];
@@ -81,8 +129,34 @@
     return type2view;
 }
 
++(UIView*)mappedControlForType:(MPWTypeDefinition*)type typeMapper:(MPWTypeToObjectMapper*)typeMapper
+{
+    if (!type) { return nil; }
+    NSMutableArray *result=[NSMutableArray array];
+    MPWUIKitUIGenerator *generator=[[[self alloc] initWithTarget:result] autorelease];
+    generator.type2view=typeMapper;
+    [generator writeObject:type];
+    return result.lastObject;
+}
+
+-(id)controlForType:(MPWTypeDefinition*)type
+{
+    return [[self class] mappedControlForType:type typeMapper:self.type2view];
+}
+
 +(UIView*)controlForType:(MPWTypeDefinition*)type
     presentationMetadata:(NSDictionary*)metadata
+              typeMapper:(MPWTypeToObjectMapper*)typeMapper
+{
+    return [self controlForType:type
+           presentationMetadata:metadata
+              representedObject:nil
+                     typeMapper:typeMapper];
+}
+
++(UIView*)controlForType:(MPWTypeDefinition*)type
+    presentationMetadata:(NSDictionary*)metadata
+       representedObject:(id)representedObject
               typeMapper:(MPWTypeToObjectMapper*)typeMapper
 {
     metadata=metadata ?: @{};
@@ -93,7 +167,7 @@
 
     if ([kind isEqual:@"label"] || [kind isEqual:@"value"]) {
         UILabel *label=[[[UILabel alloc] init] autorelease];
-        label.numberOfLines=[metadata[MPWPresentationMultilineKey] boolValue] ? 0 : 1;
+        label.numberOfLines=[type.name isEqual:@"Text"] ? 0 : 1;
         label.adjustsFontForContentSizeCategory=YES;
         label.textColor=[kind isEqual:@"value"] ? [UIColor secondaryLabelColor] : [UIColor labelColor];
         control=label;
@@ -108,7 +182,8 @@
         button.allowedValues=allowed;
         button.displayValues=display;
         if ([kind isEqual:@"action"]) {
-            [button setTitle:metadata[@"label"] ?: @"" forState:UIControlStateNormal];
+            NSString *title=[representedObject respondsToSelector:@selector(title)] ? [representedObject title] : @"";
+            [button setTitle:title ?: @"" forState:UIControlStateNormal];
             if ([metadata[MPWPresentationDestructiveKey] boolValue]) { [button setTitleColor:[UIColor systemRedColor] forState:UIControlStateNormal]; }
         }
         if ([kind isEqual:@"menu"] && allowed.count) {
@@ -128,12 +203,8 @@
             }
         }
         control=button;
-    } else if ([kind isEqual:@"multiline"] || [metadata[MPWPresentationMultilineKey] boolValue]) {
-        UITextView *text=[[[UITextView alloc] init] autorelease];
-        text.font=[UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-        control=text;
     } else {
-        control=type ? [typeMapper atType:type] : nil;
+        control=[self mappedControlForType:type typeMapper:typeMapper];
     }
 
     if (!control) {
@@ -144,13 +215,6 @@
     if ([control isKindOfClass:[UITextField class]]) {
         UITextField *field=(id)control;
         field.placeholder=metadata[MPWPresentationPlaceholderKey];
-        NSString *keyboard=metadata[MPWPresentationKeyboardKey];
-        if ([keyboard isEqual:@"email"]) {
-            field.keyboardType=UIKeyboardTypeEmailAddress;
-            field.textContentType=UITextContentTypeEmailAddress;
-            field.autocapitalizationType=UITextAutocapitalizationTypeNone;
-            field.autocorrectionType=UITextAutocorrectionTypeNo;
-        }
     }
     return control;
 }
@@ -234,6 +298,18 @@
     MPWTypeStore *types=[MPWTypeStore store];
     EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[UITextField class]], @"default text field");
     EXPECTTRUE( [[generator controlForType:types[@"bool"]] isKindOfClass:[UISwitch class]], @"bool to checkbox");
+    UITextField *email=[generator controlForType:[MPWTypeDefinition descriptorForTypeName:@"EmailAddress"]];
+    EXPECTTRUE([email isKindOfClass:[UITextField class]],@"semantic email type maps to text field");
+    INTEXPECT(email.keyboardType,UIKeyboardTypeEmailAddress,@"semantic email type configures keyboard");
+}
+
++(void)testConcreteUIViewTerminatesMapping
+{
+    NSMutableArray *target=[NSMutableArray array];
+    MPWUIKitUIGenerator *generator=[self streamWithTarget:target];
+    UIView *override=[[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+    [generator writeObject:override];
+    IDEXPECT(target.lastObject,override,@"concrete UIView is forwarded unchanged");
 }
 
 +(void)testCreateForm
@@ -266,6 +342,7 @@
     return @[
         @"testCreateForm",
         @"testMapUIKitTypes",
+        @"testConcreteUIViewTerminatesMapping",
     ];
 }
 

@@ -14,8 +14,6 @@ NSString * const MPWPresentationControlKey = @"control";
 NSString * const MPWPresentationAllowedValuesKey = @"allowedValues";
 NSString * const MPWPresentationDisplayValuesKey = @"displayValues";
 NSString * const MPWPresentationPlaceholderKey = @"placeholder";
-NSString * const MPWPresentationMultilineKey = @"multiline";
-NSString * const MPWPresentationKeyboardKey = @"keyboard";
 NSString * const MPWPresentationActionKey = @"action";
 NSString * const MPWPresentationDestructiveKey = @"destructive";
 NSString * const MPWPresentationStyleKey = @"presentationStyle";
@@ -129,23 +127,17 @@ static NSArray *MPWVisibleLeafFields(MPWStructureDefinition *definition)
     return index < self.fields.count ? self.fields[index] : nil;
 }
 
--(id<MPWIdentifying>)referenceForField:(MPWVariableDefinition*)field
-{
-    NSString *path=field.presentationMetadata[@"path"] ?: field.name;
-    return [self.store referenceForPath:path];
-}
-
 -(id)objectAtIndex:(NSUInteger)index
 {
     MPWVariableDefinition *field=[self fieldAtIndex:index];
-    return field ? [self.store at:[self referenceForField:field]] : nil;
+    return field ? [self.store at:[self.store referenceForPath:field.name]] : nil;
 }
 
 -(void)replaceObjectAtIndex:(NSUInteger)index withObject:(id)object
 {
     MPWVariableDefinition *field=[self fieldAtIndex:index];
     if (field && [self isEditableAtIndex:index]) {
-        [self.store at:[self referenceForField:field] put:object];
+        [self.store at:[self.store referenceForPath:field.name] put:object];
     }
 }
 
@@ -163,13 +155,7 @@ static NSArray *MPWVisibleLeafFields(MPWStructureDefinition *definition)
 -(NSDictionary*)presentationMetadataAtIndex:(NSUInteger)index
 {
     MPWVariableDefinition *field=[self fieldAtIndex:index];
-    if (!field) { return @{}; }
-    NSMutableDictionary *metadata=[NSMutableDictionary dictionaryWithDictionary:field.presentationMetadata ?: @{}];
-    metadata[@"fieldName"]=field.name;
-    metadata[@"label"]=field.title;
-    metadata[@"editable"]=@([self isEditableAtIndex:index]);
-    if (field.type) { metadata[@"declaredType"]=field.type; }
-    return metadata;
+    return field.presentationMetadata ?: @{};
 }
 
 -(void)dealloc
@@ -295,7 +281,6 @@ static NSArray *MPWVisibleLeafFields(MPWStructureDefinition *definition)
     MPWVariableDefinition *notes=[[[MPWVariableDefinition alloc] initWithName:@"notes" type:[MPWTypeDefinition descriptorForTypeName:@"Text"]] autorelease];
     notes.title=@"Notes";
     notes.operations=MPWRESTVerbsRead;
-    notes.presentationMetadata=@{ MPWPresentationMultilineKey: @YES };
 
     MPWStructureDefinition *identity=[MPWStructureDefinition structureWithName:@"Identity" fields:@[name]];
     MPWStructureDefinition *options=[MPWStructureDefinition structureWithName:@"Options" fields:@[enabled,notes]];

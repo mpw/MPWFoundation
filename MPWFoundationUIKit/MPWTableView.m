@@ -402,7 +402,10 @@ static NSString *MPWStringValue(id value)
 
     NSDictionary *metadata=[column presentationMetadataAtIndex:row];
     MPWTypeDefinition *type=[column typeAtIndex:row];
-    UIView *presentation=[MPWUIKitUIGenerator controlForType:type presentationMetadata:metadata typeMapper:typeMapper];
+    UIView *presentation=[MPWUIKitUIGenerator controlForType:type
+                                        presentationMetadata:metadata
+                                           representedObject:rowObject
+                                                  typeMapper:typeMapper];
     presentation.translatesAutoresizingMaskIntoConstraints = NO;
 
     MPWTableControlBinding *binding = [[[MPWTableControlBinding alloc] init] autorelease];
@@ -686,7 +689,9 @@ static NSString *MPWStringValue(id value)
     NSDictionary *valueMetadata=component.columns.count > 1
         ? [component.columns[1] presentationMetadataAtIndex:indexPath.item] : @{};
     NSString *controlKind=valueMetadata[MPWPresentationControlKey];
-    BOOL controlPrefersStack=[controlKind isEqual:@"segmented"] || [controlKind isEqual:@"multiline"];
+    MPWTypeDefinition *controlType=component.columns.count > 1
+        ? [component.columns[1] typeAtIndex:indexPath.item] : nil;
+    BOOL controlPrefersStack=[controlKind isEqual:@"segmented"] || [controlType.name isEqual:@"Text"];
     BOOL stacked=form && (CGRectGetWidth(collectionView.bounds) < 350 || controlPrefersStack);
     BOOL first=indexPath.item == 0;
     BOOL last=indexPath.item + 1 == component.count;
@@ -741,7 +746,8 @@ static NSString *MPWStringValue(id value)
         MPWTable *component=[self componentTableAtSection:indexPath.section];
         NSDictionary *metadata=component.columns.count > 1 ? [component.columns[1] presentationMetadataAtIndex:indexPath.item] : @{};
         NSString *kind=metadata[MPWPresentationControlKey];
-        BOOL tall=width < 310 || [kind isEqual:@"segmented"] || [kind isEqual:@"multiline"];
+        MPWTypeDefinition *type=component.columns.count > 1 ? [component.columns[1] typeAtIndex:indexPath.item] : nil;
+        BOOL tall=width < 310 || [kind isEqual:@"segmented"] || [type.name isEqual:@"Text"];
         return CGSizeMake(width,tall ? 86 : 52);
     }
     return CGSizeMake(width, MPWTableRowHeight);
