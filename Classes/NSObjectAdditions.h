@@ -12,6 +12,7 @@
 +(NSString*)frameworkPath:(NSString*)aPath;
 +(NSData*)frameworkResource:(NSString*)aPath category:(NSString*)category;
 -(NSData*)frameworkResource:(NSString*)aPath category:(NSString*)category;
+-(instancetype)initWithDictionary:(NSDictionary *)dict;
 
 @end
 

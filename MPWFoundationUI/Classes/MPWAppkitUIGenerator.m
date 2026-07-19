@@ -7,6 +7,10 @@
 
 #import "MPWAppkitUIGenerator.h"
 #import "MPWTableView.h"
+#import "STTextField.h"
+#import "STPopUpButton.h"
+#import "STButton.h"
+#import "STSlider.h"
 #import <Cocoa/Cocoa.h>
 
 @implementation NSObject(AppKitUI)
@@ -24,10 +28,14 @@
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper
 {
     MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
-    type2view[@"bool"] = [NSButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch),@"title": @"" }];
-    type2view[@"id"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
+    // Value-bearing controls are the store-bound ST* subclasses, so a generated
+    // form's controls read from / write back to the storage combinator.
+    type2view[@"bool"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch), @"title": @"" }];
+    type2view[@"id"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
+    type2view[@"String"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
     type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
-    type2view[@"Date"] = [NSTextField templateWithValues:@{ @"bezeled": @(false) }];
+    type2view[@"Date"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
+    type2view[@"enumeration"] = [STPopUpButton templateWithValues:@{ }];
     type2view[@"Horizontal"] = [NSStackView templateWithValues:@{ @"orientation": @(NSUserInterfaceLayoutOrientationHorizontal) }];
     type2view[@"Vertical"] = [NSStackView templateWithValues:@{ @"orientation": @(NSUserInterfaceLayoutOrientationVertical) }];
     return type2view;
@@ -37,6 +45,7 @@
 {
     self=[super initWithTarget:aTarget];
     self.rootView = aTarget;
+    self.valueControlMinimumWidth = 280;
     return self;
 }
 
@@ -55,6 +64,49 @@
     [self writeObject:[NSTextField textFieldWithString:@"title"]];
 }
 
+// Choose the control for a field: an enumeration (field.values) becomes a
+// popup, otherwise the declared type drives the choice through the type mapper.
+-(NSView*)controlForField:(MPWVariableDefinition*)field
+{
+    if ( field.values.count ) {
+        STPopUpButton *popup = (STPopUpButton*)[self.type2view at:@"enumeration"];
+        [popup addItemsWithTitles:field.values];
+        return popup;
+    }
+    return [self controlForType:field.type];
+}
+
+// Bind a control to the field's value in the store, so edits write through the
+// storage combinator and external model changes update the control.
+-(void)bindControl:(NSView*)control toField:(MPWVariableDefinition*)field
+{
+    BOOL editable = (field.operations & MPWRESTVerbsWrite) != 0;
+    if ( self.store && [control respondsToSelector:@selector(setBinding:)] ) {
+        MPWReference *ref = [self.store bindingForReference:[self.store referenceForPath:field.name]];
+        [(id)control setBinding:ref];
+        if ( [control respondsToSelector:@selector(updateFromRef)] ) {
+            [(id)control updateFromRef];        // initial population from the store
+        }
+    }
+    if ( !editable ) {
+        [[(id)control ifResponds] setEnabled:NO];
+        [[(id)control ifResponds] setEditable:NO];
+    }
+}
+
+// Value controls size to their current contents, which makes a generated form
+// collapse to whatever happens to be in the store.  Give the field-sized
+// controls a minimum width so the form has a stable, readable width.  Toggles
+// keep their intrinsic size.
+-(void)applyMinimumWidthToControl:(NSView*)control
+{
+    if ( self.valueControlMinimumWidth > 0 &&
+        ( [control isKindOfClass:[NSTextField class]] || [control isKindOfClass:[NSPopUpButton class]] )) {
+        control.translatesAutoresizingMaskIntoConstraints = NO;
+        [[control.widthAnchor constraintGreaterThanOrEqualToConstant:self.valueControlMinimumWidth] setActive:YES];
+    }
+}
+
 -(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
     NSGridView *grid = [[[NSGridView alloc] initWithFrame:NSZeroRect] autorelease];
@@ -64,7 +116,10 @@
         if ( hasMoreThanOneField ) {
             [row addObject:[NSTextField labelWithString:aField.title]];
         }
-        [row addObject:[self controlForType:aField.type]];
+        NSView *control = [self controlForField:aField];
+        [self bindControl:control toField:aField];
+        [self applyMinimumWidthToControl:control];
+        [row addObject:control];
         [grid addRowWithViews:row];
     }
     FORWARD(grid);
@@ -181,12 +236,74 @@
 
 }
 
+// A model-driven form bound to a storage combinator: controls are populated
+// from the store and edits write back through it — all without UIKit/AppKit
+// view-controller glue.
++(void)testBoundFormReadsAndWritesThroughStore
+{
+    MPWTypeStore *types=[MPWTypeStore store];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWVariableDefinition *activeField=[[[MPWVariableDefinition alloc] initWithName:@"active" type:types[@"bool"]] autorelease];
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField,activeField]] autorelease];
+
+    MPWRawDictStore *store=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"name": @"Ada", @"active": @YES }]];
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def = structure;
+    form.store = store;
+
+    MPWAppkitUIGenerator *generator=[self stream];
+    NSStackView *container=[generator process:form];
+    NSGridView *grid=[[container subviews] lastObject];
+    EXPECTTRUE( [grid isKindOfClass:[NSGridView class]], @"got the form grid");
+    INTEXPECT( grid.numberOfRows, 2, @"one row per structure field");
+
+    STTextField *nameControl=(STTextField*)[grid cellAtColumnIndex:1 rowIndex:0].contentView;
+    EXPECTTRUE( [nameControl isKindOfClass:[STTextField class]], @"name field is an STTextField");
+    IDEXPECT( nameControl.stringValue, @"Ada", @"name control populated from the store");
+
+    nameControl.stringValue = @"Grace";
+    [nameControl updateToRef];
+    IDEXPECT( [store at:[store referenceForPath:@"name"]], @"Grace", @"text edit written through the store");
+
+    STButton *activeControl=(STButton*)[grid cellAtColumnIndex:1 rowIndex:1].contentView;
+    EXPECTTRUE( [activeControl isKindOfClass:[STButton class]], @"bool field is an STButton");
+    INTEXPECT( activeControl.state, NSControlStateValueOn, @"bool control populated from the store");
+    activeControl.state = NSControlStateValueOff;
+    [activeControl updateToRef];
+    INTEXPECT( [[store at:[store referenceForPath:@"active"]] boolValue], NO, @"bool edit written through the store");
+}
+
++(void)testEnumerationFieldBecomesBoundPopup
+{
+    MPWTypeStore *types=[MPWTypeStore store];
+    MPWVariableDefinition *freq=[[[MPWVariableDefinition alloc] initWithName:@"frequency" type:types[@"id"]] autorelease];
+    freq.values = @[ @"Daily", @"Weekly", @"Monthly" ];
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"prefs" fields:@[freq]] autorelease];
+    MPWRawDictStore *store=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"frequency": @"Weekly" }]];
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def=structure; form.store=store;
+
+    MPWAppkitUIGenerator *generator=[self stream];
+    NSStackView *container=[generator process:form];
+    NSGridView *grid=[[container subviews] lastObject];
+    STPopUpButton *popup=(STPopUpButton*)[grid cellAtColumnIndex:0 rowIndex:0].contentView;
+    EXPECTTRUE( [popup isKindOfClass:[STPopUpButton class]], @"a field with allowed values becomes a popup");
+    INTEXPECT( popup.numberOfItems, 3, @"popup carries the field's allowed values");
+    IDEXPECT( popup.titleOfSelectedItem, @"Weekly", @"popup selection populated from the store");
+
+    [popup selectItemWithTitle:@"Monthly"];
+    [popup updateToRef];
+    IDEXPECT( [store at:[store referenceForPath:@"frequency"]], @"Monthly", @"popup selection written through the store");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
        @"testCreateTableViewByWritingTable",
        @"testCreateForm",
        @"testMapAppKitTypes",
+       @"testBoundFormReadsAndWritesThroughStore",
+       @"testEnumerationFieldBecomesBoundPopup",
 			];
 }
 

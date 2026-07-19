@@ -30,6 +30,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,assign) NSString *title;
 /// The model-level value used when a field is initialized or reset.
 @property (nonatomic,strong,nullable) id defaultValue;
+/// The allowed values of an enumerated field.  Non-nil selects a list-style
+/// presentation, independent of toolkit: an AppKit popup, a UIKit menu or an
+/// HTML <select>.
+@property (nonatomic,copy,nullable) NSArray *values;
 /// Transitional presentation hints not yet represented by typed model objects.
 @property (nonatomic,copy,nullable) NSDictionary *presentationMetadata;
 

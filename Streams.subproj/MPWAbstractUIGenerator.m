@@ -53,8 +53,8 @@
 
 -(void)writeForm:(MPWForm*)aForm
 {
+    self.store = aForm.store;
     [self writeUIFormForStruct: aForm.def  postAction: aForm.formAction];
-    
 }
 
 -(id)controlForType:(MPWTypeDefinition*)type
@@ -66,6 +66,7 @@
 -(void)dealloc
 {
     [_type2view release];
+    [_store release];
     [super dealloc];
 }
 

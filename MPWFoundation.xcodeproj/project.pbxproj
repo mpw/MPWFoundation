@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A2F000202F90000100000001 /* MPWFoundationUIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,7 +45,6 @@
 		1F080E5C1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5D1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
 		1F080E5E1E50515700B78EF3 /* MPWStreamSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F080E581E50515700B78EF3 /* MPWStreamSource.m */; };
-		1F0984AA219EC8E3006D10D9 /* MPWTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F0984A6219DC6A6006D10D9 /* MPWTest.framework */; };
 		1F0984AD219F20D9006D10D9 /* ClassesToTest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F0984AC219F20D9006D10D9 /* ClassesToTest.plist */; };
 		1F0984AF219F238A006D10D9 /* ResourceTest in Resources */ = {isa = PBXBuildFile; fileRef = F51B7251013FDD9801ABB64E /* ResourceTest */; };
 		1F0984B0219F23F4006D10D9 /* stops.txt in Resources */ = {isa = PBXBuildFile; fileRef = 1FBAABB81847651B00086047 /* stops.txt */; };
@@ -250,18 +248,6 @@
 		1F5620A72F61BD7500D998EF /* MPWTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumn.m */; };
 		1F5620A82F61BD7500D998EF /* MPWTableColumn.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620A22F61BD7500D998EF /* MPWTableColumn.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F5620A92F61BD7500D998EF /* MPWTableColumn.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620A32F61BD7500D998EF /* MPWTableColumn.m */; };
-		A2F000012F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000022F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
-		A2F000032F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000042F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
-		A2F000052F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000062F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
-		A2F000102F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000112F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
-		A2F000122F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000132F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
-		A2F000142F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A2F000152F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
 		1F5620AF2F6867E300D998EF /* MPWViewHarness.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */; };
 		1F5620B22F68685200D998EF /* MPWViewHarness.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F5620B02F68685200D998EF /* MPWViewHarness.h */; };
 		1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F5620B12F68685200D998EF /* MPWViewHarness.m */; };
@@ -353,7 +339,6 @@
 		1F6A727B267520B5003A5B5C /* MPWSkipFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A7276267520B5003A5B5C /* MPWSkipFilter.m */; };
 		1F6A727C267520B5003A5B5C /* MPWSkipFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6A7276267520B5003A5B5C /* MPWSkipFilter.m */; };
 		1F6B03CB274A50C2004E61A7 /* DrawingContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6B03CA274A50C2004E61A7 /* DrawingContext.framework */; };
-		1F6B03CF274A50D0004E61A7 /* DrawingContext.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F6B03CE274A50D0004E61A7 /* DrawingContext.framework */; };
 		1F6D21EE2BDFD46A006DD0C9 /* MPWInstanceVarStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D21EC2BDFD46A006DD0C9 /* MPWInstanceVarStore.h */; };
 		1F6D21EF2BDFD46A006DD0C9 /* MPWInstanceVarStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1F6D21ED2BDFD46A006DD0C9 /* MPWInstanceVarStore.m */; };
 		1F6D21F02BDFD46A006DD0C9 /* MPWInstanceVarStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F6D21EC2BDFD46A006DD0C9 /* MPWInstanceVarStore.h */; };
@@ -1408,8 +1393,6 @@
 		1FF8FE2609B49D0200652476 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07DF19B4006686DDC35ADD82 /* Foundation.framework */; };
 		1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FF930762AF10B60009B4DC6 /* MPWView.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930732AF10B60009B4DC6 /* MPWView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF930772AF10B6A009B4DC6 /* MPWView_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1FF930782AF10B6E009B4DC6 /* MPWView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FF930722AF10B60009B4DC6 /* MPWView.m */; };
 		1FFA16712B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFA16722B970E97004E63ED /* MPWStringTemplate.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F206E652B6FC94700E4D19E /* MPWStringTemplate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1FFA1B67288D443D0095A876 /* SSHCommandStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FFA1B65288D443D0095A876 /* SSHCommandStore.h */; };
@@ -1457,6 +1440,29 @@
 		4372650B1F56B455006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		4372650C1F56B45A006B489A /* MPWEnumeratorSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197B006686DDC35ADD82 /* MPWEnumeratorSource.m */; };
 		43AE45B11F55C6A50048A79E /* MPWEnumeratorBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 07DF197C006686DDC35ADD82 /* MPWEnumeratorBase.m */; };
+		A2F000012F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000022F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000032F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000042F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000052F90000100000001 /* MPWStructureTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000072F90000100000001 /* MPWStructureTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000062F90000100000001 /* MPWStructureTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000082F90000100000001 /* MPWStructureTable.m */; };
+		A2F000102F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000112F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
+		A2F000122F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000132F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
+		A2F000142F90000100000001 /* MPWCompositeTable.h in Headers */ = {isa = PBXBuildFile; fileRef = A2F000162F90000100000001 /* MPWCompositeTable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2F000152F90000100000001 /* MPWCompositeTable.m in Sources */ = {isa = PBXBuildFile; fileRef = A2F000172F90000100000001 /* MPWCompositeTable.m */; };
+		A2F000202F90000100000001 /* MPWFoundationUIKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1F7045C122313099005ED7FB /* MPWFoundationUIKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ADDE5100000000000000000B /* STTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000001 /* STTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDE5100000000000000000C /* STTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000002 /* STTextField.m */; };
+		ADDE5100000000000000000D /* STSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000003 /* STSlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDE5100000000000000000E /* STSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000004 /* STSlider.m */; };
+		ADDE5100000000000000000F /* STProgressIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000005 /* STProgressIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDE51000000000000000010 /* STProgressIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000006 /* STProgressIndicator.m */; };
+		ADDE51000000000000000011 /* STPopUpButton.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000007 /* STPopUpButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDE51000000000000000012 /* STPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000008 /* STPopUpButton.m */; };
+		ADDE51000000000000000013 /* STButton.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000009 /* STButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDE51000000000000000014 /* STButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE5100000000000000000A /* STButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1741,10 +1747,6 @@
 		1F54A15A209C71A4003113E0 /* MPWArrayFlattenStream.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWArrayFlattenStream.m; sourceTree = "<group>"; };
 		1F5620A22F61BD7500D998EF /* MPWTableColumn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWTableColumn.h; sourceTree = "<group>"; };
 		1F5620A32F61BD7500D998EF /* MPWTableColumn.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWTableColumn.m; sourceTree = "<group>"; };
-		A2F000072F90000100000001 /* MPWStructureTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWStructureTable.h; sourceTree = "<group>"; };
-		A2F000082F90000100000001 /* MPWStructureTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStructureTable.m; sourceTree = "<group>"; };
-		A2F000162F90000100000001 /* MPWCompositeTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCompositeTable.h; sourceTree = "<group>"; };
-		A2F000172F90000100000001 /* MPWCompositeTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWCompositeTable.m; sourceTree = "<group>"; };
 		1F5620AE2F6867E300D998EF /* MPWViewHarness.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPWViewHarness.xib; sourceTree = "<group>"; };
 		1F5620B02F68685200D998EF /* MPWViewHarness.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWViewHarness.h; sourceTree = "<group>"; };
 		1F5620B12F68685200D998EF /* MPWViewHarness.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWViewHarness.m; sourceTree = "<group>"; };
@@ -2120,6 +2122,20 @@
 		66DC61AE01398925005ADD88 /* Concepts.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Concepts.rtf; sourceTree = "<group>"; };
 		66DC61AF01398925005ADD88 /* Log.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Log.rtf; sourceTree = "<group>"; };
 		66DC61B001398925005ADD88 /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
+		A2F000072F90000100000001 /* MPWStructureTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWStructureTable.h; sourceTree = "<group>"; };
+		A2F000082F90000100000001 /* MPWStructureTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWStructureTable.m; sourceTree = "<group>"; };
+		A2F000162F90000100000001 /* MPWCompositeTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWCompositeTable.h; sourceTree = "<group>"; };
+		A2F000172F90000100000001 /* MPWCompositeTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWCompositeTable.m; sourceTree = "<group>"; };
+		ADDE51000000000000000001 /* STTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STTextField.h; sourceTree = "<group>"; };
+		ADDE51000000000000000002 /* STTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STTextField.m; sourceTree = "<group>"; };
+		ADDE51000000000000000003 /* STSlider.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STSlider.h; sourceTree = "<group>"; };
+		ADDE51000000000000000004 /* STSlider.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STSlider.m; sourceTree = "<group>"; };
+		ADDE51000000000000000005 /* STProgressIndicator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STProgressIndicator.h; sourceTree = "<group>"; };
+		ADDE51000000000000000006 /* STProgressIndicator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STProgressIndicator.m; sourceTree = "<group>"; };
+		ADDE51000000000000000007 /* STPopUpButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STPopUpButton.h; sourceTree = "<group>"; };
+		ADDE51000000000000000008 /* STPopUpButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPopUpButton.m; sourceTree = "<group>"; };
+		ADDE51000000000000000009 /* STButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STButton.h; sourceTree = "<group>"; };
+		ADDE5100000000000000000A /* STButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STButton.m; sourceTree = "<group>"; };
 		F51B7249013FD70701ABB64E /* NSBundleConveniences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSBundleConveniences.m; sourceTree = "<group>"; };
 		F51B724A013FD70701ABB64E /* NSBundleConveniences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSBundleConveniences.h; sourceTree = "<group>"; };
 		F51B7251013FDD9801ABB64E /* ResourceTest */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ResourceTest; sourceTree = "<group>"; };
@@ -2770,6 +2786,16 @@
 				1FA8F32624DCB4A900CD69D0 /* MPWFileBrowser.m */,
 				1F7045D8223131C2005ED7FB /* MPWBrowser.h */,
 				1F7045D7223131C2005ED7FB /* MPWBrowser.m */,
+				ADDE51000000000000000001 /* STTextField.h */,
+				ADDE51000000000000000002 /* STTextField.m */,
+				ADDE51000000000000000003 /* STSlider.h */,
+				ADDE51000000000000000004 /* STSlider.m */,
+				ADDE51000000000000000005 /* STProgressIndicator.h */,
+				ADDE51000000000000000006 /* STProgressIndicator.m */,
+				ADDE51000000000000000007 /* STPopUpButton.h */,
+				ADDE51000000000000000008 /* STPopUpButton.m */,
+				ADDE51000000000000000009 /* STButton.h */,
+				ADDE5100000000000000000A /* STButton.m */,
 				1F224F102FBAF2D1001E377F /* MPWAppkitUIGenerator.h */,
 				1F224F112FBAF2D1001E377F /* MPWAppkitUIGenerator.m */,
 				1F9401472C73534700CD37ED /* MPWProgramTextView.h */,
@@ -3155,6 +3181,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADDE5100000000000000000B /* STTextField.h in Headers */,
+				ADDE5100000000000000000D /* STSlider.h in Headers */,
+				ADDE5100000000000000000F /* STProgressIndicator.h in Headers */,
+				ADDE51000000000000000011 /* STPopUpButton.h in Headers */,
+				ADDE51000000000000000013 /* STButton.h in Headers */,
 				1F9584C62AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 				1FA8F32724DCB4A900CD69D0 /* MPWFileBrowser.h in Headers */,
 				1F224F132FBAF2D1001E377F /* MPWAppkitUIGenerator.h in Headers */,
@@ -4598,6 +4629,11 @@
 				1F9401492C73534700CD37ED /* MPWProgramTextView.m in Sources */,
 				1F417B9F2BFA253A00DB5DB5 /* MPWTableViewColumn.m in Sources */,
 				1F224F122FBAF2D1001E377F /* MPWAppkitUIGenerator.m in Sources */,
+				ADDE5100000000000000000C /* STTextField.m in Sources */,
+				ADDE5100000000000000000E /* STSlider.m in Sources */,
+				ADDE51000000000000000010 /* STProgressIndicator.m in Sources */,
+				ADDE51000000000000000012 /* STPopUpButton.m in Sources */,
+				ADDE51000000000000000014 /* STButton.m in Sources */,
 				1FF930752AF10B60009B4DC6 /* MPWView.m in Sources */,
 				1F5620B32F68685200D998EF /* MPWViewHarness.m in Sources */,
 				1F4D4414261591960023C2C5 /* MPWWindowController.m in Sources */,
