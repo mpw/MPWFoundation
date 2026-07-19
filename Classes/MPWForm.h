@@ -10,10 +10,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class MPWStructureDefinition;
+@protocol MPWStorage;
 
 @interface MPWForm : NSObject
 
 @property (nonatomic, strong) MPWStructureDefinition *def;
+@property (nonatomic, strong) id <MPWStorage> store;
 @property (nonatomic, strong) NSString *formAction;
 
 

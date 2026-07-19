@@ -26,4 +26,9 @@ FOUNDATION_EXPORT const unsigned char MPWFoundationUIVersionString[];
 #import <MPWFoundationUI/MPWView.h>
 #import <MPWFoundationUI/MPWProgramTextView.h>
 #import <MPWFoundationUI/MPWAppKitUIGenerator.h>
+#import <MPWFoundationUI/STTextField.h>
+#import <MPWFoundationUI/STSlider.h>
+#import <MPWFoundationUI/STProgressIndicator.h>
+#import <MPWFoundationUI/STPopUpButton.h>
+#import <MPWFoundationUI/STButton.h>
 

@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic,strong) NSView *rootView;
 
+/// Minimum width applied to generated value controls (text fields, popups), so
+/// a generated form doesn't collapse to the width of its current contents.
+/// Defaults to 280; set to 0 to leave controls at their intrinsic size.
+@property (nonatomic,assign) CGFloat valueControlMinimumWidth;
+
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper;
 
 

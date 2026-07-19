@@ -6,7 +6,7 @@
 //
 
 #import "MPWForm.h"
-#import <MPWFoundation/MPWStructureDefinition.h>
+#import <MPWFoundation/MPWFoundation.h>
 
 @implementation MPWForm
 
@@ -15,6 +15,7 @@
 {
     [_def release];
     [_formAction release];
+    [_store release];
     [super  dealloc];
 }
 
