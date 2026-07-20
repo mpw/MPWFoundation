@@ -50,7 +50,8 @@
 -(void)updateFromRef
 {
     if ( self.ref && !self.inProcessing) {
-        self.objectValue = self.ref.value;
+        [self selectItemWithTitle:self.ref.value];
+//        self.objectValue = self.ref.value;
     }
     if ( self.enabledRef && !self.inProcessing) {
         self.enabled = [self.enabledRef.value boolValue];
@@ -60,7 +61,7 @@
 -(void)updateToRef
 {
     if (self.ref) {
-        self.ref.value = self.objectValue;
+        self.ref.value = self.titleOfSelectedItem;
     }
 }
 

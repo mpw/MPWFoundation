@@ -308,8 +308,8 @@
     STPopUpButton *popup=(STPopUpButton*)[grid cellAtColumnIndex:0 rowIndex:0].contentView;
     EXPECTTRUE( [popup isKindOfClass:[STPopUpButton class]], @"a field with allowed values becomes a popup");
     INTEXPECT( popup.numberOfItems, 3, @"popup carries the field's allowed values");
+    IDEXPECT( popup.ref.value , @"Weekly", @"ref value");
     IDEXPECT( popup.titleOfSelectedItem, @"Weekly", @"popup selection populated from the store");
-
     [popup selectItemWithTitle:@"Monthly"];
     [popup updateToRef];
     IDEXPECT( [store at:[store referenceForPath:@"frequency"]], @"Monthly", @"popup selection written through the store");
