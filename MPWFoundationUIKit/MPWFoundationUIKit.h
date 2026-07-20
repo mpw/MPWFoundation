@@ -17,5 +17,6 @@ FOUNDATION_EXPORT const unsigned char MPWFoundationUIKitVersionString[];
 
 //#import <MPWFoundationUIKit/MPWView_iOS.h>
 #import <MPWFoundationUIKit/MPWUIKitUIGenerator.h>
+#import <MPWFoundationUIKit/MPWUIKitBoundControls.h>
 #import <MPWFoundationUIKit/MPWTableView.h>
 #import <MPWFoundationUIKit/ModelDidChangeNotification.h>

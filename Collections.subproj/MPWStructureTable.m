@@ -155,7 +155,16 @@ static NSArray *MPWVisibleLeafFields(MPWStructureDefinition *definition)
 -(NSDictionary*)presentationMetadataAtIndex:(NSUInteger)index
 {
     MPWVariableDefinition *field=[self fieldAtIndex:index];
-    return field.presentationMetadata ?: @{};
+    NSDictionary *metadata=field.presentationMetadata ?: @{};
+    // A field's allowed values live on the field itself (the `values`
+    // mechanism).  Surface them through the presentation metadata so presenters
+    // need only one path to multi-valued fields.
+    if ( field.values.count && !metadata[MPWPresentationAllowedValuesKey] ) {
+        NSMutableDictionary *merged=[[metadata mutableCopy] autorelease];
+        merged[MPWPresentationAllowedValuesKey]=field.values;
+        metadata=merged;
+    }
+    return metadata;
 }
 
 -(void)dealloc

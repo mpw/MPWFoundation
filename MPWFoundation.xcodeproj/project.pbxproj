@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BEEF51000000000000000400 /* MPWUIKitBoundControls.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000200 /* MPWUIKitBoundControls.m */; };
+		BEEF51000000000000000300 /* MPWUIKitBoundControls.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000100 /* MPWUIKitBoundControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1547,6 +1549,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BEEF51000000000000000100 /* MPWUIKitBoundControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUIKitBoundControls.h; sourceTree = "<group>"; };
+		BEEF51000000000000000200 /* MPWUIKitBoundControls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUIKitBoundControls.m; sourceTree = "<group>"; };
 		07DF1934006686DDC35ADD82 /* MPWObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObject.m; sourceTree = "<group>"; };
 		07DF1935006686DDC35ADD82 /* NSNil.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSNil.m; sourceTree = "<group>"; };
 		07DF1936006686DDC35ADD82 /* NSInvocationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSInvocationAdditions.m; sourceTree = "<group>"; };
@@ -2769,6 +2773,8 @@
 				1FF930712AF10B5F009B4DC6 /* MPWView_iOS.h */,
 				1F71387B2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h */,
 				1F71387C2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m */,
+				BEEF51000000000000000100 /* MPWUIKitBoundControls.h */,
+				BEEF51000000000000000200 /* MPWUIKitBoundControls.m */,
 				1F7138BB2FEEABF700F96C88 /* MPWTableView.h */,
 				1F7138BC2FEEABF700F96C88 /* MPWTableView.m */,
 				1F7045C422313099005ED7FB /* Info.plist */,
@@ -3210,6 +3216,7 @@
 				1F7138BD2FEEABF700F96C88 /* MPWTableView.h in Headers */,
 				1F7045C522313099005ED7FB /* MPWFoundationUIKit.h in Headers */,
 				1F71387D2FE66D4A00F96C88 /* MPWUIKitUIGenerator.h in Headers */,
+				BEEF51000000000000000300 /* MPWUIKitBoundControls.h in Headers */,
 				1F9584C72AE042650058B2B0 /* ModelDidChangeNotification.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4648,6 +4655,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F71387E2FE66D4A00F96C88 /* MPWUIKitUIGenerator.m in Sources */,
+				BEEF51000000000000000400 /* MPWUIKitBoundControls.m in Sources */,
 				1F7138BE2FEEABF700F96C88 /* MPWTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,6 +14,7 @@
 
 #import "MPWTableView.h"
 #import "MPWUIKitUIGenerator.h"
+#import "MPWUIKitBoundControls.h"
 
 static NSString * const MPWTableRowCellIdentifier = @"MPWTableRowCell";
 static NSString * const MPWTableHeaderIdentifier  = @"MPWTableHeader";
@@ -67,76 +68,10 @@ static void MPWRemoveArrangedSubviews(UIStackView *stack)
 
 #pragma mark - uniform control value access
 
-// A single protocol every presented control understands, so the binding layer
-// never has to branch on control class.  Mirrors the AppKit NSControl
-// objectValue/setObjectValue: pair (value/setValue: would collide with KVC and
-// with MPWReference).  Value normalisation now lives with each control type;
-// this is the reusable seed for object forms/inspectors, not just the table.
-@protocol MPWObjectValue <NSObject>
-- (id)objectValue;
-- (void)setObjectValue:(id)objectValue;
-- (void)setValueEditable:(BOOL)editable;
-@end
+// The MPWObjectValue protocol and its UIKit categories now live with the
+// bound controls in MPWUIKitBoundControls.h, so the form generator and the
+// table share one value-normalisation layer.
 
-static NSString *MPWStringValue(id value)
-{
-    return (value == nil || value == (id)[NSNull null]) ? @"" : [value description];
-}
-
-// Defaults: a plain view has no value and ignores edits.  Subclasses below
-// override the parts that apply; category dispatch picks the most specific one.
-@interface UIView (MPWObjectValue) <MPWObjectValue>
-@end
-@implementation UIView (MPWObjectValue)
-- (id)objectValue { return nil; }
-- (void)setObjectValue:(id)objectValue { }
-- (void)setValueEditable:(BOOL)editable { }
-@end
-
-@implementation UIControl (MPWObjectValue)
-- (void)setValueEditable:(BOOL)editable { self.enabled = editable; }
-@end
-
-@implementation UILabel (MPWObjectValue)
-- (id)objectValue { return self.text; }
-- (void)setObjectValue:(id)objectValue { self.text = MPWStringValue(objectValue); }
-@end
-
-@implementation UITextField (MPWObjectValue)
-- (id)objectValue { return self.text ?: @""; }
-- (void)setObjectValue:(id)objectValue { self.text = MPWStringValue(objectValue); }
-@end
-
-@implementation UITextView (MPWObjectValue)
-- (id)objectValue { return self.text ?: @""; }
-- (void)setObjectValue:(id)objectValue { self.text = MPWStringValue(objectValue); }
-- (void)setValueEditable:(BOOL)editable { self.editable = editable; }
-@end
-
-@implementation UISwitch (MPWObjectValue)
-- (id)objectValue { return @(self.isOn); }
-- (void)setObjectValue:(id)objectValue { self.on = [objectValue boolValue]; }
-@end
-
-@implementation UIDatePicker (MPWObjectValue)
-- (id)objectValue { return self.date; }
-- (void)setObjectValue:(id)objectValue { if ([objectValue isKindOfClass:[NSDate class]]) { self.date = objectValue; } }
-@end
-
-@implementation UISegmentedControl (MPWObjectValue)
-- (id)objectValue { return @(self.selectedSegmentIndex); }
-- (void)setObjectValue:(id)objectValue { self.selectedSegmentIndex = [objectValue integerValue]; }
-@end
-
-@implementation UISlider (MPWObjectValue)
-- (id)objectValue { return @(self.value); }
-- (void)setObjectValue:(id)objectValue { self.value = [objectValue floatValue]; }
-@end
-
-@implementation UIStepper (MPWObjectValue)
-- (id)objectValue { return @(self.value); }
-- (void)setObjectValue:(id)objectValue { self.value = [objectValue doubleValue]; }
-@end
 
 
 #pragma mark - control binding (the reusable writeback unit)
@@ -314,7 +249,7 @@ static NSString *MPWStringValue(id value)
 - (void)configureWithColumns:(NSArray<MPWTableColumn*>*)columns
                          row:(NSUInteger)row
                    rowObject:(id)rowObject
-                  typeMapper:(MPWTypeToObjectMapper*)typeMapper
+                  generator:(MPWUIKitUIGenerator*)generator
                    tableView:(MPWTableView*)tableView;
 @end
 
@@ -360,16 +295,16 @@ static NSString *MPWStringValue(id value)
 
 - (void)configureWithColumns:(NSArray<MPWTableColumn *> *)columns
                          row:(NSUInteger)row
-                  typeMapper:(MPWTypeToObjectMapper *)typeMapper
+                  generator:(MPWUIKitUIGenerator *)generator
                    tableView:(MPWTableView *)tableView
 {
-    [self configureWithColumns:columns row:row rowObject:nil typeMapper:typeMapper tableView:tableView];
+    [self configureWithColumns:columns row:row rowObject:nil generator:generator tableView:tableView];
 }
 
 - (void)configureWithColumns:(NSArray<MPWTableColumn *> *)columns
                          row:(NSUInteger)row
                    rowObject:(id)rowObject
-                  typeMapper:(MPWTypeToObjectMapper *)typeMapper
+                  generator:(MPWUIKitUIGenerator *)generator
                    tableView:(MPWTableView *)tableView
 {
     MPWRemoveArrangedSubviews(self.columnStack);
@@ -386,7 +321,7 @@ static NSString *MPWStringValue(id value)
         UIView *presentation = [self presentationForColumn:column
                                                        row:row
                                                  rowObject:rowObject
-                                                typeMapper:typeMapper
+                                                generator:generator
                                                  tableView:tableView];
         [self.columnStack addArrangedSubview:presentation];
     }
@@ -395,17 +330,16 @@ static NSString *MPWStringValue(id value)
 - (UIView *)presentationForColumn:(MPWTableColumn *)column
                               row:(NSUInteger)row
                         rowObject:(id)rowObject
-                       typeMapper:(MPWTypeToObjectMapper *)typeMapper
+                       generator:(MPWUIKitUIGenerator *)generator
                         tableView:(MPWTableView *)tableView
 {
     id value = [column objectAtIndex:row];        // read through the column abstraction
 
     NSDictionary *metadata=[column presentationMetadataAtIndex:row];
     MPWTypeDefinition *type=[column typeAtIndex:row];
-    UIView *presentation=[MPWUIKitUIGenerator controlForType:type
-                                        presentationMetadata:metadata
-                                           representedObject:rowObject
-                                                  typeMapper:typeMapper];
+    UIView *presentation=[generator controlForType:type
+                              presentationMetadata:metadata
+                                 representedObject:rowObject];
     presentation.translatesAutoresizingMaskIntoConstraints = NO;
 
     MPWTableControlBinding *binding = [[[MPWTableControlBinding alloc] init] autorelease];
@@ -447,7 +381,7 @@ static NSString *MPWStringValue(id value)
 @interface MPWTableView ()
 @property (nonatomic, retain) MPWTable *table;
 @property (nonatomic, retain) NSArray<MPWTableColumn *> *tableColumns;
-@property (nonatomic, retain) MPWTypeToObjectMapper *type2Control;
+@property (nonatomic, retain) MPWUIKitUIGenerator *generator;   // stream kept as an ivar
 @property (nonatomic, retain) MPWTableCursorSelectionSink *cursorSelectionSink;
 @property (nonatomic, retain) UILongPressGestureRecognizer *reorderGesture;
 - (MPWTable*)componentTableAtSection:(NSUInteger)section;
@@ -522,7 +456,7 @@ static NSString *MPWStringValue(id value)
             forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                    withReuseIdentifier:MPWTableFooterIdentifier];
 
-    self.type2Control = [MPWUIKitUIGenerator defaultTypes2UIMapper];
+    self.generator = [MPWUIKitUIGenerator stream];
 
     self.cursorSelectionSink = [[[MPWTableCursorSelectionSink alloc] init] autorelease];
     self.cursorSelectionSink.tableView = self;
@@ -683,7 +617,7 @@ static NSString *MPWStringValue(id value)
     [cell configureWithColumns:component.columns
                            row:indexPath.item
                      rowObject:[component objectAtIndex:indexPath.item]
-                    typeMapper:self.type2Control
+                    generator:self.generator
                      tableView:self];
     BOOL form=[self usesFormPresentation];
     NSDictionary *valueMetadata=component.columns.count > 1
@@ -846,7 +780,7 @@ static NSString *MPWStringValue(id value)
     [_activationHandler release];
     [_table release];
     [_tableColumns release];
-    [_type2Control release];
+    [_generator release];
     [_cursorSelectionSink release];
     [_reorderGesture release];
     [super dealloc];
@@ -947,7 +881,7 @@ static NSString *MPWStringValue(id value)
     MPWTableRowCell *cell = [[[MPWTableRowCell alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
     [cell configureWithColumns:table.columns
                            row:row
-                    typeMapper:[MPWUIKitUIGenerator defaultTypes2UIMapper]
+                    generator:[MPWUIKitUIGenerator stream]
                      tableView:nil];
     return cell;
 }
@@ -1100,7 +1034,7 @@ static NSString *MPWStringValue(id value)
     MPWTableRowCell *cell = [[[MPWTableRowCell alloc] initWithFrame:CGRectMake(0, 0, 390, 52)] autorelease];
     [cell configureWithColumns:component.columns
                            row:row
-                    typeMapper:[MPWUIKitUIGenerator defaultTypes2UIMapper]
+                    generator:[MPWUIKitUIGenerator stream]
                      tableView:tableView];
     return cell;
 }
@@ -1184,7 +1118,7 @@ static NSString *MPWStringValue(id value)
     NSArray *oldPresentations = [[cell.presentations copy] autorelease];
     [cell configureWithColumns:component.columns
                            row:1
-                    typeMapper:[MPWUIKitUIGenerator defaultTypes2UIMapper]
+                    generator:[MPWUIKitUIGenerator stream]
                      tableView:nil];
     INTEXPECT(cell.presentations.count, 2, @"reuse has only the current row presentations");
     EXPECTNIL([oldPresentations[0] superview], @"old label removed from cell hierarchy");

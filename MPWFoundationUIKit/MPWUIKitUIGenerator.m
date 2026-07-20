@@ -6,87 +6,14 @@
 //
 
 #import "MPWUIKitUIGenerator.h"
+#import "MPWUIKitBoundControls.h"
 #import <UIKit/UIKit.h>
-
-@interface MPWUIKitEmailField : UITextField
-@end
-
-@implementation MPWUIKitEmailField
-/// FIXME:
-///  this only exists because the templating mechanism apparently cannot set the keyboardType
-///    KVC fails, says that this is an unknown key
-
--(instancetype)init
-{
-    self=[super init];
-    if (self) {
-        self.borderStyle=UITextBorderStyleBezel;
-        self.keyboardType=UIKeyboardTypeEmailAddress;
-        self.textContentType=UITextContentTypeEmailAddress;
-        self.autocapitalizationType=UITextAutocapitalizationTypeNone;
-        self.autocorrectionType=UITextAutocorrectionTypeNo;
-    }
-    return self;
-}
-
-@end
-
-
-@interface MPWUIKitValueButton : UIButton
-@property (nonatomic,retain) id representedValue;
-@property (nonatomic,assign) BOOL appendsDisclosureIndicator;
-@property (nonatomic,assign) BOOL preservesConfiguredTitle;
-@property (nonatomic,retain) NSArray *allowedValues;
-@property (nonatomic,retain) NSArray *displayValues;
-@end
-
-@implementation MPWUIKitValueButton
-
--(id)objectValue { return self.representedValue; }
-
--(void)setObjectValue:(id)value
-{
-    self.representedValue=value;
-    if (self.preservesConfiguredTitle && (![value respondsToSelector:@selector(length)] || [value length] == 0)) { return; }
-    NSString *title=(value && value != [NSNull null]) ? [value description] : @"";
-    NSUInteger mappedIndex=[self.allowedValues indexOfObject:value];
-    if (mappedIndex != NSNotFound && mappedIndex < self.displayValues.count) {
-        title=[self.displayValues[mappedIndex] description];
-    }
-    if (self.appendsDisclosureIndicator && title.length) { title=[title stringByAppendingString:@"  ›"]; }
-    [self setTitle:title forState:UIControlStateNormal];
-}
-
--(void)setValueEditable:(BOOL)editable { self.enabled=editable; }
-
--(void)dealloc
-{
-    [_representedValue release];
-    [_allowedValues release];
-    [_displayValues release];
-    [super dealloc];
-}
-
-@end
-
 
 @implementation NSObject(AppKitUI)
 
 -(void)generateUIKitUI:(MPWUIKitUIGenerator*)stream
 {
     [self generateUI:stream];
-}
-
-@end
-
-// Type mapping is another stream stage: the mapped object is written back to
-// the generator so it may itself participate in polymorphic UI generation.
-@implementation MPWTypeDefinition(UIKitUI)
-
--(void)generateUIKitUI:(MPWUIKitUIGenerator*)stream
-{
-    id mapped=[stream.type2view atType:self];
-    if (mapped) { [stream writeObject:mapped]; }
 }
 
 @end
@@ -116,48 +43,38 @@
 +(MPWTypeToObjectMapper*)defaultTypes2UIMapper
 {
     MPWTypeToObjectMapper *type2view = [[MPWTypeToObjectMapper new] autorelease];
-    type2view[@"bool"] = [UISwitch templateWithValues:@{ }];
-    type2view[@"id"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
-    type2view[@"EmailAddress"] = [MPWUIKitEmailField templateWithValues:@{ }];
-    type2view[@"Date"] = [UITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
-    type2view[@"Text"] = [UITextView templateWithValues:@{ }];
-    type2view[@"int"] = [UITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeNumberPad) }];
-    type2view[@"long"] = [UITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeNumberPad) }];
-    type2view[@"float"] = [UITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeDecimalPad) }];
+    // Value-bearing controls are the store-bound MPWUI* subclasses, so a
+    // generated form's controls read from / write back to the store.
+    type2view[@"bool"] = [MPWUISwitch templateWithValues:@{ }];
+    type2view[@"id"] = [MPWUITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
+    type2view[@"String"] = [MPWUITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
+    type2view[@"EmailAddress"] = [MPWUIEmailField templateWithValues:@{ }];
+    type2view[@"Date"] = [MPWUITextField templateWithValues:@{  @"borderStyle": @(UITextBorderStyleBezel) }];
+    type2view[@"Text"] = [MPWUITextView templateWithValues:@{ }];
+    type2view[@"int"] = [MPWUITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeNumberPad) }];
+    type2view[@"long"] = [MPWUITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeNumberPad) }];
+    type2view[@"float"] = [MPWUITextField templateWithValues:@{ @"borderStyle": @(UITextBorderStyleRoundedRect), @"keyboardType": @(UIKeyboardTypeDecimalPad) }];
     type2view[@"Horizontal"] = [UIStackView templateWithValues:@{ @"axis": @(UILayoutConstraintAxisHorizontal) }];
     type2view[@"Vertical"] = [UIStackView templateWithValues:@{ @"axis": @(UILayoutConstraintAxisVertical) }];
     return type2view;
 }
 
-+(UIView*)mappedControlForType:(MPWTypeDefinition*)type typeMapper:(MPWTypeToObjectMapper*)typeMapper
-{
-    if (!type) { return nil; }
-    NSMutableArray *result=[NSMutableArray array];
-    MPWUIKitUIGenerator *generator=[[[self alloc] initWithTarget:result] autorelease];
-    generator.type2view=typeMapper;
-    [generator writeObject:type];
-    return result.lastObject;
-}
-
+// Mapping a single component is a plain lookup in the type mapper, not a
+// streaming operation: the stream is only for building nested structures.
 -(id)controlForType:(MPWTypeDefinition*)type
 {
-    return [[self class] mappedControlForType:type typeMapper:self.type2view];
+    return type ? [self.type2view atType:type] : nil;
 }
 
-+(UIView*)controlForType:(MPWTypeDefinition*)type
+-(UIView*)controlForType:(MPWTypeDefinition*)type
     presentationMetadata:(NSDictionary*)metadata
-              typeMapper:(MPWTypeToObjectMapper*)typeMapper
 {
-    return [self controlForType:type
-           presentationMetadata:metadata
-              representedObject:nil
-                     typeMapper:typeMapper];
+    return [self controlForType:type presentationMetadata:metadata representedObject:nil];
 }
 
-+(UIView*)controlForType:(MPWTypeDefinition*)type
+-(UIView*)controlForType:(MPWTypeDefinition*)type
     presentationMetadata:(NSDictionary*)metadata
        representedObject:(id)representedObject
-              typeMapper:(MPWTypeToObjectMapper*)typeMapper
 {
     metadata=metadata ?: @{};
     NSString *kind=metadata[MPWPresentationControlKey];
@@ -166,49 +83,34 @@
     UIView *control=nil;
 
     if ([kind isEqual:@"label"] || [kind isEqual:@"value"]) {
-        UILabel *label=[[[UILabel alloc] init] autorelease];
+        MPWUILabel *label=[[[MPWUILabel alloc] init] autorelease];
         label.numberOfLines=[type.name isEqual:@"Text"] ? 0 : 1;
         label.adjustsFontForContentSizeCategory=YES;
         label.textColor=[kind isEqual:@"value"] ? [UIColor secondaryLabelColor] : [UIColor labelColor];
         control=label;
     } else if ([kind isEqual:@"segmented"] || (!kind && allowed.count > 0)) {
-        UISegmentedControl *segments=[[[UISegmentedControl alloc] initWithItems:display ?: @[]] autorelease];
+        MPWUISegmentedControl *segments=[[[MPWUISegmentedControl alloc] initWithItems:display ?: @[]] autorelease];
         control=segments;
     } else if ([kind isEqual:@"disclosure"] || [kind isEqual:@"menu"] || [kind isEqual:@"action"]) {
-        MPWUIKitValueButton *button=[MPWUIKitValueButton buttonWithType:UIButtonTypeSystem];
+        MPWUIValueButton *button=[MPWUIValueButton buttonWithType:UIButtonTypeSystem];
         button.contentHorizontalAlignment=[kind isEqual:@"action"] ? UIControlContentHorizontalAlignmentCenter : UIControlContentHorizontalAlignmentRight;
         button.appendsDisclosureIndicator=[kind isEqual:@"disclosure"] || [kind isEqual:@"menu"];
         button.preservesConfiguredTitle=[kind isEqual:@"action"];
-        button.allowedValues=allowed;
+        button.values=allowed;
         button.displayValues=display;
         if ([kind isEqual:@"action"]) {
             NSString *title=[representedObject respondsToSelector:@selector(title)] ? [representedObject title] : @"";
             [button setTitle:title ?: @"" forState:UIControlStateNormal];
             if ([metadata[MPWPresentationDestructiveKey] boolValue]) { [button setTitleColor:[UIColor systemRedColor] forState:UIControlStateNormal]; }
         }
-        if ([kind isEqual:@"menu"] && allowed.count) {
-            if (@available(iOS 14.0, *)) {
-                NSMutableArray *actions=[NSMutableArray array];
-                __unsafe_unretained MPWUIKitValueButton *unretainedButton=button;
-                [allowed enumerateObjectsUsingBlock:^(id value, NSUInteger index, BOOL *stop) {
-                    NSString *title=index < display.count ? [display[index] description] : [value description];
-                    UIAction *action=[UIAction actionWithTitle:title image:nil identifier:nil handler:^(__kindof UIAction *selectedAction) {
-                        [unretainedButton setObjectValue:value];
-                        [unretainedButton sendActionsForControlEvents:UIControlEventValueChanged];
-                    }];
-                    [actions addObject:action];
-                }];
-                button.menu=[UIMenu menuWithTitle:@"" children:actions];
-                button.showsMenuAsPrimaryAction=YES;
-            }
-        }
+        if ([kind isEqual:@"menu"]) { [button installValueMenu]; }
         control=button;
     } else {
-        control=[self mappedControlForType:type typeMapper:typeMapper];
+        control=[self controlForType:type];
     }
 
     if (!control) {
-        UILabel *fallback=[[[UILabel alloc] init] autorelease];
+        MPWUILabel *fallback=[[[MPWUILabel alloc] init] autorelease];
         fallback.adjustsFontForContentSizeCategory=YES;
         control=fallback;
     }
@@ -219,11 +121,57 @@
     return control;
 }
 
+#pragma mark - fields: control choice + store binding (mirrors the AppKit generator)
+
+// A field with allowed `values` is an enumeration: present it as a menu button
+// carrying those values.  Otherwise the declared type drives the mapper.
+-(UIView*)controlForField:(MPWVariableDefinition*)field
+{
+    if ( field.values.count ) {
+        MPWUIValueButton *button=[MPWUIValueButton buttonWithType:UIButtonTypeSystem];
+        button.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
+        button.appendsDisclosureIndicator=YES;
+        button.values=field.values;
+        button.displayValues=field.presentationMetadata[MPWPresentationDisplayValuesKey] ?: field.values;
+        [button installValueMenu];
+        return button;
+    }
+    return [self controlForType:field.type presentationMetadata:field.presentationMetadata];
+}
+
+// Bind the control to the field's value in the store, so edits write through
+// the storage combinator and model changes update the control.
+-(void)bindControl:(UIView*)control toField:(MPWVariableDefinition*)field
+{
+    BOOL editable = (field.operations & MPWRESTVerbsWrite) != 0;
+    if ( self.store && [control respondsToSelector:@selector(setBinding:)] ) {
+        MPWReference *ref=[self.store bindingForReference:[self.store referenceForPath:field.name]];
+        [(id)control setBinding:ref];       // also populates from the store
+    }
+    if ( !editable ) {
+        [control setValueEditable:NO];
+    }
+}
+
 -(void)endView
 {
     self.target = (id)[(UIView*)(self.target) superview];
 }
 
+
+// The stream is used purely to build the nested view structure: begin/end a
+// stack, then write the already-mapped single components into it.
+-(UIView*)labelForField:(MPWVariableDefinition*)aField
+{
+    return [[[MPWUILabel alloc] initWithDictionary: @{ @"text": aField.title ?: @""}] autorelease];
+}
+
+-(UIView*)boundControlForField:(MPWVariableDefinition*)aField
+{
+    UIView *control=[self controlForField:aField];
+    [self bindControl:control toField:aField];
+    return control;
+}
 
 -(void)writeUIFormForStructVH:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
@@ -232,9 +180,9 @@
     for ( MPWVariableDefinition *aField in theStruct.fields) {
         [self beginView:self.type2view[@"Horizontal"]];
         if ( hasMoreThanOneField ) {
-            [self writeObject:[[[UILabel alloc] initWithDictionary: @{ @"text": aField.title}] autorelease]];
+            [self writeObject:[self labelForField:aField]];
         }
-        [self writeObject:[self controlForType:aField.type]];
+        [self writeObject:[self boundControlForField:aField]];
         [self endView];
     }
     [self writeObject:[UIView new]];
@@ -245,8 +193,8 @@
 -(void)writeUIFormForStructVV:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
     for ( MPWVariableDefinition *aField in theStruct.fields) {
-        [self writeObject:[[[UILabel alloc] initWithDictionary: @{ @"text": aField.title}] autorelease]];
-        [self writeObject:[self controlForType:aField.type]];
+        [self writeObject:[self labelForField:aField]];
+        [self writeObject:[self boundControlForField:aField]];
     }
     [self writeObject:[UIView new]];
 }
