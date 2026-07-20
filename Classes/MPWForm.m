@@ -15,6 +15,22 @@
     return _resetTitle ?: @"Reset";
 }
 
+// Values live in the store under their leaf names, so nested structures are
+// descended into rather than looked up.
+-(void)resetFieldsOfStructure:(MPWStructureDefinition*)structure
+{
+    for ( MPWVariableDefinition *field in structure.fields ) {
+        if ( [field.type isKindOfClass:[MPWStructureDefinition class]] ) {
+            [self resetFieldsOfStructure:(MPWStructureDefinition*)field.type];
+        } else {
+            id defaultValue=[self.defaultStore at:[self.defaultStore referenceForPath:field.name]];
+            if ( defaultValue ) {
+                [self.store at:[self.store referenceForPath:field.name] put:defaultValue];
+            }
+        }
+    }
+}
+
 // Copy the defaults through the store, then tell the bound controls the model
 // changed;  they re-read themselves from their references, so no view walking
 // and no per-field callbacks are needed here.
@@ -23,12 +39,7 @@
     if ( !self.defaultStore || !self.store ) {
         return;
     }
-    for ( MPWVariableDefinition *field in self.def.fields ) {
-        id defaultValue=[self.defaultStore at:[self.defaultStore referenceForPath:field.name]];
-        if ( defaultValue ) {
-            [self.store at:[self.store referenceForPath:field.name] put:defaultValue];
-        }
-    }
+    [self resetFieldsOfStructure:self.def];
     sendProtocolNotification( @protocol(ModelDidChange), self );
 }
 

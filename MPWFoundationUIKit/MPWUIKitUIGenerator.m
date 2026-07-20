@@ -5,9 +5,10 @@
 //  Created by Marcel Weiher on 20.06.26.
 //
 
+#import <UIKit/UIKit.h>
 #import "MPWUIKitUIGenerator.h"
 #import "MPWUIKitBoundControls.h"
-#import <UIKit/UIKit.h>
+#import "MPWTableView.h"
 
 @implementation NSObject(AppKitUI)
 
@@ -32,6 +33,45 @@
 
 @implementation MPWUIKitUIGenerator
 
+-(instancetype)initWithTarget:(id)aTarget
+{
+    self=[super initWithTarget:aTarget];
+    self.contentInset = 0;
+    self.contentSpacing = 12;
+    self.destructiveActionColor = [UIColor systemRedColor];
+    self.formBackgroundColor = [UIColor systemGroupedBackgroundColor];
+    if ( ![aTarget respondsToSelector:@selector(addArrangedSubview:)] && [aTarget isKindOfClass:[UIView class]] ) {
+        // A plain container (a view controller's view, say): generating into it
+        // directly would just pile up unconstrained subviews, so create the
+        // top-level stack and constrain it inside what we were given.
+        self.baseView = aTarget;
+        self.target = [self rootViewInBaseView:aTarget];
+    }
+    return self;
+}
+
+// Fills the base view, inset by contentInset.  Top and sides go to the view's
+// own edges so scrolling content passes under a navigation bar the way a system
+// form does;  the bottom stops at the safe area so trailing controls stay clear
+// of the home indicator.
+-(UIView*)rootViewInBaseView:(UIView*)base
+{
+    UIStackView *stack = [[self class] defaultTarget];
+    stack.spacing = self.contentSpacing;
+    stack.translatesAutoresizingMaskIntoConstraints = NO;
+    if ( !base.backgroundColor ) {
+        base.backgroundColor = self.formBackgroundColor;
+    }
+    [base addSubview:stack];
+    CGFloat inset = self.contentInset;
+    [NSLayoutConstraint activateConstraints:@[
+        [stack.topAnchor constraintEqualToAnchor:base.topAnchor constant:inset],
+        [stack.leadingAnchor constraintEqualToAnchor:base.leadingAnchor constant:inset],
+        [stack.trailingAnchor constraintEqualToAnchor:base.trailingAnchor constant:-inset],
+        [stack.bottomAnchor constraintEqualToAnchor:base.safeAreaLayoutGuide.bottomAnchor constant:-inset],
+    ]];
+    return stack;
+}
 
 -(SEL)streamWriterMessage
 {
@@ -199,9 +239,34 @@
     [self writeObject:[UIView new]];
 }
 
+// A form is written as the table projection of structure x store: that
+// translation already turns nested structures into the sections — with their
+// headers and documentation footers — a UIKit form is made of.
 -(void)writeUIFormForStruct:(MPWStructureDefinition*)theStruct postAction:(NSString*)actionString
 {
-    [self writeUIFormForStructVV:theStruct postAction:actionString];
+    [self writeTable:[MPWStructureTable tableWithStructureDefinition:theStruct store:self.store]];
+}
+
+-(void)writeTable:(MPWTable*)table
+{
+    MPWTableView *view=[[[MPWTableView alloc] initWithFrame:CGRectZero] autorelease];
+    view.presentationStyle = MPWTablePresentationStyleForm;
+    [view setTable:table];
+    FORWARD(view);
+}
+
+// Generated because the form says it has a reset action;  the button targets
+// the form itself, which restores the defaults through the store.  Reset
+// discards what the user entered, so it is tinted as destructive.
+-(void)writeResetButtonForForm:(MPWForm*)aForm
+{
+    UIButton *reset=[UIButton buttonWithType:UIButtonTypeSystem];
+    [reset setTitle:aForm.resetTitle forState:UIControlStateNormal];
+    [reset setTitleColor:self.destructiveActionColor forState:UIControlStateNormal];
+    [reset addTarget:aForm action:@selector(resetForm:) forControlEvents:UIControlEventTouchUpInside];
+    [reset setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [reset setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    FORWARD(reset);
 }
 
 +(id)defaultTarget
@@ -212,6 +277,24 @@
 -(UIView*)rootView
 {
     return (UIView*)self.target;
+}
+
+-(void)dealloc
+{
+    [_baseView release];
+    [_destructiveActionColor release];
+    [_formBackgroundColor release];
+    [super dealloc];
+}
+
+@end
+
+
+@implementation UIView(UICreation)
+
+-(MPWUIKitUIGenerator*)uiGenerator
+{
+    return [MPWUIKitUIGenerator streamWithTarget:self];
 }
 
 @end
@@ -285,12 +368,103 @@
     
 }
 
++(MPWForm*)settingsForm
+{
+    MPWTypeDefinition *stringType=[MPWTypeDefinition idType];
+    MPWTypeDefinition *boolType=[MPWTypeDefinition descriptorForObjcCode:'B'];
+    MPWVariableDefinition *name=[[[MPWVariableDefinition alloc] initWithName:@"name" type:stringType] autorelease];
+    MPWVariableDefinition *sounds=[[[MPWVariableDefinition alloc] initWithName:@"sounds" type:boolType] autorelease];
+    sounds.operations=MPWRESTVerbsReadWrite;
+    MPWStructureDefinition *account=[MPWStructureDefinition structureWithName:@"account" fields:@[name]];
+    MPWStructureDefinition *prefs=[MPWStructureDefinition structureWithName:@"preferences" fields:@[sounds]];
+    prefs.documentation=@"Preferences footer.";
+    MPWVariableDefinition *accountSection=[[[MPWVariableDefinition alloc] initWithName:@"account" type:account] autorelease];
+    MPWVariableDefinition *prefsSection=[[[MPWVariableDefinition alloc] initWithName:@"preferences" type:prefs] autorelease];
+
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def=[MPWStructureDefinition structureWithName:@"Settings" fields:@[accountSection,prefsSection]];
+    form.store=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"name": @"Ada", @"sounds": @YES }]];
+    form.defaultStore=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"name": @"Default", @"sounds": @NO }]];
+    return form;
+}
+
+// A nested structure is written as a form-styled table view: the structure x
+// store table projection turns each nested structure into a section.
++(void)testNestedStructureIsWrittenAsFormTable
+{
+    MPWForm *form=[self settingsForm];
+    UIStackView *container=[[self stream] process:form];
+    MPWTableView *tableview=[[container arrangedSubviews] lastObject];
+    EXPECTTRUE( [tableview isKindOfClass:[MPWTableView class]], @"form is written as a table view");
+    INTEXPECT( tableview.presentationStyle, MPWTablePresentationStyleForm, @"presented as a form");
+    INTEXPECT( [tableview numberOfSectionsInCollectionView:tableview], 2, @"one section per nested structure");
+}
+
++(void)testFormWithResetActionGeneratesConnectedResetButton
+{
+    MPWForm *form=[self settingsForm];
+    form.hasResetAction=YES;
+
+    UIStackView *container=[[self stream] process:form];
+    NSArray *generated=[container arrangedSubviews];
+    INTEXPECT( generated.count, 2, @"table view plus reset button");
+    UIButton *reset=[generated lastObject];
+    EXPECTTRUE( [reset isKindOfClass:[UIButton class]], @"reset is a button");
+    IDEXPECT( [reset titleForState:UIControlStateNormal], @"Reset", @"default reset title");
+    IDEXPECT( [reset titleColorForState:UIControlStateNormal], [UIColor systemRedColor], @"styled as destructive");
+    IDEXPECT( [[reset actionsForTarget:form forControlEvent:UIControlEventTouchUpInside] lastObject],
+             @"resetForm:", @"button connected to the form's resetForm:");
+
+    // -sendActionsForControlEvents: is a no-op headless, so invoke the action.
+    [form resetForm:reset];
+    IDEXPECT( [form.store at:[form.store referenceForPath:@"name"]], @"Default", @"nested field reset through the store");
+    INTEXPECT( [[form.store at:[form.store referenceForPath:@"sounds"]] boolValue], NO, @"second section reset too");
+}
+
++(void)testFormWithoutResetActionHasNoResetButton
+{
+    UIStackView *container=[[self stream] process:[self settingsForm]];
+    INTEXPECT( [[container arrangedSubviews] count], 1, @"just the table view");
+}
+
+// Generating straight into a plain container view: the generator creates and
+// constrains the top-level stack, so a client just writes the form to its view.
++(void)testGeneratingIntoPlainBaseViewCreatesConstrainedRootView
+{
+    UIView *base=[[[UIView alloc] initWithFrame:CGRectMake(0,0,320,480)] autorelease];
+    MPWUIKitUIGenerator *generator=[base uiGenerator];
+    IDEXPECT( generator.baseView, base, @"the view we were handed is the base view");
+    EXPECTTRUE( generator.rootView != base, @"root view is created, not the base view");
+    [generator writeObject:[self settingsForm]];
+
+    INTEXPECT( [[base subviews] count], 1, @"just the created root view");
+    UIStackView *root=[[base subviews] lastObject];
+    IDEXPECT( root, generator.rootView, @"root view was added to the base view");
+    EXPECTTRUE( [root isKindOfClass:[UIStackView class]], @"root view is a stack view");
+    EXPECTFALSE( root.translatesAutoresizingMaskIntoConstraints, @"root view is laid out by constraints");
+    EXPECTTRUE( base.constraints.count > 0, @"root view is constrained in the base view");
+    EXPECTTRUE( [[[root arrangedSubviews] lastObject] isKindOfClass:[MPWTableView class]], @"form was generated into the root view");
+}
+
++(void)testGeneratingIntoStackViewUsesItAsRootView
+{
+    UIStackView *stack=[[[UIStackView alloc] initWithFrame:CGRectZero] autorelease];
+    MPWUIKitUIGenerator *generator=[stack uiGenerator];
+    EXPECTNIL( generator.baseView, @"no separate base view needed");
+    IDEXPECT( generator.rootView, stack, @"the stack view we were handed is the root view");
+}
+
 +(NSArray*)testSelectors
 {
     return @[
         @"testCreateForm",
         @"testMapUIKitTypes",
         @"testConcreteUIViewTerminatesMapping",
+        @"testNestedStructureIsWrittenAsFormTable",
+        @"testFormWithResetActionGeneratesConnectedResetButton",
+        @"testFormWithoutResetActionHasNoResetButton",
+        @"testGeneratingIntoPlainBaseViewCreatesConstrainedRootView",
+        @"testGeneratingIntoStackViewUsesItAsRootView",
     ];
 }
 
