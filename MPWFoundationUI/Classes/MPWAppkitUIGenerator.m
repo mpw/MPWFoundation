@@ -44,9 +44,41 @@
 -(instancetype)initWithTarget:(id)aTarget
 {
     self=[super initWithTarget:aTarget];
-    self.rootView = aTarget;
     self.valueControlMinimumWidth = 280;
+    self.contentInset = 24;
+    self.contentSpacing = 24;
+    self.destructiveActionColor = [NSColor systemRedColor];
+    if ( [aTarget respondsToSelector:@selector(addArrangedSubview:)] ) {
+        self.rootView = aTarget;            // arranges generated views itself
+    } else {
+        // A plain container (a view controller's view, say): generating into it
+        // directly would just pile up unconstrained subviews, so create the
+        // top-level stack and constrain it inside what we were given.
+        self.baseView = aTarget;
+        self.rootView = [self rootViewInBaseView:aTarget];
+        self.target = self.rootView;
+    }
     return self;
+}
+
+// Centered horizontally, attached to the top, and inset on the other edges, so
+// the form keeps its natural size and stays put when the base view resizes.
+-(NSView*)rootViewInBaseView:(NSView*)base
+{
+    NSStackView *stack = [[self class] defaultTarget];
+    stack.alignment = NSLayoutAttributeCenterX;
+    stack.spacing = self.contentSpacing;
+    stack.translatesAutoresizingMaskIntoConstraints = NO;
+    [base addSubview:stack];
+    CGFloat inset = self.contentInset;
+    [NSLayoutConstraint activateConstraints:@[
+        [stack.centerXAnchor constraintEqualToAnchor:base.centerXAnchor],
+        [stack.topAnchor constraintEqualToAnchor:base.topAnchor constant:inset],
+        [stack.leadingAnchor constraintGreaterThanOrEqualToAnchor:base.leadingAnchor constant:inset],
+        [stack.trailingAnchor constraintLessThanOrEqualToAnchor:base.trailingAnchor constant:-inset],
+        [stack.bottomAnchor constraintLessThanOrEqualToAnchor:base.bottomAnchor constant:-inset],
+    ]];
+    return stack;
 }
 
 -(SEL)streamWriterMessage
@@ -131,6 +163,12 @@
 {
     NSButton *reset=[NSButton buttonWithTitle:aForm.resetTitle target:aForm action:@selector(resetForm:)];
     reset.bezelStyle = NSBezelStyleRounded;
+    // Reset discards what the user entered, so tint it as destructive.  A bezeled
+    // button's title ignores contentTintColor (that only tints template images),
+    // so the title has to be colored via the attributed title.
+    reset.contentTintColor = self.destructiveActionColor;
+    reset.attributedTitle = [[[NSAttributedString alloc] initWithString:aForm.resetTitle
+                                                            attributes:@{ NSForegroundColorAttributeName: self.destructiveActionColor }] autorelease];
     FORWARD(reset);
 }
 
@@ -167,6 +205,9 @@
 {
     // releasing rootView here crashes, it seems due to overrelease since rootView is an alias for target
     // but of course since it is strong that should also get an extra retain...weird
+    // baseView is not the target, so it does need to be released here.
+    [_baseView release];
+    [_destructiveActionColor release];
     [super dealloc];
 }
 
@@ -337,6 +378,9 @@
     IDEXPECT( reset.title, @"Reset", @"default reset title");
     PTREXPECT( reset.target, form, @"button targets the form");
     EXPECTTRUE( reset.action == @selector(resetForm:), @"button connected to resetForm:");
+    IDEXPECT( reset.contentTintColor, [NSColor systemRedColor], @"reset is styled as destructive");
+    IDEXPECT( [reset.attributedTitle attribute:NSForegroundColorAttributeName atIndex:0 effectiveRange:NULL],
+             [NSColor systemRedColor], @"reset title is drawn in the destructive color");
 
     NSGridView *grid=[formviews firstObject];
     STTextField *nameControl=(STTextField*)[grid cellAtColumnIndex:0 rowIndex:0].contentView;
@@ -359,6 +403,40 @@
     INTEXPECT( [[container subviews] count], 1, @"just the grid");
 }
 
+// Generating straight into a plain container view: the generator creates and
+// constrains the top-level stack, so a client just writes the form to its view.
++(void)testGeneratingIntoPlainBaseViewCreatesConstrainedRootView
+{
+    MPWTypeStore *types=[MPWTypeStore store];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField]] autorelease];
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def=structure;
+
+    NSView *base=[[[NSView alloc] initWithFrame:NSMakeRect(0,0,400,300)] autorelease];
+    MPWAppkitUIGenerator *generator=[base uiGenerator];
+    PTREXPECT( generator.baseView, base, @"the view we were handed is the base view");
+    EXPECTTRUE( generator.rootView != base, @"root view is created, not the base view");
+    [generator process:form];
+
+    INTEXPECT( [[base subviews] count], 1, @"just the created root view");
+    NSStackView *root=(NSStackView*)[[base subviews] lastObject];
+    PTREXPECT( root, generator.rootView, @"root view was added to the base view");
+    EXPECTTRUE( [root isKindOfClass:[NSStackView class]], @"root view is a stack view");
+    EXPECTFALSE( root.translatesAutoresizingMaskIntoConstraints, @"root view is laid out by constraints");
+    EXPECTTRUE( base.constraints.count > 0, @"root view is constrained in the base view");
+    EXPECTTRUE( [[[root subviews] lastObject] isKindOfClass:[NSGridView class]], @"form was generated into the root view");
+}
+
+// A view that arranges what we generate is used as-is, without wrapping.
++(void)testGeneratingIntoStackViewUsesItAsRootView
+{
+    NSStackView *stack=[[[NSStackView alloc] initWithFrame:NSZeroRect] autorelease];
+    MPWAppkitUIGenerator *generator=[stack uiGenerator];
+    EXPECTNIL( generator.baseView, @"no separate base view needed");
+    PTREXPECT( generator.rootView, stack, @"the stack view we were handed is the root view");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -369,6 +447,8 @@
        @"testEnumerationFieldBecomesBoundPopup",
        @"testFormWithResetActionGeneratesConnectedResetButton",
        @"testFormWithoutResetActionHasNoResetButton",
+       @"testGeneratingIntoPlainBaseViewCreatesConstrainedRootView",
+       @"testGeneratingIntoStackViewUsesItAsRootView",
 			];
 }
 
