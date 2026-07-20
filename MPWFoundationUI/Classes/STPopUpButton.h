@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface STPopUpButton : NSPopUpButton
+@interface STPopUpButton : NSPopUpButton<ModelDidChange>
 
 @property (nonatomic, strong)  MPWReference *ref;
 @property (nonatomic, strong)  MPWReference *enabledRef;

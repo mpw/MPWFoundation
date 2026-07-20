@@ -33,7 +33,7 @@
     for (NSString* item in items) {
         [self addItemWithTitle:item];
     }
-    
+    [self installProtocolNotifications];
     return self;
 }
 
