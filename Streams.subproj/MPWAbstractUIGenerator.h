@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(id)controlForType:(MPWTypeDefinition*)type;
 -(void)beginView:aView;
+-(void)writeResetButtonForForm:(MPWForm*)aForm;
 
 
 @end

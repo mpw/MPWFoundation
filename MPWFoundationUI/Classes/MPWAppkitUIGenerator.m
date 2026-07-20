@@ -5,13 +5,13 @@
 //  Created by Marcel Weiher on 18.05.26.
 //
 
+#import <Cocoa/Cocoa.h>       // before our header, which declares an NSView category
 #import "MPWAppkitUIGenerator.h"
 #import "MPWTableView.h"
 #import "STTextField.h"
 #import "STPopUpButton.h"
 #import "STButton.h"
 #import "STSlider.h"
-#import <Cocoa/Cocoa.h>
 
 @implementation NSObject(AppKitUI)
 
@@ -125,6 +125,15 @@
     FORWARD(grid);
 }
 
+// Generated because the form says it has a reset action;  the button targets the
+// form itself, which restores the defaults through the store.
+-(void)writeResetButtonForForm:(MPWForm*)aForm
+{
+    NSButton *reset=[NSButton buttonWithTitle:aForm.resetTitle target:aForm action:@selector(resetForm:)];
+    reset.bezelStyle = NSBezelStyleRounded;
+    FORWARD(reset);
+}
+
 -(void)beginHorizontal
 {
     [self beginView:[self.type2view at:@"Horizontal"]];
@@ -174,6 +183,16 @@
 }
 
 @end
+
+@implementation NSView(UICreation)
+
+-(MPWAppkitUIGenerator*)uiGenerator
+{
+    return [MPWAppkitUIGenerator streamWithTarget:self];
+}
+
+@end
+
 
 @implementation NSStackView(streaming)
 
@@ -296,6 +315,50 @@
     IDEXPECT( [store at:[store referenceForPath:@"frequency"]], @"Monthly", @"popup selection written through the store");
 }
 
+// The reset button is part of the generated form, driven by the model's
+// hasResetAction flag, and resetting goes through the store and the
+// ModelDidChange notification back into the bound controls.
++(void)testFormWithResetActionGeneratesConnectedResetButton
+{
+    MPWTypeStore *types=[MPWTypeStore store];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField]] autorelease];
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def=structure;
+    form.store=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"name": @"Ada" }]];
+    form.defaultStore=[MPWRawDictStore storeWithDictionary:[NSMutableDictionary dictionaryWithDictionary:@{ @"name": @"Default" }]];
+    form.hasResetAction=YES;
+
+    NSStackView *container=[[self stream] process:form];
+    NSArray *formviews=[container subviews];
+    INTEXPECT( formviews.count, 2, @"grid plus reset button");
+    NSButton *reset=[formviews lastObject];
+    EXPECTTRUE( [reset isKindOfClass:[NSButton class]], @"reset is a button");
+    IDEXPECT( reset.title, @"Reset", @"default reset title");
+    PTREXPECT( reset.target, form, @"button targets the form");
+    EXPECTTRUE( reset.action == @selector(resetForm:), @"button connected to resetForm:");
+
+    NSGridView *grid=[formviews firstObject];
+    STTextField *nameControl=(STTextField*)[grid cellAtColumnIndex:0 rowIndex:0].contentView;
+    IDEXPECT( nameControl.stringValue, @"Ada", @"control populated from the store");
+
+    [reset performClick:nil];
+    IDEXPECT( [form.store at:[form.store referenceForPath:@"name"]], @"Default", @"default written through the store");
+    IDEXPECT( nameControl.stringValue, @"Default", @"control updated from the store after reset");
+}
+
++(void)testFormWithoutResetActionHasNoResetButton
+{
+    MPWTypeStore *types=[MPWTypeStore store];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField]] autorelease];
+    MPWForm *form=[[[MPWForm alloc] init] autorelease];
+    form.def=structure;
+
+    NSStackView *container=[[self stream] process:form];
+    INTEXPECT( [[container subviews] count], 1, @"just the grid");
+}
+
 +(NSArray*)testSelectors
 {
    return @[
@@ -304,6 +367,8 @@
        @"testMapAppKitTypes",
        @"testBoundFormReadsAndWritesThroughStore",
        @"testEnumerationFieldBecomesBoundPopup",
+       @"testFormWithResetActionGeneratesConnectedResetButton",
+       @"testFormWithoutResetActionHasNoResetButton",
 			];
 }
 

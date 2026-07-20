@@ -51,10 +51,19 @@
     [NSException raise:@"unimplemented" format:@"%@ not implemented in %@",NSStringFromSelector(_cmd),[self className]];
 }
 
+// Presentation systems that can make a button override this;  the button is
+// targeted at the form's -resetForm:, so the reset behaviour stays in the model.
+-(void)writeResetButtonForForm:(MPWForm*)aForm
+{
+}
+
 -(void)writeForm:(MPWForm*)aForm
 {
     self.store = aForm.store;
     [self writeUIFormForStruct: aForm.def  postAction: aForm.formAction];
+    if ( aForm.hasResetAction ) {
+        [self writeResetButtonForForm:aForm];
+    }
 }
 
 -(id)controlForType:(MPWTypeDefinition*)type

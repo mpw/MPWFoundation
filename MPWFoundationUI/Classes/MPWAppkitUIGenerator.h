@@ -25,4 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
+@interface NSView(UICreation)
+
+-(MPWAppkitUIGenerator*)uiGenerator;
+
+@end
 NS_ASSUME_NONNULL_END
