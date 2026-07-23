@@ -26,10 +26,11 @@
 -(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget queue:(NSOperationQueue*)targetQueue
 {
     MPWURLStreamingFetchHelper *helper = [MPWURLStreamingFetchHelper streamWithTarget:aTarget];
+    self.streamingDelegate=helper;
+    NSLog(@"init a streaming stream, helper %@",helper);
     NSURLSession *session=[NSURLSession sessionWithConfiguration:[self config]
                                                         delegate:helper
                                                    delegateQueue:targetQueue];
-    self.streamingDelegate=helper;
     self=[super initWithBaseURL:newBaseURL target:aTarget session:session];
     self.streamingDelegate.inflight = self.inflight;
     return self;
@@ -44,7 +45,17 @@
 - (NSURLSessionTask*)taskForExecutingRequest:(MPWURLCall*)request
 {
     NSParameterAssert( [request isStreaming]);
-    return [[self downloader] dataTaskWithRequest: [self resolvedRequest:request]];
+    NSURLRequest *resolvedRequest=[self resolvedRequest:request];
+    NSLog(@"executing url: %@",resolvedRequest.URL);
+    NSLog(@"executing verb: %@",resolvedRequest.HTTPMethod);
+    NSLog(@"executing data: '%@'",[resolvedRequest.HTTPBody stringValue]);
+    NSLog(@"ask downloader %@ to create task: %@",[self downloader],request);
+    NSURLSessionDataTask *task = [[self downloader] dataTaskWithRequest: resolvedRequest];
+    task.delegate = self.streamingDelegate;
+    NSLog(@"streamingDelegat: %@",self.streamingDelegate);
+    [task resume];
+    NSLog(@"task: %@",task);
+    return task;
 }
 
 -(void)streamingGet:(NSURL *)theURL
@@ -53,11 +64,36 @@
     MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     request.isStreaming=YES;
+    NSLog(@"enqueue request");
     [self executeRequest:request];
+}
+
+-(void)get:(NSURL *)theURL
+{
+    return [self streamingGet:theURL];
+}
+
+
+
+-(void)streamingPost:(NSURL *)theURL data:(NSData*)data
+{
+    MPWURI *ref=[MPWURI referenceWithURL:theURL];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbPOST];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
+    request.bodyData = data;
+    request.isStreaming=YES;
+    NSLog(@"enqueue request");
+    [self executeRequest:request];
+}
+
+-(void)post:(NSData *)theData toURL:(NSURL *)theURL
+{
+    [self streamingPost:theURL data:theData];
 }
 
 -(void)setTarget:(id)newVar
 {
+    NSLog(@"streaming stream target: %@",newVar);
     [super setTarget:newVar];
     [self.streamingDelegate setTarget:newVar];
 }
@@ -79,12 +115,24 @@
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
     didReceiveData:(NSData *)data
 {
+    NSLog(@"received some data");
     FORWARD(data);
+}
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask
+                                 didReceiveResponse:(NSHTTPURLResponse *)response
+                                  completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionResponseDisposition disposition))completionHandler;
+{
+    NSURLSessionResponseDisposition disposition=NSURLSessionResponseAllow;
+    NSLog(@"got response: %@",response);
+    completionHandler( disposition);
+    
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
 didCompleteWithError:(nullable NSError *)error
 {
+    NSLog(@"did complete");
     @synchronized (self) {
         //  a streaming fetchstream can only have one in progress
         //  and we don't have accesss to the MPWCall here.
