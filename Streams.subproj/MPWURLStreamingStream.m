@@ -12,7 +12,7 @@
 #import "MPWURI.h"
 #import "MPWRESTOperation.h"
 
-@interface MPWURLStreamingFetchHelper : MPWFilter <NSURLSessionDelegate>
+@interface MPWURLStreamingFetchHelper : MPWFilter <NSURLSessionTaskDelegate>
 
 @property (nonatomic, strong)  NSMutableOrderedSet *inflight;
 
@@ -123,10 +123,43 @@
                                  didReceiveResponse:(NSHTTPURLResponse *)response
                                   completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSURLSessionResponseDisposition disposition))completionHandler;
 {
-    NSURLSessionResponseDisposition disposition=NSURLSessionResponseAllow;
+    NSURLSessionResponseDisposition disposition=NSURLSessionResponseBecomeStream;
     NSLog(@"got response: %@",response);
     completionHandler( disposition);
     
+}
+
+
+-(void)streamMore:(NSURLSessionStreamTask *) streamTask
+{
+    NSLog(@"stream more");
+    [streamTask readDataOfMinLength:50 maxLength:2000 timeout:60 completionHandler:^(NSData * _Nullable_result data, BOOL atEOF, NSError * _Nullable error){
+        if ( data.length) {
+            NSLog(@"got data");
+            FORWARD(data);
+        }
+        if (!atEOF && data.length > 0) {
+            NSLog(@"not at EOF");
+            [self streamMore:streamTask];
+        } else {
+            NSLog(@"at EOF (eof: %d length: %ld)",atEOF,(long)data.length);
+        }
+    }];
+    
+}
+
+- (void) URLSession:(NSURLSession *) session
+           dataTask:(NSURLSessionDataTask *) dataTask
+didBecomeStreamTask:(NSURLSessionStreamTask *) streamTask
+{
+    NSLog(@"task changed to streaming task");
+    NSLog(@"original: %@",dataTask);
+    NSLog(@"streaming: %@",streamTask);
+    NSLog(@"task changed to streaming task");
+    streamTask.delegate = self;
+    [streamTask resume];
+    [self streamMore:streamTask];
+    NSLog(@"resumed streaming: %@",streamTask);
 }
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
