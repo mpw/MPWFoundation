@@ -154,7 +154,7 @@ CONVENIENCEANDINIT( identifier, WithPath:(NSString*)path )
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@:%p: %@>",[self class],self,[self path]];
+    return [NSString stringWithFormat:@"<%@:%p: path: '%@'>",[self class],self,[self path]];
 }
 
 -(void)dealloc

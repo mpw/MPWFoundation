@@ -14,6 +14,16 @@
 #import "MPWObjectCache.h"
 #import "MPWIntArray.h"
 #import "MPWPlistBuilder.h"
+#import "MPWVariableDefinition.h"
+#import "MPWTypeDefinition.h"
+#import "MPWStructureDefinition.h"
+
+
+@interface MPWDelimitedTableColumn : MPWTableColumn
+
+@property (nonatomic,strong) MPWDelimitedTable *table;
+
+@end
 
 @implementation MPWDelimitedTable
 {
@@ -106,6 +116,21 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
     return [self initWithData:newTableData delimiter:@","];
 }
 
+-initWithData:(NSData*)newTableData
+{
+    return [self initWithCommaSeparatedData:newTableData];
+}
+
+-(MPWStructureDefinition*)computeItemStructure
+{
+    NSArray *keys=[self headerKeys];
+    NSMutableArray *vardefs=[NSMutableArray array];
+    for (NSString *key in keys) {
+        [vardefs addObject:[[[MPWVariableDefinition alloc] initWithName:key type:[MPWTypeDefinition idType]] autorelease]];
+    }
+    return [[[MPWStructureDefinition alloc] initWithName:@"table" fields:vardefs] autorelease];
+}
+
 -(instancetype)cloneForThreading
 {
     MPWDelimitedTable *clone=[[[self class] alloc] initWithData:data delimiter:fieldDelimiter];
@@ -130,6 +155,11 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
 -(NSUInteger)totalLineCount
 {
     return [[self lineOffsets] count]-1;
+}
+
+-(Class)itemClass
+{
+    return [[self dictionaryAtIndex:0] class];
 }
 
 -(NSUInteger)count
@@ -222,6 +252,16 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
             
             dictionaryWithObjects:[self dataAtIndex:anIndex]
             forKeys:[self headerKeys]];
+}
+
+-objectAtIndex:(NSUInteger)anIndex
+{
+    return [self dictionaryAtIndex:(int)anIndex];
+}
+
+-(id)objectAtIndexedSubscript:(NSUInteger)anIndex
+{
+    return [self dictionaryAtIndex:(int)anIndex];
 }
 
 -(NSDictionary*)slowDictionaryAtIndex:(int)anIndex
@@ -381,6 +421,30 @@ lazyAccessor(MPWIntArray*, indexesOfInterest , setIndexesOfInterest, computeInde
         [builder endDictionary];
     }
     [builder endArray];
+}
+
+-createColumnForKey:aKey
+{
+    MPWDelimitedTableColumn* c= [[MPWDelimitedTableColumn new] autorelease];
+    c.key = aKey;
+    c.table = self;
+    return c;
+}
+
+
+@end
+
+
+@implementation MPWDelimitedTableColumn
+
+-(NSUInteger)count
+{
+    return self.table.count;
+}
+
+-objectAtIndex:(NSUInteger)anIndex
+{
+    return [self.table[anIndex] objectForKey:self.key];
 }
 
 @end

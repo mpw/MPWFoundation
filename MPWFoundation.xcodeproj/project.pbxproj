@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BEEF51000000000000000400 /* MPWUIKitBoundControls.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000200 /* MPWUIKitBoundControls.m */; };
-		BEEF51000000000000000300 /* MPWUIKitBoundControls.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000100 /* MPWUIKitBoundControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200B91D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BA1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1F0200BB1D8BF836009538C5 /* MPWCombinerStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 1F0200B71D8BF836009538C5 /* MPWCombinerStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1465,6 +1463,8 @@
 		ADDE51000000000000000012 /* STPopUpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000008 /* STPopUpButton.m */; };
 		ADDE51000000000000000013 /* STButton.h in Headers */ = {isa = PBXBuildFile; fileRef = ADDE51000000000000000009 /* STButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		ADDE51000000000000000014 /* STButton.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDE5100000000000000000A /* STButton.m */; };
+		BEEF51000000000000000300 /* MPWUIKitBoundControls.h in Headers */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000100 /* MPWUIKitBoundControls.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BEEF51000000000000000400 /* MPWUIKitBoundControls.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEF51000000000000000200 /* MPWUIKitBoundControls.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1549,8 +1549,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		BEEF51000000000000000100 /* MPWUIKitBoundControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUIKitBoundControls.h; sourceTree = "<group>"; };
-		BEEF51000000000000000200 /* MPWUIKitBoundControls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUIKitBoundControls.m; sourceTree = "<group>"; };
 		07DF1934006686DDC35ADD82 /* MPWObject.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MPWObject.m; sourceTree = "<group>"; };
 		07DF1935006686DDC35ADD82 /* NSNil.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSNil.m; sourceTree = "<group>"; };
 		07DF1936006686DDC35ADD82 /* NSInvocationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSInvocationAdditions.m; sourceTree = "<group>"; };
@@ -2140,6 +2138,8 @@
 		ADDE51000000000000000008 /* STPopUpButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STPopUpButton.m; sourceTree = "<group>"; };
 		ADDE51000000000000000009 /* STButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STButton.h; sourceTree = "<group>"; };
 		ADDE5100000000000000000A /* STButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STButton.m; sourceTree = "<group>"; };
+		BEEF51000000000000000100 /* MPWUIKitBoundControls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPWUIKitBoundControls.h; sourceTree = "<group>"; };
+		BEEF51000000000000000200 /* MPWUIKitBoundControls.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPWUIKitBoundControls.m; sourceTree = "<group>"; };
 		F51B7249013FD70701ABB64E /* NSBundleConveniences.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = NSBundleConveniences.m; sourceTree = "<group>"; };
 		F51B724A013FD70701ABB64E /* NSBundleConveniences.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = NSBundleConveniences.h; sourceTree = "<group>"; };
 		F51B7251013FDD9801ABB64E /* ResourceTest */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = ResourceTest; sourceTree = "<group>"; };
@@ -6309,7 +6309,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6367,7 +6367,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6425,7 +6425,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6483,7 +6483,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6541,7 +6541,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6599,7 +6599,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
@@ -6657,7 +6657,7 @@
 					/Library/Frameworks,
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.5;
+				MACOSX_DEPLOYMENT_TARGET = 14.6;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";

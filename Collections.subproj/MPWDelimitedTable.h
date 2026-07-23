@@ -6,11 +6,11 @@
 //
 //
 
-#import <MPWFoundation/MPWTable.h>
+#import <MPWFoundation/MPWDictArrayTable.h>
 
 @protocol MPWPlistStreaming;
 
-@interface MPWDelimitedTable : MPWTable
+@interface MPWDelimitedTable : MPWDictArrayTable
 
 
 -initWithData:(NSData*)newTableData delimiter:(NSString*)newFieldDelimiter;
