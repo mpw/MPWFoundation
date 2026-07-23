@@ -244,6 +244,22 @@
 
 @end
 
+
+@implementation NSObject(inspector)
+
+-(NSView*)inspector
+{
+    return [MPWAppkitUIGenerator process:[self form]];
+}
+
+-(void)inspect
+{
+    [[self inspector] openInWindow:[self className]];
+}
+
+@end
+
+
 #import <MPWFoundation/DebugMacros.h>
 
 @implementation MPWAppkitUIGenerator(testing) 

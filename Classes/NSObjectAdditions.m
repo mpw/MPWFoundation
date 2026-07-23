@@ -253,7 +253,15 @@ static void __collectInstanceVariables( Class aClass, NSMutableArray *varNames )
 static id ivarNameCache=nil;
 static id ivarsByClassAndName=nil;
 
-
+-(MPWForm*)form
+{
+    MPWStructureDefinition *structure=[[self class] structure];
+    MPWInstanceVarStore *store=[MPWInstanceVarStore storeWithObject:self];
+    MPWForm *form=[[MPWForm new] autorelease];
+    form.def = structure;
+    form.store = store;
+    return form;
+}
 
 +instanceVariables
 {
@@ -287,7 +295,7 @@ static NSMutableDictionary *structureDefinitions=nil;
     defs[[self className]]=def;
 }
 
-+structure
++(MPWStructureDefinition*)structure
 {
     NSMutableDictionary *defs=[self structureDefinitions];
     id def=structureDefinitions[[self className]];

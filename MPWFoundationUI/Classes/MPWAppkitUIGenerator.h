@@ -47,4 +47,12 @@ NS_ASSUME_NONNULL_BEGIN
 -(MPWAppkitUIGenerator*)uiGenerator;
 
 @end
+
+@interface NSObject(inspector)
+
+-(NSView*)inspector;
+-(void)inspect;
+
+@end
+
 NS_ASSUME_NONNULL_END
