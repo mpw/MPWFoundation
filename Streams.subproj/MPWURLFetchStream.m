@@ -211,7 +211,8 @@ static NSURLSession *_defaultURLSession=nil;
 {
     NSParameterAssert( ![request isStreaming]);
     NSURLRequest *resolvedRequest=[self resolvedRequest:request];
-//  NSLog(@"url: %@",resolvedRequest.URL);
+    NSLog(@"executing url: %@",resolvedRequest.URL);
+    NSLog(@"executing verb: %@",resolvedRequest.HTTPMethod);
     NSURLSessionTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             [self removeFromInflight:request];
@@ -306,8 +307,10 @@ static NSURLSession *_defaultURLSession=nil;
 -(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb body:(NSData *)body
 {
     MPWURI *ref=[MPWURI referenceWithURL:theURL];
-    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbGET];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:verb];
+    NSLog(@"op %@",op);
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
+    NSLog(@"request %@",request);
     request.isStreaming=NO;
     [self executeRequest:request];
 }
