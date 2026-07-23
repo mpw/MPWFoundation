@@ -12,6 +12,8 @@
 #import "STPopUpButton.h"
 #import "STButton.h"
 #import "STSlider.h"
+#import "MPWIgnoreTrampoline.h"
+
 
 @implementation NSObject(AppKitUI)
 
@@ -31,7 +33,8 @@
     // Value-bearing controls are the store-bound ST* subclasses, so a generated
     // form's controls read from / write back to the storage combinator.
     type2view[@"bool"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch), @"title": @"" }];
-    type2view[@"id"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
+    //    type2view[@"id"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
+    type2view[@"id"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeMomentaryPushIn), @"title": @"" }];
     type2view[@"String"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
     type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
     type2view[@"Date"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
@@ -110,14 +113,25 @@
 
 // Bind a control to the field's value in the store, so edits write through the
 // storage combinator and external model changes update the control.
--(void)bindControl:(NSView*)control toField:(MPWVariableDefinition*)field
+-(void)bindControl:(NSControl*)control toField:(MPWVariableDefinition*)field
 {
     BOOL editable = (field.operations & MPWRESTVerbsWrite) != 0;
-    if ( self.store && [control respondsToSelector:@selector(setBinding:)] ) {
-        MPWReference *ref = [self.store bindingForReference:[self.store referenceForPath:field.name]];
-        [(id)control setBinding:ref];
-        if ( [control respondsToSelector:@selector(updateFromRef)] ) {
-            [(id)control updateFromRef];        // initial population from the store
+    if ( self.store ) {
+        if (  [control isKindOfClass:[NSButton class]] && field.type.objcTypeCode == '@' &&
+             ![control isKindOfClass:[STPopUpButton class]] ) {
+            id targetObject = self.store[field.name];
+            [control setTarget:targetObject];
+            [control setAction:@selector(inspect)];
+            NSString *title=[targetObject description];
+            title = title.length > 30 ? [title substringToIndex:25] : title;
+            [control setTitle:title];
+            [control setFrame:NSMakeRect(0,0,100,20)];
+        } else if ( [control respondsToSelector:@selector(setBinding:)] ) {
+            MPWReference *ref = [self.store bindingForReference:[self.store referenceForPath:field.name]];
+            [(id)control setBinding:ref];
+            if ( [control respondsToSelector:@selector(updateFromRef)] ) {
+                [(id)control updateFromRef];        // initial population from the store
+            }
         }
     }
     if ( !editable ) {
@@ -193,6 +207,7 @@
 {
     MPWTableView *view = [[[MPWTableView alloc] initWithFrame: NSMakeRect(0, 0, 200, 100)] autorelease];
     [view setTable:table];
+    [view reloadData];
     FORWARD(view);
 }
 
@@ -259,6 +274,22 @@
 
 @end
 
+@implementation NSArray(insepector)
+
+-table
+{
+    return [[[MPWObjectArrayTable alloc] initWithObjects:self] autorelease];
+}
+
+-(NSView*)inspector
+{
+    return [MPWAppkitUIGenerator process:[self table]];
+}
+
+
+
+@end
+
 
 #import <MPWFoundation/DebugMacros.h>
 
@@ -281,7 +312,8 @@
 {
     MPWAppkitUIGenerator *generator=[self stream];
     MPWTypeStore *types=[MPWTypeStore store];
-    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default text field");
+    EXPECTTRUE( [[generator controlForType:types[@"String"]] isKindOfClass:[NSTextField class]], @"String to text field");
+    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[NSButton class]], @"default button");
     EXPECTTRUE( [[generator controlForType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
 }
 
@@ -291,7 +323,7 @@
     MPWTypeStore *types=[MPWTypeStore store];
 
     MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"todo" fields:@[
-        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Title" type:types[@"id"]] autorelease],
+        [[[MPWInstanceVariableDefinition alloc] initWithName:@"Title" type:types[@"String"]] autorelease],
         [[[MPWInstanceVariableDefinition alloc] initWithName:@"Done" type:types[@"bool"]] autorelease],
     ]] autorelease];
     MPWForm *form=[[[MPWForm alloc] initWithDictionary:@{ @"def": structure, @"formAction": @"/newTask"}] autorelease];
@@ -318,7 +350,7 @@
 +(void)testBoundFormReadsAndWritesThroughStore
 {
     MPWTypeStore *types=[MPWTypeStore store];
-    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"String"]] autorelease];
     MPWVariableDefinition *activeField=[[[MPWVariableDefinition alloc] initWithName:@"active" type:types[@"bool"]] autorelease];
     MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField,activeField]] autorelease];
 
@@ -378,7 +410,7 @@
 +(void)testFormWithResetActionGeneratesConnectedResetButton
 {
     MPWTypeStore *types=[MPWTypeStore store];
-    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"id"]] autorelease];
+    MPWVariableDefinition *nameField=[[[MPWVariableDefinition alloc] initWithName:@"name" type:types[@"String"]] autorelease];
     MPWStructureDefinition *structure=[[[MPWStructureDefinition alloc] initWithName:@"person" fields:@[nameField]] autorelease];
     MPWForm *form=[[[MPWForm alloc] init] autorelease];
     form.def=structure;
