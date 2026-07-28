@@ -17,12 +17,15 @@
 
 @implementation MPWPrintLiner
 
--(instancetype)initWithTarget:(id)aTarget
+
+-(void)setTarget:aTarget
 {
-    self = [super initWithTarget:aTarget];
+    [super setTarget:aTarget];
     Class targetClass = [aTarget class];
-    self.temp  = [[targetClass isKindOfClass:[MPWByteStream class]] ? targetClass : [MPWByteStream class] streamWithTarget:[NSMutableString string]];
-    return self;
+    if ( ![aTarget isKindOfClass:[MPWByteStream class]]) {
+        targetClass = [MPWByteStream class];
+    }
+    self.temp  = [targetClass streamWithTarget:[NSMutableString string]];
 }
 
 -(void)writeNSObject:(id)anObject
