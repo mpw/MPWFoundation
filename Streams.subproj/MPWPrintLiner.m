@@ -27,9 +27,10 @@
 
 -(void)writeNSObject:(id)anObject
 {
-    [[self.temp target] setString:@""];
-    [self.temp writeObject:anObject];
-    [(MPWByteStream*)(self.target) println:[self.temp target]];
+    [[self.temp target] setString:[NSMutableString string]];
+    [self.temp writeObject:anObject sender:nil];
+    [(MPWByteStream*)(self.target) writeData:[[self.temp target] asData]];
+    [(MPWByteStream*)(self.target) appendBytes:"\n" length:1];
     [[self.temp target] setString:@""];
 }
 
