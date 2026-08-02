@@ -213,6 +213,7 @@ static NSURLSession *_defaultURLSession=nil;
     NSURLRequest *resolvedRequest=[self resolvedRequest:request];
     NSLog(@"executing url: %@",resolvedRequest.URL);
     NSLog(@"executing verb: %@",resolvedRequest.HTTPMethod);
+    NSLog(@"executing data: '%@'",[resolvedRequest.HTTPBody stringValue]);
     NSURLSessionTask *task = [[self downloader] dataTaskWithRequest:resolvedRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         @try {
             [self removeFromInflight:request];
@@ -253,12 +254,15 @@ static NSURLSession *_defaultURLSession=nil;
 
 -(void)enqueueRequest:(MPWURLCall*)request
 {
+    NSLog(@"enque request: %@",request);
     [request retain];
     request.task = [self taskForExecutingRequest:request];
-    if (request.task) {
+    NSLog(@"task for request: %@",request.task);
+   if (request.task) {
         @synchronized (self) {
             [self.inflight addObject:request];
         }
+       NSLog(@"added task, inflight now: %@",self.inflight);
     } else {
         [self reportError:[NSError errorWithDomain:@"network-invalid-request" code:1000 userInfo:@{ @"url": request.request.URL}]];
     }
@@ -313,6 +317,7 @@ static NSURLSession *_defaultURLSession=nil;
     NSLog(@"request %@",request);
     request.bodyData=body;
     request.isStreaming=NO;
+    request.bodyData = body;
     [self executeRequest:request];
 }
 
