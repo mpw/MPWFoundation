@@ -311,6 +311,7 @@ static NSURLSession *_defaultURLSession=nil;
     NSLog(@"op %@",op);
     MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
     NSLog(@"request %@",request);
+    request.bodyData=body;
     request.isStreaming=NO;
     [self executeRequest:request];
 }
@@ -440,5 +441,4 @@ static NSURLSession *_defaultURLSession=nil;
 }
 
 @end
-
 
