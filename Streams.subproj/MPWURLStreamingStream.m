@@ -18,6 +18,12 @@
 
 @end
 
+@interface MPWURLStreamingStream ()
+
+@property (nonatomic, strong) NSDictionary *streamingHeaderDict;
+
+@end
+
 
 
 @implementation MPWURLStreamingStream
@@ -26,12 +32,18 @@
 -(instancetype)initWithBaseURL:(NSURL*)newBaseURL target:aTarget queue:(NSOperationQueue*)targetQueue
 {
     MPWURLStreamingFetchHelper *helper = [MPWURLStreamingFetchHelper streamWithTarget:aTarget];
+    NSURLSessionConfiguration *configuration=[self config];
+    // Streaming responses can legitimately run for a long time.  This timeout is
+    // the maximum idle interval between packets, not the total response duration.
+    configuration.timeoutIntervalForRequest=60 * 60;
+    configuration.timeoutIntervalForResource=24 * 60 * 60;
+    NSURLSession *session=[NSURLSession sessionWithConfiguration:configuration
     self.streamingDelegate=helper;
     NSLog(@"init a streaming stream, helper %@",helper);
-    NSURLSession *session=[NSURLSession sessionWithConfiguration:[self config]
                                                         delegate:helper
                                                    delegateQueue:targetQueue];
     self=[super initWithBaseURL:newBaseURL target:aTarget session:session];
+    self.streamingDelegate=helper;
     self.streamingDelegate.inflight = self.inflight;
     return self;
 }
@@ -56,6 +68,30 @@
     [task resume];
     NSLog(@"task: %@",task);
     return task;
+}
+
+-(void)setHeaderDict:(NSDictionary *)newHeaderDict
+{
+    // MPWURLFetchStream's implementation replaces the session with one that has
+    // no delegate.  That turns a streaming data task back into a buffered one.
+    self.streamingHeaderDict=newHeaderDict;
+}
+
+-(NSURLRequest*)resolvedRequest:(MPWURLCall*)request
+{
+    NSMutableURLRequest *resolved=[[super resolvedRequest:request] mutableCopy];
+    [resolved setAllHTTPHeaderFields:self.streamingHeaderDict];
+    return [resolved autorelease];
+}
+
+-(void)executeRequestWithURL:(NSURL *)theURL method:(MPWRESTVerb)verb body:(NSData *)body
+{
+    MPWURI *ref=[MPWURI referenceWithURL:theURL];
+    MPWRESTOperation<MPWURI*>* op=[MPWRESTOperation operationWithReference:ref verb:verb];
+    MPWURLCall *request=[[[MPWURLCall alloc] initWithRESTOperation:op] autorelease];
+    request.bodyData=body;
+    request.isStreaming=YES;
+    [self executeRequest:request];
 }
 
 -(void)streamingGet:(NSURL *)theURL
@@ -102,6 +138,7 @@
 
 -(void)dealloc
 {
+    [_streamingHeaderDict release];
     [_streamingDelegate release];
     [super dealloc];
 }
@@ -212,4 +249,3 @@ didCompleteWithError:(nullable NSError *)error
 }
 
 @end
-
