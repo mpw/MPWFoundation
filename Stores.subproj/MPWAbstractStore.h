@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol MPWIdentifying,Streaming;
-@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryReference,MPWReference,MPWPathRelativeStore;
+@class MPWIdentifier,MPWGenericIdentifier,MPWByteStream,MPWDirectoryReference,MPWReference,MPWPathRelativeStore,MPWStructureDefinition;
 
 
 @protocol MPWStorage <NSObject>
@@ -45,6 +45,7 @@
 
 -(BOOL)hasChildren:(id <MPWIdentifying>)aReference;
 -(NSArray<MPWIdentifying>*)childrenOfReference:(id <MPWIdentifying>)aReference;
+-(MPWStructureDefinition*)structureForReference:(id <MPWIdentifying>)aReference;
 -(id <MPWIdentifying>)rootRef;
 -(MPWReference*)rootBinding;
 
@@ -86,4 +87,3 @@
 -get:uri;
 
 @end
-

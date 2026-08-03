@@ -65,6 +65,25 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)d
     return copy;
 }
 
+-(void)addReferencePathsTo:(NSMutableArray<NSString*>*)paths prefix:(NSString*)prefix
+{
+    for (MPWVariableDefinition *field in self.fields) {
+        NSString *path=prefix.length ? [prefix stringByAppendingPathComponent:field.name] : field.name;
+        if ([field.type isKindOfClass:[MPWStructureDefinition class]]) {
+            [(MPWStructureDefinition*)field.type addReferencePathsTo:paths prefix:path];
+        } else {
+            [paths addObject:path];
+        }
+    }
+}
+
+-(NSArray<NSString*>*)referencePaths
+{
+    NSMutableArray *paths=[NSMutableArray array];
+    [self addReferencePathsTo:paths prefix:@""];
+    return paths;
+}
+
 
 -(void)dealloc
 {
@@ -80,15 +99,22 @@ CONVENIENCEANDINIT( structure, WithName:(NSString*)newName dict:(NSDictionary*)d
 
 @implementation MPWStructureDefinition(testing) 
 
-+(void)someTest
++(void)testNestedReferencePaths
 {
-	EXPECTTRUE(false, @"implemented");
+	MPWStructureDefinition *products=[self structureWithName:@"Products" fields:@[
+        [MPWVariableDefinition idWithName:@"index.html"]
+    ]];
+    MPWVariableDefinition *productsField=[[[MPWVariableDefinition alloc] initWithName:@"Products" type:products] autorelease];
+    MPWStructureDefinition *site=[self structureWithName:@"site" fields:@[
+        [MPWVariableDefinition idWithName:@"index.html"], productsField
+    ]];
+    IDEXPECT([site referencePaths], (@[ @"index.html", @"Products/index.html" ]), @"nested fields describe store paths");
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-//			@"someTest",
+			@"testNestedReferencePaths",
 			];
 }
 

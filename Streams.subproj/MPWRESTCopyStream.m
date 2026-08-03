@@ -10,6 +10,8 @@
 #import "MPWGenericIdentifier.h"
 #import "MPWDictStore.h"
 #import "MPWRESTOperation.h"
+#import "MPWStructureDefinition.h"
+#import "MPWVariableDefinition.h"
 
 
 @implementation MPWRESTCopyStream
@@ -51,10 +53,32 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 -(void)update
 {
-    NSArray *children=[self.source childrenOfReference:@"."];
-    for ( id ref in children ) {
+    [self copyStructureDefinition:[self.source structureForReference:@"."]];
+}
+
+-(void)copyReferences:(NSArray*)references
+{
+    for ( id ref in references ) {
         [self writeObject:[MPWRESTOperation operationWithReference:ref verb:MPWRESTVerbPUT] sender:self];
     }
+}
+
+-(void)copyFields:(NSArray<MPWVariableDefinition*>*)fields prefix:(NSString*)prefix
+{
+    for (MPWVariableDefinition *field in fields) {
+        NSString *path=prefix.length ? [prefix stringByAppendingPathComponent:field.name] : field.name;
+        if ([field.type isKindOfClass:[MPWStructureDefinition class]]) {
+            [self.target mkdirAt:[self.target referenceForPath:path]];
+            [self copyFields:((MPWStructureDefinition*)field.type).fields prefix:path];
+        } else {
+            [self copyReferences:@[ [self.source referenceForPath:path] ]];
+        }
+    }
+}
+
+-(void)copyStructureDefinition:(MPWStructureDefinition*)structure
+{
+    [self copyFields:structure.fields prefix:@""];
 }
 
 -(void)dealloc
@@ -105,6 +129,18 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     EXPECTNIL( s.target[ref],@"not any more");
 }
 
++(void)testCopyExplicitReferences
+{
+    MPWRESTCopyStream *s=[self _streamForTesting];
+    s.source[@"one"]=@"1";
+    s.source[@"two"]=@"2";
+    s.source[@"not-copied"]=@"3";
+    [s copyReferences:@[ @"one", @"two" ]];
+    IDEXPECT(s.target[@"one"], @"1", @"copied first explicit reference");
+    IDEXPECT(s.target[@"two"], @"2", @"copied second explicit reference");
+    EXPECTNIL(s.target[@"not-copied"], @"only explicit references are copied");
+}
+
 
 +testSelectors
 {
@@ -112,8 +148,8 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
              @"testGet",
              @"testPut",
              @"testDelete",
+             @"testCopyExplicitReferences",
              ];
 }
 
 @end
-

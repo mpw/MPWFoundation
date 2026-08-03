@@ -9,6 +9,8 @@
 #import "MPWDirectoryReference.h"
 #import <AccessorMacros.h>
 #import "NSObjectFiltering.h"
+#import "MPWStructureDefinition.h"
+#import "MPWVariableDefinition.h"
 
 @implementation MPWDirectoryReference
 
@@ -44,6 +46,15 @@ boolAccessor(fancy, setFancy)
 -(long)count
 {
     return contents.count;
+}
+
+-(MPWStructureDefinition*)structureDefinition
+{
+    NSMutableArray *fields=[NSMutableArray arrayWithCapacity:self.contents.count];
+    for (id<MPWIdentifying> ref in self.contents) {
+        [fields addObject:[MPWVariableDefinition idWithName:ref.pathComponents.lastObject]];
+    }
+    return [MPWStructureDefinition structureWithName:self.path ?: @"" fields:fields];
 }
 
 -(void)dealloc

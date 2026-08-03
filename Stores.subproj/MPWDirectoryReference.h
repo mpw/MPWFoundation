@@ -17,6 +17,8 @@
 @end
 
 
+@class MPWStructureDefinition;
+
 @interface MPWDirectoryReference : MPWReference
 {
     NSArray *contents;
@@ -28,5 +30,7 @@
 -(NSArray*)dicts;
 
 @property (readonly) long count;
+/// Structural view of this legacy directory listing.
+@property (nonatomic, readonly) MPWStructureDefinition *structureDefinition;
 
 @end

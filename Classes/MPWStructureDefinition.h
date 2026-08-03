@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(instancetype)copyWithFieldIndexes:(NSArray*)fieldIndexes;
 
+/// Leaf reference paths, with nested structures represented as path components.
+-(NSArray<NSString*>*)referencePaths;
+
 @property (nonatomic, strong) NSArray<MPWVariableDefinition*>* fields;
 /// Human-readable documentation describing this structure.
 @property (nonatomic, copy, nullable) NSString *documentation;

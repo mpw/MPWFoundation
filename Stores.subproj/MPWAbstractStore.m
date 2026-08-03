@@ -15,6 +15,8 @@
 #import "NSDictAdditions.h"
 #import "MPWPathRelativeStore.h"
 #import "MPWRESTCopyStream.h"
+#import "MPWStructureDefinition.h"
+#import "MPWVariableDefinition.h"
 #import "MPWLoggingStore.h"
 #import "MPWPropertyPathStore.h"
 #include <dlfcn.h>
@@ -159,6 +161,24 @@
     } else {
         return nil;
     }
+}
+
+-(MPWStructureDefinition*)structureForReference:(id <MPWIdentifying>)aReference
+{
+    id value=[self at:aReference];
+    if ([value isKindOfClass:[MPWStructureDefinition class]]) {
+        return value;
+    }
+    if ([value respondsToSelector:@selector(structureDefinition)]) {
+        return [value structureDefinition];
+    }
+    NSArray *children=[self childrenOfReference:aReference];
+    NSMutableArray *fields=[NSMutableArray arrayWithCapacity:children.count];
+    for (id<MPWIdentifying> child in children) {
+        NSString *name=child.pathComponents.lastObject;
+        [fields addObject:[MPWVariableDefinition idWithName:name]];
+    }
+    return [MPWStructureDefinition structureWithName:[aReference path] fields:fields];
 }
 
 -(NSArray<NSString*>*)pathsAtReference:(id <MPWIdentifying>)aReference
@@ -478,4 +498,3 @@
 }
 
 @end
-
