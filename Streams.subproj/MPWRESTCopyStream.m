@@ -114,6 +114,15 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
 
 @end
 
+@implementation MPWStructureDefinition(RESTCopying)
+
+-(void)writeOnRESTCopyStream:(MPWRESTCopyStream*)aStream
+{
+    [aStream copyStructureDefinition:self];
+}
+
+@end
+
 #import "DebugMacros.h"
 
 @implementation MPWRESTCopyStream(testing)
