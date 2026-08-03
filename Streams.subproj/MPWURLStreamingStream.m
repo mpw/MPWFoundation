@@ -37,9 +37,9 @@
     // the maximum idle interval between packets, not the total response duration.
     configuration.timeoutIntervalForRequest=60 * 60;
     configuration.timeoutIntervalForResource=24 * 60 * 60;
-    NSURLSession *session=[NSURLSession sessionWithConfiguration:configuration
     self.streamingDelegate=helper;
     NSLog(@"init a streaming stream, helper %@",helper);
+    NSURLSession *session=[NSURLSession sessionWithConfiguration:configuration
                                                         delegate:helper
                                                    delegateQueue:targetQueue];
     self=[super initWithBaseURL:newBaseURL target:aTarget session:session];

@@ -7,256 +7,67 @@
 		<key>MPWArrow.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>89</integer>
+			<integer>88</integer>
 		</dict>
 		<key>MPWDuckDB.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
-		</dict>
-		<key>MPWFoundation (Framework).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>41</integer>
-		</dict>
-		<key>MPWFoundation (Linux Cocotron).xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
-		</dict>
-		<key>MPWFoundation (Linux Cocotron).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>51</integer>
-		</dict>
-		<key>MPWFoundation (Windows Cocotron).xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
-		</dict>
-		<key>MPWFoundation (Windows Cocotron).xcscheme_^#shared#^_</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>49</integer>
+			<integer>89</integer>
 		</dict>
 		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>isShown</key>
-			<true/>
 			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>MPWFoundationTouch copy.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>122</integer>
-		</dict>
-		<key>MPWFoundationTouch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>90</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
-		</dict>
-		<key>MPWFoundationTouchFat.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>24</integer>
+			<integer>91</integer>
 		</dict>
 		<key>MPWFoundationUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-<<<<<<< HEAD
-			<integer>7</integer>
-=======
-			<integer>6</integer>
->>>>>>> ab145f50103c173bfc117fbe35b142ba3fd0be7e
+			<integer>92</integer>
 		</dict>
 		<key>MPWFoundationUIKit-AI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>93</integer>
+			<integer>94</integer>
 		</dict>
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>58</integer>
+			<integer>93</integer>
+		</dict>
+		<key>MPWFoundationWatch.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>99</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>95</integer>
 		</dict>
-		<key>SteamQLite.xcscheme_^#shared#^_</key>
+		<key>TestMPWFoundation.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>124</integer>
-		</dict>
-		<key>StreamQLite.xcscheme_^#shared#^_</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>110</integer>
-		</dict>
-		<key>TestMPWFoundation.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>100</integer>
 		</dict>
 		<key>WKStoreAdapter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-<<<<<<< HEAD
-			<integer>27</integer>
-=======
-			<integer>30</integer>
->>>>>>> ab145f50103c173bfc117fbe35b142ba3fd0be7e
+			<integer>97</integer>
 		</dict>
 		<key>WKStoreAdapterTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-<<<<<<< HEAD
-			<integer>29</integer>
-=======
-			<integer>34</integer>
->>>>>>> ab145f50103c173bfc117fbe35b142ba3fd0be7e
-		</dict>
-		<key>show-build-dir.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>98</integer>
 		</dict>
 		<key>show-build-dir.xcscheme_^#shared#^_</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
 			<key>orderHint</key>
-<<<<<<< HEAD
-			<integer>5</integer>
-=======
-			<integer>2</integer>
->>>>>>> ab145f50103c173bfc117fbe35b142ba3fd0be7e
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>1F008F5A10BDAC18001F05D5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F0092262495256400841C30</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F3AC607143EB3D9009B8504</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F4FC66810F7F6AC00376799</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F4FC9721DF818AE00B35D27</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F4FC98A1DF818AF00B35D27</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F61ADFF2DBBBFD6003E8229</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F61AE112DBBBFF3003E8229</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F7045AE22313082005ED7FB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F7045C022313099005ED7FB</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F840DA4193F505700589595</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F840DAE193F505700589595</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F93B8FC284DE20D00455231</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F9975D82F518CA4007A1324</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1F9975F12F518DD0007A1324</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1FA5B7D51172CD28001628B6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1FCDE1201253A9640002D17A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1FCF25D31CF3983B00AC64CE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1FEB28E02DC7E00000E37021</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1FF8FDB309B49D0100652476</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<integer>96</integer>
 		</dict>
 	</dict>
 </dict>

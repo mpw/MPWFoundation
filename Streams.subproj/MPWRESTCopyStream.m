@@ -14,6 +14,12 @@
 #import "MPWVariableDefinition.h"
 
 
+@interface NSObject(RESTCopying)
+
+-(void)writeOnRESTCopyStream:aStream;
+
+@end
+
 @implementation MPWRESTCopyStream
 
 CONVENIENCEANDINIT(stream, WithSource:source target:target)
@@ -24,14 +30,14 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     return self;
 }
 
--(void)writeObject:(id)anObject
+-(SEL)streamWriterMessage
 {
-    [self writeObject:anObject sender:nil];
+    return @selector(writeOnRESTCopyStream:);
 }
 
--(void)writeObject:(MPWRESTOperation*)anObject sender:aSender
+-(void)writeRESTOperation:(MPWRESTOperation*)anObject
 {
-//    NSLog(@"-[%@ %@ %@]",[self className],NSStringFromSelector(_cmd),anObject);
+    NSLog(@"-[%@ %@ %@]",[self className],NSStringFromSelector(_cmd),anObject);
     id <MPWIdentifying> ref=anObject.identifier;
     switch (anObject.verb) {
         case MPWRESTVerbGET:
@@ -86,6 +92,24 @@ CONVENIENCEANDINIT(stream, WithSource:source target:target)
     [_source release];
     [_target release];
     [super dealloc];
+}
+
+@end
+
+@implementation NSObject(RESTCopying)
+
+-(void)writeOnRESTCopyStream:aStream
+{
+    [self writeOnStream:aStream];
+}
+
+@end
+
+@implementation MPWRESTOperation(RESTCopying)
+
+-(void)writeOnRESTCopyStream:(MPWRESTCopyStream*)aStream
+{
+    [aStream writeRESTOperation:self];
 }
 
 @end

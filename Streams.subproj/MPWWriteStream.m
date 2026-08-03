@@ -38,6 +38,13 @@
     return [[self new] autorelease];
 }
 
+-(instancetype)init
+{
+    if ( self=[super init] ) {
+        streamWriterMessage = [self streamWriterMessage];
+    }
+    return self;
+}
 
 -result
 {
@@ -56,9 +63,11 @@ SEL visSel;
 {
     if ( anObject != nil ) {
 #if FAST_MSG_LOOKUPS
-      objc_msgSend( anObject, streamWriterMessage, self );        
+        NSAssert1( streamWriterMessage != NULL ,@"streamWriteMessage is NULL %@",self);
+      objc_msgSend( anObject, streamWriterMessage, self );
 #else
-      [anObject performSelector:streamWriterMessage withObject:self];
+        NSAssert1( streamWriterMessage != NULL ,@"streamWriteMessage is NULL %@",self);
+     [anObject performSelector:streamWriterMessage withObject:self];
 #endif
      }
 }
@@ -347,7 +356,7 @@ SEL visSel;
 @end
 @implementation NSObject(BaseStreaming)
 
--(void)writeOnMPWStream:(MPWWriteStream*)aStream
+-(void)writeOnRESTCopyStream:(MPWWriteStream*)aStream
 {
     [aStream writeNSObject:self];
 }

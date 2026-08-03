@@ -27,7 +27,6 @@
 {
     self = [super init];
     self.target = aTarget;
-    streamWriterMessage = [self streamWriterMessage];
     return self;
 }
 
