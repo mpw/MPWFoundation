@@ -30,6 +30,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
 
 -(void)setTable:(MPWTable*)newItems
 {
+    NSLog(@"setTable: %@",newItems);
     NSArray *columns = [newItems columns];
     [self removeCurrentColumns];
     double width = self.frame.size.width-40;
@@ -51,11 +52,16 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
     viewForTableColumn:(MPWTableViewColumn *) tableColumn
                    row:(NSInteger) row
 {
+    NSLog(@"viewForTableColumn[%ld] for type %@",(long)row,tableColumn.tableColumn.type);
     NSControl *control=[self.type2Control atType:tableColumn.tableColumn.type];
     control.frame = NSMakeRect(0, 0, tableColumn.width, 20);
     control.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
     control.target = tableView;
     control.action = @selector(tableTextFieldChanged:);
+    NSLog(@"viewForTableColumn[%ld]=%@",(long)row,[control class]);
+    if ( self.debug ) {
+        control.toolTip = [NSString stringWithFormat:@"column: %@ control: %@",tableColumn,[control className]];
+    }
     return control;
 }
 
@@ -75,7 +81,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
        makeIfNecessary:(BOOL) makeIfNecessary
 {
     NSView *rowView = [super rowViewAtRow:row makeIfNecessary:makeIfNecessary];
-//    NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
+    NSLog(@"rowView[%ld]=%@",(long)row,[rowView class]);
     return rowView;
 }
 
@@ -85,7 +91,7 @@ objectAccessor( MPWDictArrayTable*, table, _setTable)
           makeIfNecessary:(BOOL) makeIfNecessary
 {
     NSView *cellView = [super viewAtColumn:column row:row makeIfNecessary:makeIfNecessary];
-//    NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
+    NSLog(@"cellView[%ld][%ld]=%@",(long)row,(long)column,[cellView class]);
     return cellView;
 }
 

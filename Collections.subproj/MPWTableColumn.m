@@ -46,6 +46,11 @@ lazyAccessor( NSString*, title, setTitle, key )
     return @{};
 }
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: key: %@ type: %@>",[self className],self.key,self.type];
+}
+
 -(BOOL)isEditableAtIndex:(NSUInteger)anIndex
 {
     return self.editable;

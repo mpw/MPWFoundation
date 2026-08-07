@@ -34,7 +34,8 @@
     // form's controls read from / write back to the storage combinator.
     type2view[@"bool"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeSwitch), @"title": @"" }];
     //    type2view[@"id"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
-    type2view[@"id"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeMomentaryPushIn), @"title": @"" }];
+//    type2view[@"id"] = [STButton templateWithValues:@{ @"buttonType": @(NSButtonTypeMomentaryPushIn), @"title": @"" }];
+    type2view[@"id"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
     type2view[@"String"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
     type2view[@"Text"] = [NSTextView templateWithValues:@{ }];
     type2view[@"Date"] = [STTextField templateWithValues:@{ @"bezeled": @(true), @"bezelStyle": @(NSTextFieldRoundedBezel), @"editable": @(true) }];
@@ -93,6 +94,21 @@
 {
     [self writeObject:[NSTextField labelWithString:title]];
 }
+
+-(void)writeString:aString
+{
+    [self label:aString];
+}
+
+-(id)controlForType:(MPWTypeDefinition*)type
+{
+    NSView *control=[super controlForType:type];
+    if ( self.debug ) {
+        control.toolTip = [NSString stringWithFormat:@"%@ -> %@",type,[control className]];
+    }
+    return control;
+}
+
 
 -(void)textField:(NSString*)title
 {
@@ -313,7 +329,8 @@
     MPWAppkitUIGenerator *generator=[self stream];
     MPWTypeStore *types=[MPWTypeStore store];
     EXPECTTRUE( [[generator controlForType:types[@"String"]] isKindOfClass:[NSTextField class]], @"String to text field");
-    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[NSButton class]], @"default button");
+    EXPECTTRUE( [[generator controlForType:types[@"Text"]] isKindOfClass:[NSTextView class]], @"Text to text view");
+    EXPECTTRUE( [[generator controlForType:types[@"id"]] isKindOfClass:[NSTextField class]], @"default is also text field");
     EXPECTTRUE( [[generator controlForType:types[@"bool"]] isKindOfClass:[NSButton class]], @"bool to checkbox");
 }
 

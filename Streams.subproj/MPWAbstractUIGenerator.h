@@ -15,10 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MPWAbstractUIGenerator : MPWFlattenStream
 
 @property (nonatomic,strong) MPWTypeToObjectMapper *type2view;
-/// The storage combinator a generated form is bound against.  Set from
-/// MPWForm.store while writing a form; field controls are bound to references
-/// into this store.  Presentation-system independent (AppKit/UIKit/HTML).
 @property (nonatomic,strong) id <MPWStorage> store;
+@property (nonatomic,assign) bool debug;
 
 -(id)controlForType:(MPWTypeDefinition*)type;
 -(void)beginView:aView;

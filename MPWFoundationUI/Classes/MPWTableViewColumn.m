@@ -10,6 +10,11 @@
 
 @implementation MPWTableViewColumn
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %@>",[self className],self.tableColumn];
+}
+
 
 @end
 

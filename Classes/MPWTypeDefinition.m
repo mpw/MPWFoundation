@@ -80,9 +80,10 @@ static STTypeDescriptorStruct definedTypes[]={
 };
 
 static STTypeDescriptorStruct mdaTypes[]={
-    { '@', "Text" ,"id" , 0 },
-    { '@', "EmailAddress" ,"id" , 0 },
-    { '@', "Date" ,"id" , 0 },
+    { '@', "Text" ,"NSString*" , 0 },
+    { '@', "String" ,"NSString*" , 0 },
+    { '@', "EmailAddress" ,"NSString*" , 0 },
+    { '@', "Date" ,"NSDate*" , 0 },
     { '@', "oid" ,"id" , true },
     { 0, NULL , 0},
 };
@@ -134,7 +135,7 @@ static STTypeDescriptorStruct mdaTypes[]={
 
 -(NSString *)description
 {
-    return self.name;
+    return [NSString stringWithFormat:@"<%@: code: '%c' name: %@ cName: %@>",[self className],self.objcTypeCode,self.name,self.cName];
 }
 
 @end
@@ -160,7 +161,7 @@ static STTypeDescriptorStruct mdaTypes[]={
     MPWTypeDefinition *idDescriptor=[self descriptorForTypeName:@"Text"];
     
     IDEXPECT( idDescriptor.name, @"Text", @"stName");
-    IDEXPECT( idDescriptor.cName, @"id", @"stName");
+    IDEXPECT( idDescriptor.cName, @"NSString*", @"cName");
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
 }
 

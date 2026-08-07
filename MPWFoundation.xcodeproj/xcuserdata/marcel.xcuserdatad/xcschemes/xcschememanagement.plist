@@ -7,67 +7,67 @@
 		<key>MPWArrow.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>88</integer>
+			<integer>76</integer>
 		</dict>
 		<key>MPWDuckDB.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>89</integer>
+			<integer>78</integer>
 		</dict>
 		<key>MPWFoundationFramework.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>90</integer>
+			<integer>80</integer>
 		</dict>
 		<key>MPWFoundationTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>91</integer>
+			<integer>82</integer>
 		</dict>
 		<key>MPWFoundationUI.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>92</integer>
+			<integer>84</integer>
 		</dict>
 		<key>MPWFoundationUIKit-AI.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>94</integer>
+			<integer>88</integer>
 		</dict>
 		<key>MPWFoundationUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>93</integer>
+			<integer>86</integer>
 		</dict>
 		<key>MPWFoundationWatch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>99</integer>
+			<integer>96</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>95</integer>
+			<integer>90</integer>
 		</dict>
 		<key>TestMPWFoundation.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>100</integer>
+			<integer>99</integer>
 		</dict>
 		<key>WKStoreAdapter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>97</integer>
+			<integer>93</integer>
 		</dict>
 		<key>WKStoreAdapterTouch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>98</integer>
+			<integer>95</integer>
 		</dict>
 		<key>show-build-dir.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>96</integer>
+			<integer>92</integer>
 		</dict>
 	</dict>
 </dict>

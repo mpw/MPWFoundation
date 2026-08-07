@@ -17,6 +17,7 @@
 @property (nonatomic, strong, nullable) MPWArrayCursor *cursor;
 @property (nonatomic, strong, nullable) NSArray* (^valueFilter)(id object);
 @property (nonatomic, weak, nullable)  id <NSTableViewDelegate> mpwDelegate;
+@property (nonatomic, assign) bool debug;
 
 - selectedObject;
 - objectAtRow:(NSUInteger)row;

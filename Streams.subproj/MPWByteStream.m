@@ -247,6 +247,12 @@ intAccessor( indentAmount , setIndentAmount )
     [self writeCString:"\n"];
 }
 
+
+-(void)writeCr
+{
+    [self writeCString:"\r"];
+}
+
 -(void)writeSpace
 {
     [self writeCString:" "];
@@ -294,6 +300,8 @@ intAccessor( indentAmount , setIndentAmount )
 {
     return NSUTF8StringEncoding;
 }
+
+
 
 #if GS_API_LATEST
 -(void)outputString:(NSString*)aString
@@ -405,6 +413,13 @@ intAccessor( indentAmount , setIndentAmount )
 -(void)println:anObject
 {
     [self print:anObject];
+    [self writeNewline];
+}
+
+-(void)printcrlf:anObject
+{
+    [self print:anObject];
+    [self writeCr];
     [self writeNewline];
 }
 
