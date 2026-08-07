@@ -28,16 +28,29 @@
     MPWTypeDefinition *idDescriptor=types[@"id"];
     
     IDEXPECT( idDescriptor.name, @"id", @"stName");
-    IDEXPECT( idDescriptor.cName, @"id", @"stName");
+    IDEXPECT( idDescriptor.cName, @"id", @"cName");
     INTEXPECT( idDescriptor.objcTypeCode, '@', @"type code");
+    
+    
+}
 
++(void)testKnowsAboutSEL
+{
+    MPWTypeStore *types = [self store];
+    MPWTypeDefinition *idDescriptor=types[@"SEL"];
+    
+    IDEXPECT( idDescriptor.name, @"SEL", @"stName");
+    IDEXPECT( idDescriptor.cName, @"SEL", @"cName");
+    INTEXPECT( idDescriptor.objcTypeCode, ':', @"type code");
+    
     
 }
 
 +(NSArray*)testSelectors
 {
    return @[
-			@"testKnowsAboutID",
+       @"testKnowsAboutID",
+       @"testKnowsAboutSEL",
 			];
 }
 

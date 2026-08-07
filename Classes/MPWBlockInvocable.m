@@ -250,18 +250,35 @@ static NSString *extractStructType( char *s )
 #endif
                 default:
                     
-                    [NSException raise:@"unknownparameter" format:@"unhandled parameter at %d '%@'",i,extractStructType( signature+signatureIndex)];
+                    [NSException raise:@"unknownparametertype" format:@"unhandled parameter at %d '%@'",i,extractStructType( signature+signatureIndex)];
                     va_arg( args, void* );
                     
             }
         }
     }
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
-//    NSLog(@"signature[0]='%c'",signature[0]);
-	if ( signature[0] == 'i' || signature[0] == 'l' ) {
-//        NSLog(@"converting to int");
-		returnVal=(id)[returnVal longValue];
-	}
+    NSLog(@"signature[0]='%c'",signature[0]);
+    switch ( signature[0] ) {
+        case 'i':
+        case 'l':
+            returnVal=(id)[returnVal longValue];
+            break;
+        case ':':
+            NSLog(@"SEL return val: '%@'",returnVal);
+            returnVal=(void*)NSSelectorFromString( returnVal );
+            break;
+        case 'v':
+//            returnVal=nil;
+            break;
+        case '@':
+            // already the right format, do nothing
+            break;
+        default:
+            NSLog(@"unknown return type: '%c'",signature[0]);
+            break;
+//            [NSException raise:@"unknownreturntype" format:@"unhandled return value '%@'",extractStructType( signature)];
+
+    }
 	return returnVal;
 }
 

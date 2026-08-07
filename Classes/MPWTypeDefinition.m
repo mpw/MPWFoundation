@@ -110,7 +110,7 @@ static STTypeDescriptorStruct mdaTypes[]={
         descriptor.invisible=mdaTypes[i].invisible;
         st2type[descriptor.name]=descriptor;
     }
-    unsigned char sttypes[]="@ldvB";
+    unsigned char sttypes[]="@ldvB:";
     for (int i=0;sttypes[i];i++) {
         MPWTypeDefinition *t=typesByObjCCode[sttypes[i]];
         st2type[t.name]=t;
