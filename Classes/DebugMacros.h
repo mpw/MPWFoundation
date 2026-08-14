@@ -157,7 +157,6 @@ MPWTESTASSERT( _idsAreEqual(_expected,_got),  ([NSString stringWithFormat:@"got 
 #define D4PRINTF0 if (DEBUG4) D0PRINTF0
 #define D4PRINTF1 if (DEBUG4) D0PRINTF1
 #define D4PRINTF2 if (DEBUG4) D0PRINTF2
-#define D4PRINTF3 if (DEBUG4) D0PRINTF3
 
 #define D5PRINTF0 if (DEBUG5) D0PRINTF0
 #define D5PRINTF1 if (DEBUG5) D0PRINTF1

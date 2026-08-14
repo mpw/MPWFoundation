@@ -42,7 +42,7 @@
 		<key>MPWFoundationWatch.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>105</integer>
+			<integer>97</integer>
 		</dict>
 		<key>ObjectiveSSH.xcscheme_^#shared#^_</key>
 		<dict>
@@ -52,7 +52,7 @@
 		<key>TestMPWFoundation.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>106</integer>
+			<integer>98</integer>
 		</dict>
 		<key>WKStoreAdapter.xcscheme_^#shared#^_</key>
 		<dict>

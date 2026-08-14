@@ -67,8 +67,8 @@ static id blockFunVar( id self, ... ) {
     return result;
 }
 
-static id blockFun( id self, SEL sel, id arg1, id arg2, id arg3 ) {
-    return blockFunVar( self, sel, arg1,arg2,arg3);
+static id blockFun( id self, SEL sel, id arg1, id arg2, id arg3 ,id arg4,id arg5, id arg6 ) {
+    return blockFunVar( self, sel, arg1,arg2,arg3, arg4, arg5, arg6 );
 }
 
 
@@ -257,14 +257,17 @@ static NSString *extractStructType( char *s )
         }
     }
 	returnVal = [self invokeOn:target withFormalParameters:formalParameters actualParamaters:parameters];
-    NSLog(@"signature[0]='%c'",signature[0]);
+//    NSLog(@"signature[0]='%c'",signature[0]);
     switch ( signature[0] ) {
         case 'i':
         case 'l':
             returnVal=(id)[returnVal longValue];
             break;
+        case 'B':
+            returnVal=(id)(long)[returnVal boolValue];
+            break;
         case ':':
-            NSLog(@"SEL return val: '%@'",returnVal);
+//            NSLog(@"SEL return val: '%@'",returnVal);
             returnVal=(void*)NSSelectorFromString( returnVal );
             break;
         case 'v':

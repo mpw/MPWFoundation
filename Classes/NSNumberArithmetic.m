@@ -20,6 +20,10 @@ NSNumber* MPWCreateInteger( long theInteger )
 
 @implementation NSNumber(Arithmetic)
 
+-(NSString*)intFormattedBy:(NSString*)formatString
+{
+    return [NSString stringWithFormat:formatString,[self intValue]];
+}
 
 -(MPWPoint*)asPoint
 {

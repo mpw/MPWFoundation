@@ -99,7 +99,6 @@
 
 @implementation NSObject(testingHelpers)
 
-
 -value { return self; }
 
 -(void)assertTrue:msg  {   EXPECTTRUE([[self value] boolValue], msg ); }
